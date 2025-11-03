@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 13201760673c143d29a7ca4be6aa66ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Blueprints/Chemical B.asset
+  uploadId: 765501

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5a35de4b31eb8470293e968c81f0d482
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Scripts/OverlapTest.cs
+  uploadId: 765501

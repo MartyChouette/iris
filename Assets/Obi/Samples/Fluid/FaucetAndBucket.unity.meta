@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bc5ce9a0e433b45abbd22fdbce538d1e
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FaucetAndBucket.unity
+  uploadId: 765501

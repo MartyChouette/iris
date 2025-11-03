@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 301c97d7892714ada9887f712bed2d53
+labels:
+- ObiFluid
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Resources/ObiMaterials/Common/Instanced/Burst/StandardPerInstanceColor.shader
+  uploadId: 765501

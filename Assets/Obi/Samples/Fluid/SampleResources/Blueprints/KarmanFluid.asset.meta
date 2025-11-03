@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bc6a0ad31b56248b5be159a27a69b3a6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Blueprints/KarmanFluid.asset
+  uploadId: 765501

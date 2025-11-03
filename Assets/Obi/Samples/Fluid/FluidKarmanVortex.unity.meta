@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ee73abd1649424e34a324b7f23940ae2
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidKarmanVortex.unity
+  uploadId: 765501

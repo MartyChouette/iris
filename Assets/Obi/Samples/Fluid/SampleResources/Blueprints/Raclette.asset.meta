@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 26eb2b54f51084592ad13b0cfef228a7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Blueprints/Raclette.asset
+  uploadId: 765501

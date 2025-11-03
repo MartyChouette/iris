@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d436b0155e8f943d59a26290140664cd
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Resources/Compute/Integration.cginc
+  uploadId: 764245

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5a94f955a91f74b1d9e6911b4a4bb672
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidSmokeSettings.lighting
+  uploadId: 765501

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1af0cea387bfd47429ca368a7939a951
+labels:
+- ObiFluid
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/CHANGELOG_fluid.txt
+  uploadId: 765501

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: b03f3cb7478b24bb1818eb9f51b88bcf
+labels:
+- ObiFluid
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Scripts/ObiFluidPropertyColorizer.cs
+  uploadId: 765501

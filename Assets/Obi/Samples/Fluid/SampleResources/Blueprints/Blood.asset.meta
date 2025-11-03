@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f16839f0bd45c4b8482269b480638501
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Blueprints/Blood.asset
+  uploadId: 765501

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2beefde11ff8c427b9a5ce549a4da9e1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Resources/ObiMaterials/Fluid/FoamParticles.mat
+  uploadId: 765501

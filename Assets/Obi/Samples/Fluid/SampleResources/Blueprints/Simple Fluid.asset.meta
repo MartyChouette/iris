@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5754c273f19e0445a86268d4ef5049e8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Blueprints/Simple Fluid.asset
+  uploadId: 765501

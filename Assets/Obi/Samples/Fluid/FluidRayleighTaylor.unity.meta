@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 317f6531f57444a18a7701cce155b294
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidRayleighTaylor.unity
+  uploadId: 765501

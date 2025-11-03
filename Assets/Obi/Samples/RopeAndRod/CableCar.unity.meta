@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 78725675a368c4503978c7bd3dbc2778
+labels:
+- ObiRope
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/RopeAndRod/CableCar.unity
+  uploadId: 764245

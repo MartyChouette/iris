@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9775d40f8df5b4c4888f40eae0e48c07
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SimpleFluid.unity
+  uploadId: 765501

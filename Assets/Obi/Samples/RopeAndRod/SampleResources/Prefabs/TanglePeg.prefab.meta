@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fd76f3270d8cf4fe3bc7a9f2f3cb6b4a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/RopeAndRod/SampleResources/Prefabs/TanglePeg.prefab
+  uploadId: 764245

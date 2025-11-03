@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 82da226c06ea9468484c363df1302bb7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidJetSettings.lighting
+  uploadId: 765501

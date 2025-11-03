@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fcc10f4de9b834b0880e324db04b3fc5
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidViscosity.unity
+  uploadId: 765501

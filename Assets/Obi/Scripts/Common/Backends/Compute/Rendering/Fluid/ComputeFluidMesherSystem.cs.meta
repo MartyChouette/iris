@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ea9a9234fe7fb436da13b8b7c219921b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Scripts/Common/Backends/Compute/Rendering/Fluid/ComputeFluidMesherSystem.cs
+  uploadId: 765501

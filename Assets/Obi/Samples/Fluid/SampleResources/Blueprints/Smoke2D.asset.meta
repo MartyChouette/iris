@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 12e73d4d4502f4287ad886a6bb97ef52
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Blueprints/Smoke2D.asset
+  uploadId: 765501

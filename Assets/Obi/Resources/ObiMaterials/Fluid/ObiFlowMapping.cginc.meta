@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2231c15aefcd6484e9857cbb64ad8cd7
+timeCreated: 1445285630
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Resources/ObiMaterials/Fluid/ObiFlowMapping.cginc
+  uploadId: 765501

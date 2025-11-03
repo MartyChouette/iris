@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 928a199443cca4a9f9d4fb00fe157110
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/PigmentMixing.unity
+  uploadId: 765501

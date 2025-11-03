@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7ed536c1aaf4745588bca2cf255e56f2
+labels:
+- ObiFluid
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Materials/Chrome.mat
+  uploadId: 765501

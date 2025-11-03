@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d5f9ae40eef20438a95f11b9d2c67e86
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/WhiskeyBottle.unity
+  uploadId: 765501

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 2dde04b106a144c46af4eaf70e53a212
+labels:
+- ObiFluid
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Common/SampleResources/Scripts/ColorFromViscosity.cs
+  uploadId: 765501

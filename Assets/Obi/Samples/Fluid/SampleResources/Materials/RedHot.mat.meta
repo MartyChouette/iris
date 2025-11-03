@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 14884fb30f1c3444d8fc3c638af41170
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Materials/RedHot.mat
+  uploadId: 765501

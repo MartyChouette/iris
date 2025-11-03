@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b65a8e509553e451ba3ed7ea8ff1c226
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Resources/ObiMaterials/URP/Fluid/Compute/IndirectThicknessURP.shader
+  uploadId: 765501

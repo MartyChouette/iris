@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8dbf95ba7e8a54adcad43f036d361d3b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidOverlapQuerySettings.lighting
+  uploadId: 765501

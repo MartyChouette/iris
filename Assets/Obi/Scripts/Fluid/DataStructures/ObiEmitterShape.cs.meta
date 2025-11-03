@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: ddc05016ea2284ceaa33a1520baede40
+labels:
+- ObiFluid
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Scripts/Fluid/DataStructures/ObiEmitterShape.cs
+  uploadId: 765501

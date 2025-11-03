@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 78347f8c117ed41c7a18b166c2019d32
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/QuickstartGuide_fluid.pdf
+  uploadId: 765501

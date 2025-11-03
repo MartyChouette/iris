@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e4faece6f67884edab78688b5b966831
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/FluidRenderPasses/FluidPassOpaque.asset
+  uploadId: 765501

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 89f7ec50c6e36440593469d980ba7830
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/RopeAndRod/SampleResources/Scripts/RatchetController.cs
+  uploadId: 764245

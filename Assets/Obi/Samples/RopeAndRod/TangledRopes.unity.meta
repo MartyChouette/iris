@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d1c0a7d11dfd3425e80480fae4b6546c
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/RopeAndRod/TangledRopes.unity
+  uploadId: 764245

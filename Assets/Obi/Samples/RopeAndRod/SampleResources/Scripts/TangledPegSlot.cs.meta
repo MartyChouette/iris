@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 866212c246a9c4c5797069099ad745aa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/RopeAndRod/SampleResources/Scripts/TangledPegSlot.cs
+  uploadId: 764245

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c1cdc16773c1f4ebe94e32c3ae0005bf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/RopeAndRod/SampleResources/Scripts/TangledRopesGameController.cs
+  uploadId: 764245

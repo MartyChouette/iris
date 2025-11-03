@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0ee7e8ae30f6c4351ac534ab8ce8492b
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/ComputeFluids.unity
+  uploadId: 765501

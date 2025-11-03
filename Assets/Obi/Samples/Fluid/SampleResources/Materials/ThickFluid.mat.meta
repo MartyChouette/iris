@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9af2a6872096047c79c50fb85e1c521e
+labels:
+- ObiFluid
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Materials/ThickFluid.mat
+  uploadId: 765501

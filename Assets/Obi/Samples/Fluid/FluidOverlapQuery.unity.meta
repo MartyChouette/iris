@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 02a505ae957c44657b6b98ca91270328
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidOverlapQuery.unity
+  uploadId: 765501

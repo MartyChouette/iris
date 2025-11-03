@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 23449ae6e42984ffeafa6e717351d13f
+labels:
+- ObiFluid
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Scripts/WaveGenerator.cs
+  uploadId: 765501

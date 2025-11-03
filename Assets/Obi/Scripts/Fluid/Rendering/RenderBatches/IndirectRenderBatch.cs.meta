@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: dd88567b18a7148e1a876f02880f9613
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Scripts/Fluid/Rendering/RenderBatches/IndirectRenderBatch.cs
+  uploadId: 765501

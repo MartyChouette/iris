@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b5ff7cd96ac134a6c8870608f78c8d73
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/2DFluidPlayground.unity
+  uploadId: 765501

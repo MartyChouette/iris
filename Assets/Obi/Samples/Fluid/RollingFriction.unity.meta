@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 154f64411c7e64bdb9d78cf5a5ad6185
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/RollingFriction.unity
+  uploadId: 765501

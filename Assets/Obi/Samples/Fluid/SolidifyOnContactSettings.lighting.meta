@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a5a00f1a791394e118c0c6233d34e5bd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SolidifyOnContactSettings.lighting
+  uploadId: 765501

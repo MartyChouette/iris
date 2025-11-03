@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2e86e06c0d5f342febc9ac3548184b91
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Materials/FluidColorizer2.mat
+  uploadId: 765501

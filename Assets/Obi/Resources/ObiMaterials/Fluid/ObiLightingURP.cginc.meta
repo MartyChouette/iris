@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: be6dc47538a1841739b33495235ff75b
+timeCreated: 1445285630
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Resources/ObiMaterials/Fluid/ObiLightingURP.cginc
+  uploadId: 765501

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 411d9eba4bb0042bf9302873985bc6e0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 55579
+  packageName: Obi Rope
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/RopeAndRod/SampleResources/Scripts/RenderLineBetweenTransforms.cs
+  uploadId: 764245

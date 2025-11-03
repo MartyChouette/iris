@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: fe6bc9ee96c8b41b683608b876b11168
+labels:
+- ObiFluid
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Materials/RockInstanced.mat
+  uploadId: 765501

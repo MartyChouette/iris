@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f0ce5d8a3a05a4b48b7c44a90a96bed7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidMillSettings.lighting
+  uploadId: 765501

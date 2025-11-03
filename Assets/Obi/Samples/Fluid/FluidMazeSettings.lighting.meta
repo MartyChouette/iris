@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8922c220da96e47a78580812ba46eb8d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidMazeSettings.lighting
+  uploadId: 765501

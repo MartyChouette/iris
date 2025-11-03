@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2577cfc61bdb549dfbf129127ad6c2a6
+labels:
+- ObiFluid
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Resources/ObiMaterials/Fluid/Compute/IndirectStuff.cginc
+  uploadId: 765501

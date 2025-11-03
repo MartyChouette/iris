@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1e62b47dd788b4602ba819edb9a37aad
+labels:
+- ObiFluid
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/FluidSmoke2D.unity
+  uploadId: 765501

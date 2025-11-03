@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d7a91ef0db034fd4a47d624b0f77e0b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 63067
+  packageName: Obi Fluid
+  packageVersion: 7.1
+  assetPath: Assets/Obi/Samples/Fluid/SampleResources/Blueprints/Light 2.asset
+  uploadId: 765501
