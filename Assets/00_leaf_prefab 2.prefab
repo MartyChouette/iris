@@ -16,10 +16,9 @@ GameObject:
   - component: {fileID: 9107248101842970599}
   - component: {fileID: 2304339059052059649}
   - component: {fileID: 5399233891119665965}
-  - component: {fileID: 3546013847057974349}
-  - component: {fileID: 233812042268774094}
-  - component: {fileID: 5801668960265733079}
-  m_Layer: 3
+  - component: {fileID: 6962571638519987572}
+  - component: {fileID: 817308602638693541}
+  m_Layer: 6
   m_Name: 00_leaf_prefab 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +182,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -195,32 +194,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 067ad039cdd72974483ebf6f39a4b638, type: 3}
---- !u!114 &3546013847057974349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6921752125431428929}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c535f65d9285e40b9991fefef421c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rope: {fileID: 0}
-  actorIndex: 0
-  pinhole: {fileID: 0}
-  flowerHead: {fileID: 0}
-  radialOffset: 0.5
-  azimuthDeg: 0
-  referenceUp: {x: 0, y: 1, z: 0}
-  leafLocalOut: {x: 1, y: 1, z: 0}
-  leafLocalForward: {x: 0, y: -20, z: 0}
-  posLerp: 25
-  rotLerp: 25
-  leafRigidbody: {fileID: 6376429583699748314}
-  autoRebindAfterTear: 1
---- !u!114 &233812042268774094
+--- !u!114 &6962571638519987572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,91 +203,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 6921752125431428929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29bdf54fa475207428fec36caf199279, type: 3}
+  m_Script: {fileID: 11500000, guid: 24a1233064f57df439db38a85f9eef73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  pinholes: {fileID: 0}
-  explicitPinhole: {fileID: 0}
-  stemRigidbody: {fileID: 0}
   sapPool: {fileID: 0}
-  leafPickMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  pickRadius: 0.5
-  includeTriggers: 1
-  blockWhenPointerOverUI: 0
-  grabMaxDistance: 10
-  handFollowSpeed: 25.7
-  handDepthBias: 0
-  attachSpring: 93
-  attachDamper: 18
-  socketSlack: 0.02
-  holdSpring: 337.5
-  holdDamper: 25
-  handSlackAttached: 2.06
-  cutDetachRadius: 0.035
-  allowYankBreak: 1
-  yankBreakDistance: 0.1
-  yankBreakTension: 40
-  stemBreakNudge: 0.6
-  destroyAfterDrop: 1
-  destroyAfterSeconds: 10
-  maxLinearVelocity: 6
-  maxAngularVelocity: 20
-  stemTugScale: 0.64
-  stemTugMaxImpulse: 0.48
-  stemTugMode: 1
-  drawDebug: 1
-  logBreaks: 1
---- !u!114 &5801668960265733079
+  leafPool: {fileID: 0}
+  follower: {fileID: 817308602638693541}
+  rb: {fileID: 6376429583699748314}
+  sapLifetime: 1.25
+--- !u!114 &817308602638693541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6921752125431428929}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 493df765eae0d5d478b6dfe0f5d36712, type: 3}
+  m_Script: {fileID: 11500000, guid: d420e0771aa63174a9fb4b2d204e0312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rope: {fileID: 0}
-  actorIndex: 1
-  pinhole: {fileID: 0}
-  radialOffset: 1
-  azimuthDeg: 180
-  referenceUp: {x: 0, y: 1, z: 0}
-  leafLocalOut: {x: 1, y: -1, z: 0}
-  leafLocalForward: {x: 0, y: 20, z: 0}
-  posLerp: 25
-  rotLerp: 25
+  actorIndex: 0
   cam: {fileID: 0}
-  leafPickMask:
-    serializedVersion: 2
-    m_Bits: 64
-  pickRadius: 0.02
-  grabMaxDistance: 12
-  handFollowSpeed: 24
-  handDepthBias: 0
-  attachSpring: 160
-  attachDamper: 20
-  socketSlack: 0.02
-  holdSpring: 260
-  holdDamper: 26
-  handSlackAttached: 0.03
-  breakByYank: 1
-  yankBreakDistance: 0.09
-  yankBreakTension: 45
-  breakByCutNotify: 1
-  cutDetachRadius: 0.04
-  sapPool: {fileID: 0}
-  sapOnDrop: 1
-  stemBreakNudge: 0.7
-  stemRigidbody: {fileID: 6376429583699748314}
-  destroyAfterDrop: 1
-  destroyAfterSeconds: 10
-  maxLinearVelocity: 6
-  maxAngularVelocity: 20
-  drawDebug: 1
-  logBreaks: 1
+  flowerHead: {fileID: 0}
+  side: 1
+  posLerp: 30
+  localOut: {x: 1, y: 0, z: 0}
+  localUp: {x: 0, y: 0, z: 1}

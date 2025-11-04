@@ -73,8 +73,7 @@ namespace Obi.Samples
         public bool notifyLeaves = true;
         private readonly Collider[] _leafOverlap = new Collider[32];
 
-        [Header("One-shot Cleanup (first cut)")]
-        [Header("One-shot Cleanup (first cut)")]
+        [Header("Cleanup Stem Attachments")]
         [FormerlySerializedAs("destroyAttachmentsOnFirstCut")]
         public bool enableAttachmentCleanup = true;   // uncheck to never delete attachments on first cut
         public Object[] attachmentsToDestroy;
