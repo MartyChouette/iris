@@ -1,18 +1,28 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
+/// Attach this to each leaf prefab.
+/// RMB = grab/preview. Release = drop only if already detached.
+/// Detaches only when a CUT is reported near its pinhole (or via optional yank-break).
 [DisallowMultipleComponent]
 public class LeafPullOff : MonoBehaviour
 {
     // ── Scene refs ──
     [Header("Scene Refs")]
     public Camera cam;
-    public PinholeLibrary pinholes;     // optional
-    public Transform explicitPinhole;   // assigned by spawner
-    public Rigidbody stemRigidbody;     // small RB for jiggle/tug
-    public SapFxPool sapPool;           // <-- pooled spray (ParticleSystem or ObiEmitter)
+    public PinholeLibrary pinholes;     // fallback when explicitPinhole not set by spawner
+    public Transform explicitPinhole;   // socket created by spawner at rope particle
+    public Rigidbody stemRigidbody;     // small RB on stem for a nudge
+    public SapFxPool sapPool;           // pooled spray (ParticleSystem / ObiEmitter)
 
-    // ── Grab / hand proxy ──
+    // ── Click picking ──
+    [Header("Click picking")]
+    public LayerMask leafPickMask = 6;
+    public float pickRadius = 0.02f;
+    public bool includeTriggers = true;
+    public bool blockWhenPointerOverUI = false;
+
+    // ── Grab/hand proxy ──
     [Header("Grab (hand)")]
     public float grabMaxDistance = 12f;
     public float handFollowSpeed = 24f;
@@ -22,30 +32,35 @@ public class LeafPullOff : MonoBehaviour
     [Header("Attachment spring (leaf ↔ pinhole)")]
     public float attachSpring = 160f;
     public float attachDamper = 20f;
-    public float socketSlack = 0.02f;   // visible give at socket
+    public float socketSlack = 0.02f;
 
     [Header("Hold spring (leaf ↔ hand)")]
     public float holdSpring = 260f;
     public float holdDamper = 26f;
-    public float handSlackAttached = 0.03f; // slack only while attached
+    public float handSlackAttached = 0.03f;
 
     // ── Detach rules ──
     [Header("Detachment")]
-    public bool onlyBreakByExternalCut = true;
+    [Tooltip("Detach the leaf when a cut occurs within this radius of the pinhole (world units).")]
+    public float cutDetachRadius = 0.035f;
+
+    [Tooltip("If true, yanking can also detach (not your current flow).")]
     public bool allowYankBreak = false;
     public float yankBreakDistance = 0.10f;
     public float yankBreakTension = 45f;
 
+  
+
     // ── FX / jiggle ──
     [Header("On Break (sap + jiggle)")]
-    public float stemBreakNudge = 0.7f;       // impulse magnitude into stem
+    public float stemBreakNudge = 0.7f;          // impulse magnitude into stem at socket
 
     // ── After drop ──
     [Header("After Drop")]
-    public bool destroyAfterDrop = true;      // if you want pooling, set this false and add a ReturnToPool script
+    public bool destroyAfterDrop = true;         // false if pooling
     public float destroyAfterSeconds = 10f;
 
-    // ── Physics niceties ──
+    // ── Limits ──
     [Header("Limits")]
     public float maxLinearVelocity = 6f;
     public float maxAngularVelocity = 20f;
@@ -57,7 +72,8 @@ public class LeafPullOff : MonoBehaviour
     public ForceMode stemTugMode = ForceMode.Force;
 
     [Header("Debug")]
-    public bool drawDebug;
+    public bool drawDebug = false;
+    public bool logBreaks = false;
 
     // runtime
     public event Action OnBreak;
@@ -73,6 +89,8 @@ public class LeafPullOff : MonoBehaviour
 
     float _tensionSmoothed;
     float _grabbedDepthFromCam;
+    bool _broken; // ← guard: fire sap / break-once only
+
 
     void Awake()
     {
@@ -81,6 +99,14 @@ public class LeafPullOff : MonoBehaviour
         _leafRB.useGravity = false;
         _leafRB.interpolation = RigidbodyInterpolation.Interpolate;
         _leafRB.maxAngularVelocity = maxAngularVelocity;
+
+        // Ensure there’s a collider and it’s hittable.
+        var col = GetComponent<Collider>();
+        if (!col) col = gameObject.AddComponent<SphereCollider>();  // simple, robust
+        col.enabled = true;
+
+        // If someone put it on Ignore Raycast, put it back on Default.
+        if (gameObject.layer == 2) gameObject.layer = 0;
 
         if (!cam) cam = Camera.main;
 
@@ -91,22 +117,26 @@ public class LeafPullOff : MonoBehaviour
         _handProxy.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
+
     void Start()
     {
         _pinhole = explicitPinhole ? explicitPinhole
                                    : (pinholes ? pinholes.GetNearest(transform.position) : null);
         if (_pinhole) _jointToPinhole = CreateSocketJoint(_leafRB, _pinhole, socketSlack);
         _state = State.AttachedIdle;
+        _broken = false;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) TryGrab();
-        if (Input.GetMouseButtonUp(0)) TryRelease();
+        // RMB grab/preview
+        if (Input.GetMouseButtonDown(1)) TryGrab();
+        if (Input.GetMouseButtonUp(1)) TryRelease();
     }
 
     void FixedUpdate()
     {
+        // clamp excessive linear speed
         if (_leafRB && _leafRB.linearVelocity.sqrMagnitude > maxLinearVelocity * maxLinearVelocity)
             _leafRB.linearVelocity = _leafRB.linearVelocity.normalized * maxLinearVelocity;
 
@@ -115,8 +145,9 @@ public class LeafPullOff : MonoBehaviour
             case State.AttachedHeld:
                 UpdateHandProxyLockedDepth();
                 TugStemWhileHeld();
-                if (!onlyBreakByExternalCut && allowYankBreak && _pinhole) MaybeYankBreak();
+                if (allowYankBreak && _pinhole) MaybeYankBreak();
                 break;
+
             case State.DetachedHeld:
                 UpdateHandProxyLockedDepth();
                 break;
@@ -127,33 +158,81 @@ public class LeafPullOff : MonoBehaviour
                            _state == State.AttachedHeld ? Color.cyan : Color.green, 0f, false);
     }
 
-    void OnDestroy() { if (_handProxy) Destroy(_handProxy.gameObject); }
+    void OnDestroy()
+    {
+        if (_handProxy) Destroy(_handProxy.gameObject);
+    }
 
-    // --- input ---
+    // ─────────────────────────────────────────────────────────────────────
+    // PUBLIC API — call this from your rope cut script:
+    // ─────────────────────────────────────────────────────────────────────
+    /// <summary>Notify this leaf that a stem cut happened at worldCutPoint.</summary>
+    public void OnStemCutAt(Vector3 worldCutPoint)
+    {
+        if (_broken || _pinhole == null) return;
+        if (Vector3.Distance(worldCutPoint, _pinhole.position) <= cutDetachRadius)
+            DoBreak();
+    }
+
+    /// <summary>Force an immediate break (rarely needed; prefer OnStemCutAt).</summary>
+    public void BreakNow()
+    {
+        if (_broken) return;
+        DoBreak();
+    }
+    // ─────────────────────────────────────────────────────────────────────
+
+    // ── input ──
     void TryGrab()
     {
-        if (!cam) return;
+        if (!cam) { if (drawDebug) Debug.LogWarning("LeafPullOff: no Camera assigned."); return; }
+
+#if UNITY_ENGINE_UI || ENABLE_INPUT_SYSTEM
+        if (blockWhenPointerOverUI && UnityEngine.EventSystems.EventSystem.current != null &&
+            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        { if (drawDebug) Debug.Log("LeafPullOff: pointer is over UI"); return; }
+#endif
+
+        // broaden the pick a bit; use Raycast first, then SphereCast as fallback.
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (!Physics.Raycast(ray, out var hit, grabMaxDistance, ~0, QueryTriggerInteraction.Ignore)) return;
-        if (!hit.collider || !hit.collider.transform.IsChildOf(transform)) return;
+        RaycastHit hit;
 
-        _grabbedDepthFromCam = Vector3.Dot(transform.position - cam.transform.position, cam.transform.forward);
-        _grabbedDepthFromCam = Mathf.Max(0.1f, _grabbedDepthFromCam) + handDepthBias;
+        bool got = Physics.Raycast(ray, out hit, grabMaxDistance, leafPickMask,
+                                   includeTriggers ? QueryTriggerInteraction.Collide : QueryTriggerInteraction.Ignore);
 
-        _handProxy.position = transform.position;
+        if (!got)
+        {
+            var hits = Physics.SphereCastAll(ray, Mathf.Max(0.01f, pickRadius), grabMaxDistance, leafPickMask,
+                                             includeTriggers ? QueryTriggerInteraction.Collide : QueryTriggerInteraction.Ignore);
+            if (hits != null && hits.Length > 0)
+            {
+                System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+                hit = hits[0];
+                got = true;
+            }
+        }
+
+        if (!got) { if (drawDebug) Debug.Log("LeafPullOff: no collider hit (mask/layer?)"); return; }
+
+        var lpo = hit.collider.GetComponentInParent<LeafPullOff>();
+        if (lpo != this) { if (drawDebug) Debug.Log("LeafPullOff: hit something else, not this leaf."); return; }
+
+        _grabbedDepthFromCam = hit.distance + handDepthBias;
+        _handProxy.position = hit.point;
 
         if (_jointToHand == null)
             _jointToHand = CreateHandJoint(_leafRB, _handProxy, (_pinhole ? handSlackAttached : 0f));
         else
             SetHandJointSlack((_pinhole ? handSlackAttached : 0f));
 
-        _state = (_pinhole ? State.AttachedHeld : State.DetachedHeld);
+        _state = (_pinhole != null) ? State.AttachedHeld : State.DetachedHeld;
     }
 
     void TryRelease()
     {
         if (_state == State.AttachedHeld)
         {
+            // still attached → just stop holding; stays attached
             DestroyHandJoint();
             _state = State.AttachedIdle;
         }
@@ -162,14 +241,12 @@ public class LeafPullOff : MonoBehaviour
             DestroyHandJoint();
             _leafRB.useGravity = true;
             _state = State.DetachedFree;
-
-            // pooled leaves? comment this and call your own ReturnToPool()
             if (destroyAfterDrop && destroyAfterSeconds > 0f)
                 Destroy(gameObject, destroyAfterSeconds);
         }
     }
 
-    // --- hand proxy ---
+    // ── hand proxy ──
     void UpdateHandProxyLockedDepth()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -178,7 +255,7 @@ public class LeafPullOff : MonoBehaviour
         _handProxy.MovePosition(newPos);
     }
 
-    // --- tug into stem while attached ---
+    // ── tug into stem while held & attached ──
     void TugStemWhileHeld()
     {
         if (_pinhole == null || stemRigidbody == null || stemRigidbody.isKinematic) return;
@@ -194,62 +271,54 @@ public class LeafPullOff : MonoBehaviour
         stemRigidbody.AddForceAtPosition(tug, _pinhole.position, stemTugMode);
     }
 
-    // --- external break (from scissors) ---
-    public void BreakNow()
-    {
-        if (_pinhole == null) return;
-        DoBreak();
-    }
-
-    void MaybeYankBreak()
-    {
-        float stretch = Vector3.Distance(transform.position, _pinhole.position);
-        float estTension = attachSpring * stretch;
-        _tensionSmoothed = Mathf.Lerp(_tensionSmoothed, estTension, 1f - Mathf.Exp(-8f * Time.fixedDeltaTime));
-        if (stretch >= yankBreakDistance || _tensionSmoothed >= yankBreakTension) DoBreak();
-    }
-
+    // ── internal break ──
     void DoBreak()
     {
-        // spray burst at the socket (direction from socket to leaf)
-        Vector3 dir = (transform.position - _pinhole.position);
-        if (dir.sqrMagnitude < 1e-6f) dir = transform.forward;
+        if (_broken) return;
+        _broken = true;
 
-        if (sapPool)                       // <-- pooled spray
-            sapPool.Play(_pinhole.position, dir, _pinhole, null);
-        else
-            Debug.LogWarning("[LeafPullOff] No SapFxPool assigned, skipping spray.");
+        if (logBreaks) Debug.Log($"Leaf '{name}' broke at {Time.time:F3}");
 
-        // one-shot nudge into stem
-        if (stemRigidbody && !stemRigidbody.isKinematic)
-            stemRigidbody.AddForceAtPosition(dir.normalized * stemBreakNudge, _pinhole.position, ForceMode.Impulse);
+        // spray/nudge at socket
+        if (_pinhole != null)
+        {
+            Vector3 dir = (transform.position - _pinhole.position);
+            if (dir.sqrMagnitude < 1e-6f) dir = transform.forward;
 
-        // sever socket
+            if (sapPool) sapPool.Play(_pinhole.position, dir, _pinhole, null);
+
+            if (stemRigidbody && !stemRigidbody.isKinematic)
+                stemRigidbody.AddForceAtPosition(dir.normalized * stemBreakNudge, _pinhole.position, ForceMode.Impulse);
+        }
+
+        // sever socket joint
         DestroySocketJoint();
-
-        // keep holding: tighten hand slack to 0 so it hugs cursor
-        SetHandJointSlack(0f);
-
         _pinhole = null;
 
-        if (_state == State.AttachedHeld)
-        {
-            _state = State.DetachedHeld;
-            _leafRB.useGravity = false;
-        }
-        else
-        {
-            _state = State.DetachedFree;
-            _leafRB.useGravity = true;
+        // force drop, even if held
+        DestroyHandJoint();
+        _leafRB.useGravity = true;
+        _state = State.DetachedFree;
 
-            if (destroyAfterDrop && destroyAfterSeconds > 0f)
-                Destroy(gameObject, destroyAfterSeconds);
-        }
+        if (destroyAfterDrop && destroyAfterSeconds > 0f)
+            Destroy(gameObject, destroyAfterSeconds);
 
         OnBreak?.Invoke();
     }
 
-    // --- joints ---
+    // ── yank option ──
+    void MaybeYankBreak()
+    {
+        if (_pinhole == null) return;
+
+        float stretch = Vector3.Distance(transform.position, _pinhole.position);
+        float estTension = attachSpring * stretch;
+        _tensionSmoothed = Mathf.Lerp(_tensionSmoothed, estTension, 1f - Mathf.Exp(-8f * Time.fixedDeltaTime));
+        if (stretch >= yankBreakDistance || _tensionSmoothed >= yankBreakTension)
+            DoBreak();
+    }
+
+    // ── joints ──
     ConfigurableJoint CreateSocketJoint(Rigidbody leaf, Transform pinhole, float slack)
     {
         var j = leaf.gameObject.AddComponent<ConfigurableJoint>();
@@ -257,6 +326,7 @@ public class LeafPullOff : MonoBehaviour
         j.connectedBody = pinParentRB;
         j.autoConfigureConnectedAnchor = false;
         j.anchor = Vector3.zero;
+
         j.connectedAnchor = (j.connectedBody != null)
             ? j.connectedBody.transform.InverseTransformPoint(pinhole.position)
             : pinhole.position;
@@ -278,6 +348,7 @@ public class LeafPullOff : MonoBehaviour
         j.autoConfigureConnectedAnchor = false;
         j.anchor = Vector3.zero;
         j.connectedAnchor = Vector3.zero;
+
         j.xMotion = j.yMotion = j.zMotion = ConfigurableJointMotion.Limited;
         var lm = new SoftJointLimit { limit = Mathf.Max(0f, slack) };
         j.linearLimit = lm;

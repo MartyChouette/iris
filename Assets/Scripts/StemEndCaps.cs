@@ -9,102 +9,92 @@ public class StemEndCaps : MonoBehaviour
     [Header("Refs")]
     public ObiRope rope;
 
-    [Tooltip("Prefab for the bottom cover (cap).")]
+    [Tooltip("Prefab for the bottom cover (cap). Placed on all free tips EXCEPT the crown tip.")]
     public GameObject bottomCapPrefab;
 
-    [Tooltip("Prefab for the top crown object (flower crown).")]
+    [Tooltip("Prefab for the flower crown. Always attached to the MAX actor index (last particle).")]
     public GameObject topCrownPrefab;
 
-    [Tooltip("World-space anchor near the flower head. The top crown locks to the end closest to this.")]
-    public Transform headHint;
-
     [Header("Placement")]
-    [Tooltip("Small push outward along the end normal (meters).")]
-    public float pushOut = 0.003f;
+    [Tooltip("Meters to push outward along the end normal. Set 0 while validating.")]
+    public float pushOut = 0f;
 
-    [Tooltip("Extra lateral offset (meters), e.g. crown thickness.")]
+    [Tooltip("Meters of sideways offset. Set 0 while validating.")]
     public float lateralOffset = 0f;
 
-    [Tooltip("Delay to allow rope to bind to solver before arming.")]
-    public float armDelay = 0.15f;
+    [Tooltip("Delay so the rope binds to the solver before we arm.")]
+    public float armDelay = 0.1f;
+
+    [Header("Debug")]
+    public bool drawEndGizmos = true;
+    public float gizmoRadius = 0.004f;
 
     // runtime
-    GameObject _bottomCap, _topCrown;
-    int _armedBottomActor = -1, _armedTopActor = -1; // kept for fallback
+    GameObject _topCrown;
+    readonly List<GameObject> _caps = new(); // one cap per non-crown end
 
     void Reset() { if (!rope) rope = GetComponent<ObiRope>(); }
 
     IEnumerator Start()
     {
-        // wait for solver to be ready
         float t = 0f;
         while (t < armDelay || rope == null || rope.solver == null || rope.activeParticleCount == 0)
-        {
-            t += Time.deltaTime; yield return null;
-        }
+        { t += Time.deltaTime; yield return null; }
 
-        if (bottomCapPrefab) _bottomCap = Instantiate(bottomCapPrefab, transform);
         if (topCrownPrefab) _topCrown = Instantiate(topCrownPrefab, transform);
-
-        var ends = GetEndActorIndices();
-        if (ends.Count == 0) yield break;
-
-        // Arm using headHint if available, else original Y-based pick
-        if (headHint && TryPickEndsWithHeadHint(ends, out _armedTopActor, out _armedBottomActor))
-        {
-            PositionCaps();
-        }
-        else
-        {
-            PickInitialEndsByY(ends, out _armedBottomActor, out _armedTopActor);
-            PositionCaps();
-        }
     }
 
     void LateUpdate()
     {
-        if (!rope || rope.solver == null) return;
-        PositionCaps();
-    }
+        if (!rope || rope.solver == null || rope.activeParticleCount == 0) return;
 
-    void PositionCaps()
-    {
-        var ends = GetEndActorIndices();
+        var ends = GetFreeTips();
         if (ends.Count == 0) return;
 
-        int currTop = -1;
-        int currBottom = -1;
+        // Crown = highest actor index end
+        int crownActor = -1;
+        for (int i = 0; i < ends.Count; i++)
+            if (ends[i] > crownActor) crownActor = ends[i];
 
-        // --- Hard lock: top crown always follows the end closest to headHint ---
-        if (headHint)
+        // Ensure cap pool size
+        int targetCaps = Mathf.Max(0, ends.Count - 1);
+        while (_caps.Count < targetCaps && bottomCapPrefab)
+            _caps.Add(Instantiate(bottomCapPrefab, transform));
+        for (int i = targetCaps; i < _caps.Count; i++)
+            _caps[i].SetActive(false);
+
+        // Place crown
+        if (_topCrown)
         {
-            currTop = PickEndClosestToPoint(ends, headHint.position);
-            currBottom = PickOtherEndFarthestFrom(ends, currTop);
+            PlaceAtEndExact(crownActor, _topCrown, pushOut, lateralOffset);
+            _topCrown.SetActive(true);
         }
-        else
+
+        // Place caps on all other free tips
+        int capIdx = 0;
+        for (int i = 0; i < ends.Count; i++)
         {
-            // Fallback to previous behavior if no head hint is provided
-            currTop = ChooseClosestEndByActorIndex(ends, _armedTopActor, preferHighestY: true);
-            currBottom = ChooseClosestEndByActorIndex(ends, _armedBottomActor, preferLowestY: true);
+            int ai = ends[i];
+            if (ai == crownActor) continue;
 
-            // If both collapse to the same end, push bottom to the farthest other end
-            if (currBottom == currTop)
-                currBottom = PickOtherEndFarthestFrom(ends, currTop);
+            if (capIdx < _caps.Count && _caps[capIdx])
+            {
+                _caps[capIdx].SetActive(true);
+                PlaceAtEndExact(ai, _caps[capIdx], pushOut, lateralOffset);
+                capIdx++;
+            }
         }
-
-        if (_topCrown) PlaceAtEnd(currTop, _topCrown, pushOut, lateralOffset);
-        if (_bottomCap) PlaceAtEnd(currBottom, _bottomCap, pushOut, lateralOffset);
     }
 
-    // --- helpers ---
+    // ---------- helpers ----------
 
-    // Build the list of actor indices whose degree==1 and invMass>0 (free tips)
-    List<int> GetEndActorIndices()
+    // Ends = degree==1 (tip) and not fixed (invMass > 0)
+    List<int> GetFreeTips()
     {
         var ends = new List<int>(4);
         if (rope == null || rope.solver == null || rope.activeParticleCount == 0) return ends;
 
-        // degree per actor using rope.elements
+        // degree per actor
         var degree = new Dictionary<int, int>(rope.elements.Count * 2);
         for (int i = 0; i < rope.elements.Count; i++)
         {
@@ -131,132 +121,43 @@ public class StemEndCaps : MonoBehaviour
         return ends;
     }
 
-    // Arm using head hint: top = closest to headHint, bottom = other end farthest from top
-    bool TryPickEndsWithHeadHint(List<int> ends, out int topActor, out int bottomActor)
-    {
-        topActor = bottomActor = -1;
-        if (!headHint || ends.Count == 0) return false;
-
-        topActor = PickEndClosestToPoint(ends, headHint.position);
-        bottomActor = PickOtherEndFarthestFrom(ends, topActor);
-
-        // Store arm references for fallback paths (in case headHint later nulls)
-        _armedTopActor = topActor;
-        _armedBottomActor = bottomActor;
-
-        return topActor >= 0;
-    }
-
-    int PickEndClosestToPoint(List<int> ends, Vector3 point)
-    {
-        int best = -1; float bestD = float.PositiveInfinity;
-        foreach (var ai in ends)
-        {
-            if (!TryGetActorWorld(ai, out var p)) continue;
-            float d = (p - point).sqrMagnitude;
-            if (d < bestD) { bestD = d; best = ai; }
-        }
-        return best;
-    }
-
-    int PickOtherEndFarthestFrom(List<int> ends, int refEnd)
-    {
-        if (ends.Count == 0) return -1;
-        if (refEnd < 0)
-            return ends[0];
-
-        if (!TryGetActorWorld(refEnd, out var refPos))
-        {
-            // if we can't get ref world pos, just pick a different end
-            foreach (var ai in ends) if (ai != refEnd) return ai;
-            return refEnd;
-        }
-
-        int pick = refEnd;
-        float best = -1f;
-        foreach (var ai in ends)
-        {
-            if (ai == refEnd) continue;
-            if (!TryGetActorWorld(ai, out var p)) continue;
-            float d = (p - refPos).sqrMagnitude;
-            if (d > best) { best = d; pick = ai; }
-        }
-        return pick;
-    }
-
-    // Original Y-based arming (fallback)
-    void PickInitialEndsByY(List<int> ends, out int bottomActor, out int topActor)
-    {
-        bottomActor = topActor = -1;
-        float minY = float.MaxValue, maxY = float.MinValue;
-
-        foreach (int ai in ends)
-        {
-            if (!TryGetActorWorld(ai, out var p)) continue;
-            if (p.y < minY) { minY = p.y; bottomActor = ai; }
-            if (p.y > maxY) { maxY = p.y; topActor = ai; }
-        }
-
-        if (topActor < 0) topActor = bottomActor;
-        if (bottomActor < 0) bottomActor = topActor;
-    }
-
-    // Choose closest by actor index, with optional Y bias (fallback path)
-    int ChooseClosestEndByActorIndex(List<int> ends, int refActor, bool preferLowestY = false, bool preferHighestY = false)
-    {
-        if (ends.Count == 0) return -1;
-
-        if (refActor >= 0)
-        {
-            int best = ends[0]; int bestDiff = Mathf.Abs(ends[0] - refActor);
-            for (int i = 1; i < ends.Count; i++)
-            {
-                int diff = Mathf.Abs(ends[i] - refActor);
-                if (diff < bestDiff) { bestDiff = diff; best = ends[i]; }
-            }
-            return best;
-        }
-
-        if (preferLowestY || preferHighestY)
-        {
-            int pick = ends[0]; TryGetActorWorld(pick, out var p0);
-            float bestY = p0.y;
-
-            for (int i = 1; i < ends.Count; i++)
-            {
-                if (!TryGetActorWorld(ends[i], out var p)) continue;
-                if (preferLowestY && p.y < bestY) { bestY = p.y; pick = ends[i]; }
-                if (preferHighestY && p.y > bestY) { bestY = p.y; pick = ends[i]; }
-            }
-            return pick;
-        }
-
-        return ends[0];
-    }
-
-    void PlaceAtEnd(int actorIndex, GameObject go, float outOffset, float sideOffset)
+    // Place object so its Anchor (if present) sits EXACTLY at the particle.
+    void PlaceAtEndExact(int actorIndex, GameObject go, float outOffset, float sideOffset)
     {
         if (actorIndex < 0 || go == null) return;
+        if (!TryGetParticleWorld(actorIndex, out var endP)) return;
 
-        if (!TryGetActorWorld(actorIndex, out var endP)) return;
-
-        int neighborActor = FindNeighborActor(actorIndex);
+        // choose a normal using neighbor to orient outward (does not affect exact pin)
         Vector3 nrm = Vector3.up;
-        if (neighborActor >= 0 && TryGetActorWorld(neighborActor, out var nbP))
-        {
-            // outward from neighbor → end (so cap 'faces out' of the rope tip)
-            nrm = (endP - nbP).normalized;
-        }
+        int nb = FindNeighborActor(actorIndex);
+        if (nb >= 0 && TryGetParticleWorld(nb, out var nbP))
+            nrm = (endP - nbP).sqrMagnitude > 1e-12f ? (endP - nbP).normalized : Vector3.up;
 
-        // Stable lateral for a pretty sideways offset
+        // stable sideways for lateral offset
         Vector3 upHint = Vector3.up;
         Vector3 right = Vector3.Cross(upHint, nrm).normalized;
         if (right.sqrMagnitude < 1e-6f) right = Vector3.Cross(Vector3.forward, nrm).normalized;
 
-        Vector3 pos = endP + nrm * outOffset + right * sideOffset;
-        Quaternion rot = Quaternion.LookRotation(nrm, upHint);
+        Vector3 finalPos = endP + nrm * outOffset + right * sideOffset;
+        Quaternion finalRot = Quaternion.LookRotation(nrm, upHint);
 
-        go.transform.SetPositionAndRotation(pos, rot);
+        // If prefab has an "Anchor" child, place THAT at the particle and offset parent accordingly.
+        Transform anchor = go.transform.Find("Anchor");
+        if (anchor != null)
+        {
+            // Where would the parent need to be so that anchor lands at finalPos/finalRot?
+            // P_world = Parent * AnchorLocal  ⇒  Parent = P_world * Inverse(AnchorLocal)
+            Matrix4x4 A_local = Matrix4x4.TRS(anchor.localPosition, anchor.localRotation, anchor.localScale);
+            Matrix4x4 P_world = Matrix4x4.TRS(finalPos, finalRot, Vector3.one);
+            Matrix4x4 parentWorld = P_world * A_local.inverse;
+
+            go.transform.SetPositionAndRotation(parentWorld.GetColumn(3), parentWorld.rotation);
+        }
+        else
+        {
+            // No anchor → just put the object itself at the exact particle pose
+            go.transform.SetPositionAndRotation(finalPos, finalRot);
+        }
     }
 
     int FindNeighborActor(int actorIndex)
@@ -270,7 +171,8 @@ public class StemEndCaps : MonoBehaviour
         return -1;
     }
 
-    bool TryGetActorWorld(int actorIndex, out Vector3 worldPos)
+    // Obi 7: renderablePositions are already in WORLD space
+    bool TryGetParticleWorld(int actorIndex, out Vector3 worldPos)
     {
         worldPos = default;
         if (rope == null || rope.solver == null) return false;
@@ -283,7 +185,19 @@ public class StemEndCaps : MonoBehaviour
         if (si < 0 || si >= rp.count) return false;
 
         var p4 = rp[si];
-        worldPos = rope.solver.transform.TransformPoint(new Vector3(p4.x, p4.y, p4.z));
+        worldPos = new Vector3(p4.x, p4.y, p4.z); // DO NOT TransformPoint()
         return true;
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        if (!drawEndGizmos || rope == null || rope.solver == null) return;
+        var ends = GetFreeTips();
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < ends.Count; i++)
+            if (TryGetParticleWorld(ends[i], out var p))
+                Gizmos.DrawSphere(p, gizmoRadius);
+    }
+#endif
 }

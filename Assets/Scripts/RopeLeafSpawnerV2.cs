@@ -7,10 +7,10 @@ public class RopeLeafSpawnerV2 : MonoBehaviour
 {
     [Header("Refs")]
     public ObiRopeBase rope;
-    public LeafPool leafPool;              // <-- use pool
-    public PinholeLibrary pinholeLibrary;  // optional collector
+    public LeafPool leafPool;
     public Camera cam;
-    public Rigidbody stemRigidbody;        // optional jiggle RB shared by leaves
+    public Rigidbody stemRigidbody;
+    public SapFxPool sapPool;   // optional
 
     [Header("Counts / Placement")]
     public int minLeaves = 1, maxLeaves = 4;
@@ -20,15 +20,18 @@ public class RopeLeafSpawnerV2 : MonoBehaviour
     public float radialOffset = 0.05f;
     public bool alternateSides = true;
     public Vector3 fallbackUp = Vector3.up;
-    public bool forceLeafScaleOne = true;
+
+    [Header("Scale")]
+    public bool forceLeafScaleOne = false;
+    public bool overrideWorldScale = false;
+    public float leafWorldScale = 1f;
 
     void Awake() { if (!rope) rope = GetComponent<ObiRopeBase>(); }
     void OnEnable() { StartCoroutine(SpawnWhenReady()); }
 
     IEnumerator SpawnWhenReady()
     {
-        while (rope == null ||
-               rope.solver == null ||
+        while (rope == null || rope.solver == null ||
                rope.activeParticleCount < 3 ||
                rope.solverIndices == null ||
                rope.solver.renderablePositions == null)
@@ -39,7 +42,7 @@ public class RopeLeafSpawnerV2 : MonoBehaviour
 
     void Spawn()
     {
-        if (!leafPool) { Debug.LogError("[RopeLeafSpawnerV2] Assign LeafPool."); return; }
+        if (!leafPool) { Debug.LogError("[RopeLeafSpawnerV3] Assign LeafPool."); return; }
 
         int count = Mathf.Clamp(Random.Range(minLeaves, maxLeaves + 1), 0, 64);
         if (count == 0) return;
@@ -52,13 +55,15 @@ public class RopeLeafSpawnerV2 : MonoBehaviour
             float f = Mathf.Lerp(a0, a1, (k + 0.5f) / count);
             int ai = Mathf.Clamp(Mathf.RoundToInt(f * (actorCount - 1)), 1, actorCount - 2);
 
-            // world-space socket position from Obi
+            // world socket
             int solverIndex = rope.solverIndices[ai];
             Vector3 socketWorld = GetRenderableWorld(rope, solverIndex);
 
-            // compute side/tangent for initial offset/orientation
+            // orientation & side
             Vector3 tangent = ComputeTangentWorld(rope, ai);
-            Vector3 upRef = Vector3.Dot(tangent, Vector3.up) > 0.9f ? rope.transform.right : Vector3.up;
+            Vector3 upRef = (Mathf.Abs(Vector3.Dot(tangent.normalized, Vector3.up)) > 0.9f)
+                                ? rope.transform.right
+                                : Vector3.up;
             Vector3 side = Vector3.Cross(upRef, tangent).normalized;
             if (side.sqrMagnitude < 1e-6f) side = Vector3.Cross(fallbackUp, tangent).normalized;
 
@@ -66,35 +71,53 @@ public class RopeLeafSpawnerV2 : MonoBehaviour
             Vector3 leafWorld = socketWorld + side * (radialOffset * sgn);
             Quaternion rot = Quaternion.LookRotation(side * sgn, tangent.sqrMagnitude > 1e-6f ? tangent : fallbackUp);
 
-            // create a pinhole AT the socket under solver (no scale/rotation surprises)
-            Transform pinhole = CreatePinholeAt(socketWorld, ai);
+            // create a UNIQUE pinhole that follows this rope particle:
+            Transform pinhole = new GameObject($"Pinhole_ai{ai}").transform;
+            pinhole.SetParent(rope.solver.transform, true);
+            pinhole.position = socketWorld;
+            pinhole.rotation = rope.solver.transform.rotation;
+            var follower = pinhole.gameObject.AddComponent<PinholeFollower>();
+            follower.rope = rope;
+            follower.actorIndex = ai;
+            follower.fallbackUp = fallbackUp;
 
-            // fetch leaf from pool
+            // get a leaf from pool
             GameObject leafGO = leafPool.Get();
             if (!leafGO) break;
 
-            // place at world pose *before* parenting, then parent under rope
+            // world pose -> parent
             leafGO.transform.SetPositionAndRotation(leafWorld, rot);
             if (forceLeafScaleOne) leafGO.transform.localScale = Vector3.one;
             leafGO.transform.SetParent(rope.transform, true);
 
-            // wire up the behaviour
+            if (overrideWorldScale)
+            {
+                var parentLossy = leafGO.transform.parent ? leafGO.transform.parent.lossyScale : Vector3.one;
+                Vector3 safeDiv = new Vector3(
+                    parentLossy.x == 0 ? 1 : parentLossy.x,
+                    parentLossy.y == 0 ? 1 : parentLossy.y,
+                    parentLossy.z == 0 ? 1 : parentLossy.z
+                );
+                Vector3 desiredWorld = Vector3.one * Mathf.Max(0.0001f, leafWorldScale);
+                leafGO.transform.localScale = new Vector3(
+                    desiredWorld.x / safeDiv.x,
+                    desiredWorld.y / safeDiv.y,
+                    desiredWorld.z / safeDiv.z
+                );
+            }
+
+            // wire behaviour (joint-free) — leaf OWNS the pinhole:
             var lpo = leafGO.GetComponent<LeafPullOff>();
-            if (!lpo) { Debug.LogError("[RopeLeafSpawnerV3] Leaf prefab missing LeafPullOff."); leafPool.Return(leafGO); continue; }
+            if (!lpo) { Debug.LogError("[RopeLeafSpawnerV3] Leaf prefab missing LeafPullOff."); Destroy(pinhole.gameObject); continue; }
 
-            lpo.cam = cam ? cam : Camera.main;
-            lpo.explicitPinhole = pinhole;
-            lpo.pinholes = null;
-            lpo.stemRigidbody = stemRigidbody;
-
-            if (pinholeLibrary) pinholeLibrary.pinholePoints.Add(pinhole);
+            //lpo.Setup(cam ? cam : Camera.main, pinhole, stemRigidbody, sapPool);
         }
     }
 
-    // ----- Obi helpers -----
+    // Obi helpers
     static Vector3 GetRenderableWorld(ObiRopeBase rope, int solverIndex)
     {
-        var v4 = rope.solver.renderablePositions[solverIndex]; // ObiNativeVector4List (WORLD)
+        var v4 = rope.solver.renderablePositions[solverIndex];
         return new Vector3(v4.x, v4.y, v4.z);
     }
 
@@ -105,17 +128,8 @@ public class RopeLeafSpawnerV2 : MonoBehaviour
         int aNext = Mathf.Min(ai + 1, rope.activeParticleCount - 1);
         Vector3 p0 = GetRenderableWorld(rope, idx[aPrev]);
         Vector3 p1 = GetRenderableWorld(rope, idx[aNext]);
-        Vector3 t = p1 - p0; if (t.sqrMagnitude > 1e-8f) t.Normalize();
-        return t;
-    }
-
-    Transform CreatePinholeAt(Vector3 socketWorld, int actorIndex)
-    {
-        var t = new GameObject($"Pinhole_ai{actorIndex}").transform;
-        t.SetParent(rope.solver.transform, true);
-        t.position = socketWorld;
-        t.rotation = rope.solver.transform.rotation;
-        t.gameObject.AddComponent<PinholeMarker>().actorIndex = actorIndex;
+        Vector3 t = p1 - p0;
+        if (t.sqrMagnitude > 1e-8f) t.Normalize();
         return t;
     }
 }
