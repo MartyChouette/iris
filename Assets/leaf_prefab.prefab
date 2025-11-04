@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6962571638519987572}
   - component: {fileID: 817308602638693541}
   m_Layer: 6
-  m_Name: 00_leaf_prefab 2
+  m_Name: leaf_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   leafPool: {fileID: 0}
   follower: {fileID: 817308602638693541}
   rb: {fileID: 6376429583699748314}
-  sapLifetime: 1.25
+  sapLifetime: 8
 --- !u!114 &817308602638693541
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -58,7 +58,7 @@ MonoBehaviour:
   emitterBlueprint: {fileID: 11400000, guid: eae3f4de6f75a4bef942d5ef885b4677, type: 2}
   filter: -65534
   emissionMethod: 1
-  minPoolSize: 0.295
+  minPoolSize: 0.834
   speed: 2
   lifespan: 8
   randomDirection: 0.205

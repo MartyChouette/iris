@@ -79,6 +79,10 @@ namespace Obi.Samples
         public Object[] attachmentsToDestroy;
         private bool attachmentsDestroyed;
 
+        [Header("Global Juice (optional)")]
+        public JuiceSettings juiceSettings;
+
+
 
         // OPTIONAL: if UI is disabled, make sure they stay hidden on Awake()
         void Awake()
@@ -395,7 +399,10 @@ namespace Obi.Samples
             if (enableUIJuice && splashText) splashText.text = label;
 
             // Run time freeze/slomo + (optionally) UI
-            StartCoroutine(DoFreezeAndUI(enableUIJuice, enableTimeJuice));
+            bool uiOn = juiceSettings ? juiceSettings.enableUIJuice : enableUIJuice;
+            bool timeOn = juiceSettings ? juiceSettings.enableTimeJuice : enableTimeJuice;
+            StartCoroutine(DoFreezeAndUI(uiOn, timeOn));
+
         }
 
 

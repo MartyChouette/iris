@@ -13,7 +13,11 @@ public class Leaf : MonoBehaviour
     public Rigidbody rb;                // on the leaf
 
     [Header("FX")]
-    public float sapLifetime = 1.25f;
+    public float sapLifetime = 8f;
+
+    [Header("Global Juice (optional)")]
+    public JuiceSettings juiceSettings;
+
 
     bool _torn;
 
