@@ -79,6 +79,58 @@ public class Leaf3D_PullBreak : MonoBehaviour
     Vector3 _grabStartSocketPos;   // socket/world at grab begin
     Vector3 _grabPlaneNormal;      // camera forward at grab begin (for cursor-plane projection)
     Vector3 _handWorld;            // current projected world hand position
+    // In Leaf3D_PullBreak.cs (add somewhere inside the class)
+    public bool externalControl = true;  // when true, the script will NOT read mouse; it expects external control
+
+    // expose position for the grabber
+    public Vector3 GetPosition() => transform.position;
+
+    // called when grab begins
+    public void BeginExternalGrab(Vector3 anchorWorld, Vector3 planeNormal)
+    {
+        _grabbed = true;
+        _grabPlaneNormal = planeNormal;
+        _grabStartSocketPos = anchorWorld; // use socket/anchor as plane point
+    }
+
+    // per-frame from grabber
+    public void SetExternalHand(Vector3 handWorld)
+    {
+        _handWorld = handWorld;
+
+        if (_attached)
+        {
+            // Allow visible stretch while attached (don’t snap back this frame)
+            // Just pose the leaf at hand; Update() will check distance and call BreakOff() if needed.
+            transform.position = _handWorld;
+        }
+        else if (stayInHandAfterBreak)
+        {
+            PoseLeafAtHand();
+        }
+
+        // distance check identical to internal path:
+        float dist = Vector3.Distance(attachSocket ? attachSocket.position : _grabStartSocketPos, _handWorld);
+        if (_attached && dist >= breakDistance)
+            BreakOff();
+    }
+
+    // called on release
+    public void EndExternalGrab()
+    {
+        _grabbed = false;
+        if (!_attached && _rb)
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+        }
+    }
+
+    // convenience for interface parity
+    public void TearOff()
+    {
+        if (_attached) BreakOff();
+    }
 
     void Awake()
     {
@@ -136,8 +188,14 @@ public class Leaf3D_PullBreak : MonoBehaviour
     {
         transform.position = attachSocket.TransformPoint(localPosOffset);
         transform.rotation = attachSocket.rotation * localRotOffset;
-        if (_rb) { _rb.linearVelocity = Vector3.zero; _rb.angularVelocity = Vector3.zero; }
+
+        if (_rb && !_rb.isKinematic)
+        {
+            _rb.linearVelocity = Vector3.zero;  // or: _rb.velocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+        }
     }
+
 
     void PoseLeafAtHand()
     {

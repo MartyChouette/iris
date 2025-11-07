@@ -798,6 +798,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &116991558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 116991560}
+  - component: {fileID: 116991559}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &116991559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116991558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &116991560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116991558}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &143805745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,7 +2027,7 @@ MonoBehaviour:
   blockWhenPointerOverUI: 0
   pickMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 72
   pickRayDistance: 10
   collisionBurstCooldown: 0.15
   onBreakBurst:
@@ -1991,6 +2037,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   burstOnGrab: 0
+  externalControl: 1
 --- !u!1 &777037819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,6 +2613,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   burstOnGrab: 0
+  externalControl: 1
 --- !u!1 &885122129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3852,7 +3900,6 @@ GameObject:
   - component: {fileID: 1322653139}
   - component: {fileID: 1322653138}
   - component: {fileID: 1322653152}
-  - component: {fileID: 1322653137}
   - component: {fileID: 1322653136}
   - component: {fileID: 1322653143}
   - component: {fileID: 1322653149}
@@ -3897,21 +3944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   category: 0
---- !u!114 &1322653137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322653134}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88cb6f64c607f46b3b0d7a30a99ed18b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 1797091330}
-  leafDownImpulse: 1.4
-  leafCutRadius: 0.06
 --- !u!114 &1322653138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5882,10 +5914,10 @@ GameObject:
   - component: {fileID: 1780103267}
   - component: {fileID: 1780103268}
   - component: {fileID: 1780103269}
-  - component: {fileID: 1780103270}
   - component: {fileID: 1780103271}
   - component: {fileID: 1780103272}
   - component: {fileID: 1780103273}
+  - component: {fileID: 1780103274}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5993,27 +6025,6 @@ MonoBehaviour:
   enableIdleRestart: 1
   idleRestartAfterSeconds: 120
   ignoreWhenUnfocused: 1
---- !u!114 &1780103270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780103262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfe6d400519fe6d4385b3b309224d195, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 1797091330}
-  leafMask:
-    serializedVersion: 2
-    m_Bits: 72
-  spring: 40
-  damping: 10
-  maxDragSpeed: 4
-  tearDistance: 0.11
-  tearDwell: 0.38
 --- !u!114 &1780103271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6084,6 +6095,28 @@ MonoBehaviour:
   - {fileID: 1780103272}
   folderName: Playtest Feedback
   alsoWriteJson: 1
+--- !u!114 &1780103274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780103262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab868c94d200e87449544dae97a5171f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1797091330}
+  leafMask:
+    serializedVersion: 2
+    m_Bits: 72
+  blockWhenPointerOverUI: 0
+  spring: 40
+  damping: 10
+  maxDragSpeed: 4
+  tearDistance: 0.11
+  tearDwell: 0
 --- !u!1 &1797091326
 GameObject:
   m_ObjectHideFlags: 0
@@ -6320,52 +6353,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1866492861
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1866492863}
-  - component: {fileID: 1866492862}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1866492862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866492861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &1866492863
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866492861}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1902924336
 GameObject:
   m_ObjectHideFlags: 0
@@ -7036,4 +7023,4 @@ SceneRoots:
   - {fileID: 869162700}
   - {fileID: 1507074963}
   - {fileID: 974744732}
-  - {fileID: 1866492863}
+  - {fileID: 116991560}

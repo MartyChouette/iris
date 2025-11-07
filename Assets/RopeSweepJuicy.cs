@@ -300,13 +300,10 @@ namespace Obi.Samples
             lineRenderer.positionCount = 2;
             lineRenderer.enabled = false;
 
-            if (lineMaterial != null)
-            {
-                lineRenderer.sharedMaterial = lineMaterial;
-                return;
-            }
+            // 0) If you assigned a material in the Inspector, just use it and bail.
+            if (lineMaterial != null) { lineRenderer.sharedMaterial = lineMaterial; return; }
 
-            // Generate classic dotted texture
+            // 1) Make the dotted texture (optional; comment out if you don’t want dots)
             int w = Mathf.Max(1, dotPx + Mathf.Max(1, gapPx));
             var tex = new Texture2D(w, 1, TextureFormat.RGBA32, false);
             tex.filterMode = FilterMode.Point;
@@ -315,16 +312,32 @@ namespace Obi.Samples
                 tex.SetPixel(x, 0, x < dotPx ? Color.black : new Color(0, 0, 0, 0));
             tex.Apply();
 
-            // Try Unlit/Texture; fall back to Sprites/Default so builds still show a line
-            var mat = new Material(Shader.Find("Unlit/Texture"));
-            if (mat && tex) { mat.mainTexture = tex; mat.color = Color.white; }
-            else
+            // 2) Try URP/Unlit first, then Sprites/Default. Never construct with null.
+            Shader s = Shader.Find("Universal Render Pipeline/Unlit");
+            if (s != null)
             {
-                mat = new Material(Shader.Find("Sprites/Default"));
-                if (mat) mat.color = Color.black;
+                var m = new Material(s);
+                if (m.HasProperty("_BaseMap")) m.SetTexture("_BaseMap", tex);
+                if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", Color.black);
+                lineRenderer.sharedMaterial = m;
+                return;
             }
-            lineRenderer.sharedMaterial = mat;
+
+            s = Shader.Find("Sprites/Default");
+            if (s != null)
+            {
+                var m = new Material(s);
+                m.mainTexture = tex;
+                m.color = Color.white;
+                lineRenderer.sharedMaterial = m;
+                return;
+            }
+
+            // 3) Last resort: don’t crash; disable the line but keep cutting functional.
+            Debug.LogWarning("[RopeSweepCutJuicy] No shader found for line in Player; line will be invisible but cutting will still work.");
         }
+
+
 
         // Optional modern tiny-dot builder (kept for completeness)
         private void AddMouseLine_Modern(int dotPx = 1, int gapPx = 1600)
