@@ -154,7 +154,7 @@ public class PlaytestFeedbackPanel : MonoBehaviour
 
         if (ok)
         {
-            SetStatus($"Saved feedback → {finalPath}");
+            //SetStatus($"Saved feedback → {finalPath}");
             if (inputField != null) inputField.text = "";
         }
         else

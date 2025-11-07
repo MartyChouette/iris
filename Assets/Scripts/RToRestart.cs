@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;   // <-- for EventSystem.current
+using UnityEngine.UI;             // <-- legacy InputField
+using TMPro;                      // <-- TMP_InputField
 
 public class RToRestart : MonoBehaviour
 {
@@ -30,10 +33,13 @@ public class RToRestart : MonoBehaviour
 
     void Update()
     {
-        // 1) Manual restart
+        // 1) Manual restart (but NOT while typing in a text field)
         if (Input.GetKeyDown(manualRestartKey))
         {
-            ReloadScene();
+            if (!IsTypingInTextField())
+            {
+                ReloadScene();
+            }
             return;
         }
 
@@ -57,9 +63,28 @@ public class RToRestart : MonoBehaviour
     }
 
     /// <summary>
-    /// Call this from other scripts when you consider something an interaction
-    /// (e.g., UI buttons, controller events using the new Input System).
+    /// True if the player is actively focused on a UI text field (TMP or legacy).
     /// </summary>
+    private bool IsTypingInTextField()
+    {
+        if (EventSystem.current == null) return false;
+
+        var go = EventSystem.current.currentSelectedGameObject;
+        if (go == null) return false;
+
+        // TextMeshPro input field
+        if (go.TryGetComponent<TMP_InputField>(out var tmp))
+            return tmp.enabled && tmp.interactable && tmp.isFocused;
+
+        // Legacy uGUI input field
+        if (go.TryGetComponent<InputField>(out var ui))
+            return ui.enabled && ui.interactable && ui.isFocused;
+
+        // (Optional) If you later use UI Toolkit, you'd check focus on a TextField there.
+        return false;
+    }
+
+    /// <summary>Call this from other scripts to count an interaction.</summary>
     public void RegisterInteraction()
     {
         interactedSinceLoad = true;
@@ -73,7 +98,6 @@ public class RToRestart : MonoBehaviour
     }
 
     // Detects "activity" using the old Input API for broad coverage.
-    // Works fine alongside the new Input System; you can also call RegisterInteraction() from your input actions.
     private bool DetectInteraction()
     {
         // Any key/button pressed this frame

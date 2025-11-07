@@ -12,10 +12,10 @@ public class StemEndCaps : MonoBehaviour
     [Tooltip("Prefab for the bottom cover (cap). Placed on all free tips EXCEPT the crown tip.")]
     public GameObject bottomCapPrefab;
 
-    [Tooltip("Prefab for the flower crown. Always attached to the MAX actor index (last particle).")]
+    [Tooltip("Prefab for the flower crown. Prefer attaching to the original top particle.")]
     public GameObject topCrownPrefab;
 
-    [Header("Placement")]
+    [Header("Placement (all ends)")]
     [Tooltip("Meters to push outward along the end normal. Set 0 while validating.")]
     public float pushOut = 0f;
 
@@ -25,6 +25,16 @@ public class StemEndCaps : MonoBehaviour
     [Tooltip("Delay so the rope binds to the solver before we arm.")]
     public float armDelay = 0.1f;
 
+    [Header("Crown targeting")]
+    [Tooltip("If ON, the crown locks to the original top actor index captured after armDelay.")]
+    public bool lockCrownToOriginalTop = true;
+
+    [Tooltip("Optional override. If >= 0, force this actor index as the crown target.")]
+    public int forcedTopActorIndex = -1;
+
+    [Tooltip("World-space vertical (Y) nudge for the crown only (meters).")]
+    public float crownVerticalOffset = 0f;
+
     [Header("Debug")]
     public bool drawEndGizmos = true;
     public float gizmoRadius = 0.004f;
@@ -32,6 +42,8 @@ public class StemEndCaps : MonoBehaviour
     // runtime
     GameObject _topCrown;
     readonly List<GameObject> _caps = new(); // one cap per non-crown end
+    int _originalTopActorIndex = -1;
+    bool _armed = false;
 
     void Reset() { if (!rope) rope = GetComponent<ObiRope>(); }
 
@@ -41,32 +53,34 @@ public class StemEndCaps : MonoBehaviour
         while (t < armDelay || rope == null || rope.solver == null || rope.activeParticleCount == 0)
         { t += Time.deltaTime; yield return null; }
 
+        // Capture the original top actor index once (highest actor index among initial free tips).
+        _originalTopActorIndex = FindInitialTopActorIndex();
+        _armed = true;
+
         if (topCrownPrefab) _topCrown = Instantiate(topCrownPrefab, transform);
     }
 
     void LateUpdate()
     {
-        if (!rope || rope.solver == null || rope.activeParticleCount == 0) return;
+        if (!_armed || !rope || rope.solver == null || rope.activeParticleCount == 0) return;
 
-        var ends = GetFreeTips();
-        if (ends.Count == 0) return;
+        var ends = GetFreeTips();               // current free tips (degree==1 & not fixed)
+        if (ends.Count == 0 && _topCrown == null) return;
 
-        // Crown = highest actor index end
-        int crownActor = -1;
-        for (int i = 0; i < ends.Count; i++)
-            if (ends[i] > crownActor) crownActor = ends[i];
+        // Decide crown target actor index
+        int crownActor = ResolveCrownActor(ends);
 
-        // Ensure cap pool size
-        int targetCaps = Mathf.Max(0, ends.Count - 1);
+        // Ensure cap pool size (ends minus crown if crown is a free tip; harmless if not)
+        int targetCaps = Mathf.Max(0, ends.Count - (ends.Contains(crownActor) ? 1 : 0));
         while (_caps.Count < targetCaps && bottomCapPrefab)
             _caps.Add(Instantiate(bottomCapPrefab, transform));
-        for (int i = targetCaps; i < _caps.Count; i++)
-            _caps[i].SetActive(false);
+        for (int i = 0; i < _caps.Count; i++)
+            _caps[i].SetActive(i < targetCaps);
 
-        // Place crown
+        // Place crown (always, even if its actor isn't a current free tip)
         if (_topCrown)
         {
-            PlaceAtEndExact(crownActor, _topCrown, pushOut, lateralOffset);
+            PlaceAtEndExact(crownActor, _topCrown, pushOut, lateralOffset, crownVerticalOffset);
             _topCrown.SetActive(true);
         }
 
@@ -76,11 +90,9 @@ public class StemEndCaps : MonoBehaviour
         {
             int ai = ends[i];
             if (ai == crownActor) continue;
-
             if (capIdx < _caps.Count && _caps[capIdx])
             {
-                _caps[capIdx].SetActive(true);
-                PlaceAtEndExact(ai, _caps[capIdx], pushOut, lateralOffset);
+                PlaceAtEndExact(ai, _caps[capIdx], pushOut, lateralOffset, 0f);
                 capIdx++;
             }
         }
@@ -121,8 +133,44 @@ public class StemEndCaps : MonoBehaviour
         return ends;
     }
 
+    // Capture once at arm time: pick the highest-index free tip if possible; otherwise fallback to last actor.
+    int FindInitialTopActorIndex()
+    {
+        var ends = GetFreeTips();
+        int best = -1;
+        for (int i = 0; i < ends.Count; i++)
+            if (ends[i] > best) best = ends[i];
+
+        if (best >= 0) return best;
+
+        // Fallback: last actor index by count-1
+        return Mathf.Max(0, rope.activeParticleCount - 1);
+    }
+
+    // Decide which actor index to use for the crown *this frame*
+    int ResolveCrownActor(List<int> currentEnds)
+    {
+        // Hard override
+        if (forcedTopActorIndex >= 0) return forcedTopActorIndex;
+
+        // Preferred: the original top we captured
+        if (lockCrownToOriginalTop && TryGetParticleWorld(_originalTopActorIndex, out _))
+            return _originalTopActorIndex;
+
+        // Fallback: current highest-index free tip
+        int crownActor = -1;
+        for (int i = 0; i < currentEnds.Count; i++)
+            if (currentEnds[i] > crownActor) crownActor = currentEnds[i];
+
+        if (crownActor >= 0) return crownActor;
+
+        // Final fallback: last actor index (even if not a free tip)
+        return Mathf.Max(0, rope.activeParticleCount - 1);
+    }
+
     // Place object so its Anchor (if present) sits EXACTLY at the particle.
-    void PlaceAtEndExact(int actorIndex, GameObject go, float outOffset, float sideOffset)
+    // Adds world-space Y nudge via verticalOffset for the crown.
+    void PlaceAtEndExact(int actorIndex, GameObject go, float outOffset, float sideOffset, float verticalOffset)
     {
         if (actorIndex < 0 || go == null) return;
         if (!TryGetParticleWorld(actorIndex, out var endP)) return;
@@ -138,15 +186,13 @@ public class StemEndCaps : MonoBehaviour
         Vector3 right = Vector3.Cross(upHint, nrm).normalized;
         if (right.sqrMagnitude < 1e-6f) right = Vector3.Cross(Vector3.forward, nrm).normalized;
 
-        Vector3 finalPos = endP + nrm * outOffset + right * sideOffset;
+        Vector3 finalPos = endP + nrm * outOffset + right * sideOffset + Vector3.up * verticalOffset;
         Quaternion finalRot = Quaternion.LookRotation(nrm, upHint);
 
         // If prefab has an "Anchor" child, place THAT at the particle and offset parent accordingly.
         Transform anchor = go.transform.Find("Anchor");
         if (anchor != null)
         {
-            // Where would the parent need to be so that anchor lands at finalPos/finalRot?
-            // P_world = Parent * AnchorLocal  ⇒  Parent = P_world * Inverse(AnchorLocal)
             Matrix4x4 A_local = Matrix4x4.TRS(anchor.localPosition, anchor.localRotation, anchor.localScale);
             Matrix4x4 P_world = Matrix4x4.TRS(finalPos, finalRot, Vector3.one);
             Matrix4x4 parentWorld = P_world * A_local.inverse;
@@ -155,7 +201,6 @@ public class StemEndCaps : MonoBehaviour
         }
         else
         {
-            // No anchor → just put the object itself at the exact particle pose
             go.transform.SetPositionAndRotation(finalPos, finalRot);
         }
     }

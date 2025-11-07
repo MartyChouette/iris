@@ -3,7 +3,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SapBurstOneShot : MonoBehaviour
 {
-    public float lifetime = 1.25f;   // will be overridden from Leaf
+    public float lifetime = 8f;   // will be overridden from Leaf
     void OnEnable()
     {
         var ps = GetComponent<ParticleSystem>();

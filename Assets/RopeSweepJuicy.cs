@@ -1,10 +1,13 @@
-﻿// File: RopeSweepCutJuicy.cs  (diff: safer hit test + tear-after-search + single rebuild)
-using Obi;
+﻿// File: RopeSweepCutJuicy.cs
+// Same behavior, but using the Unity 6 Input System (no legacy Input.*).
+
 using System.Collections;
+using Obi;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;   // ← new input system
 
 namespace Obi.Samples
 {
@@ -14,18 +17,44 @@ namespace Obi.Samples
         [Header("Core")]
         public Camera cam;
 
-        // --- stock fields ---
+        // --- Input System actions ---
+        [Header("Input (Unity 6 Input System)")]
+        [Tooltip("Vector2 action bound to <Pointer>/position")]
+        public InputActionReference pointerPositionAction;
+        [Tooltip("Button action bound to <Pointer>/press (or <Mouse>/leftButton)")]
+        public InputActionReference pointerPressAction;
+
+        // --- Obi / internals ---
         private ObiRope rope;
         private LineRenderer lineRenderer;
         private Vector3 cutStartPosition;   // screen space
         private Vector3 cutEndPosition;     // screen space
 
+        // Press edge tracking
+        private bool _wasPressedLastFrame;
+
+        // ======================== JUICE: TIME ========================
         [Header("Juice: Time Freeze / SloMo")]
+        [Tooltip("How long to freeze/slo-mo when a cut lands (seconds, unscaled).")]
         public float freezeDuration = 0.15f;
+
+        [Tooltip("Timescale during the freeze window. 0 = full freeze, 0.05–0.2 = buttery slo-mo.")]
         [Range(0, 1f)] public float freezeTimeScale = 0.05f;
+
+        [Tooltip("After the freeze, keep a little slo-mo for this many seconds (unscaled).")]
         public float postFreezeSloMoDuration = 0.20f;
+
+        [Tooltip("Timescale during post-freeze slo-mo.")]
         [Range(0, 1f)] public float postFreezeTimeScale = 0.2f;
 
+        [Header("Global Juice (optional shared toggles)")]
+        public JuiceSettings juiceSettings;   // if present, overrides the two toggles below
+
+        [Header("Juice Toggles (local)")]
+        public bool enableUIJuice = true;     // TMP + splash anims on/off
+        public bool enableTimeJuice = true;   // freeze/slo-mo on/off
+
+        // ======================== JUICE: UI ========================
         [Header("Juice: UI Elements")]
         public RectTransform splashImage;
         public TMP_Text splashText;
@@ -48,13 +77,7 @@ namespace Obi.Samples
         public AnimationCurve textInCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         public AnimationCurve textOutCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-
-        // ADD near your other headers:
-        [Header("Juice Toggles")]
-        public bool enableUIJuice = true;   // turn TMP + splash anims on/off
-        public bool enableTimeJuice = true; // turn freeze/slo-mo on/off
-
-
+        // ======================== GRADING ========================
         [Header("Grading")]
         public RopeCutGrader grader;
         public string perfectText = "PERFECT!";
@@ -63,60 +86,211 @@ namespace Obi.Samples
         public LayerMask gradeMask = ~0;
         public float gradeRayMaxDistance = 40f;
 
+        // ======================== LIQUID FX ========================
         [Header("Juice: Liquid (Sap)")]
         public SapFxPool sapPool;
         public bool faceSapTowardCamera = true;
 
+        // ======================== LEAF NOTIFY ========================
         [Header("Leaf Detach Notify")]
+        [Tooltip("Radius around hit point to look for leaves to notify (meters).")]
         public float leafCutNotifyRadius = 0.06f;
         public LayerMask leafMask = ~0;
         public bool notifyLeaves = true;
         private readonly Collider[] _leafOverlap = new Collider[32];
 
+        // ======================== ATTACHMENT CLEANUP ========================
         [Header("Cleanup Stem Attachments")]
         [FormerlySerializedAs("destroyAttachmentsOnFirstCut")]
         public bool enableAttachmentCleanup = true;   // uncheck to never delete attachments on first cut
         public Object[] attachmentsToDestroy;
         private bool attachmentsDestroyed;
 
-        [Header("Global Juice (optional)")]
-        public JuiceSettings juiceSettings;
+        // ======================== LINE STYLE (CLASSIC) ========================
+        [Header("Line Style")]
+        [Tooltip("Draw the guideline exactly like the old script (fixed z=0.5 ScreenToWorld + dotted Unlit).")]
+        public bool useClassicLineDrawing = true;
 
+        [Tooltip("Optional: assign a URP-safe material (e.g., URP/Unlit). If null, a classic Unlit/Texture dotted mat is generated.")]
+        public Material lineMaterial;
 
-
-        // OPTIONAL: if UI is disabled, make sure they stay hidden on Awake()
+        // ====================================================================
+        // LIFECYCLE
+        // ====================================================================
         void Awake()
         {
             rope = GetComponent<ObiRope>();
-            if (!cam) cam = Camera.main;
-            AddMouseLine();
+            cam = ResolveCamera();
+
+            if (useClassicLineDrawing) AddMouseLine_Classic();
+            else AddMouseLine_Modern(); // visually similar
 
             var img = splashImage ? splashImage.GetComponent<Image>() : null;
             if (img) img.raycastTarget = false;
             if (splashText) splashText.raycastTarget = false;
 
-            if (!enableUIJuice)
+            if (!EnableUI())
             {
                 if (splashImage) splashImage.gameObject.SetActive(false);
                 if (splashText) splashText.gameObject.SetActive(false);
             }
+
+
         }
 
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+        string _diag;
+        void Update()
+        {
+            _diag =
+                $"Rope? {(rope ? "ok" : "MISSING")}\n" +
+                $"Solver? {(rope && rope.solver ? "ok" : "MISSING")}\n" +
+                $"Cam? {(cam ? "ok" : "MISSING")}\n" +
+                $"Line? {(lineRenderer ? (lineRenderer.sharedMaterial ? "ok" : "NO MAT") : "MISSING")}\n" +
+                $"PosAction? {(pointerPositionAction ? "set" : "null")}\n" +
+                $"PressAction? {(pointerPressAction ? "set" : "null")}\n";
+        }
+        void OnGUI()
+        {
+            if (!string.IsNullOrEmpty(_diag))
+                GUI.Label(new Rect(10, 10, 600, 200), _diag);
+        }
+#endif
 
-        void OnEnable() { rope.OnSimulationStart += Rope_OnBeginSimulation; }
-        void OnDisable() { rope.OnSimulationStart -= Rope_OnBeginSimulation; }
-        void OnDestroy() { DeleteMouseLine(); }
+
+        void OnEnable()
+        {
+            rope.OnSimulationStart += Rope_OnBeginSimulation;
+
+            // enable input actions
+            if (pointerPositionAction != null) pointerPositionAction.action.Enable();
+            if (pointerPressAction != null) pointerPressAction.action.Enable();
+            _wasPressedLastFrame = false;
+        }
+
+        void OnDisable()
+        {
+            rope.OnSimulationStart -= Rope_OnBeginSimulation;
+
+            if (pointerPositionAction != null) pointerPositionAction.action.Disable();
+            if (pointerPressAction != null) pointerPressAction.action.Disable();
+        }
+
+        void OnDestroy()
+        {
+            if (lineRenderer) Destroy(lineRenderer.gameObject);
+        }
 
         void LateUpdate()
         {
-            if (!cam) return;
-            ProcessInput();
+            if (!ResolveCamera()) return;
+            ProcessInput_NewInputSystem();
         }
 
-        private void AddMouseLine(int dotPx = 1, int gapPx = 1600, float dotsPerUnit = 20f)
+        private Camera ResolveCamera()
         {
-            GameObject line = new GameObject("Mouse Line");
-            lineRenderer = line.AddComponent<LineRenderer>();
+            if (cam) return cam;
+            if (Camera.main) return cam = Camera.main;
+            if (Camera.allCamerasCount > 0) return cam = Camera.allCameras[0];
+            return null;
+        }
+
+        // ====================================================================
+        // INPUT / LINE DRAWING (Input System)
+        // ====================================================================
+        private void ProcessInput_NewInputSystem()
+        {
+            Vector2 pointerPos = ReadPointerPosition();
+            bool pressed = ReadPointerPressed();
+
+            // press started
+            if (pressed && !_wasPressedLastFrame)
+            {
+                cutStartPosition = pointerPos;
+
+                if (lineRenderer)
+                {
+                    Vector3 a = useClassicLineDrawing
+                        ? ClassicScreenToWorld(cutStartPosition)
+                        : cam.ScreenToWorldPoint(new Vector3(cutStartPosition.x, cutStartPosition.y, 0.5f));
+
+                    lineRenderer.enabled = true;
+                    lineRenderer.positionCount = 2;
+                    lineRenderer.SetPosition(0, a);
+                    lineRenderer.SetPosition(1, a);
+                }
+            }
+
+            // while pressed, update line end
+            if (lineRenderer && lineRenderer.enabled && pressed)
+            {
+                Vector3 b = useClassicLineDrawing
+                    ? ClassicScreenToWorld(pointerPos)
+                    : cam.ScreenToWorldPoint(new Vector3(pointerPos.x, pointerPos.y, 0.5f));
+
+                lineRenderer.SetPosition(1, b);
+            }
+
+            // press released
+            if (!pressed && _wasPressedLastFrame)
+            {
+                cutEndPosition = pointerPos;
+                if (lineRenderer) lineRenderer.enabled = false;
+
+                if (ScreenSpaceCut(cutStartPosition, cutEndPosition))
+                    AfterSuccessfulCut();
+            }
+
+            _wasPressedLastFrame = pressed;
+        }
+
+        private Vector2 ReadPointerPosition()
+        {
+            if (pointerPositionAction != null)
+                return pointerPositionAction.action.ReadValue<Vector2>();
+
+            if (UnityEngine.InputSystem.Mouse.current != null)
+                return UnityEngine.InputSystem.Mouse.current.position.ReadValue();
+
+            if (UnityEngine.InputSystem.Touchscreen.current != null)
+                return UnityEngine.InputSystem.Touchscreen.current.primaryTouch.position.ReadValue();
+
+            return new Vector2(Screen.width * 0.5f, Screen.height * 0.5f); // safe center fallback
+        }
+
+
+        private bool ReadPointerPressed()
+        {
+            // Prefer the action if present
+            if (pointerPressAction != null)
+            {
+                // Use analog button value; more robust across devices/builds
+                float v = pointerPressAction.action.ReadValue<float>();
+                return v > 0.5f;
+            }
+
+            // Fallbacks
+            if (UnityEngine.InputSystem.Mouse.current != null)
+                return UnityEngine.InputSystem.Mouse.current.leftButton.isPressed;
+
+            if (UnityEngine.InputSystem.Touchscreen.current != null)
+                return UnityEngine.InputSystem.Touchscreen.current.primaryTouch.press.isPressed;
+
+            return false;
+        }
+
+
+        // Classic z=0.5 screen→world like the older script
+        private Vector3 ClassicScreenToWorld(Vector2 screen)
+        {
+            return cam.ScreenToWorldPoint(new Vector3(screen.x, screen.y, 0.5f));
+        }
+
+        // Build a dotted line (classic Unlit/Texture, or URP-safe override if assigned)
+        private void AddMouseLine_Classic(int dotPx = 50, int gapPx = 1600)
+        {
+            var go = new GameObject("Mouse Line");
+            lineRenderer = go.AddComponent<LineRenderer>();
 
             lineRenderer.startWidth = 0.005f;
             lineRenderer.endWidth = 0.005f;
@@ -126,6 +300,13 @@ namespace Obi.Samples
             lineRenderer.positionCount = 2;
             lineRenderer.enabled = false;
 
+            if (lineMaterial != null)
+            {
+                lineRenderer.sharedMaterial = lineMaterial;
+                return;
+            }
+
+            // Generate classic dotted texture
             int w = Mathf.Max(1, dotPx + Mathf.Max(1, gapPx));
             var tex = new Texture2D(w, 1, TextureFormat.RGBA32, false);
             tex.filterMode = FilterMode.Point;
@@ -134,66 +315,92 @@ namespace Obi.Samples
                 tex.SetPixel(x, 0, x < dotPx ? Color.black : new Color(0, 0, 0, 0));
             tex.Apply();
 
+            // Try Unlit/Texture; fall back to Sprites/Default so builds still show a line
             var mat = new Material(Shader.Find("Unlit/Texture"));
-            mat.mainTexture = tex;
-            mat.color = Color.white;
+            if (mat && tex) { mat.mainTexture = tex; mat.color = Color.white; }
+            else
+            {
+                mat = new Material(Shader.Find("Sprites/Default"));
+                if (mat) mat.color = Color.black;
+            }
             lineRenderer.sharedMaterial = mat;
         }
 
-        private void DeleteMouseLine()
+        // Optional modern tiny-dot builder (kept for completeness)
+        private void AddMouseLine_Modern(int dotPx = 1, int gapPx = 1600)
         {
-            if (lineRenderer != null)
-                Destroy(lineRenderer.gameObject);
-        }
+            var go = new GameObject("Mouse Line");
+            lineRenderer = go.AddComponent<LineRenderer>();
 
-        private void ProcessInput()
-        {
-            if (Input.GetMouseButtonDown(0))
+            lineRenderer.startWidth = 0.005f;
+            lineRenderer.endWidth = 0.005f;
+            lineRenderer.numCapVertices = 0;
+            lineRenderer.alignment = LineAlignment.View;
+            lineRenderer.textureMode = LineTextureMode.Tile;
+            lineRenderer.positionCount = 2;
+            lineRenderer.enabled = false;
+
+            if (lineMaterial != null)
             {
-                cutStartPosition = Input.mousePosition;
-                lineRenderer.SetPosition(0, cam.ScreenToWorldPoint(new Vector3(cutStartPosition.x, cutStartPosition.y, 0.5f)));
-                lineRenderer.enabled = true;
+                lineRenderer.sharedMaterial = lineMaterial;
+                return;
             }
 
-            if (lineRenderer.enabled)
-                lineRenderer.SetPosition(1, cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.5f)));
+            int w = Mathf.Max(1, dotPx + Mathf.Max(1, gapPx));
+            var tex = new Texture2D(w, 1, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Point;
+            tex.wrapMode = TextureWrapMode.Repeat;
+            for (int x = 0; x < w; x++)
+                tex.SetPixel(x, 0, x < dotPx ? Color.black : new Color(0, 0, 0, 0));
+            tex.Apply();
 
-            if (Input.GetMouseButtonUp(0))
+            Material mat = null;
+
+            if (lineMaterial != null)
             {
-                cutEndPosition = Input.mousePosition;
-                lineRenderer.enabled = false;
-
-                if (ScreenSpaceCut(cutStartPosition, cutEndPosition))
-                    AfterSuccessfulCut();
+                mat = lineMaterial;
             }
+            else
+            {
+                mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+                if (mat != null)
+                {
+                    mat.SetTexture("_BaseMap", tex);
+                    mat.SetColor("_BaseColor", Color.white);
+                }
+                else
+                {
+                    mat = new Material(Shader.Find("Sprites/Default"));
+                    if (mat != null) mat.color = Color.white;
+                }
+            }
+
+            lineRenderer.sharedMaterial = mat;
         }
 
+        // ====================================================================
+        // OBI CUT LOGIC (unchanged)
+        // ====================================================================
         private void Rope_OnBeginSimulation(ObiActor actor, float stepTime, float substepTime) { }
 
         private bool ScreenSpaceCut(Vector2 lineStart, Vector2 lineEnd)
         {
-            // --- 1) Find the best (closest-to-swipe-end) intersected segment, don't tear yet ---
             int bestElement = -1;
-            float bestS = float.PositiveInfinity; // param along swipe (C->D), smaller ~ closer to start; we'll prefer closer to END, so we’ll invert later.
+            float bestS = float.PositiveInfinity;
 
-            // Take a snapshot count so we aren't confused if something else changes the list
             int elemCount = rope.elements.Count;
-
-            for (int i = elemCount - 1; i >= 0; --i) // backwards is safer w.r.t. future mutations
+            for (int i = elemCount - 1; i >= 0; --i)
             {
                 var e = rope.elements[i];
 
-                // world positions
                 Vector3 p1World = SolverToWorld(RenderableAt(e.particle1));
                 Vector3 p2World = SolverToWorld(RenderableAt(e.particle2));
 
-                // screen space
                 Vector2 s1 = cam.WorldToScreenPoint(p1World);
                 Vector2 s2 = cam.WorldToScreenPoint(p2World);
 
                 if (SegmentSegmentIntersection2D(s1, s2, lineStart, lineEnd, out float rSeg, out float sSwipe))
                 {
-                    // prefer intersections closer to the swipe end (so multiple overlaps feel natural)
                     float inv = 1f - Mathf.Clamp01(sSwipe);
                     if (inv < bestS)
                     {
@@ -205,45 +412,35 @@ namespace Obi.Samples
 
             if (bestElement < 0) return false;
 
-            // --- 2) Now tear once, then rebuild once ---
             var hitElem = rope.elements[bestElement];
 
             Vector3 a = SolverToWorld(RenderableAt(hitElem.particle1));
             Vector3 b = SolverToWorld(RenderableAt(hitElem.particle2));
 
-            // approximate hit point using the *current* swipe param:
-            // recompute r along the hit segment for a decent sap location
             Vector2 A = cam.WorldToScreenPoint(a);
             Vector2 B = cam.WorldToScreenPoint(b);
             SegmentSegmentIntersection2D(A, B, lineStart, lineEnd, out float rSeg2, out _);
             Vector3 hitWorld = Vector3.Lerp(a, b, Mathf.Clamp01(rSeg2));
-
 
             rope.Tear(hitElem);
             rope.RebuildConstraintsFromElements();
 
             LeafRetargetUtil.RetargetFollowersNear(rope, hitWorld, leafCutNotifyRadius, leafMask);
 
-
-
-
-            // FX
             Vector3 segDir = (b - a).normalized;
             Vector3 normal = faceSapTowardCamera
                              ? cam.transform.forward
                              : Vector3.Cross(segDir, cam.transform.right).normalized;
             if (normal.sqrMagnitude < 1e-6f) normal = Vector3.up;
-            FireSap(hitWorld, normal);
 
+            FireSap(hitWorld, normal);
             if (notifyLeaves) NotifyLeavesOfCut(hitWorld, leafCutNotifyRadius);
 
             return true;
         }
 
-        // Prefer renderable positions so screen projection matches visuals during substeps
         private Vector3 RenderableAt(int solverIndex)
         {
-            // Obi 7: renderablePositions exists; fall back to positions if needed.
             var rp = rope.solver.renderablePositions;
             if (rp != null && rp.count > solverIndex) return (Vector3)rp[solverIndex];
             return (Vector3)rope.solver.positions[solverIndex];
@@ -282,7 +479,6 @@ namespace Obi.Samples
             return notified;
         }
 
-        // Robust 2D segment/segment with eps; returns r (A->B) and s (C->D)
         private bool SegmentSegmentIntersection2D(Vector2 A, Vector2 B, Vector2 C, Vector2 D, out float r, out float s)
         {
             const float EPS = 1e-6f;
@@ -292,7 +488,7 @@ namespace Obi.Samples
             Vector2 AC = C - A;
 
             float denom = AB.x * CD.y - AB.y * CD.x;
-            if (Mathf.Abs(denom) < EPS) { r = s = -1; return false; } // parallel or nearly so
+            if (Mathf.Abs(denom) < EPS) { r = s = -1; return false; }
 
             float rNum = AC.x * CD.y - AC.y * CD.x;
             float sNum = AC.x * AB.y - AC.y * AB.x;
@@ -303,10 +499,13 @@ namespace Obi.Samples
             return (r >= -EPS && r <= 1f + EPS && s >= -EPS && s <= 1f + EPS);
         }
 
-        // ===== UI / time =====
+        // ====================================================================
+        // JUICE: UI/TIME & AFTER-CUT (unchanged)
+        // ====================================================================
+        private bool EnableUI() => juiceSettings ? juiceSettings.enableUIJuice : enableUIJuice;
+        private bool EnableTime() => juiceSettings ? juiceSettings.enableTimeJuice : enableTimeJuice;
 
-        // CHANGE: DoFreezeAndUI signature + logic
-        IEnumerator DoFreezeAndUI(bool withUI, bool withTimeEffects)
+        private IEnumerator DoFreezeAndUI(bool withUI, bool withTimeEffects)
         {
             float originalScale = Time.timeScale;
 
@@ -332,8 +531,7 @@ namespace Obi.Samples
             Time.timeScale = originalScale;
         }
 
-
-        IEnumerator PlaySplashUI()
+        private IEnumerator PlaySplashUI()
         {
             Coroutine img = null, txt = null;
 
@@ -360,7 +558,7 @@ namespace Obi.Samples
             if (txt != null) yield return txt;
         }
 
-        IEnumerator AnimateRectFromTo(RectTransform rt, Vector2 startOffset, Vector2 endOffset, float dur, AnimationCurve curve, bool makeActive)
+        private IEnumerator AnimateRectFromTo(RectTransform rt, Vector2 startOffset, Vector2 endOffset, float dur, AnimationCurve curve, bool makeActive)
         {
             if (rt == null) yield break;
             if (makeActive) rt.gameObject.SetActive(true);
@@ -383,28 +581,22 @@ namespace Obi.Samples
             if (!makeActive) rt.gameObject.SetActive(false);
         }
 
-        // CHANGE: AfterSuccessfulCut()
-        void AfterSuccessfulCut()
+        private void AfterSuccessfulCut()
         {
             MaybeDestroyAttachmentsOnce();
 
             string label = "CUT!";
-            if (enableUIJuice && grader && RaycastWorldFromScreen(cutEndPosition, out var hit))
+            if (EnableUI() && grader && RaycastWorldFromScreen(cutEndPosition, out var hit))
             {
                 var g = grader.GradeCutFromWorldPoint(hit.point, out _, out _);
                 label = g == RopeCutGrader.Grade.Perfect ? perfectText :
-                    g == RopeCutGrader.Grade.Good ? goodText : badText;
+                        g == RopeCutGrader.Grade.Good ? goodText : badText;
             }
 
-            if (enableUIJuice && splashText) splashText.text = label;
+            if (EnableUI() && splashText) splashText.text = label;
 
-            // Run time freeze/slomo + (optionally) UI
-            bool uiOn = juiceSettings ? juiceSettings.enableUIJuice : enableUIJuice;
-            bool timeOn = juiceSettings ? juiceSettings.enableTimeJuice : enableTimeJuice;
-            StartCoroutine(DoFreezeAndUI(uiOn, timeOn));
-
+            StartCoroutine(DoFreezeAndUI(EnableUI(), EnableTime()));
         }
-
 
         private RaycastHit _lastRayHit;
         private bool RaycastWorldFromScreen(Vector2 screen, out RaycastHit hit)
