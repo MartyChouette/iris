@@ -1,29 +1,22 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
-/// Drives pulling/tearing by cursor alone.
-/// Distance-only tear: set tearDwell = 0 for instant tear once threshold is crossed.
 public class LeafGrabber : MonoBehaviour
 {
     public Camera cam;
     public LayerMask leafMask = ~0;
-    public bool blockWhenPointerOverUI = true;
 
     [Header("Pluck feel")]
-    public float spring = 40f;          // higher = snap to cursor faster
-    public float damping = 10f;         // approx critically damped when ~2*sqrt(k/m). Tune by feel.
-    public float maxDragSpeed = 4f;     // cap while held
+    public float spring = 40f;         // pull strength toward cursor
+    public float damping = 10f;        // critically damped-ish
+    public float maxDragSpeed = 4f;    // cap motion while held
 
-    [Header("Tear")]
-    public float tearDistance = 0.11f;  // world meters from anchor
-    public float tearDwell = 0.0f;      // seconds above distance before tear (0 = pure distance)
+    public float tearDistance = 0.11f; // how far past anchor to tear
+    public float tearDwell = 0.12f;    // how long stretched before tearing
 
-    // Internal
-    LeafTarget _leaf;                   // any component that implements LeafTarget (below)
-    Vector3 _anchor;                    // world anchor at grab begin
-    float _over;                        // dwell timer
-    Vector3 _vel;                       // SmoothDamp velocity (must persist between frames)
+    Leaf _leaf;
+    Vector3 _anchor;                   // world anchor on first grab
+    float _over;
 
     void Awake() { if (!cam) cam = Camera.main; }
 
@@ -33,37 +26,32 @@ public class LeafGrabber : MonoBehaviour
 
         if (_leaf == null)
         {
-            if (m.leftButton.wasPressedThisFrame)
-            {
-                if (blockWhenPointerOverUI && EventSystem.current && EventSystem.current.IsPointerOverGameObject())
-                    return;
-
-                if (RaycastLeaf(m.position.ReadValue(), out _leaf, out _anchor))
-                {
-                    _over = 0f;
-                    _vel = Vector3.zero;
-                    _leaf.BeginExternalGrab(_anchor, cam.transform.forward);
-                }
-            }
+            if (m.leftButton.wasPressedThisFrame && RaycastLeaf(m.position.ReadValue(), out _leaf, out _anchor))
+                _over = 0f;
             return;
         }
 
         if (m.leftButton.isPressed)
         {
+            // target on plane through anchor facing camera
             Vector3 target = ScreenToWorldOnPlane(m.position.ReadValue(), _anchor, cam);
-            // Spring step toward target (visual stretch)
-            Vector3 p = _leaf.GetPosition();
-            p = Vector3.SmoothDamp(p, target, ref _vel, Mathf.Max(0.0001f, damping / spring), maxDragSpeed);
-            _leaf.SetExternalHand(p);
 
-            // Distance-only tear check
-            float stretch = Vector3.Distance(p, _anchor);
+            // springy pull of the leaf’s transform (visual + attachment target)
+            Transform t = _leaf.transform;
+            Vector3 toTarget = target - t.position;
+
+            // critically-damped spring step
+            Vector3 vel = Vector3.zero;
+            t.position = Vector3.SmoothDamp(t.position, target, ref vel, Mathf.Max(0.0001f, damping / spring), maxDragSpeed);
+
+            // stretch test (how far from the original anchor)
+            float stretch = Vector3.Distance(t.position, _anchor);
             if (stretch >= tearDistance)
             {
                 _over += Time.deltaTime;
                 if (_over >= tearDwell)
                 {
-                    _leaf.TearOff();   // will handle sap burst etc.
+                    _leaf.TearOff();
                     _leaf = null;
                 }
             }
@@ -71,20 +59,17 @@ public class LeafGrabber : MonoBehaviour
         }
         else
         {
-            // release
-            _leaf?.EndExternalGrab();
             _leaf = null;
         }
     }
 
-    bool RaycastLeaf(Vector2 scr, out LeafTarget leaf, out Vector3 hit)
+    bool RaycastLeaf(Vector2 scr, out Leaf leaf, out Vector3 hit)
     {
         leaf = null; hit = default;
         Ray r = cam.ScreenPointToRay(scr);
-        if (Physics.Raycast(r, out var h, 50f, leafMask, QueryTriggerInteraction.Collide))
+        if (Physics.Raycast(r, out var h, 50f, leafMask, QueryTriggerInteraction.Ignore))
         {
-            // Grab the closest LeafTarget in parents
-            leaf = h.collider.GetComponentInParent<LeafTarget>();
+            leaf = h.collider.GetComponentInParent<Leaf>();
             if (leaf != null) { hit = h.point; return true; }
         }
         return false;
@@ -96,14 +81,4 @@ public class LeafGrabber : MonoBehaviour
         Ray r = cam.ScreenPointToRay(scr);
         return p.Raycast(r, out float d) ? r.GetPoint(d) : planePoint;
     }
-}
-
-/// Small interface so any leaf script can be driven by this grabber.
-public interface LeafTarget
-{
-    void BeginExternalGrab(Vector3 anchorWorld, Vector3 planeNormal);
-    void SetExternalHand(Vector3 handWorld);
-    void EndExternalGrab();
-    void TearOff();
-    Vector3 GetPosition();
 }
