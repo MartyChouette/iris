@@ -50,6 +50,7 @@ public static class LeafRetargetUtil
         float bestD2 = (searchRadius > 0f) ? searchRadius * searchRadius : float.PositiveInfinity;
 
         var all = Object.FindObjectsOfType<ObiRopeBase>();
+
         foreach (var r in all)
         {
             if (!r || r.solver != solver) continue;

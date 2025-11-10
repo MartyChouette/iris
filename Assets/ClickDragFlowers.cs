@@ -1,166 +1,203 @@
-// ClickDragFlowers.cs
-// Click LMB to pick any collider on layer "Flower" and drag it around.
-// Works with meshes or prefabs; uses a camera-parallel drag plane at grab depth.
-
 using UnityEngine;
 using UnityEngine.EventSystems;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
-[DisallowMultipleComponent]
 public class ClickDragFlowers : MonoBehaviour
-{
+{// Add near the top of the class:
+    [Header("Debug HUD")]
+    [Range(0f, 1f)] public float hudAnchorX = 0.02f;   // 0 = left, 1 = right
+    [Range(0f, 1f)] public float hudAnchorY = 0.50f;   // 0.5 = vertical middle
+    public int hudWidth = 820;
+    public int hudLine = 18;
+    public int hudPad = 8;
+
     [Header("Setup")]
-    public Camera cam;                          // assign your main camera
-    [Tooltip("Only objects on this Unity layer are draggable.")]
-    public string draggableLayerName = "Flower";
+    public Camera cam;
+    [Tooltip("Only objects on these layers are draggable. Set to Everything to test.")]
+    public LayerMask dragMask = ~0;
+    [Tooltip("Count trigger colliders as hits.")]
+    public bool includeTriggers = true;
+    [Tooltip("Use a small sphere for hits to avoid missing thin meshes.")]
+    public float rayRadius = 0.01f;
     [Tooltip("Ignore clicks when pointer is over UI.")]
-    public bool blockWhenPointerOverUI = true;
+    public bool blockWhenOverUI = true;
 
     [Header("Feel")]
-    [Tooltip("Optional smoothing for motion while dragging.")]
-    [Range(0f, 60f)] public float moveLerp = 30f;
+    [Tooltip("How quickly the object chases the cursor. 0 = snap.")]
+    public float followLerp = 30f;
 
     // runtime
-    int _layerMask;
     Transform _grabbed;
-    Rigidbody _grabbedRB;
-    bool _madeKinematic;
-    float _grabDepth;               // signed distance along camera forward
-    Vector3 _grabOffsetWS;          // world-space offset from cursor plane hit to object pivot
-    Vector3 _targetPos;             // for smoothing
+    Rigidbody _grabbedRb;
+    Vector3 _grabLocalHitOffset; // world offset from hit point to object position at grab time
+    Vector3 _planePoint;
+    Vector3 _planeNormal;
+    string _lastWhy = "";
+    string _lastHitName = "";
+    string _lastLayer = "";
+    Vector3 _lastHitPoint;
 
     void Awake()
     {
-        if (cam == null) cam = Camera.main;
-        _layerMask = LayerMask.GetMask(draggableLayerName);
-        if (_layerMask == 0)
-        {
-            Debug.LogWarning($"ClickDragFlowers: Layer \"{draggableLayerName}\" not found. " +
-                             $"Create it and assign your objects to that layer.");
-        }
+        if (!cam) cam = Camera.main;
+        if (!cam) _lastWhy = "No camera found (assign Cam on the script).";
     }
 
     void Update()
     {
-        // start drag
-        if (Input.GetMouseButtonDown(0))
-            TryBeginGrab();
+        if (!cam) return;
 
-        // update drag
-        if (_grabbed != null)
-            UpdateGrab();
+        // ----- input snapshot (RMB) -----
+        bool down, held, up;
+        Vector2 screen;
+#if ENABLE_INPUT_SYSTEM
+        var m = Mouse.current; if (m == null) return;
+        down = m.rightButton.wasPressedThisFrame;
+        held = m.rightButton.isPressed;
+        up = m.rightButton.wasReleasedThisFrame;
+        screen = m.position.ReadValue();
+#else
+        down = Input.GetMouseButtonDown(1);
+        held = Input.GetMouseButton(1);
+        up   = Input.GetMouseButtonUp(1);
+        screen = Input.mousePosition;
+#endif
 
-        // end drag
-        if (Input.GetMouseButtonUp(0))
-            EndGrab();
-    }
-
-    void TryBeginGrab()
-    {
-        if (blockWhenPointerOverUI && EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        if (cam == null) return;
-
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit, float.PositiveInfinity, _layerMask, QueryTriggerInteraction.Ignore))
+        if (down)
         {
-            // choose the rigidbody root if available so we move the whole thing
-            _grabbedRB = hit.rigidbody;
-            _grabbed = _grabbedRB ? _grabbedRB.transform : hit.transform;
-
-            // camera-parallel plane depth where we grabbed
-            _grabDepth = Vector3.Dot(cam.transform.forward, _grabbed.position - cam.transform.position);
-
-            // compute point on that plane under the cursor
-            if (TryRayToCameraDepth(ray, _grabDepth, out Vector3 cursorAtDepth))
+            _lastWhy = "";
+            if (blockWhenOverUI && EventSystem.current && EventSystem.current.IsPointerOverGameObject())
             {
-                _grabOffsetWS = _grabbed.position - cursorAtDepth;
-                _targetPos = _grabbed.position;
-
-                // make RB kinematic while dragging (so we can place it precisely)
-                if (_grabbedRB != null)
-                {
-                    _madeKinematic = !_grabbedRB.isKinematic;
-                    _grabbedRB.isKinematic = true;
-                }
+                _lastWhy = "Blocked by UI under pointer.";
             }
             else
             {
-                // failed to compute a stable plane hit (degenerate case)
-                _grabbed = null;
-                _grabbedRB = null;
+                if (TryHit(screen, out var hit))
+                {
+                    _grabbed = hit.collider.transform;
+                    _grabbedRb = _grabbed.GetComponent<Rigidbody>();
+                    _lastHitName = _grabbed.name;
+                    _lastLayer = LayerMask.LayerToName(hit.collider.gameObject.layer);
+                    _lastHitPoint = hit.point;
+
+                    // drag plane: through hit, facing camera
+                    _planePoint = hit.point;
+                    _planeNormal = cam.transform.forward;
+
+                    // remember offset so we keep the same “grabbed spot”
+                    _grabLocalHitOffset = _grabbed.position - hit.point;
+                }
+                else if (string.IsNullOrEmpty(_lastWhy))
+                {
+                    _lastWhy = "Ray missed all colliders in mask.";
+                }
             }
         }
+
+        if (_grabbed && held)
+        {
+            Vector3 target = ScreenToWorldOnPlane(screen, _planePoint, _planeNormal, cam) + _grabLocalHitOffset;
+            float k = 1f - Mathf.Exp(-followLerp * Time.deltaTime);
+
+            if (_grabbedRb && !_grabbedRb.isKinematic)
+                _grabbedRb.MovePosition(Vector3.Lerp(_grabbed.position, target, k));
+            else
+                _grabbed.position = Vector3.Lerp(_grabbed.position, target, k);
+        }
+
+        if (up)
+        {
+            _grabbed = null;
+            _grabbedRb = null;
+        }
     }
 
-    void UpdateGrab()
+    bool TryHit(Vector2 screen, out RaycastHit best)
     {
-        if (cam == null) return;
+        best = default;
+        Ray ray = cam.ScreenPointToRay(screen);
+        Debug.DrawRay(ray.origin, ray.direction * 5f, Color.cyan, 0.1f);
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (!TryRayToCameraDepth(ray, _grabDepth, out Vector3 cursorAtDepth))
-            return;
+        // choose trigger behavior
+        QueryTriggerInteraction qti = includeTriggers ? QueryTriggerInteraction.Collide
+                                                      : QueryTriggerInteraction.Ignore;
 
-        Vector3 desired = cursorAtDepth + _grabOffsetWS;
-
-        // smooth move (set moveLerp=0 for perfectly crisp motion)
-        float t = moveLerp > 0f ? 1f - Mathf.Exp(-moveLerp * Time.deltaTime) : 1f;
-        _targetPos = Vector3.Lerp(_targetPos, desired, t);
-
-        if (_grabbedRB != null)
-        {
-            // if you prefer physics interpolation:
-            _grabbedRB.MovePosition(_targetPos);
-        }
+        RaycastHit[] hits;
+        if (rayRadius > 0f)
+            hits = Physics.SphereCastAll(ray, rayRadius, 500f, dragMask, qti);
         else
+            hits = Physics.RaycastAll(ray, 500f, dragMask, qti);
+
+        if (hits.Length == 0)
         {
-            _grabbed.position = _targetPos;
-        }
-    }
-
-    void EndGrab()
-    {
-        if (_grabbedRB != null && _madeKinematic)
-        {
-            _grabbedRB.isKinematic = false;
-        }
-        _grabbed = null;
-        _grabbedRB = null;
-        _madeKinematic = false;
-    }
-
-    /// <summary>
-    /// Intersect a screen ray with a plane parallel to the camera plane,
-    /// at a signed distance (along cam.forward) from the camera position.
-    /// </summary>
-    static bool TryRayToCameraDepth(Ray ray, float camForwardDepth, out Vector3 point)
-    {
-        // We need t such that dot(camFwd, ray.origin + t*ray.dir - camPos) == camForwardDepth.
-        // Let camFwd be ray2? We don't have camera here, so derive from ray: we need an external camFwd.
-        // Instead: reconstruct from current main camera each call… but to keep this static, we pass via Camera.main.
-        var cam = Camera.main;
-        if (cam == null) { point = default; return false; }
-
-        Vector3 camFwd = cam.transform.forward;
-        Vector3 camPos = cam.transform.position;
-
-        float denom = Vector3.Dot(camFwd, ray.direction);
-        if (Mathf.Abs(denom) < 1e-4f)
-        {
-            point = default;
+            // second chance: Everything, for diagnosis
+            var diag = Physics.RaycastAll(ray, 500f, ~0, qti);
+            if (diag.Length > 0)
+            {
+                var closest = Closest(diag);
+                _lastWhy = $"Hit '{closest.collider.name}' on layer '{LayerMask.LayerToName(closest.collider.gameObject.layer)}' but it is filtered out by dragMask.";
+            }
             return false;
         }
 
-        float numer = camForwardDepth - Vector3.Dot(camFwd, ray.origin - camPos);
-        float t = numer / denom;
-        if (t < 0f)
-        {
-            point = default;
-            return false;
-        }
-
-        point = ray.origin + ray.direction * t;
+        best = Closest(hits);
         return true;
     }
+
+    static RaycastHit Closest(RaycastHit[] hits)
+    {
+        int bestI = 0;
+        float bestD = hits[0].distance;
+        for (int i = 1; i < hits.Length; i++)
+            if (hits[i].distance < bestD) { bestD = hits[i].distance; bestI = i; }
+        return hits[bestI];
+    }
+
+    static Vector3 ScreenToWorldOnPlane(Vector2 screen, Vector3 planePoint, Vector3 planeNormal, Camera cam)
+    {
+        Ray ray = cam.ScreenPointToRay(screen);
+        float denom = Vector3.Dot(planeNormal, ray.direction);
+        if (Mathf.Abs(denom) < 1e-6f) return planePoint;
+        float t = Vector3.Dot(planePoint - ray.origin, planeNormal) / denom;
+        return ray.origin + ray.direction * Mathf.Max(t, 0f);
+    }
+
+    // simple on-screen debug HUD
+    // Replace your OnGUI() with this:
+    void OnGUI()
+    {
+        int startX = Mathf.RoundToInt(Screen.width * hudAnchorX) + hudPad;
+        int startY = Mathf.RoundToInt(Screen.height * hudAnchorY) + hudPad;
+
+        int y = startY;
+        int line = hudLine;
+
+        // faint backdrop
+        var rect = new Rect(startX - hudPad, startY - hudPad, hudWidth + hudPad * 2, line * 6 + hudPad * 2);
+        Color old = GUI.color;
+        GUI.color = new Color(0, 0, 0, 0.35f);
+        GUI.DrawTexture(rect, Texture2D.whiteTexture);
+        GUI.color = old;
+
+        GUI.Label(new Rect(startX, y, hudWidth, line), $"[RMB_Drag3D] cam={(cam ? cam.name : "<null>")}"); y += line;
+        GUI.Label(new Rect(startX, y, hudWidth, line), _grabbed ? $"Dragging: {_grabbed.name}" : "Dragging: <none>"); y += line;
+        GUI.Label(new Rect(startX, y, hudWidth, line),
+            string.IsNullOrEmpty(_lastHitName) ? "Last Hit: <none>"
+                : $"Last Hit: {_lastHitName} (layer {_lastLayer}) @ {_lastHitPoint}");
+        y += line;
+
+        if (!string.IsNullOrEmpty(_lastWhy))
+        {
+            GUI.color = Color.yellow;
+            GUI.Label(new Rect(startX, y, hudWidth, line), $"Why no grab: {_lastWhy}");
+            GUI.color = old;
+            y += line;
+        }
+
+        GUI.Label(new Rect(startX, y, hudWidth, line),
+            $"Mask: {dragMask.value}  | includeTriggers={includeTriggers}  | rayRadius={rayRadius}");
+    }
+
 }

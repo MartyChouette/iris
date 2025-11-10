@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd86dfccc509754eb56c6c38665387e, type: 3}
   m_Name: JuiceSettings
   m_EditorClassIdentifier: 
-  enableUIJuice: 1
-  enableTimeJuice: 1
-  enableSapFX: 1
+  enableUIJuice: 0
+  enableTimeJuice: 0
+  enableSapFX: 0

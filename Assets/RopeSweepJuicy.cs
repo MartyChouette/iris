@@ -1,13 +1,14 @@
 ﻿// File: RopeSweepCutJuicy.cs
-// Same behavior, but using the Unity 6 Input System (no legacy Input.*).
+// Unity 6 Input System only. One-way dotted scissor line that looks the same in Editor & Player.
 
 using System.Collections;
+using System.Linq;
 using Obi;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;   // ← new input system
+using UnityEngine.InputSystem;
 
 namespace Obi.Samples
 {
@@ -29,30 +30,21 @@ namespace Obi.Samples
         private LineRenderer lineRenderer;
         private Vector3 cutStartPosition;   // screen space
         private Vector3 cutEndPosition;     // screen space
-
-        // Press edge tracking
         private bool _wasPressedLastFrame;
 
         // ======================== JUICE: TIME ========================
         [Header("Juice: Time Freeze / SloMo")]
-        [Tooltip("How long to freeze/slo-mo when a cut lands (seconds, unscaled).")]
         public float freezeDuration = 0.15f;
-
-        [Tooltip("Timescale during the freeze window. 0 = full freeze, 0.05–0.2 = buttery slo-mo.")]
         [Range(0, 1f)] public float freezeTimeScale = 0.05f;
-
-        [Tooltip("After the freeze, keep a little slo-mo for this many seconds (unscaled).")]
         public float postFreezeSloMoDuration = 0.20f;
-
-        [Tooltip("Timescale during post-freeze slo-mo.")]
         [Range(0, 1f)] public float postFreezeTimeScale = 0.2f;
 
         [Header("Global Juice (optional shared toggles)")]
-        public JuiceSettings juiceSettings;   // if present, overrides the two toggles below
+        public JuiceSettings juiceSettings;
 
         [Header("Juice Toggles (local)")]
-        public bool enableUIJuice = true;     // TMP + splash anims on/off
-        public bool enableTimeJuice = true;   // freeze/slo-mo on/off
+        public bool enableUIJuice = true;
+        public bool enableTimeJuice = true;
 
         // ======================== JUICE: UI ========================
         [Header("Juice: UI Elements")]
@@ -93,7 +85,6 @@ namespace Obi.Samples
 
         // ======================== LEAF NOTIFY ========================
         [Header("Leaf Detach Notify")]
-        [Tooltip("Radius around hit point to look for leaves to notify (meters).")]
         public float leafCutNotifyRadius = 0.06f;
         public LayerMask leafMask = ~0;
         public bool notifyLeaves = true;
@@ -102,28 +93,31 @@ namespace Obi.Samples
         // ======================== ATTACHMENT CLEANUP ========================
         [Header("Cleanup Stem Attachments")]
         [FormerlySerializedAs("destroyAttachmentsOnFirstCut")]
-        public bool enableAttachmentCleanup = true;   // uncheck to never delete attachments on first cut
+        public bool enableAttachmentCleanup = true;
         public Object[] attachmentsToDestroy;
         private bool attachmentsDestroyed;
 
-        // ======================== LINE STYLE (CLASSIC) ========================
-        [Header("Line Style")]
-        [Tooltip("Draw the guideline exactly like the old script (fixed z=0.5 ScreenToWorld + dotted Unlit).")]
-        public bool useClassicLineDrawing = true;
-
-        [Tooltip("Optional: assign a URP-safe material (e.g., URP/Unlit). If null, a classic Unlit/Texture dotted mat is generated.")]
+        // ======================== LINE (single, dotted) ========================
+        [Header("Dotted Line Settings")]
+        [Tooltip("URP-safe material. If left null, a URP/Unlit or Sprites/Default material is created at runtime.")]
         public Material lineMaterial;
+        [Tooltip("World width of the dotted line.")]
+        public float lineWidth = 0.005f;
+        [Tooltip("Screen→world projection depth (meters from camera) for line points.")]
+        public float lineScreenZ = 0.5f;
+        [Tooltip("Dot length in texture pixels.")]
+        public int dotPixels = 50;
+        [Tooltip("Gap length in texture pixels.")]
+        public int gapPixels = 1600;
+        [Tooltip("Dotted line color (dot color).")]
+        public Color lineColor = Color.black;
 
-        // ====================================================================
-        // LIFECYCLE
-        // ====================================================================
         void Awake()
         {
             rope = GetComponent<ObiRope>();
             cam = ResolveCamera();
 
-            if (useClassicLineDrawing) AddMouseLine_Classic();
-            else AddMouseLine_Modern(); // visually similar
+            AddDottedLine();
 
             var img = splashImage ? splashImage.GetComponent<Image>() : null;
             if (img) img.raycastTarget = false;
@@ -134,8 +128,6 @@ namespace Obi.Samples
                 if (splashImage) splashImage.gameObject.SetActive(false);
                 if (splashText) splashText.gameObject.SetActive(false);
             }
-
-
         }
 
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
@@ -157,12 +149,9 @@ namespace Obi.Samples
         }
 #endif
 
-
         void OnEnable()
         {
             rope.OnSimulationStart += Rope_OnBeginSimulation;
-
-            // enable input actions
             if (pointerPositionAction != null) pointerPositionAction.action.Enable();
             if (pointerPressAction != null) pointerPressAction.action.Enable();
             _wasPressedLastFrame = false;
@@ -171,7 +160,6 @@ namespace Obi.Samples
         void OnDisable()
         {
             rope.OnSimulationStart -= Rope_OnBeginSimulation;
-
             if (pointerPositionAction != null) pointerPositionAction.action.Disable();
             if (pointerPressAction != null) pointerPressAction.action.Disable();
         }
@@ -184,7 +172,7 @@ namespace Obi.Samples
         void LateUpdate()
         {
             if (!ResolveCamera()) return;
-            ProcessInput_NewInputSystem();
+            ProcessInput();
         }
 
         private Camera ResolveCamera()
@@ -196,9 +184,9 @@ namespace Obi.Samples
         }
 
         // ====================================================================
-        // INPUT / LINE DRAWING (Input System)
+        // INPUT / LINE DRAWING (single path)
         // ====================================================================
-        private void ProcessInput_NewInputSystem()
+        private void ProcessInput()
         {
             Vector2 pointerPos = ReadPointerPosition();
             bool pressed = ReadPointerPressed();
@@ -210,10 +198,7 @@ namespace Obi.Samples
 
                 if (lineRenderer)
                 {
-                    Vector3 a = useClassicLineDrawing
-                        ? ClassicScreenToWorld(cutStartPosition)
-                        : cam.ScreenToWorldPoint(new Vector3(cutStartPosition.x, cutStartPosition.y, 0.5f));
-
+                    Vector3 a = ScreenToWorldAtZ(cutStartPosition, lineScreenZ);
                     lineRenderer.enabled = true;
                     lineRenderer.positionCount = 2;
                     lineRenderer.SetPosition(0, a);
@@ -224,10 +209,7 @@ namespace Obi.Samples
             // while pressed, update line end
             if (lineRenderer && lineRenderer.enabled && pressed)
             {
-                Vector3 b = useClassicLineDrawing
-                    ? ClassicScreenToWorld(pointerPos)
-                    : cam.ScreenToWorldPoint(new Vector3(pointerPos.x, pointerPos.y, 0.5f));
-
+                Vector3 b = ScreenToWorldAtZ(pointerPos, lineScreenZ);
                 lineRenderer.SetPosition(1, b);
             }
 
@@ -249,109 +231,50 @@ namespace Obi.Samples
             if (pointerPositionAction != null)
                 return pointerPositionAction.action.ReadValue<Vector2>();
 
-            if (UnityEngine.InputSystem.Mouse.current != null)
-                return UnityEngine.InputSystem.Mouse.current.position.ReadValue();
+            if (Mouse.current != null)
+                return Mouse.current.position.ReadValue();
 
-            if (UnityEngine.InputSystem.Touchscreen.current != null)
-                return UnityEngine.InputSystem.Touchscreen.current.primaryTouch.position.ReadValue();
+            if (Touchscreen.current != null)
+                return Touchscreen.current.primaryTouch.position.ReadValue();
 
-            return new Vector2(Screen.width * 0.5f, Screen.height * 0.5f); // safe center fallback
+            return new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
         }
-
 
         private bool ReadPointerPressed()
         {
-            // Prefer the action if present
             if (pointerPressAction != null)
-            {
-                // Use analog button value; more robust across devices/builds
-                float v = pointerPressAction.action.ReadValue<float>();
-                return v > 0.5f;
-            }
+                return pointerPressAction.action.ReadValue<float>() > 0.5f;
 
-            // Fallbacks
-            if (UnityEngine.InputSystem.Mouse.current != null)
-                return UnityEngine.InputSystem.Mouse.current.leftButton.isPressed;
+            if (Mouse.current != null)
+                return Mouse.current.leftButton.isPressed;
 
-            if (UnityEngine.InputSystem.Touchscreen.current != null)
-                return UnityEngine.InputSystem.Touchscreen.current.primaryTouch.press.isPressed;
+            if (Touchscreen.current != null)
+                return Touchscreen.current.primaryTouch.press.isPressed;
 
             return false;
         }
 
-
-        // Classic z=0.5 screen→world like the older script
-        private Vector3 ClassicScreenToWorld(Vector2 screen)
+        private Vector3 ScreenToWorldAtZ(Vector2 screen, float zDepth)
         {
-            return cam.ScreenToWorldPoint(new Vector3(screen.x, screen.y, 0.5f));
+            return cam.ScreenToWorldPoint(new Vector3(screen.x, screen.y, zDepth));
         }
 
-        // Build a dotted line (classic Unlit/Texture, or URP-safe override if assigned)
-        private void AddMouseLine_Classic(int dotPx = 50, int gapPx = 1600)
+        // ====================================================================
+        // DOTTED LINE
+        // ====================================================================
+        private void AddDottedLine()
         {
             var go = new GameObject("Mouse Line");
             lineRenderer = go.AddComponent<LineRenderer>();
 
-            lineRenderer.startWidth = 0.005f;
-            lineRenderer.endWidth = 0.005f;
+            lineRenderer.startWidth = lineWidth;
+            lineRenderer.endWidth = lineWidth;
             lineRenderer.numCapVertices = 0;
             lineRenderer.alignment = LineAlignment.View;
             lineRenderer.textureMode = LineTextureMode.Tile;
             lineRenderer.positionCount = 2;
             lineRenderer.enabled = false;
-
-            // 0) If you assigned a material in the Inspector, just use it and bail.
-            if (lineMaterial != null) { lineRenderer.sharedMaterial = lineMaterial; return; }
-
-            // 1) Make the dotted texture (optional; comment out if you don’t want dots)
-            int w = Mathf.Max(1, dotPx + Mathf.Max(1, gapPx));
-            var tex = new Texture2D(w, 1, TextureFormat.RGBA32, false);
-            tex.filterMode = FilterMode.Point;
-            tex.wrapMode = TextureWrapMode.Repeat;
-            for (int x = 0; x < w; x++)
-                tex.SetPixel(x, 0, x < dotPx ? Color.black : new Color(0, 0, 0, 0));
-            tex.Apply();
-
-            // 2) Try URP/Unlit first, then Sprites/Default. Never construct with null.
-            Shader s = Shader.Find("Universal Render Pipeline/Unlit");
-            if (s != null)
-            {
-                var m = new Material(s);
-                if (m.HasProperty("_BaseMap")) m.SetTexture("_BaseMap", tex);
-                if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", Color.black);
-                lineRenderer.sharedMaterial = m;
-                return;
-            }
-
-            s = Shader.Find("Sprites/Default");
-            if (s != null)
-            {
-                var m = new Material(s);
-                m.mainTexture = tex;
-                m.color = Color.white;
-                lineRenderer.sharedMaterial = m;
-                return;
-            }
-
-            // 3) Last resort: don’t crash; disable the line but keep cutting functional.
-            Debug.LogWarning("[RopeSweepCutJuicy] No shader found for line in Player; line will be invisible but cutting will still work.");
-        }
-
-
-
-        // Optional modern tiny-dot builder (kept for completeness)
-        private void AddMouseLine_Modern(int dotPx = 1, int gapPx = 1600)
-        {
-            var go = new GameObject("Mouse Line");
-            lineRenderer = go.AddComponent<LineRenderer>();
-
-            lineRenderer.startWidth = 0.005f;
-            lineRenderer.endWidth = 0.005f;
-            lineRenderer.numCapVertices = 0;
-            lineRenderer.alignment = LineAlignment.View;
-            lineRenderer.textureMode = LineTextureMode.Tile;
-            lineRenderer.positionCount = 2;
-            lineRenderer.enabled = false;
+            lineRenderer.useWorldSpace = true;
 
             if (lineMaterial != null)
             {
@@ -359,40 +282,39 @@ namespace Obi.Samples
                 return;
             }
 
-            int w = Mathf.Max(1, dotPx + Mathf.Max(1, gapPx));
+            int w = Mathf.Max(1, dotPixels + Mathf.Max(1, gapPixels));
             var tex = new Texture2D(w, 1, TextureFormat.RGBA32, false);
             tex.filterMode = FilterMode.Point;
             tex.wrapMode = TextureWrapMode.Repeat;
+            Color dot = lineColor; dot.a = 1f;
             for (int x = 0; x < w; x++)
-                tex.SetPixel(x, 0, x < dotPx ? Color.black : new Color(0, 0, 0, 0));
+                tex.SetPixel(x, 0, x < dotPixels ? dot : new Color(0, 0, 0, 0));
             tex.Apply();
 
-            Material mat = null;
-
-            if (lineMaterial != null)
+            Shader s = Shader.Find("Universal Render Pipeline/Unlit");
+            if (s != null)
             {
-                mat = lineMaterial;
-            }
-            else
-            {
-                mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-                if (mat != null)
-                {
-                    mat.SetTexture("_BaseMap", tex);
-                    mat.SetColor("_BaseColor", Color.white);
-                }
-                else
-                {
-                    mat = new Material(Shader.Find("Sprites/Default"));
-                    if (mat != null) mat.color = Color.white;
-                }
+                var m = new Material(s);
+                if (m.HasProperty("_BaseMap")) m.SetTexture("_BaseMap", tex);
+                if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", Color.white);
+                lineRenderer.sharedMaterial = m;
+                return;
             }
 
-            lineRenderer.sharedMaterial = mat;
+            s = Shader.Find("Sprites/Default");
+            if (s != null)
+            {
+                var m = new Material(s) { color = Color.white };
+                m.mainTexture = tex;
+                lineRenderer.sharedMaterial = m;
+                return;
+            }
+
+            Debug.LogWarning("[RopeSweepCutJuicy] No shader found for dotted line; line will be invisible but cutting still works.");
         }
 
         // ====================================================================
-        // OBI CUT LOGIC (unchanged)
+        // OBI CUT LOGIC + TEAR BUS
         // ====================================================================
         private void Rope_OnBeginSimulation(ObiActor actor, float stepTime, float substepTime) { }
 
@@ -415,11 +337,7 @@ namespace Obi.Samples
                 if (SegmentSegmentIntersection2D(s1, s2, lineStart, lineEnd, out float rSeg, out float sSwipe))
                 {
                     float inv = 1f - Mathf.Clamp01(sSwipe);
-                    if (inv < bestS)
-                    {
-                        bestS = inv;
-                        bestElement = i;
-                    }
+                    if (inv < bestS) { bestS = inv; bestElement = i; }
                 }
             }
 
@@ -435,9 +353,18 @@ namespace Obi.Samples
             SegmentSegmentIntersection2D(A, B, lineStart, lineEnd, out float rSeg2, out _);
             Vector3 hitWorld = Vector3.Lerp(a, b, Mathf.Clamp01(rSeg2));
 
+            // --- perform tear ---
             rope.Tear(hitElem);
             rope.RebuildConstraintsFromElements();
 
+            // --- TEAR BUS: compute ACTOR index near the cut and broadcast ---
+            int aActor = SolverToActorIndex(rope, hitElem.particle1);
+            int bActor = SolverToActorIndex(rope, hitElem.particle2);
+            // choose nearer particle along the segment: rSeg2 ~ [0..1]
+            int tearActorIndex = (rSeg2 >= 0.5f) ? Mathf.Max(aActor, bActor) : Mathf.Min(aActor, bActor);
+            RopeTearBus.Broadcast(rope, tearActorIndex);
+
+            // --- your existing post-cut effects ---
             LeafRetargetUtil.RetargetFollowersNear(rope, hitWorld, leafCutNotifyRadius, leafMask);
 
             Vector3 segDir = (b - a).normalized;
@@ -513,7 +440,7 @@ namespace Obi.Samples
         }
 
         // ====================================================================
-        // JUICE: UI/TIME & AFTER-CUT (unchanged)
+        // JUICE: UI/TIME & AFTER-CUT
         // ====================================================================
         private bool EnableUI() => juiceSettings ? juiceSettings.enableUIJuice : enableUIJuice;
         private bool EnableTime() => juiceSettings ? juiceSettings.enableTimeJuice : enableTimeJuice;
@@ -635,6 +562,26 @@ namespace Obi.Samples
                 if (item is GameObject go) { Destroy(go); continue; }
                 if (item is Component comp) { Destroy(comp); continue; }
             }
+        }
+
+        // ====================================================================
+        // Helper: map solver index -> actor index for this rope
+        // ====================================================================
+        private static int SolverToActorIndex(ObiRope rope, int solverIndex)
+        {
+            // rope.solverIndices maps actorIndex -> solverIndex
+            // We need the inverse: find actorIndex where solverIndices[actor] == solverIndex
+            var map = rope.solverIndices;
+#if OBI_NATIVE_COLLECTIONS
+            int count = map.count;
+            for (int i = 0; i < count; i++)
+                if (map[i] == solverIndex) return i;
+#else
+            int count = map.Count();
+            for (int i = 0; i < count; i++)
+                if (map[i] == solverIndex) return i;
+#endif
+            return -1; // shouldn't happen unless particle inactive
         }
     }
 }
