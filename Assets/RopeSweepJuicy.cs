@@ -2,7 +2,6 @@
 // Unity 6 Input System only. One-way dotted scissor line that looks the same in Editor & Player.
 
 using System.Collections;
-using System.Linq;
 using Obi;
 using TMPro;
 using UnityEngine;
@@ -577,7 +576,7 @@ namespace Obi.Samples
             for (int i = 0; i < count; i++)
                 if (map[i] == solverIndex) return i;
 #else
-            int count = map.Count();
+            int count = map.count;
             for (int i = 0; i < count; i++)
                 if (map[i] == solverIndex) return i;
 #endif

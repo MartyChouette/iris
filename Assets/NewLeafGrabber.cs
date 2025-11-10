@@ -118,7 +118,7 @@ public class NewLeafGrabber : MonoBehaviour
             anchor = h.point;
             var comp = (lt as Component);
             var leafPB = comp ? comp.GetComponent<Leaf3D_PullBreak>() : null;
-            if (leafPB && leafPB.attachSocket) anchor = leafPB.attachSocket.position;
+            //if (leafPB && leafPB.attachSocket) anchor = leafPB.attachSocket.position;
 
             leaf = lt; hitInfo = h;
             return true;

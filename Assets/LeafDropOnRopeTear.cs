@@ -2,30 +2,44 @@
 using Obi;
 
 [DefaultExecutionOrder(32000)]
+[DisallowMultipleComponent]
 public class LeafDropOnRopeTear : MonoBehaviour
 {
-    public ObiRopeBase rope;          // the stem rope this leaf is attached to
-    public int actorIndex = 0;        // particle index the leaf rides/pins to
-    public Rigidbody rb;              // optional auto-find
-    public MonoBehaviour followerToDisable; // e.g., your RopeLeafFollower
+    [Header("Wiring")]
+    public ObiRopeBase rope;                // stem rope this leaf is attached to
+    [Tooltip("Actor-space particle index the leaf rides/pins to.")]
+    public int actorIndex = 0;
+    public Rigidbody rb;                    // auto-filled if null
+    [Tooltip("Follower script that writes the leaf's pose (disable when dropping).")]
+    public MonoBehaviour followerToDisable; // e.g., RopeLeafFollower_Bespoke
+
+    [Header("Debug")]
     public bool debug = true;
 
     bool dropped = false;
 
-    void Awake() { if (!rb) rb = GetComponent<Rigidbody>(); }
+    void Awake()
+    {
+        if (!rb) rb = GetComponent<Rigidbody>();
+    }
 
     void OnEnable() { RopeTearBus.OnAnyRopeTorn += HandleTear; }
     void OnDisable() { RopeTearBus.OnAnyRopeTorn -= HandleTear; }
 
-    void HandleTear(ObiRopeBase tornRope, int tearIndex)
+    void HandleTear(ObiRopeBase torn, int tearActorIndex)
     {
-        if (dropped || tornRope != rope) return;
+        if (dropped || torn != rope) return;
 
-        // severed above this leaf (toward root=0)? then drop:
-        if (tearIndex <= actorIndex)
+        // If the rope was severed ABOVE/AT this leaf (toward root=0), drop it.
+        // Convention: tearActorIndex <= actorIndex -> this leaf loses its upstream path.
+        if (tearActorIndex <= actorIndex)
         {
-            if (debug) Debug.Log($"[LeafDrop] Tear at {tearIndex} → DROP {name}", this);
+            if (debug) Debug.Log($"[LeafDrop] Tear at {tearActorIndex} <= leaf {actorIndex} → DROP {name}", this);
             DropNow();
+        }
+        else if (debug)
+        {
+            Debug.Log($"[LeafDrop] Tear at {tearActorIndex} > leaf {actorIndex} → still attached", this);
         }
     }
 
