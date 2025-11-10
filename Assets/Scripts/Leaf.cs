@@ -45,8 +45,8 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
         {
             rb.isKinematic = true;
             rb.useGravity = false;
-            rb.linearVelocity = Vector3.zero;          // ? fix
-            rb.angularVelocity = Vector3.zero;   // ? fix
+            //rb.linearVelocity = Vector3.zero;          // ? fix
+            //rb.angularVelocity = Vector3.zero;   // ? fix
         }
         if (follower) follower.enabled = true;
     }
@@ -59,14 +59,25 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
 
         // stop following & enable physics
         if (follower) follower.enabled = false;
+
+        LeafDetachUtil.DetachAllFor(transform);
+
         if (rb)
         {
-            if (TryGetComponent(out MeshCollider mc) && !mc.convex) mc.convex = true;
+
             rb.isKinematic = false;
-            rb.useGravity = true;
+            rb.detectCollisions = true;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.AddForce(Random.onUnitSphere * 0.6f, ForceMode.Impulse);
+
+
+            //if (TryGetComponent(out MeshCollider mc) && !mc.convex) mc.convex = true;
+            //rb.isKinematic = false;
+            //rb.useGravity = true;
+            //rb.linearVelocity = Vector3.zero;
+            //rb.angularVelocity = Vector3.zero;
+            //rb.AddForce(Random.onUnitSphere * 0.6f, ForceMode.Impulse);
         }
 
         // spawn sap at the rope particle this leaf was riding, if available
@@ -87,6 +98,9 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
         // auto-return to pool after a short while
         Invoke(nameof(ReturnToPool), 2.5f);
     }
+
+
+
 
     void ReturnToPool()
     {

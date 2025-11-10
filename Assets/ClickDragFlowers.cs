@@ -54,14 +54,14 @@ public class ClickDragFlowers : MonoBehaviour
         Vector2 screen;
 #if ENABLE_INPUT_SYSTEM
         var m = Mouse.current; if (m == null) return;
-        down = m.rightButton.wasPressedThisFrame;
-        held = m.rightButton.isPressed;
-        up = m.rightButton.wasReleasedThisFrame;
+        down = m.leftButton.wasPressedThisFrame;
+        held = m.leftButton.isPressed;
+        up = m.leftButton.wasReleasedThisFrame;
         screen = m.position.ReadValue();
 #else
-        down = Input.GetMouseButtonDown(1);
-        held = Input.GetMouseButton(1);
-        up   = Input.GetMouseButtonUp(1);
+        down = Input.GetMouseButtonDown(0);
+        held = Input.GetMouseButton(0);
+        up   = Input.GetMouseButtonUp(0);
         screen = Input.mousePosition;
 #endif
 

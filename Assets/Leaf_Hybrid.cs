@@ -1,11 +1,3 @@
-// File: LeafHybrid.cs
-// Unity 6 + Obi 7
-// Tug while attached (pin active). When pulled beyond breakDistance for breakDwellSeconds:
-//  - remove only this leaf's pinned particle from its ObiParticleAttachment group (or disable local attachment),
-//  - enable physics and nudge (or keep kinematic while still grabbed, if desired),
-//  - play sap on break,
-//  - also play sap on first collisions after detach (cooldown).
-
 using UnityEngine;
 using Obi;
 
@@ -14,40 +6,57 @@ using Obi;
 public class LeafHybrid : MonoBehaviour
 {
     [Header("Obi / Scene")]
-    public ObiRope rope;                        // the stem rope
-    [Tooltip("Actor-space particle index for this leaf. -1 = auto from attachment group (requires exactly 1 index there).")]
+    public ObiRope rope;
+    [Tooltip("Actor-space particle index for this leaf. -1 = auto from attachment group (must contain exactly 1 index).")]
     public int actorIndex = -1;
-    [Tooltip("Attachment that pins this leaf's particle.")]
-    public ObiParticleAttachment attachment;    // prefer on the leaf; shared on rope also supported
-    public Rigidbody rb;                        // leaf rigidbody
-    public SapFxPool sapPool;                   // optional sap pool
+    public ObiParticleAttachment attachment;   // preferably on this leaf
+    public Rigidbody rb;
+    public SapFxPool sapPool;
     public Camera cam;
 
-    [Header("Break settings")]
-    [Min(0.001f)] public float breakDistance = 0.12f;   // meters (adjust to your scale)
-    [Min(0f)] public float breakDwellSeconds = 0.05f; // continuous time beyond distance before break
-    [Tooltip("Must come within this distance of the pin once before breaking is allowed (prevents instant pop).")]
-    public float armThreshold = 0.03f;                  // < breakDistance
-    public Vector3 breakImpulse = new Vector3(0f, 0.8f, 0f);
-    public bool stayInHandAfterBreak = true;            // if true, keep kinematic until you release after tearing
+    [Header("Break tuning")]
+    [Tooltip("Meters of pull beyond the captured anchor required to allow a tear.")]
+    [Min(0.001f)] public float breakDistance = 0.12f;
 
-    [Header("Collision Sap")]
+    [Tooltip("Continuous seconds you must remain beyond breakDistance before the pin is removed (\"how long the stem stays connected\").")]
+    [Min(0f)] public float breakDwellSeconds = 0.12f;
+
+    [Tooltip("Must come within this distance of the pin once before a break is allowed (prevents instant pop).")]
+    public float armThreshold = 0.03f;
+
+    public Vector3 breakImpulse = new(0f, 0.1f, 0f);
+
+    [Header("Hold feel")]
+    [Tooltip("Keep the leaf kinematic and in-hand after it tears until you release LMB.")]
+    public bool stayInHandAfterBreak = true;
+
+    [Tooltip("If the leaf is already detached when you release LMB, it will be destroyed after this many seconds.")]
+    public float postReleaseLifetimeSeconds = 10f;
+
+    [Header("Idle follow (attached & not grabbed)")]
+    public bool syncToRopeWhenIdle = true;
+    public float idleLerp = 30f;
+    public Vector3 idleOffset = Vector3.zero;
+
+    [Header("Collision sap")]
     public float collisionBurstCooldown = 0.15f;
 
     [Header("Debug")]
-    public bool debug = true;
+    public bool debug = false;
 
     // runtime
     bool _attached = true;
     bool _armed = false;
     bool _grabbed = false;
     bool _solverReady = false;
+    bool _initDone = false;
     int _solverIndex = -1;
 
-    Vector3 _anchorAtGrab;     // pin world pos at grab start (we measure against this)
-    Vector3 _hand;             // latest hand pos
+    Vector3 _anchorAtGrab;
+    Vector3 _hand;
     float _beyondTimer = 0f;
     float _lastCollisionSap = -999f;
+    float _destroyAt = -1f;
 
     void Awake()
     {
@@ -62,139 +71,76 @@ public class LeafHybrid : MonoBehaviour
             enabled = false; return;
         }
 
-        // while pinned, leaf should be kinematic / no contacts:
         if (rb)
         {
+            // while pinned: no physics
             rb.isKinematic = true;
             rb.detectCollisions = false;
             rb.interpolation = RigidbodyInterpolation.None;
         }
     }
 
-    // add near other fields:
-    bool _initDone = false;
-
-    // --- replace your OnEnable / OnDisable with this:
     void OnEnable()
     {
         if (!rope) return;
-
-        // If rope is already loaded when we enable, initialize now:
         TryInitFromSolver();
-
-        // Fallback + hot-reload path: this event exists on all Obi 7 builds.
-        rope.OnSimulationStart += Rope_OnSimulationStart;
+        rope.OnSimulationStart += OnSimulationStart;
     }
 
     void OnDisable()
     {
-        if (!rope) return;
-        rope.OnSimulationStart -= Rope_OnSimulationStart;
-        _initDone = false;
-        _solverReady = false;
-        _solverIndex = -1;
-        _armed = false;
-        _beyondTimer = 0f;
+        if (rope) rope.OnSimulationStart -= OnSimulationStart;
+        _initDone = false; _solverReady = false; _solverIndex = -1;
+        _armed = false; _beyondTimer = 0f;
     }
 
-    // called every time simulation begins (safe moment to read solver data)
-    void Rope_OnSimulationStart(ObiActor actor, float stepTime, float substepTime)
+    void Update()
     {
-        TryInitFromSolver();
-    }
-
-    // one-shot init, safe in all versions
-    void TryInitFromSolver()
-    {
-        if (_initDone || rope == null || !rope.isLoaded || rope.solver == null) return;
-
-        // auto actor-index if group has exactly one index:
-        if (actorIndex < 0 && attachment.particleGroup != null &&
-            attachment.particleGroup.particleIndices != null &&
-            attachment.particleGroup.particleIndices.Count == 1)
-        {
-            actorIndex = attachment.particleGroup.particleIndices[0];
-            if (debug) Debug.Log($"[LeafHybrid] Auto actorIndex = {actorIndex}", this);
-        }
-
-        _solverIndex = ActorToSolverIndex(rope, actorIndex);
-        _solverReady = (_solverIndex >= 0);
-        _armed = false;
-        _beyondTimer = 0f;
-
-        if (_solverReady) TryArmByProximity();
-
-        _initDone = true;
-        if (debug) Debug.Log("[LeafHybrid] Initialized from solver.", this);
-    }
-
-
-    // ===== Solver events (this is what actually runs) =====
-    void Rope_OnAddedToSolver(ObiActor a, ObiSolver s)
-    {
-        // auto actor-index if group has exactly one index:
-        if (actorIndex < 0 && attachment.particleGroup != null &&
-            attachment.particleGroup.particleIndices != null &&
-            attachment.particleGroup.particleIndices.Count == 1)
-        {
-            actorIndex = attachment.particleGroup.particleIndices[0];
-            if (debug) Debug.Log($"[LeafHybrid] Auto actorIndex = {actorIndex}", this);
-        }
-
-        _solverIndex = ActorToSolverIndex(rope, actorIndex);
-        _solverReady = (_solverIndex >= 0);
-        _armed = false;
-        _beyondTimer = 0f;
-
-        TryArmByProximity(); // may arm immediately if we spawned close to the pin
-    }
-
-    void Rope_OnRemovedFromSolver(ObiActor a, ObiSolver s)
-    {
-        _solverReady = false;
-        _solverIndex = -1;
-        _armed = false;
-        _beyondTimer = 0f;
+        // post-release lifetime (only counts after we've detached AND released)
+        if (_destroyAt > 0f && Time.time >= _destroyAt)
+            Destroy(gameObject);
     }
 
     void LateUpdate()
     {
         if (!_attached || !_solverReady || attachment == null || !attachment.enabled) return;
 
-        // only allow break once armed (close at least once to the pin)
-        if (!_armed) { TryArmByProximity(); return; }
+        // idle rope->leaf follow
+        if (!_grabbed && syncToRopeWhenIdle)
+        {
+            Vector3 pw = GetParticleWorld(rope, _solverIndex) + idleOffset;
+            float k = 1f - Mathf.Exp(-idleLerp * Time.deltaTime);
+            if (rb && rb.isKinematic) rb.MovePosition(Vector3.Lerp(transform.position, pw, k));
+            else transform.position = Vector3.Lerp(transform.position, pw, k);
+        }
 
-        // if grabbed, measure hand vs anchor-at-grab; otherwise measure leaf vs live pin:
-        float dist = _grabbed
-            ? Vector3.Distance(_hand, _anchorAtGrab)
-            : Vector3.Distance(transform.position, GetParticleWorld(rope, _solverIndex));
+        // Only allow tearing while actively grabbed
+        if (!_grabbed)
+        {
+            if (!_armed) TryArmByProximity();
+            return;
+        }
+        if (!_armed) return;
 
-        if (debug) Debug.Log($"[LeafHybrid] dist={dist:F3} / {breakDistance}  armed={_armed} grabbed={_grabbed}", this);
+        float dist = Vector3.Distance(_hand, _anchorAtGrab);
+        if (debug) Debug.Log($"[LeafHybrid] dist={dist:F3}/{breakDistance} armed={_armed} grabbed={_grabbed}", this);
 
         if (dist >= breakDistance)
         {
             _beyondTimer += Time.deltaTime;
-            if (_beyondTimer >= breakDwellSeconds)
-                DetachNow();
+            if (_beyondTimer >= breakDwellSeconds) DetachNow();
         }
-        else
-        {
-            _beyondTimer = 0f;
-        }
+        else _beyondTimer = 0f;
     }
 
-    // ========== Public API for grabbers ==========
-
-    /// Call on mouse-down (or touch begin). We'll capture the anchor at the pin.
+    // ---------- driven by the LMB grabber ----------
     public void BeginGrab(Vector3 worldHitPoint)
     {
         if (!_solverReady) return;
-
         _grabbed = true;
         _hand = worldHitPoint;
-        _anchorAtGrab = GetParticleWorld(rope, _solverIndex); // pin position at grab moment
+        _anchorAtGrab = GetParticleWorld(rope, _solverIndex);
 
-        // ensure we're kinematic while attached so following the cursor tugs the pin:
         if (_attached && rb)
         {
             rb.isKinematic = true;
@@ -203,15 +149,15 @@ public class LeafHybrid : MonoBehaviour
 
         _armed = true;
         _beyondTimer = 0f;
+        _destroyAt = -1f; // cancel any pending destroy while held
         if (debug) Debug.Log("[LeafHybrid] BeginGrab -> armed.", this);
     }
 
-    /// Call every frame while held with the world hand position you want the leaf to be at.
     public void SetHand(Vector3 worldHand)
     {
         _hand = worldHand;
 
-        if (_attached)
+        if (_attached || (stayInHandAfterBreak && _grabbed))
         {
             if (rb && rb.isKinematic) rb.MovePosition(worldHand);
             else transform.position = worldHand;
@@ -222,69 +168,77 @@ public class LeafHybrid : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, face, 0.25f);
             }
         }
-        else if (stayInHandAfterBreak)
-        {
-            // If we tore while still held, we keep it kinematic until release.
-            if (rb && rb.isKinematic) rb.MovePosition(worldHand);
-            else transform.position = worldHand;
-        }
     }
 
-    /// Call on mouse/touch release.
     public void EndGrab()
     {
         bool wasHeld = _grabbed;
         _grabbed = false;
 
-        // If we’re already detached and were keeping it in hand, hand over to physics now.
-        if (!_attached && rb)
+        if (!_attached && rb)  // detached already
         {
-            if (stayInHandAfterBreak && wasHeld)
-            {
-                rb.isKinematic = false;
-                rb.detectCollisions = true;
-                rb.interpolation = RigidbodyInterpolation.Interpolate;
-            }
+            // hand over to physics now (we kept it in-hand while held)
+            rb.isKinematic = false;
+            rb.detectCollisions = true;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+
+            // start lifetime countdown after release
+            if (postReleaseLifetimeSeconds > 0f)
+                _destroyAt = Time.time + postReleaseLifetimeSeconds;
         }
     }
 
-    /// If you ever want to force a tear (e.g., for testing).
     public void ForceTear() { if (_attached) DetachNow(); }
 
-    // ========== Detach & SAP ==========
+    // ---------- internals ----------
+    void OnSimulationStart(ObiActor a, float step, float substep) => TryInitFromSolver();
+
+    void TryInitFromSolver()
+    {
+        if (_initDone || rope == null || !rope.isLoaded || rope.solver == null) return;
+
+        if (actorIndex < 0 &&
+            attachment.particleGroup != null &&
+            attachment.particleGroup.particleIndices != null &&
+            attachment.particleGroup.particleIndices.Count == 1)
+        {
+            actorIndex = attachment.particleGroup.particleIndices[0];
+            if (debug) Debug.Log($"[LeafHybrid] Auto actorIndex = {actorIndex}", this);
+        }
+
+        _solverIndex = ActorToSolverIndex(rope, actorIndex);
+        _solverReady = (_solverIndex >= 0);
+        _armed = false;
+        _beyondTimer = 0f;
+        if (_solverReady) TryArmByProximity();
+        _initDone = true;
+    }
 
     void DetachNow()
     {
         if (!_attached) return;
         _attached = false;
 
-        // If the attachment lives on this leaf and pins only this particle → safe to disable.
         if (attachment != null && attachment.gameObject == gameObject)
         {
-            attachment.enabled = false;
-            if (debug) Debug.Log("[LeafHybrid] Disabled local attachment.", this);
+            attachment.enabled = false; // local, safe to disable
         }
         else
         {
-            // Shared attachment (on the rope): remove only our actorIndex from its group.
             RemoveActorFromAttachmentGroup(attachment, actorIndex);
-            // Optional: disable the component if the group is empty
             if (attachment.particleGroup != null &&
                 (attachment.particleGroup.particleIndices == null ||
                  attachment.particleGroup.particleIndices.Count == 0))
-            {
                 attachment.enabled = false;
-            }
+
             rope.SetConstraintsDirty(Oni.ConstraintType.Pin);
-            if (debug) Debug.Log($"[LeafHybrid] Removed actor {actorIndex} from shared attachment.", this);
         }
 
-        // Physics handoff:
         if (rb)
         {
-            // If we're still holding it and want it to stay in hand, keep it kinematic until EndGrab().
+            // stay in hand (kinematic) until EndGrab(); enable physics there.
             if (!(stayInHandAfterBreak && _grabbed))
             {
                 rb.isKinematic = false;
@@ -292,26 +246,21 @@ public class LeafHybrid : MonoBehaviour
                 rb.interpolation = RigidbodyInterpolation.Interpolate;
             }
 
-            rb.linearVelocity = Vector3.zero;          // <-- fixed
-            rb.angularVelocity = Vector3.zero;   // <-- fixed
+            //rb.linearVelocity = Vector3.zero;
+            //rb.angularVelocity = Vector3.zero;
             rb.AddForce(breakImpulse, ForceMode.VelocityChange);
 
-            // MeshCollider safety:
             var mc = GetComponent<MeshCollider>();
             if (mc && !mc.convex) mc.convex = true;
         }
 
-        // sap on break:
         if (sapPool)
         {
             Vector3 normal = cam ? -cam.transform.forward : Vector3.up;
             sapPool.Play(transform.position, normal);
         }
-
-        if (debug) Debug.Log("[LeafHybrid] DETACHED: physics enabled + sap burst.", this);
     }
 
-    // ========== Collision sap after detach ==========
     void OnCollisionEnter(Collision c)
     {
         if (_attached || sapPool == null) return;
@@ -319,15 +268,8 @@ public class LeafHybrid : MonoBehaviour
         if (now - _lastCollisionSap < collisionBurstCooldown) return;
         _lastCollisionSap = now;
 
-        if (c.contactCount > 0)
-        {
-            var cp = c.GetContact(0);
-            sapPool.Play(cp.point, cp.normal);
-        }
-        else
-        {
-            sapPool.Play(transform.position, Vector3.up);
-        }
+        if (c.contactCount > 0) sapPool.Play(c.GetContact(0).point, c.GetContact(0).normal);
+        else sapPool.Play(transform.position, Vector3.up);
     }
 
     void OnTriggerEnter(Collider other)
@@ -337,26 +279,21 @@ public class LeafHybrid : MonoBehaviour
         if (now - _lastCollisionSap < collisionBurstCooldown) return;
         _lastCollisionSap = now;
 
-        var pos = other.ClosestPoint(transform.position);
-        var nrm = (transform.position - pos);
+        Vector3 pos = other.ClosestPoint(transform.position);
+        Vector3 nrm = (transform.position - pos);
         sapPool.Play(pos, nrm.sqrMagnitude > 1e-6f ? nrm.normalized : Vector3.up);
     }
 
-    // ========== helpers ==========
     void TryArmByProximity()
     {
         if (_armed || !_solverReady || attachment == null || !attachment.enabled) return;
         if (!GroupContains(attachment, actorIndex)) return;
 
         float d = Vector3.Distance(transform.position, GetParticleWorld(rope, _solverIndex));
-        if (d <= armThreshold)
-        {
-            _armed = true;
-            _beyondTimer = 0f;
-            if (debug) Debug.Log($"[LeafHybrid] ARMED (d={d:F3} <= {armThreshold}).", this);
-        }
+        if (d <= armThreshold) { _armed = true; _beyondTimer = 0f; }
     }
 
+    // helpers (Obi safe)
     static void RemoveActorFromAttachmentGroup(ObiParticleAttachment a, int actorIdx)
     {
         if (a == null || a.particleGroup == null || a.particleGroup.particleIndices == null) return;
@@ -376,11 +313,10 @@ public class LeafHybrid : MonoBehaviour
     {
         if (r == null || actorIdx < 0) return -1;
 #if OBI_NATIVE_COLLECTIONS
-        if (actorIdx < r.solverIndices.count) return r.solverIndices[actorIdx];
+        return actorIdx < r.solverIndices.count ? r.solverIndices[actorIdx] : -1;
 #else
-        if (r.solverIndices != null && actorIdx < r.solverIndices.count) return r.solverIndices[actorIdx];
+        return (r.solverIndices != null && actorIdx < r.solverIndices.count) ? r.solverIndices[actorIdx] : -1;
 #endif
-        return -1;
     }
 
     static Vector3 GetParticleWorld(ObiRope r, int solverIdx)
@@ -393,9 +329,9 @@ public class LeafHybrid : MonoBehaviour
         if (s.positions.count > solverIdx)
             return s.transform.TransformPoint((Vector3)s.positions[solverIdx]);
 #else
-        if (s.renderablePositions != null && s.renderablePositions.count > solverIdx)
+        if (s.renderablePositions != null && solverIdx < s.renderablePositions.count)
             return s.transform.TransformPoint((Vector3)s.renderablePositions[solverIdx]);
-        if (s.positions != null && s.positions.count > solverIdx)
+        if (s.positions != null && solverIdx < s.positions.count)
             return s.transform.TransformPoint((Vector3)s.positions[solverIdx]);
 #endif
         return Vector3.zero;

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voxelSize: 0.08
   isosurface: 0.059
-  descentIterations: 4
-  descentIsosurface: 0.1
+  descentIterations: 2
+  descentIsosurface: 0.25
   descentSpeed: 0.8
   smoothingIterations: 1
   smoothingIntensity: 0.8
@@ -23,11 +23,11 @@ MonoBehaviour:
   materialType: 1
   customFluidMaterial: {fileID: 0}
   customUnderwaterMaterial: {fileID: 0}
-  reflectionCubemap: {fileID: 0}
+  reflectionCubemap: {fileID: 8900000, guid: c33edd744b24a4969856286e6004bf8f, type: 3}
   smoothness: 0.9
   metallic: 0
   turbidity: {r: 0, g: 0, b: 0, a: 0}
-  thickness: 1
+  thickness: 8
   indexOfRefraction: 1.33
   diffuseMap: {fileID: 0}
   diffuseColor: {r: 1, g: 1, b: 1, a: 1}
