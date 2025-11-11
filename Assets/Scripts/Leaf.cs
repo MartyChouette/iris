@@ -2,7 +2,7 @@
 using Obi;
 
 [DisallowMultipleComponent]
-public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so NewLeafGrabber can drive it
+public class Leaf : MonoBehaviour, LeafTarget
 {
     [Header("External refs")]
     public SapFxPool sapPool;
@@ -22,13 +22,33 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
     public bool burstOnCollision = true;
     public float collisionBurstCooldown = 0.15f;
 
+    // ---------- Integration controls (to not interfere with 2D leaf systems) ----------
+    [Header("Integration / Cooperation")]
+    [Tooltip("If ON, this script manages Rigidbody states (kinematic/collisions/gravity). Turn OFF to let 2D systems manage physics.")]
+    public bool manageRigidbodyStates = false;   // [ADDED]
+
+    [Tooltip("If ON, disables RopeLeafFollower while the leaf is externally grabbed.")]
+    public bool disableFollowerWhileGrabbed = false; // [ADDED]
+
+    [Tooltip("If ON, while attached & grabbed this script drives transform.position to show stretch. Turn OFF if your 2D leaf script moves it.")]
+    public bool driveTransformWhileAttached = false;  // [ADDED]
+
+    [Tooltip("If ON, when external grab ends and the leaf wasn't torn, follower is re-enabled. Turn OFF if another system will handle it.")]
+    public bool reenableFollowerIfNotTorn = false;    // [ADDED]
+    // -----------------------------------------------------------------------
+
+
     bool _torn;
     float _lastCollisionBurstTime = -999f;
 
-    // ????????? LeafTarget interface support ?????????
+    // LeafTarget support
     Vector3 _grabPlaneNormal;
     Vector3 _handWorld;
     bool _externallyGrabbed;
+
+    // Convenience for other scripts
+    public bool IsTorn => _torn;                    // [ADDED]
+    public bool IsExternallyGrabbed => _externallyGrabbed; // [ADDED]
 
     void Reset()
     {
@@ -41,13 +61,14 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
         _torn = false;
         _externallyGrabbed = false;
 
-        if (rb)
+        if (manageRigidbodyStates && rb) // [CHANGED] gated by toggle
         {
             rb.isKinematic = true;
+            rb.detectCollisions = false;
+            rb.interpolation = RigidbodyInterpolation.None;
             rb.useGravity = false;
-            //rb.linearVelocity = Vector3.zero;          // ? fix
-            //rb.angularVelocity = Vector3.zero;   // ? fix
         }
+
         if (follower) follower.enabled = true;
     }
 
@@ -62,22 +83,15 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
 
         LeafDetachUtil.DetachAllFor(transform);
 
-        if (rb)
+        if (rb && manageRigidbodyStates) // [CHANGED] gated by toggle
         {
-
             rb.isKinematic = false;
             rb.detectCollisions = true;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-
-
-            //if (TryGetComponent(out MeshCollider mc) && !mc.convex) mc.convex = true;
-            //rb.isKinematic = false;
-            //rb.useGravity = true;
-            //rb.linearVelocity = Vector3.zero;
-            //rb.angularVelocity = Vector3.zero;
-            //rb.AddForce(Random.onUnitSphere * 0.6f, ForceMode.Impulse);
+            rb.useGravity = true; // [ADDED] ensure gravity after tear
+            rb.AddForce(Random.onUnitSphere * 0.1f, ForceMode.Impulse);
         }
 
         // spawn sap at the rope particle this leaf was riding, if available
@@ -95,12 +109,10 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
         }
         if (sapPool) sapPool.Play(pos, nrm, rope ? rope.transform : null, sapLifetime);
 
-        // auto-return to pool after a short while
-        Invoke(nameof(ReturnToPool), 2.5f);
+        // NOTE: pool return is intentionally not automatic here to avoid interference.
+        // If you need it, call ReturnToPool() from your 2D system at the right time.
+        //Invoke(nameof(ReturnToPool), 2.5f);
     }
-
-
-
 
     void ReturnToPool()
     {
@@ -114,9 +126,10 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
         _externallyGrabbed = true;
         _grabPlaneNormal = planeNormal;
 
-        // while attached, let the player �stretch� the leaf:
-        if (!_torn && follower) follower.enabled = false;
-        // physics stays kinematic until torn; we drive transform directly
+        if (disableFollowerWhileGrabbed && !_torn && follower) // [CHANGED] gated by toggle
+            follower.enabled = false;
+
+        // physics stays kinematic until torn; transform drive is optional (see SetExternalHand)
     }
 
     public void SetExternalHand(Vector3 handWorld)
@@ -125,13 +138,13 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
 
         if (!_torn)
         {
-            // show stretch while still attached
-            transform.position = _handWorld;
+            // show stretch while still attached, only if allowed
+            if (driveTransformWhileAttached) // [ADDED] cooperate with 2D mover
+                transform.position = _handWorld;
         }
         else
         {
-            // post-tear: if you want it to stay in hand, you could also set position here
-            // (your grabber currently releases right after TearOff, so this is fine)
+            // post-tear: let 2D system decide; don't force-move here
         }
     }
 
@@ -141,11 +154,11 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
 
         if (!_torn)
         {
-            // snap back to following if it wasn't torn
-            if (follower) follower.enabled = true;
+            // snap back to following if it wasn't torn, but only if desired
+            if (reenableFollowerIfNotTorn && follower) // [CHANGED] gated by toggle
+                follower.enabled = true;
 
-            // zero physics just in case
-            if (rb)
+            if (rb && manageRigidbodyStates) // [CHANGED] gated by toggle
             {
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
@@ -153,7 +166,7 @@ public class Leaf : MonoBehaviour, LeafTarget   // ? implement LeafTarget so New
         }
         else
         {
-            // already dynamic
+            // already dynamic; let other systems take over
         }
     }
 

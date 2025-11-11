@@ -1,8 +1,11 @@
 ﻿// File: Leaf3D_PullBreak.cs
 // Unity 6 + Obi 7 (safe init + stay-in-hand + timed lifetime after release)
 
+using System;
 using UnityEngine;
 using Obi;
+using System.Collections;
+using Object = UnityEngine.Object;
 
 [DefaultExecutionOrder(32000)]
 [DisallowMultipleComponent]
@@ -17,6 +20,23 @@ public class Leaf3D_PullBreak : MonoBehaviour
     public Rigidbody rb;
     public SapFxPool sapPool;
     public Camera cam;
+
+        
+
+    public event Action<Leaf3D_PullBreak> OnDetached;   // raise when the leaf actually pops
+    [Header("Sap emit override (optional)")]
+    public Transform sapEmitOverride;                   // if set, use this as sap origin
+
+    [Header("Auto-cull (optional)")]
+    public bool enableAutoCull = false;
+    public float autoCullDistance = 20f;
+    public Transform autoCullOrigin; // if null, will use Camera.main.transform when available
+
+
+[Header("Detach cleanup")]
+    [Tooltip("When the leaf is plucked, remove any ObiParticleAttachment components that still reference this particle.")]
+    public bool deleteAttachmentsOnDetach = true;  // [ADDED]
+
 
     [Header("Break tuning")]
     [Min(0.001f)] public float breakDistance = 0.12f;     // meters
@@ -35,18 +55,33 @@ public class Leaf3D_PullBreak : MonoBehaviour
     [Header("Arming (prevents instant break on spawn)")]
     [Tooltip("Must come within this distance of the pin once before breaking is allowed.")]
     public float armThreshold = 0.03f;          // < breakDistance
+    [Header("Detach timing (visual tug)")]
+    [Tooltip("If ON, keep the Obi attachment alive for a brief moment after break is triggered, so you can see the tug before it releases.")]
+    public bool useReleaseDelay = true;        // [ADDED]
+    [Min(0f)] public float releaseDelaySeconds = 0.08f; // [ADDED]
+    public float distForBreak = 0.8f;
+    public float breakDeadZone = 0.08f;
+    public bool requireGrabToBreak = true;
+    public bool armOnProximity = false;
+
 
     [Header("Debug")]
     public bool debug = true;
+    // runtime
+    Coroutine _releaseDelayCo;                  // [ADDED]
+    bool _breakQueued;                          // [ADDED]
 
     // runtime
     bool _detached, _armed, _grabbed, _initDone, _solverReady;
     int _solverIndex = -1;
     float _beyondTimer, _attachedSince, _lastCollisionSap = -999f;
     Vector3 _anchorAtGrab, _hand;
+    public bool autoDespawnAfterDrop;
 
     void Awake()
     {
+        if (!autoCullOrigin && cam) autoCullOrigin = cam.transform;
+
         if (!rope) rope = GetComponentInParent<ObiRope>();
         if (!attachment) attachment = GetComponent<ObiParticleAttachment>();
         if (!rb) rb = GetComponent<Rigidbody>();
@@ -77,6 +112,9 @@ public class Leaf3D_PullBreak : MonoBehaviour
 
     void OnDisable()
     {
+        if (_releaseDelayCo != null) { StopCoroutine(_releaseDelayCo); _releaseDelayCo = null; }
+        _breakQueued = false;
+
         if (rope != null)
             rope.OnSimulationStart -= Rope_OnSimulationStart;
 
@@ -85,6 +123,7 @@ public class Leaf3D_PullBreak : MonoBehaviour
         _armed = false;
         _beyondTimer = 0f;
     }
+
 
     // Called each time the solver starts stepping (safe time to touch solver lists)
     void Rope_OnSimulationStart(ObiActor actor, float step, float substep)
@@ -132,12 +171,40 @@ public class Leaf3D_PullBreak : MonoBehaviour
 
         if (debug) Debug.Log($"[LeafBreak] dist={dist:F3}/{breakDistance} armed={_armed} grabbed={_grabbed}", this);
 
-        if (dist >= breakDistance)
+        if (distForBreak >= breakDistance)
         {
             _beyondTimer += Time.deltaTime;
-            if (_beyondTimer >= breakDwellSeconds) DetachNow();
+            if (_beyondTimer >= breakDwellSeconds)
+            {
+                // [CHANGED] queue delayed release so the attachment still tugs for a beat
+                if (!_detached && !_breakQueued)
+                {
+                    if (useReleaseDelay && releaseDelaySeconds > 25f)
+                    {
+                        _breakQueued = true;
+                        _releaseDelayCo = StartCoroutine(ReleaseAfterDelay()); // [ADDED]
+                        if (debug) Debug.Log($"[LeafBreak] Break queued; releasing in {releaseDelaySeconds:0.###}s", this);
+                    }
+                    else
+                    {
+                        DoActualDetachNow(); // [ADDED] calls your old detach body
+                    }
+                }
+            }
         }
-        else _beyondTimer = 0f;
+        else
+        {
+            _beyondTimer = 0f;
+        }
+
+        // simple self-cull when detached and not held
+        if (enableAutoCull && _detached && !_grabbed && autoCullOrigin)
+        {
+            if (Vector3.Distance(autoCullOrigin.position, transform.position) > autoCullDistance)
+                Destroy(gameObject);
+        }
+
+
     }
 
     // ===== Optional public hooks for your LMB grabber =====
@@ -186,6 +253,7 @@ public class Leaf3D_PullBreak : MonoBehaviour
         _grabbed = false;
 
         // If already torn and we kept it kinematic in-hand, hand control to physics now.
+        // Inside EndGrab(), when you switch from kinematic to dynamic:
         if (_detached && rb)
         {
             rb.isKinematic = false;
@@ -193,19 +261,41 @@ public class Leaf3D_PullBreak : MonoBehaviour
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            rb.useGravity = true;                  // [ADDED] enable gravity when you let go
 
-            if (holdLifetimeAfterRelease > 0f)
+            if (autoDespawnAfterDrop && holdLifetimeAfterRelease > 25f)
                 Destroy(gameObject, holdLifetimeAfterRelease);
         }
+
+    }
+    IEnumerator ReleaseAfterDelay() // [ADDED]
+    {
+        // Still attached during this wait -> solver shows the tug visually.
+        float t = 0f;
+        while (t < releaseDelaySeconds)
+        {
+            // If something force-drops/disable occurs, bail safely
+            if (_detached || attachment == null || !attachment.enabled) break;
+            t += Time.deltaTime;
+            yield return null;
+        }
+        DoActualDetachNow();        // perform the real detach
     }
 
-    // ===== Detach =====
-    void DetachNow()
+    void DoActualDetachNow() // [ADDED] <- this is your previous DetachNow() body
     {
         if (_detached) return;
         _detached = true;
+        _breakQueued = false;
+        _releaseDelayCo = null;
 
-        // Disable local attachment OR remove just our particle from shared group
+        // protect from parent cleanup + (optional) clear attachments referencing this actor
+        transform.SetParent(null, true);
+
+        // If you had the "delete attachments on detach" flow, keep it here:
+        // if (deleteAttachmentsOnDetach && rope != null) RemoveActorFromAllAttachments(rope, actorIndex);
+
+        // --- begin: original DetachNow() body ---
         if (attachment.gameObject == gameObject)
         {
             attachment.enabled = false;
@@ -225,16 +315,17 @@ public class Leaf3D_PullBreak : MonoBehaviour
         {
             if (stayInHandAfterBreak && _grabbed)
             {
-                // keep in hand (still kinematic) until EndGrab()
+                rb.useGravity = false; // stays in hand
             }
             else
             {
                 rb.isKinematic = false;
                 rb.detectCollisions = true;
                 rb.interpolation = RigidbodyInterpolation.Interpolate;
+                rb.useGravity = true;  // gravity once free
             }
 
-            rb.linearVelocity = Vector3.zero;          // safe now (dynamic or will be when released)
+            rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.AddForce(breakImpulse, ForceMode.VelocityChange);
 
@@ -244,12 +335,35 @@ public class Leaf3D_PullBreak : MonoBehaviour
 
         if (sapPool)
         {
+            Vector3 emitPos = sapEmitOverride ? sapEmitOverride.position : transform.position;
             Vector3 n = cam ? -cam.transform.forward : Vector3.up;
-            sapPool.Play(transform.position, n);
+            sapPool.Play(emitPos, n);
         }
+        OnDetached?.Invoke(this); // notify grabber for freeze juice
 
-        if (debug) Debug.Log("[LeafBreak] DETACHED", this);
+
+        if (debug) Debug.Log("[LeafBreak] DETACHED (after delay)", this);
+        // --- end: original DetachNow() body ---
     }
+
+
+    // ===== Detach =====
+    void DetachNow() // [CHANGED] wrapper; keeps public API but routes through delay
+    {
+        if (_detached || _breakQueued) return;
+
+        if (useReleaseDelay && releaseDelaySeconds > 0f)
+        {
+            _breakQueued = true;
+            _releaseDelayCo = StartCoroutine(ReleaseAfterDelay());
+            if (debug) Debug.Log($"[LeafBreak] Break queued; releasing in {releaseDelaySeconds:0.###}s", this);
+        }
+        else
+        {
+            DoActualDetachNow();
+        }
+    }
+
 
     // ===== Collision sap after detach =====
     void OnCollisionEnter(Collision c)
@@ -273,6 +387,8 @@ public class Leaf3D_PullBreak : MonoBehaviour
         sapPool.Play(pos, n.sqrMagnitude > 1e-6f ? n.normalized : Vector3.up);
     }
 
+
+
     // ===== Helpers =====
     void TryArmByProximity()
     {
@@ -288,6 +404,52 @@ public class Leaf3D_PullBreak : MonoBehaviour
         }
     }
 
+    // [ADDED] Remove this actor index from ALL ObiParticleAttachments under the rope hierarchy.
+    // Destroys the attachment component if its group becomes empty.
+    static void RemoveActorFromAllAttachments(ObiRope rope, int actorIdx)
+    {
+        if (rope == null || actorIdx < 0) return;
+
+        var attachments = rope.GetComponentsInChildren<ObiParticleAttachment>(true);
+        int totalHits = 0, totalRemoved = 0, totalDestroyed = 0;
+
+        foreach (var a in attachments)
+        {
+            if (a == null || a.particleGroup == null || a.particleGroup.particleIndices == null) continue;
+
+            var list = a.particleGroup.particleIndices;
+            if (list.Contains(actorIdx))
+            {
+                totalHits++;
+                // remove all occurrences (safety)
+                for (int i = list.Count - 1; i >= 0; --i)
+                {
+                    if (list[i] == actorIdx) { list.RemoveAt(i); totalRemoved++; }
+                }
+
+                // if empty, kill the attachment component itself
+                if (list.Count == 0)
+                {
+                    // Disable first for safety, then destroy the component (not the GO):
+                    a.enabled = false;
+                    Object.Destroy(a);
+                    totalDestroyed++;
+                }
+                else
+                {
+                    // still has other particles pinned; just mark constraints dirty
+                    a.enabled = true;
+                }
+            }
+        }
+
+        rope.SetConstraintsDirty(Oni.ConstraintType.Pin);
+
+        // optional: debug summary
+        // Debug.Log($"[LeafBreak] Attachments cleaned: hits={totalHits}, indicesRemoved={totalRemoved}, compsDestroyed={totalDestroyed}");
+    }
+
+    // (kept for local single-attachment path; used elsewhere in your code)
     static void RemoveActorFromAttachmentGroup(ObiParticleAttachment a, int actorIdx)
     {
         if (a == null || a.particleGroup == null || a.particleGroup.particleIndices == null) return;
@@ -295,6 +457,7 @@ public class Leaf3D_PullBreak : MonoBehaviour
         for (int i = list.Count - 1; i >= 0; --i)
             if (list[i] == actorIdx) list.RemoveAt(i);
     }
+
 
     static bool GroupContains(ObiParticleAttachment a, int actorIdx)
     {
@@ -330,5 +493,25 @@ public class Leaf3D_PullBreak : MonoBehaviour
             return s.transform.TransformPoint((Vector3)s.positions[solverIdx]);
 #endif
         return Vector3.zero;
+    }
+
+    public void ConfigureFromGrabber(
+        float giveDeadZone, float popDistance, float dwellSeconds,
+        bool useDelay, float delaySeconds,
+        bool stayInHand, float despawnAfterDropSeconds)
+    {
+        breakDeadZone = Mathf.Max(0f, giveDeadZone);
+        breakDistance = Mathf.Max(0.001f, popDistance);
+        breakDwellSeconds = Mathf.Max(0f, dwellSeconds);
+
+        useReleaseDelay = useDelay;
+        releaseDelaySeconds = Mathf.Max(0f, delaySeconds);
+
+        stayInHandAfterBreak = stayInHand;
+        holdLifetimeAfterRelease = Mathf.Max(0f, despawnAfterDropSeconds);
+
+        // distance-only: require grab, don’t arm on proximity
+        requireGrabToBreak = true;
+        armOnProximity = false;
     }
 }
