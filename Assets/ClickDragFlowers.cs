@@ -166,38 +166,38 @@ public class ClickDragFlowers : MonoBehaviour
 
     // simple on-screen debug HUD
     // Replace your OnGUI() with this:
-    void OnGUI()
-    {
-        int startX = Mathf.RoundToInt(Screen.width * hudAnchorX) + hudPad;
-        int startY = Mathf.RoundToInt(Screen.height * hudAnchorY) + hudPad;
+    //void OnGUI()
+    //{
+    //    int startX = Mathf.RoundToInt(Screen.width * hudAnchorX) + hudPad;
+    //    int startY = Mathf.RoundToInt(Screen.height * hudAnchorY) + hudPad;
 
-        int y = startY;
-        int line = hudLine;
+    //    int y = startY;
+    //    int line = hudLine;
 
-        // faint backdrop
-        var rect = new Rect(startX - hudPad, startY - hudPad, hudWidth + hudPad * 2, line * 6 + hudPad * 2);
-        Color old = GUI.color;
-        GUI.color = new Color(0, 0, 0, 0.35f);
-        GUI.DrawTexture(rect, Texture2D.whiteTexture);
-        GUI.color = old;
+    //    // faint backdrop
+    //    var rect = new Rect(startX - hudPad, startY - hudPad, hudWidth + hudPad * 2, line * 6 + hudPad * 2);
+    //    Color old = GUI.color;
+    //    GUI.color = new Color(0, 0, 0, 0.35f);
+    //    GUI.DrawTexture(rect, Texture2D.whiteTexture);
+    //    GUI.color = old;
 
-        GUI.Label(new Rect(startX, y, hudWidth, line), $"[RMB_Drag3D] cam={(cam ? cam.name : "<null>")}"); y += line;
-        GUI.Label(new Rect(startX, y, hudWidth, line), _grabbed ? $"Dragging: {_grabbed.name}" : "Dragging: <none>"); y += line;
-        GUI.Label(new Rect(startX, y, hudWidth, line),
-            string.IsNullOrEmpty(_lastHitName) ? "Last Hit: <none>"
-                : $"Last Hit: {_lastHitName} (layer {_lastLayer}) @ {_lastHitPoint}");
-        y += line;
+    //    GUI.Label(new Rect(startX, y, hudWidth, line), $"[RMB_Drag3D] cam={(cam ? cam.name : "<null>")}"); y += line;
+    //    GUI.Label(new Rect(startX, y, hudWidth, line), _grabbed ? $"Dragging: {_grabbed.name}" : "Dragging: <none>"); y += line;
+    //    GUI.Label(new Rect(startX, y, hudWidth, line),
+    //        string.IsNullOrEmpty(_lastHitName) ? "Last Hit: <none>"
+    //            : $"Last Hit: {_lastHitName} (layer {_lastLayer}) @ {_lastHitPoint}");
+    //    y += line;
 
-        if (!string.IsNullOrEmpty(_lastWhy))
-        {
-            GUI.color = Color.yellow;
-            GUI.Label(new Rect(startX, y, hudWidth, line), $"Why no grab: {_lastWhy}");
-            GUI.color = old;
-            y += line;
-        }
+    //    if (!string.IsNullOrEmpty(_lastWhy))
+    //    {
+    //        GUI.color = Color.yellow;
+    //        GUI.Label(new Rect(startX, y, hudWidth, line), $"Why no grab: {_lastWhy}");
+    //        GUI.color = old;
+    //        y += line;
+    //    }
 
-        GUI.Label(new Rect(startX, y, hudWidth, line),
-            $"Mask: {dragMask.value}  | includeTriggers={includeTriggers}  | rayRadius={rayRadius}");
-    }
+    //    GUI.Label(new Rect(startX, y, hudWidth, line),
+    //        $"Mask: {dragMask.value}  | includeTriggers={includeTriggers}  | rayRadius={rayRadius}");
+    //}
 
 }

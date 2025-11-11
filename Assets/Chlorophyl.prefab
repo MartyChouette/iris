@@ -57,7 +57,7 @@ MonoBehaviour:
   m_MassScale: 1
   emitterBlueprint: {fileID: 11400000, guid: eae3f4de6f75a4bef942d5ef885b4677, type: 2}
   filter: -65534
-  emissionMethod: 0
+  emissionMethod: 1
   minPoolSize: 0.934
   speed: 8
   lifespan: 8

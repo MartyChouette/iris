@@ -1,5 +1,6 @@
-// File: RopeLeafFollower_Stable.cs  (fixed)
-// Same behavior; only change is the head-index helper signature/impl.
+﻿// File: RopeLeafFollower_SimplePin.cs
+// Follow the exact pinned particle (from ObiParticleAttachment) + preserve authored offset.
+// No rotation changes. Robust to solver not-yet-ready. Minimal moving parts.
 
 using UnityEngine;
 using Obi;
@@ -8,166 +9,161 @@ using Obi;
 [DisallowMultipleComponent]
 public class RopeParticleFollowers : MonoBehaviour
 {
-    [Header("Rope & camera")]
-    public ObiRopeBase rope;
-    public Camera cam;
+    [Header("Refs")]
+    public ObiRopeBase rope;                         // your stem rope/rod
+    [Tooltip("If present, we'll auto-read the first particle index from this attachment.")]
+    public ObiParticleAttachment attachment;         // usually on the leaf itself
 
-    [Header("Segment selection")]
-    public int actorIndex = 1;
-    public Transform flowerHead;
+    [Header("Binding")]
+    [Tooltip("Use the first index in the Attachment's particleGroup on Start/when solver loads.")]
+    public bool autoDetectFromAttachment = true;
 
-    [Header("Placement / feel")]
-    public float radial = 0.5f;
+    [Tooltip("Actor-space particle index. Ignored if autoDetectFromAttachment is true and an attachment is provided.")]
+    public int actorIndex = -1;                      // -1 = not set
+
+    [Header("Offset / Feel")]
+    [Tooltip("Captured automatically at first valid frame: leafPose - pinWorld.")]
+    public Vector3 authoredOffset = Vector3.zero;    // you can tweak in Inspector after play starts
+    [Tooltip("Extra nudge applied on top of authoredOffset.")]
+    public Vector3 extraOffsetWorld = Vector3.zero;
+    [Tooltip("Higher = snappier follow. 0 disables smoothing (teleports).")]
     public float posLerp = 30f;
-    public float rotLerp = 18f;
-    public float side = +1f;
 
-    [Header("Leaf local axes")]
-    public Vector3 localOut = Vector3.right;
-    public Vector3 localUp = Vector3.forward;
+    [Header("Rebind / Robustness")]
+    [Tooltip("If we temporarily lose validity (cut/split), try to rebind from the attachment (or keep last actorIndex).")]
+    public bool autoRebindWhenInvalid = true;
 
-    [Header("Cut/tear robustness")]
-    public bool autoRebind = true;
-    public float rebindSearchRadius = 0.15f;
+    [Header("Debug")]
+    public bool debug = false;
 
-    Quaternion _baseMap;
-    Vector3 _baseLocalUp;
-    bool _following = true;
+    // ── runtime ──
+    bool _offsetCaptured = false;
+    bool _everValid = false;
 
-    void Reset() { rope = GetComponentInParent<ObiRopeBase>(); }
+    void Reset()
+    {
+        rope = GetComponentInParent<ObiRopeBase>();
+        attachment = GetComponent<ObiParticleAttachment>();
+    }
 
     void Awake()
     {
-        if (!cam) cam = Camera.main;
-        _baseLocalUp = localUp;
-        _baseMap = Quaternion.Inverse(Quaternion.LookRotation(localUp, localOut));
+        if (!rope) rope = GetComponentInParent<ObiRopeBase>();
+        if (!attachment) attachment = GetComponent<ObiParticleAttachment>();
     }
 
-    public void StopFollowing() => _following = false;
-    public void StartFollowing() => _following = true;
+    void OnEnable()
+    {
+        if (rope != null)
+            rope.OnSimulationStart += OnSimStart; // fired when solver steps → safe to bind
+    }
 
-    void OnEnable() { if (rope != null) rope.OnSimulationStart += OnSimStart; }
-    void OnDisable() { if (rope != null) rope.OnSimulationStart -= OnSimStart; }
+    void OnDisable()
+    {
+        if (rope != null)
+            rope.OnSimulationStart -= OnSimStart;
+        _offsetCaptured = false;
+        _everValid = false;
+    }
 
-    void OnSimStart(ObiActor a, float step, float substep) { ClampActorIndex(); }
+    void OnSimStart(ObiActor a, float step, float substep)
+    {
+        TryAutoDetectActorIndex();
+        // We'll capture the offset in LateUpdate once the first valid pin world position exists.
+    }
+
+    void Start()
+    {
+        TryAutoDetectActorIndex(); // safety if solver already running
+    }
+
+    void TryAutoDetectActorIndex()
+    {
+        if (!autoDetectFromAttachment || attachment == null) return;
+
+        var grp = attachment.particleGroup;
+        if (grp != null && grp.particleIndices != null && grp.particleIndices.Count > 0)
+        {
+            actorIndex = grp.particleIndices[0];
+            if (debug) Debug.Log($"[LeafFollower] Auto actorIndex = {actorIndex}", this);
+        }
+    }
 
     void LateUpdate()
     {
-        if (!_following || rope == null || rope.solver == null) return;
-
-        var s = rope.solver;
-        var si = rope.solverIndices;
-        var rp = s.renderablePositions;
-        int n = rope.activeParticleCount;
-
-        if (si == null || rp == null || n < 2) return;
-
-        ClampActorIndex();
-
-        // head-avoid using new helper (no NativeList in signature)
-        int headActor = EstimateHeadIndexFromRope(rope, flowerHead);
-        if (headActor >= 0)
-        {
-            if (actorIndex == headActor - 1) actorIndex = Mathf.Clamp(actorIndex - 1, 0, n - 2);
-            if (actorIndex >= headActor) actorIndex = Mathf.Clamp(headActor - 2, 0, n - 2);
-        }
-
-        if (si.count <= actorIndex + 1) return;
-
-        int siA = si[actorIndex];
-        int siB = si[actorIndex + 1];
-        if (!Valid(siA, rp.count) || !Valid(siB, rp.count))
-        {
-            if (autoRebind) TryRebindToNearestSegment();
-            return;
-        }
-
-        Vector3 pA = s.transform.TransformPoint((Vector3)rp[siA]);
-        Vector3 pB = s.transform.TransformPoint((Vector3)rp[siB]);
-        Vector3 mid = 0.5f * (pA + pB);
-
-        Vector3 tangent = pB - pA;
-        if (tangent.sqrMagnitude < 1e-9f) tangent = Vector3.up; else tangent.Normalize();
-
-        Vector3 viewRight = cam ? cam.transform.right : Vector3.right;
-        Vector3 rightProj = Vector3.ProjectOnPlane(viewRight, tangent).normalized;
-        if (rightProj.sqrMagnitude < 1e-9f) rightProj = Vector3.Cross(Vector3.up, tangent).normalized;
-
-        Vector3 outDir = rightProj * Mathf.Sign(side);
-        Vector3 targetPos = mid + outDir * radial;
-
-        transform.position = Vector3.Lerp(transform.position, targetPos, 1f - Mathf.Exp(-posLerp * Time.deltaTime));
-
-        float ySign = Mathf.Sign(side) >= 0f ? 1f : -1f;
-        Vector3 signedLocalUp = new Vector3(_baseLocalUp.x, Mathf.Abs(_baseLocalUp.y) * ySign, _baseLocalUp.z);
-        Quaternion mapNow = Quaternion.Inverse(Quaternion.LookRotation(signedLocalUp, localOut));
-        Quaternion worldAim = Quaternion.LookRotation(tangent, outDir);
-        Quaternion targetRot = worldAim * mapNow;
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 1f - Mathf.Exp(-rotLerp * Time.deltaTime));
-    }
-
-    void ClampActorIndex()
-    {
-        int n = rope.activeParticleCount;
-        actorIndex = Mathf.Clamp(actorIndex, 0, Mathf.Max(0, n - 2));
-    }
-
-    static bool Valid(int idx, int count) => idx >= 0 && idx < count;
-
-    // --- FIX: no NativeList<> in parameters; pull data from rope/solver directly.
-    int EstimateHeadIndexFromRope(ObiRopeBase r, Transform head)
-    {
-        if (r == null || r.solver == null || head == null) return -1;
-
-        var s = r.solver;
-        var si = r.solverIndices;
-        var rp = s.renderablePositions;
-        int n = r.activeParticleCount;
-
-        if (si == null || rp == null || n <= 0) return -1;
-
-        float best = float.PositiveInfinity;
-        int bestActor = -1;
-
-        for (int i = 0; i < n; i++)
-        {
-            int svi = si[i];
-            if (!Valid(svi, rp.count)) continue;
-            Vector3 p = s.transform.TransformPoint((Vector3)rp[svi]);
-            float d2 = (p - head.position).sqrMagnitude;
-            if (d2 < best) { best = d2; bestActor = i; }
-        }
-        return bestActor;
-    }
-
-    void TryRebindToNearestSegment()
-    {
         if (rope == null || rope.solver == null) return;
 
-        var s = rope.solver;
-        var rp = s.renderablePositions;
-        var si = rope.solverIndices;
-        if (rp == null || si == null) return;
-
-        float best = rebindSearchRadius * rebindSearchRadius;
-        int bestI = -1;
-
-        int n = rope.activeParticleCount;
-        for (int i = 0; i < n - 1; i++)
+        int solverIndex = ActorToSolverIndex(rope, actorIndex);
+        if (!ValidSolverIndex(rope, solverIndex))
         {
-            int a = si[i];
-            int b = si[i + 1];
-            if (!Valid(a, rp.count) || !Valid(b, rp.count)) continue;
-
-            Vector3 pA = s.transform.TransformPoint((Vector3)rp[a]);
-            Vector3 pB = s.transform.TransformPoint((Vector3)rp[b]);
-            Vector3 mid = 0.5f * (pA + pB);
-
-            float d2 = (mid - transform.position).sqrMagnitude;
-            if (d2 < best) { best = d2; bestI = i; }
+            if (debug && _everValid) Debug.Log("[LeafFollower] Lost validity; attempting rebind…", this);
+            if (autoRebindWhenInvalid)
+            {
+                // Try refresh from attachment again (handles cuts where groups are updated externally)
+                TryAutoDetectActorIndex();
+                solverIndex = ActorToSolverIndex(rope, actorIndex);
+                if (!ValidSolverIndex(rope, solverIndex)) return; // still invalid; wait for next frame
+            }
+            else return;
         }
 
-        if (bestI >= 0) actorIndex = bestI;
+        _everValid = true;
+
+        Vector3 pinWorld = GetParticleWorld(rope, solverIndex);
+
+        // Capture your original offset once (from current pose)
+        if (!_offsetCaptured)
+        {
+            authoredOffset = transform.position - pinWorld;
+            _offsetCaptured = true;
+            if (debug) Debug.Log($"[LeafFollower] Captured offset = {authoredOffset}", this);
+        }
+
+        Vector3 target = pinWorld + authoredOffset + extraOffsetWorld;
+
+        float k = (posLerp <= 0f) ? 1f : (1f - Mathf.Exp(-posLerp * Time.deltaTime));
+        transform.position = Vector3.Lerp(transform.position, target, k);
+        // Intentionally never touch rotation.
+    }
+
+    // ── helpers ──
+
+    static int ActorToSolverIndex(ObiRopeBase r, int actorIdx)
+    {
+        if (r == null || actorIdx < 0) return -1;
+#if OBI_NATIVE_COLLECTIONS
+        return (actorIdx < r.solverIndices.count) ? r.solverIndices[actorIdx] : -1;
+#else
+        return (r.solverIndices != null && actorIdx < r.solverIndices.count) ? r.solverIndices[actorIdx] : -1;
+#endif
+    }
+
+    static bool ValidSolverIndex(ObiRopeBase r, int solverIdx)
+    {
+        if (r == null || r.solver == null || solverIdx < 0) return false;
+#if OBI_NATIVE_COLLECTIONS
+        return solverIdx < r.solver.renderablePositions.count || solverIdx < r.solver.positions.count;
+#else
+        var s = r.solver;
+        return (s.renderablePositions != null && solverIdx < s.renderablePositions.count) ||
+               (s.positions != null && solverIdx < s.positions.count);
+#endif
+    }
+
+    static Vector3 GetParticleWorld(ObiRopeBase r, int solverIdx)
+    {
+        var s = r.solver;
+#if OBI_NATIVE_COLLECTIONS
+        if (s.renderablePositions.count > solverIdx)
+            return s.transform.TransformPoint((Vector3)s.renderablePositions[solverIdx]);
+        if (s.positions.count > solverIdx)
+            return s.transform.TransformPoint((Vector3)s.positions[solverIdx]);
+#else
+        if (s.renderablePositions != null && s.renderablePositions.count > solverIdx)
+            return s.transform.TransformPoint((Vector3)s.renderablePositions[solverIdx]);
+        if (s.positions != null && s.positions.count > solverIdx)
+            return s.transform.TransformPoint((Vector3)s.positions[solverIdx]);
+#endif
+        return r.transform.position; // fallback
     }
 }

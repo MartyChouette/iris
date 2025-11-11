@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Obi;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,6 +66,9 @@ public class NewLeafGrabber : MonoBehaviour
     bool _pendingGrab;         // clicked but not pulled far enough yet
     Vector3 _grabOffset;       // keep zero snap at grab start
 
+    public StemParticleTugger stemTugger;     // assign in Inspector (same stem rope)
+    public float tugSearchRadius = 0.2f;      // how far from pin to pick the particle
+
     void Awake()
     {
         if (!cam) cam = Camera.main;
@@ -74,6 +78,7 @@ public class NewLeafGrabber : MonoBehaviour
     void OnDisable()
     {
         UnsubscribeBreakEvent();
+        if (stemTugger != null) stemTugger.StopTug();   // ensure tug ends if we disable mid-grab
     }
 
     void Update()
@@ -132,6 +137,15 @@ public class NewLeafGrabber : MonoBehaviour
 
                     _leaf3D.BeginGrab(_anchor);
                     _grabOffset = _leaf3D.transform.position - target;
+
+                    // >>> START STEM TUG right when grab truly begins <<<
+                    if (stemTugger != null && _leaf3D.rope is ObiRope stemRope)
+                    {
+                        Vector3 pinWorld = _anchor;
+                        int solverIdx = FindNearestStemSolverParticle(stemRope, pinWorld, tugSearchRadius);
+                        if (solverIdx >= 0)
+                            stemTugger.StartTugBySolverIndex(solverIdx, pinWorld);
+                    }
                 }
                 else
                 {
@@ -145,26 +159,22 @@ public class NewLeafGrabber : MonoBehaviour
             // actively dragging
             if (_leaf3D != null && _leaf3D.enabled)
             {
-                // drive 3D hand with preserved offset so there’s no jump
                 _leaf3D.SetHand(target + _grabOffset);
 
-                // optional safety cull while dragging (if leaf somehow flies away)
-                TryCullCurrentLeaf();
+                if (stemTugger != null) stemTugger.UpdateTarget(target, Time.deltaTime);
 
-                return; // do not run legacy
+                TryCullCurrentLeaf(); // safety
+                return;
             }
 
-            // -------- legacy fallback (no Leaf3D_PullBreak on the hit) --------
+            // -------- legacy fallback --------
             Transform t = _leafLegacy.transform;
-
-            // critically-damped pull
             Vector3 vel = Vector3.zero;
             t.position = Vector3.SmoothDamp(
                 t.position, target, ref vel,
                 Mathf.Max(0.0001f, damping / spring), maxDragSpeed
             );
 
-            // legacy tear logic (guarded so click-only can’t pop)
             float stretch = Vector3.Distance(t.position, _anchor);
             if (stretch >= Mathf.Max(pullToStartGrabDistance, 0f))
             {
@@ -179,9 +189,8 @@ public class NewLeafGrabber : MonoBehaviour
 
                     if (_over >= dwell)
                     {
-                        // legacy “pop”
                         _leafLegacy.TearOff();
-                        DoFreezeJuice(); // apply freeze even in legacy case
+                        DoFreezeJuice();
                         _leafLegacy = null;
                         return;
                     }
@@ -197,15 +206,43 @@ public class NewLeafGrabber : MonoBehaviour
         {
             if (_leaf3D != null)
             {
-                _leaf3D.EndGrab(); // gravity + optional despawn handled inside
-                TryCullCurrentLeaf(); // post-release safety
+                _leaf3D.EndGrab();
+                TryCullCurrentLeaf();
                 UnsubscribeBreakEvent();
+                if (stemTugger != null) stemTugger.StopTug();
                 _leaf3D = null;
             }
 
             _pendingGrab = false;
             _leafLegacy = null;
         }
+    }
+
+    int FindNearestStemSolverParticle(ObiRope rope, Vector3 pinWorld, float radius)
+    {
+        if (rope == null || rope.solver == null) return -1;
+        var s = rope.solver;
+        float bestSqr = radius * radius;
+        int best = -1;
+
+#if OBI_NATIVE_COLLECTIONS
+        int n = s.renderablePositions.count;
+        for (int i = 0; i < n; ++i)
+        {
+            Vector3 p = s.transform.TransformPoint((Vector3)s.renderablePositions[i]);
+            float d2 = (p - pinWorld).sqrMagnitude;
+            if (d2 < bestSqr) { bestSqr = d2; best = i; }
+        }
+#else
+        int n = (s.renderablePositions != null) ? s.renderablePositions.count : 0;
+        for (int i = 0; i < n; ++i)
+        {
+            Vector3 p = s.transform.TransformPoint((Vector3)s.renderablePositions[i]);
+            float d2 = (p - pinWorld).sqrMagnitude;
+            if (d2 < bestSqr) { bestSqr = d2; best = i; }
+        }
+#endif
+        return best;
     }
 
     void TryCullCurrentLeaf()
@@ -218,6 +255,7 @@ public class NewLeafGrabber : MonoBehaviour
         {
             Destroy(_leaf3D.gameObject);
             _leaf3D = null;
+            if (stemTugger != null) stemTugger.StopTug();
         }
     }
 
@@ -232,6 +270,7 @@ public class NewLeafGrabber : MonoBehaviour
     }
     void OnLeaf3DBroke(Leaf3D_PullBreak leaf)
     {
+        if (stemTugger != null) stemTugger.StopTug();
         DoFreezeJuice();
     }
     void DoFreezeJuice()
@@ -242,15 +281,10 @@ public class NewLeafGrabber : MonoBehaviour
     }
     IEnumerator CoFreeze()
     {
-        // freeze (unscaled)
         float prevScale = Time.timeScale;
         Time.timeScale = Mathf.Clamp(freezeTimeScale, 0f, 1f);
         float t = 0f;
-        while (t < freezeDuration)
-        {
-            yield return null;
-            t += Time.unscaledDeltaTime;
-        }
+        while (t < freezeDuration) { yield return null; t += Time.unscaledDeltaTime; }
         Time.timeScale = prevScale;
     }
 
