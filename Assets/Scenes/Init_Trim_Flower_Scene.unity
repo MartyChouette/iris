@@ -747,52 +747,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &60149969
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 60149971}
-  - component: {fileID: 60149970}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &60149970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 60149969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &60149971
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 60149969}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &69259485
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,6 +4013,52 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!1 &1379599648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1379599650}
+  - component: {fileID: 1379599649}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1379599649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379599648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &1379599650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379599648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1384640486
 GameObject:
   m_ObjectHideFlags: 0
@@ -5410,7 +5410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7337c3e564e43ac40857e836d6f2a5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rope: {fileID: 0}
+  rope: {fileID: 6922213306244071900}
   spring: 80
   damper: 10
   maxAccel: 120
@@ -8167,7 +8167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5901967730694254423}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1155d7330cfc18b48be89ec5d948fd4a, type: 3}
   m_Name: 
@@ -8175,7 +8175,7 @@ MonoBehaviour:
   rope: {fileID: 6922213306244071900}
   attachment: {fileID: 64292830128304722}
   autoDetectFromAttachment: 1
-  actorIndex: 3
+  actorIndex: -1
   authoredOffset: {x: 0, y: 0, z: 0}
   extraOffsetWorld: {x: 0, y: 0, z: 0}
   posLerp: 30
@@ -8816,10 +8816,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   notifyLeaves: 1
-  enableAttachmentCleanup: 0
+  enableAttachmentCleanup: 1
   attachmentsToDestroy:
-  - {fileID: 1894694457551867388}
-  - {fileID: 64292830128304722}
+  - {fileID: 2260688756027936254, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
+  - {fileID: -2263478472684624270, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
+  - {fileID: 4580425941286430955, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
+  - {fileID: -7955781227442464827, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
+  - {fileID: 2645566972588118864, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
+  - {fileID: 536863615878172357, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
+  - {fileID: -5454026940720612113, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
   lineMaterial: {fileID: 2100000, guid: 9e52502c19fa72b4691354d54ea51af4, type: 2}
   lineWidth: 0.005
   lineScreenZ: 0.5
@@ -9056,15 +9061,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434951084686169080}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1155d7330cfc18b48be89ec5d948fd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rope: {fileID: 6922213306244071900}
   attachment: {fileID: 64292830128304722}
-  autoDetectFromAttachment: 1
-  actorIndex: 4
+  autoDetectFromAttachment: 0
+  actorIndex: -1
   authoredOffset: {x: 0, y: 0, z: 0}
   extraOffsetWorld: {x: 0, y: 0, z: 0}
   posLerp: 30
@@ -9924,4 +9929,4 @@ SceneRoots:
   - {fileID: 1676970127}
   - {fileID: 193270406}
   - {fileID: 1856937282}
-  - {fileID: 60149971}
+  - {fileID: 1379599650}

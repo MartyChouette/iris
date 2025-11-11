@@ -555,13 +555,61 @@ namespace Obi.Samples
             attachmentsDestroyed = true;
             if (attachmentsToDestroy == null) return;
 
-            foreach (var item in attachmentsToDestroy)
+            // cache every attachment under this rope (active/inactive)
+            var allPins = rope ? rope.GetComponentsInChildren<ObiParticleAttachment>(true) : null;
+
+            foreach (var obj in attachmentsToDestroy)
             {
-                if (!item) continue;
-                if (item is GameObject go) { Destroy(go); continue; }
-                if (item is Component comp) { Destroy(comp); continue; }
+                if (!obj) continue;
+
+                // 1) If they dragged an ObiParticleAttachment directly:
+                if (obj is ObiParticleAttachment pinDirect)
+                {
+                    pinDirect.enabled = false;
+                    Destroy(pinDirect);
+                    continue;
+                }
+
+                // 2) If they dragged a GameObject or any Component, nuke any pins found under it:
+                if (obj is GameObject go)
+                {
+                    foreach (var pin in go.GetComponentsInChildren<ObiParticleAttachment>(true))
+                    {
+                        pin.enabled = false;
+                        Destroy(pin);
+                    }
+                    continue;
+                }
+                if (obj is Component comp)
+                {
+                    foreach (var pin in comp.GetComponentsInChildren<ObiParticleAttachment>(true))
+                    {
+                        pin.enabled = false;
+                        Destroy(pin);
+                    }
+                    continue;
+                }
+
+                // 3) If they dragged an ObiParticleGroup asset (your current screenshot):
+                if (obj is ObiParticleGroup group && allPins != null)
+                {
+                    foreach (var pin in allPins)
+                    {
+                        if (pin != null && pin.particleGroup == group)
+                        {
+                            pin.enabled = false;
+                            Destroy(pin);
+                        }
+                    }
+                    continue;
+                }
             }
+
+            // Tell Obi its pin constraints changed so it rebuilds them.
+            if (rope != null)
+                rope.SetConstraintsDirty(Oni.ConstraintType.Pin);
         }
+
 
         // ====================================================================
         // Helper: map solver index -> actor index for this rope
