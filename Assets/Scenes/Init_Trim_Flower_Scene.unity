@@ -1007,15 +1007,16 @@ MonoBehaviour:
   actorIndex: 4
   attachment: {fileID: 64292830128304722}
   rb: {fileID: 2400603709180242875}
-  sapPool: {fileID: 1780103263}
   cam: {fileID: 1797091330}
   sapEmitOverride: {fileID: 786591492}
+  sapSpawn: {fileID: 786591492}
   sapOnPopPS: {fileID: 0}
   sapOnImpactPS: {fileID: 0}
   sapImpactCooldown: 0.15
   sapObiEmitter: {fileID: 6843405362058283937, guid: 56e6f2c95401937478b8fbe4b5f708a6, type: 3}
   obiBurstSeconds: 0.06
   obiStopExtraDelay: 0.02
+  sapPool: {fileID: 1780103263}
   enableAutoCull: 1
   autoCullDistance: 20
   autoCullOrigin: {fileID: 24610183}
@@ -1031,12 +1032,10 @@ MonoBehaviour:
   armThreshold: 0.03
   useReleaseDelay: 1
   releaseDelaySeconds: 2
-  distForBreak: 1
   breakDeadZone: 0.03
   requireGrabToBreak: 1
   armOnProximity: 0
   debug: 1
-  sapSpawn: {fileID: 786591492}
 --- !u!114 &187312572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4546,22 +4545,23 @@ MonoBehaviour:
   actorIndex: 3
   attachment: {fileID: 64292830128304722}
   rb: {fileID: 2400603709180242875}
-  sapPool: {fileID: 1780103263}
   cam: {fileID: 1797091330}
   sapEmitOverride: {fileID: 1384640487}
+  sapSpawn: {fileID: 1384640487}
   sapOnPopPS: {fileID: 0}
   sapOnImpactPS: {fileID: 0}
   sapImpactCooldown: 0.15
   sapObiEmitter: {fileID: 6843405362058283937, guid: 56e6f2c95401937478b8fbe4b5f708a6, type: 3}
-  obiBurstSeconds: 0.06
-  obiStopExtraDelay: 0.02
+  obiBurstSeconds: 1
+  obiStopExtraDelay: 0.3
+  sapPool: {fileID: 1780103263}
   enableAutoCull: 1
   autoCullDistance: 20
   autoCullOrigin: {fileID: 24610183}
   deleteAttachmentsOnDetach: 1
-  breakDistance: 0.2
+  breakDistance: 0.1
   breakDwellSeconds: 0.03
-  minAttachSeconds: 0.1
+  minAttachSeconds: 0.2
   breakImpulse: {x: 0.8, y: 0.8, z: 0.8}
   stayInHandAfterBreak: 1
   holdLifetimeAfterRelease: 10
@@ -4570,12 +4570,10 @@ MonoBehaviour:
   armThreshold: 0.03
   useReleaseDelay: 1
   releaseDelaySeconds: 2
-  distForBreak: 1
   breakDeadZone: 0.03
   requireGrabToBreak: 1
   armOnProximity: 0
   debug: 1
-  sapSpawn: {fileID: 1384640487}
 --- !u!114 &1545102839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5126,6 +5124,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1761430664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1761430666}
+  - component: {fileID: 1761430665}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1761430665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761430664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &1761430666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761430664}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780103262
 GameObject:
   m_ObjectHideFlags: 0
@@ -5144,6 +5188,7 @@ GameObject:
   - component: {fileID: 1780103273}
   - component: {fileID: 1780103274}
   - component: {fileID: 1780103275}
+  - component: {fileID: 1780103276}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5359,7 +5404,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780103262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7337c3e564e43ac40857e836d6f2a5be, type: 3}
   m_Name: 
@@ -5369,8 +5414,32 @@ MonoBehaviour:
   damper: 10
   maxAccel: 120
   neighborWidth: 2
-  neighborFalloff: 0.65
+  neighborFalloff: 0.217
   minDt: 0.00001
+--- !u!114 &1780103276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780103262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e1240e7b2190d4eb5aa614a95845da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1797091330}
+  rope: {fileID: 6922213306244071900}
+  pointerPositionAction: {fileID: -3578229498329003838, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  pointerPressAction: {fileID: -1428901565342522881, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  pickRadius: 6
+  dragPlaneMask:
+    serializedVersion: 2
+    m_Bits: 64
+  attachmentType: 0
+  compliance: 0.0001
+  constrainOrientation: 0
+  breakDistance: 0
 --- !u!1 &1797091326
 GameObject:
   m_ObjectHideFlags: 0
@@ -5517,52 +5586,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 8, y: 90, z: 0}
---- !u!1 &1843981820
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1843981822}
-  - component: {fileID: 1843981821}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1843981821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843981820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &1843981822
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843981820}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1856937281
 GameObject:
   m_ObjectHideFlags: 0
@@ -7965,7 +7988,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5901967730694254423}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
   m_Name: 
@@ -8005,7 +8028,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5901967730694254423}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
   m_Name: 
@@ -8176,6 +8199,8 @@ MonoBehaviour:
   actorIndex: 4
   smooth: 1
   posLerp: 30
+  autoRebindToNearestValid: 1
+  rebindScanRadius: 8
   rebindKey: 0
 --- !u!33 &6550379366120203833
 MeshFilter:
@@ -8854,7 +8879,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434951084686169080}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
   m_Name: 
@@ -8894,7 +8919,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434951084686169080}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
   m_Name: 
@@ -9065,6 +9090,8 @@ MonoBehaviour:
   actorIndex: 3
   smooth: 1
   posLerp: 30
+  autoRebindToNearestValid: 1
+  rebindScanRadius: 8
   rebindKey: 0
 --- !u!1 &7219463156094289854
 GameObject:
@@ -9287,6 +9314,7 @@ GameObject:
   - component: {fileID: 187312572}
   - component: {fileID: 187312571}
   - component: {fileID: 8114735299940081167}
+  - component: {fileID: 8114735299940081168}
   m_Layer: 6
   m_Name: Leaf_L
   m_TagString: Untagged
@@ -9307,6 +9335,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kinematicForParticles: 0
+--- !u!114 &8114735299940081168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8114735299940081166}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1155d7330cfc18b48be89ec5d948fd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rope: {fileID: 6922213306244071900}
+  actorIndex: 3
+  smooth: 1
+  posLerp: 24
+  autoRebindToNearestValid: 1
+  rebindScanRadius: 8
+  rebindKey: 278
 --- !u!1 &8117565947915230396
 GameObject:
   m_ObjectHideFlags: 0
@@ -9920,4 +9967,4 @@ SceneRoots:
   - {fileID: 1676970127}
   - {fileID: 193270406}
   - {fileID: 1856937282}
-  - {fileID: 1843981822}
+  - {fileID: 1761430666}

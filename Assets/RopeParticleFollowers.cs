@@ -1,15 +1,12 @@
 ﻿// File: RopeParticleFollowerInitialOffset.cs
-// Follows an Obi rope particle, preserving the initial world-space offset.
-// Place your object in the scene where you want it relative to the rope,
-// set rope + actorIndex, and it will stick with that initial offset.
-// Works without subscribing to solver events.
+// Follow one Obi rope particle, preserving this object's initial world-space offset.
 
 using UnityEngine;
 using Obi;
 
 [DefaultExecutionOrder(32000)]
 [DisallowMultipleComponent]
-public class RopeParticleFollowers : MonoBehaviour
+public class RopeParticleFollowerInitialOffset : MonoBehaviour
 {
     [Header("Refs")]
     public ObiRopeBase rope;
@@ -17,17 +14,20 @@ public class RopeParticleFollowers : MonoBehaviour
     public int actorIndex = 0;
 
     [Header("Behavior")]
-    [Tooltip("If true, we smooth movement towards the target.")]
     public bool smooth = true;
-    [Tooltip("How quickly to move towards the target when smoothing is enabled.")]
     public float posLerp = 24f;
 
-    [Tooltip("Recompute offset at runtime (useful if you move the object in play mode).")]
+    [Tooltip("If true, when the current particle is not in the solver (solverIndex=-1), we search nearby for a valid one.")]
+    public bool autoRebindToNearestValid = true;
+    [Tooltip("Max particles to scan left/right when rebinding.")]
+    public int rebindScanRadius = 8;
+
+    [Tooltip("Recompute the offset at runtime (keeps your current pose as new offset).")]
     public KeyCode rebindKey = KeyCode.None;
 
-    // captured at runtime
-    private Vector3 _initialOffsetWS;
-    private bool _bound;
+    // runtime
+    Vector3 _initialOffsetWS;
+    bool _bound;
 
     void Reset()
     {
@@ -44,44 +44,88 @@ public class RopeParticleFollowers : MonoBehaviour
         if (rebindKey != KeyCode.None && Input.GetKeyDown(rebindKey))
             TryBindOffset();
 
-        if (!_bound || rope == null || rope.solver == null) return;
+        if (!_bound || rope == null) return;
 
-        Vector3 p = GetParticleWorldPosition(rope, actorIndex);
+        // rope/solver can briefly be null/not ready at startup or after resets
+        var solver = rope.solver;
+        if (solver == null) return;
+
+        // Safeguard: nothing active yet
+        if (rope.activeParticleCount <= 0) return;
+
+        int ai = Mathf.Clamp(actorIndex, 0, rope.activeParticleCount - 1);
+
+        // actor -> solver index (can be -1 if particle isn't in the solver)
+        int si = (ai >= 0 && ai < rope.solverIndices.count) ? rope.solverIndices[ai] : -1;
+
+        if (si < 0 && autoRebindToNearestValid)
+        {
+            // Look around for the nearest valid particle present in the solver
+            int best = -1;
+            for (int d = 1; d <= rebindScanRadius; d++)
+            {
+                int left = ai - d;
+                int right = ai + d;
+
+                if (left >= 0)
+                {
+                    int s = rope.solverIndices[left];
+                    if (s >= 0) { best = left; break; }
+                }
+                if (right < rope.activeParticleCount)
+                {
+                    int s = rope.solverIndices[right];
+                    if (s >= 0) { best = right; break; }
+                }
+            }
+            if (best >= 0) ai = best;
+            si = (ai >= 0 && ai < rope.solverIndices.count) ? rope.solverIndices[ai] : -1;
+        }
+
+        // Still invalid? Skip this frame (prevents [-1] access).
+        if (si < 0) return;
+
+        Vector3 p = GetSolverWorldPosition(solver, si);
         Vector3 target = p + _initialOffsetWS;
 
         if (smooth)
             transform.position = Vector3.Lerp(transform.position, target, 1f - Mathf.Exp(-posLerp * Time.deltaTime));
         else
             transform.position = target;
-        // rotation intentionally untouched (keep your authored rotation)
     }
 
-    // Capture current offset from particle to this object in world space.
+    /// Capture current offset from the selected particle.
     public void TryBindOffset()
     {
-        if (rope == null || rope.solver == null) { _bound = false; return; }
+        _bound = false;
 
-        actorIndex = Mathf.Clamp(actorIndex, 0, rope.activeParticleCount );
-        Vector3 p = GetParticleWorldPosition(rope, actorIndex);
+        if (rope == null || rope.solver == null) return;
+        if (rope.activeParticleCount <= 0) return;
+
+        actorIndex = Mathf.Clamp(actorIndex, 0, rope.activeParticleCount - 1);
+
+        int si = (actorIndex >= 0 && actorIndex < rope.solverIndices.count) ? rope.solverIndices[actorIndex] : -1;
+        if (si < 0) return; // can't bind yet; particle not in solver
+
+        Vector3 p = GetSolverWorldPosition(rope.solver, si);
         _initialOffsetWS = transform.position - p;
         _bound = true;
     }
 
-    // Helper to read a particle's world-space position (renderable if available).
-    private static Vector3 GetParticleWorldPosition(ObiRopeBase rope, int actorIdx)
+    // Prefer renderable positions when available; fall back to positions.
+    static Vector3 GetSolverWorldPosition(ObiSolver solver, int solverIndex)
     {
-        actorIdx = Mathf.Clamp(actorIdx, 0, rope.activeParticleCount - 1);
-
-        // actor index -> solver index
-        var solverIndex = rope.solverIndices[actorIdx];
-
-        // prefer renderable positions for smoother visuals
-        var solver = rope.solver;
         Vector3 solverPos;
-        if (solver.renderablePositions != null && solver.renderablePositions.count > solverIndex)
+
+        if (solver.renderablePositions != null &&
+            solverIndex >= 0 && solverIndex < solver.renderablePositions.count)
+        {
             solverPos = (Vector3)solver.renderablePositions[solverIndex];
+        }
         else
+        {
             solverPos = (Vector3)solver.positions[solverIndex];
+        }
 
         return solver.transform.TransformPoint(solverPos);
     }
@@ -89,8 +133,13 @@ public class RopeParticleFollowers : MonoBehaviour
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
-        if (rope == null || rope.solver == null) return;
-        var p = GetParticleWorldPosition(rope, Mathf.Clamp(actorIndex, 0, Mathf.Max(0, rope.activeParticleCount - 1)));
+        if (rope == null || rope.solver == null || rope.activeParticleCount <= 0) return;
+
+        int ai = Mathf.Clamp(actorIndex, 0, rope.activeParticleCount - 1);
+        int si = (ai >= 0 && ai < rope.solverIndices.count) ? rope.solverIndices[ai] : -1;
+        if (si < 0) return;
+
+        Vector3 p = GetSolverWorldPosition(rope.solver, si);
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(p, 0.01f);
         Gizmos.DrawLine(p, transform.position);
