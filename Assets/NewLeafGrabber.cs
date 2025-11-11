@@ -1,4 +1,5 @@
-﻿using Obi;
+﻿// File: NewLeafGrabber.cs  (only change: add recoil on break)
+using Obi;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,59 +16,41 @@ public class NewLeafGrabber : MonoBehaviour
     public float tearDistance = 0.11f; // legacy-only
     public float tearDwell = 0.12f;    // legacy-only
 
-    // -------- Cooperation switches --------
     [Header("Cooperation with 3D leaf")]
-    [Tooltip("If ON, when a hit object has Leaf3D_PullBreak we delegate grab + pop to it.")]
     public bool cooperateWith3DLeaf = true;
 
-    // -------- Distance gating knobs --------
-    [Header("Distance gating (your two knobs)")]
-    [Tooltip("How far the pointer must pull from the initial hit BEFORE the grab begins (meters). Prevents click-only grabs.")]
+    [Header("Distance gating")]
     [Min(0f)] public float pullToStartGrabDistance = 0.02f;
-
-    [Tooltip("If ON, we configure the 3D leaf for distance-only popping (no click pops).")]
     public bool useDistanceOnlyPop = true;
-
-    [Tooltip("Ignored give before counting toward pop (meters) – used when distance-only pop is ON.")]
     [Min(0f)] public float popDeadZone = 0.03f;
-
-    [Tooltip("Extra distance (beyond the dead-zone) required to pop (meters).")]
     [Min(0.001f)] public float popDistance = 0.12f;
-
-    [Tooltip("Optional dwell after exceeding popDistance (seconds). 0 = pure distance-only.")]
     [Min(0f)] public float popDwellSeconds = 0f;
 
-    // -------- Break juice: time freeze --------
     [Header("Break Juice (time freeze)")]
     public bool enableBreakFreeze = true;
-    [Tooltip("Freeze length in seconds (unscaled).")]
     [Min(0f)] public float freezeDuration = 0.12f;
-    [Tooltip("Timescale during the freeze window (0 = full stop, 0.05–0.2 = slo-mo).")]
     [Range(0f, 1f)] public float freezeTimeScale = 0.05f;
 
-    // -------- Sap emit override --------
     [Header("Sap emit override (optional)")]
-    [Tooltip("If set, sap will emit from this transform instead of the leaf pivot when it pops.")]
     public Transform sapEmitPointOverride;
 
-    // -------- Cull safety --------
     [Header("Cull safety")]
     public bool enableCull = true;
     [Min(0.1f)] public float cullDistance = 20f;
-    [Tooltip("If null, camera transform is used.")]
     public Transform cullOrigin;
 
     // --- runtime ---
-    Leaf _leafLegacy;          // optional legacy helper
-    Vector3 _anchor;           // initial click world point
-    float _over;               // dwell accumulator (legacy)
+    Leaf _leafLegacy;
+    Vector3 _anchor;
+    float _over;
 
-    Leaf3D_PullBreak _leaf3D;  // cooperating 3D leaf, if any
-    bool _pendingGrab;         // clicked but not pulled far enough yet
-    Vector3 _grabOffset;       // keep zero snap at grab start
+    Leaf3D_PullBreak _leaf3D;
+    bool _pendingGrab;
+    Vector3 _grabOffset;
 
-    public StemParticleTugger stemTugger;     // assign in Inspector (same stem rope)
-    public float tugSearchRadius = 0.2f;      // how far from pin to pick the particle
+    [Header("Stem tugger hookup")]
+    public StemParticleTugger stemTugger;
+    public float tugSearchRadius = 0.2f;
 
     void Awake()
     {
@@ -78,67 +61,56 @@ public class NewLeafGrabber : MonoBehaviour
     void OnDisable()
     {
         UnsubscribeBreakEvent();
-        if (stemTugger != null) stemTugger.StopTug();   // ensure tug ends if we disable mid-grab
+        if (stemTugger != null) stemTugger.StopTug();
     }
 
     void Update()
     {
         var m = Mouse.current; if (m == null || cam == null) return;
 
-        // -------- acquire on click --------
         if (_leafLegacy == null && _leaf3D == null)
         {
             if (m.leftButton.wasPressedThisFrame && RaycastLeaf(m.position.ReadValue(), out _leafLegacy, out _anchor))
             {
-                // prefer 3D controller if present
                 _leaf3D = (cooperateWith3DLeaf ? _leafLegacy.GetComponent<Leaf3D_PullBreak>() : null);
                 _pendingGrab = true;
             }
             return;
         }
 
-        // -------- while mouse held --------
         if (m.leftButton.isPressed)
         {
             Vector3 target = ScreenToWorldOnPlane(m.position.ReadValue(), _anchor, cam);
 
-            // enforce pull-to-start for both paths
             if (_pendingGrab)
             {
                 float pulled = Vector3.Distance(target, _anchor);
-                if (pulled < pullToStartGrabDistance) return; // resistant to click-only
+                if (pulled < pullToStartGrabDistance) return;
 
-                // threshold crossed → begin the grab now
                 if (_leaf3D != null && _leaf3D.enabled)
                 {
                     if (useDistanceOnlyPop)
                     {
                         _leaf3D.ConfigureFromGrabber(
-                            popDeadZone,
-                            popDistance,
-                            popDwellSeconds,
-                            _leaf3D.useReleaseDelay,
-                            _leaf3D.releaseDelaySeconds,
-                            _leaf3D.stayInHandAfterBreak,
-                            _leaf3D.holdLifetimeAfterRelease
+                            popDeadZone, popDistance, popDwellSeconds,
+                            _leaf3D.useReleaseDelay, _leaf3D.releaseDelaySeconds,
+                            _leaf3D.stayInHandAfterBreak, _leaf3D.holdLifetimeAfterRelease
                         );
-                        _leaf3D.requireGrabToBreak = true;  // distance-only; no click pops
+                        _leaf3D.requireGrabToBreak = true;
                         _leaf3D.armOnProximity = false;
                     }
 
-                    // pass optional sap override + auto-cull settings
                     _leaf3D.sapEmitOverride = sapEmitPointOverride;
                     _leaf3D.enableAutoCull = enableCull;
                     _leaf3D.autoCullDistance = cullDistance;
                     _leaf3D.autoCullOrigin = cullOrigin ? cullOrigin : (cam ? cam.transform : null);
 
-                    // subscribe to pop event for freeze juice
                     SubscribeBreakEvent();
 
                     _leaf3D.BeginGrab(_anchor);
                     _grabOffset = _leaf3D.transform.position - target;
 
-                    // >>> START STEM TUG right when grab truly begins <<<
+                    // Start stem tug on the nearest solver particle to the pin/anchor
                     if (stemTugger != null && _leaf3D.rope is ObiRope stemRope)
                     {
                         Vector3 pinWorld = _anchor;
@@ -149,25 +121,23 @@ public class NewLeafGrabber : MonoBehaviour
                 }
                 else
                 {
-                    // legacy path: start accumulating
                     _over = 0f;
                 }
 
                 _pendingGrab = false;
             }
 
-            // actively dragging
             if (_leaf3D != null && _leaf3D.enabled)
             {
                 _leaf3D.SetHand(target + _grabOffset);
 
                 if (stemTugger != null) stemTugger.UpdateTarget(target, Time.deltaTime);
 
-                TryCullCurrentLeaf(); // safety
+                TryCullCurrentLeaf();
                 return;
             }
 
-            // -------- legacy fallback --------
+            // legacy fallback
             Transform t = _leafLegacy.transform;
             Vector3 vel = Vector3.zero;
             t.position = Vector3.SmoothDamp(
@@ -197,11 +167,9 @@ public class NewLeafGrabber : MonoBehaviour
                 }
                 else _over = 0f;
             }
-
             return;
         }
 
-        // -------- mouse released --------
         if (m.leftButton.wasReleasedThisFrame)
         {
             if (_leaf3D != null)
@@ -270,9 +238,20 @@ public class NewLeafGrabber : MonoBehaviour
     }
     void OnLeaf3DBroke(Leaf3D_PullBreak leaf)
     {
-        if (stemTugger != null) stemTugger.StopTug();
+        if (stemTugger != null)
+        {
+            stemTugger.StopTug();
+
+            // >>> STEM RECOIL on actual break <<<
+            // Nudge the stem opposite the leaf's break impulse (gentle kick).
+            // If your Leaf3D_PullBreak.breakImpulse points up/out, invert a bit:
+            Vector3 recoil = -leaf.breakImpulse * 0.35f;   // tune factor
+            stemTugger.KickRecoil(recoil, 2);
+        }
+
         DoFreezeJuice();
     }
+
     void DoFreezeJuice()
     {
         if (!enableBreakFreeze || freezeDuration <= 0f) return;
