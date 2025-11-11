@@ -1013,7 +1013,7 @@ MonoBehaviour:
   sapOnPopPS: {fileID: 0}
   sapOnImpactPS: {fileID: 0}
   sapImpactCooldown: 0.15
-  sapObiEmitter: {fileID: 0}
+  sapObiEmitter: {fileID: 6843405362058283937, guid: 56e6f2c95401937478b8fbe4b5f708a6, type: 3}
   obiBurstSeconds: 0.06
   obiStopExtraDelay: 0.02
   enableAutoCull: 1
@@ -2164,7 +2164,7 @@ Transform:
   m_GameObject: {fileID: 786591491}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.481, y: 3.986, z: -0.656}
+  m_LocalPosition: {x: 0.481, y: 3.49, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4013,52 +4013,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
---- !u!1 &1379599648
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1379599650}
-  - component: {fileID: 1379599649}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1379599649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379599648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &1379599650
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379599648}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1384640486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4084,7 +4038,7 @@ Transform:
   m_GameObject: {fileID: 1384640486}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8039932, y: 4.247, z: 0.635}
+  m_LocalPosition: {x: 0.8039932, y: 3.78, z: 0.635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4598,7 +4552,7 @@ MonoBehaviour:
   sapOnPopPS: {fileID: 0}
   sapOnImpactPS: {fileID: 0}
   sapImpactCooldown: 0.15
-  sapObiEmitter: {fileID: 0}
+  sapObiEmitter: {fileID: 6843405362058283937, guid: 56e6f2c95401937478b8fbe4b5f708a6, type: 3}
   obiBurstSeconds: 0.06
   obiStopExtraDelay: 0.02
   enableAutoCull: 1
@@ -5390,8 +5344,8 @@ MonoBehaviour:
   popDistance: 0.2
   popDwellSeconds: 0
   enableBreakFreeze: 1
-  freezeDuration: 0.5
-  freezeTimeScale: 0.231
+  freezeDuration: 1
+  freezeTimeScale: 0.063
   sapEmitPointOverride: {fileID: 1384640487}
   enableCull: 1
   cullDistance: 20
@@ -5563,6 +5517,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 8, y: 90, z: 0}
+--- !u!1 &1843981820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1843981822}
+  - component: {fileID: 1843981821}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1843981821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843981820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &1843981822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843981820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1856937281
 GameObject:
   m_ObjectHideFlags: 0
@@ -7052,7 +7052,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2834472610377195084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa00450d3697b33458a4cd56e0ba4690, type: 3}
   m_Name: 
@@ -7147,7 +7147,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
@@ -8173,14 +8173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rope: {fileID: 6922213306244071900}
-  attachment: {fileID: 64292830128304722}
-  autoDetectFromAttachment: 1
-  actorIndex: -1
-  authoredOffset: {x: 0, y: 0, z: 0}
-  extraOffsetWorld: {x: 0, y: 0, z: 0}
+  actorIndex: 4
+  smooth: 1
   posLerp: 30
-  autoRebindWhenInvalid: 1
-  debug: 0
+  rebindKey: 0
 --- !u!33 &6550379366120203833
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8824,7 +8820,6 @@ MonoBehaviour:
   - {fileID: -7955781227442464827, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
   - {fileID: 2645566972588118864, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
   - {fileID: 536863615878172357, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
-  - {fileID: -5454026940720612113, guid: f92460ac39eb444ad8f2bfb5714bb425, type: 2}
   lineMaterial: {fileID: 2100000, guid: 9e52502c19fa72b4691354d54ea51af4, type: 2}
   lineWidth: 0.005
   lineScreenZ: 0.5
@@ -8846,7 +8841,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
@@ -9067,14 +9062,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rope: {fileID: 6922213306244071900}
-  attachment: {fileID: 64292830128304722}
-  autoDetectFromAttachment: 0
-  actorIndex: -1
-  authoredOffset: {x: 0, y: 0, z: 0}
-  extraOffsetWorld: {x: 0, y: 0, z: 0}
+  actorIndex: 3
+  smooth: 1
   posLerp: 30
-  autoRebindWhenInvalid: 1
-  debug: 0
+  rebindKey: 0
 --- !u!1 &7219463156094289854
 GameObject:
   m_ObjectHideFlags: 0
@@ -9721,7 +9712,7 @@ MonoBehaviour:
   m_Compliance: 0
   m_ClampAtEnds: 1
   currentEdge:
-    edgeIndex: -1
+    edgeIndex: 47
     coordinate: 0.15932465
   firstEdge:
     edgeIndex: 44
@@ -9744,23 +9735,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Rope: {fileID: 6922213306244071900}
   m_Target: {fileID: 1775026026262792514}
-  m_Position: 0.61694926
-  m_LimitRange: 1
+  m_Position: 1
+  m_LimitRange: 0
   m_Range: {x: 0.61694926, y: 0.61694926}
-  m_Friction: 1
+  m_Friction: 0
   m_MotorSpeed: 0
   m_MotorForce: 0
   m_Compliance: 0
-  m_ClampAtEnds: 1
+  m_ClampAtEnds: 0
   currentEdge:
     edgeIndex: -1
-    coordinate: 0.65424347
+    coordinate: 0.99925995
   firstEdge:
-    edgeIndex: 45
-    coordinate: 0.65424347
+    edgeIndex: 0
+    coordinate: -3.4028235e+38
   lastEdge:
-    edgeIndex: 45
-    coordinate: 0.65424347
+    edgeIndex: 73
+    coordinate: 3.4028235e+38
   breakThreshold: 20
 --- !u!114 &8902878467289449629
 MonoBehaviour:
@@ -9829,7 +9820,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972468706224165524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d03c9194b7ab4aaba4dfa5afec22c69, type: 3}
   m_Name: 
@@ -9929,4 +9920,4 @@ SceneRoots:
   - {fileID: 1676970127}
   - {fileID: 193270406}
   - {fileID: 1856937282}
-  - {fileID: 1379599650}
+  - {fileID: 1843981822}
