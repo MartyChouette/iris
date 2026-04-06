@@ -41,13 +41,14 @@ public class DialoguePortraitBox : MonoBehaviour
     private Coroutine _activeRoutine;
     private float _panelOffscreenY;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void AutoSpawn()
-    {
-        if (Instance != null) return;
-        var go = new GameObject("[DialoguePortraitBox]");
-        go.AddComponent<DialoguePortraitBox>();
-    }
+    // Disabled — VN talking head box removed for now.
+    // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    // private static void AutoSpawn()
+    // {
+    //     if (Instance != null) return;
+    //     var go = new GameObject("[DialoguePortraitBox]");
+    //     go.AddComponent<DialoguePortraitBox>();
+    // }
 
     private void Awake()
     {
