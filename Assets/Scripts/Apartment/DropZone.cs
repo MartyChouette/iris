@@ -317,6 +317,11 @@ public class DropZone : MonoBehaviour
         for (int i = 0; i < cols.Length; i++)
             if (cols[i] != null) cols[i].enabled = false;
 
+        // Render on top of the trash can during the arc animation
+        var renderers = go.GetComponentsInChildren<Renderer>();
+        for (int i = 0; i < renderers.Length; i++)
+            if (renderers[i] != null) renderers[i].material.renderQueue = 4000;
+
         Vector3 startPos = go.transform.position;
         Quaternion startRot = go.transform.rotation;
         Vector3 startScale = go.transform.localScale;

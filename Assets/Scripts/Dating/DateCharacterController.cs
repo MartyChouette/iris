@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Controls a date NPC. Teleported between locations by DateSessionManager.
+/// Controls a date NPC. Stationary per-phase models toggled by DateSessionManager.
 /// Evaluates nearby ReactableTags via seated excursions (no walking).
 /// </summary>
-[RequireComponent(typeof(NavMeshAgent))]
 public class DateCharacterController : MonoBehaviour
 {
     public enum CharState { Idle, Sitting, Investigating, Dismissed }
@@ -65,12 +64,19 @@ public class DateCharacterController : MonoBehaviour
     public void Initialize(Vector3 position)
     {
         _agent = GetComponent<NavMeshAgent>();
-        _agent.enabled = false;
-        transform.position = position;
-        _agent.enabled = true;
+        if (_agent != null)
+        {
+            _agent.enabled = false;
+            transform.position = position;
+            _agent.enabled = true;
 
-        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
-            _agent.Warp(hit.position);
+            if (NavMesh.SamplePosition(position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+                _agent.Warp(hit.position);
+        }
+        else
+        {
+            transform.position = position;
+        }
 
         _state = CharState.Idle;
         Debug.Log($"[DateCharacterController] Initialized at {position}");
@@ -80,12 +86,20 @@ public class DateCharacterController : MonoBehaviour
     public void WarpTo(Vector3 position)
     {
         if (_agent == null) _agent = GetComponent<NavMeshAgent>();
-        _agent.enabled = false;
-        transform.position = position;
-        _agent.enabled = true;
 
-        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
-            _agent.Warp(hit.position);
+        if (_agent != null)
+        {
+            _agent.enabled = false;
+            transform.position = position;
+            _agent.enabled = true;
+
+            if (NavMesh.SamplePosition(position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+                _agent.Warp(hit.position);
+        }
+        else
+        {
+            transform.position = position;
+        }
 
         _currentTarget = null;
         Debug.Log($"[DateCharacterController] Warped to {position}");

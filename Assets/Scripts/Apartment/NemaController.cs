@@ -587,11 +587,23 @@ public class NemaController : MonoBehaviour
                 break;
 
             case DayPhaseManager.DayPhase.FlowerTrimming:
-                SetVisible(false);
+                // Hide all models — Nema is off-screen during flower trimming
+                ShowOnlyModel(null);
                 break;
 
             case DayPhaseManager.DayPhase.DateInProgress:
-                SetVisible(true);
+                // MoveToDatePhase() has already set up the correct model.
+                // Only deactivate phase-specific models that aren't used
+                // during dates. Don't touch _model — it's the fallback
+                // when per-phase date models aren't wired.
+                if (_explorationLeanModel != null) _explorationLeanModel.SetActive(false);
+                if (_cleaningModel != null) _cleaningModel.SetActive(false);
+                if (_newspaperModel != null) _newspaperModel.SetActive(false);
+                if (_areaModels != null)
+                {
+                    for (int i = 0; i < _areaModels.Length; i++)
+                        if (_areaModels[i] != null) _areaModels[i].SetActive(false);
+                }
                 break;
         }
     }

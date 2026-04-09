@@ -331,9 +331,18 @@ public class AuthoredMessSpawner : MonoBehaviour
         // Apply glitch material AFTER PlaceableObject.Awake (so _instanceMat exists)
         // and BEFORE InteractableHighlight.Awake (so it caches the correct base material)
         if (isProcedural && _glitchMatInstance != null)
+        {
             po.ApplyMaterialOverride(_glitchMatInstance, bp.objectColor);
+        }
         else if (isProcedural)
+        {
             go.GetComponent<Renderer>()?.material.SetColor("_Color", bp.objectColor);
+        }
+
+        // Apply PSX glitch shader + render-on-top to ALL renderers in the trash
+        // hierarchy (prefab items like the wine bottle have multiple child meshes).
+        // Also disable collider physics so trash doesn't block the trash can.
+        ApplyTrashVisuals(go);
 
         // Add InteractableHighlight — caches materials including glitch override
         if (go.GetComponent<InteractableHighlight>() == null)
@@ -353,6 +362,51 @@ public class AuthoredMessSpawner : MonoBehaviour
         }
 
         return go;
+    }
+
+    /// <summary>
+    /// Walk every renderer in a trash item's hierarchy: apply the PSX glitch
+    /// shader and boost the render queue so trash always draws on top of the
+    /// trash can and other furniture. Also makes colliders triggers so trash
+    /// doesn't physically block the trash can or other objects.
+    /// </summary>
+    private void ApplyTrashVisuals(GameObject go)
+    {
+        // ── Glitch shader + render-on-top for ALL renderers ──
+        Shader glitchShader = null;
+        if (_glitchMatInstance != null)
+            glitchShader = _glitchMatInstance.shader;
+        if (glitchShader == null)
+            glitchShader = Shader.Find("Iris/PSXLitGlitch");
+
+        var renderers = go.GetComponentsInChildren<Renderer>(true);
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            var r = renderers[i];
+            if (r == null) continue;
+
+            // Instance the material so we don't mutate shared assets
+            var mat = r.material; // implicitly instances
+            if (glitchShader != null)
+            {
+                mat.shader = glitchShader;
+                mat.SetFloat("_GlitchIntensity", 0f);
+            }
+            // Render above normal geometry (trash can is ~2000)
+            mat.renderQueue = 2500;
+        }
+
+        // Mark PlaceableObject as glitched so pickup/place logic is aware
+        var po = go.GetComponent<PlaceableObject>();
+        if (po != null) po.SetGlitched(true);
+
+        // ── Make colliders triggers so trash doesn't physically block ──
+        var cols = go.GetComponentsInChildren<Collider>(true);
+        for (int i = 0; i < cols.Length; i++)
+        {
+            if (cols[i] != null)
+                cols[i].isTrigger = true;
+        }
     }
 
     private void CleanUpPreviousObjects()

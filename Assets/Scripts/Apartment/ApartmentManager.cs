@@ -36,6 +36,9 @@ public class ApartmentManager : MonoBehaviour
     [Tooltip("Maximum camera shift distance toward cursor.")]
     [SerializeField, Range(0f, 0.5f)] private float parallaxMaxOffset = 0.05f;
 
+    [Tooltip("Maximum rotation (degrees) applied instead of translation when in orthographic mode. Rotation avoids geometry clipping that translation causes in ortho.")]
+    [SerializeField, Range(0f, 5f)] private float parallaxMaxRotation = 1.5f;
+
     [Tooltip("Smoothing speed for parallax follow.")]
     [SerializeField, Range(1f, 20f)] private float parallaxSmoothing = 8f;
 
@@ -129,6 +132,7 @@ public class ApartmentManager : MonoBehaviour
 
     // Parallax offset (applied on top of base, never fed back)
     private Vector3 _currentParallaxOffset;
+    private Quaternion _currentParallaxRotation = Quaternion.identity;
 
     // Browse camera suppression (DayPhaseManager lowers during Morning)
     private bool _browseSuppressed;
@@ -318,6 +322,7 @@ public class ApartmentManager : MonoBehaviour
         _targetFOV = _baseFOV;
         _isTransitioning = false;
         _currentParallaxOffset = Vector3.zero;
+        _currentParallaxRotation = Quaternion.identity;
 
         // Write to transform
         var t = browseCamera.transform;
@@ -763,7 +768,9 @@ public class ApartmentManager : MonoBehaviour
         // Always write base + offset to transform, even with parallax disabled
         var t = browseCamera.transform;
 
-        if (parallaxMaxOffset > 0f && !AccessibilitySettings.ReduceMotion)
+        bool isOrtho = browseCamera.Lens.ModeOverride == Unity.Cinemachine.LensSettings.OverrideModes.Orthographic;
+
+        if ((parallaxMaxOffset > 0f || parallaxMaxRotation > 0f) && !AccessibilitySettings.ReduceMotion)
         {
             Vector2 mousePos = IrisInput.CursorPosition;
             float nx = (mousePos.x / Screen.width - 0.5f) * 2f;
@@ -771,29 +778,47 @@ public class ApartmentManager : MonoBehaviour
             nx = Mathf.Clamp(nx, -1f, 1f);
             ny = Mathf.Clamp(ny, -1f, 1f);
 
-            // Use base rotation for offset direction (never reads from transform)
-            Vector3 right = _baseRotation * Vector3.right;
-            Vector3 up = _baseRotation * Vector3.up;
-            float effectiveOffset = parallaxMaxOffset * AccessibilitySettings.ScreenShakeScale;
-            Vector3 targetOffset = (right * -nx + up * -ny) * effectiveOffset;
+            if (isOrtho && parallaxMaxRotation > 0f)
+            {
+                // Ortho: rotate instead of translate to avoid geometry clipping.
+                // Small yaw/pitch pivots the view without shifting the frustum.
+                float effectiveRot = parallaxMaxRotation * AccessibilitySettings.ScreenShakeScale;
+                Quaternion targetRot = Quaternion.Euler(-ny * effectiveRot, nx * effectiveRot, 0f);
+                _currentParallaxRotation = Quaternion.Slerp(_currentParallaxRotation, targetRot,
+                    Time.deltaTime * parallaxSmoothing);
+                _currentParallaxOffset = Vector3.Lerp(_currentParallaxOffset, Vector3.zero,
+                    Time.deltaTime * parallaxSmoothing);
+            }
+            else
+            {
+                // Perspective: translate as before
+                Vector3 right = _baseRotation * Vector3.right;
+                Vector3 up = _baseRotation * Vector3.up;
+                float effectiveOffset = parallaxMaxOffset * AccessibilitySettings.ScreenShakeScale;
+                Vector3 targetOffset = (right * -nx + up * -ny) * effectiveOffset;
 
-            _currentParallaxOffset = Vector3.Lerp(_currentParallaxOffset, targetOffset,
-                Time.deltaTime * parallaxSmoothing);
+                _currentParallaxOffset = Vector3.Lerp(_currentParallaxOffset, targetOffset,
+                    Time.deltaTime * parallaxSmoothing);
+                _currentParallaxRotation = Quaternion.Slerp(_currentParallaxRotation, Quaternion.identity,
+                    Time.deltaTime * parallaxSmoothing);
+            }
         }
         else if (AccessibilitySettings.ReduceMotion)
         {
             _currentParallaxOffset = Vector3.Lerp(_currentParallaxOffset, Vector3.zero,
                 Time.deltaTime * parallaxSmoothing);
+            _currentParallaxRotation = Quaternion.Slerp(_currentParallaxRotation, Quaternion.identity,
+                Time.deltaTime * parallaxSmoothing);
         }
 
         // Write final position = base + parallax + pan
         t.position = _basePosition + _currentParallaxOffset + _panOffset;
-        t.rotation = _baseRotation;
+        t.rotation = _baseRotation * _currentParallaxRotation;
 
         // Write lens — preset or area default, then layer zoom on top
         {
             var lens = browseCamera.Lens;
-            bool isOrtho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
+            bool lensOrtho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
 
             // Base lens: preset owns it when active, otherwise use area FOV
             if (!_presetOverrideActive)
@@ -802,7 +827,7 @@ public class ApartmentManager : MonoBehaviour
             // Layer zoom on top (works with both preset and default lens)
             if (_currentZoom >= 0f)
             {
-                if (isOrtho)
+                if (lensOrtho)
                     lens.OrthographicSize = _currentZoom;
                 else
                     lens.FieldOfView = _currentZoom;

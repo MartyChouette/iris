@@ -121,6 +121,7 @@ public class DateSessionManager : MonoBehaviour
     [Tooltip("Where the NPC stands during the kitchen/drink phase.")]
     [SerializeField] private Transform kitchenStandPoint;
 
+
     [Tooltip("Runs the entrance judgments (music, perfume, outfit, cleanliness).")]
     [SerializeField] private EntranceJudgmentSequence _entranceJudgments;
 
@@ -201,6 +202,7 @@ public class DateSessionManager : MonoBehaviour
     private float _moodCheckTimer;
     private DateCharacterController _dateCharacter;
     private GameObject _dateCharacterGO;
+    private DateSceneModels _activeSceneModels; // non-null when using scene-placed per-phase models
     private float _arrivalTimer;
     private bool _arrivalTimerActive;
     private readonly List<AccumulatedReaction> _accumulatedReactions = new();
@@ -424,13 +426,26 @@ public class DateSessionManager : MonoBehaviour
         // Start pulsing fridge + drink station
         StartPhase2Pulse();
 
-        // Teleport NPC to kitchen
-        Vector3 kitchenPos = kitchenStandPoint != null ? kitchenStandPoint.position
-            : new Vector3(-4f, 0f, -4.5f);
-        if (_dateCharacter != null)
+        // Switch to kitchen model (or warp legacy character)
+        if (_activeSceneModels != null && _activeSceneModels.kitchenModel != null)
         {
-            _dateCharacter.WarpTo(kitchenPos);
+            if (_dateCharacter != null)
+                _dateCharacter.OnReaction -= HandleCharacterReaction;
+            _activeSceneModels.ShowOnly(_activeSceneModels.kitchenModel);
+            _dateCharacterGO = _activeSceneModels.kitchenModel;
+            EnsureDateComponents(_dateCharacterGO);
             _dateCharacter.SetSitting();
+            _dateCharacter.OnReaction += HandleCharacterReaction;
+        }
+        else
+        {
+            Vector3 kitchenPos = kitchenStandPoint != null ? kitchenStandPoint.position
+                : new Vector3(-4f, 0f, -4.5f);
+            if (_dateCharacter != null)
+            {
+                _dateCharacter.WarpTo(kitchenPos);
+                _dateCharacter.SetSitting();
+            }
         }
 
         if (phaseTransitionSFX != null && AudioManager.Instance != null)
@@ -484,12 +499,25 @@ public class DateSessionManager : MonoBehaviour
         _datePhase = DatePhase.Reveal;
         NemaController.Instance?.MoveToDatePhase(DatePhase.Reveal);
 
-        // Teleport NPC to couch
-        Vector3 couchPos = couchSeatTarget != null ? couchSeatTarget.position : Vector3.zero;
-        if (_dateCharacter != null)
+        // Switch to couch model (or warp legacy character)
+        if (_activeSceneModels != null && _activeSceneModels.couchModel != null)
         {
-            _dateCharacter.WarpTo(couchPos);
+            if (_dateCharacter != null)
+                _dateCharacter.OnReaction -= HandleCharacterReaction;
+            _activeSceneModels.ShowOnly(_activeSceneModels.couchModel);
+            _dateCharacterGO = _activeSceneModels.couchModel;
+            EnsureDateComponents(_dateCharacterGO);
             _dateCharacter.SetSitting();
+            _dateCharacter.OnReaction += HandleCharacterReaction;
+        }
+        else
+        {
+            Vector3 couchPos = couchSeatTarget != null ? couchSeatTarget.position : Vector3.zero;
+            if (_dateCharacter != null)
+            {
+                _dateCharacter.WarpTo(couchPos);
+                _dateCharacter.SetSitting();
+            }
         }
 
         if (phaseTransitionSFX != null && AudioManager.Instance != null)
@@ -1370,8 +1398,16 @@ public class DateSessionManager : MonoBehaviour
             _dateCharacter.Dismiss();
         }
 
-        if (_dateCharacterGO != null)
+        if (_activeSceneModels != null)
+        {
+            // Hide all scene-placed models — don't destroy them
+            _activeSceneModels.HideAll();
+            _activeSceneModels = null;
+        }
+        else if (_dateCharacterGO != null)
+        {
             Destroy(_dateCharacterGO);
+        }
 
         _dateCharacterGO = null;
         _dateCharacter = null;
@@ -1383,51 +1419,61 @@ public class DateSessionManager : MonoBehaviour
 
     private void SpawnDateCharacter()
     {
-        // Spawn at judgment point (entrance area)
-        Vector3 spawnPos = judgmentStopPoint != null ? judgmentStopPoint.position
-            : new Vector3(-1.0f, 0f, 5.5f);
+        // ── Scene-placed per-phase models (preferred) ──
+        // Look up scene models matching this date's SO via DateSceneModels registry.
+        _activeSceneModels = DateSceneModels.FindForDate(_currentDate);
 
-        if (_currentDate.characterModelPrefab != null)
+        if (_activeSceneModels != null && _activeSceneModels.arrivalModel != null)
         {
-            _dateCharacterGO = Instantiate(_currentDate.characterModelPrefab, spawnPos, Quaternion.identity);
+            _activeSceneModels.ShowOnly(_activeSceneModels.arrivalModel);
+            _dateCharacterGO = _activeSceneModels.arrivalModel;
         }
         else
         {
-            // Fallback: create a capsule placeholder
-            _dateCharacterGO = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            _dateCharacterGO.name = $"Date_{_currentDate.characterName}";
-            _dateCharacterGO.transform.position = spawnPos;
+            // Fallback: instantiate from SO prefab
+            Vector3 spawnPos = judgmentStopPoint != null ? judgmentStopPoint.position
+                : new Vector3(-1.0f, 0f, 5.5f);
+
+            if (_currentDate.characterModelPrefab != null)
+            {
+                _dateCharacterGO = Instantiate(_currentDate.characterModelPrefab, spawnPos, Quaternion.identity);
+            }
+            else
+            {
+                _dateCharacterGO = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                _dateCharacterGO.name = $"Date_{_currentDate.characterName}";
+                _dateCharacterGO.transform.position = spawnPos;
+            }
         }
 
-        // Add character controller
-        _dateCharacter = _dateCharacterGO.GetComponent<DateCharacterController>();
-        if (_dateCharacter == null)
-            _dateCharacter = _dateCharacterGO.AddComponent<DateCharacterController>();
+        EnsureDateComponents(_dateCharacterGO);
 
-        // Add reaction UI
-        var reactionUI = _dateCharacterGO.GetComponent<DateReactionUI>();
-        if (reactionUI == null)
-            reactionUI = _dateCharacterGO.AddComponent<DateReactionUI>();
-
-        // Add gaze highlight driver
-        if (_dateCharacterGO.GetComponent<NPCGazeHighlight>() == null)
-            _dateCharacterGO.AddComponent<NPCGazeHighlight>();
-
-        // Add occluded silhouette so player can see NPC through walls
-        if (_dateCharacterGO.GetComponent<OccludedSilhouette>() == null)
-            _dateCharacterGO.AddComponent<OccludedSilhouette>();
-
-        // Add NavMeshAgent if missing
-        var agent = _dateCharacterGO.GetComponent<UnityEngine.AI.NavMeshAgent>();
-        if (agent == null)
-            agent = _dateCharacterGO.AddComponent<UnityEngine.AI.NavMeshAgent>();
-
-        // Initialize at position and set to sitting (idle, no walking)
-        _dateCharacter.Initialize(spawnPos);
+        // Initialize and set to sitting (idle, no walking)
+        Vector3 initPos = _activeSceneModels != null
+            ? _dateCharacterGO.transform.position
+            : (judgmentStopPoint != null ? judgmentStopPoint.position : new Vector3(-1.0f, 0f, 5.5f));
+        _dateCharacter.Initialize(initPos);
         _dateCharacter.SetSitting();
 
         // Subscribe to reactions
         _dateCharacter.OnReaction += HandleCharacterReaction;
+    }
+
+    /// <summary>Ensure required components exist on the active date model.</summary>
+    private void EnsureDateComponents(GameObject go)
+    {
+        _dateCharacter = go.GetComponent<DateCharacterController>();
+        if (_dateCharacter == null)
+            _dateCharacter = go.AddComponent<DateCharacterController>();
+
+        if (go.GetComponent<DateReactionUI>() == null)
+            go.AddComponent<DateReactionUI>();
+
+        if (go.GetComponent<NPCGazeHighlight>() == null)
+            go.AddComponent<NPCGazeHighlight>();
+
+        if (go.GetComponent<OccludedSilhouette>() == null)
+            go.AddComponent<OccludedSilhouette>();
     }
 
     private void HandleCharacterReaction(ReactableTag tag, ReactionType type, string displayName)

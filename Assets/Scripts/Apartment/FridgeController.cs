@@ -2,8 +2,9 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Click-to-open fridge door. Visual interaction during Selected apartment state.
-/// The door tweens open when clicked; DrinkMaking manager is already active from Selected state.
+/// Click-to-open fridge with slotted interior shelves. Items snap to shelf
+/// slots when placed inside (magnetic snap like the shoe station). The fridge
+/// is pure storage — drink-making lives on the DrinkCartController.
 /// </summary>
 public class FridgeController : MonoBehaviour
 {
@@ -30,9 +31,9 @@ public class FridgeController : MonoBehaviour
     [Tooltip("Layer mask for walls that can block fridge clicks (prevents clicking through walls).")]
     [SerializeField] private LayerMask _wallOcclusionLayer;
 
-    [Header("Item Deposit")]
-    [Tooltip("DropZone for accepting items (milk cartons). Assign the DropZone on this GO or a child.")]
-    [SerializeField] private DropZone _depositZone;
+    [Header("Interior Shelves")]
+    [Tooltip("Slotted DropZones on the interior shelves (hi, mid, lo, drawer). Items snap to slots when placed. Set UseSlotting = true on each.")]
+    [SerializeField] private DropZone[] _interiorShelves;
 
     [Header("Light")]
     [Tooltip("Point light inside the fridge — on when open, off when closed.")]
@@ -54,10 +55,6 @@ public class FridgeController : MonoBehaviour
     private Quaternion _openRotation;
 
     private Coroutine _blinkCoroutine;
-    private InteractableHighlight _highlight;
-
-    private float _rejectCooldown;
-    private const float RejectCooldownDuration = 5f;
 
     private void Awake()
     {
@@ -86,80 +83,34 @@ public class FridgeController : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
+    /// <summary>True when the fridge door is open.</summary>
+    public bool IsOpen => _state == DoorState.Open;
+
     private void Update()
     {
         if (DayPhaseManager.Instance != null && !DayPhaseManager.Instance.IsInteractionPhase) return;
+        if (_state != DoorState.Closed && _state != DoorState.Open) return;
+        if (IrisInput.Instance == null || !IrisInput.Instance.Click.WasPressedThisFrame()) return;
+        if (ApartmentManager.Instance == null) return;
+        if (ApartmentManager.Instance.CurrentState != ApartmentManager.State.Browsing) return;
+        if (ObjectGrabber.ClickConsumedThisFrame) return;
+        if (_mainCamera == null) return;
 
-        // Fridge door only opens during Phase 2 (drink making)
-        bool isDrinkPhase = DateSessionManager.Instance != null
-            && DateSessionManager.Instance.CurrentDatePhase == DateSessionManager.DatePhase.BackgroundJudging;
-
-        // Start blink guide when drink phase begins and fridge is closed
-        if (isDrinkPhase)
-            UpdateBlinkGuide();
-
-        // Item deposit is handled by ObjectGrabber's DropZone proximity search
-
-        if (_rejectCooldown > 0f)
-            _rejectCooldown -= Time.deltaTime;
-
-        // Outside drink phase: show rejection text if player clicks the fridge
-        // (but not if they're depositing an item — ObjectGrabber handles that)
-        if (!isDrinkPhase)
+        // Holding an item while fridge is open → try to deposit
+        if (ObjectGrabber.IsHoldingObject && _state == DoorState.Open)
         {
-            if (IrisInput.Instance != null && IrisInput.Instance.Click.WasPressedThisFrame()
-                && !ObjectGrabber.IsHoldingObject && !ObjectGrabber.ClickConsumedThisFrame
-                && _rejectCooldown <= 0f && _mainCamera != null)
-            {
-                Vector2 rejectMousePos = IrisInput.CursorPosition;
-                var rejectRay = _mainCamera.ScreenPointToRay(rejectMousePos);
-                if (Physics.Raycast(rejectRay, out var rejectHit, 20f, _fridgeLayer))
-                {
-                    // Wall occlusion — don't show if clicking through a wall
-                    bool blocked = _wallOcclusionLayer.value != 0
-                        && Physics.Raycast(rejectRay, out var rejectWallHit, 20f, _wallOcclusionLayer)
-                        && rejectWallHit.distance < rejectHit.distance;
-
-                    if (!blocked)
-                    {
-                        if (DialoguePortraitBox.Instance != null)
-                            DialoguePortraitBox.Instance.Say("I don't want anything right now.");
-                        else
-                            PickupDescriptionHUD.Instance?.Show("I don't want anything right now.");
-                        _rejectCooldown = RejectCooldownDuration;
-                    }
-                }
-            }
+            TryDepositHeldItem();
             return;
         }
 
-        if (_state != DoorState.Closed && _state != DoorState.Open) return;
-        if (IrisInput.Instance == null || !IrisInput.Instance.Click.WasPressedThisFrame()) return;
-
-        // Only respond during Browsing apartment state
-        if (ApartmentManager.Instance == null) return;
-        if (ApartmentManager.Instance.CurrentState != ApartmentManager.State.Browsing)
-            return;
-
-        // Don't toggle fridge while actively pouring or scoring a drink
-        if (SimpleDrinkManager.Instance != null
-            && SimpleDrinkManager.Instance.CurrentState != SimpleDrinkManager.State.ChoosingRecipe)
-            return;
-
-        // Wall occlusion raycast (below) handles cross-room blocking — no area gate needed
-
         if (ObjectGrabber.IsHoldingObject) return;
-        if (ObjectGrabber.ClickConsumedThisFrame) return;
-
-        if (_mainCamera == null) return;
 
         Vector2 mousePos = IrisInput.CursorPosition;
         var ray = _mainCamera.ScreenPointToRay(mousePos);
 
-        // Two-pass raycast: check if a wall is closer than the fridge (prevents clicking through walls)
-        if (!Physics.Raycast(ray, out var fridgeHit, 20f, _fridgeLayer))
-            return;
+        if (!Physics.Raycast(ray, out var fridgeHit, 20f, _fridgeLayer)) return;
 
+        // Wall occlusion
         if (_wallOcclusionLayer.value != 0
             && Physics.Raycast(ray, out var wallHit, 20f, _wallOcclusionLayer)
             && wallHit.distance < fridgeHit.distance)
@@ -177,38 +128,91 @@ public class FridgeController : MonoBehaviour
         }
     }
 
-    private void TryAcceptHeldItem()
+    /// <summary>
+    /// Try to place the held item into the nearest interior shelf slot.
+    /// Rejects with a message if all shelves are full.
+    /// </summary>
+    private void TryDepositHeldItem()
     {
         var held = ObjectGrabber.HeldObject;
         if (held == null) return;
 
-        // Check if held item's home zone matches the fridge's DropZone
-        var zone = _depositZone;
-        if (zone == null) zone = GetComponent<DropZone>();
-        if (zone == null) zone = GetComponentInChildren<DropZone>();
-        if (zone == null) return;
-
-        bool matches = (!string.IsNullOrEmpty(held.HomeZoneName) && zone.ZoneName == held.HomeZoneName)
-                    || (!string.IsNullOrEmpty(held.AltHomeZoneName) && zone.ZoneName == held.AltHomeZoneName);
-        if (!matches) return;
-
-        // Raycast to make sure player clicked on the fridge
+        // Raycast to confirm player clicked on the fridge
         if (_mainCamera == null) return;
         Vector2 mousePos = IrisInput.CursorPosition;
         var ray = _mainCamera.ScreenPointToRay(mousePos);
-        if (!Physics.Raycast(ray, out var hit, 20f, _fridgeLayer)) return;
+        if (!Physics.Raycast(ray, out _, 20f, _fridgeLayer)) return;
 
-        // Accept the item — release from grabber, then deposit (shrink+destroy)
+        // Find the first shelf with a free slot
+        DropZone targetShelf = null;
+        Vector3 slotPos = Vector3.zero;
+        Quaternion slotRot = Quaternion.identity;
+
+        if (_interiorShelves != null)
+        {
+            for (int i = 0; i < _interiorShelves.Length; i++)
+            {
+                var shelf = _interiorShelves[i];
+                if (shelf == null) continue;
+                if (shelf.TryGetNextDepositSlot(out slotPos, out slotRot))
+                {
+                    targetShelf = shelf;
+                    break;
+                }
+            }
+        }
+
+        if (targetShelf == null)
+        {
+            // All shelves full
+            if (DialoguePortraitBox.Instance != null)
+                DialoguePortraitBox.Instance.Say("No more space in the fridge.");
+            else
+                PickupDescriptionHUD.Instance?.Show("No more space.");
+            return;
+        }
+
+        // Place the item at the shelf slot
+        held.OnPlaced(null, true, slotPos, slotRot);
+
+        // Lock in place
+        var rb = held.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.linearVelocity = Vector3.zero;
+        }
+
+        targetShelf.RegisterDeposit(held);
         ObjectGrabber.ForceReleaseHeld();
-        zone.RegisterDeposit(held);
         ObjectGrabber.ConsumeClickExternal();
-        Debug.Log($"[FridgeController] Accepted {held.name} into fridge.");
+
+        if (_openSFX != null)
+            AudioManager.Instance?.PlaySFX(_openSFX);
+
+        Debug.Log($"[FridgeController] Stored {held.name} on shelf '{targetShelf.ZoneName}'.");
+    }
+
+    /// <summary>Total free slots across all interior shelves.</summary>
+    public int TotalFreeSlots
+    {
+        get
+        {
+            if (_interiorShelves == null) return 0;
+            int free = 0;
+            for (int i = 0; i < _interiorShelves.Length; i++)
+            {
+                var shelf = _interiorShelves[i];
+                if (shelf == null || !shelf.UseSlotting) continue;
+                free += shelf.SlotCount - shelf.DepositCount;
+            }
+            return free;
+        }
     }
 
     private IEnumerator OpenDoorSequence()
     {
         _state = DoorState.Opening;
-        StopBlinkGuide();
 
         if (_openSFX != null)
             AudioManager.Instance?.PlaySFX(_openSFX);
@@ -218,8 +222,6 @@ public class FridgeController : MonoBehaviour
 
         if (_interiorLight != null)
             _interiorLight.enabled = true;
-
-        SimpleDrinkManager.Instance?.ShowRecipePanel();
     }
 
     /// <summary>
@@ -243,7 +245,6 @@ public class FridgeController : MonoBehaviour
             _doorPivot.localRotation = _closedRotation;
         if (_interiorLight != null)
             _interiorLight.enabled = false;
-        SimpleDrinkManager.Instance?.HideRecipePanel();
     }
 
     private IEnumerator CloseDoorSequence()
@@ -258,8 +259,6 @@ public class FridgeController : MonoBehaviour
 
         if (_interiorLight != null)
             _interiorLight.enabled = false;
-
-        SimpleDrinkManager.Instance?.HideRecipePanel();
     }
 
     private IEnumerator TweenDoor(Quaternion from, Quaternion to)
@@ -279,37 +278,4 @@ public class FridgeController : MonoBehaviour
         _doorPivot.localRotation = to;
     }
 
-    // ── Rim Guide ─────────────────────────────────────────────
-    // During drink phase (BackgroundJudging), steady rimlight on
-    // the fridge until the player selects a recipe.
-
-    private bool _guideActive;
-
-    private void UpdateBlinkGuide()
-    {
-        bool shouldGuide = DateSessionManager.Instance != null
-            && DateSessionManager.Instance.CurrentDatePhase == DateSessionManager.DatePhase.BackgroundJudging
-            && (SimpleDrinkManager.Instance == null || SimpleDrinkManager.Instance.CurrentState == SimpleDrinkManager.State.ChoosingRecipe)
-            && (SimpleDrinkManager.Instance == null || SimpleDrinkManager.Instance.ActiveRecipe == null);
-
-        if (shouldGuide && !_guideActive)
-        {
-            if (_highlight == null)
-                _highlight = GetComponent<InteractableHighlight>();
-            if (_highlight != null)
-                _highlight.SetHighlighted(true);
-            _guideActive = true;
-        }
-        else if (!shouldGuide && _guideActive)
-        {
-            StopBlinkGuide();
-        }
-    }
-
-    private void StopBlinkGuide()
-    {
-        if (_highlight != null)
-            _highlight.SetHighlighted(false);
-        _guideActive = false;
-    }
 }

@@ -136,7 +136,8 @@ public class PlaceableObject : MonoBehaviour
     }
 
     /// <summary>
-    /// The effect multiplier from the current placement surface (1-5).
+    /// The effect multiplier from the current placement surface (1-5),
+    /// plus bonuses for paired items and stacked dishes.
     /// Returns 1x if:
     ///   - The item isn't on a surface (held, on the floor, etc.).
     ///   - The item is hidden in a closed cubby. Interior surface multipliers
@@ -153,7 +154,24 @@ public class PlaceableObject : MonoBehaviour
         {
             if (_lastPlacedSurface == null) return 1;
             if (IsHiddenInCubby) return 1;
-            return _lastPlacedSurface.EffectMultiplier;
+
+            int mult = _lastPlacedSurface.EffectMultiplier;
+
+            // Paired bonus: shoes/items that are paired score higher
+            var pairable = GetComponent<PairableItem>();
+            if (pairable != null && pairable.IsPaired)
+                mult += 1;
+
+            // Stack bonus: stacked dishes score higher per plate in the stack
+            var stackable = GetComponent<StackablePlate>();
+            if (stackable != null)
+            {
+                int stackSize = GetComponentsInChildren<StackablePlate>().Length;
+                if (stackSize > 1)
+                    mult += stackSize - 1; // +1 per extra plate in stack
+            }
+
+            return mult;
         }
     }
     public Vector3 HomePosition => _homePosition;
@@ -342,7 +360,7 @@ public class PlaceableObject : MonoBehaviour
         _lastValidPosition = transform.position;
         _lastValidRotation = transform.rotation;
         _rb = GetComponent<Rigidbody>();
-        _colliders = GetComponents<Collider>();
+        _colliders = GetComponentsInChildren<Collider>();
 
         // Ensure every placeable has an InteractableHighlight for hover/proximity effects
         // (skip plants — they have their own watering interaction)
@@ -685,6 +703,11 @@ public class PlaceableObject : MonoBehaviour
         if (_rb != null)
             _rb.isKinematic = false;
 
+        // Picking up a disheveled item corrects it — remove glitch before
+        // SetRenderOnTop saves the shader state, so the glitch stays gone.
+        if (_isGlitched && _startDishelved)
+            RemoveGlitch();
+
         // Auto-straighten to home rotation on pickup (if home was captured)
         if (_homeRotation != Quaternion.identity)
         {
@@ -744,6 +767,8 @@ public class PlaceableObject : MonoBehaviour
                 {
                     IsAtHome = true;
                     ResetSmellAging();
+                    // Item is home — clear glitch indicator
+                    if (_isGlitched) RemoveGlitch();
                 }
             }
         }

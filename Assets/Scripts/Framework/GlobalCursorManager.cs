@@ -205,7 +205,7 @@ public class GlobalCursorManager : MonoBehaviour
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
-    private void OnSceneLoaded(Scene s, LoadSceneMode m) { _cachedCamera = null; _cameraRefetchTimer = 0f; }
+    private void OnSceneLoaded(Scene s, LoadSceneMode m) { _cachedCamera = null; _cameraRefetchTimer = 0f; s_lockedCursor = null; }
 
     // ══════════════════════════════════════════════════════════════
     // Texture loading
@@ -457,6 +457,7 @@ public class GlobalCursorManager : MonoBehaviour
         if (Has<PhoneController>(go))      return CursorType.Phone;
         if (Has<DrawerController>(go))     return CursorType.Drawer;
         if (Has<SimpleDrinkManager>(go))   return CursorType.Drink;
+        if (Has<DrinkCartController>(go))  return CursorType.Drink;
         if (Has<FlyController>(go))         return CursorType.Swatter;
         if (Has<CleanableSurface>(go))     return CursorType.Sponge;
         if (Has<ScissorStation>(go))      return CursorType.Scissors;
@@ -483,122 +484,47 @@ public class GlobalCursorManager : MonoBehaviour
     private void ApplyCursor(CursorType type)
     {
         _desiredType = type;
-        float dt = Time.unscaledDeltaTime;
 
-        // Grab is handled by Update (cursor hidden while holding) — should not reach here
         if (type == CursorType.Grab) return;
 
-        // ── Transition logic ────────────────────────────────────────────
-        // The core rule: the cursor ALWAYS passes through Default between
-        // any two context cursors. So transitions are either:
-        //   Default → Context   (fade in)
-        //   Context → Default   (fade out)
-        //   Context A → Context B  (fade out A, fade-out-complete branch
-        //                           lands on Default, next tick fades in B)
-        // Without this, switching from Watering directly to Drawer used to
-        // slam the new cursor on top of the old without passing through the
-        // default arrow, which looked like "the cursor is stuck on the
-        // wrong context" even though it was actually doing the right work.
+        // Same type as last frame — nothing to do
+        if (type == _displayedType) return;
 
-        // Case A: Default → Context cursor. Kick off a fade-in.
-        if (type != CursorType.Default && _displayedType == CursorType.Default)
+        _displayedType = type;
+        _currentAlpha = 1f;
+
+        if (type == CursorType.Default)
         {
-            _displayedType = type;
-            _fadeProgress = 0f;
-            _targetAlpha = 1f;
-            _hoverTimer = 0f;
-            _lastStep = -1;
-        }
-        // Case B: Currently showing Context A, desired is Context B (B != A).
-        // Start fading A out. Once its alpha hits zero, the "Fade-out complete"
-        // branch below flips _displayedType to Default, and on the next tick
-        // we'll land in Case A and begin fading B in.
-        else if (type != CursorType.Default && _displayedType != CursorType.Default
-                 && type != _displayedType && _targetAlpha > 0f)
-        {
-            _fadeProgress = 0f;
-            _targetAlpha = 0f;
-            _hoverTimer = 0f;
-        }
-        // Case C: Desired is Default while still showing a context cursor.
-        // Standard fade-out to the default arrow.
-        else if (type == CursorType.Default && _displayedType != CursorType.Default
-                 && _targetAlpha > 0f)
-        {
-            _fadeProgress = 0f;
-            _targetAlpha = 0f;
-            _hoverTimer = 0f;
-        }
-
-        // Desired matches displayed → tick hover timer for sustained-hover fade
-        if (type != CursorType.Default && type == _displayedType
-            && Mathf.Approximately(_currentAlpha, 1f))
-        {
-            _hoverTimer += dt;
-            if (_hoverTimer >= _fadeSettings.hoverDelay && _targetAlpha >= 1f)
-            {
-                _fadeProgress = 0f;
-                _targetAlpha = _fadeSettings.hoverFadedAlpha;
-            }
-        }
-
-        // Curve-driven alpha toward target
-        if (!Mathf.Approximately(_fadeProgress, 1f))
-        {
-            float duration;
-            AnimationCurve curve;
-
-            if (_targetAlpha >= 1f)
-                { duration = _fadeSettings.fadeInDuration; curve = _fadeSettings.fadeInCurve; }
-            else if (_targetAlpha <= 0f)
-                { duration = _fadeSettings.fadeOutDuration; curve = _fadeSettings.fadeOutCurve; }
-            else
-                { duration = _fadeSettings.hoverFadeDuration; curve = _fadeSettings.hoverFadeCurve; }
-
-            float speed = duration > 0f ? 1f / duration : 100f;
-            _fadeProgress = Mathf.MoveTowards(_fadeProgress, 1f, speed * dt);
-
-            // Curve maps 0→1 progress to 0→1 blend factor
-            float blend = curve != null ? curve.Evaluate(_fadeProgress) : _fadeProgress;
-
-            // Interpolate from start alpha to target alpha
-            float startAlpha = (_targetAlpha >= 1f) ? 0f
-                             : (_targetAlpha <= 0f) ? 1f
-                             : 1f; // hover fade: from full to hoverFadedAlpha
-            _currentAlpha = Mathf.Lerp(startAlpha, _targetAlpha, blend);
-        }
-
-        // Fade-out complete → switch to custom default cursor
-        if (_currentAlpha <= 0.001f && _displayedType != CursorType.Default)
-        {
-            _displayedType = CursorType.Default;
-            _currentAlpha = 0f;
-            _lastStep = -1;
             ApplyDefaultCursor();
             return;
         }
 
-        // Default state — show our custom arrow at full opacity
-        if (_displayedType == CursorType.Default)
+        // Swap to the full-opacity context cursor texture immediately
+        var source = GetSourceTexture(type);
+        if (source != null)
         {
-            if (_lastStep != -1)
-            {
-                _lastStep = -1;
-                ApplyDefaultCursor();
-            }
-            return;
+            Vector2 hotSpot = GetHotSpot(type);
+            Cursor.SetCursor(source, hotSpot, CursorMode.Auto);
         }
+    }
 
-        // Look up pre-baked texture at the nearest alpha step
-        int step = Mathf.Clamp(Mathf.RoundToInt(_currentAlpha * (AlphaSteps - 1)), 0, AlphaSteps - 1);
-        if (step == _lastStep) return;
-        _lastStep = step;
-
-        var bank = _alphaBank[(int)_displayedType];
-        if (bank == null) return;
-
-        Vector2 hotSpot = GetHotSpot(_displayedType);
-        Cursor.SetCursor(bank[step], hotSpot, CursorMode.Auto);
+    private Texture2D GetSourceTexture(CursorType type)
+    {
+        return type switch
+        {
+            CursorType.Interact => _interactCursor,
+            CursorType.Watering => _wateringCursor,
+            CursorType.Fridge   => _fridgeCursor,
+            CursorType.Phone    => _phoneCursor,
+            CursorType.Drawer   => _drawerCursor,
+            CursorType.Drink    => _drinkCursor,
+            CursorType.Sponge   => _spongeCursor,
+            CursorType.Grab     => _grabCursor,
+            CursorType.Scissors => _scissorsCursor,
+            CursorType.Swatter  => _swatterCursor,
+            CursorType.Light    => _lightCursor,
+            _ => null
+        };
     }
 
     /// <summary>

@@ -3818,3 +3818,810 @@ Assets/Shader/CursorShadow.shader
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260409_095244
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/compaction-log.txt
+---
+
+## Session End: 20260409_095746
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_113335
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_113852
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_114136
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_114532
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_120100
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_120505
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_125351
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_125452
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_134352
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_135047
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_135926
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_140512
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_140933
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_141151
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_141508
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_141605
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_141814
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_142223
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_142321
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_142618
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_143239
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_143430
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_143756
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_144741
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_145025
+### Uncommitted Changes
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_151344
+### Uncommitted Changes
+Assets/ArtAssets/Daisy.meta
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat.meta
+Assets/ArtAssets/Daisy/Flower.prefab
+Assets/ArtAssets/Daisy/Flower.prefab.meta
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat.meta
+Assets/ArtAssets/Female Laying Pose.fbx
+Assets/ArtAssets/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Iris.meta
+Assets/ArtAssets/Iris/Back_Standard.fbx
+Assets/ArtAssets/Iris/Back_Standard.fbx.meta
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_fall.fbx
+Assets/ArtAssets/Iris/Front_fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Standard.fbx
+Assets/ArtAssets/Iris/Left_Standard.fbx.meta
+Assets/ArtAssets/Iris/Left_leaf.fbx
+Assets/ArtAssets/Iris/Left_leaf.fbx.meta
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Right_Standard.fbx
+Assets/ArtAssets/Iris/Right_Standard.fbx.meta
+Assets/ArtAssets/Iris/Right_leaf.fbx
+Assets/ArtAssets/Iris/Right_leaf.fbx.meta
+Assets/ArtAssets/Iris/Stem.fbx
+Assets/ArtAssets/Iris/Stem.fbx.meta
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx.meta
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Northern Soul Spin.fbx
+Assets/ArtAssets/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Scissors.meta
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx.meta
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx.meta
+Assets/ArtAssets/Sitting.fbx
+Assets/ArtAssets/Sitting.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat.meta
+Assets/ArtAssets/palestinian-straw-tray/source.meta
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray/textures.meta
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg.meta
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_151640
+### Uncommitted Changes
+Assets/ArtAssets/Daisy.meta
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat.meta
+Assets/ArtAssets/Daisy/Flower.prefab
+Assets/ArtAssets/Daisy/Flower.prefab.meta
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat.meta
+Assets/ArtAssets/Female Laying Pose.fbx
+Assets/ArtAssets/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Iris.meta
+Assets/ArtAssets/Iris/Back_Standard.fbx
+Assets/ArtAssets/Iris/Back_Standard.fbx.meta
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_fall.fbx
+Assets/ArtAssets/Iris/Front_fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Standard.fbx
+Assets/ArtAssets/Iris/Left_Standard.fbx.meta
+Assets/ArtAssets/Iris/Left_leaf.fbx
+Assets/ArtAssets/Iris/Left_leaf.fbx.meta
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Right_Standard.fbx
+Assets/ArtAssets/Iris/Right_Standard.fbx.meta
+Assets/ArtAssets/Iris/Right_leaf.fbx
+Assets/ArtAssets/Iris/Right_leaf.fbx.meta
+Assets/ArtAssets/Iris/Stem.fbx
+Assets/ArtAssets/Iris/Stem.fbx.meta
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx.meta
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Northern Soul Spin.fbx
+Assets/ArtAssets/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Scissors.meta
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx.meta
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx.meta
+Assets/ArtAssets/Sitting.fbx
+Assets/ArtAssets/Sitting.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat.meta
+Assets/ArtAssets/palestinian-straw-tray/source.meta
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray/textures.meta
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg.meta
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_152007
+### Uncommitted Changes
+Assets/ArtAssets/Daisy.meta
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat.meta
+Assets/ArtAssets/Daisy/Flower.prefab
+Assets/ArtAssets/Daisy/Flower.prefab.meta
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat.meta
+Assets/ArtAssets/Female Laying Pose.fbx
+Assets/ArtAssets/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Iris.meta
+Assets/ArtAssets/Iris/Back_Standard.fbx
+Assets/ArtAssets/Iris/Back_Standard.fbx.meta
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_fall.fbx
+Assets/ArtAssets/Iris/Front_fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Standard.fbx
+Assets/ArtAssets/Iris/Left_Standard.fbx.meta
+Assets/ArtAssets/Iris/Left_leaf.fbx
+Assets/ArtAssets/Iris/Left_leaf.fbx.meta
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Right_Standard.fbx
+Assets/ArtAssets/Iris/Right_Standard.fbx.meta
+Assets/ArtAssets/Iris/Right_leaf.fbx
+Assets/ArtAssets/Iris/Right_leaf.fbx.meta
+Assets/ArtAssets/Iris/Stem.fbx
+Assets/ArtAssets/Iris/Stem.fbx.meta
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx.meta
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Northern Soul Spin.fbx
+Assets/ArtAssets/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Scissors.meta
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx.meta
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx.meta
+Assets/ArtAssets/Sitting.fbx
+Assets/ArtAssets/Sitting.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat.meta
+Assets/ArtAssets/palestinian-straw-tray/source.meta
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray/textures.meta
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg.meta
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260409_152255
+### Uncommitted Changes
+Assets/ArtAssets/Daisy.meta
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx
+Assets/ArtAssets/Daisy/Combined_Daisy.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx
+Assets/ArtAssets/Daisy/Daisy_Crown.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_L.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat
+Assets/ArtAssets/Daisy/Daisy_Leaf_Material.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx
+Assets/ArtAssets/Daisy/Daisy_Leaf_R.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx
+Assets/ArtAssets/Daisy/Daisy_Long_Stem 2.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Pedal_Mat.mat.meta
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx
+Assets/ArtAssets/Daisy/Daisy_Stem.fbx.meta
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat
+Assets/ArtAssets/Daisy/Daisy_Yolk_Mat.mat.meta
+Assets/ArtAssets/Daisy/Flower.prefab
+Assets/ArtAssets/Daisy/Flower.prefab.meta
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/L_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx
+Assets/ArtAssets/Daisy/R_Daisy_Withered.fbx.meta
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat
+Assets/ArtAssets/Daisy/Shiny_Daisy_Leaf_Mat.mat.meta
+Assets/ArtAssets/Female Laying Pose.fbx
+Assets/ArtAssets/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Iris.meta
+Assets/ArtAssets/Iris/Back_Standard.fbx
+Assets/ArtAssets/Iris/Back_Standard.fbx.meta
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx
+Assets/ArtAssets/Iris/Back_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx
+Assets/ArtAssets/Iris/Front_Style_Arm.fbx.meta
+Assets/ArtAssets/Iris/Front_fall.fbx
+Assets/ArtAssets/Iris/Front_fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx
+Assets/ArtAssets/Iris/Left_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Left_Standard.fbx
+Assets/ArtAssets/Iris/Left_Standard.fbx.meta
+Assets/ArtAssets/Iris/Left_leaf.fbx
+Assets/ArtAssets/Iris/Left_leaf.fbx.meta
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx
+Assets/ArtAssets/Iris/Right_Side_Fall.fbx.meta
+Assets/ArtAssets/Iris/Right_Standard.fbx
+Assets/ArtAssets/Iris/Right_Standard.fbx.meta
+Assets/ArtAssets/Iris/Right_leaf.fbx
+Assets/ArtAssets/Iris/Right_leaf.fbx.meta
+Assets/ArtAssets/Iris/Stem.fbx
+Assets/ArtAssets/Iris/Stem.fbx.meta
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx
+Assets/ArtAssets/Nema_2nd_pass_shade_smooth.fbx.meta
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Northern Soul Spin.fbx
+Assets/ArtAssets/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Scissors.meta
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx
+Assets/ArtAssets/Scissors/Closed_Scissors.fbx.meta
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx
+Assets/ArtAssets/Scissors/Opened_Scissors.fbx.meta
+Assets/ArtAssets/Sitting.fbx
+Assets/ArtAssets/Sitting.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials.meta
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat
+Assets/ArtAssets/palestinian-straw-tray/Materials/EBdNOvlXkAAJR0T.mat.meta
+Assets/ArtAssets/palestinian-straw-tray/source.meta
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx
+Assets/ArtAssets/palestinian-straw-tray/source/Qash-Tray.fbx.meta
+Assets/ArtAssets/palestinian-straw-tray/textures.meta
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg
+Assets/ArtAssets/palestinian-straw-tray/textures/EBdNOvlXkAAJR0T.jpeg.meta
+Assets/Prefabs/Wine Bottle.prefab
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateCharacterController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/CursorFadeSettings.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+

@@ -223,6 +223,12 @@ public class ObjectGrabber : MonoBehaviour
         if (cam == null)
             cam = Camera.main;
 
+        // Load default click SFX from Resources if none assigned in Inspector
+        if (_pickupSFX == null)
+            _pickupSFX = Resources.Load<AudioClip>("Audio/default_click");
+        if (_placeSFX == null)
+            _placeSFX = Resources.Load<AudioClip>("Audio/default_click");
+
         BuildShadow();
     }
 
@@ -518,32 +524,27 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // No surface — check if clicking near a DropZone directly (fridge, etc.)
-        if (_currentSurface == null)
+        // Check if clicking directly on a DropZone (trash can body, fridge, etc.)
+        // This runs regardless of surface state so clicking anywhere on the
+        // trash can (body or lid) deposits trash.
+        if (TryDepositAtNearbyZone())
         {
-            if (TryDepositAtNearbyZone())
-            {
-                ConsumeClick();
-                return;
-            }
+            ConsumeClick();
             return;
         }
 
+        // No surface — nothing more to do
+        if (_currentSurface == null) return;
+
         // ── DropZone check ──
-        // Check current surface first, then search ALL surfaces with DropZones
+        // Only match the DropZone directly on this surface — parent/child
+        // traversal was causing the kitchen counter to match the nearby sink.
         {
             DropZone zone = _currentSurface.GetComponent<DropZone>();
 
-            // If current surface has no DropZone, search all surfaces with DropZones
-            if (zone == null)
-            {
-                // Check parent chain (sink might be parent/child of counter)
-                zone = _currentSurface.GetComponentInParent<DropZone>();
-                if (zone == null)
-                    zone = _currentSurface.GetComponentInChildren<DropZone>();
-            }
-
-            // Still nothing — search ALL DropZones by proximity (covers fridge, sink, etc.)
+            // Proximity fallback for non-destroy zones only (shoe rack, etc.).
+            // Destroy zones (sink, trash can) must be placed directly on a
+            // surface to match — otherwise adjacent surfaces steal deposits.
             if (zone == null)
             {
                 float bestDist = float.MaxValue;
@@ -552,6 +553,7 @@ public class ObjectGrabber : MonoBehaviour
                 {
                     var z = allZones[i];
                     if (z == null) continue;
+                    if (z.DestroyOnDeposit) continue; // skip sink/trash — direct match only
 
                     float dist = Vector3.Distance(z.transform.position, _grabTarget);
                     if (dist < 2f && dist < bestDist)
@@ -755,6 +757,10 @@ public class ObjectGrabber : MonoBehaviour
     // Forgiving radius for pairing/stacking — SphereCast instead of Raycast
     private const float PairStackRadius = 0.08f;
 
+    [Header("Pair Snap")]
+    [Tooltip("World-space radius at which the held item magnetically snaps toward its pair partner while carrying.")]
+    [SerializeField] private float _pairSnapRadius = 0.4f;
+
     private bool TryPairWithClicked()
     {
         if (_held == null) return false;
@@ -769,8 +775,15 @@ public class ObjectGrabber : MonoBehaviour
 
         // Use SphereCast for forgiving click area, fall back to RaycastAll
         PairableItem clickedPairable = FindComponentAlongRay<PairableItem>(ray, placeableLayer);
-        if (clickedPairable == null || clickedPairable == heldPairable) return false;
 
+        // If precise click missed, accept the snap target we're already locked onto
+        if ((clickedPairable == null || clickedPairable == heldPairable || !clickedPairable.CanPairWith(heldPairable))
+            && _pairSnapTarget != null && _pairSnapTarget.CanPairWith(heldPairable))
+        {
+            clickedPairable = _pairSnapTarget;
+        }
+
+        if (clickedPairable == null || clickedPairable == heldPairable) return false;
         if (!clickedPairable.CanPairWith(heldPairable)) return false;
 
         // Release held item from grabber
@@ -787,6 +800,64 @@ public class ObjectGrabber : MonoBehaviour
         PlayPlaceSFX(_held);
         ClearHeld();
         return true;
+    }
+
+    // ── Pair snap (magnetic carry bias) ──────────────────────────────
+
+    private PairableItem _pairSnapTarget; // currently snapped-to partner (null = no snap)
+
+    /// <summary>
+    /// When holding a pairable item near its partner, snap the grab target
+    /// to the pair position so the item magnetically locks in place.
+    /// Called from UpdateGrabTarget after the normal position is calculated.
+    /// </summary>
+    private void UpdatePairSnap()
+    {
+        _pairSnapTarget = null;
+        if (_held == null) return;
+
+        var heldPairable = _held.GetComponent<PairableItem>();
+        if (heldPairable == null) return;
+        if (heldPairable.IsPaired && heldPairable.Mode == PairableItem.PairMode.SpecificPartner) return;
+
+        // Find the nearest valid partner within snap radius
+        PairableItem best = null;
+        float bestDist = _pairSnapRadius;
+
+        var allItems = PlaceableObject.All;
+        for (int i = 0; i < allItems.Count; i++)
+        {
+            var po = allItems[i];
+            if (po == null || po == _held) continue;
+            if (po.CurrentState == PlaceableObject.State.Held) continue;
+
+            var pairable = po.GetComponent<PairableItem>();
+            if (pairable == null || pairable == heldPairable) continue;
+            if (!pairable.CanPairWith(heldPairable)) continue;
+
+            float dist = Vector3.Distance(po.transform.position, _grabTarget);
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                best = pairable;
+            }
+        }
+
+        if (best == null) return;
+
+        _pairSnapTarget = best;
+
+        // Calculate the position the held item would land at when paired
+        Vector3 snapPos = best.GetPairSnapPosition(heldPairable);
+        _grabTarget = snapPos;
+
+        // Hard-teleport so the item locks instantly (no spring lag)
+        if (_heldRb != null)
+        {
+            _heldRb.position = snapPos;
+            _heldRb.linearVelocity = Vector3.zero;
+            _heldRb.angularVelocity = Vector3.zero;
+        }
     }
 
     /// <summary>
@@ -883,9 +954,17 @@ public class ObjectGrabber : MonoBehaviour
         if (zone == null) zone = hit.collider.GetComponentInParent<DropZone>();
         if (zone == null) return false;
 
-        // Check if the held item matches this zone
+        // Check if the held item matches this zone (name match or category match)
         bool matches = (!string.IsNullOrEmpty(_held.HomeZoneName) && zone.ZoneName == _held.HomeZoneName)
                     || (!string.IsNullOrEmpty(_held.AltHomeZoneName) && zone.ZoneName == _held.AltHomeZoneName);
+        // Category-specific destroy zones: trash→TrashCan, dishes→Sink
+        if (!matches && zone.DestroyOnDeposit)
+        {
+            if (_held.Category == ItemCategory.Trash && zone.ZoneName == "TrashCan")
+                matches = true;
+            else if (_held.Category == ItemCategory.Dish && zone.ZoneName == "Sink")
+                matches = true;
+        }
         if (!matches) return false;
 
         // Deposit
@@ -935,8 +1014,12 @@ public class ObjectGrabber : MonoBehaviour
         _currentSurface = null;
         _lastValidSurface = null;
         _isOnWall = false;
+        _pairSnapTarget = null;
         ShowShadow(false);
         DestroyGhostPreview();
+
+        // Safety: unlock cursor in case an interaction lock was active
+        GlobalCursorManager.UnlockCursor();
 
         if (PickupDescriptionHUD.Instance != null)
             PickupDescriptionHUD.Instance.Hide();
@@ -1032,6 +1115,10 @@ public class ObjectGrabber : MonoBehaviour
         }
 
         // Wall clamping removed — felt too harsh. Surface bounds still constrain placement.
+
+        // Pair snap: if holding a pairable item near its partner, override
+        // _grabTarget to magnetically lock onto the pair position.
+        UpdatePairSnap();
     }
 
     /// <summary>
@@ -1272,6 +1359,13 @@ public class ObjectGrabber : MonoBehaviour
         _ghostPreviewGO.transform.localScale = source.transform.lossyScale;
 
         // Strip everything that isn't a pure visual (transform + mesh render).
+        // Destroy RequireComponent owners first (PlaceableObject → Rigidbody/Collider
+        // dependency) so their dependencies can be removed in the second pass.
+        foreach (var po in _ghostPreviewGO.GetComponentsInChildren<PlaceableObject>(true))
+            DestroyImmediate(po);
+        foreach (var pi in _ghostPreviewGO.GetComponentsInChildren<PairableItem>(true))
+            DestroyImmediate(pi);
+
         var comps = _ghostPreviewGO.GetComponentsInChildren<Component>(includeInactive: true);
         for (int i = 0; i < comps.Length; i++)
         {
@@ -1395,6 +1489,18 @@ public class ObjectGrabber : MonoBehaviour
         float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
         Vector3 placePos = snapped + hitResult.surfaceNormal * halfExtent;
 
+        Quaternion placeRot = _currentSurface.IsVertical
+            ? Quaternion.LookRotation(hitResult.surfaceNormal, Vector3.up)
+              * Quaternion.AngleAxis(_wallRotation, Vector3.forward)
+            : _held.transform.rotation;
+
+        // Mirror the home-snap override from Place() so ghost matches exactly
+        if (_held.HasHome && Vector3.Distance(placePos, _held.HomePosition) < _held.HomeTolerance * 2f)
+        {
+            placePos = _held.HomePosition;
+            placeRot = _held.HomeRotation;
+        }
+
         Vector3 shadowPos = snapped + hitResult.surfaceNormal * 0.01f;
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
@@ -1430,7 +1536,7 @@ public class ObjectGrabber : MonoBehaviour
 
         // Ghost preview sits at the planned landing pose so the player sees
         // a translucent copy of the item "parked" at the snapped grid cell.
-        UpdateGhostPreview(placePos, _held.transform.rotation, show: canPlace);
+        UpdateGhostPreview(placePos, placeRot, show: canPlace);
     }
 
     // ── Public API ──────────────────────────────────────────────────

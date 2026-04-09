@@ -160,11 +160,18 @@ public class PairableItem : MonoBehaviour
         RestoreColor();
         _originalColorCaptured = false;
 
-        // Also restore partner's color
+        // Also restore partner's color and turn off their highlight
         if (_specificPartner != null)
         {
             _specificPartner.RestoreColor();
             _specificPartner._originalColorCaptured = false;
+
+            if (_partnerHighlightActive)
+            {
+                var partnerHL = _specificPartner.GetComponent<InteractableHighlight>();
+                if (partnerHL != null)
+                    partnerHL.SetHighlighted(false);
+            }
         }
 
         _partnerHighlightActive = false;
@@ -230,7 +237,7 @@ public class PairableItem : MonoBehaviour
     {
         if (held == null) return;
 
-        // Stop partner highlight pulse on both items before snapping
+        // Stop all visual cues on both items before snapping
         held.OnPutDown();
         OnPutDown();
 
@@ -241,6 +248,10 @@ public class PairableItem : MonoBehaviour
         // Drop the unpaired-state glitch shader on both items now that they connect.
         if (_placeable != null) _placeable.SetGlitched(false);
         if (held._placeable != null) held._placeable.SetGlitched(false);
+
+        // Kill InteractableHighlight on BOTH items — no lingering glow after pairing
+        ClearHighlight(gameObject);
+        ClearHighlight(held.gameObject);
 
         // Play snap sound
         if (_snapSound != null)
@@ -306,6 +317,27 @@ public class PairableItem : MonoBehaviour
         Debug.Log($"[PairableItem] {held.name} snapped to {stackTop.name} (stack depth)");
     }
 
+    /// <summary>
+    /// Preview where a held item would land if paired with this item right now.
+    /// Used by ObjectGrabber's magnetic pair-snap to lock the held item in place
+    /// before the player clicks to confirm.
+    /// </summary>
+    public Vector3 GetPairSnapPosition(PairableItem held)
+    {
+        Transform stackTop = FindStackTop(transform);
+
+        if (_snapMode == SnapMode.Stacked)
+        {
+            var renderer = stackTop.GetComponentInChildren<Renderer>();
+            if (renderer != null)
+                return renderer.bounds.center + Vector3.up * renderer.bounds.extents.y;
+            return stackTop.position + Vector3.up * _snapOffset.y;
+        }
+
+        // SideBySide (shoes) — world-space equivalent of the local offset
+        return stackTop.TransformPoint(_snapOffset);
+    }
+
     /// <summary>Walk the transform hierarchy to find the topmost stacked PairableItem.</summary>
     private static Transform FindStackTop(Transform root)
     {
@@ -325,6 +357,17 @@ public class PairableItem : MonoBehaviour
             if (!found) break;
         }
         return current;
+    }
+
+    /// <summary>Turn off InteractableHighlight on a GameObject (both highlighted and interact-highlighted).</summary>
+    private static void ClearHighlight(GameObject go)
+    {
+        var hl = go.GetComponent<InteractableHighlight>();
+        if (hl != null)
+        {
+            hl.SetHighlighted(false);
+            hl.SetInteractHighlighted(false);
+        }
     }
 
     /// <summary>Brief color pulse on an item to confirm pairing.</summary>
@@ -348,9 +391,10 @@ public class PairableItem : MonoBehaviour
             }
         }
 
-        // Always restore to true base color
+        // Restore all visual state — color, highlight, pulse flag
         RestoreColor();
         _pairPulseActive = false;
         _originalColorCaptured = false;
+        ClearHighlight(gameObject);
     }
 }

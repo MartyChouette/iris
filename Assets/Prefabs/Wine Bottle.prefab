@@ -427,7 +427,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3.24, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -1.9, y: 0.6, z: 0}
 --- !u!114 &5070487108991051935
 MonoBehaviour:
@@ -447,14 +447,13 @@ MonoBehaviour:
   _homeZoneName: 
   _altHomeZoneName: 
   _itemDescription: 
+  _smellPerDay: 0
+  _daysLeftOut: 0
   canWallMount: 0
   wallOnly: 0
-  _gridSizeMultiplier: 1
   crookedAngleRange: 12
-  _canBeDishelved: 0
-  _dishevelAngle: 25
+  _rotateAxis: {x: 0, y: 1, z: 0}
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
-  _hasDisheveledPose: 0
   _startDishelved: 0
   _pickupSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
   _placeSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
@@ -496,14 +495,13 @@ MonoBehaviour:
   _homeZoneName: 
   _altHomeZoneName: 
   _itemDescription: 
+  _smellPerDay: 0
+  _daysLeftOut: 0
   canWallMount: 0
   wallOnly: 0
-  _gridSizeMultiplier: 1
   crookedAngleRange: 12
-  _canBeDishelved: 0
-  _dishevelAngle: 25
+  _rotateAxis: {x: 0, y: 1, z: 0}
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
-  _hasDisheveledPose: 0
   _startDishelved: 0
   _pickupSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
   _placeSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}

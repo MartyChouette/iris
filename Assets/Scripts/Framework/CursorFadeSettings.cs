@@ -18,8 +18,8 @@ public class CursorFadeSettings : ScriptableObject
     [Tooltip("Duration in seconds for the cursor to fade out.")]
     public float fadeOutDuration = 0.20f;
 
-    [Tooltip("Easing curve for fade-out. X = normalized time, Y = alpha (1→0).")]
-    public AnimationCurve fadeOutCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+    [Tooltip("Easing curve for fade-out. X = normalized time, Y = blend factor (0→1).")]
+    public AnimationCurve fadeOutCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
     [Header("Hover Fade (sustained hover → half transparent)")]
     [Tooltip("Seconds of hovering before the cursor starts fading to half.")]
