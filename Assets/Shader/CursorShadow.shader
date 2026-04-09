@@ -26,7 +26,7 @@ Shader "Iris/CursorShadow"
         Tags
         {
             "RenderType" = "Transparent"
-            "Queue" = "Transparent+100"
+            "Queue" = "Overlay"
             "RenderPipeline" = "UniversalPipeline"
         }
 
@@ -37,7 +37,7 @@ Shader "Iris/CursorShadow"
 
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
-            ZTest LEqual
+            ZTest Always
             Cull Back
 
             HLSLPROGRAM

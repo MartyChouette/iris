@@ -62,16 +62,16 @@ public class ApartmentClock : MonoBehaviour
         // Second hand: 360° per 60 seconds
         float secondAngle = second * 6f;
 
-        // Hands have a base 90° X rotation to lie flat against the clock face.
-        // Sweep angle goes in Z (applied before the X tilt in Unity's ZXY order).
+        // Rotate pivot empties around local Z. The child hand meshes carry
+        // their own base orientation — the pivot just sweeps the angle.
         if (hourHand != null)
-            hourHand.localRotation = Quaternion.Euler(90f, 0f, -hourAngle);
+            hourHand.localRotation = Quaternion.Euler(0f, 0f, -hourAngle);
 
         if (minuteHand != null)
-            minuteHand.localRotation = Quaternion.Euler(90f, 0f, -minuteAngle);
+            minuteHand.localRotation = Quaternion.Euler(0f, 0f, -minuteAngle);
 
         if (secondHand != null)
-            secondHand.localRotation = Quaternion.Euler(90f, 0f, -secondAngle);
+            secondHand.localRotation = Quaternion.Euler(0f, 0f, -secondAngle);
 
         // Tick SFX on minute change
         int currentMinute = Mathf.FloorToInt(hour24 * 60f);

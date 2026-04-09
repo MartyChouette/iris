@@ -17,6 +17,21 @@ public class PlacementSurface : MonoBehaviour
 
     public enum SurfaceAxis { Up, Forward }
 
+    /// <summary>
+    /// How much a placed item's effects are amplified by the surface it sits on.
+    /// Applies to date affection reactions, smell accumulation, tidiness scoring,
+    /// Nema's gaze selection, and reveal wave ordering. Values 1–3 are meant for
+    /// normal authoring; 4 and 5 are reserved for future "secret" surfaces.
+    /// </summary>
+    public enum SurfaceEffectMultiplier
+    {
+        [InspectorName("1× (normal)")]      OneX   = 1,
+        [InspectorName("2× (prominent)")]   TwoX   = 2,
+        [InspectorName("3× (centerpiece)")] ThreeX = 3,
+        [InspectorName("4× (reserved — secret)")] FourX  = 4,
+        [InspectorName("5× (reserved — secret)")] FiveX  = 5,
+    }
+
     public struct SurfaceHitResult
     {
         public Vector3 worldPosition;
@@ -39,8 +54,15 @@ public class PlacementSurface : MonoBehaviour
     [Tooltip("Mark as floor — trash items can be placed here.")]
     [SerializeField] private bool _isFloor;
 
+    [Header("Effect Multiplier")]
+    [Tooltip("Amplifies the impact of items placed here. Applies to date reactions, smell accumulation, tidiness scoring, Nema's gaze, and reveal-wave ordering.")]
+    [SerializeField] private SurfaceEffectMultiplier _effectMultiplier = SurfaceEffectMultiplier.OneX;
+
     /// <summary>True if this surface is marked as a floor in the Inspector.</summary>
     public bool IsFloor => _isFloor;
+
+    /// <summary>Integer multiplier (1-5) applied to effects of items sitting on this surface.</summary>
+    public int EffectMultiplier => (int)_effectMultiplier;
 
     /// <summary>World-space surface normal based on orientation axis.</summary>
     public Vector3 SurfaceNormal =>

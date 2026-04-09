@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,29 +21,60 @@ public class NemaController : MonoBehaviour
     public static NemaController Instance { get; private set; }
 
     [Header("Model")]
-    [Tooltip("Root transform of Nema's visual model (moved by this controller).")]
+    [Tooltip("Root transform of Nema's visual model (moved by this controller). Used as the fallback model when no per-location model is configured below.")]
     [SerializeField] private Transform _model;
 
-    [Tooltip("Animator on Nema's model. Optional — pose/look-at features require it.")]
+    [Tooltip("Animator on Nema's fallback model. Optional — pose/look-at features require it. Per-location models carry their own Animators, which are picked up automatically when the model is shown.")]
     [SerializeField] private Animator _animator;
 
     [Header("Browsing Positions (per area index)")]
-    [Tooltip("Where Nema stands in each apartment area. Index-matched to ApartmentManager.areas[].")]
+    [Tooltip("Where Nema stands in each apartment area. Index-matched to ApartmentManager.areas[]. Ignored when a matching per-area model is set below.")]
     [SerializeField] private Transform[] _areaPositions;
 
+    [Tooltip("Per-browsing-area Nema models with their own idle animators. Index-matched to _areaPositions. Leave empty to use the fallback _model + WarpTo behavior.")]
+    [SerializeField] private GameObject[] _areaModels;
+
     [Header("Date Positions")]
-    [Tooltip("Where Nema stands during entrance judgments (Phase 1).")]
+    [Tooltip("Where Nema stands during entrance judgments (Phase 1). Ignored when _arrivalModel is set.")]
     [SerializeField] private Transform _entrancePosition;
 
-    [Tooltip("Where Nema stands during kitchen/drink phase (Phase 2).")]
+    [Tooltip("Where Nema stands during kitchen/drink phase (Phase 2). Ignored when _kitchenModel is set.")]
     [SerializeField] private Transform _kitchenPosition;
 
-    [Tooltip("Where Nema sits during couch/reveal phase (Phase 3).")]
+    [Tooltip("Where Nema sits during couch/reveal phase (Phase 3). Ignored when _couchModel is set.")]
     [SerializeField] private Transform _couchPosition;
 
+    [Header("Date Phase Models")]
+    [Tooltip("Full Nema model (mesh + Animator + looping idle) for Phase 1 Arrival. Pre-positioned at the entrance.")]
+    [SerializeField] private GameObject _arrivalModel;
+
+    [Tooltip("Full Nema model for Phase 2 Kitchen. Pre-positioned at the kitchen.")]
+    [SerializeField] private GameObject _kitchenModel;
+
+    [Tooltip("Full Nema model for Phase 3 Couch/Reveal. Pre-positioned on the couch.")]
+    [SerializeField] private GameObject _couchModel;
+
     [Header("Newspaper Position")]
-    [Tooltip("Where Nema stands while reading the newspaper (morning phase).")]
+    [Tooltip("Where Nema stands while reading the newspaper (morning phase). Ignored when _newspaperModel is set.")]
     [SerializeField] private Transform _newspaperPosition;
+
+    [Tooltip("Full Nema model for the morning newspaper pose. Pre-positioned at the newspaper spot.")]
+    [SerializeField] private GameObject _newspaperModel;
+
+    [Header("Exploration (pre-date clean-up)")]
+    [Tooltip("Nema model shown during the pre-date Exploration phase — she's leaning against the wall while the player tidies up. Uses the leaning animation / lean location.")]
+    [SerializeField] private GameObject _explorationLeanModel;
+
+    [Header("Cleaning Phase (post-date Evening)")]
+    [Tooltip("Full Nema model for the post-date Evening phase. Pre-positioned watching the player clean.")]
+    [SerializeField] private GameObject _cleaningModel;
+
+    [Header("Secret — Dancing")]
+    [Tooltip("Secret dancing Nema model (e.g. Northern Soul Spin). Shown via ShowDancingSecret() — not tied to any phase, toggled externally by whatever trigger unlocks the dance (record player, secret click, etc.).")]
+    [SerializeField] private GameObject _dancingModel;
+
+    // Runtime flag so phase changes respect an active secret dance.
+    private bool _dancingSecretActive;
 
     [Header("Look-At")]
     [Tooltip("How fast the look-at weight blends in/out (per second).")]
@@ -64,15 +96,10 @@ public class NemaController : MonoBehaviour
     [Tooltip("Chance (0-1) of glancing at a random object vs just shifting pose.")]
     [SerializeField, Range(0f, 1f)] private float _glanceChance = 0.7f;
 
-    [Header("Body Facing")]
-    [Tooltip("If true, Nema's body subtly rotates toward the look target (not just head).")]
-    [SerializeField] private bool _bodyFacesTarget = true;
-
-    [Tooltip("Max degrees the body turns toward the look target.")]
-    [SerializeField] private float _maxBodyTurn = 30f;
-
-    [Tooltip("How fast the body rotates toward the look target (degrees/sec).")]
-    [SerializeField] private float _bodyTurnSpeed = 60f;
+    // Body-turn system removed: per-location models have their own idle
+    // animations driving full-body orientation; turning the body here would
+    // fight the Animator. Head-only look-at is still active via the IK /
+    // manual head bone path below.
 
     // ── Runtime state ──────────────────────────────────────────
     private Camera _cachedCamera;
@@ -90,14 +117,51 @@ public class NemaController : MonoBehaviour
     private bool _isBored;
     private Transform _boredTarget;
 
-    // Body facing
-    private Quaternion _baseRotation; // rotation from position marker
-    private float _currentBodyTurn;
 
     // Animator hashes
     private static readonly int H_IdleIndex = Animator.StringToHash("IdleIndex");
     private static readonly int H_LookWeight = Animator.StringToHash("LookWeight");
     private static readonly int H_Bored = Animator.StringToHash("Bored");
+
+    // ── Null-safe animator parameter helpers ──────────────────────
+    // Per-location Nema models may each have a bespoke Animator Controller
+    // that doesn't include every parameter (IdleIndex, LookWeight, Bored).
+    // These helpers check the parameter exists with the expected type before
+    // calling the underlying Animator API, so missing parameters become a
+    // silent no-op instead of a Unity console warning on every frame.
+
+    private static bool AnimatorHasParameter(Animator a, int nameHash, AnimatorControllerParameterType type)
+    {
+        if (a == null || a.runtimeAnimatorController == null) return false;
+        var ps = a.parameters;
+        for (int i = 0; i < ps.Length; i++)
+        {
+            var p = ps[i];
+            if (p.nameHash == nameHash && p.type == type) return true;
+        }
+        return false;
+    }
+
+    private void SafeSetFloat(int nameHash, float value)
+    {
+        if (_animator == null) return;
+        if (AnimatorHasParameter(_animator, nameHash, AnimatorControllerParameterType.Float))
+            _animator.SetFloat(nameHash, value);
+    }
+
+    private void SafeSetInteger(int nameHash, int value)
+    {
+        if (_animator == null) return;
+        if (AnimatorHasParameter(_animator, nameHash, AnimatorControllerParameterType.Int))
+            _animator.SetInteger(nameHash, value);
+    }
+
+    private void SafeSetTrigger(int nameHash)
+    {
+        if (_animator == null) return;
+        if (AnimatorHasParameter(_animator, nameHash, AnimatorControllerParameterType.Trigger))
+            _animator.SetTrigger(nameHash);
+    }
 
     private void Awake()
     {
@@ -136,13 +200,10 @@ public class NemaController : MonoBehaviour
 
         UpdateLookTarget();
         UpdateBoredTimer();
-        UpdateBodyFacing();
 
-        // Sync animator parameters
-        if (_animator != null)
-        {
-            _animator.SetFloat(H_LookWeight, _lookWeight);
-        }
+        // Sync animator parameters (null-safe — skipped if the active model's
+        // Animator Controller doesn't define LookWeight).
+        SafeSetFloat(H_LookWeight, _lookWeight);
     }
 
     private void LateUpdate()
@@ -271,7 +332,10 @@ public class NemaController : MonoBehaviour
 
     private void StartBoredGlance()
     {
-        // Pick a random active ReactableTag in the scene
+        // Pick a random active ReactableTag in the scene, weighted by the
+        // surface effect multiplier of the item's PlaceableObject. An item on
+        // a 3× centerpiece surface is 3× as likely to be picked as one on a
+        // normal shelf, so Nema looks at prominent things more often.
         var candidates = ReactableTag.All;
         if (candidates.Count == 0)
         {
@@ -282,7 +346,7 @@ public class NemaController : MonoBehaviour
         // Try a few times to find one that's in front of Nema
         for (int attempt = 0; attempt < 5; attempt++)
         {
-            var pick = candidates[Random.Range(0, candidates.Count)];
+            var pick = PickWeightedRandomTag(candidates);
             if (pick == null || !pick.IsActive) continue;
 
             Vector3 toItem = pick.transform.position - _model.position;
@@ -293,9 +357,8 @@ public class NemaController : MonoBehaviour
                 _isBored = true;
                 _boredGlanceTimer = _boredGlanceDuration + Random.Range(-0.5f, 0.5f);
 
-                // Fire animator trigger for a pose shift
-                if (_animator != null)
-                    _animator.SetTrigger(H_Bored);
+                // Fire animator trigger for a pose shift (null-safe).
+                SafeSetTrigger(H_Bored);
 
                 return;
             }
@@ -303,31 +366,48 @@ public class NemaController : MonoBehaviour
 
         // Couldn't find a valid target — just shift pose without looking
         _isBored = false;
-        if (_animator != null)
-            _animator.SetTrigger(H_Bored);
+        SafeSetTrigger(H_Bored);
     }
 
-    // ── Body facing ────────────────────────────────────────────
-
-    private void UpdateBodyFacing()
+    /// <summary>
+    /// Pick a random ReactableTag weighted by its PlaceableObject's current
+    /// effect multiplier. Items on prominent surfaces (3×) get picked 3× as
+    /// often as items on normal surfaces (1×). Falls back to uniform random
+    /// if no candidates have a PlaceableObject.
+    /// </summary>
+    private static ReactableTag PickWeightedRandomTag(IReadOnlyList<ReactableTag> candidates)
     {
-        if (!_bodyFacesTarget || _model == null) return;
+        if (candidates == null || candidates.Count == 0) return null;
 
-        float targetTurn = 0f;
-
-        if (_hasLookTarget && _lookWeight > 0.1f)
+        // Compute total weight
+        int totalWeight = 0;
+        for (int i = 0; i < candidates.Count; i++)
         {
-            Vector3 toTarget = _lookTarget - _model.position;
-            toTarget.y = 0f;
-            if (toTarget.sqrMagnitude > 0.01f)
-            {
-                float signedAngle = Vector3.SignedAngle(_baseRotation * Vector3.forward, toTarget, Vector3.up);
-                targetTurn = Mathf.Clamp(signedAngle, -_maxBodyTurn, _maxBodyTurn) * _lookWeight;
-            }
+            var c = candidates[i];
+            if (c == null || !c.IsActive) continue;
+            totalWeight += GetTagWeight(c);
         }
 
-        _currentBodyTurn = Mathf.MoveTowards(_currentBodyTurn, targetTurn, _bodyTurnSpeed * Time.deltaTime);
-        _model.rotation = _baseRotation * Quaternion.Euler(0f, _currentBodyTurn, 0f);
+        if (totalWeight <= 0) return candidates[Random.Range(0, candidates.Count)];
+
+        // Pick a random point in the weight range and walk until we land in a bucket
+        int roll = Random.Range(0, totalWeight);
+        int cursor = 0;
+        for (int i = 0; i < candidates.Count; i++)
+        {
+            var c = candidates[i];
+            if (c == null || !c.IsActive) continue;
+            cursor += GetTagWeight(c);
+            if (roll < cursor) return c;
+        }
+        return candidates[candidates.Count - 1];
+    }
+
+    private static int GetTagWeight(ReactableTag tag)
+    {
+        var po = tag.GetComponent<PlaceableObject>();
+        if (po == null) po = tag.GetComponentInParent<PlaceableObject>();
+        return po != null ? po.CurrentEffectMultiplier : 1;
     }
 
     // ── Public API ──────────────────────────────────────────────
@@ -338,9 +418,7 @@ public class NemaController : MonoBehaviour
         if (_model == null || target == null) return;
         _currentTarget = target;
         _model.position = target.position;
-        _baseRotation = target.rotation;
         _model.rotation = target.rotation;
-        _currentBodyTurn = 0f;
 
         // Reset look/bored state on teleport
         ClearLookTarget();
@@ -354,8 +432,6 @@ public class NemaController : MonoBehaviour
     {
         if (_model == null) return;
         _model.position = position;
-        _baseRotation = _model.rotation;
-        _currentBodyTurn = 0f;
     }
 
     /// <summary>Show or hide Nema's model.</summary>
@@ -363,6 +439,76 @@ public class NemaController : MonoBehaviour
     {
         if (_model != null)
             _model.gameObject.SetActive(visible);
+    }
+
+    /// <summary>
+    /// Deactivate every known per-location Nema model and activate
+    /// <paramref name="target"/>. Pass null to hide every model.
+    /// Each model has its own looping idle Animator which plays on enable,
+    /// so phase transitions become "toggle the right GameObject". The
+    /// active model's Animator becomes the look-at / bored target so head
+    /// tracking keeps working without per-model wiring.
+    /// </summary>
+    private void ShowOnlyModel(GameObject target)
+    {
+        // Deactivate every known model, including the fallback single-model root.
+        if (_model != null && (target == null || _model.gameObject != target))
+            _model.gameObject.SetActive(false);
+        if (_arrivalModel   != null && _arrivalModel   != target) _arrivalModel.SetActive(false);
+        if (_kitchenModel   != null && _kitchenModel   != target) _kitchenModel.SetActive(false);
+        if (_couchModel     != null && _couchModel     != target) _couchModel.SetActive(false);
+        if (_newspaperModel != null && _newspaperModel != target) _newspaperModel.SetActive(false);
+        if (_explorationLeanModel != null && _explorationLeanModel != target) _explorationLeanModel.SetActive(false);
+        if (_cleaningModel  != null && _cleaningModel  != target) _cleaningModel.SetActive(false);
+        if (_dancingModel   != null && _dancingModel   != target) _dancingModel.SetActive(false);
+        if (_areaModels != null)
+        {
+            for (int i = 0; i < _areaModels.Length; i++)
+                if (_areaModels[i] != null && _areaModels[i] != target)
+                    _areaModels[i].SetActive(false);
+        }
+
+        if (target == null) return;
+
+        target.SetActive(true);
+        // Re-bind look-at/bored to the active model's animator so the head
+        // tracking keeps working after a phase switch. If the target doesn't
+        // have its own animator we fall back to the serialized one.
+        var animOnTarget = target.GetComponentInChildren<Animator>();
+        if (animOnTarget != null) _animator = animOnTarget;
+    }
+
+    // ── Public API for the secret dancing overlay ───────────────────
+
+    /// <summary>
+    /// Activate the secret dancing Nema model (Northern Soul Spin etc.).
+    /// Overrides whatever the current phase would show until HideDancingSecret
+    /// is called. Trigger from wherever makes sense (record player, secret
+    /// click, debug hotkey).
+    /// </summary>
+    public void ShowDancingSecret()
+    {
+        if (_dancingModel == null)
+        {
+            Debug.LogWarning("[NemaController] ShowDancingSecret called but _dancingModel is not assigned.");
+            return;
+        }
+        _dancingSecretActive = true;
+        ShowOnlyModel(_dancingModel);
+    }
+
+    /// <summary>
+    /// Deactivate the secret dance and restore Nema to whatever the current
+    /// phase / area would normally show. Re-triggers the phase handler.
+    /// </summary>
+    public void HideDancingSecret()
+    {
+        if (!_dancingSecretActive) return;
+        _dancingSecretActive = false;
+
+        // Re-evaluate the current phase so she snaps back to the right model.
+        if (DayPhaseManager.Instance != null)
+            OnPhaseChanged((int)DayPhaseManager.Instance.CurrentPhase);
     }
 
     /// <summary>Notify Nema that the player just did something interesting (resets bored timer).</summary>
@@ -385,32 +531,58 @@ public class NemaController : MonoBehaviour
                 return;
         }
 
+        // Prefer per-area model if wired, otherwise fall back to WarpTo.
+        if (_areaModels != null && areaIndex >= 0 && areaIndex < _areaModels.Length
+            && _areaModels[areaIndex] != null)
+        {
+            ShowOnlyModel(_areaModels[areaIndex]);
+            return;
+        }
+
         if (_areaPositions != null && areaIndex >= 0 && areaIndex < _areaPositions.Length
             && _areaPositions[areaIndex] != null)
         {
             WarpTo(_areaPositions[areaIndex]);
 
-            // Set idle pose for this area
-            if (_animator != null)
-                _animator.SetInteger(H_IdleIndex, areaIndex);
+            // Set idle pose for this area (null-safe).
+            SafeSetInteger(H_IdleIndex, areaIndex);
         }
     }
 
     private void OnPhaseChanged(int phaseInt)
     {
+        // If the dancing secret is currently active, phase changes leave her
+        // dancing — the secret state wins until explicitly cleared.
+        if (_dancingSecretActive) return;
+
         var phase = (DayPhaseManager.DayPhase)phaseInt;
         switch (phase)
         {
             case DayPhaseManager.DayPhase.Morning:
                 SetVisible(true);
-                if (_newspaperPosition != null)
+                if (_newspaperModel != null)
+                    ShowOnlyModel(_newspaperModel);
+                else if (_newspaperPosition != null)
                     WarpTo(_newspaperPosition);
                 break;
 
             case DayPhaseManager.DayPhase.Exploration:
-            case DayPhaseManager.DayPhase.Evening:
+                // Pre-date clean-up phase — prefer the lean model if wired,
+                // else fall back to per-area browsing models.
                 SetVisible(true);
-                if (ApartmentManager.Instance != null)
+                if (_explorationLeanModel != null)
+                    ShowOnlyModel(_explorationLeanModel);
+                else if (ApartmentManager.Instance != null)
+                    OnAreaChanged(ApartmentManager.Instance.CurrentAreaIndex);
+                break;
+
+            case DayPhaseManager.DayPhase.Evening:
+                // Post-date cleanup phase — prefer the dedicated cleaning model
+                // if wired, else fall back to the normal area-driven behavior.
+                SetVisible(true);
+                if (_cleaningModel != null)
+                    ShowOnlyModel(_cleaningModel);
+                else if (ApartmentManager.Instance != null)
                     OnAreaChanged(ApartmentManager.Instance.CurrentAreaIndex);
                 break;
 
@@ -431,13 +603,22 @@ public class NemaController : MonoBehaviour
         switch (datePhase)
         {
             case DateSessionManager.DatePhase.Arrival:
-                if (_entrancePosition != null) WarpTo(_entrancePosition);
+                if (_arrivalModel != null)
+                    ShowOnlyModel(_arrivalModel);
+                else if (_entrancePosition != null)
+                    WarpTo(_entrancePosition);
                 break;
             case DateSessionManager.DatePhase.BackgroundJudging:
-                if (_kitchenPosition != null) WarpTo(_kitchenPosition);
+                if (_kitchenModel != null)
+                    ShowOnlyModel(_kitchenModel);
+                else if (_kitchenPosition != null)
+                    WarpTo(_kitchenPosition);
                 break;
             case DateSessionManager.DatePhase.Reveal:
-                if (_couchPosition != null) WarpTo(_couchPosition);
+                if (_couchModel != null)
+                    ShowOnlyModel(_couchModel);
+                else if (_couchPosition != null)
+                    WarpTo(_couchPosition);
                 break;
         }
     }

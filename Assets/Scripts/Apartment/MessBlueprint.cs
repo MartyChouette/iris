@@ -40,9 +40,6 @@ public class MessBlueprint : ScriptableObject
     [Tooltip("Color of the procedural box (used when objectPrefab is null).")]
     public Color objectColor = Color.gray;
 
-    [Tooltip("If true, this item counts as messy when tilted (books, magazines, papers).")]
-    public bool canBeDishelved;
-
     [Header("Conditions")]
     [Tooltip("If DateAftermath: require last date succeeded?")]
     public bool requireDateSuccess;

@@ -107,8 +107,10 @@ public class PourCursorOverlay : MonoBehaviour
 
         if (!_active) return;
 
-        // Position at mouse
-        _cursorRT.position = IrisInput.CursorPosition;
+        // Lock the visual cursor to the click origin so the icon stays put
+        // while the player drags downward to control pour rate. The OS cursor
+        // is hidden during drag, so the player only sees this anchored icon.
+        _cursorRT.position = PourDragHelper.ClickOrigin;
 
         // Rotate: tilt clockwise as player drags down
         float angle = -PourDragHelper.TiltAngle;

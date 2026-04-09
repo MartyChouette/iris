@@ -90,7 +90,6 @@ public static class RecordSetup
         // Configure PlaceableObject via SerializedObject
         var so = new SerializedObject(placeable);
         so.FindProperty("_useSpawnAsHome").boolValue = true;
-        so.FindProperty("_canBeDishelved").boolValue = true;
         so.FindProperty("_itemCategory").enumValueIndex = (int)ItemCategory.Record;
 
         string recordName = index <= definitions.Length ? definitions[index - 1]?.title ?? $"Record {index}" : $"Record {index}";

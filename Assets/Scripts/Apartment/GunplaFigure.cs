@@ -1,105 +1,47 @@
 using UnityEngine;
 
 /// <summary>
-/// Poseable Gunpla model figure built from a hierarchy of cubes with HingeJoints.
-/// Monitors the sibling PlaceableObject for state changes:
-///   - On pickup: all child Rigidbodies go kinematic so the figure moves as one unit.
-///   - On place: child Rigidbodies restored to non-kinematic with HingeJoint limits.
-/// Click a limb segment while NOT holding it to cycle that joint through preset angles.
+/// One-shot rigidifier for the Gunpla model. The figure was originally built
+/// from a tree of cube parts wired together by HingeJoints + per-limb
+/// Rigidbodies, which made it flop under physics. This component runs in both
+/// Awake and Start (belt-and-suspenders against script execution order) and
+/// completely destroys every child HingeJoint AND every child Rigidbody, so
+/// the figure becomes a single rigid object owned entirely by the root
+/// PlaceableObject. Animator components on any descendant are also disabled.
 /// </summary>
 public class GunplaFigure : MonoBehaviour
 {
-    [Tooltip("Preset angles (degrees) to cycle through when clicking a joint.")]
-    [SerializeField] private float[] _presetAngles = { 0f, -45f, -90f };
+    private void Awake() => Rigidify();
+    private void Start() => Rigidify();
 
-    [Tooltip("Spring force used to drive joints to target angles.")]
-    [SerializeField] private float _jointSpringForce = 50f;
-
-    [Tooltip("Damper on the joint spring.")]
-    [SerializeField] private float _jointDamper = 5f;
-
-    private PlaceableObject _placeable;
-    private HingeJoint[] _joints;
-    private Rigidbody[] _childBodies;
-    private int[] _angleIndices;
-    private bool _isHeld;
-
-    private void Awake()
+    private void Rigidify()
     {
-        _placeable = GetComponent<PlaceableObject>();
-        _joints = GetComponentsInChildren<HingeJoint>();
-        _childBodies = GetComponentsInChildren<Rigidbody>();
-        _angleIndices = new int[_joints.Length];
-    }
+        // 1. Disable any Animator on descendants — most important guard against
+        //    an unexpected animation component.
+        var animators = GetComponentsInChildren<Animator>(includeInactive: true);
+        for (int i = 0; i < animators.Length; i++)
+            if (animators[i] != null) animators[i].enabled = false;
 
-    private void Update()
-    {
-        if (_placeable == null) return;
+        // 2. Destroy every HingeJoint (and any other joint type) on descendants.
+        //    Joints between two kinematic bodies are inert, but destroying them
+        //    avoids PhysX warnings and makes the intent clear.
+        var hinges = GetComponentsInChildren<HingeJoint>(includeInactive: true);
+        for (int i = 0; i < hinges.Length; i++)
+            if (hinges[i] != null) Destroy(hinges[i]);
 
-        bool shouldBeHeld = _placeable.CurrentState == PlaceableObject.State.Held;
-        if (shouldBeHeld != _isHeld)
+        var anyJoints = GetComponentsInChildren<Joint>(includeInactive: true);
+        for (int i = 0; i < anyJoints.Length; i++)
+            if (anyJoints[i] != null) Destroy(anyJoints[i]);
+
+        // 3. Destroy every child Rigidbody. Only the root Rigidbody survives —
+        //    it's owned by PlaceableObject and drives pickup/place. Child
+        //    bodies being destroyed also cascades any remaining joints away.
+        var bodies = GetComponentsInChildren<Rigidbody>(includeInactive: true);
+        for (int i = 0; i < bodies.Length; i++)
         {
-            if (shouldBeHeld) OnFigurePickedUp();
-            else OnFigurePlaced();
+            if (bodies[i] == null) continue;
+            if (bodies[i].gameObject == gameObject) continue;
+            Destroy(bodies[i]);
         }
-    }
-
-    private void OnFigurePickedUp()
-    {
-        _isHeld = true;
-        foreach (var rb in _childBodies)
-        {
-            if (rb.gameObject == gameObject) continue;
-            rb.isKinematic = true;
-        }
-    }
-
-    private void OnFigurePlaced()
-    {
-        _isHeld = false;
-        foreach (var rb in _childBodies)
-        {
-            if (rb.gameObject == gameObject) continue;
-            rb.isKinematic = false;
-        }
-    }
-
-    /// <summary>
-    /// Cycle a specific joint to the next preset angle.
-    /// Called when the player clicks on a limb segment.
-    /// </summary>
-    public void CycleJoint(HingeJoint joint)
-    {
-        if (_isHeld || joint == null) return;
-
-        int idx = System.Array.IndexOf(_joints, joint);
-        if (idx < 0) return;
-
-        _angleIndices[idx] = (_angleIndices[idx] + 1) % _presetAngles.Length;
-        float target = _presetAngles[_angleIndices[idx]];
-
-        var spring = joint.spring;
-        spring.spring = _jointSpringForce;
-        spring.damper = _jointDamper;
-        spring.targetPosition = target;
-        joint.spring = spring;
-        joint.useSpring = true;
-    }
-
-    /// <summary>
-    /// Try cycling a joint on the clicked child collider. Returns true if handled.
-    /// </summary>
-    public bool TryClickLimb(Collider clickedCollider)
-    {
-        if (_isHeld) return false;
-
-        var joint = clickedCollider.GetComponent<HingeJoint>();
-        if (joint == null)
-            joint = clickedCollider.GetComponentInParent<HingeJoint>();
-
-        if (joint == null) return false;
-
-        CycleJoint(joint);
-        return true;
     }
 }

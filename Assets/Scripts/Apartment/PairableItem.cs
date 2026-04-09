@@ -75,6 +75,15 @@ public class PairableItem : MonoBehaviour
             _baseColor = _renderer.sharedMaterial.color;
     }
 
+    private void Start()
+    {
+        // Unpaired pairables get the PSX glitch shader as a visual hint that
+        // they belong with a partner. Removed in SnapPair when they connect.
+        // Deferred to Start so PlaceableObject.Awake has created _instanceMat.
+        if (!_isPaired && _placeable != null)
+            _placeable.SetGlitched(true);
+    }
+
     private void Update()
     {
         if (_pairPulseActive) return;
@@ -228,6 +237,10 @@ public class PairableItem : MonoBehaviour
         _isPaired = true;
         held._isPaired = true;
         _pairedChild = held;
+
+        // Drop the unpaired-state glitch shader on both items now that they connect.
+        if (_placeable != null) _placeable.SetGlitched(false);
+        if (held._placeable != null) held._placeable.SetGlitched(false);
 
         // Play snap sound
         if (_snapSound != null)

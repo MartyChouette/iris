@@ -17,7 +17,9 @@ public static class PourDragHelper
     /// <summary>True while the player is actively dragging to pour.</summary>
     public static bool IsDragging { get; private set; }
 
-    private static float _startY;
+    /// <summary>Screen-space position where the player clicked to begin pouring.</summary>
+    public static Vector2 ClickOrigin { get; private set; }
+
     private static bool _started;
 
     // How many pixels of downward drag = max pour rate
@@ -27,7 +29,7 @@ public static class PourDragHelper
     /// <summary>Call once when the player clicks to begin pouring.</summary>
     public static void Begin()
     {
-        _startY = IrisInput.CursorPosition.y;
+        ClickOrigin = IrisInput.CursorPosition;
         _started = true;
         IsDragging = true;
         PourRate = 0f;
@@ -45,7 +47,7 @@ public static class PourDragHelper
         }
 
         float currentY = IrisInput.CursorPosition.y;
-        float dragDown = Mathf.Max(_startY - currentY, 0f);
+        float dragDown = Mathf.Max(ClickOrigin.y - currentY, 0f);
         float t = Mathf.Clamp01(dragDown / MaxDragPixels);
 
         // Ease-in curve so small movements give fine control

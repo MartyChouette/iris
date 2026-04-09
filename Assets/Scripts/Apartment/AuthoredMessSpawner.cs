@@ -78,7 +78,7 @@ public class AuthoredMessSpawner : MonoBehaviour
         }
         else
         {
-            var shader = Shader.Find("Iris/PSXLit");
+            var shader = Shader.Find("Iris/PSXLitGlitch");
             if (shader == null) shader = Shader.Find("Universal Render Pipeline/Lit");
             if (shader != null)
                 _glitchMatInstance = new Material(shader);
@@ -327,8 +327,6 @@ public class AuthoredMessSpawner : MonoBehaviour
         poSO.SetEnum("_itemCategory", (int)ItemCategory.Trash);
         poSO.SetString("_homeZoneName", "TrashCan");
         poSO.SetString("_itemDescription", !string.IsNullOrEmpty(bp.description) ? bp.description : bp.messName);
-        if (bp.canBeDishelved)
-            poSO.SetBool("_canBeDishelved", true);
 
         // Apply glitch material AFTER PlaceableObject.Awake (so _instanceMat exists)
         // and BEFORE InteractableHighlight.Awake (so it caches the correct base material)
@@ -393,12 +391,5 @@ public class AuthoredMessSpawner : MonoBehaviour
             if (field != null) field.SetValue(_target, value);
         }
 
-        public void SetBool(string fieldName, bool value)
-        {
-            if (_target == null) return;
-            var field = _target.GetType().GetField(fieldName,
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (field != null) field.SetValue(_target, value);
-        }
     }
 }

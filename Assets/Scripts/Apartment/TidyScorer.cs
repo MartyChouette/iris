@@ -1,10 +1,11 @@
 using UnityEngine;
 
 /// <summary>
-/// Scene-scoped singleton that aggregates per-area tidiness from three signals:
+/// Scene-scoped singleton that aggregates per-area tidiness from four signals:
 ///   1. Stain cleanliness (CleaningManager)
 ///   2. Object mess (misplaced PlaceableObjects with non-General category)
 ///   3. Smell (sum of ReactableTag.SmellAmount in area)
+///   4. Floor clutter (items resting on the floor)
 ///
 /// Each area score ranges 0 (filthy) to 1 (spotless).
 /// Uses PlaceableObject.All static registry instead of FindObjectsByType.
@@ -26,9 +27,6 @@ public class TidyScorer : MonoBehaviour
     [Tooltip("Weight for floor clutter in the tidiness formula.")]
     [SerializeField] private float _clutterWeight = 0.10f;
 
-    [Tooltip("Weight for dishelved items (tilted books, magazines, etc).")]
-    [SerializeField] private float _dishevelWeight = 0.05f;
-
     [Header("Thresholds")]
     [Tooltip("Maximum expected mess items per area before objectClean = 0.")]
     [SerializeField] private int _maxExpectedMess = 3;
@@ -38,9 +36,6 @@ public class TidyScorer : MonoBehaviour
 
     [Tooltip("Smell amount per area above which smellClean = 0.")]
     [SerializeField] private float _smellThreshold = 1.5f;
-
-    [Tooltip("Maximum expected dishelved items per area before dishevelClean = 0.")]
-    [SerializeField] private int _maxExpectedDishelved = 3;
 
     [Header("Area Bounds (drag boxes in Scene View)")]
     [SerializeField] private Bounds _kitchenBounds = new Bounds(
@@ -80,13 +75,11 @@ public class TidyScorer : MonoBehaviour
         float objectClean = GetObjectClean(area);
         float smellClean = GetSmellClean(area);
         float clutterClean = GetClutterClean(area);
-        float dishevelClean = GetDishevelClean(area);
 
         return stainClean * _stainWeight
              + objectClean * _objectWeight
              + smellClean * _smellWeight
-             + clutterClean * _clutterWeight
-             + dishevelClean * _dishevelWeight;
+             + clutterClean * _clutterWeight;
     }
 
     /// <summary>Average tidiness across all areas.</summary>
@@ -130,6 +123,10 @@ public class TidyScorer : MonoBehaviour
 
     private float GetObjectClean(ApartmentArea area)
     {
+        // Weighted by each item's surface multiplier — a misplaced mug on the
+        // coffee table (3x) counts three times as much mess as one tucked in a
+        // closet (1x). Items hidden in closed cubbies are skipped entirely —
+        // out of sight, out of mess score.
         int messCount = 0;
         var placeables = PlaceableObject.All;
         for (int i = 0; i < placeables.Count; i++)
@@ -138,8 +135,9 @@ public class TidyScorer : MonoBehaviour
             if (p.Category == ItemCategory.General) continue;
             if (p.IsAtHome) continue;
             if (p.CurrentState == PlaceableObject.State.Held) continue;
+            if (p.IsHiddenInCubby) continue;
             if (ClassifyPosition(p.transform.position) == area)
-                messCount++;
+                messCount += p.CurrentEffectMultiplier;
         }
 
         return 1f - Mathf.Clamp01((float)messCount / _maxExpectedMess);
@@ -148,6 +146,10 @@ public class TidyScorer : MonoBehaviour
     /// <summary>Clutter cleanliness for an area: items on the floor that aren't on surfaces.</summary>
     public float GetClutterClean(ApartmentArea area)
     {
+        // Floor items are by definition off-surface, so they all count as 1
+        // (CurrentEffectMultiplier falls back to 1 when _lastPlacedSurface is null).
+        // Belt-and-suspenders: also skip anything flagged hidden in a cubby,
+        // even though floor items shouldn't ever be private.
         int floorItems = 0;
         var placeables = PlaceableObject.All;
         for (int i = 0; i < placeables.Count; i++)
@@ -155,8 +157,9 @@ public class TidyScorer : MonoBehaviour
             var p = placeables[i];
             if (!p.IsOnFloor) continue;
             if (p.IsAtHome) continue;
+            if (p.IsHiddenInCubby) continue;
             if (ClassifyPosition(p.transform.position) == area)
-                floorItems++;
+                floorItems += p.CurrentEffectMultiplier;
         }
 
         return 1f - Mathf.Clamp01((float)floorItems / _maxExpectedClutter);
@@ -176,23 +179,6 @@ public class TidyScorer : MonoBehaviour
                 count++;
         }
         return count;
-    }
-
-    /// <summary>Dishelved cleanliness: tilted books, magazines, papers count as messy.</summary>
-    private float GetDishevelClean(ApartmentArea area)
-    {
-        int dishelvedCount = 0;
-        var placeables = PlaceableObject.All;
-        for (int i = 0; i < placeables.Count; i++)
-        {
-            var p = placeables[i];
-            if (!p.IsDishelved) continue;
-            if (p.CurrentState == PlaceableObject.State.Held) continue;
-            if (ClassifyPosition(p.transform.position) == area)
-                dishelvedCount++;
-        }
-
-        return 1f - Mathf.Clamp01((float)dishelvedCount / _maxExpectedDishelved);
     }
 
     private float GetSmellClean(ApartmentArea area)

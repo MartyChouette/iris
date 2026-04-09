@@ -35,7 +35,6 @@ public class PlaceableObjectEditor : Editor
                 Undo.RecordObject(po, "Capture Disheveled Rotation");
                 var so = new SerializedObject(po);
                 so.FindProperty("_disheveledRotation").quaternionValue = po.transform.rotation;
-                so.FindProperty("_hasDisheveledPose").boolValue = true;
                 so.ApplyModifiedProperties();
                 Debug.Log($"[PlaceableObject] {po.name} disheveled rotation captured: {po.transform.eulerAngles}");
             }

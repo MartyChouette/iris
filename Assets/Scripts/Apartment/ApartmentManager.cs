@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Unity.Cinemachine;
 using TMPro;
 using Iris.Apartment;
@@ -384,6 +385,21 @@ public class ApartmentManager : MonoBehaviour
     [Tooltip("Pan speed for WASD/arrow keys (world units per second).")]
     [SerializeField] private float _keyPanSpeed = 3f;
 
+    [Header("Edge-Scroll Pan")]
+    [Tooltip("Enable RTS-style edge scrolling — pushing the cursor against a screen edge pans the camera in that direction.")]
+    [SerializeField] private bool _edgePanEnabled = true;
+
+    [Tooltip("Width of the active edge zone in pixels. Cursor must be within this many pixels of the screen edge for edge-pan to engage.")]
+    [SerializeField] private float _edgePanZoneWidth = 60f;
+
+    [Tooltip("Max pan speed when the cursor is all the way at the screen edge (world units per second). Scales linearly from 0 at the inner zone edge to this value at the screen edge.")]
+    [SerializeField] private float _edgePanMaxSpeed = 4f;
+
+    [Tooltip("Seconds the cursor must dwell against an edge before edge-pan kicks in. 0 = instant.")]
+    [SerializeField] private float _edgePanActivationDelay = 0.1f;
+
+    private float _edgePanHoldTimer;
+
     private void HandleBrowsingInput()
     {
         // WASD / arrow keys pan the camera (replaces area cycling)
@@ -400,6 +416,89 @@ public class ApartmentManager : MonoBehaviour
             _panOffset += (right * h + up * v) * _keyPanSpeed * Time.deltaTime;
             ClampPanOffset();
         }
+
+        HandleEdgeScrollPan();
+    }
+
+    /// <summary>
+    /// RTS-style edge scroll: pushing the cursor within <see cref="_edgePanZoneWidth"/>
+    /// pixels of any screen edge pans the camera in that direction. Speed is
+    /// proportional to how far INTO the edge zone the cursor has traveled (0 at
+    /// the inner zone edge, max at the screen edge) — so holding it against
+    /// the edge "presses harder" and scrolls faster. Respects a short dwell
+    /// delay to avoid jittery accidental activations when moving the cursor
+    /// casually across the screen.
+    /// </summary>
+    private void HandleEdgeScrollPan()
+    {
+        if (!_edgePanEnabled) return;
+
+        // Don't edge-pan during the pour drag (watering / drink making) —
+        // the pour mechanic deliberately pulls the cursor toward the bottom
+        // edge and we don't want the camera to fight that motion.
+        if (PourDragHelper.IsDragging)
+        {
+            _edgePanHoldTimer = 0f;
+            return;
+        }
+
+        // Don't edge-pan when right-click dragging (user is already panning manually).
+        if (IrisInput.Instance != null && IrisInput.Instance.PanButton.IsPressed())
+        {
+            _edgePanHoldTimer = 0f;
+            return;
+        }
+
+        // Don't edge-pan when hovering a UI element (buttons, panels, HUDs).
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            _edgePanHoldTimer = 0f;
+            return;
+        }
+
+        Vector2 cursor = Input.mousePosition;
+        float w = Screen.width;
+        float h = Screen.height;
+        float zone = Mathf.Max(1f, _edgePanZoneWidth);
+
+        // Compute a -1..+1 push factor per axis. Each axis scales from 0 at the
+        // inner zone edge to ±1 at the screen edge (or past it), so cursors
+        // deep in the edge zone scroll faster than ones just nudging into it.
+        float hFactor = 0f;
+        float vFactor = 0f;
+
+        if (cursor.x < zone)
+            hFactor = -Mathf.Clamp01(1f - cursor.x / zone);
+        else if (cursor.x > w - zone)
+            hFactor = Mathf.Clamp01((cursor.x - (w - zone)) / zone);
+
+        if (cursor.y < zone)
+            vFactor = -Mathf.Clamp01(1f - cursor.y / zone);
+        else if (cursor.y > h - zone)
+            vFactor = Mathf.Clamp01((cursor.y - (h - zone)) / zone);
+
+        // Ignore cursor positions outside the window bounds entirely — Unity
+        // can report negative or greater-than-screen-size values in windowed
+        // mode when the cursor leaves the game view, which would otherwise
+        // keep edge-pan firing after you've alt-tabbed away.
+        if (cursor.x < 0f || cursor.x > w || cursor.y < 0f || cursor.y > h)
+            hFactor = vFactor = 0f;
+
+        if (Mathf.Abs(hFactor) < 0.01f && Mathf.Abs(vFactor) < 0.01f)
+        {
+            _edgePanHoldTimer = 0f;
+            return;
+        }
+
+        // Dwell-delay gate: require the cursor to be in the edge zone for a
+        // short moment before engaging, so flicks across the screen don't trip.
+        _edgePanHoldTimer += Time.deltaTime;
+        if (_edgePanHoldTimer < _edgePanActivationDelay) return;
+
+        Vector3 right = _baseRotation * Vector3.right;
+        Vector3 up = _baseRotation * Vector3.up;
+        _panOffset += (right * hFactor + up * vFactor) * _edgePanMaxSpeed * Time.deltaTime;
+        ClampPanOffset();
     }
 
     private void ResetZoom()

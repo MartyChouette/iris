@@ -49,27 +49,19 @@ public class PlaceableObject : MonoBehaviour
     [Tooltip("If true, this object can ONLY be placed on walls (rejects tables/shelves).")]
     [SerializeField] private bool wallOnly;
 
-    [Tooltip("Grid size multiplier for this item (0.5 = half grid, fits 2 per cell). 0 or 1 = use default.")]
-    [SerializeField, Range(0f, 2f)] private float _gridSizeMultiplier = 1f;
-
-    /// <summary>Multiplier applied to grid size for this item. Books use 0.5 to fit 2 per cell.</summary>
-    public float GridSizeMultiplier => _gridSizeMultiplier <= 0f ? 1f : _gridSizeMultiplier;
-
     [Tooltip("Random rotation range (degrees) applied when spawned on a wall.")]
     [SerializeField] private float crookedAngleRange = 12f;
 
-    [Header("Dishelved Detection")]
-    [Tooltip("If true, this item counts as messy when tilted (books, magazines, papers).")]
-    [SerializeField] private bool _canBeDishelved;
+    [Header("Rotate Input")]
+    [Tooltip("World-space axis around which the rotate button (RMB) turns this item. Default (0,1,0) = yaw around world up. Use (0,-1,0) to invert. Set to (0,0,0) to lock rotation entirely (useful for books where yaw would tip them off the shelf).")]
+    [SerializeField] private Vector3 _rotateAxis = Vector3.up;
 
-    [Tooltip("Angle threshold (degrees) — tilted beyond this from upright = dishelved.")]
-    [SerializeField] private float _dishevelAngle = 25f;
+    /// <summary>World axis for the rotate input. Zero = rotation locked.</summary>
+    public Vector3 RotateAxis => _rotateAxis;
 
-    [Tooltip("Captured disheveled rotation. Use context menu 'Capture Disheveled Pose' to set.")]
+    [Header("Disheveled Pose")]
+    [Tooltip("Captured askew rotation. Use the inspector 'Capture Disheveled Rotation' button to set.")]
     [SerializeField] private Quaternion _disheveledRotation = Quaternion.identity;
-
-    [Tooltip("True when a disheveled rotation has been captured.")]
-    [SerializeField] private bool _hasDisheveledPose;
 
     [Tooltip("If true, starts the scene in the disheveled pose.")]
     [SerializeField] private bool _startDishelved;
@@ -125,8 +117,45 @@ public class PlaceableObject : MonoBehaviour
         && Vector3.Distance(transform.position, _homePosition) <= _homeTolerance;
     public bool CanWallMount => canWallMount;
     public bool WallOnly => wallOnly;
-    public bool CanBeDishelved => _canBeDishelved;
     public PlacementSurface LastPlacedSurface => _lastPlacedSurface;
+
+    /// <summary>
+    /// True when the item is inside a closed cubby/drawer — signaled by its
+    /// ReactableTag.IsPrivate flag. Hidden items are fully excluded from
+    /// tidiness scoring (dirty mug in a closed drawer = zero visible mess).
+    /// Smell is deliberately NOT gated by this (ReactableTag comment: "Smell
+    /// travels through drawers.") so smells still accumulate but aren't amplified.
+    /// </summary>
+    public bool IsHiddenInCubby
+    {
+        get
+        {
+            var tag = GetComponent<ReactableTag>();
+            return tag != null && tag.IsPrivate;
+        }
+    }
+
+    /// <summary>
+    /// The effect multiplier from the current placement surface (1-5).
+    /// Returns 1x if:
+    ///   - The item isn't on a surface (held, on the floor, etc.).
+    ///   - The item is hidden in a closed cubby. Interior surface multipliers
+    ///     don't amplify effects for things the player has hidden. The
+    ///     reveal/affection path already skips private items via tag.IsPrivate,
+    ///     but smell and NemaController don't, so the gate lives here.
+    /// Consumers: DateSessionManager (reveal affection), smell accumulation,
+    /// NemaController (bored glance weight). TidyScorer skips hidden items
+    /// entirely via IsHiddenInCubby rather than weighting them at 1.
+    /// </summary>
+    public int CurrentEffectMultiplier
+    {
+        get
+        {
+            if (_lastPlacedSurface == null) return 1;
+            if (IsHiddenInCubby) return 1;
+            return _lastPlacedSurface.EffectMultiplier;
+        }
+    }
     public Vector3 HomePosition => _homePosition;
     public Quaternion HomeRotation => _homeRotation;
     public float HomeTolerance => _homeTolerance;
@@ -154,63 +183,17 @@ public class PlaceableObject : MonoBehaviour
     }
 
     /// <summary>
-    /// True when this item is tilted beyond its angle threshold.
-    /// Used by ObjectGrabber for click-to-straighten.
-    /// </summary>
-    public bool IsTilted
-    {
-        get
-        {
-            if (!_canBeDishelved) return false;
-            if (CurrentState == State.Held) return false;
-            if (canWallMount) return false;
-            float angle = Vector3.Angle(transform.up, Vector3.up);
-            return angle > _dishevelAngle;
-        }
-    }
-
-    /// <summary>
-    /// True when this item is messy / out of place. Includes:
-    /// - Trash items (always disheveled until disposed)
-    /// - Items not at home (need to be returned)
-    /// - Tilted items (crooked books, magazines)
-    /// </summary>
-    public bool IsDishelved
-    {
-        get
-        {
-            if (CurrentState == State.Held) return false;
-            if (_itemCategory == ItemCategory.Trash) return true;
-            if (!IsAtHome && _homePosition != Vector3.zero) return true;
-            return IsTilted;
-        }
-    }
-
-    /// <summary>
-    /// Straighten a tilted item — snaps to home rotation if captured, otherwise zeroes X/Z.
-    /// Returns true if the item was tilted and got straightened.
-    /// </summary>
-    public bool Straighten()
-    {
-        if (!IsTilted) return false;
-
-        if (_homeRotation != Quaternion.identity)
-            transform.rotation = _homeRotation;
-        else
-            transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
-
-        if (_rb != null) _rb.angularVelocity = Vector3.zero;
-        Debug.Log($"[PlaceableObject] {name} straightened.");
-        return true;
-    }
-
-    /// <summary>
-    /// Apply the captured disheveled pose. Does nothing if no pose was captured.
-    /// Call from mess spawners or DailyMessSpawner to scatter items.
+    /// Apply the captured askew pose. No-op if no rotation was captured.
+    /// Also swaps the item to the PSX glitch shader (matching the Dead Letter
+    /// Love books) so disheveled items visibly jitter with the same PSX feel
+    /// as other glitched scene elements. The shader swap uses _GlitchIntensity=0
+    /// — identical to the books' serialized material — so the jitter level
+    /// comes from the shader's vertex-snap/affine/dither passes, not extra
+    /// screen-space displacement.
     /// </summary>
     public void Dishevel()
     {
-        if (!_canBeDishelved || !_hasDisheveledPose) return;
+        if (_disheveledRotation == Quaternion.identity) return;
 
         transform.rotation = _disheveledRotation;
 
@@ -222,6 +205,7 @@ public class PlaceableObject : MonoBehaviour
         }
 
         ApplyGlitch();
+
         Debug.Log($"[PlaceableObject] {name} disheveled.");
     }
 
@@ -239,7 +223,9 @@ public class PlaceableObject : MonoBehaviour
 
         _originalShader = _instanceMat.shader;
         _instanceMat.shader = s_glitchShader;
-        _instanceMat.SetFloat("_GlitchIntensity", 0.4f);
+        // Match the books and procedural trash — the PSX vertex-snap / affine /
+        // dither effects do the visual work; full glitch intensity is way too noisy.
+        _instanceMat.SetFloat("_GlitchIntensity", 0f);
         _isGlitched = true;
     }
 
@@ -251,12 +237,21 @@ public class PlaceableObject : MonoBehaviour
         _isGlitched = false;
     }
 
+    /// <summary>Public toggle for the PSX glitch shader swap (used by PairableItem for unpaired-state hint).</summary>
+    public void SetGlitched(bool active)
+    {
+        if (active) ApplyGlitch();
+        else RemoveGlitch();
+    }
+
+    /// <summary>True if the glitch shader is currently applied.</summary>
+    public bool IsGlitched => _isGlitched;
+
     /// <summary>Capture current rotation as the disheveled pose (rotation only, position untouched).</summary>
     [ContextMenu("Capture Disheveled Rotation")]
     private void CaptureDisheveledPose()
     {
         _disheveledRotation = transform.rotation;
-        _hasDisheveledPose = true;
         Debug.Log($"[PlaceableObject] {name} disheveled rotation captured: {transform.eulerAngles}");
     }
 
@@ -287,11 +282,10 @@ public class PlaceableObject : MonoBehaviour
         Debug.Log($"[PlaceableObject] {name} home position cleared.");
     }
 
-    /// <summary>Clear the captured disheveled pose (reverts to procedural fallback).</summary>
+    /// <summary>Clear the captured disheveled pose.</summary>
     [ContextMenu("Clear Disheveled Rotation")]
     private void ClearDisheveledPose()
     {
-        _hasDisheveledPose = false;
         _disheveledRotation = Quaternion.identity;
         Debug.Log($"[PlaceableObject] {name} disheveled rotation cleared.");
     }
@@ -372,6 +366,12 @@ public class PlaceableObject : MonoBehaviour
 
     private void Start()
     {
+        // Snap scene-placed items to the same grid the player uses, so editor
+        // placement (which is rarely on-grid) doesn't conflict with the runtime
+        // occupancy check. Disheveled items snap *first*, then take their askew
+        // rotation. Wall items keep their wall-aligned position.
+        SnapToGridOnSpawn();
+
         if (_startDishelved)
             Dishevel();
 
@@ -393,6 +393,50 @@ public class PlaceableObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Find the placement surface this item is sitting on (raycast down for
+    /// horizontal items, use last placed surface for wall items) and snap the
+    /// position to the global grid. Updates _homePosition to match.
+    /// </summary>
+    private void SnapToGridOnSpawn()
+    {
+        if (canWallMount) return; // wall items use their crooked spawn pose
+        if (_itemCategory == ItemCategory.Trash) return; // trash spawns wherever it falls
+        if (_itemCategory == ItemCategory.Record) return; // records live in dedicated record slots, not on the grid
+        // Belt-and-suspenders: also bail if a RecordItem component is present,
+        // in case a record isn't flagged with the Record category in the inspector.
+        if (GetComponent<RecordItem>() != null) return;
+
+        var surface = PlacementSurface.FindNearest(transform.position, skipVertical: true);
+        if (surface == null) return;
+
+        // Only snap if we're actually over this surface — otherwise we'd teleport
+        // floor items onto the nearest table.
+        Vector3 clamped = surface.ClampToSurface(transform.position);
+        if ((clamped - transform.position).sqrMagnitude > 0.25f) return; // > 0.5m off
+
+        var hit = surface.ProjectOntoSurface(transform.position);
+        Vector3 snapped = surface.SnapToGrid(hit.worldPosition, ObjectGrabber.GlobalGridSize);
+
+        // Preserve the item's resting offset above the surface (half-height along surface normal).
+        float halfExtent = GetHalfExtentAlongNormal(hit.surfaceNormal);
+        Vector3 finalPos = snapped + hit.surfaceNormal * halfExtent;
+
+        transform.position = finalPos;
+        _lastValidPosition = finalPos;
+        if (_homePosition != Vector3.zero)
+            _homePosition = finalPos;
+        _lastPlacedSurface = surface;
+    }
+
+    /// <summary>Half-extent of the renderer bounds along a world-space normal.</summary>
+    private float GetHalfExtentAlongNormal(Vector3 normal)
+    {
+        if (_renderer == null) return 0f;
+        Vector3 ext = _renderer.bounds.extents;
+        return Mathf.Abs(Vector3.Dot(ext, normal.normalized));
+    }
+
     private void OnNewDay()
     {
         if (this == null) return; // destroyed
@@ -404,7 +448,8 @@ public class PlaceableObject : MonoBehaviour
         if (_smellPerDay <= 0f) return;
 
         _daysLeftOut++;
-        float totalSmell = _smellPerDay * _daysLeftOut;
+        // Surface multiplier amplifies displayed stink — prominent trash stinks 3x.
+        float totalSmell = _smellPerDay * _daysLeftOut * CurrentEffectMultiplier;
 
         // Update ReactableTag smell
         var tag = GetComponent<ReactableTag>();
@@ -626,18 +671,11 @@ public class PlaceableObject : MonoBehaviour
         _lastValidPosition = transform.position;
         _lastValidRotation = transform.rotation;
         IsAtHome = false;
-        RemoveGlitch();
 
-        // Lazy-init silhouette on first pickup (deferred from scene load)
-        EnsureSilhouette();
-
-        // Also silhouette all paired/stacked children
-        foreach (Transform child in transform)
-        {
-            var childPlaceable = child.GetComponent<PlaceableObject>();
-            if (childPlaceable != null)
-                childPlaceable.EnsureSilhouette();
-        }
+        // Silhouette overlay disabled — SetRenderOnTop (called from the actual
+        // pickup path) swaps the held mesh's shader to Iris/HeldOnTop, which
+        // already renders the real item on top of everything. The old
+        // see-through silhouette duplicate was visual noise on top of that.
 
         // If we were stored in a drawer, notify the drawer
         var drawer = GetComponentInParent<DrawerController>();
@@ -1041,26 +1079,86 @@ public class PlaceableObject : MonoBehaviour
 
     // ── Render on top (held items always visible) ─────────────────────
 
-    private int _savedRenderQueue = -1;
+    // Per-renderer state so we can restore each material's original shader on drop.
+    // URP/Lit hard-codes ZTest LEqual — setting a _ZTest property is a no-op.
+    // The only reliable fix is to swap the shader to one with ZTest Always.
+    private struct RenderOnTopState
+    {
+        public Renderer renderer;
+        public Material instanceMat;
+        public Shader savedShader;
+        public int savedQueue;
+    }
+    private readonly List<RenderOnTopState> _renderOnTopStates = new();
+
+    private static Shader s_heldOnTopShader;
+    private static bool s_heldOnTopShaderCached;
 
     private void SetRenderOnTop(bool onTop)
     {
-        if (_instanceMat == null) return;
-
         if (onTop)
         {
-            _savedRenderQueue = _instanceMat.renderQueue;
-            _instanceMat.SetFloat("_ZTest", (float)CompareFunction.Always);
-            _instanceMat.renderQueue = 4000;
+            // Already on top — don't re-save shaders (that would overwrite the
+            // originals with the already-swapped HeldOnTop shader).
+            if (_renderOnTopStates.Count > 0) return;
+
+            if (!s_heldOnTopShaderCached)
+            {
+                s_heldOnTopShaderCached = true;
+                s_heldOnTopShader = Shader.Find("Iris/HeldOnTop");
+                if (s_heldOnTopShader == null)
+                    Debug.LogWarning("[PlaceableObject] Iris/HeldOnTop shader not found — held items will not render on top.");
+            }
+            if (s_heldOnTopShader == null) return;
+
+            // Walk EVERY renderer in the hierarchy (multi-mesh items: shoes,
+            // figurines, etc.) and swap each material's shader to HeldOnTop so
+            // it's drawn after every other opaque renderer in the scene. Skip
+            // children that have their own PlaceableObject — they handle
+            // themselves recursively below.
+            var renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                var r = renderers[i];
+                if (r == null) continue;
+
+                // A child PlaceableObject will call SetRenderOnTop on itself.
+                var childPO = r.GetComponentInParent<PlaceableObject>();
+                if (childPO != null && childPO != this) continue;
+
+                // Skip stink-line particle systems and silhouette overlays —
+                // they manage their own render order.
+                if (r.gameObject.name == "StinkLines") continue;
+                if (r.gameObject.name == "Silhouette") continue;
+
+                // Instantiate the material so we don't mutate the shared asset.
+                var mat = r.material; // this implicitly instances
+                _renderOnTopStates.Add(new RenderOnTopState
+                {
+                    renderer = r,
+                    instanceMat = mat,
+                    savedShader = mat.shader,
+                    savedQueue = mat.renderQueue,
+                });
+
+                mat.shader = s_heldOnTopShader;
+                mat.renderQueue = 4000;
+            }
         }
         else
         {
-            _instanceMat.SetFloat("_ZTest", (float)CompareFunction.LessEqual);
-            if (_savedRenderQueue >= 0)
-                _instanceMat.renderQueue = _savedRenderQueue;
+            // Restore original shader + queue on each tracked renderer.
+            for (int i = 0; i < _renderOnTopStates.Count; i++)
+            {
+                var s = _renderOnTopStates[i];
+                if (s.instanceMat == null || s.renderer == null) continue;
+                if (s.savedShader != null) s.instanceMat.shader = s.savedShader;
+                s.instanceMat.renderQueue = s.savedQueue;
+            }
+            _renderOnTopStates.Clear();
         }
 
-        // Also apply to paired/stacked children
+        // Cascade to paired/stacked child PlaceableObjects (each owns its own state)
         foreach (Transform child in transform)
         {
             var childPlaceable = child.GetComponent<PlaceableObject>();

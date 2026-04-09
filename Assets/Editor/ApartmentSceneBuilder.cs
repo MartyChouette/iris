@@ -700,11 +700,9 @@ public static class ApartmentSceneBuilder
     {
         var parent = new GameObject("Placeables");
 
-        // Cup on coffee table
-        var cup = CreatePlaceable("Cup", parent.transform,
-            new Vector3(-0.672f, 0.45f, 1.984f), new Vector3(0.12f, 0.15f, 0.12f),
-            new Color(0.85f, 0.82f, 0.75f), placeableLayer);
-        SetItemDescription(cup, "A ceramic mug, slightly chipped.");
+        // Chipped mug removed — there's now a dynamic "Dirty Glass" that
+        // comes from the post-date drink on the coffee table, so the
+        // hand-authored chipped mug was redundant.
 
         // Vase on kitchen counter
         var vase = CreatePlaceable("Vase", parent.transform,
@@ -718,7 +716,6 @@ public static class ApartmentSceneBuilder
             new Vector3(-0.372f, 0.42f, 2.084f), new Vector3(0.22f, 0.025f, 0.30f),
             new Color(0.7f, 0.3f, 0.3f), placeableLayer);
         SetItemDescription(magazine, "Last month's gardening magazine.");
-        SetDishelved(magazine, true);
 
         // Yoyo on coffee table
         var yoyo = CreatePlaceable("Yoyo", parent.transform,
@@ -766,16 +763,6 @@ public static class ApartmentSceneBuilder
         if (placeable == null) return;
         var so = new SerializedObject(placeable);
         so.FindProperty("_itemDescription").stringValue = description;
-        so.ApplyModifiedPropertiesWithoutUndo();
-    }
-
-    private static void SetDishelved(GameObject go, bool canBeDishelved, float angle = 25f)
-    {
-        var placeable = go.GetComponent<PlaceableObject>();
-        if (placeable == null) return;
-        var so = new SerializedObject(placeable);
-        so.FindProperty("_canBeDishelved").boolValue = canBeDishelved;
-        so.FindProperty("_dishevelAngle").floatValue = angle;
         so.ApplyModifiedPropertiesWithoutUndo();
     }
 
@@ -1260,29 +1247,28 @@ public static class ApartmentSceneBuilder
         root.layer = placeableLayer;
         root.isStatic = false;
 
-        // Torso (main body — child Rigidbody for HingeJoint chain)
+        // Static robot — no per-limb Rigidbodies, no HingeJoints. Parts are
+        // mesh-only children of the root, welded via Transform parenting. The
+        // root's Rigidbody (added below) drives pickup/place for the whole
+        // figure. This prevents physics jitter and means the Gunpla behaves
+        // like a single rigid prop.
+
+        // Torso (main body)
         var torso = CreateGunplaPart("Torso", root.transform,
             new Vector3(0f, upperLegL + lowerLegL + torsoH / 2f, 0f),
             new Vector3(torsoW, torsoH, torsoD), white, litShader);
-        var torsoRb = torso.AddComponent<Rigidbody>();
-        torsoRb.mass = 0.3f;
-        torsoRb.isKinematic = true;
 
         // Head
         var head = CreateGunplaPart("Head", root.transform,
             new Vector3(0f, upperLegL + lowerLegL + torsoH + headS / 2f, 0f),
             new Vector3(headS, headS, headS), white, litShader);
-        var headRb = head.AddComponent<Rigidbody>();
-        headRb.mass = 0.05f;
-        headRb.isKinematic = true;
-        AddHingeJoint(head, torsoRb, new Vector3(0f, -headS / 2f, 0f), Vector3.up, -45f, 45f);
 
-        // V-fin on head (decorative — no joint)
+        // V-fin on head (decorative — parented to head)
         CreateGunplaPart("VFin", head.transform,
             new Vector3(0f, headS * 0.4f, -headS * 0.3f),
             new Vector3(headS * 0.8f, headS * 0.3f, 0.004f), yellow, litShader);
 
-        // Arms (left/right)
+        // Arms (left/right) — static parts, no joints
         for (int side = 0; side < 2; side++)
         {
             float sign = side == 0 ? -1f : 1f;
@@ -1291,26 +1277,16 @@ public static class ApartmentSceneBuilder
             float shoulderX = sign * (torsoW / 2f + armW / 2f);
             float shoulderY = upperLegL + lowerLegL + torsoH - armW / 2f;
 
-            var upperArm = CreateGunplaPart($"UpperArm_{lr}", root.transform,
+            CreateGunplaPart($"UpperArm_{lr}", root.transform,
                 new Vector3(shoulderX, shoulderY - upperArmL / 2f, 0f),
                 new Vector3(armW, upperArmL, armW), red, litShader);
-            var uaRb = upperArm.AddComponent<Rigidbody>();
-            uaRb.mass = 0.05f;
-            uaRb.isKinematic = true;
-            AddHingeJoint(upperArm, torsoRb,
-                new Vector3(0f, upperArmL / 2f, 0f), Vector3.forward, -90f, 90f);
 
-            var foreArm = CreateGunplaPart($"ForeArm_{lr}", root.transform,
+            CreateGunplaPart($"ForeArm_{lr}", root.transform,
                 new Vector3(shoulderX, shoulderY - upperArmL - foreArmL / 2f, 0f),
                 new Vector3(armW * 0.9f, foreArmL, armW * 0.9f), white, litShader);
-            var faRb = foreArm.AddComponent<Rigidbody>();
-            faRb.mass = 0.03f;
-            faRb.isKinematic = true;
-            AddHingeJoint(foreArm, uaRb,
-                new Vector3(0f, foreArmL / 2f, 0f), Vector3.forward, 0f, 135f);
         }
 
-        // Legs (left/right)
+        // Legs (left/right) — static parts, no joints
         for (int side = 0; side < 2; side++)
         {
             float sign = side == 0 ? -1f : 1f;
@@ -1319,26 +1295,16 @@ public static class ApartmentSceneBuilder
             float hipX = sign * (torsoW / 2f - legW / 2f);
             float hipY = upperLegL + lowerLegL;
 
-            var upperLeg = CreateGunplaPart($"UpperLeg_{lr}", root.transform,
+            CreateGunplaPart($"UpperLeg_{lr}", root.transform,
                 new Vector3(hipX, hipY - upperLegL / 2f, 0f),
                 new Vector3(legW, upperLegL, legW), blue, litShader);
-            var ulRb = upperLeg.AddComponent<Rigidbody>();
-            ulRb.mass = 0.05f;
-            ulRb.isKinematic = true;
-            AddHingeJoint(upperLeg, torsoRb,
-                new Vector3(0f, upperLegL / 2f, 0f), Vector3.right, -90f, 90f);
 
-            var lowerLeg = CreateGunplaPart($"LowerLeg_{lr}", root.transform,
+            CreateGunplaPart($"LowerLeg_{lr}", root.transform,
                 new Vector3(hipX, hipY - upperLegL - lowerLegL / 2f, 0f),
                 new Vector3(legW * 0.9f, lowerLegL, legW * 1.1f), white, litShader);
-            var llRb = lowerLeg.AddComponent<Rigidbody>();
-            llRb.mass = 0.03f;
-            llRb.isKinematic = true;
-            AddHingeJoint(lowerLeg, ulRb,
-                new Vector3(0f, lowerLegL / 2f, 0f), Vector3.right, 0f, 135f);
         }
 
-        // Backpack (decorative, fixed to torso)
+        // Backpack (decorative, parented to torso)
         CreateGunplaPart("Backpack", torso.transform,
             new Vector3(0f, 0f, torsoD / 2f + backpackS / 2f - 0.002f),
             new Vector3(backpackS, backpackS * 1.2f, backpackS * 0.6f), grey, litShader);
@@ -1389,20 +1355,6 @@ public static class ApartmentSceneBuilder
             rend.sharedMaterial = mat;
         }
         return go;
-    }
-
-    private static void AddHingeJoint(GameObject go, Rigidbody connectedBody,
-        Vector3 anchor, Vector3 axis, float minAngle, float maxAngle)
-    {
-        var joint = go.AddComponent<HingeJoint>();
-        joint.connectedBody = connectedBody;
-        joint.anchor = anchor;
-        joint.axis = axis;
-        joint.useLimits = true;
-        var limits = joint.limits;
-        limits.min = minAngle;
-        limits.max = maxAngle;
-        joint.limits = limits;
     }
 
     // ══════════════════════════════════════════════════════════════════
@@ -3545,7 +3497,7 @@ public static class ApartmentSceneBuilder
         CreateMessBP(messDir, "Scattered_Magazine", "Scattered Magazine", "Open to a horoscope page.",
             MessBlueprint.MessCategory.General, MessBlueprint.MessType.Object,
             weight: 1.0f, objColor: new Color(0.8f, 0.3f, 0.35f), objScale: new Vector3(0.21f, 0.015f, 0.15f),
-            areas: new[] { ApartmentArea.LivingRoom }, canBeDishelved: true,
+            areas: new[] { ApartmentArea.LivingRoom },
             spawnPos: new Vector3(-0.4f, 0.46f, 1.8f), spawnRot: new Vector3(0f, 15f, 8f)); // coffee table, tilted
 
         AssetDatabase.SaveAssets();
@@ -3557,7 +3509,7 @@ public static class ApartmentSceneBuilder
         SpillDefinition spillDef = null, bool requireSuccess = false, bool requireFailure = false,
         float minAffection = 0f, float maxAffection = 100f, string requireTag = "",
         int minDay = 1, float weight = 1f, Color? objColor = null, Vector3? objScale = null,
-        ApartmentArea[] areas = null, bool canBeDishelved = false,
+        ApartmentArea[] areas = null,
         Vector3? spawnPos = null, Vector3? spawnRot = null)
     {
         string path = $"{dir}/Mess_{fileName}.asset";
@@ -3579,7 +3531,6 @@ public static class ApartmentSceneBuilder
         bp.objectColor = objColor ?? Color.gray;
         bp.objectScale = objScale ?? Vector3.one * 0.1f;
         bp.allowedAreas = areas ?? new[] { ApartmentArea.Kitchen, ApartmentArea.LivingRoom };
-        bp.canBeDishelved = canBeDishelved;
         bp.spawnPosition = spawnPos ?? Vector3.zero;
         bp.spawnRotation = spawnRot ?? Vector3.zero;
 

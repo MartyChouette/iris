@@ -12,14 +12,15 @@ using UnityEngine.SceneManagement;
 ///   3. Phone      — hovering PhoneController (phone icon)
 ///   4. Drawer     — hovering DrawerController (open/pull icon)
 ///   5. Drink      — hovering SimpleDrinkManager or drink station (pouring icon)
-///   6. Interact   — hovering InteractableHighlight, PlaceableObject, etc. (pinch)
-///   7. Default    — OS cursor (null)
+///   6. Light      — hovering LightSwitch (lightbulb icon)
+///   7. Interact   — hovering InteractableHighlight, PlaceableObject, etc. (pinch)
+///   8. Default    — OS cursor (null)
 /// </summary>
 public class GlobalCursorManager : MonoBehaviour
 {
     public static GlobalCursorManager Instance { get; private set; }
 
-    private enum CursorType { Default, Interact, Watering, Fridge, Phone, Drawer, Drink, Sponge, Grab, Scissors, Swatter }
+    private enum CursorType { Default, Interact, Watering, Fridge, Phone, Drawer, Drink, Sponge, Grab, Scissors, Swatter, Light }
 
     // ── Cursor source textures ──
     private Texture2D _interactCursor;
@@ -32,6 +33,8 @@ public class GlobalCursorManager : MonoBehaviour
     private Texture2D _grabCursor;
     private Texture2D _scissorsCursor;
     private Texture2D _swatterCursor;
+    private Texture2D _lightCursor;
+    private Texture2D _defaultCursor;
 
     private Vector2 _interactHotSpot;
     private Vector2 _wateringHotSpot;
@@ -43,6 +46,8 @@ public class GlobalCursorManager : MonoBehaviour
     private Vector2 _scissorsHotSpot;
     private Vector2 _swatterHotSpot;
     private Vector2 _grabHotSpot;
+    private Vector2 _lightHotSpot;
+    private Vector2 _defaultHotSpot;
 
     // ── Smooth fade state ──
     // Pre-baked alpha ramp: _alphaBank[cursorType][step] where step 0=transparent, Steps-1=full
@@ -97,6 +102,7 @@ public class GlobalCursorManager : MonoBehaviour
             CursorType.Grab     => _grabCursor,
             CursorType.Scissors => _scissorsCursor,
             CursorType.Swatter  => _swatterCursor,
+            CursorType.Light    => _lightCursor,
             _ => null
         };
     }
@@ -141,13 +147,18 @@ public class GlobalCursorManager : MonoBehaviour
         }
 
         LoadCursorTextures();
+
+        // Show our custom default cursor immediately so the OS arrow never flashes.
+        ApplyDefaultCursor();
+
         Debug.Log($"[GlobalCursorManager] Awake — interact={(_interactCursor != null ? "OK" : "NULL")}, " +
                   $"watering={(_wateringCursor != null ? "OK" : "NULL")}, " +
                   $"fridge={(_fridgeCursor != null ? "OK" : "NULL")}, " +
                   $"phone={(_phoneCursor != null ? "OK" : "NULL")}, " +
                   $"drawer={(_drawerCursor != null ? "OK" : "NULL")}, " +
                   $"drink={(_drinkCursor != null ? "OK" : "NULL")}, " +
-                  $"sponge={(_spongeCursor != null ? "OK" : "NULL")}");
+                  $"sponge={(_spongeCursor != null ? "OK" : "NULL")}, " +
+                  $"default={(_defaultCursor != null ? "OK" : "NULL")}");
     }
 
     // Track procedurally generated textures so we only destroy those (not Resources assets)
@@ -242,6 +253,12 @@ public class GlobalCursorManager : MonoBehaviour
         _swatterCursor = LoadOrGenerate("swatter", GenSwatter(S));
         _swatterHotSpot = center;
 
+        _lightCursor = LoadOrGenerate("light", GenLightBulb(S));
+        _lightHotSpot = center;
+
+        _defaultCursor = LoadOrGenerate("default", GenArrow(S));
+        _defaultHotSpot = Vector2.zero; // top-left tip of the arrow
+
         // Pre-bake alpha ramp for each cursor type
         int typeCount = System.Enum.GetValues(typeof(CursorType)).Length;
         _alphaBank = new Texture2D[typeCount][];
@@ -254,6 +271,7 @@ public class GlobalCursorManager : MonoBehaviour
         BakeAlphaRamp(CursorType.Sponge,   _spongeCursor);
         BakeAlphaRamp(CursorType.Scissors, _scissorsCursor);
         BakeAlphaRamp(CursorType.Swatter,  _swatterCursor);
+        BakeAlphaRamp(CursorType.Light,    _lightCursor);
         // Grab doesn't fade — no bank needed
     }
 
@@ -442,6 +460,7 @@ public class GlobalCursorManager : MonoBehaviour
         if (Has<FlyController>(go))         return CursorType.Swatter;
         if (Has<CleanableSurface>(go))     return CursorType.Sponge;
         if (Has<ScissorStation>(go))      return CursorType.Scissors;
+        if (Has<LightSwitch>(go))          return CursorType.Light;
         if (Has<InteractableHighlight>(go)
          || Has<PlaceableObject>(go)
          || Has<RecordSlot>(go)
@@ -469,8 +488,20 @@ public class GlobalCursorManager : MonoBehaviour
         // Grab is handled by Update (cursor hidden while holding) — should not reach here
         if (type == CursorType.Grab) return;
 
-        // Switching to a new context cursor → start fade-in
-        if (type != CursorType.Default && type != _displayedType)
+        // ── Transition logic ────────────────────────────────────────────
+        // The core rule: the cursor ALWAYS passes through Default between
+        // any two context cursors. So transitions are either:
+        //   Default → Context   (fade in)
+        //   Context → Default   (fade out)
+        //   Context A → Context B  (fade out A, fade-out-complete branch
+        //                           lands on Default, next tick fades in B)
+        // Without this, switching from Watering directly to Drawer used to
+        // slam the new cursor on top of the old without passing through the
+        // default arrow, which looked like "the cursor is stuck on the
+        // wrong context" even though it was actually doing the right work.
+
+        // Case A: Default → Context cursor. Kick off a fade-in.
+        if (type != CursorType.Default && _displayedType == CursorType.Default)
         {
             _displayedType = type;
             _fadeProgress = 0f;
@@ -478,9 +509,21 @@ public class GlobalCursorManager : MonoBehaviour
             _hoverTimer = 0f;
             _lastStep = -1;
         }
-
-        // Desired is Default → start fade-out
-        if (type == CursorType.Default && _displayedType != CursorType.Default && _targetAlpha > 0f)
+        // Case B: Currently showing Context A, desired is Context B (B != A).
+        // Start fading A out. Once its alpha hits zero, the "Fade-out complete"
+        // branch below flips _displayedType to Default, and on the next tick
+        // we'll land in Case A and begin fading B in.
+        else if (type != CursorType.Default && _displayedType != CursorType.Default
+                 && type != _displayedType && _targetAlpha > 0f)
+        {
+            _fadeProgress = 0f;
+            _targetAlpha = 0f;
+            _hoverTimer = 0f;
+        }
+        // Case C: Desired is Default while still showing a context cursor.
+        // Standard fade-out to the default arrow.
+        else if (type == CursorType.Default && _displayedType != CursorType.Default
+                 && _targetAlpha > 0f)
         {
             _fadeProgress = 0f;
             _targetAlpha = 0f;
@@ -525,23 +568,23 @@ public class GlobalCursorManager : MonoBehaviour
             _currentAlpha = Mathf.Lerp(startAlpha, _targetAlpha, blend);
         }
 
-        // Fade-out complete → switch to OS default
+        // Fade-out complete → switch to custom default cursor
         if (_currentAlpha <= 0.001f && _displayedType != CursorType.Default)
         {
             _displayedType = CursorType.Default;
             _currentAlpha = 0f;
             _lastStep = -1;
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            ApplyDefaultCursor();
             return;
         }
 
-        // Nothing to render
+        // Default state — show our custom arrow at full opacity
         if (_displayedType == CursorType.Default)
         {
             if (_lastStep != -1)
             {
                 _lastStep = -1;
-                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                ApplyDefaultCursor();
             }
             return;
         }
@@ -558,6 +601,18 @@ public class GlobalCursorManager : MonoBehaviour
         Cursor.SetCursor(bank[step], hotSpot, CursorMode.Auto);
     }
 
+    /// <summary>
+    /// Apply our custom default cursor texture (replaces the OS arrow).
+    /// Falls back to OS cursor if the default texture failed to load.
+    /// </summary>
+    private void ApplyDefaultCursor()
+    {
+        if (_defaultCursor != null)
+            Cursor.SetCursor(_defaultCursor, _defaultHotSpot, CursorMode.Auto);
+        else
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+
     private Vector2 GetHotSpot(CursorType type)
     {
         return type switch
@@ -572,6 +627,7 @@ public class GlobalCursorManager : MonoBehaviour
             CursorType.Grab     => _grabHotSpot,
             CursorType.Scissors => _scissorsHotSpot,
             CursorType.Swatter  => _swatterHotSpot,
+            CursorType.Light    => _lightHotSpot,
             _ => Vector2.zero
         };
     }
@@ -845,6 +901,151 @@ public class GlobalCursorManager : MonoBehaviour
         Set(px, s, 22, 24, foam); Set(px, s, 23, 25, foam);
         Set(px, s, 24, 24, foam); Set(px, s, 25, 26, foam);
         Set(px, s, 20, 25, foam); Set(px, s, 26, 24, foam);
+
+        tex.SetPixels32(px);
+        tex.Apply();
+        return tex;
+    }
+
+    // ── Default arrow (classic top-left pixel cursor) ──────────
+    private static Texture2D GenArrow(int s)
+    {
+        var tex = MakeTex(s);
+        var px = new Color32[s * s];
+
+        var fill    = new Color32(245, 245, 250, 255);  // bright off-white
+        var outline = new Color32(20, 20, 25, 255);     // hard black outline
+        var shadow  = new Color32(0, 0, 0, 90);         // soft drop shadow
+
+        // Pixel art arrow — top-left tip at (1, 30), tail extends to ~(12, 18).
+        // Y axis is bottom-up in Unity's Texture2D.
+        // We sketch the white fill first, then trace the outline around it.
+
+        // Triangular blade (rows from top tip down)
+        // Row 30 (top tip): single pixel
+        Set(px, s, 1, 30, fill);
+        // Rows 29..20: blade widens to the right
+        for (int i = 0; i < 11; i++)
+        {
+            int y = 29 - i;
+            int x0 = 1;
+            int x1 = 2 + i;
+            for (int x = x0; x <= x1; x++) Set(px, s, x, y, fill);
+        }
+        // Notch at row 19 — split into "leg" on left and "stem" on right
+        Set(px, s, 1, 19, fill); Set(px, s, 2, 19, fill); Set(px, s, 3, 19, fill);
+        Set(px, s, 6, 19, fill); Set(px, s, 7, 19, fill); Set(px, s, 8, 19, fill);
+        // Left leg (rows 18..15)
+        for (int y = 18; y >= 15; y--)
+        {
+            Set(px, s, 1, y, fill); Set(px, s, 2, y, fill); Set(px, s, 3, y, fill);
+        }
+        // Right stem (rows 18..14)
+        for (int y = 18; y >= 14; y--)
+        {
+            Set(px, s, 6, y, fill); Set(px, s, 7, y, fill); Set(px, s, 8, y, fill);
+        }
+
+        // Trace outline: any black pixel where a fill pixel borders empty.
+        // We do a second pass that places outline around the fill silhouette.
+        var fillCopy = new bool[s * s];
+        for (int i = 0; i < px.Length; i++) fillCopy[i] = px[i].a > 0;
+        for (int y = 0; y < s; y++)
+        {
+            for (int x = 0; x < s; x++)
+            {
+                if (fillCopy[y * s + x]) continue;
+                // Check 4-neighborhood for fill
+                bool n = (y + 1 < s && fillCopy[(y + 1) * s + x]);
+                bool sN = (y - 1 >= 0 && fillCopy[(y - 1) * s + x]);
+                bool e = (x + 1 < s && fillCopy[y * s + (x + 1)]);
+                bool w = (x - 1 >= 0 && fillCopy[y * s + (x - 1)]);
+                if (n || sN || e || w) Set(px, s, x, y, outline);
+            }
+        }
+
+        // Drop shadow — one pixel down-right of the silhouette where empty
+        for (int y = 0; y < s; y++)
+        {
+            for (int x = 0; x < s; x++)
+            {
+                if (!fillCopy[y * s + x]) continue;
+                int sx = x + 1, sy = y - 1;
+                if (sx < s && sy >= 0)
+                {
+                    int idx = sy * s + sx;
+                    if (!fillCopy[idx] && px[idx].a == 0)
+                        Set(px, s, sx, sy, shadow);
+                }
+            }
+        }
+
+        tex.SetPixels32(px);
+        tex.Apply();
+        return tex;
+    }
+
+    // ── Lightbulb (classic incandescent shape) ─────────────────
+    private static Texture2D GenLightBulb(int s)
+    {
+        var tex = MakeTex(s);
+        var px = new Color32[s * s];
+
+        var glass    = new Color32(255, 240, 170, 255);  // warm bulb glass
+        var hilite   = new Color32(255, 250, 220, 255);  // bright highlight
+        var dark     = new Color32(180, 150, 60, 255);   // glass outline
+        var base_    = new Color32(160, 160, 165, 255);  // grey metal base
+        var threads  = new Color32(110, 110, 115, 255);  // base threads
+        var glow     = new Color32(255, 230, 120, 80);   // soft outer glow
+
+        int cx = 16;
+
+        // Outer glow halo (subtle, large)
+        for (int y = 12; y <= 30; y++)
+            for (int x = 6; x <= 26; x++)
+            {
+                int dx = x - cx, dy = y - 22;
+                int rsq = dx * dx + dy * dy;
+                if (rsq >= 49 && rsq <= 100) Set(px, s, x, y, glow);
+            }
+
+        // Bulb glass (round top)
+        for (int y = 14; y <= 28; y++)
+            for (int x = 9; x <= 23; x++)
+            {
+                int dx = x - cx, dy = y - 22;
+                int rsq = dx * dx + dy * dy;
+                if (rsq <= 49) Set(px, s, x, y, glass);
+                else if (rsq <= 64) Set(px, s, x, y, dark);
+            }
+
+        // Bright highlight on upper-left of bulb
+        Set(px, s, 13, 25, hilite); Set(px, s, 14, 26, hilite);
+        Set(px, s, 13, 26, hilite); Set(px, s, 12, 24, hilite);
+        Set(px, s, 14, 24, hilite);
+
+        // Filament hint inside bulb
+        DrawLine(px, s, 14, 21, 16, 23, dark);
+        DrawLine(px, s, 16, 23, 18, 21, dark);
+        DrawLine(px, s, 18, 21, 16, 19, dark);
+        DrawLine(px, s, 16, 19, 14, 21, dark);
+
+        // Neck transition (bulb to base)
+        FillRect(px, s, 13, 12, 19, 14, dark);
+        FillRect(px, s, 14, 12, 18, 13, base_);
+
+        // Metal screw base (3 thread bands)
+        FillRect(px, s, 13, 8, 19, 12, base_);
+        for (int x = 13; x <= 19; x++)
+        {
+            Set(px, s, x, 11, threads);
+            Set(px, s, x, 9,  threads);
+        }
+        // Base outline
+        for (int y = 8; y <= 12; y++) { Set(px, s, 13, y, dark); Set(px, s, 19, y, dark); }
+        // Contact tip (bottom)
+        FillRect(px, s, 15, 6, 17, 8, base_);
+        Set(px, s, 15, 6, dark); Set(px, s, 17, 6, dark);
 
         tex.SetPixels32(px);
         tex.Apply();

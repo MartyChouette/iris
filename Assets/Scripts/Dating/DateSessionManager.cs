@@ -124,6 +124,32 @@ public class DateSessionManager : MonoBehaviour
     [Tooltip("Runs the entrance judgments (music, perfume, outfit, cleanliness).")]
     [SerializeField] private EntranceJudgmentSequence _entranceJudgments;
 
+    [Header("Phase Cameras")]
+    [Tooltip("Camera framing snapped to during each date phase. Capture from the Scene View via the inspector buttons.")]
+    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival" };
+    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging" };
+    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal" };
+
+    [Tooltip("Default seconds the camera takes to glide into a phase frame when LerpPhaseCamera is used.")]
+    [SerializeField] private float _phaseCameraLerpDuration = 1.6f;
+
+    [System.Serializable]
+    public struct PhaseCameraFrame
+    {
+        public string label;
+        public Vector3 position;
+        public Vector3 rotation;
+        public float fov;
+        public bool captured;
+    }
+
+    // Editor-only access to the frames so the custom inspector can mutate them.
+#if UNITY_EDITOR
+    public ref PhaseCameraFrame EditorGetArrivalCamera() => ref _arrivalCamera;
+    public ref PhaseCameraFrame EditorGetKitchenCamera() => ref _kitchenCamera;
+    public ref PhaseCameraFrame EditorGetCouchCamera()   => ref _couchCamera;
+#endif
+
     [Header("Phase 2 Highlights")]
     [Tooltip("Renderer on the fridge to pulse during drink phase.")]
     [SerializeField] private Renderer _fridgeHighlightRenderer;
@@ -181,6 +207,7 @@ public class DateSessionManager : MonoBehaviour
     private Coroutine _phase2PulseCoroutine;
     private Color _fridgeOrigColor;
     private Color _drinkOrigColor;
+    private Coroutine _phaseCameraLerp;
 
     // ──────────────────────────────────────────────────────────────
     // Public API
@@ -340,7 +367,7 @@ public class DateSessionManager : MonoBehaviour
         OnAffectionChanged?.Invoke(_affection);
 
         // Frame camera on entrance while still black
-        DateCameraFraming.Instance?.SnapToPhase(DatePhase.Arrival);
+        ApplyPhaseCamera(DatePhase.Arrival);
 
         // Fade in to reveal NPC at entrance
         if (ScreenFade.Instance != null)
@@ -409,12 +436,12 @@ public class DateSessionManager : MonoBehaviour
         if (phaseTransitionSFX != null && AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(phaseTransitionSFX);
 
-        // Frame camera on kitchen while still black
-        DateCameraFraming.Instance?.SnapToPhase(DatePhase.BackgroundJudging);
-
-        // Fade in
+        // Fade in — camera is still on the prior (Arrival) framing.
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
+
+        // Now glide the camera over to the kitchen while the player watches.
+        LerpPhaseCamera(DatePhase.BackgroundJudging);
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)
@@ -468,12 +495,12 @@ public class DateSessionManager : MonoBehaviour
         if (phaseTransitionSFX != null && AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(phaseTransitionSFX);
 
-        // Frame camera on couch while still black
-        DateCameraFraming.Instance?.SnapToPhase(DatePhase.Reveal);
-
-        // Fade in
+        // Fade in — camera is still on the prior (Kitchen) framing.
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
+
+        // Glide camera over to the couch while the player watches.
+        LerpPhaseCamera(DatePhase.Reveal);
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)
@@ -520,17 +547,41 @@ public class DateSessionManager : MonoBehaviour
 
         var prefs = _currentDate.preferences;
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
+        var apartmentScene = gameObject.scene;
 
+        // Track which highlights we've switched on so we can cleanly clear
+        // them on the next item in the wave and at the end of the reveal.
+        InteractableHighlight activeHL = null;
+        bool activeHLLiked = false;
+
+        // ── Pass 1: gather qualifying tags into a list and sort by multiplier
+        // descending so the wave starts with centerpieces (3×) and works its
+        // way down to normal shelves (1×). This makes the reveal feel curated.
+        var revealList = new List<(ReactableTag tag, ReactionType reaction, int multiplier)>();
         foreach (var tag in ReactableTag.All)
         {
             if (!tag.IsActive) continue;
             if (tag.IsPrivate) continue;
+            if (tag.gameObject.scene != apartmentScene) continue;
 
             var reaction = ReactionEvaluator.EvaluateReactable(tag, prefs);
             if (reaction == ReactionType.Neutral) continue;
 
-            // Apply affection
-            ApplyReaction(reaction);
+            int multiplier = GetTagEffectMultiplier(tag);
+            revealList.Add((tag, reaction, multiplier));
+        }
+        // Descending by multiplier so 3× items go first, then 2×, then 1×.
+        revealList.Sort((a, b) => b.multiplier.CompareTo(a.multiplier));
+
+        // ── Pass 2: the actual wave ──
+        for (int i = 0; i < revealList.Count; i++)
+        {
+            var tag = revealList[i].tag;
+            var reaction = revealList[i].reaction;
+            int multiplier = revealList[i].multiplier;
+
+            // Apply affection with the surface multiplier baked into magnitude.
+            ApplyReaction(reaction, multiplier);
 
             // Fire reveal event for HUD
             OnRevealReaction?.Invoke(new AccumulatedReaction
@@ -539,15 +590,66 @@ public class DateSessionManager : MonoBehaviour
                 type = reaction
             });
 
-            // Spawn particles at the item's visual center (not pivot)
-            SpawnReactionParticles(GetVisualCenter(tag.transform), reaction);
+            // ── Highlight the item that the reveal wave is hitting right now ──
+            // Clear any previously-lit item from the previous iteration so
+            // only the current item glows as the wave passes.
+            if (activeHL != null)
+            {
+                if (activeHLLiked) activeHL.SetPrepLikedHighlighted(false);
+                else activeHL.SetPrepDislikedHighlighted(false);
+                activeHL = null;
+            }
+
+            // Walk up the tag's hierarchy to find the InteractableHighlight —
+            // some tags live on child GameObjects while the highlight sits
+            // on the root (e.g. books in bookcases, paired shoes).
+            var highlight = tag.GetComponent<InteractableHighlight>()
+                         ?? tag.GetComponentInParent<InteractableHighlight>()
+                         ?? tag.GetComponentInChildren<InteractableHighlight>();
+            if (highlight != null)
+            {
+                if (reaction == ReactionType.Like)
+                {
+                    highlight.SetPrepLikedHighlighted(true);
+                    activeHLLiked = true;
+                }
+                else
+                {
+                    highlight.SetPrepDislikedHighlighted(true);
+                    activeHLLiked = false;
+                }
+                activeHL = highlight;
+            }
+
+            // Resolve + log the visual center BEFORE spawning particles so
+            // we can diagnose any "particles in the wrong place" issues.
+            Vector3 visualCenter = GetVisualCenter(tag.transform);
 
 #if UNITY_EDITOR
-            Debug.Log($"[DateSessionManager] Reveal: {tag.DisplayName} → {reaction}");
+            var firstRenderer = tag.GetComponentInChildren<Renderer>();
+            Debug.Log($"[DateSessionManager] Reveal: '{tag.DisplayName}' → {reaction} ×{multiplier} | " +
+                      $"tagPos={tag.transform.position:F3} | visualCenter={visualCenter:F3} | " +
+                      $"renderer={(firstRenderer != null ? firstRenderer.gameObject.name : "<none>")} | " +
+                      $"highlight={(highlight != null ? "yes" : "NO")}");
 #endif
+
+            // Spawn particles at the item's visual center (not pivot)
+            SpawnReactionParticles(visualCenter, reaction);
+
+            // Spawn the floating "2×" popup so the player can see which items
+            // contributed more to the affection score. Sits slightly above the
+            // particles so they don't cover the text.
+            SpawnMultiplierPopup(visualCenter + Vector3.up * 0.22f, multiplier, reaction);
 
             // Stagger for visual clarity
             yield return s_wait03;
+        }
+
+        // Clear the last item's highlight so nothing stays lit forever.
+        if (activeHL != null)
+        {
+            if (activeHLLiked) activeHL.SetPrepLikedHighlighted(false);
+            else activeHL.SetPrepDislikedHighlighted(false);
         }
 
         // Also evaluate cleanliness as a whole-room judgment
@@ -622,24 +724,191 @@ public class DateSessionManager : MonoBehaviour
 
     // ── Helpers ────────────────────────────────────────────────────
 
+    /// <summary>
+    /// Compute the world-space visual center of a ReactableTag's item by
+    /// encapsulating the bounds of EVERY active renderer on the item and its
+    /// children. The old version used `GetComponentInChildren<Renderer>()`
+    /// which returns only the first match in depth-first order — for
+    /// multi-mesh items (Gunpla, paired shoes, flowers with petals +
+    /// leaves + stem) that was the first child mesh found, not the centroid
+    /// of the whole item, so particles would spawn on an arm instead of the
+    /// torso, on a petal instead of the flower crown, etc. Walking all
+    /// renderers and calling Bounds.Encapsulate gives the true visual
+    /// centroid. Skips renderers with invalid / zero-extent bounds (common
+    /// when the mesh hasn't been rendered yet) and falls back to the
+    /// transform's world position if nothing usable is found.
+    /// </summary>
+    /// <summary>
+    /// Walks a ReactableTag's hierarchy to find the PlaceableObject and
+    /// returns its current surface effect multiplier (1-5). Defaults to 1
+    /// if the tag has no PlaceableObject or the item isn't on a surface.
+    /// </summary>
+    private static int GetTagEffectMultiplier(ReactableTag tag)
+    {
+        if (tag == null) return 1;
+        var po = tag.GetComponent<PlaceableObject>();
+        if (po == null) po = tag.GetComponentInParent<PlaceableObject>();
+        if (po == null) po = tag.GetComponentInChildren<PlaceableObject>();
+        return po != null ? po.CurrentEffectMultiplier : 1;
+    }
+
+    /// <summary>
+    /// Floating "×N" label that rises and fades above each revealed item
+    /// during the Phase 3 wave. Uses a runtime-built TextMesh so no prefab
+    /// wiring is required. Color matches the reaction (pink for Like, grey
+    /// for Dislike). Animates via a coroutine on DateSessionManager itself.
+    /// </summary>
+    private void SpawnMultiplierPopup(Vector3 worldPos, int multiplier, ReactionType reaction)
+    {
+        var go = new GameObject($"MultiplierPopup_x{multiplier}");
+        go.transform.position = worldPos;
+
+        var tm = go.AddComponent<TextMesh>();
+        tm.text = $"×{multiplier}";
+        tm.fontSize = 64;
+        tm.characterSize = 0.018f; // world units per character
+        tm.anchor = TextAnchor.MiddleCenter;
+        tm.alignment = TextAlignment.Center;
+        tm.color = reaction == ReactionType.Like
+            ? new Color(1f, 0.55f, 0.75f, 1f)   // warm pink
+            : new Color(0.55f, 0.55f, 0.6f, 1f); // grey
+
+        var mr = go.GetComponent<MeshRenderer>();
+        if (mr != null)
+        {
+            // Swap the default TextMesh material (which uses GUI/Text Shader
+            // with ZTest LEqual — occluded by scene geometry) for our custom
+            // Iris/OverlaySprite shader which hard-codes ZTest Always +
+            // Overlay queue. Copy the font atlas from the original material
+            // so the glyphs still render. If the overlay shader isn't found
+            // in the build, fall back to the default and bump the queue so
+            // at least render ordering helps.
+            var overlayShader = Shader.Find("Iris/OverlaySprite");
+            if (overlayShader != null && tm.font != null && tm.font.material != null)
+            {
+                var overlayMat = new Material(overlayShader);
+                overlayMat.mainTexture = tm.font.material.mainTexture;
+                overlayMat.color = tm.color;
+                overlayMat.renderQueue = 4500;
+                mr.sharedMaterial = overlayMat;
+            }
+            else if (mr.sharedMaterial != null)
+            {
+                mr.sharedMaterial.renderQueue = 4500;
+            }
+            mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            mr.receiveShadows = false;
+        }
+
+        StartCoroutine(AnimateMultiplierPopup(go.transform, 1.6f));
+    }
+
+    private IEnumerator AnimateMultiplierPopup(Transform t, float duration)
+    {
+        if (t == null) yield break;
+        Vector3 startPos = t.position;
+        Vector3 endPos = startPos + Vector3.up * 0.35f;
+
+        var tm = t.GetComponent<TextMesh>();
+        var mr = t.GetComponent<MeshRenderer>();
+        Color baseColor = tm != null ? tm.color : Color.white;
+
+        float elapsed = 0f;
+        while (elapsed < duration && t != null)
+        {
+            elapsed += Time.deltaTime;
+            float u = Mathf.Clamp01(elapsed / duration);
+
+            // Rise smoothly
+            t.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0f, 1f, u));
+
+            // Always face the camera (billboard)
+            var cam = Camera.main;
+            if (cam != null)
+                t.rotation = Quaternion.LookRotation(t.position - cam.transform.position, Vector3.up);
+
+            // Fade: pop in fast, hold, fade out
+            float alpha;
+            if (u < 0.15f) alpha = u / 0.15f;            // pop in
+            else if (u < 0.65f) alpha = 1f;               // hold
+            else alpha = Mathf.Lerp(1f, 0f, (u - 0.65f) / 0.35f); // fade out
+
+            // Scale punch on pop-in for juiciness
+            float scale = u < 0.2f
+                ? Mathf.Lerp(0.5f, 1.15f, u / 0.2f)
+                : u < 0.3f
+                    ? Mathf.Lerp(1.15f, 1f, (u - 0.2f) / 0.1f)
+                    : 1f;
+            t.localScale = Vector3.one * scale;
+
+            var c = baseColor;
+            c.a *= alpha;
+
+            // Drive color through BOTH the TextMesh (in case the overlay
+            // shader isn't present) and the MeshRenderer's overlay material
+            // (which is what actually draws when the shader swap succeeded).
+            if (tm != null) tm.color = c;
+            if (mr != null && mr.sharedMaterial != null)
+                mr.sharedMaterial.color = c;
+
+            yield return null;
+        }
+
+        if (t != null) Destroy(t.gameObject);
+    }
+
     private static Vector3 GetVisualCenter(Transform t)
     {
-        var renderer = t.GetComponentInChildren<Renderer>();
-        if (renderer != null)
-            return renderer.bounds.center;
+        if (t == null) return Vector3.zero;
+
+        var renderers = t.GetComponentsInChildren<Renderer>(includeInactive: false);
+        bool any = false;
+        Bounds combined = new Bounds();
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            var r = renderers[i];
+            if (r == null || !r.enabled) continue;
+            // Particle systems and skinned meshes sometimes report
+            // zero-extent bounds until the first frame of rendering.
+            Bounds b = r.bounds;
+            if (b.extents.sqrMagnitude < 0.0000001f) continue;
+            if (!any) { combined = b; any = true; }
+            else combined.Encapsulate(b);
+        }
+
+        if (any) return combined.center;
         return t.position;
     }
 
     private static void SpawnReactionParticles(Vector3 position, ReactionType reaction)
     {
+        Vector3 spawnPos = position + Vector3.up * 0.15f;
         var go = new GameObject("ReactionParticles");
-        // Position above the item so particles are clearly visible
-        go.transform.position = position + Vector3.up * 0.15f;
+        // Position BEFORE adding the ParticleSystem, otherwise the PS Awake
+        // runs with the GameObject at (0,0,0) and any initial emission that
+        // happens before Play() is called later in this function spawns at
+        // the wrong spot when the system uses World simulation space.
+        go.transform.position = spawnPos;
 
         var ps = go.AddComponent<ParticleSystem>();
+
+        // Critical: stop any default-config playback that Unity kicked off
+        // when AddComponent<ParticleSystem>() ran with the default playOnAwake=true.
+        // Without this, a handful of default-cone particles fire BEFORE our
+        // configuration is applied, which can spawn particles at whatever the
+        // simulation state was when the GameObject first existed.
+        ps.Stop(withChildren: true, stopBehavior: ParticleSystemStopBehavior.StopEmittingAndClear);
+        ps.Clear(withChildren: true);
+
         var main = ps.main;
+        main.playOnAwake = false;
         main.simulationSpace = ParticleSystemSimulationSpace.World;
         main.stopAction = ParticleSystemStopAction.Destroy;
+        main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+
+#if UNITY_EDITOR
+        Debug.Log($"[DateSessionManager] SpawnReactionParticles: reaction={reaction} spawnPos={spawnPos:F3} goPos={go.transform.position:F3}");
+#endif
 
         if (reaction == ReactionType.Like)
         {
@@ -824,13 +1093,119 @@ public class DateSessionManager : MonoBehaviour
         if (_state == SessionState.Idle || _state == SessionState.DateEnding) return;
 
         // Release date camera framing back to normal browsing
-        DateCameraFraming.Instance?.Release();
+        ReleasePhaseCamera();
 
         if (_affection < _revealFailThreshold)
             FailDate();
         else
             SucceedDate();
     }
+
+    // ──────────────────────────────────────────────────────────────
+    // Phase Camera Framing
+    // ──────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Apply the captured camera framing for the given phase as an instant snap.
+    /// Pushes pos/rot/fov into ApartmentManager as a preset override (parallax
+    /// still layers on top). No-op if the frame hasn't been captured yet.
+    /// Use this during a fade-to-black so the player never sees the cut.
+    /// </summary>
+    public void ApplyPhaseCamera(DatePhase phase)
+    {
+        var frame = GetPhaseFrame(phase);
+        if (!frame.captured) return;
+        if (ApartmentManager.Instance == null) return;
+
+        StopPhaseCameraLerp();
+        ApartmentManager.Instance.SetPresetBase(
+            frame.position,
+            Quaternion.Euler(frame.rotation),
+            frame.fov);
+    }
+
+    /// <summary>
+    /// Smoothly glide the camera from its current pose to the captured frame for
+    /// <paramref name="phase"/>. Pass <paramref name="duration"/> &lt; 0 to use
+    /// the inspector default. Use this AFTER fade-in so the player sees the
+    /// camera move into the new framing.
+    /// </summary>
+    public void LerpPhaseCamera(DatePhase phase, float duration = -1f)
+    {
+        var frame = GetPhaseFrame(phase);
+        if (!frame.captured) return;
+        if (ApartmentManager.Instance == null) return;
+
+        if (duration < 0f) duration = _phaseCameraLerpDuration;
+
+        StopPhaseCameraLerp();
+        _phaseCameraLerp = StartCoroutine(PhaseCameraLerpRoutine(frame, duration));
+    }
+
+    /// <summary>Release the date camera override and return to normal apartment browsing.</summary>
+    public void ReleasePhaseCamera()
+    {
+        StopPhaseCameraLerp();
+        ApartmentManager.Instance?.ClearPresetBase();
+    }
+
+    private void StopPhaseCameraLerp()
+    {
+        if (_phaseCameraLerp != null)
+        {
+            StopCoroutine(_phaseCameraLerp);
+            _phaseCameraLerp = null;
+        }
+    }
+
+    private IEnumerator PhaseCameraLerpRoutine(PhaseCameraFrame frame, float duration)
+    {
+        var am = ApartmentManager.Instance;
+        var cam = Camera.main;
+        if (am == null || cam == null) yield break;
+
+        // Capture starting pose from the live camera (mouse parallax included
+        // — it's small enough that the lerp absorbs it cleanly).
+        Vector3 startPos = cam.transform.position;
+        Quaternion startRot = cam.transform.rotation;
+        float startFov = cam.fieldOfView;
+
+        Vector3 endPos = frame.position;
+        Quaternion endRot = Quaternion.Euler(frame.rotation);
+        float endFov = frame.fov;
+
+        if (duration <= 0f)
+        {
+            am.SetPresetBase(endPos, endRot, endFov);
+            _phaseCameraLerp = null;
+            yield break;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+
+            am.SetPresetBase(
+                Vector3.Lerp(startPos, endPos, t),
+                Quaternion.Slerp(startRot, endRot, t),
+                Mathf.Lerp(startFov, endFov, t));
+
+            yield return null;
+        }
+
+        am.SetPresetBase(endPos, endRot, endFov);
+        _phaseCameraLerp = null;
+    }
+
+    private PhaseCameraFrame GetPhaseFrame(DatePhase phase) => phase switch
+    {
+        DatePhase.Arrival           => _arrivalCamera,
+        DatePhase.BackgroundJudging => _kitchenCamera,
+        DatePhase.Reveal            => _couchCamera,
+        _                           => default,
+    };
 
     /// <summary>Returns true (and triggers failure) if affection is below threshold.</summary>
     private bool CheckPhaseFailAndExit(float threshold)

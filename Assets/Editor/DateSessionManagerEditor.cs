@@ -1,37 +1,39 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(DateCameraFraming))]
-public class DateCameraFramingEditor : Editor
+[CustomEditor(typeof(DateSessionManager))]
+public class DateSessionManagerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        var framing = (DateCameraFraming)target;
+        var mgr = (DateSessionManager)target;
 
         EditorGUILayout.Space(10);
-        EditorGUILayout.LabelField("Capture from Scene View", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Phase Camera Capture", EditorStyles.boldLabel);
         EditorGUILayout.HelpBox(
-            "Position the Scene View camera to frame Nema + date character, then click a button to capture.",
+            "Position the Scene View camera to frame Nema + the date character, " +
+            "then click a button to capture the framing for that phase. " +
+            "The captured pos/rot/fov is pushed into ApartmentManager during phase transitions.",
             MessageType.Info);
 
-        DrawCaptureButton(framing, "Arrival", ref framing.arrival);
-        DrawCaptureButton(framing, "Kitchen", ref framing.kitchen);
-        DrawCaptureButton(framing, "Couch",   ref framing.couch);
+        DrawCaptureRow(mgr, "Arrival",  ref mgr.EditorGetArrivalCamera());
+        DrawCaptureRow(mgr, "Kitchen",  ref mgr.EditorGetKitchenCamera());
+        DrawCaptureRow(mgr, "Couch",    ref mgr.EditorGetCouchCamera());
 
         EditorGUILayout.Space(5);
         if (GUILayout.Button("Clear All Captures", GUILayout.Height(24)))
         {
-            Undo.RecordObject(framing, "Clear Camera Captures");
-            framing.arrival.captured = false;
-            framing.kitchen.captured = false;
-            framing.couch.captured = false;
-            EditorUtility.SetDirty(framing);
+            Undo.RecordObject(mgr, "Clear Phase Cameras");
+            mgr.EditorGetArrivalCamera().captured = false;
+            mgr.EditorGetKitchenCamera().captured = false;
+            mgr.EditorGetCouchCamera().captured = false;
+            EditorUtility.SetDirty(mgr);
         }
     }
 
-    private void DrawCaptureButton(DateCameraFraming framing, string label, ref DateCameraFraming.PhaseFrame frame)
+    private void DrawCaptureRow(DateSessionManager mgr, string label, ref DateSessionManager.PhaseCameraFrame frame)
     {
         EditorGUILayout.BeginHorizontal();
 
@@ -47,17 +49,17 @@ public class DateCameraFramingEditor : Editor
             var sv = SceneView.lastActiveSceneView;
             if (sv != null)
             {
-                Undo.RecordObject(framing, $"Capture {label} Camera");
+                Undo.RecordObject(mgr, $"Capture {label} Camera");
                 frame.position = sv.camera.transform.position;
                 frame.rotation = sv.camera.transform.eulerAngles;
                 frame.fov = sv.camera.fieldOfView;
                 frame.captured = true;
-                EditorUtility.SetDirty(framing);
-                Debug.Log($"[DateCameraFraming] Captured {label}: pos={frame.position}, rot={frame.rotation}, fov={frame.fov:F1}");
+                EditorUtility.SetDirty(mgr);
+                Debug.Log($"[DateSessionManager] Captured {label}: pos={frame.position}, rot={frame.rotation}, fov={frame.fov:F1}");
             }
             else
             {
-                Debug.LogWarning("[DateCameraFraming] No active Scene View.");
+                Debug.LogWarning("[DateSessionManager] No active Scene View.");
             }
         }
 

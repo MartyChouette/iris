@@ -32,11 +32,20 @@ public class VisibilityEyeIndicator : MonoBehaviour
     [Tooltip("World-space size of the icon.")]
     [SerializeField] private float _iconSize = 0.12f;
 
+    [Header("Custom Icons (optional)")]
+    [Tooltip("Custom open-eye sprite. If null, falls back to the procedural pixel art below.")]
+    [SerializeField] private Sprite _openEyeSpriteOverride;
+
+    [Tooltip("Custom closed-eye sprite. If null, falls back to the procedural pixel art below.")]
+    [SerializeField] private Sprite _closedEyeSpriteOverride;
+
     // ── Runtime ──
     private Texture2D _openEyeTex;
     private Texture2D _closedEyeTex;
     private Sprite _openEyeSprite;
     private Sprite _closedEyeSprite;
+    private bool _ownsOpenSprite;
+    private bool _ownsClosedSprite;
     private Camera _cam;
 
     private readonly List<IconInstance> _active = new();
@@ -65,14 +74,37 @@ public class VisibilityEyeIndicator : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
 
-        _openEyeTex = GenOpenEye();
-        _closedEyeTex = GenClosedEye();
-        _openEyeSprite = Sprite.Create(_openEyeTex,
-            new Rect(0, 0, _openEyeTex.width, _openEyeTex.height),
-            new Vector2(0.5f, 0.5f), 128f);
-        _closedEyeSprite = Sprite.Create(_closedEyeTex,
-            new Rect(0, 0, _closedEyeTex.width, _closedEyeTex.height),
-            new Vector2(0.5f, 0.5f), 128f);
+        // Use inspector-assigned sprites when set, otherwise fall back to the
+        // built-in procedural pixel art. `_ownsXxxSprite` tracks whether we
+        // allocated the sprite so OnDestroy only releases what it owns and
+        // doesn't free a user asset.
+        if (_openEyeSpriteOverride != null)
+        {
+            _openEyeSprite = _openEyeSpriteOverride;
+            _ownsOpenSprite = false;
+        }
+        else
+        {
+            _openEyeTex = GenOpenEye();
+            _openEyeSprite = Sprite.Create(_openEyeTex,
+                new Rect(0, 0, _openEyeTex.width, _openEyeTex.height),
+                new Vector2(0.5f, 0.5f), 128f);
+            _ownsOpenSprite = true;
+        }
+
+        if (_closedEyeSpriteOverride != null)
+        {
+            _closedEyeSprite = _closedEyeSpriteOverride;
+            _ownsClosedSprite = false;
+        }
+        else
+        {
+            _closedEyeTex = GenClosedEye();
+            _closedEyeSprite = Sprite.Create(_closedEyeTex,
+                new Rect(0, 0, _closedEyeTex.width, _closedEyeTex.height),
+                new Vector2(0.5f, 0.5f), 128f);
+            _ownsClosedSprite = true;
+        }
     }
 
     private void OnEnable()
@@ -100,8 +132,10 @@ public class VisibilityEyeIndicator : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
-        if (_openEyeSprite != null) Destroy(_openEyeSprite);
-        if (_closedEyeSprite != null) Destroy(_closedEyeSprite);
+        // Only destroy what we allocated — never free a sprite dragged in
+        // from the inspector, since that's a shared project asset.
+        if (_ownsOpenSprite && _openEyeSprite != null) Destroy(_openEyeSprite);
+        if (_ownsClosedSprite && _closedEyeSprite != null) Destroy(_closedEyeSprite);
         if (_openEyeTex != null) Destroy(_openEyeTex);
         if (_closedEyeTex != null) Destroy(_closedEyeTex);
     }
@@ -234,8 +268,14 @@ public class VisibilityEyeIndicator : MonoBehaviour
         go.transform.SetParent(transform);
         var sr = go.AddComponent<SpriteRenderer>();
         sr.sortingOrder = 999;
-        // Render on top of everything (visible through doors/walls)
-        sr.material = new Material(Shader.Find("Sprites/Default"));
+        // Use the Iris/OverlaySprite shader which hard-codes ZTest Always and
+        // Overlay queue so the eye icons draw ON TOP of every other scene
+        // geometry (including closed cubby doors). The old Sprites/Default
+        // shader used ZTest LEqual, which meant the eye got clipped by the
+        // closed cubby it was trying to indicate.
+        var overlayShader = Shader.Find("Iris/OverlaySprite");
+        if (overlayShader == null) overlayShader = Shader.Find("Sprites/Default");
+        sr.material = new Material(overlayShader);
         sr.material.renderQueue = 4000;
         go.SetActive(false);
 

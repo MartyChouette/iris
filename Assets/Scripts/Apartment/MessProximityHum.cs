@@ -1,7 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Low sine hum that grows in volume as the cursor approaches disheveled items.
+/// Low sine hum that grows in volume as the cursor approaches messy items
+/// (trash, or non-General items left out of their home zone).
 /// Pulses with a taper pattern (mmmmm mm mm mm mmmmmm) for an uneasy feeling.
 /// Active during Exploration and DateInProgress phases only.
 /// </summary>
@@ -99,16 +100,18 @@ public class MessProximityHum : MonoBehaviour
         else
             return; // cursor not over anything
 
-        // Find closest disheveled item
+        // Find closest messy item — trash, or anything misplaced from its home zone
         float closestDist = float.MaxValue;
         var all = PlaceableObject.All;
         for (int i = 0; i < all.Count; i++)
         {
-            if (all[i] == null) continue;
-            if (!all[i].IsDishelved) continue;
-            if (!all[i].gameObject.activeInHierarchy) continue;
+            var p = all[i];
+            if (p == null) continue;
+            if (!p.gameObject.activeInHierarchy) continue;
+            if (p.CurrentState == PlaceableObject.State.Held) continue;
+            if (!IsMessy(p)) continue;
 
-            float dist = Vector3.Distance(cursorWorld, all[i].transform.position);
+            float dist = Vector3.Distance(cursorWorld, p.transform.position);
             if (dist < closestDist)
                 closestDist = dist;
         }
@@ -142,6 +145,14 @@ public class MessProximityHum : MonoBehaviour
         var phase = DayPhaseManager.Instance.CurrentPhase;
         return phase == DayPhaseManager.DayPhase.Exploration
             || phase == DayPhaseManager.DayPhase.DateInProgress;
+    }
+
+    /// <summary>Trash items, or non-General items left out of their home zone.</summary>
+    private static bool IsMessy(PlaceableObject p)
+    {
+        if (p.Category == ItemCategory.Trash) return true;
+        if (p.Category == ItemCategory.General) return false;
+        return p.HasHome && !p.IsAtHome;
     }
 
     private void CreateSineClip()

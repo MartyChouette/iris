@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -101,14 +102,17 @@ public class ObjectGrabber : MonoBehaviour
     }
 
     [Header("Grid Snap")]
-    [Tooltip("Grid cell size in world units.")]
-    [SerializeField] private float gridSize = 0.11f;
+    [Tooltip("Grid cell size in world units. Placement is always grid-snapped — no toggle.")]
+    [SerializeField] private float gridSize = 0.03f;
 
     public float GridSize
     {
         get => gridSize;
         set => gridSize = Mathf.Max(0.01f, value);
     }
+
+    /// <summary>Global grid cell size, set in Awake. PlaceableObject reads this on Start to snap scene-placed items.</summary>
+    public static float GlobalGridSize { get; private set; } = 0.03f;
 
     [Header("Scroll Behavior")]
     [Tooltip("Degrees rotated per scroll tick around Y axis.")]
@@ -144,7 +148,6 @@ public class ObjectGrabber : MonoBehaviour
     // Input managed by IrisInput singleton
 
     private bool _isEnabled;
-    private bool _gridSnap = true;
 
     /// <summary>Fired after an object is placed on a surface. Arg: the placed object.</summary>
     public static event System.Action<PlaceableObject> OnObjectPlaced;
@@ -200,12 +203,22 @@ public class ObjectGrabber : MonoBehaviour
     private GameObject _shadowGO;
     private MeshRenderer _shadowRenderer;
     private Material _shadowMat;
-    private static readonly Color s_shadowValid = new Color(0.55f, 0.7f, 0.55f, 0.7f);
-    private static readonly Color s_shadowInvalid = new Color(0.72f, 0.45f, 0.48f, 0.7f);
+    private static readonly Color s_shadowValid = new Color(0.25f, 0.9f, 0.3f, 0.75f);
+    private static readonly Color s_shadowInvalid = new Color(0.95f, 0.18f, 0.2f, 0.75f);
+
+    // Ghost preview (translucent copy of the held item at the snapped grid cell)
+    [Header("Ghost Preview")]
+    [Tooltip("If true, a translucent duplicate of the held item is shown at the grid-snapped cell so the player sees exactly where it will land. Works alongside the disc shadow.")]
+    [SerializeField] private bool _useGhostPreview = true;
+    [Tooltip("Tint applied to the ghost preview. Alpha controls see-through amount.")]
+    [SerializeField] private Color _ghostTint = new Color(0.5f, 0.95f, 0.55f, 0.35f);
+    private GameObject _ghostPreviewGO;
+    private readonly List<Material> _ghostPreviewMats = new();
 
     private void Awake()
     {
         s_instance = this;
+        GlobalGridSize = gridSize;
 
         if (cam == null)
             cam = Camera.main;
@@ -219,6 +232,7 @@ public class ObjectGrabber : MonoBehaviour
     {
         if (s_instance == this) s_instance = null;
         if (_shadowMat != null) Destroy(_shadowMat);
+        DestroyGhostPreview();
     }
 
     private void Update()
@@ -227,12 +241,6 @@ public class ObjectGrabber : MonoBehaviour
             return;
 
         if (!_isEnabled) return;
-
-        if (IrisInput.Instance != null && IrisInput.Instance.GridToggle.WasPressedThisFrame())
-        {
-            _gridSnap = !_gridSnap;
-            Debug.Log($"[ObjectGrabber] Grid snap: {(_gridSnap ? "ON" : "OFF")}");
-        }
 
         // Reset click consumption flag at start of each frame
         if (Time.frameCount != s_lastConsumedFrame)
@@ -261,15 +269,10 @@ public class ObjectGrabber : MonoBehaviour
                     return;
                 }
 
-                // If holding a pairable item, check if clicking its match → snap pair
+                // If holding a pairable item, check if clicking its match → snap pair.
+                // This is the ONLY path for placing one item on top of another —
+                // non-pairable items can't be stacked.
                 if (TryPairWithClicked())
-                {
-                    ConsumeClick();
-                    return;
-                }
-
-                // If holding a plate, check if clicking another plate → join stack
-                if (TryStackOntoClickedPlate())
                 {
                     ConsumeClick();
                     return;
@@ -485,6 +488,7 @@ public class ObjectGrabber : MonoBehaviour
 
         AudioManager.Instance?.PlaySFX(placeable.PickupSFXOverride != null ? placeable.PickupSFXOverride : _pickupSFX);
         ShowShadow(true);
+        BuildGhostPreview(placeable);
 
         // Show pickup description
         if (PickupDescriptionHUD.Instance != null)
@@ -593,6 +597,26 @@ public class ObjectGrabber : MonoBehaviour
                         ClearHeld();
                         return;
                     }
+
+                    // Auto-slot deposit (shoe rack, etc.) — snap to the next
+                    // free slot in a row instead of dropping at the cursor.
+                    if (zone.UseSlotting
+                        && zone.TryGetNextDepositSlot(out var slotPos, out var slotRot))
+                    {
+                        _held.OnPlaced(_currentSurface, true, slotPos, slotRot);
+
+                        // Lock slotted items in place — they shouldn't fall off
+                        // their slot or roll around. Picking the shoe back up
+                        // re-enables physics via PlaceableObject.OnPickedUp.
+                        LockRigidbodyAtSlot(_held);
+
+                        zone.RegisterDeposit(_held);
+                        OnObjectPlaced?.Invoke(_held);
+                        PlayPlaceSFX(_held);
+                        ClearHeld();
+                        return;
+                    }
+
                     // Normal drop zone — place normally, zone registers deposit
                     // Fall through to standard placement, OnPlaced will set IsAtHome
                 }
@@ -626,10 +650,7 @@ public class ObjectGrabber : MonoBehaviour
         // Use _grabTarget (cursor-tracked) instead of _heldRb.position for wall face
         // detection — the rigidbody can overshoot through thin wall triggers.
         var hitResult = _currentSurface.ProjectOntoSurface(_grabTarget, cam.transform.position);
-        float effectiveGrid = gridSize * (_held != null ? _held.GridSizeMultiplier : 1f);
-        Vector3 pos = _gridSnap
-            ? _currentSurface.SnapToGrid(hitResult.worldPosition, effectiveGrid, cam.transform.position)
-            : hitResult.worldPosition;
+        Vector3 pos = _currentSurface.SnapToGrid(hitResult.worldPosition, gridSize, cam.transform.position);
 
         float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
         pos += hitResult.surfaceNormal * halfExtent;
@@ -663,11 +684,21 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
+        // Occupancy check — block placement if another item already occupies the
+        // resolved cell. Pairables stack via the click-on-partner path
+        // (TryPairWithClicked above); plain placement here is never allowed to
+        // overlap a sibling.
+        if (FindOccupant(pos) != null)
+        {
+            Debug.Log($"[ObjectGrabber] BLOCKED: cell occupied at {pos}");
+            return;
+        }
+
         // Restore constraints before placement configures the rigidbody
         _heldRb.constraints = _originalConstraints;
         _heldRb.linearVelocity = Vector3.zero;
 
-        _held.OnPlaced(_currentSurface, _gridSnap, pos, rot);
+        _held.OnPlaced(_currentSurface, true, pos, rot);
 
         // Book public/private toggle based on placement surface
         var bookItem = _held.GetComponent<BookItem>();
@@ -696,11 +727,11 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // Stack-aware plate hooks
+        // Stack-aware plate hooks. No more auto-stack-on-place: stacking only
+        // happens through explicit pairable click (TryPairWithClicked above).
         var stackable = _held.GetComponent<StackablePlate>();
         if (stackable != null)
         {
-            stackable.TryJoinStack();
             var dishZone = _currentSurface != null
                 ? _currentSurface.GetComponent<DishDropZone>() : null;
             if (dishZone != null)
@@ -719,12 +750,8 @@ public class ObjectGrabber : MonoBehaviour
         ClearHeld();
     }
 
-    // ── Plate stacking helpers ─────────────────────────────────────
+    // ── Pair / stacking helpers ─────────────────────────────────────
 
-    /// <summary>
-    /// While holding a plate, raycast for another plate under the cursor.
-    /// If found, join the clicked plate onto the held stack (or vice versa).
-    /// </summary>
     // Forgiving radius for pairing/stacking — SphereCast instead of Raycast
     private const float PairStackRadius = 0.08f;
 
@@ -762,41 +789,6 @@ public class ObjectGrabber : MonoBehaviour
         return true;
     }
 
-    private bool TryStackOntoClickedPlate()
-    {
-        var heldStack = _held.GetComponent<StackablePlate>();
-        if (heldStack == null) return false;
-
-        Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = cam.ScreenPointToRay(screenPos);
-
-        // Use SphereCast for forgiving click area
-        StackablePlate clickedPlate = FindComponentAlongRay<StackablePlate>(ray, placeableLayer);
-        if (clickedPlate == null || clickedPlate == heldStack) return false;
-        if (clickedPlate.transform.IsChildOf(_held.transform)) return false;
-
-        // Detach the clicked plate from its current context and parent to held plate
-        clickedPlate.PrepareForGrab();
-        clickedPlate.transform.SetParent(_held.transform);
-        clickedPlate.transform.localPosition = new Vector3(0f, 0.03f * GetStackCount(_held.transform), 0f);
-        clickedPlate.transform.localRotation = Quaternion.identity;
-
-        var clickedRb = clickedPlate.GetComponent<Rigidbody>();
-        if (clickedRb != null)
-        {
-            clickedRb.isKinematic = true;
-            clickedRb.linearVelocity = Vector3.zero;
-        }
-
-        var clickedPlaceable = clickedPlate.GetComponent<PlaceableObject>();
-        if (clickedPlaceable != null)
-            clickedPlaceable.OnPickedUp();
-
-        Debug.Log($"[ObjectGrabber] Stacked {clickedPlate.name} onto held {_held.name}");
-        return true;
-    }
-
-    /// <summary>
     /// <summary>
     /// Forgiving component search along a ray. Tries SphereCast first (wider hit area),
     /// then falls back to RaycastAll for objects the sphere might miss.
@@ -873,17 +865,6 @@ public class ObjectGrabber : MonoBehaviour
         return true;
     }
 
-    private static int GetStackCount(Transform root)
-    {
-        int count = 0;
-        foreach (Transform child in root)
-        {
-            if (child.GetComponent<StackablePlate>() != null)
-                count++;
-        }
-        return count;
-    }
-
     /// <summary>
     /// Try to deposit the held item at the nearest DropZone when not over a PlacementSurface.
     /// Used for fridge, trash can, etc. that don't have placement surfaces.
@@ -955,6 +936,7 @@ public class ObjectGrabber : MonoBehaviour
         _lastValidSurface = null;
         _isOnWall = false;
         ShowShadow(false);
+        DestroyGhostPreview();
 
         if (PickupDescriptionHUD.Instance != null)
             PickupDescriptionHUD.Instance.Hide();
@@ -1000,13 +982,28 @@ public class ObjectGrabber : MonoBehaviour
                 _isOnWall = bestSurface.IsVertical;
 
                 var hitResult = bestSurface.ProjectOntoSurface(hits[bestIndex].point, cam.transform.position);
-                float eGrid = gridSize * (_held != null ? _held.GridSizeMultiplier : 1f);
-                Vector3 pos = _gridSnap
-                    ? bestSurface.SnapToGrid(hitResult.worldPosition, eGrid, cam.transform.position)
-                    : hitResult.worldPosition;
+                Vector3 pos = bestSurface.SnapToGrid(hitResult.worldPosition, gridSize, cam.transform.position);
 
                 float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
                 pos += hitResult.surfaceNormal * halfExtent;
+
+                // Heavy slot snap — if the surface has a slotted DropZone the
+                // held item belongs to, override pos with the next free slot
+                // and teleport the rigidbody so the shoe physically clicks in.
+                var slotZone = bestSurface.GetComponent<DropZone>();
+                if (slotZone == null) slotZone = bestSurface.GetComponentInParent<DropZone>();
+                if (slotZone != null && slotZone.UseSlotting && _held != null
+                    && (slotZone.ZoneName == _held.HomeZoneName || slotZone.ZoneName == _held.AltHomeZoneName)
+                    && slotZone.TryPeekNextDepositSlot(out var slotPos, out _))
+                {
+                    pos = slotPos;
+                    if (_heldRb != null)
+                    {
+                        _heldRb.position = pos;
+                        _heldRb.linearVelocity = Vector3.zero;
+                        _heldRb.angularVelocity = Vector3.zero;
+                    }
+                }
 
                 _grabTarget = pos;
 
@@ -1131,6 +1128,65 @@ public class ObjectGrabber : MonoBehaviour
         return Mathf.Abs(Vector3.Dot(_heldBoundsExtents, normal.normalized)) + PlacementSafetyMargin;
     }
 
+    /// <summary>
+    /// Lock a slot-deposited item (and any paired children) so it can't fall
+    /// out of the slot or get bumped around. Reverted on next pickup via
+    /// PlaceableObject.OnPickedUp, which sets isKinematic = false.
+    /// </summary>
+    private static void LockRigidbodyAtSlot(PlaceableObject po)
+    {
+        if (po == null) return;
+
+        var rb = po.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+
+        // Paired partner is parented under this transform — lock it too.
+        var childRbs = po.GetComponentsInChildren<Rigidbody>();
+        for (int i = 0; i < childRbs.Length; i++)
+        {
+            if (childRbs[i] == rb) continue;
+            childRbs[i].linearVelocity = Vector3.zero;
+            childRbs[i].angularVelocity = Vector3.zero;
+            childRbs[i].isKinematic = true;
+            childRbs[i].useGravity = false;
+        }
+    }
+
+    // Buffer reused by FindOccupant — keeps the helper allocation-free.
+    private static readonly Collider[] s_occupancyBuffer = new Collider[16];
+
+    /// <summary>
+    /// Returns a PlaceableObject occupying the cell at <paramref name="worldPos"/>
+    /// for the held item, or null if the cell is free. Excludes the held item itself
+    /// and any of its children. Used for placement gating and shadow color.
+    /// </summary>
+    private PlaceableObject FindOccupant(Vector3 worldPos)
+    {
+        if (_held == null) return null;
+
+        // Use the larger horizontal half-extent shrunk slightly so flush neighbors
+        // along the grid don't trip the check.
+        float radius = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.z) * 0.85f;
+        if (radius < 0.02f) radius = 0.02f;
+
+        int count = Physics.OverlapSphereNonAlloc(worldPos, radius, s_occupancyBuffer, placeableLayer);
+        for (int i = 0; i < count; i++)
+        {
+            var po = s_occupancyBuffer[i].GetComponentInParent<PlaceableObject>();
+            if (po == null) continue;
+            if (po == _held) continue;
+            if (po.transform.IsChildOf(_held.transform)) continue;
+            return po;
+        }
+        return null;
+    }
+
     // ── Shadow preview ──────────────────────────────────────────────
 
     private void BuildShadow()
@@ -1198,6 +1254,97 @@ public class ObjectGrabber : MonoBehaviour
             _shadowGO.SetActive(show);
     }
 
+    // ── Ghost preview ──────────────────────────────────────────────
+
+    /// <summary>
+    /// Build a translucent clone of the held item, reparented under a ghost
+    /// root so we can move it to the grid-snapped position each frame. The
+    /// player sees exactly where the real item will land without breaking the
+    /// smooth carry motion of the held item itself.
+    /// </summary>
+    private void BuildGhostPreview(PlaceableObject source)
+    {
+        if (!_useGhostPreview || source == null) return;
+        DestroyGhostPreview();
+
+        _ghostPreviewGO = Instantiate(source.gameObject);
+        _ghostPreviewGO.name = $"GhostPreview_{source.name}";
+        _ghostPreviewGO.transform.localScale = source.transform.lossyScale;
+
+        // Strip everything that isn't a pure visual (transform + mesh render).
+        var comps = _ghostPreviewGO.GetComponentsInChildren<Component>(includeInactive: true);
+        for (int i = 0; i < comps.Length; i++)
+        {
+            var c = comps[i];
+            if (c == null) continue;
+            if (c is Transform) continue;
+            if (c is MeshFilter) continue;
+            if (c is MeshRenderer) continue;
+            Destroy(c);
+        }
+
+        // Force every layer to IgnoreRaycast so the ghost never catches
+        // cursor raycasts, occupancy checks, or placement surface hits.
+        int ignoreLayer = 2; // built-in IgnoreRaycast
+        foreach (Transform t in _ghostPreviewGO.GetComponentsInChildren<Transform>(true))
+            t.gameObject.layer = ignoreLayer;
+
+        // Replace materials with a translucent tint version so the ghost looks
+        // like a semi-see-through preview instead of a solid duplicate.
+        _ghostPreviewMats.Clear();
+        var ghostShader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+        if (ghostShader == null) ghostShader = Shader.Find("Sprites/Default");
+        var renderers = _ghostPreviewGO.GetComponentsInChildren<Renderer>(includeInactive: true);
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            var r = renderers[i];
+            if (r == null) continue;
+            var mat = new Material(ghostShader);
+            mat.SetFloat("_Surface", 1f);
+            mat.SetFloat("_Blend", 0f);
+            mat.SetFloat("_ZWrite", 0f);
+            mat.SetOverrideTag("RenderType", "Transparent");
+            mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            mat.renderQueue = 3100;
+            mat.color = _ghostTint;
+            r.sharedMaterial = mat;
+            r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            r.receiveShadows = false;
+            _ghostPreviewMats.Add(mat);
+        }
+
+        _ghostPreviewGO.SetActive(false); // hidden until UpdateShadow positions it
+    }
+
+    /// <summary>Position the ghost at the currently-planned placement pose.</summary>
+    private void UpdateGhostPreview(Vector3 worldPos, Quaternion worldRot, bool show)
+    {
+        if (_ghostPreviewGO == null) return;
+        if (show)
+        {
+            _ghostPreviewGO.transform.SetPositionAndRotation(worldPos, worldRot);
+            if (!_ghostPreviewGO.activeSelf)
+                _ghostPreviewGO.SetActive(true);
+        }
+        else if (_ghostPreviewGO.activeSelf)
+        {
+            _ghostPreviewGO.SetActive(false);
+        }
+    }
+
+    private void DestroyGhostPreview()
+    {
+        for (int i = 0; i < _ghostPreviewMats.Count; i++)
+            if (_ghostPreviewMats[i] != null) Destroy(_ghostPreviewMats[i]);
+        _ghostPreviewMats.Clear();
+
+        if (_ghostPreviewGO != null)
+        {
+            Destroy(_ghostPreviewGO);
+            _ghostPreviewGO = null;
+        }
+    }
+
     private void UpdateShadow()
     {
         if (_shadowGO == null || _heldRb == null) return;
@@ -1206,13 +1353,49 @@ public class ObjectGrabber : MonoBehaviour
         if (_currentSurface == null)
         {
             _shadowGO.SetActive(false);
+            UpdateGhostPreview(Vector3.zero, Quaternion.identity, show: false);
             return;
         }
 
         _shadowGO.SetActive(true);
 
         var hitResult = _currentSurface.ProjectOntoSurface(_grabTarget, cam.transform.position);
-        Vector3 shadowPos = hitResult.worldPosition + hitResult.surfaceNormal * 0.01f;
+
+        // Slot-zone fast path: if the surface has a slotted DropZone the held
+        // item belongs to, the shadow follows the slot — not the cursor — and
+        // is green whenever the rack has any free slot. The actual click goes
+        // through the auto-slot deposit, which doesn't care about grid cells.
+        var slotZone = _currentSurface.GetComponent<DropZone>();
+        if (slotZone == null) slotZone = _currentSurface.GetComponentInParent<DropZone>();
+        bool isSlotZoneMatch = slotZone != null && slotZone.UseSlotting && _held != null
+            && (slotZone.ZoneName == _held.HomeZoneName || slotZone.ZoneName == _held.AltHomeZoneName);
+
+        if (isSlotZoneMatch)
+        {
+            bool slotFree = slotZone.TryPeekNextDepositSlot(out Vector3 slotPos, out Quaternion slotRot);
+            Vector3 slotShadow = slotFree
+                ? slotPos + hitResult.surfaceNormal * 0.01f
+                : hitResult.worldPosition + hitResult.surfaceNormal * 0.01f;
+
+            _shadowMat.color = slotFree ? s_shadowValid : s_shadowInvalid;
+            _shadowGO.transform.position = slotShadow;
+            _shadowGO.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
+            _shadowGO.transform.localScale = new Vector3(_heldShadowDiameter, 1f, _heldShadowDiameter);
+
+            // Ghost preview follows the slot pose (not the cursor) when snapping.
+            UpdateGhostPreview(slotFree ? slotPos : hitResult.worldPosition,
+                               slotFree ? slotRot : Quaternion.identity,
+                               show: slotFree);
+            return;
+        }
+
+        // Snap the preview to the same grid cell Place() will use, so what you
+        // see is exactly what you'll get.
+        Vector3 snapped = _currentSurface.SnapToGrid(hitResult.worldPosition, gridSize, cam.transform.position);
+        float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
+        Vector3 placePos = snapped + hitResult.surfaceNormal * halfExtent;
+
+        Vector3 shadowPos = snapped + hitResult.surfaceNormal * 0.01f;
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
         bool canPlace = (!_currentSurface.IsVertical || _held.CanWallMount)
@@ -1226,10 +1409,28 @@ public class ObjectGrabber : MonoBehaviour
             canPlace = _currentSurface.IsFloor || isTrashCan;
         }
 
+        // Occupancy: blocked unless the occupant is a valid pair partner of the held item.
+        if (canPlace)
+        {
+            var occupant = FindOccupant(placePos);
+            if (occupant != null)
+            {
+                var heldPair = _held.GetComponent<PairableItem>();
+                var occPair = occupant.GetComponent<PairableItem>();
+                bool canStackHere = heldPair != null && occPair != null
+                    && occPair.CanPairWith(heldPair);
+                if (!canStackHere) canPlace = false;
+            }
+        }
+
         _shadowMat.color = canPlace ? s_shadowValid : s_shadowInvalid;
         _shadowGO.transform.position = shadowPos;
         _shadowGO.transform.rotation = shadowRot;
         _shadowGO.transform.localScale = new Vector3(_heldShadowDiameter, 1f, _heldShadowDiameter);
+
+        // Ghost preview sits at the planned landing pose so the player sees
+        // a translucent copy of the item "parked" at the snapped grid cell.
+        UpdateGhostPreview(placePos, _held.transform.rotation, show: canPlace);
     }
 
     // ── Public API ──────────────────────────────────────────────────
@@ -1264,11 +1465,11 @@ public class ObjectGrabber : MonoBehaviour
                 var bookItem = _held.GetComponent<BookItem>();
                 if (bookItem != null) bookItem.OnBookPlaced(nearest);
 
-                // Stack-aware plate hooks on force-drop
+                // Stack-aware plate hooks on force-drop. Auto-stack-on-place
+                // is gone — pairing is the only stack path now.
                 var stackable = _held.GetComponent<StackablePlate>();
                 if (stackable != null)
                 {
-                    stackable.TryJoinStack();
                     var dropZone = nearest.GetComponent<DishDropZone>();
                     if (dropZone != null)
                     {

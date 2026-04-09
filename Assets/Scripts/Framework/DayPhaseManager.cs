@@ -90,6 +90,18 @@ public class DayPhaseManager : MonoBehaviour
     [Tooltip("Panel with Go to Bed button — shown only during Evening phase.")]
     [SerializeField] private GameObject _goToBedPanel;
 
+#if UNITY_EDITOR
+    [Header("Editor Quick-Boot (Editor only — stripped from builds)")]
+    [Tooltip("If true, pressing Play in the editor skips the normal morning→exploration→date flow and boots straight into the chosen phase with the chosen date pre-selected. Completely absent in built players.")]
+    [SerializeField] private bool _editorQuickBoot = true;
+
+    [Tooltip("Which phase to jump to on editor Play. Default is Exploration so you land in the pre-date clean-up phase with Nema already in her lean pose.")]
+    [SerializeField] private DayPhase _editorBootPhase = DayPhase.Exploration;
+
+    [Tooltip("Which date to pre-select so phase-based systems know who's coming. Drag the DatePersonalDefinition asset (e.g. Date_Paris).")]
+    [SerializeField] private DatePersonalDefinition _editorBootDate;
+#endif
+
     [Header("Audio")]
     [Tooltip("SFX played at the start of a new day (morning transition).")]
     [SerializeField] private AudioClip nextDaySFX;
@@ -159,7 +171,65 @@ public class DayPhaseManager : MonoBehaviour
         // Subscribe to calendar completion
         if (GameClock.Instance != null)
             GameClock.Instance.OnCalendarComplete.AddListener(OnCalendarComplete);
+
+#if UNITY_EDITOR
+        // Editor quick-boot: skip the normal day flow and jump straight to a
+        // chosen phase for fast iteration. Entirely stripped from builds via
+        // the #if, so the demo build still follows the normal morning →
+        // exploration → date session → evening flow.
+        if (_editorQuickBoot)
+            TryEditorQuickBoot();
+#endif
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// Editor-only shortcut: pre-select the chosen date on DateSessionManager
+    /// (so phase-based systems that read CurrentDate behave as if a session
+    /// is set up) and jump straight to the target phase. Does not run a real
+    /// date session — it just fakes enough state for phase testing.
+    /// Default target is Exploration (pre-date clean-up) so Nema appears in
+    /// her lean pose and the editor tester can iterate on the clean-up UX
+    /// without walking through morning → newspaper → call-date flow.
+    /// </summary>
+    private void TryEditorQuickBoot()
+    {
+        if (_editorBootDate != null && DateSessionManager.Instance != null)
+        {
+            // Use reflection so we don't need a new public setter on DSM — this
+            // is editor-only so the perf cost is irrelevant.
+            var field = typeof(DateSessionManager).GetField("_currentDate",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (field != null)
+                field.SetValue(DateSessionManager.Instance, _editorBootDate);
+
+            Debug.Log($"[DayPhaseManager] Editor quick-boot: date set to '{_editorBootDate.characterName}'.");
+        }
+
+        // Call the right entry point for the target phase so all side effects
+        // (UI toggles, fade-in, state machine) run normally.
+        switch (_editorBootPhase)
+        {
+            case DayPhase.Morning:
+                EnterMorning();
+                break;
+            case DayPhase.Exploration:
+                EnterExploration();
+                break;
+            case DayPhase.Evening:
+                EnterEvening(_editorBootDate, 100f);
+                break;
+            case DayPhase.FlowerTrimming:
+                SetPhase(DayPhase.FlowerTrimming);
+                break;
+            case DayPhase.DateInProgress:
+                SetPhase(DayPhase.DateInProgress);
+                break;
+        }
+
+        Debug.Log($"[DayPhaseManager] Editor quick-boot: jumped to {_editorBootPhase}.");
+    }
+#endif
 
     private void OnDestroy()
     {
