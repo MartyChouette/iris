@@ -210,8 +210,10 @@ public class ObjectGrabber : MonoBehaviour
     [Header("Ghost Preview")]
     [Tooltip("If true, a translucent duplicate of the held item is shown at the grid-snapped cell so the player sees exactly where it will land. Works alongside the disc shadow.")]
     [SerializeField] private bool _useGhostPreview = true;
-    [Tooltip("Tint applied to the ghost preview. Alpha controls see-through amount.")]
+    [Tooltip("Tint applied to the ghost preview when placement is valid.")]
     [SerializeField] private Color _ghostTint = new Color(0.5f, 0.95f, 0.55f, 0.35f);
+    [Tooltip("Tint applied to the ghost preview when the item can't fit / can't be placed.")]
+    [SerializeField] private Color _ghostTintInvalid = new Color(0.95f, 0.2f, 0.2f, 0.35f);
     private GameObject _ghostPreviewGO;
     private readonly List<Material> _ghostPreviewMats = new();
 
@@ -295,6 +297,40 @@ public class ObjectGrabber : MonoBehaviour
             UpdateScrollInput();
             UpdateShadow();
         }
+        else
+        {
+            UpdateAlbumHover();
+        }
+    }
+
+    // ── Album sleeve hover detection ────────────────────────────────
+
+    private AlbumSleeve _lastHoveredSleeve;
+
+    private void UpdateAlbumHover()
+    {
+        AlbumSleeve hovered = null;
+
+        Ray ray = cam.ScreenPointToRay(IrisInput.CursorPosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, placeableLayer))
+        {
+            hovered = hit.collider.GetComponent<AlbumSleeve>();
+            if (hovered == null) hovered = hit.collider.GetComponentInParent<AlbumSleeve>();
+        }
+
+        if (hovered != _lastHoveredSleeve)
+        {
+            if (_lastHoveredSleeve != null)
+                _lastHoveredSleeve.SetHovered(false);
+
+            if (hovered != null)
+            {
+                hovered.SetHovered(true);
+                PickupDescriptionHUD.Instance?.Show(hovered.GetTooltipText());
+            }
+
+            _lastHoveredSleeve = hovered;
+        }
     }
 
     private void FixedUpdate()
@@ -357,7 +393,9 @@ public class ObjectGrabber : MonoBehaviour
         Vector2 screenPos = IrisInput.CursorPosition;
         Ray ray = cam.ScreenPointToRay(screenPos);
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, 100f, placeableLayer))
+        // QueryTriggerInteraction.Collide so mess items (petals, trimmings)
+        // with trigger colliders can be clicked.
+        if (!Physics.Raycast(ray, out RaycastHit hit, 100f, placeableLayer, QueryTriggerInteraction.Collide))
             return;
 
         var placeable = hit.collider.GetComponent<PlaceableObject>();
@@ -406,15 +444,62 @@ public class ObjectGrabber : MonoBehaviour
                 return;
             }
 
-            // Check for turntable click — eject record
+            // Check for turntable button click (play/pause)
+            var turntableBtn = hit.collider.GetComponent<TurntableButton>();
+            if (turntableBtn == null)
+                turntableBtn = hit.collider.GetComponentInParent<TurntableButton>();
+            if (turntableBtn != null)
+            {
+                turntableBtn.Press();
+                ConsumeClick();
+                return;
+            }
+
+            // Click on album sleeve — extract vinyl if hovered/peeking
+            var clickedSleeve = hit.collider.GetComponent<AlbumSleeve>();
+            if (clickedSleeve == null)
+                clickedSleeve = hit.collider.GetComponentInParent<AlbumSleeve>();
+            if (clickedSleeve != null && clickedSleeve.IsHovered)
+            {
+                var vinylPlaceable = clickedSleeve.ExtractVinyl();
+                if (vinylPlaceable != null)
+                {
+                    ConsumeClick();
+                    _held = vinylPlaceable;
+                    _pickupTimer = PickupFeelDuration;
+                    InitGrab();
+                    return;
+                }
+            }
+
+            // Click on a drink glass while not holding anything → finish the drink
+            var clickedGlass = hit.collider.GetComponent<DrinkGlass>();
+            if (clickedGlass == null)
+                clickedGlass = hit.collider.GetComponentInParent<DrinkGlass>();
+            if (clickedGlass != null && DrinkPourManager.Instance != null
+                && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Pouring
+                && DrinkPourManager.Instance.ActiveGlass == clickedGlass)
+            {
+                DrinkPourManager.Instance.FinishDrink();
+                ConsumeClick();
+                return;
+            }
+
+            // Click on turntable while vinyl is loaded — eject to hand
             var clickedSlot = hit.collider.GetComponent<RecordSlot>();
             if (clickedSlot == null)
                 clickedSlot = hit.collider.GetComponentInParent<RecordSlot>();
-            if (clickedSlot != null && clickedSlot.IsPlaying)
+            if (clickedSlot != null && clickedSlot.IsLoaded)
             {
-                clickedSlot.EjectRecord();
-                ConsumeClick();
-                return;
+                var ejected = clickedSlot.EjectVinyl();
+                if (ejected != null)
+                {
+                    ConsumeClick();
+                    _held = ejected;
+                    _pickupTimer = PickupFeelDuration;
+                    InitGrab();
+                    return;
+                }
             }
 
             return;
@@ -423,18 +508,83 @@ public class ObjectGrabber : MonoBehaviour
         if (placeable.CurrentState == PlaceableObject.State.Held)
             return;
 
-        // Records use click-to-select — no physical grab
-        var recordItem = placeable.GetComponent<RecordItem>();
-        if (recordItem != null)
+        // Album sleeves are static — never grab them
+        if (placeable.GetComponent<AlbumSleeve>() != null
+            || placeable.GetComponentInParent<AlbumSleeve>() != null)
         {
-            recordItem.SelectForPlayback();
-            ConsumeClick();
-            return;
+            // But if the click hit the peeking vinyl, extract it
+            var vinylOnSleeve = placeable.GetComponent<VinylDisc>();
+            if (vinylOnSleeve == null) vinylOnSleeve = placeable.GetComponentInChildren<VinylDisc>();
+            var parentSleeve = vinylOnSleeve != null ? vinylOnSleeve.HomeSleeve : null;
+            if (parentSleeve != null && parentSleeve.IsHovered)
+            {
+                var vinylPlaceable = parentSleeve.ExtractVinyl();
+                if (vinylPlaceable != null)
+                {
+                    ConsumeClick();
+                    _held = vinylPlaceable;
+                    _pickupTimer = PickupFeelDuration;
+                    InitGrab();
+                }
+            }
+            return; // never grab the sleeve itself
+        }
+
+        // Vinyl in album sleeve — extract on click (when sleeve is hovered / peeking)
+        var vinylDisc = placeable.GetComponent<VinylDisc>();
+        if (vinylDisc != null)
+        {
+            var sleeve = vinylDisc.HomeSleeve;
+            if (sleeve != null && sleeve.IsHovered)
+            {
+                var vinylPlaceable = sleeve.ExtractVinyl();
+                if (vinylPlaceable != null)
+                {
+                    ConsumeClick();
+                    _held = vinylPlaceable;
+                    _pickupTimer = PickupFeelDuration;
+                    InitGrab();
+                    return;
+                }
+            }
+        }
+
+        // Book collection: clicking a child book in a connected set detaches
+        // just that book (for reordering) instead of picking up the whole group.
+        var bookColl = placeable.GetComponent<BookCollectionItem>();
+        if (bookColl != null && placeable.GetComponentInParent<PairableItem>() != null)
+        {
+            // Check if this is a CHILD in a paired stack (not the root)
+            var parentPairable = placeable.transform.parent != null
+                ? placeable.transform.parent.GetComponent<PairableItem>()
+                : null;
+            if (parentPairable != null)
+            {
+                var detached = bookColl.DetachFromStack();
+                if (detached != null)
+                {
+                    ConsumeClick();
+                    _held = detached;
+                    _pickupTimer = PickupFeelDuration;
+                    InitGrab();
+                    return;
+                }
+            }
         }
 
         ConsumeClick();
         _held = placeable;
         _pickupTimer = PickupFeelDuration;
+        InitGrab();
+    }
+
+    /// <summary>
+    /// Shared grab initialization. Assumes _held and _pickupTimer are already set.
+    /// Sets up physics, bounds cache, shadow, ghost preview, and description HUD.
+    /// </summary>
+    private void InitGrab()
+    {
+        var placeable = _held;
 
         // Flash partner highlight for pairable items (shoes)
         var pairable = placeable.GetComponent<PairableItem>();
@@ -492,6 +642,10 @@ public class ObjectGrabber : MonoBehaviour
         var bookItem = placeable.GetComponent<BookItem>();
         if (bookItem != null) bookItem.OnBookPickedUp();
 
+        // Blanket fold + hidden item reveal
+        var blanket = placeable.GetComponent<BlanketItem>();
+        if (blanket != null) blanket.OnBlanketPickedUp();
+
         AudioManager.Instance?.PlaySFX(placeable.PickupSFXOverride != null ? placeable.PickupSFXOverride : _pickupSFX);
         ShowShadow(true);
         BuildGhostPreview(placeable);
@@ -506,6 +660,44 @@ public class ObjectGrabber : MonoBehaviour
     private void Place()
     {
         if (_held == null) return;
+
+        // ── Watering can near plant ──
+        if (_held.GetComponent<WateringCan>() != null)
+        {
+            var wm = WateringManager.Instance;
+
+            if (_nearestWaterablePlant != null && wm != null)
+            {
+                // Not yet pouring this plant → start session
+                if (wm.CurrentState != WateringManager.State.Pouring
+                    || wm.ActivePlant != _nearestWaterablePlant)
+                {
+                    wm.StartWatering(_nearestWaterablePlant);
+                    ConsumeClick();
+                    return;
+                }
+
+                // Already pouring this plant → click does nothing (hold to pour)
+                ConsumeClick();
+                return;
+            }
+
+            // Not near any plant → end watering and place the can down
+            if (wm != null && wm.CurrentState == WateringManager.State.Pouring)
+                wm.EndWatering();
+        }
+
+        // ── Bottle near glass → start pouring instead of placing ──
+        var heldBottle = _held.GetComponent<BottleItem>();
+        if (heldBottle != null && _nearestDrinkGlass != null)
+        {
+            if (DrinkPourManager.Instance != null)
+            {
+                DrinkPourManager.Instance.StartPouring(_nearestDrinkGlass, heldBottle.Ingredient);
+                ConsumeClick();
+                return; // keep holding the bottle
+            }
+        }
 
         // ── DiscoBall check ──
         if (_currentSurface != null)
@@ -524,6 +716,38 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
+        // ── Vinyl placement ──
+        var heldVinyl = _held.GetComponent<VinylDisc>();
+        if (heldVinyl != null)
+        {
+            // Try placing on turntable
+            if (RecordSlot.Instance != null && RecordSlot.Instance.TryAcceptVinyl(_held))
+            {
+                PlayPlaceSFX(_held);
+                ClearHeld();
+                ConsumeClick();
+                return;
+            }
+
+            // Try returning to home sleeve
+            if (heldVinyl.HomeSleeve != null && heldVinyl.HomeSleeve.WaitingForReturn)
+            {
+                Ray returnRay = cam.ScreenPointToRay(IrisInput.CursorPosition);
+                if (Physics.Raycast(returnRay, out RaycastHit sleeveHit, 100f))
+                {
+                    var sleeve = sleeveHit.collider.GetComponent<AlbumSleeve>();
+                    if (sleeve == null) sleeve = sleeveHit.collider.GetComponentInParent<AlbumSleeve>();
+                    if (sleeve != null && sleeve == heldVinyl.HomeSleeve)
+                    {
+                        sleeve.ReturnVinyl(heldVinyl);
+                        ClearHeld();
+                        ConsumeClick();
+                        return;
+                    }
+                }
+            }
+        }
+
         // Check if clicking directly on a DropZone (trash can body, fridge, etc.)
         // This runs regardless of surface state so clicking anywhere on the
         // trash can (body or lid) deposits trash.
@@ -533,14 +757,49 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
-        // No surface — nothing more to do
-        if (_currentSurface == null) return;
+        // Proximity deposit: if the item was magnetically pulled close to a
+        // destroy zone (trash can, sink), deposit it even if the click missed
+        // the zone's collider (hit the counter behind it instead).
+        if (_held.Category == ItemCategory.Trash || _held.Category == ItemCategory.Dish)
+        {
+            var allZones = DropZone.All;
+            for (int i = 0; i < allZones.Count; i++)
+            {
+                var z = allZones[i];
+                if (z == null || !z.DestroyOnDeposit) continue;
+
+                bool matches = (_held.Category == ItemCategory.Trash && z.ZoneName == "TrashCan")
+                            || (_held.Category == ItemCategory.Dish && z.ZoneName == "Sink")
+                            || z.ZoneName == _held.HomeZoneName
+                            || z.ZoneName == _held.AltHomeZoneName;
+                if (!matches) continue;
+
+                float dist = Vector3.Distance(z.transform.position, _grabTarget);
+                if (dist < _trashSnapRadius)
+                {
+                    z.RegisterDeposit(_held);
+                    ClearHeld();
+                    ConsumeClick();
+                    return;
+                }
+            }
+        }
+
+        // No surface under cursor — snap to the nearest surface as a fallback
+        // so items don't free-fall through the floor.
+        if (_currentSurface == null)
+        {
+            var fallbackSurface = PlacementSurface.FindNearest(_grabTarget, skipVertical: true);
+            if (fallbackSurface == null) return;
+            _currentSurface = fallbackSurface;
+        }
 
         // ── DropZone check ──
         // Only match the DropZone directly on this surface — parent/child
         // traversal was causing the kitchen counter to match the nearby sink.
         {
             DropZone zone = _currentSurface.GetComponent<DropZone>();
+            bool zoneIsDirect = zone != null; // true = zone is on this surface, not found via proximity
 
             // Proximity fallback for non-destroy zones only (shoe rack, etc.).
             // Destroy zones (sink, trash can) must be placed directly on a
@@ -576,14 +835,15 @@ public class ObjectGrabber : MonoBehaviour
                     else if (_held.Category == ItemCategory.Dish && zone.ZoneName == "Sink")
                         matchesHome = true;
                 }
-                // Shoes must be paired before placing at their home station
-                if (matchesHome)
+                // Proximity-found zone with unpaired pairable — skip the zone,
+                // fall through to normal surface placement instead.
+                if (matchesHome && !zoneIsDirect)
                 {
                     var pairable = _held.GetComponent<PairableItem>();
                     if (pairable != null && pairable.Mode == PairableItem.PairMode.SpecificPartner && !pairable.IsPaired)
                     {
-                        Debug.Log("[ObjectGrabber] Shoe must be paired before placing at station.");
-                        return; // block placement
+                        zone = null;
+                        matchesHome = false;
                     }
                 }
 
@@ -761,6 +1021,34 @@ public class ObjectGrabber : MonoBehaviour
     [Tooltip("World-space radius at which the held item magnetically snaps toward its pair partner while carrying.")]
     [SerializeField] private float _pairSnapRadius = 0.4f;
 
+    [Header("Trash Can Snap")]
+    [Tooltip("World-space radius at which trash items start being pulled toward the trash can lid.")]
+    [SerializeField] private float _trashSnapRadius = 0.8f;
+
+    [Tooltip("How strongly the item is pulled toward the lid (0 = no pull, 1 = full lock). Interpolated by proximity.")]
+    [SerializeField, Range(0f, 1f)] private float _trashSnapStrength = 0.45f;
+
+    [Header("Turntable Snap")]
+    [Tooltip("World-space radius at which vinyl items start being pulled toward the turntable platter.")]
+    [SerializeField] private float _turntableSnapRadius = 0.6f;
+
+    [Tooltip("How strongly the vinyl is pulled toward the platter (0 = no pull, 1 = full lock).")]
+    [SerializeField, Range(0f, 1f)] private float _turntableSnapStrength = 0.5f;
+
+    [Header("Bottle Snap")]
+    [Tooltip("World-space radius at which a held bottle snaps toward a glass.")]
+    [SerializeField] private float _bottleSnapRadius = 0.6f;
+
+    [Tooltip("How strongly the bottle is pulled toward the glass pour position.")]
+    [SerializeField, Range(0f, 1f)] private float _bottleSnapStrength = 0.7f;
+
+    [Header("Watering Can Snap")]
+    [Tooltip("World-space radius at which the watering can snaps toward a plant.")]
+    [SerializeField] private float _wateringSnapRadius = 1.0f;
+
+    [Tooltip("How strongly the can is pulled toward the plant pour position.")]
+    [SerializeField, Range(0f, 1f)] private float _wateringSnapStrength = 0.75f;
+
     private bool TryPairWithClicked()
     {
         if (_held == null) return false;
@@ -849,6 +1137,12 @@ public class ObjectGrabber : MonoBehaviour
 
         // Calculate the position the held item would land at when paired
         Vector3 snapPos = best.GetPairSnapPosition(heldPairable);
+
+        // If on a surface, grid-snap the pair position so items still
+        // "click" into the surface grid instead of floating freely.
+        if (_currentSurface != null)
+            snapPos = _currentSurface.SnapToGrid(snapPos, gridSize, cam.transform.position);
+
         _grabTarget = snapPos;
 
         // Hard-teleport so the item locks instantly (no spring lag)
@@ -857,6 +1151,223 @@ public class ObjectGrabber : MonoBehaviour
             _heldRb.position = snapPos;
             _heldRb.linearVelocity = Vector3.zero;
             _heldRb.angularVelocity = Vector3.zero;
+        }
+    }
+
+    // ── Trash can magnetic snap ─────────────────────────────────────
+
+    /// <summary>
+    /// When holding a trash item near a trash can, softly pull the grab
+    /// target toward the lid to signal "you can drop this here."
+    /// </summary>
+    private void UpdateTrashCanSnap()
+    {
+        if (_held == null) return;
+
+        // Only snap items the trash can would accept
+        bool isTrash = _held.Category == ItemCategory.Trash
+                    || _held.HomeZoneName == "TrashCan"
+                    || _held.AltHomeZoneName == "TrashCan";
+        if (!isTrash) return;
+
+        // Find nearest trash can within snap radius
+        DropZone bestZone = null;
+        float bestDist = _trashSnapRadius;
+
+        var allZones = DropZone.All;
+        for (int i = 0; i < allZones.Count; i++)
+        {
+            var zone = allZones[i];
+            if (zone == null || !zone.DestroyOnDeposit) continue;
+            if (zone.ZoneName != "TrashCan") continue;
+
+            float dist = Vector3.Distance(zone.transform.position, _grabTarget);
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                bestZone = zone;
+            }
+        }
+
+        if (bestZone == null) return;
+
+        // Pull toward the lid (top of the trash can)
+        Vector3 lidPos = bestZone.transform.position + bestZone.transform.up * 0.15f;
+        float proximity = 1f - (bestDist / _trashSnapRadius); // 0 at edge, 1 at center
+        float strength = proximity * proximity * _trashSnapStrength; // quadratic ease-in
+        _grabTarget = Vector3.Lerp(_grabTarget, lidPos, strength);
+    }
+
+    // ── Turntable magnetic snap ─────────────────────────────────────
+
+    /// <summary>
+    /// When holding a vinyl disc near the turntable, softly pull the grab
+    /// target toward the platter to signal "you can place this here."
+    /// </summary>
+    private void UpdateTurntableSnap()
+    {
+        if (_held == null) return;
+        if (_held.GetComponent<VinylDisc>() == null) return;
+        if (RecordSlot.Instance == null) return;
+
+        Vector3 snapPos = RecordSlot.Instance.SnapPoint;
+        float dist = Vector3.Distance(snapPos, _grabTarget);
+        if (dist > _turntableSnapRadius || dist < 0.01f) return;
+
+        float proximity = 1f - (dist / _turntableSnapRadius);
+        float strength = proximity * proximity * _turntableSnapStrength;
+        _grabTarget = Vector3.Lerp(_grabTarget, snapPos, strength);
+    }
+
+    // ── Watering can magnetic snap + pour trigger ────────────────────
+
+    private WaterablePlant _nearestWaterablePlant;
+
+    /// <summary>
+    /// When holding a watering can near a plant, pull toward pour position.
+    /// If the player clicks while snapped, start the watering session.
+    /// </summary>
+    // ── Bottle magnetic snap ────────────────────────────────────────
+
+    private DrinkGlass _nearestDrinkGlass;
+
+    private void UpdateBottleSnap()
+    {
+        _nearestDrinkGlass = null;
+        if (_held == null) return;
+
+        var bottle = _held.GetComponent<BottleItem>();
+        if (bottle == null) return;
+
+        // Find nearest DrinkGlass
+        DrinkGlass bestGlass = null;
+        float bestDist = _bottleSnapRadius;
+
+        foreach (var glass in DrinkGlass.All)
+        {
+            if (glass == null) continue;
+            float dist = Vector3.Distance(glass.transform.position, _grabTarget);
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                bestGlass = glass;
+            }
+        }
+
+        if (bestGlass == null)
+        {
+            // Moved away — stop pouring if active
+            if (DrinkPourManager.Instance != null
+                && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Pouring)
+                DrinkPourManager.Instance.StopPouring();
+            return;
+        }
+
+        _nearestDrinkGlass = bestGlass;
+
+        // Snap to pour position above the glass rim
+        Vector3 glassTop = bestGlass.transform.position + Vector3.up * 0.15f;
+        Vector3 toCursor = _grabTarget - bestGlass.transform.position;
+        toCursor.y = 0f;
+        if (toCursor.sqrMagnitude < 0.001f) toCursor = Vector3.forward;
+        toCursor.Normalize();
+
+        Vector3 pourPos = bestGlass.transform.position + toCursor * 0.08f + Vector3.up * 0.2f;
+
+        float proximity = 1f - (bestDist / _bottleSnapRadius);
+        float strength = proximity > 0.4f
+            ? Mathf.Lerp(0.5f, 1f, (proximity - 0.4f) / 0.6f)
+            : proximity * proximity * _bottleSnapStrength;
+
+        _grabTarget = Vector3.Lerp(_grabTarget, pourPos, strength);
+
+        // Tilt bottle toward glass
+        if (proximity > 0.5f)
+        {
+            Vector3 tiltDir = (bestGlass.transform.position - _held.transform.position).normalized;
+            tiltDir.y = 0f;
+            float tiltAngle = Mathf.Lerp(0f, 45f, (proximity - 0.5f) / 0.5f);
+            Quaternion tiltRot = Quaternion.LookRotation(tiltDir, Vector3.up)
+                               * Quaternion.Euler(tiltAngle, 0f, 0f);
+            _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation, tiltRot,
+                                                         Time.deltaTime * 8f);
+        }
+    }
+
+    private void UpdateWateringCanSnap()
+    {
+        _nearestWaterablePlant = null;
+        if (_held == null) return;
+        if (_held.GetComponent<WateringCan>() == null) return;
+
+        // If we WERE watering but moved away, end the session + dismiss UI
+        bool wasWatering = WateringManager.Instance != null
+            && WateringManager.Instance.CurrentState == WateringManager.State.Pouring;
+
+        // Find nearest WaterablePlant
+        WaterablePlant bestPlant = null;
+        float bestDist = _wateringSnapRadius;
+
+        foreach (var plant in WaterablePlant.All)
+        {
+            if (plant == null) continue;
+            float dist = Vector3.Distance(plant.transform.position, _grabTarget);
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                bestPlant = plant;
+            }
+        }
+
+        if (bestPlant == null)
+        {
+            // Moved away from all plants — end any active watering session
+            if (wasWatering)
+                WateringManager.Instance.EndWatering();
+            return;
+        }
+
+        _nearestWaterablePlant = bestPlant;
+
+        // Snap the can to orbit the plant rim. Mouse left/right rotates
+        // the can around the pot. Hard lock when close — the can clicks
+        // into position on the rim and waits for the player to hold-click.
+        Vector3 plantCenter = bestPlant.transform.position;
+        float rimRadius = 0.15f; // distance from plant center to rim edge
+        float rimHeight = 0.3f;  // height above plant base (spout above rim)
+
+        // Direction from plant to cursor in XZ
+        Vector3 toCursor = _grabTarget - plantCenter;
+        toCursor.y = 0f;
+        if (toCursor.sqrMagnitude < 0.001f)
+            toCursor = Vector3.forward;
+        toCursor.Normalize();
+
+        // Pour position orbits the rim
+        Vector3 pourPos = plantCenter + toCursor * rimRadius + Vector3.up * rimHeight;
+
+        float proximity = 1f - (bestDist / _wateringSnapRadius);
+
+        // Hard magnetic lock — snaps firmly to the rim, not a soft suggestion
+        float strength;
+        if (proximity > 0.4f)
+            strength = Mathf.Lerp(0.5f, 1f, (proximity - 0.4f) / 0.6f); // strong ramp to full lock
+        else
+            strength = proximity * proximity * _wateringSnapStrength;
+
+        _grabTarget = Vector3.Lerp(_grabTarget, pourPos, strength);
+
+        // Tilt the 3D watering can to look like it's pouring
+        if (_held != null && proximity > 0.5f)
+        {
+            // Tilt toward the plant center (spout tips inward)
+            Vector3 tiltDir = (plantCenter - _held.transform.position).normalized;
+            tiltDir.y = 0f;
+            float tiltAngle = Mathf.Lerp(0f, 35f, (proximity - 0.5f) / 0.5f); // up to 35° tilt
+            Quaternion tiltRot = Quaternion.LookRotation(tiltDir, Vector3.up)
+                               * Quaternion.Euler(tiltAngle, 0f, 0f);
+            _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation, tiltRot,
+                                                         Time.deltaTime * 8f);
         }
     }
 
@@ -992,6 +1503,9 @@ public class ObjectGrabber : MonoBehaviour
 
         if (_held != null)
         {
+            // Restore normal rendering (undo HeldOnTop shader swap from pickup)
+            _held.SetRenderOnTop(false);
+
             // Always clean up held item visuals
             _held.ForceRestoreMaterial();
             _held.ForceDestroySilhouette();
@@ -1037,35 +1551,64 @@ public class ObjectGrabber : MonoBehaviour
         // RaycastAll so the ray can pass through nearer surfaces to reach
         // ones further away (e.g. coffee table in living room from kitchen camera).
         var hits = Physics.RaycastAll(ray, 100f, surfaceLayer);
+        if (hits.Length == 0 && _held != null)
+            Debug.Log($"[UpdateGrabTarget] No surface hits at all. surfaceLayer={surfaceLayer.value}");
         if (hits.Length > 0)
         {
-            // Linear pass: find nearest valid surface without sorting
-            float bestDist = float.MaxValue;
-            int bestIndex = -1;
-            PlacementSurface bestSurface = null;
+            // Sort nearest-first so we try the camera-closest surface first
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            int occlusionMask = _wallLayer | _barrierLayer;
+            Vector3 camPos = cam.transform.position;
 
             for (int h = 0; h < hits.Length; h++)
             {
-                if (hits[h].distance >= bestDist) continue;
                 var surface = hits[h].collider.GetComponentInParent<PlacementSurface>();
                 bool surfaceValid = surface != null
                     && (!surface.IsVertical || _held.CanWallMount)
                     && (surface.IsVertical || !_held.WallOnly);
-                if (!surfaceValid) continue;
+                if (!surfaceValid)
+                {
+                    Debug.Log($"[UpdateGrabTarget] Skipped {hits[h].collider.name}: surface={surface?.name}, isVertical={surface?.IsVertical}, canWallMount={_held?.CanWallMount}, wallOnly={_held?.WallOnly}");
+                    continue;
+                }
 
-                bestDist = hits[h].distance;
-                bestIndex = h;
-                bestSurface = surface;
-            }
+                // Project onto the actual surface face to get the real placement point
+                var hitResult = surface.ProjectOntoSurface(hits[h].point, camPos);
+                Vector3 projectedPos = hitResult.worldPosition;
 
-            if (bestIndex >= 0)
-            {
-                _currentSurface = bestSurface;
-                _lastValidSurface = bestSurface;
-                _isOnWall = bestSurface.IsVertical;
+                // Occlusion check: reject surfaces whose placement point is
+                // hidden behind solid geometry (counter, bookshelf, etc.).
+                // Skip for floor surfaces — floor placement should never be
+                // blocked by furniture the camera looks through.
+                if (!surface.IsFloor)
+                {
+                    Vector3 toProj = projectedPos - camPos;
+                    float projDist = toProj.magnitude;
+                    if (projDist > 0.1f)
+                    {
+                        Vector3 projDir = toProj / projDist;
+                        if (Physics.Raycast(camPos, projDir, out RaycastHit occHit,
+                                projDist - 0.05f, occlusionMask))
+                        {
+                            // Allow if the blocker is the surface's own furniture
+                            bool sameFurniture = occHit.transform.IsChildOf(surface.transform)
+                                              || surface.transform.IsChildOf(occHit.transform);
+                            // Allow if the hit is very close to the surface — it's
+                            // the surface's own supporting geometry (floor slab,
+                            // table top mesh, etc.), not a separate occluder.
+                            bool nearSurface = Vector3.Distance(occHit.point, projectedPos) < 0.15f;
+                            if (!sameFurniture && !nearSurface) continue; // truly occluded — skip
+                        }
+                    }
+                }
 
-                var hitResult = bestSurface.ProjectOntoSurface(hits[bestIndex].point, cam.transform.position);
-                Vector3 pos = bestSurface.SnapToGrid(hitResult.worldPosition, gridSize, cam.transform.position);
+                // This surface is valid and visible — use it
+                _currentSurface = surface;
+                _lastValidSurface = surface;
+                _isOnWall = surface.IsVertical;
+
+                Vector3 pos = surface.SnapToGrid(hitResult.worldPosition, gridSize, camPos);
 
                 float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
                 pos += hitResult.surfaceNormal * halfExtent;
@@ -1073,8 +1616,8 @@ public class ObjectGrabber : MonoBehaviour
                 // Heavy slot snap — if the surface has a slotted DropZone the
                 // held item belongs to, override pos with the next free slot
                 // and teleport the rigidbody so the shoe physically clicks in.
-                var slotZone = bestSurface.GetComponent<DropZone>();
-                if (slotZone == null) slotZone = bestSurface.GetComponentInParent<DropZone>();
+                var slotZone = surface.GetComponent<DropZone>();
+                if (slotZone == null) slotZone = surface.GetComponentInParent<DropZone>();
                 if (slotZone != null && slotZone.UseSlotting && _held != null
                     && (slotZone.ZoneName == _held.HomeZoneName || slotZone.ZoneName == _held.AltHomeZoneName)
                     && slotZone.TryPeekNextDepositSlot(out var slotPos, out _))
@@ -1092,13 +1635,14 @@ public class ObjectGrabber : MonoBehaviour
 
                 // Track depth so fallback stays smooth if cursor leaves surface
                 _fallbackDepth = Vector3.Dot(
-                    _grabTarget - cam.transform.position,
+                    _grabTarget - camPos,
                     cam.transform.forward);
 
                 if (_isOnWall)
                     _held.AlignToWall(hitResult.surfaceNormal, _wallRotation);
 
                 foundSurface = true;
+                break; // first valid, non-occluded surface wins
             }
         }
 
@@ -1119,6 +1663,18 @@ public class ObjectGrabber : MonoBehaviour
         // Pair snap: if holding a pairable item near its partner, override
         // _grabTarget to magnetically lock onto the pair position.
         UpdatePairSnap();
+
+        // Trash can snap: soft pull toward lid when carrying trash nearby.
+        UpdateTrashCanSnap();
+
+        // Turntable snap: soft pull toward platter when carrying vinyl nearby.
+        UpdateTurntableSnap();
+
+        // Watering can snap: pull toward nearest plant when carrying the can.
+        UpdateWateringCanSnap();
+
+        // Bottle snap: pull toward nearest drink glass when carrying a bottle.
+        UpdateBottleSnap();
     }
 
     /// <summary>
@@ -1162,19 +1718,31 @@ public class ObjectGrabber : MonoBehaviour
         }
     }
 
-    // ── Rotate input (RMB / gamepad RB) ─────────────────────────────
+    // ── Rotate input ────────────────────────────────────────────────
+    // RMB          = roll (Z axis)
+    // Mouse Fwd(4) = yaw  (Y axis)
+    // Mouse Back(3)= flip (X axis — toggle upright/flat)
 
     private void UpdateScrollInput()
     {
-        // RMB = rotate around Y (turn)
-        bool rotatePressed = UnityEngine.InputSystem.Mouse.current != null
-            && UnityEngine.InputSystem.Mouse.current.rightButton.wasPressedThisFrame;
-        if (!rotatePressed
+        var mouse = UnityEngine.InputSystem.Mouse.current;
+
+        // RMB = roll around Z
+        bool rollPressed = mouse != null && mouse.rightButton.wasPressedThisFrame;
+        if (rollPressed && _held.AllowRoll)
+        {
+            float angle = scrollRotateStep;
+            _held.transform.Rotate(0f, 0f, angle, Space.Self);
+        }
+
+        // Mouse Forward (4) = yaw around Y
+        bool yawPressed = Input.GetMouseButtonDown(4);
+        if (!yawPressed
             && UnityEngine.InputSystem.Gamepad.current != null
             && UnityEngine.InputSystem.Gamepad.current.rightShoulder.wasPressedThisFrame)
-            rotatePressed = true;
+            yawPressed = true;
 
-        if (rotatePressed)
+        if (yawPressed && _held.AllowYaw)
         {
             float angle = scrollRotateStep;
             if (_isOnWall)
@@ -1183,17 +1751,11 @@ public class ObjectGrabber : MonoBehaviour
                 _held.transform.Rotate(0f, angle, 0f, Space.World);
         }
 
-        // Shift+RMB or Mouse Back Button (3) = flip upright/flat
-        bool flipPressed = Input.GetMouseButtonDown(3); // mouse back/thumb button
-        if (!flipPressed)
-        {
-            flipPressed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                       && Input.GetMouseButtonDown(1);
-        }
+        // Mouse Back (3) = flip around X (toggle upright/flat)
+        bool flipPressed = Input.GetMouseButtonDown(3);
 
-        if (flipPressed)
+        if (flipPressed && _held.AllowFlip)
         {
-            // Toggle between standing (upright) and lying flat
             Vector3 euler = _held.transform.eulerAngles;
             float xAngle = Mathf.DeltaAngle(euler.x, 0f);
             bool isUpright = Mathf.Abs(xAngle) < 45f;
@@ -1410,8 +1972,9 @@ public class ObjectGrabber : MonoBehaviour
         _ghostPreviewGO.SetActive(false); // hidden until UpdateShadow positions it
     }
 
-    /// <summary>Position the ghost at the currently-planned placement pose.</summary>
-    private void UpdateGhostPreview(Vector3 worldPos, Quaternion worldRot, bool show)
+    /// <summary>Position the ghost at the currently-planned placement pose.
+    /// When visible, tints green (valid) or red (can't fit / blocked).</summary>
+    private void UpdateGhostPreview(Vector3 worldPos, Quaternion worldRot, bool show, bool valid = true)
     {
         if (_ghostPreviewGO == null) return;
         if (show)
@@ -1419,6 +1982,11 @@ public class ObjectGrabber : MonoBehaviour
             _ghostPreviewGO.transform.SetPositionAndRotation(worldPos, worldRot);
             if (!_ghostPreviewGO.activeSelf)
                 _ghostPreviewGO.SetActive(true);
+
+            // Tint ghost based on placement validity
+            Color tint = valid ? _ghostTint : _ghostTintInvalid;
+            for (int i = 0; i < _ghostPreviewMats.Count; i++)
+                if (_ghostPreviewMats[i] != null) _ghostPreviewMats[i].color = tint;
         }
         else if (_ghostPreviewGO.activeSelf)
         {
@@ -1476,10 +2044,10 @@ public class ObjectGrabber : MonoBehaviour
             _shadowGO.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
             _shadowGO.transform.localScale = new Vector3(_heldShadowDiameter, 1f, _heldShadowDiameter);
 
-            // Ghost preview follows the slot pose (not the cursor) when snapping.
+            // Ghost preview follows the slot pose — red if rack is full.
             UpdateGhostPreview(slotFree ? slotPos : hitResult.worldPosition,
                                slotFree ? slotRot : Quaternion.identity,
-                               show: slotFree);
+                               show: true, valid: slotFree);
             return;
         }
 
@@ -1501,7 +2069,9 @@ public class ObjectGrabber : MonoBehaviour
             placeRot = _held.HomeRotation;
         }
 
-        Vector3 shadowPos = snapped + hitResult.surfaceNormal * 0.01f;
+        // Shadow always sits directly under the ghost on the surface face.
+        // Derived from placePos so any override (home snap, etc.) keeps them aligned.
+        Vector3 shadowPos = placePos - hitResult.surfaceNormal * (halfExtent - 0.01f);
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
         bool canPlace = (!_currentSurface.IsVertical || _held.CanWallMount)
@@ -1534,9 +2104,9 @@ public class ObjectGrabber : MonoBehaviour
         _shadowGO.transform.rotation = shadowRot;
         _shadowGO.transform.localScale = new Vector3(_heldShadowDiameter, 1f, _heldShadowDiameter);
 
-        // Ghost preview sits at the planned landing pose so the player sees
-        // a translucent copy of the item "parked" at the snapped grid cell.
-        UpdateGhostPreview(placePos, placeRot, show: canPlace);
+        // Ghost preview sits at the planned landing pose — green when valid,
+        // red when the item can't fit or placement is blocked.
+        UpdateGhostPreview(placePos, placeRot, show: true, valid: canPlace);
     }
 
     // ── Public API ──────────────────────────────────────────────────

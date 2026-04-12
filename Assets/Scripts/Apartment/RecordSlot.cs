@@ -1,11 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Turntable/record player receiver. Accepts a PlaceableObject with RecordItem,
-/// manages playback via AudioManager, feeds MoodMachine, and toggles ReactableTag.
-/// When a record is playing, it stands upright at the display point so the player
-/// can see which record is loaded. On eject (or song switch), the record returns
-/// to its shelf home position.
+/// Turntable receiver. Accepts a physical VinylDisc placed by the player,
+/// manages playback via AudioManager, drives the tone arm and disc spin,
+/// feeds MoodMachine, and toggles ReactableTag.
+///
+/// Play/Pause are triggered by tiny TurntableButton children, not by
+/// clicking the turntable itself. Clicking the vinyl on the platter
+/// ejects it back into the player's hand.
+///
 /// Scene-scoped singleton (one turntable per apartment).
 /// </summary>
 public class RecordSlot : MonoBehaviour
@@ -22,19 +26,26 @@ public class RecordSlot : MonoBehaviour
     [Tooltip("Renderer on the disc visual for changing label color.")]
     [SerializeField] private Renderer _discRenderer;
 
-    [Tooltip("Rotation speed in degrees/second while playing.")]
+    [Tooltip("Target rotation speed in degrees/second while playing.")]
     [SerializeField] private float _rotationSpeed = 33.3f;
 
+    [Tooltip("Seconds for the disc to accelerate/decelerate.")]
+    [SerializeField] private float _spinTransitionDuration = 1.5f;
+
     [Header("Record Placement")]
-    [Tooltip("Where the record snaps to when placed on the turntable (hidden).")]
-    [SerializeField] private Transform _recordSnapPoint;
+    [Tooltip("Where the vinyl snaps to on the platter.")]
+    [SerializeField] private Transform _platePlacementPoint;
 
-    [Tooltip("Where the playing record stands upright for display. If null, uses turntable position + offset.")]
-    [SerializeField] private Transform _displayPoint;
+    [Tooltip("Seconds for the vinyl to interpolate onto the platter.")]
+    [SerializeField] private float _placementLerpDuration = 0.4f;
 
-    [Header("Startup")]
-    [Tooltip("If set, this record starts on the turntable when the scene loads.")]
-    [SerializeField] private RecordItem _startingRecord;
+    [Header("Tone Arm")]
+    [Tooltip("Reference to the ToneArm component.")]
+    [SerializeField] private ToneArm _toneArm;
+
+    [Header("Magnetic Snap")]
+    [Tooltip("Radius for ObjectGrabber's magnetic snap when carrying vinyl nearby.")]
+    public float snapRadius = 0.6f;
 
     [Header("Audio")]
     [Tooltip("SFX played when a record starts playing.")]
@@ -43,15 +54,21 @@ public class RecordSlot : MonoBehaviour
     [Tooltip("SFX played when a record is ejected/stopped.")]
     [SerializeField] private AudioClip _stopSFX;
 
-    private PlaceableObject _loadedRecord;
-    private RecordItem _loadedRecordItem;
-    private Vector3 _loadedHomePosition;
-    private Quaternion _loadedHomeRotation;
+    private PlaceableObject _loadedPlaceable;
+    private VinylDisc _loadedVinyl;
     private Material _labelMat;
     private bool _isPlaying;
+    private float _currentSpinSpeed;
+    private Coroutine _placementLerp;
 
     public bool IsPlaying => _isPlaying;
-    public RecordDefinition CurrentRecord => _loadedRecordItem != null ? _loadedRecordItem.Definition : null;
+    public bool IsLoaded => _loadedVinyl != null;
+    public RecordDefinition CurrentRecord => _loadedVinyl != null ? _loadedVinyl.Definition : null;
+
+    /// <summary>World position vinyl snaps to (for magnetic snap in ObjectGrabber).</summary>
+    public Vector3 SnapPoint => _platePlacementPoint != null
+        ? _platePlacementPoint.position
+        : transform.position;
 
     private void Awake()
     {
@@ -70,12 +87,6 @@ public class RecordSlot : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (_startingRecord != null)
-            SelectRecord(_startingRecord);
-    }
-
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
@@ -85,205 +96,207 @@ public class RecordSlot : MonoBehaviour
 
     private void Update()
     {
-        if (_isPlaying && _discVisual != null)
-            _discVisual.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime, Space.Self);
+        // Gradual spin acceleration/deceleration
+        float targetSpeed = _isPlaying ? _rotationSpeed : 0f;
+        float lerpRate = _spinTransitionDuration > 0f ? Time.deltaTime / _spinTransitionDuration : 1f;
+        _currentSpinSpeed = Mathf.MoveTowards(_currentSpinSpeed, targetSpeed, _rotationSpeed * lerpRate);
+
+        if (_discVisual != null && Mathf.Abs(_currentSpinSpeed) > 0.01f)
+            _discVisual.Rotate(Vector3.up, _currentSpinSpeed * Time.deltaTime, Space.Self);
     }
 
-    /// <summary>
-    /// Click-to-select: instantly loads a record from its shelf onto the turntable.
-    /// No physical grab — the record teleports to the display point and starts playing.
-    /// </summary>
-    public void SelectRecord(RecordItem recordItem)
-    {
-        if (recordItem == null || recordItem.Definition == null) return;
-
-        var held = recordItem.GetComponent<PlaceableObject>();
-
-        // Eject current record if one is loaded
-        if (_loadedRecord != null)
-            EjectRecord();
-
-        _loadedRecord = held;
-        _loadedRecordItem = recordItem;
-        _loadedHomePosition = recordItem.HomePosition;
-        _loadedHomeRotation = recordItem.HomeRotation;
-
-        // Disable physics
-        var rb = recordItem.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        // Disable colliders so the record doesn't interfere with raycasts
-        foreach (var col in recordItem.GetComponents<Collider>())
-            col.enabled = false;
-
-        // Teleport to display point
-        if (held != null)
-            PositionAtDisplay(held);
-        recordItem.transform.SetParent(transform);
-
-        StartPlayback();
-
-        Debug.Log($"[RecordSlot] Selected: {recordItem.Definition.title} by {recordItem.Definition.artist}");
-    }
+    // ── Vinyl acceptance ─────────────────────────────────────────────
 
     /// <summary>
-    /// Attempts to accept a held PlaceableObject as a record.
-    /// Returns true if the record was accepted (has RecordItem component).
+    /// Accept a held vinyl disc onto the platter. Called by ObjectGrabber.Place()
+    /// when the player clicks the turntable while holding a VinylDisc.
+    /// Returns true if accepted.
     /// </summary>
-    public bool TryAcceptRecord(PlaceableObject held)
+    public bool TryAcceptVinyl(PlaceableObject held)
     {
         if (held == null) return false;
 
-        var recordItem = held.GetComponent<RecordItem>();
-        if (recordItem == null || recordItem.Definition == null) return false;
+        var vinyl = held.GetComponent<VinylDisc>();
+        if (vinyl == null || vinyl.Definition == null) return false;
 
-        // Eject current record if one is loaded (returns it to shelf)
-        if (_loadedRecord != null)
-            EjectRecord();
-
-        // Load the new record
-        _loadedRecord = held;
-        _loadedRecordItem = recordItem;
-
-        // Remember where it came from so we can return it
-        _loadedHomePosition = recordItem.HomePosition;
-        _loadedHomeRotation = recordItem.HomeRotation;
-
-        // Disable physics
-        var rb = held.GetComponent<Rigidbody>();
-        if (rb != null)
+        // Don't accept if already loaded — player must eject first
+        if (_loadedVinyl != null)
         {
-            rb.isKinematic = true;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            PickupDescriptionHUD.Instance?.Show("Eject the current record first.");
+            return false;
         }
 
-        // Disable colliders so the record doesn't interfere with raycasts
-        foreach (var col in held.GetComponents<Collider>())
-            col.enabled = false;
+        _loadedPlaceable = held;
+        _loadedVinyl = vinyl;
 
-        // Stand the record upright at the display point
-        PositionAtDisplay(held);
-        held.transform.SetParent(transform);
+        vinyl.ConfigureForTurntable();
 
-        StartPlayback();
-        return true;
-    }
-
-    /// <summary>
-    /// Position the record standing upright at the display point.
-    /// </summary>
-    private void PositionAtDisplay(PlaceableObject record)
-    {
-        if (_displayPoint != null)
-        {
-            record.transform.position = _displayPoint.position;
-            record.transform.rotation = _displayPoint.rotation;
-        }
-        else
-        {
-            // Default: stand upright behind the turntable
-            record.transform.position = transform.position + transform.forward * -0.15f + Vector3.up * 0.1f;
-            record.transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
-        }
-    }
-
-    /// <summary>
-    /// Ejects the current record, returning it to its shelf home position.
-    /// </summary>
-    public void EjectRecord()
-    {
-        if (_loadedRecord == null) return;
-
-        StopPlayback();
-
-        _loadedRecord.transform.SetParent(null);
-
-        // Return to shelf home position
-        _loadedRecord.transform.position = _loadedHomePosition;
-        _loadedRecord.transform.rotation = _loadedHomeRotation;
-
-        var rb = _loadedRecord.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;  // Stay put on shelf
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        // Re-enable colliders
-        foreach (var col in _loadedRecord.GetComponents<Collider>())
-            col.enabled = true;
-
-        // Mark as at home
-        _loadedRecord.IsAtHome = true;
-
-        Debug.Log($"[RecordSlot] Returned '{_loadedRecordItem?.Definition?.title}' to shelf.");
-
-        _loadedRecord = null;
-        _loadedRecordItem = null;
-    }
-
-    /// <summary>
-    /// Toggles playback on/off. Called by clicking the turntable while a record is loaded.
-    /// </summary>
-    public void TogglePlayback()
-    {
-        if (_loadedRecord == null) return;
-
-        if (_isPlaying)
-            StopPlayback();
-        else
-            StartPlayback();
-    }
-
-    /// <summary>
-    /// Stops playback without ejecting the record. Called by GameClock / DayPhaseManager
-    /// during phase transitions.
-    /// </summary>
-    public void Stop()
-    {
-        if (_isPlaying)
-            StopPlayback();
-    }
-
-    private void StartPlayback()
-    {
-        if (_loadedRecordItem == null || _loadedRecordItem.Definition == null) return;
-
-        _isPlaying = true;
-        var def = _loadedRecordItem.Definition;
+        // Preserve the vinyl's world scale before parenting — the turntable
+        // may have a non-uniform scale that would deform the disc.
+        Vector3 vinylWorldScale = held.transform.lossyScale;
+        held.transform.SetParent(transform, true);
+        // Recompute local scale to maintain original world scale under new parent
+        Vector3 parentScale = transform.lossyScale;
+        held.transform.localScale = new Vector3(
+            parentScale.x != 0f ? vinylWorldScale.x / parentScale.x : 1f,
+            parentScale.y != 0f ? vinylWorldScale.y / parentScale.y : 1f,
+            parentScale.z != 0f ? vinylWorldScale.z / parentScale.z : 1f);
 
         // Apply label color
         if (_labelMat != null)
-            _labelMat.color = def.labelColor;
+            _labelMat.color = vinyl.Definition.labelColor;
 
-        // Play music (lazy-loaded from Resources to avoid scene load bloat)
+        // Interpolate vinyl onto platter
+        if (_placementLerp != null) StopCoroutine(_placementLerp);
+        _placementLerp = StartCoroutine(LerpVinylToPlatter(held.transform));
+
+        Debug.Log($"[RecordSlot] Loaded: {vinyl.Definition.title} by {vinyl.Definition.artist}");
+        return true;
+    }
+
+    private IEnumerator LerpVinylToPlatter(Transform vinyl)
+    {
+        Vector3 startPos = vinyl.position;
+        Quaternion startRot = vinyl.rotation;
+        Vector3 targetPos = _platePlacementPoint != null ? _platePlacementPoint.position : transform.position;
+        Quaternion targetRot = _platePlacementPoint != null ? _platePlacementPoint.rotation : transform.rotation;
+
+        float elapsed = 0f;
+        while (elapsed < _placementLerpDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / _placementLerpDuration);
+            vinyl.position = Vector3.Lerp(startPos, targetPos, t);
+            vinyl.rotation = Quaternion.Slerp(startRot, targetRot, t);
+            yield return null;
+        }
+
+        vinyl.position = targetPos;
+        vinyl.rotation = targetRot;
+        _placementLerp = null;
+    }
+
+    // ── Playback controls ────────────────────────────────────────────
+
+    /// <summary>Start playback. Called by TurntableButton (Play).</summary>
+    public void Play()
+    {
+        if (_loadedVinyl == null || _loadedVinyl.Definition == null) return;
+        if (_isPlaying) return;
+
+        if (_toneArm != null)
+            _toneArm.SwingToPlay(OnNeedleDropped);
+        else
+            OnNeedleDropped();
+    }
+
+    private void OnNeedleDropped()
+    {
+        _isPlaying = true;
+        var def = _loadedVinyl.Definition;
+
         var clip = def.MusicClip;
         if (clip != null)
             AudioManager.Instance?.PlayMusic(clip, def.volume);
 
-        // Feed mood machine
         MoodMachine.Instance?.SetSource("Music", def.moodValue);
 
-        // Activate reactable tag
         var reactable = GetComponent<ReactableTag>();
         if (reactable != null) reactable.IsActive = true;
 
-        AudioManager.Instance?.PlaySFX(_playSFX);
+        if (_playSFX != null)
+            AudioManager.Instance?.PlaySFX(_playSFX);
+
         OnRecordChanged?.Invoke();
 
         Debug.Log($"[RecordSlot] Playing: {def.title} by {def.artist}");
     }
 
-    private void StopPlayback()
+    /// <summary>Pause playback. Called by TurntableButton (Pause).</summary>
+    public void Pause()
+    {
+        if (!_isPlaying) return;
+
+        if (_toneArm != null)
+            _toneArm.SwingToRest(OnNeedleLifted);
+        else
+            OnNeedleLifted();
+    }
+
+    private void OnNeedleLifted()
     {
         _isPlaying = false;
+
+        AudioManager.Instance?.PauseMusic();
+
+        var reactable = GetComponent<ReactableTag>();
+        if (reactable != null) reactable.IsActive = false;
+
+        Debug.Log("[RecordSlot] Paused.");
+    }
+
+    // ── Eject ────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Eject the vinyl from the platter into the player's hand.
+    /// Returns the PlaceableObject for ObjectGrabber to grab.
+    /// Returns null if nothing is loaded.
+    /// </summary>
+    public PlaceableObject EjectVinyl()
+    {
+        if (_loadedPlaceable == null) return null;
+
+        StopPlaybackInternal();
+
+        _loadedPlaceable.transform.SetParent(null, true);
+        _loadedVinyl.ConfigureForGrab();
+
+        // Signal the home sleeve to show "ready to receive"
+        if (_loadedVinyl.HomeSleeve != null)
+            _loadedVinyl.HomeSleeve.SetHovered(false); // reset hover, WaitingForReturn was set on extract
+
+        var result = _loadedPlaceable;
+        _loadedPlaceable = null;
+        _loadedVinyl = null;
+
+        if (_stopSFX != null)
+            AudioManager.Instance?.PlaySFX(_stopSFX);
+
+        Debug.Log("[RecordSlot] Vinyl ejected to hand.");
+        return result;
+    }
+
+    /// <summary>
+    /// Full stop without returning vinyl to player (phase transitions, sleep).
+    /// Ejects vinyl back to its home sleeve if one exists.
+    /// </summary>
+    public void Stop()
+    {
+        if (_loadedPlaceable == null) return;
+
+        StopPlaybackInternal();
+
+        // Return vinyl to its sleeve
+        if (_loadedVinyl != null && _loadedVinyl.HomeSleeve != null)
+        {
+            _loadedPlaceable.transform.SetParent(null, true);
+            _loadedVinyl.HomeSleeve.ReturnVinyl(_loadedVinyl);
+        }
+        else
+        {
+            // No sleeve — just unparent
+            _loadedPlaceable.transform.SetParent(null, true);
+            _loadedVinyl?.ConfigureForSleeve();
+        }
+
+        _loadedPlaceable = null;
+        _loadedVinyl = null;
+    }
+
+    private void StopPlaybackInternal()
+    {
+        _isPlaying = false;
+        _currentSpinSpeed = 0f;
 
         AudioManager.Instance?.StopMusic();
         MoodMachine.Instance?.RemoveSource("Music");
@@ -291,8 +304,6 @@ public class RecordSlot : MonoBehaviour
         var reactable = GetComponent<ReactableTag>();
         if (reactable != null) reactable.IsActive = false;
 
-        AudioManager.Instance?.PlaySFX(_stopSFX);
-
-        Debug.Log("[RecordSlot] Stopped playback.");
+        if (_toneArm != null) _toneArm.SnapToRest();
     }
 }

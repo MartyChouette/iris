@@ -29,6 +29,10 @@ public class PairableItem : MonoBehaviour
     [Tooltip("Specific partner item (shoes only). Leave null for AnyOfCategory.")]
     [SerializeField] private PairableItem _specificPartner;
 
+    [Header("Group Size")]
+    [Tooltip("Maximum items in a paired group (0 = unlimited). Books use 3, shoes use 2.")]
+    [SerializeField] private int _maxGroupSize = 0;
+
     [Header("Snap")]
     [Tooltip("SideBySide for shoes, Stacked for dishes/bowls.")]
     [SerializeField] private SnapMode _snapMode = SnapMode.SideBySide;
@@ -58,6 +62,9 @@ public class PairableItem : MonoBehaviour
     private bool _pairPulseActive; // true while snap-confirmation pulse is playing
 
     public bool IsPaired => _isPaired;
+
+    /// <summary>Reset paired state. Used by BookCollectionItem.DetachFromStack.</summary>
+    public void ResetPaired() { _isPaired = false; _pairedChild = null; }
     public PairableItem PairedChild => _pairedChild;
     public PairMode Mode => _pairMode;
     public PairableItem SpecificPartner => _specificPartner;
@@ -224,9 +231,24 @@ public class PairableItem : MonoBehaviour
             return held == _specificPartner || held._specificPartner == this;
         }
 
-        // AnyOfCategory — unlimited stacking (no _isPaired check)
+        // AnyOfCategory — stacking (no _isPaired check)
         if (_placeable == null || held._placeable == null) return false;
-        return _placeable.Category == held._placeable.Category;
+        if (_placeable.Category != held._placeable.Category) return false;
+
+        // Group size cap (books = 3, 0 = unlimited)
+        if (_maxGroupSize > 0 && GetStackSize() + held.GetStackSize() > _maxGroupSize)
+            return false;
+
+        return true;
+    }
+
+    /// <summary>Count all PairableItems in this stack (walks up to root first).</summary>
+    public int GetStackSize()
+    {
+        Transform root = transform;
+        while (root.parent != null && root.parent.GetComponent<PairableItem>() != null)
+            root = root.parent;
+        return root.GetComponentsInChildren<PairableItem>().Length;
     }
 
     /// <summary>
@@ -301,9 +323,30 @@ public class PairableItem : MonoBehaviour
         }
         else
         {
-            // SideBySide (shoes) — use local offset as before
-            held.transform.SetParent(stackTop, true);
-            held.transform.localPosition = _snapOffset;
+            // SideBySide — parent to the stack ROOT so items fan out from center.
+            // Pick the side (+ or - offset) closest to where the held item is,
+            // falling back to whichever side is still free.
+            Transform root = FindStackRoot(transform);
+
+            // For book collections: straighten root to upright so all books
+            // face the same direction when snapped together.
+            if (root.GetComponent<BookCollectionItem>() != null)
+            {
+                Vector3 rootEuler = root.eulerAngles;
+                root.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
+            }
+
+            Vector3 localPos = GetSideBySideLocalOffset(root, held);
+
+            // Preserve world scale — parent may have different scale that deforms the child
+            Vector3 heldWorldScale = held.transform.lossyScale;
+            held.transform.SetParent(root, true);
+            Vector3 parentScale = root.lossyScale;
+            held.transform.localScale = new Vector3(
+                parentScale.x != 0f ? heldWorldScale.x / parentScale.x : 1f,
+                parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
+                parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
+            held.transform.localPosition = localPos;
             held.transform.localRotation = Quaternion.identity;
         }
 
@@ -315,6 +358,14 @@ public class PairableItem : MonoBehaviour
             held._placeable.enabled = false;
 
         Debug.Log($"[PairableItem] {held.name} snapped to {stackTop.name} (stack depth)");
+
+        // Notify any BookCollectionItem on the stack root
+        Transform stackRoot = transform;
+        while (stackRoot.parent != null && stackRoot.parent.GetComponent<PairableItem>() != null)
+            stackRoot = stackRoot.parent;
+        var collection = stackRoot.GetComponent<BookCollectionItem>();
+        if (collection != null)
+            collection.OnBookSnapped();
     }
 
     /// <summary>
@@ -334,8 +385,53 @@ public class PairableItem : MonoBehaviour
             return stackTop.position + Vector3.up * _snapOffset.y;
         }
 
-        // SideBySide (shoes) — world-space equivalent of the local offset
-        return stackTop.TransformPoint(_snapOffset);
+        // SideBySide — pick the best free side relative to the stack root
+        Transform root = FindStackRoot(transform);
+        Vector3 localPos = GetSideBySideLocalOffset(root, held);
+        return root.TransformPoint(localPos);
+    }
+
+    /// <summary>Walk up to the root of a paired stack.</summary>
+    private static Transform FindStackRoot(Transform node)
+    {
+        var current = node;
+        while (current.parent != null && current.parent.GetComponent<PairableItem>() != null)
+            current = current.parent;
+        return current;
+    }
+
+    /// <summary>
+    /// For SideBySide mode: pick +offset or -offset from the root, choosing
+    /// the side closest to the held item. If one side is occupied, use the other.
+    /// </summary>
+    private Vector3 GetSideBySideLocalOffset(Transform root, PairableItem held)
+    {
+        bool positiveOccupied = false;
+        bool negativeOccupied = false;
+
+        foreach (Transform child in root)
+        {
+            if (child.GetComponent<PairableItem>() == null) continue;
+            float dot = Vector3.Dot(child.localPosition.normalized, _snapOffset.normalized);
+            if (dot >= 0f) positiveOccupied = true;
+            else negativeOccupied = true;
+        }
+
+        // If both free, pick the side closer to the held item
+        if (!positiveOccupied && !negativeOccupied)
+        {
+            Vector3 posWorld = root.TransformPoint(_snapOffset);
+            Vector3 negWorld = root.TransformPoint(-_snapOffset);
+            float distPos = Vector3.Distance(held.transform.position, posWorld);
+            float distNeg = Vector3.Distance(held.transform.position, negWorld);
+            return distPos <= distNeg ? _snapOffset : -_snapOffset;
+        }
+
+        if (!negativeOccupied) return -_snapOffset;
+        if (!positiveOccupied) return _snapOffset;
+
+        // Both occupied (stack full) — default to positive
+        return _snapOffset;
     }
 
     /// <summary>Walk the transform hierarchy to find the topmost stacked PairableItem.</summary>

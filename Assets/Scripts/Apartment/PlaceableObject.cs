@@ -59,6 +59,24 @@ public class PlaceableObject : MonoBehaviour
     /// <summary>World axis for the rotate input. Zero = rotation locked.</summary>
     public Vector3 RotateAxis => _rotateAxis;
 
+    [Header("Allowed Rotations")]
+    [Tooltip("Allow RMB yaw rotation (turn left/right around Y axis).")]
+    [SerializeField] private bool _allowYaw = true;
+
+    [Tooltip("Allow Mouse Back flip (toggle between upright and laying flat around X).")]
+    [SerializeField] private bool _allowFlip = true;
+
+    [Tooltip("Allow RMB roll (rotate around Z axis).")]
+    [SerializeField] private bool _allowRoll = true;
+
+    [Tooltip("Allow pickup to auto-straighten (zero X/Z tilt). Uncheck for items that should keep their orientation when grabbed.")]
+    [SerializeField] private bool _allowAutoStraighten = true;
+
+    public bool AllowYaw => _allowYaw;
+    public bool AllowFlip => _allowFlip;
+    public bool AllowRoll => _allowRoll;
+    public bool AllowAutoStraighten => _allowAutoStraighten;
+
     [Header("Disheveled Pose")]
     [Tooltip("Captured askew rotation. Use the inspector 'Capture Disheveled Rotation' button to set.")]
     [SerializeField] private Quaternion _disheveledRotation = Quaternion.identity;
@@ -708,24 +726,25 @@ public class PlaceableObject : MonoBehaviour
         if (_isGlitched && _startDishelved)
             RemoveGlitch();
 
-        // Auto-straighten to home rotation on pickup (if home was captured)
-        if (_homeRotation != Quaternion.identity)
+        if (_allowAutoStraighten)
         {
-            transform.rotation = _homeRotation;
-            if (_rb != null) _rb.angularVelocity = Vector3.zero;
-            Debug.Log($"[PlaceableObject] {name} straightened to home rotation on pickup.");
-        }
-        else
-        {
-            // No home rotation — just zero X/Z, keep Y
-            Vector3 euler = transform.eulerAngles;
-            float xTilt = Mathf.Abs(Mathf.DeltaAngle(euler.x, 0f));
-            float zTilt = Mathf.Abs(Mathf.DeltaAngle(euler.z, 0f));
-            if (xTilt > 1f || zTilt > 1f)
+            // Auto-straighten to home rotation on pickup (if home was captured)
+            if (_homeRotation != Quaternion.identity)
             {
-                transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
+                transform.rotation = _homeRotation;
                 if (_rb != null) _rb.angularVelocity = Vector3.zero;
-                Debug.Log($"[PlaceableObject] {name} auto-straightened on pickup.");
+            }
+            else
+            {
+                // No home rotation — just zero X/Z, keep Y
+                Vector3 euler = transform.eulerAngles;
+                float xTilt = Mathf.Abs(Mathf.DeltaAngle(euler.x, 0f));
+                float zTilt = Mathf.Abs(Mathf.DeltaAngle(euler.z, 0f));
+                if (xTilt > 1f || zTilt > 1f)
+                {
+                    transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
+                    if (_rb != null) _rb.angularVelocity = Vector3.zero;
+                }
             }
         }
 
@@ -786,8 +805,9 @@ public class PlaceableObject : MonoBehaviour
             _rb.linearVelocity = Vector3.zero;
             _rb.angularVelocity = Vector3.zero;
 
-            if (surface != null && surface.IsVertical)
+            if (surface != null && (surface.IsVertical || surface.IsFloor))
             {
+                // Wall and floor items stay put — no physics needed
                 _rb.isKinematic = true;
                 _rb.useGravity = false;
             }
@@ -1119,7 +1139,7 @@ public class PlaceableObject : MonoBehaviour
     private static Shader s_heldOnTopShader;
     private static bool s_heldOnTopShaderCached;
 
-    private void SetRenderOnTop(bool onTop)
+    public void SetRenderOnTop(bool onTop)
     {
         if (onTop)
         {

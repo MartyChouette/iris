@@ -63,4 +63,13 @@ public class DrinkRecipeDefinition : ScriptableObject
 
     [Tooltip("Liquid colour for the glass visual and coffee table delivery.")]
     public Color liquidColor = new Color(0.8f, 0.6f, 0.3f, 0.8f);
+
+    [Header("Layer Accuracy")]
+    [Tooltip("How close each ingredient's poured amount must be to its target portion (0.05 = ±5%).")]
+    [Range(0.01f, 0.2f)]
+    public float portionTolerance = 0.08f;
+
+    [Header("Garnishes")]
+    [Tooltip("Correct garnishes for this recipe. Player drops them on the glass for bonus points.")]
+    public DrinkGarnishDefinition[] garnishes;
 }

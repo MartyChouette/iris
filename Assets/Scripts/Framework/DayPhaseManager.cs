@@ -959,6 +959,14 @@ public class DayPhaseManager : MonoBehaviour
             yield break;
         }
 
+        // 0. Force-drop any held item and disable grabber — prevents soft-lock
+        //    if the player is holding something when the scene transitions.
+        var grabber = Object.FindAnyObjectByType<ObjectGrabber>();
+        if (grabber != null) grabber.SetEnabled(false);
+
+        // Also end any active watering session
+        WateringManager.Instance?.ForceIdle();
+
         // 1. Fade to black
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(_fadeDuration);
@@ -1008,8 +1016,25 @@ public class DayPhaseManager : MonoBehaviour
         // 8b. Wait for flower scene to fully unload before showing apartment
         while (bridge != null && bridge.IsSceneReady)
             yield return null;
-        // Extra frame for cleanup
+
+        // Clean up any stray trimming debris that fell into the apartment
+        // during scene unload (they're at flower-scene scale = giant).
+        foreach (var debris in Object.FindObjectsByType<Rigidbody>(FindObjectsSortMode.None))
+        {
+            if (debris == null) continue;
+            // Trimming debris has no PlaceableObject — it's raw physics chunks
+            if (debris.GetComponent<PlaceableObject>() == null
+                && debris.gameObject.scene == gameObject.scene
+                && debris.transform.lossyScale.x > 1f)
+            {
+                Object.Destroy(debris.gameObject);
+            }
+        }
+
+        // Extra frames for cleanup + physics settle
         yield return null;
+        yield return null;
+        yield return new WaitForSeconds(0.2f);
 
         // 9. Restore apartment camera while screen is fully black
         if (bridge != null)
@@ -1018,12 +1043,15 @@ public class DayPhaseManager : MonoBehaviour
         // 10. Clean up state while still black (skip GoToBed to avoid redundant fades)
         _currentPhase = DayPhase.Evening;
 
+        // Re-enable grabber after trimming scene
+        if (grabber != null) grabber.SetEnabled(true);
+
         // Restore audio levels — FlowerTrimming ducked music to 10%
         AudioManager.Instance?.UnduckMusic(0.5f);
         AudioManager.Instance?.SetNonMusicMix(1f, 0.5f);
         DateSessionManager.Instance?.EndDate();
         FridgeController.Instance?.ForceClose();
-        SimpleDrinkManager.Instance?.HideRecipePanel();
+        DrinkPourManager.Instance?.ForceIdle();
         RecordSlot.Instance?.Stop();
         DateEndScreen.Instance?.Dismiss();
 
@@ -1126,7 +1154,7 @@ public class DayPhaseManager : MonoBehaviour
     {
         WateringManager.Instance?.ForceIdle();
         // Record music continues across phases — duck/unduck handles volume
-        SimpleDrinkManager.Instance?.ForceIdle();
+        DrinkPourManager.Instance?.ForceIdle();
         FridgeController.Instance?.CloseDoor();
 
         var calendar = Object.FindAnyObjectByType<ApartmentCalendar>();

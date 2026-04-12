@@ -35,4 +35,8 @@ public class GlassDefinition : ScriptableObject
 
     [Tooltip("Glass tint colour (clear, amber, etc.).")]
     public Color glassColor = new Color(0.9f, 0.95f, 1f, 0.3f);
+
+    [Header("Pour")]
+    [Tooltip("Fill rate multiplier — narrow glasses (highball=1.5) fill faster than wide ones (wine=0.7).")]
+    public float fillRateMultiplier = 1f;
 }

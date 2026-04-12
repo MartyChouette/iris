@@ -314,6 +314,31 @@ public class PSXRenderController : MonoBehaviour
             Debug.Log($"[PSXRenderController] Swapped {swapped} materials to PSXLit.");
     }
 
+    /// <summary>
+    /// Swap any unswapped URP/Standard materials on a GameObject that was
+    /// inactive during the initial scene scan (e.g. Nema phase models).
+    /// Call after activating a previously-hidden model.
+    /// </summary>
+    public void EnsureSwapped(GameObject go)
+    {
+        if (_psxLitShader == null || go == null) return;
+
+        foreach (var r in go.GetComponentsInChildren<Renderer>(true))
+        {
+            foreach (var mat in r.sharedMaterials)
+            {
+                if (mat == null || mat.shader == null) continue;
+                if (_originalShaders.ContainsKey(mat)) continue;
+
+                if (s_swappableShaders.Contains(mat.shader.name))
+                {
+                    _originalShaders[mat] = mat.shader;
+                    mat.shader = _psxLitShader;
+                }
+            }
+        }
+    }
+
     private void RestoreOriginalShaders()
     {
         foreach (var kvp in _originalShaders)

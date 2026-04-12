@@ -16,5 +16,5 @@ MonoBehaviour:
   modeDescription: Play at your own pace. No time limits.
   totalDays: 7
   demoTimeLimitSeconds: 0
-  realSecondsPerGameHour: 60
-  prepDuration: 180
+  realSecondsPerGameHour: 26
+  prepDuration: 260

@@ -216,18 +216,35 @@ public class FlowerGiftPresenter : MonoBehaviour
     }
 
     /// <summary>
-    /// Push all renderers' material render queue to Overlay so the flower
-    /// draws on top of scene geometry but behind screen-space UI.
+    /// Swap all renderers to the Iris/HeldOnTop shader (ZTest Always) so the
+    /// flower draws on top of scene geometry. URP/Lit hard-codes ZTest LEqual,
+    /// so only a shader swap reliably defeats depth testing.
     /// </summary>
     private static void SetRenderOnTop(GameObject flower)
     {
+        var onTopShader = Shader.Find("Iris/HeldOnTop");
+        if (onTopShader == null)
+        {
+            Debug.LogWarning("[FlowerGiftPresenter] Iris/HeldOnTop shader not found — flower may be occluded.");
+            // Fallback: at least bump render queue (helps with shaders that do respect it)
+            foreach (var rend in flower.GetComponentsInChildren<Renderer>())
+                foreach (var mat in rend.materials)
+                    if (mat != null) mat.renderQueue = 4000;
+            return;
+        }
+
         foreach (var rend in flower.GetComponentsInChildren<Renderer>())
         {
-            foreach (var mat in rend.materials)
+            // Instance materials so we don't mutate shared assets
+            // (clone is destroyed after presentation, so no restore needed)
+            var mats = rend.materials;
+            for (int i = 0; i < mats.Length; i++)
             {
-                if (mat != null)
-                    mat.renderQueue = 4000; // Overlay queue — above geometry, below screen UI
+                if (mats[i] == null) continue;
+                mats[i].shader = onTopShader;
+                mats[i].renderQueue = 4000;
             }
+            rend.materials = mats;
         }
     }
 

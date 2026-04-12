@@ -39,9 +39,6 @@ public static class HUDScaleUp
         {
             if (hud.plantNameLabel != null)
                 SetFont(hud.plantNameLabel, PlantNameFontSize, ref changed);
-
-            if (hud.pourBar != null)
-                SetPourBar(hud.pourBar, ref changed);
         }
 
         // ── Drink HUD ──

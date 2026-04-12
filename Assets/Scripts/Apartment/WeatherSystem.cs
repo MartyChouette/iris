@@ -56,6 +56,24 @@ public class WeatherSystem : MonoBehaviour
     public float CurrentLeafIntensity { get; private set; }
     public float CurrentOvercast { get; private set; }
 
+    /// <summary>
+    /// How much weather accelerates plant water evaporation.
+    /// Hot/clear = faster drying, rainy/snowy = slower.
+    /// </summary>
+    public float GetDryingMultiplier()
+    {
+        return CurrentWeather switch
+        {
+            WeatherState.Clear         => 1.5f,
+            WeatherState.Overcast      => 1.0f,
+            WeatherState.Rainy         => 0.6f,
+            WeatherState.Stormy        => 0.4f,
+            WeatherState.Snowy         => 0.3f,
+            WeatherState.FallingLeaves => 1.2f,
+            _ => 1.0f,
+        };
+    }
+
     // Timeline playback
     private bool _timelineActive;
     private WeatherSchedule.DayTimeline _activeTimeline;

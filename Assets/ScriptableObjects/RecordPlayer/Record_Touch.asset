@@ -15,7 +15,9 @@ MonoBehaviour:
   title: Touch
   artist: SCENE
   genre: K-pop
-  description: 
+  description: 'Fav
+
+'
   labelColor: {r: 0.9, g: 0.3, b: 0.6, a: 1}
   coverColor: {r: 0.95, g: 0.85, b: 0.9, a: 1}
   albumArt: {fileID: 2800000, guid: 08b8ed31d43474b42a722343c5969229, type: 3}

@@ -2,8 +2,9 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// Simple overlay HUD for the ambient watering system.
-/// Shows plant name and a visual pour bar. Hidden when idle.
+/// Legacy HUD bridge for the watering system. The new PotCrossSectionUI handles
+/// the main pour overlay. This component now just manages the optional plant
+/// name label and panel visibility based on WateringManager state.
 /// </summary>
 [DisallowMultipleComponent]
 public class WateringHUD : MonoBehaviour
@@ -12,71 +13,29 @@ public class WateringHUD : MonoBehaviour
     public WateringManager manager;
 
     [Header("UI")]
-    public PourBarUI pourBar;
     public TMP_Text plantNameLabel;
 
     [Header("Panels")]
     [Tooltip("Root panel — hidden when Idle.")]
     public GameObject hudPanel;
 
-    [Tooltip("HUD canvas — hidden until first interaction.")]
-    public Canvas hudCanvas;
-
     void Update()
     {
         if (manager == null) return;
 
-        bool showHUD = manager.CurrentState != WateringManager.State.Idle;
-
-        // Show canvas on first interaction
-        if (showHUD && hudCanvas != null && !hudCanvas.gameObject.activeSelf)
-            hudCanvas.gameObject.SetActive(true);
+        bool showHUD = manager.CurrentState == WateringManager.State.Pouring;
 
         if (hudPanel != null)
             hudPanel.SetActive(showHUD);
 
-        if (pourBar != null)
-            pourBar.SetVisible(showHUD);
-
         if (!showHUD) return;
 
-        switch (manager.CurrentState)
-        {
-            case WateringManager.State.Pouring:
-                UpdatePouring();
-                break;
-            case WateringManager.State.Scoring:
-                UpdateScoring();
-                break;
-        }
-    }
-
-    private void UpdatePouring()
-    {
-        var plant = manager.CurrentPlant;
-        var pot = manager.Pot;
-
         if (plantNameLabel != null)
-            plantNameLabel.text = plant != null ? plant.plantName : "";
-
-        if (pourBar != null && pot != null && plant != null)
         {
-            pourBar.SetLevels(pot.WaterLevel, pot.FoamLevel, manager.OscillatingTarget, plant.waterTolerance);
-            pourBar.SetOverflowing(pot.FoamLevel >= 1f);
-        }
-    }
-
-    private void UpdateScoring()
-    {
-        var plant = manager.CurrentPlant;
-
-        if (plantNameLabel != null)
-            plantNameLabel.text = plant != null ? plant.plantName : "";
-
-        if (pourBar != null)
-        {
-            pourBar.SetOverflowing(false);
-            pourBar.ShowScore($"Score: {manager.lastScore}");
+            var plant = manager.ActivePlant;
+            plantNameLabel.text = plant != null && plant.definition != null
+                ? plant.definition.plantName
+                : "";
         }
     }
 }

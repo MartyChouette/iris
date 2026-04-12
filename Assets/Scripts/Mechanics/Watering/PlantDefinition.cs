@@ -46,11 +46,11 @@ public class PlantDefinition : ScriptableObject
     [Tooltip("Foam rises this many times faster than water (dirt bubbles up).")]
     public float foamRateMultiplier = 1.3f;
 
-    [Tooltip("Oscillations per second for the moving target line.")]
-    public float targetOscSpeed = 0.5f;
+    [Tooltip("(Legacy — unused. Target line is now fixed at idealWaterLevel.)")]
+    [HideInInspector] public float targetOscSpeed = 0f;
 
-    [Tooltip("How far the target swings above/below idealWaterLevel.")]
-    public float targetOscAmplitude = 0.15f;
+    [Tooltip("(Legacy — unused. Target line is now fixed at idealWaterLevel.)")]
+    [HideInInspector] public float targetOscAmplitude = 0f;
 
     [Tooltip("Units/sec foam collapses toward water level when not pouring.")]
     public float foamSettleRate = 0.25f;
@@ -61,4 +61,98 @@ public class PlantDefinition : ScriptableObject
     [Header("Scoring")]
     [Tooltip("Maximum possible score for this plant.")]
     public int baseScore = 100;
+
+    // ── Pot Shape & Persistence ─────────────────────────────────────
+
+    public enum PotShape
+    {
+        [InspectorName("Tall Cylinder (steady even fill)")]
+        TallCylinder,
+        [InspectorName("Round Bulb (fast bottom, slow middle, fast top)")]
+        RoundBulb,
+        [InspectorName("Tapered Cone (slow bottom, fast top)")]
+        TaperedCone,
+        [InspectorName("Hourglass (fast-slow-fast pinch)")]
+        Hourglass
+    }
+
+    [Header("Pot Shape")]
+    [Tooltip("Shape of the vase cross-section. Affects fill rate curve and UI silhouette.")]
+    public PotShape potShape = PotShape.TallCylinder;
+
+    [Header("Water Persistence")]
+    [Tooltip("Fraction of water lost overnight (before weather multiplier). 0.15 = loses 15%.")]
+    [Range(0f, 0.5f)]
+    public float dryingRatePerDay = 0.15f;
+
+    [Tooltip("How much water this plant ideally needs (maps to idealWaterLevel for display).")]
+    [Range(0f, 1f)]
+    public float thirstLevel = 0.7f;
+
+    [Tooltip("Chance of shedding a leaf when under/overwatered (per morning check).")]
+    [Range(0f, 1f)]
+    public float leafSheddingChance = 0.5f;
+
+    /// <summary>
+    /// Fill rate multiplier based on the vase's cross-sectional width at a
+    /// given height. Narrow sections fill fast, wide sections fill slow.
+    /// This creates the "volume shift" feel as water rises through the shape.
+    /// </summary>
+    public float GetShapeFillMultiplier(float normalizedHeight)
+    {
+        float h = Mathf.Clamp01(normalizedHeight);
+        switch (potShape)
+        {
+            case PotShape.TallCylinder:
+                // Consistent width → steady fill rate
+                return 1.0f;
+
+            case PotShape.RoundBulb:
+                // Wide belly at 0.4-0.6, narrow neck at top and bottom
+                // sin curve: narrow at 0 and 1, widest at 0.5
+                float bulbWidth = 0.5f + 0.5f * Mathf.Sin(h * Mathf.PI);
+                return 1.0f / Mathf.Max(bulbWidth, 0.3f); // invert: wide = slow, narrow = fast
+
+            case PotShape.TaperedCone:
+                // Wide bottom → narrow top. Starts slow, fills faster as it rises.
+                float coneWidth = Mathf.Lerp(1.4f, 0.5f, h);
+                return 1.0f / Mathf.Max(coneWidth, 0.3f);
+
+            case PotShape.Hourglass:
+                // Narrow pinch at 0.5, wide at top and bottom
+                // cos curve: wide at 0 and 1, narrowest at 0.5
+                float hourglassWidth = 0.5f + 0.5f * Mathf.Cos(h * Mathf.PI);
+                hourglassWidth = Mathf.Max(hourglassWidth, 0.35f); // don't go too narrow at pinch
+                return 1.0f / hourglassWidth;
+
+            default:
+                return 1.0f;
+        }
+    }
+
+    /// <summary>
+    /// Normalized width of the vase at a given height (0-1). Used by the UI
+    /// to draw the vase silhouette shape.
+    /// </summary>
+    public float GetShapeWidth(float normalizedHeight)
+    {
+        float h = Mathf.Clamp01(normalizedHeight);
+        switch (potShape)
+        {
+            case PotShape.TallCylinder:
+                return 1.0f;
+
+            case PotShape.RoundBulb:
+                return 0.5f + 0.5f * Mathf.Sin(h * Mathf.PI);
+
+            case PotShape.TaperedCone:
+                return Mathf.Lerp(1.3f, 0.6f, h);
+
+            case PotShape.Hourglass:
+                return 0.5f + 0.5f * Mathf.Cos(h * Mathf.PI);
+
+            default:
+                return 1.0f;
+        }
+    }
 }

@@ -34,6 +34,31 @@ public class LivingFlowerPlant : MonoBehaviour
     private Vector3 _baseScale;
     private bool _isDead;
 
+    // ── Water Persistence ────────────────────────────────────────
+    public enum WaterState { Underwatered, Perfect, Overwatered }
+
+    [Header("Water")]
+    [Tooltip("Current water level (0-1). Persists between days.")]
+    [SerializeField] private float _currentWaterLevel;
+
+    [Tooltip("Target water level from PlantDefinition.thirstLevel.")]
+    [SerializeField] private float _waterTarget = 0.7f;
+
+    [Tooltip("Water tolerance band around target.")]
+    [SerializeField] private float _waterTolerance = 0.08f;
+
+    [Tooltip("Drying rate per day (before weather multiplier).")]
+    [SerializeField] private float _dryingRate = 0.15f;
+
+    [Tooltip("Chance of shedding a leaf when stressed.")]
+    [SerializeField] private float _leafSheddingChance = 0.5f;
+
+    private bool _overflowedToday;
+
+    public float CurrentWaterLevel => _currentWaterLevel;
+    public float WaterTarget => _waterTarget;
+    public bool OverflowedToday => _overflowedToday;
+
     // ─── Public API ───────────────────────────────────────────────
 
     public int SpawnDay => _spawnDay;
@@ -98,6 +123,9 @@ public class LivingFlowerPlant : MonoBehaviour
 
     // ─── Internal ─────────────────────────────────────────────────
 
+    private static readonly Color UnderwaterTint = new Color(0.7f, 0.55f, 0.3f); // dry brown
+    private static readonly Color OverwaterTint = new Color(0.4f, 0.5f, 0.35f);  // soggy dark green
+
     private void UpdateVisuals()
     {
         // Wilt tint: white (fresh) → yellowish (wilting) → brown (dead)
@@ -106,6 +134,13 @@ public class LivingFlowerPlant : MonoBehaviour
             wiltTint = Color.Lerp(WiltingColor, Color.white, (_health - 0.5f) * 2f);
         else
             wiltTint = Color.Lerp(DeadColor, WiltingColor, _health * 2f);
+
+        // Water stress tint overlay — browning for dry, dark green for soggy
+        var waterState = GetWaterState();
+        if (waterState == WaterState.Underwatered)
+            wiltTint *= UnderwaterTint;
+        else if (waterState == WaterState.Overwatered)
+            wiltTint *= OverwaterTint;
 
         // Apply tint to all child renderers, preserving each one's original color
         if (_renderers != null)
@@ -120,6 +155,52 @@ public class LivingFlowerPlant : MonoBehaviour
         // Scale shrinks as health drops
         float scale = Mathf.Lerp(MinScale, MaxScale, _health);
         transform.localScale = _baseScale * scale;
+    }
+
+    /// <summary>Set water config from PlantDefinition.</summary>
+    public void ConfigureWater(float target, float tolerance, float dryingRate, float sheddingChance)
+    {
+        _waterTarget = target;
+        _waterTolerance = tolerance;
+        _dryingRate = dryingRate;
+        _leafSheddingChance = sheddingChance;
+    }
+
+    /// <summary>Set the water level (called by WateringManager after pouring).</summary>
+    public void SetWaterLevel(float level)
+    {
+        _currentWaterLevel = Mathf.Clamp01(level);
+        _overflowedToday = level > 1f;
+    }
+
+    /// <summary>Apply overnight water loss. Called each morning by LivingFlowerPlantManager.</summary>
+    public void ApplyOvernightDrying(float weatherMultiplier)
+    {
+        _currentWaterLevel -= _dryingRate * weatherMultiplier;
+        _currentWaterLevel = Mathf.Max(0f, _currentWaterLevel);
+        _overflowedToday = false;
+    }
+
+    /// <summary>Current watering quality relative to target.</summary>
+    public WaterState GetWaterState()
+    {
+        if (_currentWaterLevel < _waterTarget - _waterTolerance) return WaterState.Underwatered;
+        if (_currentWaterLevel > _waterTarget + _waterTolerance || _overflowedToday) return WaterState.Overwatered;
+        return WaterState.Perfect;
+    }
+
+    /// <summary>Air quality contribution (0-1). Perfect = 1, stressed = reduced.</summary>
+    public float GetAirQualityContribution()
+    {
+        if (_isDead) return 0f;
+        return GetWaterState() == WaterState.Perfect ? _health : _health * 0.3f;
+    }
+
+    /// <summary>Whether this plant should shed a leaf this morning (random check).</summary>
+    public bool ShouldShedLeaf()
+    {
+        if (GetWaterState() == WaterState.Perfect) return false;
+        return Random.value < _leafSheddingChance;
     }
 
     private void Die()
@@ -148,9 +229,16 @@ public class LivingFlowerPlant : MonoBehaviour
             spawnDay = _spawnDay,
             totalDaysAlive = _totalDaysAlive,
             currentHealth = _health,
+            currentWaterLevel = _currentWaterLevel,
             px = transform.position.x,
             py = transform.position.y,
             pz = transform.position.z
         };
+    }
+
+    /// <summary>Restore water level from save data.</summary>
+    public void RestoreWaterLevel(float waterLevel)
+    {
+        _currentWaterLevel = Mathf.Clamp01(waterLevel);
     }
 }

@@ -452,16 +452,16 @@ public class GlobalCursorManager : MonoBehaviour
 
     private static CursorType ClassifyHit(GameObject go)
     {
-        if (Has<WaterablePlant>(go))       return CursorType.Watering;
-        if (Has<FridgeController>(go))     return CursorType.Fridge;
-        if (Has<PhoneController>(go))      return CursorType.Phone;
+        if (Has<WaterablePlant>(go))       return CursorType.Interact;
+        if (Has<FridgeController>(go))     return CursorType.Interact;
+        if (Has<PhoneController>(go))      return CursorType.Interact;
         if (Has<DrawerController>(go))     return CursorType.Drawer;
-        if (Has<SimpleDrinkManager>(go))   return CursorType.Drink;
-        if (Has<DrinkCartController>(go))  return CursorType.Drink;
-        if (Has<FlyController>(go))         return CursorType.Swatter;
-        if (Has<CleanableSurface>(go))     return CursorType.Sponge;
+        if (Has<DrinkGlass>(go))            return CursorType.Interact;
+        if (Has<BottleItem>(go))           return CursorType.Interact;
+        if (Has<FlyController>(go))         return CursorType.Interact;
+        if (Has<CleanableSurface>(go))     return CursorType.Interact;
         if (Has<ScissorStation>(go))      return CursorType.Scissors;
-        if (Has<LightSwitch>(go))          return CursorType.Light;
+        if (Has<LightSwitch>(go))          return CursorType.Interact;
         if (Has<InteractableHighlight>(go)
          || Has<PlaceableObject>(go)
          || Has<RecordSlot>(go)

@@ -210,6 +210,10 @@ public class CleanableSurface : MonoBehaviour
 
     void Awake()
     {
+        // Nudge stain slightly above the floor so depth testing works:
+        // stain wins against the floor but loses against items placed on top.
+        transform.position += transform.up * 0.001f;
+
         // Expand collider so the sponge doesn't "catch" at the visual edge —
         // cursor can overshoot and still register hits for smooth scrubbing.
         ExpandCollider();

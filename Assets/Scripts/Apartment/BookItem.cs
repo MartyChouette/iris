@@ -89,7 +89,10 @@ public class BookItem : MonoBehaviour
         _hiddenItemDropped = true;
 
         // Spawn hidden item at book's last resting position
-        Instantiate(_hiddenItemPrefab, transform.position, Quaternion.identity);
+        var spawnedItem = Instantiate(_hiddenItemPrefab, transform.position, Quaternion.identity);
+
+        // Frame the discovery with moment camera
+        MomentCamera.FrameTarget(transform.position, 2f);
 
         // Show caption
         string desc = !string.IsNullOrEmpty(_definition.hiddenItemDescription)

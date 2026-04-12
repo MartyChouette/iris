@@ -35,4 +35,9 @@ public class DrinkIngredientDefinition : ScriptableObject
     [Tooltip("Affects stir difficulty — thick (milk ~0.8) vs thin (gin ~0.3).")]
     [Range(0f, 1f)]
     public float viscosity = 0.5f;
+
+    [Header("Layering")]
+    [Tooltip("Weight for layer sorting. Heavier liquids (1.0 = grenadine) sink below lighter ones (0.1 = cream).")]
+    [Range(0f, 1f)]
+    public float weight = 0.5f;
 }

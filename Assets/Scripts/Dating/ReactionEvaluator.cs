@@ -28,9 +28,9 @@ public static class ReactionEvaluator
             {
                 if (string.Equals(t, liked, System.StringComparison.OrdinalIgnoreCase))
                 {
-                    // If it's a plant the date cares about, health modifies reaction
+                    // If it's a plant, both health AND watering quality affect reaction
                     if (plant != null)
-                        return EvaluatePlantHealth(plant.Health);
+                        return EvaluatePlantWithWater(plant);
                     return ReactionType.Like;
                 }
             }
@@ -54,6 +54,25 @@ public static class ReactionEvaluator
         if (health >= 0.6f) return ReactionType.Like;
         if (health >= 0.3f) return ReactionType.Neutral;
         return ReactionType.Dislike;
+    }
+
+    /// <summary>
+    /// Evaluate a plant considering both health AND watering quality.
+    /// Perfect water + good health = Like. Stressed water downgrades the reaction.
+    /// </summary>
+    private static ReactionType EvaluatePlantWithWater(LivingFlowerPlant plant)
+    {
+        var baseReaction = EvaluatePlantHealth(plant.Health);
+
+        // Water stress downgrades the reaction by one tier
+        var waterState = plant.GetWaterState();
+        if (waterState != LivingFlowerPlant.WaterState.Perfect)
+        {
+            if (baseReaction == ReactionType.Like) return ReactionType.Neutral;
+            if (baseReaction == ReactionType.Neutral) return ReactionType.Dislike;
+        }
+
+        return baseReaction;
     }
 
     /// <summary>Evaluate a drink against date preferences and quality.</summary>

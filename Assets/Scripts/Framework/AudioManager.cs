@@ -344,6 +344,18 @@ public class AudioManager : MonoBehaviour
     private Coroutine _musicFadeCoroutine;
     private AudioClip _fadingOutClip;
 
+    public void PauseMusic()
+    {
+        if (IsValid(musicSource) && musicSource.isPlaying)
+            musicSource.Pause();
+    }
+
+    public void ResumeMusic()
+    {
+        if (IsValid(musicSource) && !musicSource.isPlaying && musicSource.clip != null)
+            musicSource.UnPause();
+    }
+
     public void StopMusic(float fadeTime = 0f)
     {
         if (!IsValid(musicSource)) return;
@@ -448,20 +460,21 @@ public class AudioManager : MonoBehaviour
 
     // ─── Dual SFX ────────────────────────────────────────────────
 
-    public void PlayDualSFX(AudioClip first, AudioClip second, float delay)
+    public void PlayDualSFX(AudioClip first, AudioClip second, float delay, float volume = 1f)
     {
         if (!IsValid(sfxSource)) return;
         if (first == null && second == null) return;
-        StartCoroutine(PlayDualRoutine(first, second, delay));
+        StartCoroutine(PlayDualRoutine(first, second, delay, volume));
     }
 
-    private IEnumerator PlayDualRoutine(AudioClip first, AudioClip second, float delay)
+    private IEnumerator PlayDualRoutine(AudioClip first, AudioClip second, float delay, float volume)
     {
         if (!IsValid(sfxSource))
             yield break;
 
+        float vol = EffectiveSFXVol(volume);
         if (first != null)
-            sfxSource.PlayOneShot(first, _masterVol * _sfxVol);
+            sfxSource.PlayOneShot(first, vol);
 
         if (delay > 0f)
             yield return new WaitForSeconds(delay);
@@ -470,6 +483,6 @@ public class AudioManager : MonoBehaviour
             yield break;
 
         if (second != null)
-            sfxSource.PlayOneShot(second, _masterVol * _sfxVol);
+            sfxSource.PlayOneShot(second, vol);
     }
 }

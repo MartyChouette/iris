@@ -28,3 +28,7 @@ MonoBehaviour:
   foamSettleRate: 0.25
   absorptionRate: 0.05
   baseScore: 100
+  potShape: 2
+  dryingRatePerDay: 0.15
+  thirstLevel: 0.7
+  leafSheddingChance: 0.5

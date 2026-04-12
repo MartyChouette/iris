@@ -471,6 +471,13 @@ public class NemaController : MonoBehaviour
         if (target == null) return;
 
         target.SetActive(true);
+
+        // Models that were inactive during PSXRenderController's startup scan
+        // still have their original URP/Standard shaders, which may be stripped
+        // in builds. Swap them to PSXLit now that they're active.
+        if (PSXRenderController.Instance != null)
+            PSXRenderController.Instance.EnsureSwapped(target);
+
         // Re-bind look-at/bored to the active model's animator so the head
         // tracking keeps working after a phase switch. If the target doesn't
         // have its own animator we fall back to the serialized one.
@@ -594,15 +601,22 @@ public class NemaController : MonoBehaviour
             case DayPhaseManager.DayPhase.DateInProgress:
                 // MoveToDatePhase() has already set up the correct model.
                 // Only deactivate phase-specific models that aren't used
-                // during dates. Don't touch _model — it's the fallback
-                // when per-phase date models aren't wired.
+                // during dates. Skip any model that's also a date phase model
+                // so we don't immediately undo MoveToDatePhase.
                 if (_explorationLeanModel != null) _explorationLeanModel.SetActive(false);
                 if (_cleaningModel != null) _cleaningModel.SetActive(false);
                 if (_newspaperModel != null) _newspaperModel.SetActive(false);
                 if (_areaModels != null)
                 {
                     for (int i = 0; i < _areaModels.Length; i++)
-                        if (_areaModels[i] != null) _areaModels[i].SetActive(false);
+                    {
+                        if (_areaModels[i] == null) continue;
+                        // Don't disable area models that double as date phase models
+                        if (_areaModels[i] == _arrivalModel) continue;
+                        if (_areaModels[i] == _kitchenModel) continue;
+                        if (_areaModels[i] == _couchModel) continue;
+                        _areaModels[i].SetActive(false);
+                    }
                 }
                 break;
         }

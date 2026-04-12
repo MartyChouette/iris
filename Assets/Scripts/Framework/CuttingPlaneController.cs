@@ -636,10 +636,11 @@ public class CuttingPlaneController : MonoBehaviour
     {
         if (AudioManager.Instance == null || (first == null && second == null)) return;
 
+        const float trimVolume = 0.9f;
         if (second != null || delay > 0f)
-            AudioManager.Instance.PlayDualSFX(first, second, delay);
+            AudioManager.Instance.PlayDualSFX(first, second, delay, trimVolume);
         else
-            AudioManager.Instance.PlaySFX(first);
+            AudioManager.Instance.PlaySFX(first, trimVolume);
     }
 
     private void TriggerFluid(FluidSquirter planeSquirter, Collider exampleCol)

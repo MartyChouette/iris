@@ -20,7 +20,6 @@ MonoBehaviour:
   objectPrefab: {fileID: 0}
   objectScale: {x: 0.1, y: 0.1, z: 0.1}
   objectColor: {r: 0.9081669, g: 0, b: 1, a: 1}
-  canBeDishelved: 0
   requireDateSuccess: 1
   requireDateFailure: 0
   minAffection: 70
@@ -28,9 +27,9 @@ MonoBehaviour:
   requireReactionTag: 
   requireBadFlowerTrim: 0
   requireGoodFlowerTrim: 0
-  minDay: 1
-  maxDay: 0
-  spawnPosition: {x: -1.1516838, y: 0.03872314, z: -0.98993516}
+  minDay: 0
+  maxDay: 50
+  spawnPosition: {x: -1.1516838, y: 0.075029254, z: -1.3358278}
   spawnRotation: {x: 0, y: 0, z: 0}
   allowedAreas: 01000000
   weight: 1

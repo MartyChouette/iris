@@ -56,7 +56,15 @@ public class DateSceneModels : MonoBehaviour
         if (couchModel   != null && couchModel   != target) couchModel.SetActive(false);
 
         if (target != null)
+        {
             target.SetActive(true);
+
+            // Models inactive during PSXRenderController's startup scan still
+            // have URP/Standard shaders — swap to PSXLit to avoid stripped-shader
+            // invisibility in builds.
+            if (PSXRenderController.Instance != null)
+                PSXRenderController.Instance.EnsureSwapped(target);
+        }
     }
 
     /// <summary>Hide all models in this set.</summary>

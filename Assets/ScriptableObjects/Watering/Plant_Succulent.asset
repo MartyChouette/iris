@@ -23,6 +23,12 @@ MonoBehaviour:
   waterTolerance: 0.08
   pourRate: 0.12
   foamRateMultiplier: 1.8
+  targetOscSpeed: 0.5
+  targetOscAmplitude: 0.15
   foamSettleRate: 0.25
   absorptionRate: 0.04
   baseScore: 100
+  potShape: 3
+  dryingRatePerDay: 0.15
+  thirstLevel: 0.7
+  leafSheddingChance: 0.5

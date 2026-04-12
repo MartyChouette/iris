@@ -2,337 +2,298 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Ambient watering system — always active, not a station.
-/// Click any WaterablePlant from any camera position to pour.
-/// States: Idle → Pouring → Scoring.
+/// Watering system driven by the physical watering can.
+/// Player holds the can near a plant (ObjectGrabber magnetic snap), then
+/// click-and-holds to pour. Water rises in the PotCrossSectionUI overlay.
+/// Chicken pour: release pauses, re-press resumes. Water never drains during
+/// a session — only overnight via drying.
+///
+/// States: Idle → Approaching → Pouring → Done
+///   Idle        — can is on shelf, no watering
+///   Approaching — can is held, not near a plant yet
+///   Pouring     — can snapped to plant, mouse held = water flowing
+///   Done        — session ended, water level saved to plant
 /// </summary>
 [DisallowMultipleComponent]
 public class WateringManager : MonoBehaviour
 {
     public static WateringManager Instance { get; private set; }
 
-    public enum State { Idle, Pouring, Scoring }
+    public enum State { Idle, Approaching, Pouring, Done }
 
     [Header("References")]
-    [Tooltip("Layer mask for plant pots with WaterablePlant component.")]
-    [SerializeField] private LayerMask _plantLayer;
-
-    [Tooltip("The pot controller (hidden — HUD shows meters).")]
-    [SerializeField] private PotController _pot;
-
-    [Tooltip("HUD reference for state-driven display.")]
-    [SerializeField] private WateringHUD _hud;
-
     [Tooltip("Main camera (auto-found if null).")]
     [SerializeField] private Camera _mainCamera;
 
-    [Header("Scoring")]
-    [Tooltip("How long the score displays before returning to Idle.")]
-    [SerializeField] private float _scoreDisplayTime = 2f;
+    [Header("Pour Settings")]
+    [Tooltip("Base pour rate (water units/sec). Modified by pot shape.")]
+    [SerializeField] private float _basePourRate = 0.1f;
 
-    [Tooltip("Points deducted for overflow.")]
-    [SerializeField] private float _overflowPenalty = 30f;
+    [Tooltip("How much faster foam/soil bubbles rise compared to water. Higher = more obscured water line.")]
+    [SerializeField] private float _foamRateMultiplier = 2.5f;
+
+    [Tooltip("Foam settle speed when not pouring (units/sec).")]
+    [SerializeField] private float _foamSettleRate = 0.2f;
+
+    [Tooltip("Amplitude of pour rate oscillation (0 = steady, 0.15 = ±15%).")]
+    [SerializeField] private float _pourRateOscAmplitude = 0.15f;
+
+    [Tooltip("Speed of pour rate oscillation (Hz).")]
+    [SerializeField] private float _pourRateOscSpeed = 2f;
 
     [Header("Audio")]
     public AudioClip pourSFX;
     public AudioClip overflowSFX;
-    public AudioClip scoreSFX;
-
-    [Tooltip("SFX played when a plant is clicked to start watering.")]
-    public AudioClip plantClickSFX;
-
-    [Tooltip("SFX played on a perfect watering score.")]
     public AudioClip perfectSFX;
 
-    [Tooltip("SFX played on a failed watering score.")]
-    public AudioClip failSFX;
-
-    // ── Public read-only API ─────────────────────────────────────────
+    // ── Public API ──────────────────────────────────────────────────
 
     public State CurrentState { get; private set; } = State.Idle;
-    public PlantDefinition CurrentPlant => _activePlant;
-    public PotController Pot => _pot;
 
-    [HideInInspector] public int lastScore;
-    [HideInInspector] public float lastFillScore;
-    [HideInInspector] public float lastOverflowScore;
-    [HideInInspector] public float lastBonusScore;
+    /// <summary>The plant currently being watered (null if none).</summary>
+    public WaterablePlant ActivePlant => _activePlant;
 
-    // ── Input ────────────────────────────────────────────────────────
+    /// <summary>Current water level during pour session.</summary>
+    public float WaterLevel => _waterLevel;
+
+    /// <summary>Current foam/bubble level (obscures water line).</summary>
+    public float FoamLevel => _foamLevel;
+
+    /// <summary>True if water overflowed the pot.</summary>
+    public bool Overflowed => _overflowed;
+
+    // ── Runtime ─────────────────────────────────────────────────────
+
+    private WaterablePlant _activePlant;
+    private PlantDefinition _activeDef;
+    private LivingFlowerPlant _activeLiving;
+    private float _waterLevel;
+    private float _foamLevel;
+    private bool _overflowed;
+    private bool _overflowSFXPlayed;
+    private float _pourTime;
+    private bool _isPouring; // true while mouse is held during pour
 
     private InputAction _clickAction;
-    private InputAction _mousePosition;
 
-    // ── Runtime ──────────────────────────────────────────────────────
+    // ── Lifecycle ───────────────────────────────────────────────────
 
-    private PlantDefinition _activePlant;
-    private bool _overflowSFXPlayed;
-    private bool _shownNearlyFull;
-    private static bool s_hasWateredOnce;
-    private float _scoreTimer;
-    private float _pourTime;
-
-    /// <summary>Current oscillating target level (updates each frame while pouring).</summary>
-    public float OscillatingTarget { get; private set; }
-
-    // ── Singleton lifecycle ──────────────────────────────────────────
-
-    void Awake()
+    private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(this); return; }
         Instance = this;
 
         _clickAction = new InputAction("WaterClick", InputActionType.Button, "<Mouse>/leftButton");
-        _mousePosition = new InputAction("WaterPointer", InputActionType.Value, "<Mouse>/position");
-
-        if (_mainCamera == null)
-            _mainCamera = Camera.main;
+        if (_mainCamera == null) _mainCamera = Camera.main;
     }
 
-    void OnDestroy()
+    private void OnDestroy() { if (Instance == this) Instance = null; }
+    private void OnEnable() { _clickAction.Enable(); }
+    private void OnDisable() { _clickAction.Disable(); }
+
+    private void Update()
     {
-        if (Instance == this) Instance = null;
+        if (CurrentState == State.Pouring)
+            UpdatePouring();
     }
 
-    void OnEnable()
-    {
-        _clickAction.Enable();
-        _mousePosition.Enable();
-    }
+    // ── Called by ObjectGrabber ──────────────────────────────────────
 
-    void OnDisable()
+    /// <summary>
+    /// Start a watering session on a specific plant.
+    /// Called by ObjectGrabber when the player holds the watering can
+    /// near a plant and clicks.
+    /// </summary>
+    public void StartWatering(WaterablePlant plant)
     {
-        _clickAction.Disable();
-        _mousePosition.Disable();
-    }
+        if (plant == null) return;
 
-    // ── Update dispatch ──────────────────────────────────────────────
-
-    void Update()
-    {
-        if (DayPhaseManager.Instance != null && !DayPhaseManager.Instance.IsInteractionPhase)
+        // Already watering this same plant — don't restart, just resume
+        if (CurrentState == State.Pouring && _activePlant == plant)
             return;
 
-        if (ObjectGrabber.IsHoldingObject) return;
-        if (ObjectGrabber.ClickConsumedThisFrame) return;
+        // Switching plants — save the previous one first
+        if (CurrentState == State.Pouring && _activePlant != null && _activePlant != plant)
+            SaveWaterLevel();
 
-        if (_mainCamera == null) return;
+        _activePlant = plant;
+        _activeDef = plant.definition;
+        _activeLiving = plant.GetComponent<LivingFlowerPlant>();
 
-        switch (CurrentState)
-        {
-            case State.Idle:
-                UpdateIdle();
-                break;
-            case State.Pouring:
-                UpdatePouring();
-                break;
-            case State.Scoring:
-                UpdateScoring();
-                break;
-        }
-    }
-
-    // ── Idle ─────────────────────────────────────────────────────────
-
-    private void UpdateIdle()
-    {
-        Vector2 pointer = _mousePosition.ReadValue<Vector2>();
-
-        if (_clickAction.WasPressedThisFrame())
-        {
-            Ray ray = _mainCamera.ScreenPointToRay(pointer);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, _plantLayer))
-            {
-                var plant = hit.collider.GetComponent<WaterablePlant>();
-                if (plant == null)
-                    plant = hit.collider.GetComponentInParent<WaterablePlant>();
-
-                if (plant != null && plant.definition != null)
-                {
-                    if (plantClickSFX != null && AudioManager.Instance != null)
-                        AudioManager.Instance.PlaySFX(plantClickSFX);
-                    ObjectGrabber.ConsumeClickExternal();
-                    BeginPouring(plant.definition);
-                }
-            }
-        }
-    }
-
-    private void BeginPouring(PlantDefinition def)
-    {
-        _activePlant = def;
-
-        if (_pot != null)
-        {
-            _pot.definition = def;
-            _pot.Clear();
-        }
-
-        _overflowSFXPlayed = false;
+        // Start from the plant's current water level (persistence — never resets)
+        _waterLevel = _activeLiving != null ? _activeLiving.CurrentWaterLevel : 0f;
+        _foamLevel = _waterLevel;
+        _overflowed = _waterLevel > 1f;
+        _overflowSFXPlayed = _overflowed;
         _pourTime = 0f;
-        OscillatingTarget = def.idealWaterLevel;
-        if (_pot != null)
-            _pot.TargetLevel = def.idealWaterLevel;
+        _isPouring = false;
+
         CurrentState = State.Pouring;
-        _shownNearlyFull = false;
 
-        // First-time watering hint
-        if (!s_hasWateredOnce)
-        {
-            s_hasWateredOnce = true;
-            DialoguePortraitBox.Instance?.Say("Click and hold to pour. Let go when the pot's full!", 4f);
-        }
+        if (PotCrossSectionUI.Instance != null && _activeDef != null)
+            PotCrossSectionUI.Instance.Show(_activeDef, _waterLevel);
 
-        // Lock the pour overlay to the watering cursor so it matches the hover seamlessly
-        if (PourCursorOverlay.Instance != null && GlobalCursorManager.Instance != null)
-            PourCursorOverlay.Instance.LockTexture(GlobalCursorManager.Instance.GetCurrentCursorTexture());
-        PourDragHelper.Begin();
-
-        Debug.Log($"[WateringManager] Pouring: {def.plantName}");
+        Debug.Log($"[WateringManager] Started watering: {_activeDef?.plantName ?? "unknown"} (water={_waterLevel:F2})");
     }
 
-    // ── Pouring ──────────────────────────────────────────────────────
+    /// <summary>Save current water level to the plant without ending the session.</summary>
+    private void SaveWaterLevel()
+    {
+        if (_activeLiving != null)
+            _activeLiving.SetWaterLevel(Mathf.Min(_waterLevel, 1f));
+    }
+
+    /// <summary>
+    /// End the watering session. Saves water level to the plant.
+    /// Called when the player moves the can away or places it down.
+    /// </summary>
+    public void EndWatering()
+    {
+        if (CurrentState != State.Pouring) return;
+
+        // Save water level to the living plant
+        if (_activeLiving != null)
+            _activeLiving.SetWaterLevel(_waterLevel);
+
+        // Hide UI
+        PotCrossSectionUI.Instance?.Hide();
+
+        _activePlant = null;
+        _activeDef = null;
+        _activeLiving = null;
+        CurrentState = State.Idle;
+
+        Debug.Log("[WateringManager] Watering session ended.");
+    }
+
+    /// <summary>Force back to idle. Called on phase transitions.</summary>
+    public void ForceIdle()
+    {
+        PotCrossSectionUI.Instance?.Hide();
+        _activePlant = null;
+        _activeDef = null;
+        _activeLiving = null;
+        CurrentState = State.Idle;
+    }
+
+    // ── Pouring ─────────────────────────────────────────────────────
 
     private void UpdatePouring()
     {
-        // Update oscillating target every frame
-        if (_activePlant != null)
+        if (_activeDef == null) { EndWatering(); return; }
+
+        bool mouseHeld = _clickAction.IsPressed();
+
+        if (mouseHeld)
         {
+            // Chicken pour: accumulate water while held
             _pourTime += Time.deltaTime;
-            float amp = _activePlant.targetOscAmplitude;
-            float spd = _activePlant.targetOscSpeed;
-            OscillatingTarget = _activePlant.idealWaterLevel
-                + amp * Mathf.Sin(2f * Mathf.PI * spd * _pourTime);
 
-            if (_pot != null)
-                _pot.TargetLevel = OscillatingTarget;
-        }
+            // Fill rate with shape multiplier and oscillation
+            float shapeMult = _activeDef.GetShapeFillMultiplier(_waterLevel);
+            float osc = 1f + _pourRateOscAmplitude * Mathf.Sin(_pourRateOscSpeed * Mathf.PI * 2f * _pourTime);
+            float rate = _basePourRate * shapeMult * osc;
 
-        if (_clickAction.IsPressed())
-        {
-            float dragRate = PourDragHelper.UpdateDrag();
+            float delta = rate * Time.deltaTime;
+            _waterLevel += delta;
 
-            if (_pot != null && dragRate > 0f)
-                _pot.Pour(Time.deltaTime * dragRate);
+            // Foam grows much faster than water to obscure the water line.
+            // The gap between foam and water is the "blind zone" the player
+            // can't see through. Foam leads water by a growing margin.
+            float foamDelta = delta * _foamRateMultiplier;
+            _foamLevel += foamDelta;
+            // Foam always stays above water — never below
+            _foamLevel = Mathf.Max(_foamLevel, _waterLevel + 0.03f);
 
-            // Nearly full hint (once per pour)
-            if (_pot != null && !_shownNearlyFull && _pot.WaterLevel >= 0.7f)
+            _isPouring = true;
+
+            // Save water level to plant continuously
+            SaveWaterLevel();
+
+            // Overflow check — EITHER water or foam going over the rim = spill
+            bool rimOverflow = _waterLevel > 1f || _foamLevel > 1f;
+            if (rimOverflow && !_overflowed)
             {
-                _shownNearlyFull = true;
-                DialoguePortraitBox.Instance?.Say("Getting close...", 1.5f);
-            }
+                _overflowed = true;
+                PotCrossSectionUI.Instance?.SetOverflowing(true);
+                PotCrossSectionUI.Instance?.SetStatus("Overflowing!");
 
-            // Overflow SFX (play once)
-            if (_pot != null && _pot.Overflowed && !_overflowSFXPlayed)
-            {
-                if (AudioManager.Instance != null && overflowSFX != null)
-                    AudioManager.Instance.PlaySFX(overflowSFX);
-                _overflowSFXPlayed = true;
-                DialoguePortraitBox.Instance?.Say("Oops, a little too much!", 2f);
-            }
-        }
-        else
-        {
-            // Mouse released → finish pouring
-            PourDragHelper.End();
-            if (_pot != null)
-                _pot.StopPouring();
-
-            CalculateScore();
-        }
-    }
-
-    // ── Scoring ──────────────────────────────────────────────────────
-
-    private void CalculateScore()
-    {
-        if (_pot == null || _pot.definition == null)
-        {
-            CurrentState = State.Scoring;
-            _scoreTimer = _scoreDisplayTime;
-            return;
-        }
-
-        var def = _pot.definition;
-
-        // Fill score (0-70): how close water is to the oscillating target at release
-        float fillDist = Mathf.Abs(_pot.WaterLevel - OscillatingTarget);
-        float fillNorm = Mathf.Clamp01(1f - fillDist / Mathf.Max(def.waterTolerance, 0.001f));
-        lastFillScore = fillNorm * 70f;
-
-        // Overflow penalty
-        lastOverflowScore = _pot.Overflowed ? -_overflowPenalty : 0f;
-
-        // Bonus (0-30): extra points for near-perfect without overflow
-        if (!_pot.Overflowed && fillNorm > 0.9f)
-            lastBonusScore = 30f;
-        else
-            lastBonusScore = fillNorm * 30f;
-
-        float raw = lastFillScore + lastBonusScore + lastOverflowScore;
-        lastScore = Mathf.Clamp((int)raw, 0, def.baseScore);
-
-        if (AudioManager.Instance != null && scoreSFX != null)
-            AudioManager.Instance.PlaySFX(scoreSFX);
-
-        // Perfect / fail SFX based on score threshold
-        bool isPerfect = !_pot.Overflowed && fillNorm > 0.9f;
-        if (isPerfect && perfectSFX != null && AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(perfectSFX);
-        else if (!isPerfect && lastScore < 30 && failSFX != null && AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(failSFX);
-
-        // Voice reaction
-        if (!_pot.Overflowed && fillDist <= 0.15f)
-            DialoguePortraitBox.Instance?.Say("Perfect! That's just right.", 2f);
-
-        CurrentState = State.Scoring;
-        _scoreTimer = _scoreDisplayTime;
-
-        Debug.Log($"[WateringManager] Score: {lastScore} (fill={lastFillScore:F0} bonus={lastBonusScore:F0} overflow={lastOverflowScore:F0})");
-    }
-
-    private void UpdateScoring()
-    {
-        // Allow clicking the next plant to interrupt the score display
-        if (_clickAction.WasPressedThisFrame())
-        {
-            Vector2 pointer = _mousePosition.ReadValue<Vector2>();
-            Ray ray = _mainCamera.ScreenPointToRay(pointer);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, _plantLayer))
-            {
-                var plant = hit.collider.GetComponent<WaterablePlant>();
-                if (plant == null)
-                    plant = hit.collider.GetComponentInParent<WaterablePlant>();
-
-                if (plant != null && plant.definition != null)
+                if (!_overflowSFXPlayed && overflowSFX != null && AudioManager.Instance != null)
                 {
-                    if (plantClickSFX != null && AudioManager.Instance != null)
-                        AudioManager.Instance.PlaySFX(plantClickSFX);
-                    BeginPouring(plant.definition);
-                    return;
+                    AudioManager.Instance.PlaySFX(overflowSFX);
+                    _overflowSFXPlayed = true;
                 }
+
+                // Spawn water spill stain immediately at the plant's base
+                if (_activePlant != null)
+                    SpawnOverflowSpill(_activePlant.transform.position);
+            }
+
+            _waterLevel = Mathf.Min(_waterLevel, 1.1f);
+            _foamLevel = Mathf.Min(_foamLevel, 1.2f);
+        }
+        else
+        {
+            // Released — foam settles toward water level
+            if (_foamLevel > _waterLevel)
+            {
+                _foamLevel -= _foamSettleRate * Time.deltaTime;
+                _foamLevel = Mathf.Max(_foamLevel, _waterLevel);
+            }
+
+            if (_isPouring)
+            {
+                _isPouring = false;
+                // Update status based on accuracy
+                UpdatePourStatus();
             }
         }
 
-        _scoreTimer -= Time.deltaTime;
-        if (_scoreTimer <= 0f)
-        {
-            _activePlant = null;
-            CurrentState = State.Idle;
-
-            Debug.Log("[WateringManager] Returned to Idle.");
-        }
+        // Update UI
+        PotCrossSectionUI.Instance?.UpdatePour(_waterLevel, _foamLevel);
     }
 
-    /// <summary>Force back to idle. Called on phase transitions to close HUD.</summary>
-    public void ForceIdle()
+    private void UpdatePourStatus()
     {
-        _activePlant = null;
-        CurrentState = State.Idle;
+        if (_activeDef == null) return;
+
+        float target = _activeDef.idealWaterLevel;
+        float tolerance = _activeDef.waterTolerance;
+        float diff = _waterLevel - target;
+
+        if (_overflowed)
+            PotCrossSectionUI.Instance?.SetStatus("Too much water!");
+        else if (Mathf.Abs(diff) <= tolerance)
+            PotCrossSectionUI.Instance?.SetStatus("Looks perfect!");
+        else if (diff < -tolerance)
+            PotCrossSectionUI.Instance?.SetStatus("Could use more...");
+        else
+            PotCrossSectionUI.Instance?.SetStatus("A bit much...");
+    }
+
+    /// <summary>Spawn a water spill stain at the plant's base when overflowing.</summary>
+    private static void SpawnOverflowSpill(Vector3 plantPos)
+    {
+        // Find a nearby CleanableSurface slot or create a SpillSurface
+        Vector3 spillPos = plantPos + new Vector3(
+            Random.Range(-0.1f, 0.1f), 0.001f, Random.Range(-0.1f, 0.1f));
+
+        var spillGO = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        spillGO.name = "WaterSpill";
+        spillGO.transform.position = spillPos;
+        spillGO.transform.rotation = Quaternion.Euler(90f, 0f, 0f); // flat on floor
+        spillGO.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+
+        // Add SpillSurface for wipe-to-clean
+        var spill = spillGO.AddComponent<SpillSurface>();
+
+        // Replace MeshCollider (can't be trigger) with a flat BoxCollider
+        var meshCol = spillGO.GetComponent<MeshCollider>();
+        if (meshCol != null) Object.Destroy(meshCol);
+        var box = spillGO.AddComponent<BoxCollider>();
+        box.isTrigger = true;
+        box.size = new Vector3(1f, 1f, 0.01f);
+
+        Debug.Log($"[WateringManager] Water spill spawned at {spillPos}.");
     }
 }

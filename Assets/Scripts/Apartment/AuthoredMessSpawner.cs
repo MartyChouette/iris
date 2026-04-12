@@ -312,6 +312,20 @@ public class AuthoredMessSpawner : MonoBehaviour
         if (_objectLayer > 0)
             go.layer = _objectLayer;
 
+        // Ensure at least one collider exists for raycasting (prefabs may lack one)
+        if (go.GetComponentInChildren<Collider>() == null)
+        {
+            var box = go.AddComponent<BoxCollider>();
+            var rend = go.GetComponentInChildren<Renderer>();
+            if (rend != null)
+            {
+                box.center = go.transform.InverseTransformPoint(rend.bounds.center);
+                box.size = go.transform.InverseTransformVector(rend.bounds.size);
+                // Ensure minimum clickable size
+                box.size = Vector3.Max(box.size, Vector3.one * 0.03f);
+            }
+        }
+
         // Add Rigidbody
         var rb = go.GetComponent<Rigidbody>();
         if (rb == null) rb = go.AddComponent<Rigidbody>();

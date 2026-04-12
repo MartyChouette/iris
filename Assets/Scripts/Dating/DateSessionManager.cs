@@ -46,6 +46,22 @@ public class DateSessionManager : MonoBehaviour
     [Tooltip("Affection multiplier when mood is outside date's preferences.")]
     [SerializeField] private float moodMismatchMultiplier = 0.5f;
 
+    [Header("Multiplier Popup")]
+    [Tooltip("Character size of the floating ×N text (world units per character).")]
+    [SerializeField] private float _popupCharSize = 0.035f;
+
+    [Tooltip("Color for positive (Like) multiplier popups.")]
+    [SerializeField] private Color _popupLikeColor = new Color(1f, 0.55f, 0.75f, 1f);
+
+    [Tooltip("Color for negative (Dislike) multiplier popups.")]
+    [SerializeField] private Color _popupDislikeColor = new Color(0.55f, 0.55f, 0.6f, 1f);
+
+    [Tooltip("How far the popup floats upward during its animation.")]
+    [SerializeField] private float _popupRiseHeight = 0.35f;
+
+    [Tooltip("How long the popup is visible (seconds).")]
+    [SerializeField] private float _popupDuration = 1.6f;
+
     [Header("Reaction Values")]
     [Tooltip("Affection gained from a Like reaction.")]
     [SerializeField] private float likeAffection = 5f;
@@ -351,6 +367,12 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.HidePhaseTitle();
 
+        // Time-jump to sunset so the date always arrives at golden hour,
+        // even if the player called early via the phone.
+        const float sunsetHour = 18f;
+        if (GameClock.Instance != null && GameClock.Instance.CurrentHour < sunsetHour)
+            GameClock.Instance.RestoreFromSave(GameClock.Instance.CurrentDay, sunsetHour);
+
         // Set up session while screen is black
         _state = SessionState.DateInProgress;
         _datePhase = DatePhase.Arrival;
@@ -374,6 +396,10 @@ public class DateSessionManager : MonoBehaviour
         // Fade in to reveal NPC at entrance
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
+
+        // Moment camera: frame the date character at the entrance
+        if (_dateCharacterGO != null)
+            MomentCamera.FrameTarget(_dateCharacterGO.transform.position, 2f);
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)
@@ -661,6 +687,9 @@ public class DateSessionManager : MonoBehaviour
                       $"highlight={(highlight != null ? "yes" : "NO")}");
 #endif
 
+            // Frame the item with the moment camera (quick push for each item)
+            MomentCamera.FrameTarget(visualCenter, 0.25f);
+
             // Spawn particles at the item's visual center (not pivot)
             SpawnReactionParticles(visualCenter, reaction);
 
@@ -669,8 +698,8 @@ public class DateSessionManager : MonoBehaviour
             // particles so they don't cover the text.
             SpawnMultiplierPopup(visualCenter + Vector3.up * 0.22f, multiplier, reaction);
 
-            // Stagger for visual clarity
-            yield return s_wait03;
+            // Stagger for visual clarity — wait for moment camera to finish
+            yield return new WaitForSeconds(0.5f);
         }
 
         // Clear the last item's highlight so nothing stays lit forever.
@@ -794,12 +823,19 @@ public class DateSessionManager : MonoBehaviour
         var tm = go.AddComponent<TextMesh>();
         tm.text = $"×{multiplier}";
         tm.fontSize = 64;
-        tm.characterSize = 0.018f; // world units per character
+
+        // Scale size and color intensity by multiplier value:
+        // ×1 = base size + like/dislike color
+        // ×5 = 2× base size + deep red
+        float t = Mathf.Clamp01((multiplier - 1f) / 4f); // 0 at ×1, 1 at ×5
+        tm.characterSize = Mathf.Lerp(_popupCharSize, _popupCharSize * 2f, t);
+
+        Color baseColor = reaction == ReactionType.Like ? _popupLikeColor : _popupDislikeColor;
+        Color hotColor = new Color(1f, 0.15f, 0.1f, 1f); // deep red
+        tm.color = Color.Lerp(baseColor, hotColor, t);
+
         tm.anchor = TextAnchor.MiddleCenter;
         tm.alignment = TextAlignment.Center;
-        tm.color = reaction == ReactionType.Like
-            ? new Color(1f, 0.55f, 0.75f, 1f)   // warm pink
-            : new Color(0.55f, 0.55f, 0.6f, 1f); // grey
 
         var mr = go.GetComponent<MeshRenderer>();
         if (mr != null)
@@ -828,14 +864,14 @@ public class DateSessionManager : MonoBehaviour
             mr.receiveShadows = false;
         }
 
-        StartCoroutine(AnimateMultiplierPopup(go.transform, 1.6f));
+        StartCoroutine(AnimateMultiplierPopup(go.transform, _popupDuration));
     }
 
     private IEnumerator AnimateMultiplierPopup(Transform t, float duration)
     {
         if (t == null) yield break;
         Vector3 startPos = t.position;
-        Vector3 endPos = startPos + Vector3.up * 0.35f;
+        Vector3 endPos = startPos + Vector3.up * _popupRiseHeight;
 
         var tm = t.GetComponent<TextMesh>();
         var mr = t.GetComponent<MeshRenderer>();

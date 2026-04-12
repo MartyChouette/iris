@@ -205,7 +205,7 @@ public class GameClock : MonoBehaviour
 
         // Reset all UI / station state before fading out
         FridgeController.Instance?.ForceClose();
-        SimpleDrinkManager.Instance?.HideRecipePanel();
+        DrinkPourManager.Instance?.ForceIdle();
         RecordSlot.Instance?.Stop();
         DateEndScreen.Instance?.Dismiss();
 

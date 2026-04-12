@@ -96,6 +96,10 @@ public class SpillSurface : MonoBehaviour
 
     private void Awake()
     {
+        // Nudge stain slightly above the floor so depth testing works:
+        // stain wins against the floor but loses against items placed on top.
+        transform.position += transform.up * 0.001f;
+
         GenerateSpillTexture();
         ApplyToMaterial();
     }
@@ -191,9 +195,14 @@ public class SpillSurface : MonoBehaviour
         _matInstance.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
         _matInstance.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
         _matInstance.SetInt("_ZWrite", 0);
+        // Transparent pass with standard depth testing. The 0.001m Y offset
+        // (applied in Awake) prevents z-fighting with the floor, and ZTest LEqual
+        // ensures items placed on top correctly occlude the stain.
         _matInstance.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
         _matInstance.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
 
         rend.sharedMaterial = _matInstance;
+        rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        rend.receiveShadows = false;
     }
 }

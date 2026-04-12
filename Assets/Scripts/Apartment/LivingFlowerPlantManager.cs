@@ -116,6 +116,13 @@ public class LivingFlowerPlantManager : MonoBehaviour
         int currentDay = GameClock.Instance != null ? GameClock.Instance.CurrentDay : 1;
         plant.Initialize(characterName, currentDay, daysAlive);
 
+        // Configure water parameters from the first available PlantDefinition
+        // (TODO: per-character plant definitions when more date characters are added)
+        var plantDef = FindDefaultPlantDefinition();
+        if (plantDef != null)
+            plant.ConfigureWater(plantDef.thirstLevel, plantDef.waterTolerance,
+                                 plantDef.dryingRatePerDay, plantDef.leafSheddingChance);
+
         // Add ReactableTag for date NPC reactions
         var reactable = plantGO.AddComponent<ReactableTag>();
         var tagsField = typeof(ReactableTag).GetField("tags",
@@ -126,8 +133,9 @@ public class LivingFlowerPlantManager : MonoBehaviour
         MakePlaceable(plantGO);
 
         // Make it waterable like other apartment plants
-        if (plantGO.GetComponent<WaterablePlant>() == null)
-            plantGO.AddComponent<WaterablePlant>();
+        var waterable = plantGO.GetComponent<WaterablePlant>();
+        if (waterable == null) waterable = plantGO.AddComponent<WaterablePlant>();
+        if (plantDef != null) waterable.definition = plantDef;
 
         // Lightweight breathing wobble instead of full physics joints
         if (plantGO.GetComponent<PlantBreathingWobble>() == null)
@@ -149,6 +157,11 @@ public class LivingFlowerPlantManager : MonoBehaviour
     /// <summary>Called by GameClock.OnDayStarted event each morning.</summary>
     public void AdvanceAllPlants()
     {
+        // Get weather drying multiplier
+        float dryMult = WeatherSystem.Instance != null
+            ? WeatherSystem.Instance.GetDryingMultiplier()
+            : 1f;
+
         for (int i = _activePlants.Count - 1; i >= 0; i--)
         {
             if (_activePlants[i] == null || _activePlants[i].IsDead)
@@ -157,15 +170,64 @@ public class LivingFlowerPlantManager : MonoBehaviour
                 continue;
             }
 
-            _activePlants[i].AdvanceDay();
+            var plant = _activePlants[i];
 
-            if (_activePlants[i].IsDead)
+            // Apply overnight water evaporation
+            plant.ApplyOvernightDrying(dryMult);
+
+            // Check watering consequences
+            var waterState = plant.GetWaterState();
+            if (waterState != LivingFlowerPlant.WaterState.Perfect)
+            {
+                // Leaf shedding (spawns trash near the plant)
+                if (plant.ShouldShedLeaf() && AuthoredMessSpawner.Instance != null)
+                {
+                    Vector3 leafPos = plant.transform.position
+                        + new Vector3(Random.Range(-0.15f, 0.15f), 0f, Random.Range(-0.15f, 0.15f));
+                    // Spawn a small leaf trash item near the plant
+                    // (uses the existing mess system — AuthoredMessSpawner handles cleanup)
+                    Debug.Log($"[LivingFlowerPlantManager] {plant.CharacterName}'s plant shed a leaf ({waterState}).");
+                }
+
+                // Overwatered → spawn water spill stain near plant
+                if (waterState == LivingFlowerPlant.WaterState.Overwatered || plant.OverflowedToday)
+                {
+                    Debug.Log($"[LivingFlowerPlantManager] {plant.CharacterName}'s plant overwatered — water spill spawned.");
+                    // TODO: spawn CleanableSurface stain at plant base position
+                }
+            }
+
+            // Advance general plant health (lifespan decay)
+            plant.AdvanceDay();
+
+            if (plant.IsDead)
                 _activePlants.RemoveAt(i);
         }
 
         UpdateMoodSource();
+        UpdateAirQuality();
 
-        Debug.Log($"[LivingFlowerPlantManager] Advanced plants. {_activePlants.Count} alive.");
+        Debug.Log($"[LivingFlowerPlantManager] Advanced plants. {_activePlants.Count} alive. Weather drying: {dryMult:F1}x");
+    }
+
+    /// <summary>Feed air quality to MoodMachine based on plant watering health.</summary>
+    private void UpdateAirQuality()
+    {
+        if (_activePlants.Count == 0)
+        {
+            MoodMachine.Instance?.RemoveSource("AirQuality");
+            return;
+        }
+
+        float totalQuality = 0f;
+        for (int i = 0; i < _activePlants.Count; i++)
+        {
+            if (_activePlants[i] != null)
+                totalQuality += _activePlants[i].GetAirQualityContribution();
+        }
+
+        float avgQuality = totalQuality / _activePlants.Count;
+        MoodMachine.Instance?.SetSource("AirQuality", avgQuality);
     }
 
     /// <summary>Get all living plant records for save data.</summary>
@@ -193,6 +255,13 @@ public class LivingFlowerPlantManager : MonoBehaviour
             var plant = plantGO.AddComponent<LivingFlowerPlant>();
             plant.Initialize(record.characterName, record.spawnDay, record.totalDaysAlive);
             plant.SetHealth(record.currentHealth);
+            plant.RestoreWaterLevel(record.currentWaterLevel);
+
+            // Restore water config from PlantDefinition
+            var plantDef = FindDefaultPlantDefinition();
+            if (plantDef != null)
+                plant.ConfigureWater(plantDef.thirstLevel, plantDef.waterTolerance,
+                                     plantDef.dryingRatePerDay, plantDef.leafSheddingChance);
 
             var reactable = plantGO.AddComponent<ReactableTag>();
             var tagsField = typeof(ReactableTag).GetField("tags",
@@ -201,6 +270,11 @@ public class LivingFlowerPlantManager : MonoBehaviour
                 tagsField.SetValue(reactable, new[] { "plant", "flower", "gift" });
 
             MakePlaceable(plantGO);
+
+            // Set WaterablePlant definition for watering can interaction
+            var waterable = plantGO.GetComponent<WaterablePlant>();
+            if (waterable == null) waterable = plantGO.AddComponent<WaterablePlant>();
+            if (plantDef != null) waterable.definition = plantDef;
 
             _activePlants.Add(plant);
         }
@@ -307,6 +381,17 @@ public class LivingFlowerPlantManager : MonoBehaviour
         go.layer = layer;
         foreach (Transform child in go.transform)
             SetLayerRecursive(child.gameObject, layer);
+    }
+
+    private static PlantDefinition FindDefaultPlantDefinition()
+    {
+        // Try Resources first, then fall back to any loaded PlantDefinition
+        var def = Resources.Load<PlantDefinition>("DefaultPlantDefinition");
+        if (def != null) return def;
+
+        // Search all loaded SOs
+        var all = Resources.FindObjectsOfTypeAll<PlantDefinition>();
+        return all.Length > 0 ? all[0] : null;
     }
 
     private Material GetSafeMaterial(Color color)

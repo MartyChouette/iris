@@ -63,5 +63,6 @@ public class LivingPlantRecord
     public int spawnDay;
     public int totalDaysAlive;
     public float currentHealth;
+    public float currentWaterLevel;
     public float px, py, pz;
 }
