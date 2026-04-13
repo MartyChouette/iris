@@ -701,12 +701,8 @@ public class DateSessionManager : MonoBehaviour
             // Spawn the floating "2×" popup slightly above
             SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
 
-            // Wait for player click before advancing to next item
-            yield return new WaitForSeconds(0.3f); // brief pause so particles register
-            PickupDescriptionHUD.Instance?.Show("Click to continue...");
-            yield return new WaitUntil(() =>
-                IrisInput.Instance != null && IrisInput.Instance.Click.WasPressedThisFrame());
-            PickupDescriptionHUD.Instance?.Hide();
+            // Brief pause so particles and popup register before next item
+            yield return new WaitForSeconds(0.6f);
         }
 
         // Clear the last item's highlight so nothing stays lit forever.
