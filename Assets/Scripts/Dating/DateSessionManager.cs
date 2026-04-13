@@ -397,9 +397,9 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 
-        // Moment camera: frame the date character at the entrance
-        if (_dateCharacterGO != null)
-            MomentCamera.FrameTarget(_dateCharacterGO.transform.position, 2f);
+        // Phase camera already positioned by ApplyPhaseCamera above.
+        // No MomentCamera here — it fights with the phase camera and
+        // causes a jarring snap-back when it returns to normal.
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)

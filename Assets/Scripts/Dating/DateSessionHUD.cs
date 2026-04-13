@@ -56,17 +56,12 @@ public class DateSessionHUD : MonoBehaviour
         if (dateNameText != null && dsm.CurrentDate != null)
             dateNameText.text = dsm.CurrentDate.characterName;
 
-        // Affection
-        float aff = dsm.Affection;
-        if (affectionText != null)
-            affectionText.text = $"{aff:F0}%";
-
-        if (affectionBar != null)
-        {
-            affectionBar.minValue = 0f;
-            affectionBar.maxValue = 100f;
-            affectionBar.value = aff;
-        }
+        // Affection — the flower meter (AffectionBar) is the visual.
+        // Hide the old debug bar and percentage text.
+        if (affectionBar != null && affectionBar.gameObject.activeSelf)
+            affectionBar.gameObject.SetActive(false);
+        if (affectionText != null && affectionText.gameObject.activeSelf)
+            affectionText.gameObject.SetActive(false);
 
         // Phase label
         if (phaseText != null)

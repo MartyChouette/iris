@@ -96,13 +96,48 @@ public class AffectionBar : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
-    private void Start()
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        TrySubscribe();
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        Unsubscribe();
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        // Hide on scene change — no date active until proven otherwise
+        SetVisible(false);
+        // Re-subscribe after scene changes — singletons may have been recreated
+        StartCoroutine(SubscribeDeferred());
+    }
+
+    private System.Collections.IEnumerator SubscribeDeferred()
+    {
+        yield return null; // wait one frame for singletons to Awake
+        TrySubscribe();
+    }
+
+    private void TrySubscribe()
     {
         if (DateSessionManager.Instance != null)
             DateSessionManager.Instance.OnAffectionChanged.AddListener(OnAffectionChanged);
 
         if (DayPhaseManager.Instance != null)
             DayPhaseManager.Instance.OnPhaseChanged.AddListener(OnPhaseChanged);
+    }
+
+    private void Unsubscribe()
+    {
+        if (DateSessionManager.Instance != null)
+            DateSessionManager.Instance.OnAffectionChanged.RemoveListener(OnAffectionChanged);
+
+        if (DayPhaseManager.Instance != null)
+            DayPhaseManager.Instance.OnPhaseChanged.RemoveListener(OnPhaseChanged);
     }
 
     private void Update()
