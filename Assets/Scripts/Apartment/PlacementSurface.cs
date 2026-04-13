@@ -203,8 +203,15 @@ public class PlacementSurface : MonoBehaviour
 
         float marginA = (max[a] - min[a] > EdgeMargin * 4f) ? EdgeMargin : 0f;
         float marginB = (max[b] - min[b] > EdgeMargin * 4f) ? EdgeMargin : 0f;
-        local[a] = Mathf.Clamp(Mathf.Round(local[a] / gridSize) * gridSize, min[a] + marginA, max[a] - marginA);
-        local[b] = Mathf.Clamp(Mathf.Round(local[b] / gridSize) * gridSize, min[b] + marginB, max[b] - marginB);
+
+        // Convert world-space grid size to local space so the grid is consistent
+        // regardless of the surface object's scale.
+        Vector3 scale = transform.lossyScale;
+        float localGridA = Mathf.Abs(scale[a]) > 0.001f ? gridSize / Mathf.Abs(scale[a]) : gridSize;
+        float localGridB = Mathf.Abs(scale[b]) > 0.001f ? gridSize / Mathf.Abs(scale[b]) : gridSize;
+
+        local[a] = Mathf.Clamp(Mathf.Round(local[a] / localGridA) * localGridA, min[a] + marginA, max[a] - marginA);
+        local[b] = Mathf.Clamp(Mathf.Round(local[b] / localGridB) * localGridB, min[b] + marginB, max[b] - marginB);
 
         // Use same dot-product face detection as ProjectOntoSurface
         bool frontFace = true;

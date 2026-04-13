@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iris - Story Weaver</title>
+<!-- No external dependencies. Sync via story_sync.php on same server. -->
+<style>
+:root {
+  --bg: #1a1520;
+  --bg2: #221a2e;
+  --bg3: #2d1f3d;
+  --surface: #261e32;
+  --surface2: #302640;
+  --border: #3d2f50;
+  --text: #e0dce6;
+  --text2: #9990a8;
+  --accent: #c44569;
+  --accent2: #f5a623;
+  --accent3: #4ecdc4;
+  --accent4: #a78bfa;
+  --green: #4ade80;
+  --red: #f87171;
+  --blue: #60a5fa;
+  --yellow: #fbbf24;
+  --rose: #c44569;
+  --wine: #8b2252;
+  --garden: #3a9e8f;
+  --mystery: #7c5cbf;
+  --char0: #e94560;
+  --char1: #f5a623;
+  --char2: #4ecdc4;
+  --char3: #a78bfa;
+  --char4: #60a5fa;
+  --char5: #f87171;
+  --char6: #4ade80;
+  --char7: #fbbf24;
+  --nema: #c44569;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
+#app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+
+/* Top nav */
+#topbar { display: flex; align-items: center; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 16px; height: 48px; gap: 4px; }
+#topbar h1 { font-size: 15px; color: var(--accent); margin-right: 16px; letter-spacing: 3px; text-transform: uppercase; font-style: italic; }
+#topbar h1 span { color: var(--accent2); font-style: normal; font-size: 10px; letter-spacing: 1px; vertical-align: super; }
+.tab-btn { background: none; border: none; color: var(--text2); padding: 12px 14px; cursor: pointer; font-size: 12px; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+#topbar .spacer { flex: 1; }
+.save-indicator { font-size: 11px; color: var(--green); opacity: 0; transition: opacity 0.3s; margin-right: 4px; }
+.save-indicator.show { opacity: 1; }
+.top-action { background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-left: 4px; }
+.top-action:hover { background: var(--accent); color: #fff; }
+
+/* Presence avatars in topbar */
+.presence-area { display: flex; align-items: center; gap: 4px; margin-right: 8px; }
+.presence-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #000; position: relative; cursor: default; border: 2px solid transparent; }
+.presence-dot .pd-tooltip { display: none; position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 3px; font-size: 10px; color: var(--text); white-space: nowrap; font-weight: 400; z-index: 100; }
+.presence-dot:hover .pd-tooltip { display: block; }
+.presence-dot .pd-tab { position: absolute; top: -4px; right: -4px; font-size: 7px; background: var(--bg2); border: 1px solid var(--border); padding: 0 3px; border-radius: 3px; color: var(--text2); }
+.sync-status { font-size: 10px; margin-right: 8px; }
+.sync-status.online { color: var(--green); }
+.sync-status.offline { color: var(--text2); }
+
+/* Main content */
+#content { overflow: hidden; position: relative; }
+.tab-content { display: none; height: 100%; overflow: hidden; }
+.tab-content.active { display: flex; }
+
+/* ===================== SETUP MODAL ===================== */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+.modal-overlay.hidden { display: none; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; max-width: 520px; width: 90%; max-height: 90vh; overflow-y: auto; }
+.modal h2 { color: var(--accent); margin-bottom: 4px; font-size: 20px; }
+.modal .modal-sub { color: var(--text2); font-size: 13px; margin-bottom: 20px; }
+.modal .form-group { margin-bottom: 14px; }
+.modal .form-group label { display: block; font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.modal .form-group input, .modal .form-group textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px; border-radius: 4px; font-family: inherit; font-size: 13px; }
+.modal .form-group textarea { min-height: 100px; font-family: 'Consolas', monospace; font-size: 11px; }
+.modal .form-group input:focus, .modal .form-group textarea:focus { outline: none; border-color: var(--accent); }
+.modal .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
+.modal .modal-actions button { padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid var(--border); }
+.modal .modal-actions .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.modal .modal-actions .btn-secondary { background: var(--surface2); color: var(--text); }
+.modal .modal-actions button:hover { opacity: 0.85; }
+.modal .setup-step { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-bottom: 12px; font-size: 12px; line-height: 1.6; }
+.modal .setup-step code { background: var(--bg3); padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+.modal .setup-step a { color: var(--accent3); }
+.color-picker-row { display: flex; gap: 6px; margin-top: 6px; }
+.color-swatch { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
+.color-swatch:hover { transform: scale(1.15); }
+.color-swatch.selected { border-color: #fff; box-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
+/* Avatar picker */
+.avatar-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.avatar-option { width: 40px; height: 40px; border-radius: 8px; border: 2px solid var(--border); background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; transition: all 0.15s; }
+.avatar-option:hover { transform: scale(1.15); border-color: var(--accent3); }
+.avatar-option.selected { border-color: #fff; box-shadow: 0 0 10px rgba(255,255,255,0.3); background: var(--bg3); }
+
+/* ===================== CURSOR AVATARS ===================== */
+/* Partner cursor: avatar emoji with pointer arrow, positioned precisely */
+.cursor-avatar { position: absolute; pointer-events: none; z-index: 100; transition: left 1s ease-out, top 1s ease-out; }
+.cursor-avatar .ca-pointer { position: relative; }
+/* The arrow tip (top-left is the exact cursor point) */
+.cursor-avatar .ca-arrow { width: 0; height: 0; border-left: 6px solid; border-right: 6px solid transparent; border-bottom: 10px solid transparent; border-top: 10px solid; position: absolute; top: 0; left: 0; }
+/* Avatar sits offset from the arrow */
+.cursor-avatar .ca-emoji { position: absolute; top: 12px; left: 10px; font-size: 18px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); animation: ca-float 3s ease-in-out infinite; }
+.cursor-avatar .ca-name { position: absolute; top: 32px; left: 8px; font-size: 9px; white-space: nowrap; padding: 1px 6px; border-radius: 3px; background: rgba(26,21,32,0.9); border: 1px solid var(--border); }
+
+/* Proximity reactions */
+.cursor-avatar .ca-reaction { position: absolute; top: -6px; left: 16px; font-size: 12px; opacity: 0; pointer-events: none; }
+.cursor-avatar.reacting .ca-reaction { animation: ca-react-pop 1.5s ease-out infinite; }
+.cursor-avatar.reacting .ca-emoji { animation: ca-bounce 0.6s ease-in-out 3; }
+.cursor-avatar.close .ca-emoji { animation: ca-wiggle 0.4s ease-in-out infinite; }
+.cursor-avatar.close .ca-reaction { animation: ca-hearts 2s ease-in-out infinite; }
+.cursor-avatar.close::after {
+  content: ''; position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--accent2);
+  top: 0px; left: 22px; animation: ca-sparkle 1.2s ease-in-out infinite;
+}
+
+/* No local cursor avatar — use CSS custom cursor instead */
+@keyframes ca-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes ca-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.15); }
+}
+@keyframes ca-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+@keyframes ca-react-pop {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  20% { opacity: 1; transform: translateY(-8px) scale(1.2); }
+  80% { opacity: 1; transform: translateY(-14px) scale(1); }
+  100% { opacity: 0; transform: translateY(-22px) scale(0.8); }
+}
+@keyframes ca-hearts {
+  0%, 100% { opacity: 0.3; transform: translateY(-2px); }
+  50% { opacity: 1; transform: translateY(-10px); }
+}
+@keyframes ca-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(2); }
+}
+
+/* ===================== CHANGE FEED ===================== */
+#change-feed { position: absolute; bottom: 12px; right: 12px; width: 280px; max-height: 200px; overflow-y: auto; background: rgba(38,30,50,0.95); border: 1px solid var(--border); border-radius: 8px; z-index: 15; font-size: 11px; }
+#change-feed.collapsed { max-height: 32px; overflow: hidden; }
+#change-feed .cf-header { padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-bottom: 1px solid var(--border); }
+#change-feed .cf-header span { color: var(--text2); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+#change-feed .cf-body { padding: 4px 0; }
+.cf-entry { padding: 4px 12px; display: flex; gap: 6px; align-items: flex-start; }
+.cf-entry .cf-avatar { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #000; margin-top: 1px; }
+.cf-entry .cf-text { color: var(--text2); line-height: 1.4; }
+.cf-entry .cf-text strong { color: var(--text); }
+.cf-entry .cf-time { color: var(--border); font-size: 9px; margin-left: auto; flex-shrink: 0; }
+
+/* Collaborator highlight on list items */
+.list-item .collab-viewing { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
+
+/* ===================== STORY MAP ===================== */
+#tab-storymap { position: relative; flex-direction: column; }
+#storymap-toolbar { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+#storymap-toolbar label { font-size: 12px; color: var(--text2); }
+#storymap-toolbar select, #storymap-toolbar input { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 4px 8px; border-radius: 3px; font-size: 12px; }
+#storymap-container { flex: 1; overflow: hidden; position: relative; cursor: grab; }
+#storymap-container.dragging { cursor: grabbing; }
+#storymap-world { position: absolute; transform-origin: 0 0; }
+.sm-node { position: absolute; border-radius: 6px; padding: 6px 8px; cursor: grab; transition: box-shadow 0.15s, border-color 0.15s; font-size: 10px; line-height: 1.3; border: 1px solid var(--border); background: var(--surface); user-select: none; }
+.sm-node:hover { z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+.sm-node.selected { box-shadow: 0 0 12px rgba(196,69,105,0.5); }
+.sm-node.dragging-node { cursor: grabbing; z-index: 50; box-shadow: 0 8px 30px rgba(0,0,0,0.7); opacity: 0.9; }
+.sm-node.type-character { border-radius: 50%; width: 80px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.sm-node.type-item { width: 120px; }
+.sm-node.type-beat { width: 130px; border-style: dashed; }
+.sm-node .node-name { font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sm-node .node-sub { font-size: 8px; color: var(--text2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sm-node .node-badge { font-size: 8px; padding: 1px 4px; border-radius: 3px; margin-top: 3px; display: inline-block; }
+#storymap-svg { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
+#storymap-svg line, #storymap-svg path { pointer-events: stroke; cursor: pointer; }
+#sm-detail { position: absolute; right: 0; top: 0; width: 380px; height: 100%; background: var(--surface); border-left: 1px solid var(--border); overflow-y: auto; transform: translateX(100%); transition: transform 0.2s; z-index: 20; padding: 16px; }
+#sm-detail.open { transform: translateX(0); }
+#sm-detail h3 { color: var(--accent); font-size: 14px; margin-bottom: 12px; }
+#sm-detail .close-btn { position: absolute; top: 8px; right: 8px; background: none; border: none; color: var(--text2); cursor: pointer; font-size: 18px; }
+.sm-legend { position: absolute; bottom: 12px; left: 12px; background: rgba(38,30,50,0.95); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; font-size: 11px; z-index: 15; }
+.sm-legend div { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+.sm-legend .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.sm-zoom-controls { position: absolute; bottom: 12px; right: 300px; display: flex; gap: 4px; z-index: 15; }
+.sm-zoom-btn { width: 32px; height: 32px; background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 4px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+.sm-zoom-btn:hover { background: var(--accent); }
+
+/* ===================== SHARED LAYOUTS ===================== */
+.split-view { flex-direction: row; }
+.side-list { width: 240px; background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto; flex-shrink: 0; display: flex; flex-direction: column; }
+.side-list h3 { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--border); flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; }
+.side-list h3 button { background: none; border: 1px dashed var(--border); color: var(--accent3); padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; }
+.side-list h3 button:hover { border-color: var(--accent3); background: rgba(78,205,196,0.1); }
+.list-items { flex: 1; overflow-y: auto; }
+.list-item { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid rgba(61,47,80,0.5); transition: background 0.15s; position: relative; }
+.list-item:hover { background: var(--surface2); }
+.list-item.active { background: var(--bg3); border-left: 3px solid var(--accent); }
+.list-item .li-name { font-size: 13px; font-weight: 600; }
+.list-item .li-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.list-item .li-tag { font-size: 9px; padding: 1px 6px; border-radius: 3px; display: inline-block; margin-top: 3px; }
+.editor-panel { flex: 1; overflow-y: auto; padding: 24px; max-width: 900px; }
+.editor-panel h2 { font-size: 20px; margin-bottom: 4px; }
+.editor-panel .ep-sub { color: var(--text2); font-size: 12px; margin-bottom: 20px; }
+
+/* Form controls */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.form-group textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px; border-radius: 4px; font-family: inherit; font-size: 13px; line-height: 1.6; resize: vertical; min-height: 80px; }
+.form-group textarea:focus { outline: none; border-color: var(--accent); }
+.form-group input[type=text], .form-group input[type=number], .form-group select { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 4px; font-size: 13px; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Detail sections */
+.detail-section { margin-bottom: 16px; }
+.detail-section h4 { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+
+/* Cards */
+.card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-bottom: 10px; }
+.card .card-head { font-size: 12px; font-weight: 600; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.card .card-body { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.card textarea { width: 100%; min-height: 50px; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 4px; font-family: inherit; font-size: 12px; line-height: 1.5; resize: vertical; }
+.card textarea:focus { outline: none; border-color: var(--accent); }
+
+/* Tags */
+.tag-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); cursor: default; }
+.tag.removable { cursor: pointer; }
+.tag.removable:hover { border-color: var(--red); color: var(--red); }
+.tag-input-row { display: flex; gap: 4px; margin-top: 6px; }
+.tag-input-row input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 4px 8px; border-radius: 3px; font-size: 12px; }
+.tag-input-row button { background: var(--bg3); border: 1px solid var(--border); color: var(--accent3); padding: 4px 10px; border-radius: 3px; cursor: pointer; font-size: 11px; }
+
+/* Reactions on items */
+.reactions-grid { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.reaction-row { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+.reaction-row .rr-char { font-size: 12px; font-weight: 600; min-width: 70px; flex-shrink: 0; }
+.reaction-row .rr-emotion { display: flex; gap: 3px; flex-shrink: 0; }
+.emotion-btn { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; background: var(--surface); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; padding: 0; }
+.emotion-btn:hover { transform: scale(1.2); }
+.emotion-btn.active { border-color: var(--accent2); background: var(--bg3); transform: scale(1.15); }
+.reaction-row .rr-text { flex: 1; min-width: 0; }
+.reaction-row .rr-text input { width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 4px 8px; border-radius: 3px; font-size: 12px; font-style: italic; }
+.reaction-row .rr-text input:focus { outline: none; border-color: var(--accent); }
+.reaction-row .rr-text input::placeholder { color: var(--text2); font-style: italic; }
+.reaction-add { display: flex; gap: 6px; margin-top: 6px; }
+.reaction-add select { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 4px 8px; border-radius: 3px; font-size: 12px; }
+@media (max-width: 768px) {
+  .reaction-row { flex-wrap: wrap; gap: 6px; padding: 10px; }
+  .reaction-row .rr-char { min-width: 100%; }
+  .emotion-btn { width: 32px; height: 32px; font-size: 18px; }
+  .reaction-row .rr-text input { font-size: 16px; padding: 8px; min-height: 40px; }
+}
+
+/* ===================== KEYWORD HIGHLIGHTS ===================== */
+.kw { display: inline; padding: 0 2px; border-radius: 2px; cursor: default; position: relative; font-weight: 600; }
+.kw-liked { color: var(--green); background: rgba(74,222,128,0.1); animation: kw-pulse-green 3s ease-in-out infinite; }
+.kw-disliked { color: var(--red); background: rgba(248,113,113,0.1); animation: kw-pulse-red 3s ease-in-out infinite; }
+.kw-profile { background: rgba(255,255,255,0.05); text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+.kw-tag { color: var(--accent3); background: rgba(78,205,196,0.08); }
+.kw-lore { color: var(--accent4); background: rgba(167,139,250,0.1); animation: kw-pulse-purple 3s ease-in-out infinite; }
+/* Tooltip on hover */
+.kw .kw-tip { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--border); padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 400; white-space: nowrap; z-index: 50; color: var(--text); max-width: 250px; white-space: normal; line-height: 1.4; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+.kw:hover .kw-tip { display: block; }
+@keyframes kw-pulse-green { 0%,100% { text-shadow: 0 0 0 transparent; } 50% { text-shadow: 0 0 6px rgba(74,222,128,0.4); } }
+@keyframes kw-pulse-red { 0%,100% { text-shadow: 0 0 0 transparent; } 50% { text-shadow: 0 0 6px rgba(248,113,113,0.3); } }
+@keyframes kw-pulse-purple { 0%,100% { text-shadow: 0 0 0 transparent; } 50% { text-shadow: 0 0 8px rgba(167,139,250,0.4); } }
+@media (max-width: 768px) {
+  .kw .kw-tip { font-size: 12px; padding: 6px 12px; }
+}
+
+/* Reorder controls on list items */
+.reorder-btns { display: flex; flex-direction: column; gap: 0; margin-left: auto; flex-shrink: 0; opacity: 0.4; transition: opacity 0.15s; }
+.list-item:hover .reorder-btns, .list-item.active .reorder-btns { opacity: 1; }
+.reorder-btn { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 10px; padding: 2px 6px; line-height: 1; border-radius: 3px; }
+.reorder-btn:hover { background: var(--bg3); color: var(--text); }
+@media (max-width: 768px) {
+  .reorder-btns { opacity: 1; }
+  .reorder-btn { font-size: 16px; padding: 6px 10px; min-width: 36px; min-height: 28px; display: flex; align-items: center; justify-content: center; }
+}
+
+/* Buttons */
+.btn { padding: 6px 14px; border-radius: 4px; border: 1px solid var(--border); cursor: pointer; font-size: 12px; background: var(--surface); color: var(--text); }
+.btn:hover { background: var(--bg3); }
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-accent:hover { opacity: 0.85; }
+.btn-danger { color: var(--red); border-color: transparent; background: none; }
+.btn-danger:hover { background: rgba(248,113,113,0.1); }
+.btn-row { display: flex; gap: 8px; margin-top: 12px; }
+
+/* Mystery meter */
+.mystery-meter { display: flex; gap: 2px; align-items: center; }
+.mystery-pip { width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); cursor: pointer; transition: all 0.15s; }
+.mystery-pip.filled { background: var(--mystery); border-color: var(--mystery); }
+.mystery-pip:hover { border-color: var(--mystery); }
+.mystery-label { font-size: 10px; color: var(--text2); margin-left: 6px; }
+
+/* Item type badges */
+.item-type-badge { font-size: 9px; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+.item-type-badge.souvenir { background: rgba(196,69,105,0.2); color: var(--accent); border: 1px solid var(--accent); }
+.item-type-badge.apartment { background: rgba(96,165,250,0.2); color: var(--blue); border: 1px solid var(--blue); }
+.item-type-badge.mess { background: rgba(248,113,113,0.2); color: var(--red); border: 1px solid var(--red); }
+.item-type-badge.mystery { background: rgba(167,139,250,0.2); color: var(--accent4); border: 1px solid var(--accent4); }
+.item-type-badge.crafted { background: rgba(74,222,128,0.2); color: var(--green); border: 1px solid var(--green); }
+
+/* Description variant */
+.desc-variant { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-bottom: 8px; }
+.desc-variant .dv-label { font-size: 10px; color: var(--accent2); margin-bottom: 4px; font-weight: 600; }
+
+/* Outcomes */
+.outcome-section { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-top: 12px; }
+.outcome-section h4 { font-size: 12px; margin-bottom: 8px; }
+.outcome-section.success h4 { color: var(--green); }
+.outcome-section.failure h4 { color: var(--red); }
+.outcome-section.disappear h4 { color: var(--accent); }
+
+/* Character prefs */
+.char-portrait { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 8px; }
+.char-color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
+.char-prefs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.pref-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; }
+.pref-box h4 { font-size: 11px; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Beat trigger */
+.beat-trigger { background: rgba(245,166,35,0.1); border: 1px solid var(--accent2); border-radius: 6px; padding: 12px; margin-bottom: 12px; }
+.beat-trigger h4 { color: var(--accent2); font-size: 12px; margin-bottom: 8px; }
+.beat-effect { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-bottom: 8px; display: flex; gap: 8px; align-items: flex-start; }
+.beat-effect select { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 4px 6px; border-radius: 3px; font-size: 11px; flex-shrink: 0; }
+.beat-effect .ef-detail { flex: 1; }
+
+/* Chains */
+.chain-step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.chain-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--accent2); font-size: 16px; padding-top: 10px; }
+.chain-step-card { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; }
+.chain-step-card .cs-num { font-size: 10px; color: var(--text2); margin-bottom: 4px; }
+.chain-result { background: rgba(74,222,128,0.1); border: 1px solid var(--green); border-radius: 6px; padding: 10px; margin-left: 30px; }
+.chain-result h5 { color: var(--green); font-size: 11px; margin-bottom: 4px; }
+
+/* Dream interstitial */
+.tl-dream { background: #0a0810; border: 1px solid #2a1f3a; border-radius: 6px; margin: 6px 0; padding: 14px 20px; position: relative; }
+.tl-dream::before { content: 'DREAM'; position: absolute; top: 6px; right: 10px; font-size: 8px; letter-spacing: 2px; color: #4a3a6a; text-transform: uppercase; }
+.tl-dream textarea { width: 100%; background: transparent; border: none; color: #9080b0; font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 14px; line-height: 1.8; resize: vertical; min-height: 50px; padding: 0; }
+.tl-dream textarea:focus { outline: none; color: #c0b0e0; }
+.tl-dream textarea::placeholder { color: #3a2a5a; font-style: italic; }
+@media (max-width: 768px) {
+  .tl-dream { padding: 12px 16px; }
+  .tl-dream textarea { font-size: 16px; min-height: 60px; }
+}
+
+/* Timeline */
+#tab-timeline { flex-direction: column; overflow-y: auto; padding: 24px; gap: 0; }
+.timeline-row { display: flex; gap: 0; margin-bottom: 4px; min-height: 70px; }
+.tl-day-label { width: 70px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--text2); background: var(--surface); border: 1px solid var(--border); border-radius: 4px 0 0 4px; gap: 2px; }
+.tl-day-label .tl-day-num { font-size: 20px; color: var(--text); }
+.tl-day-content { flex: 1; background: var(--surface); border: 1px solid var(--border); border-left: none; border-radius: 0 4px 4px 0; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.tl-row-group { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.tl-row-label { font-size: 9px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; width: 55px; flex-shrink: 0; }
+.tl-chip { font-size: 10px; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; transition: all 0.15s; }
+.tl-chip:hover { border-color: var(--accent); transform: translateY(-1px); }
+.tl-chip.beat { border-color: var(--accent2); color: var(--accent2); }
+.tl-chip.item { border-color: var(--accent3); color: var(--accent3); }
+.tl-chip.char { border-color: var(--accent); color: var(--accent); }
+.tl-chip.chain { border-color: var(--green); color: var(--green); }
+.tl-chip.event { border-color: var(--border); color: var(--text2); }
+.tl-chip .chip-x { margin-left: 4px; color: var(--red); font-size: 8px; opacity: 0; transition: opacity 0.15s; }
+.tl-chip:hover .chip-x { opacity: 1; }
+.tl-pacing-bar { height: 3px; border-radius: 2px; margin-top: 2px; }
+.tl-pacing-bar.setup { background: var(--blue); }
+.tl-pacing-bar.tension { background: var(--accent2); }
+.tl-pacing-bar.reveal { background: var(--accent); }
+.tl-pacing-bar.calm { background: var(--green); }
+.tl-controls { display: flex; gap: 6px; align-items: center; margin-top: 2px; }
+.tl-controls select { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 2px 6px; border-radius: 3px; font-size: 10px; }
+.tl-add-entity { display: flex; gap: 4px; align-items: center; margin-top: 2px; }
+.tl-add-entity select { background: var(--bg); border: 1px solid var(--border); color: var(--text2); padding: 3px 6px; border-radius: 3px; font-size: 10px; flex: 1; max-width: 200px; }
+.tl-add-entity button { background: var(--bg3); border: 1px solid var(--border); color: var(--accent3); padding: 3px 8px; border-radius: 3px; cursor: pointer; font-size: 10px; }
+.tl-add-entity button:hover { background: var(--accent3); color: #000; }
+
+/* Export */
+#tab-export { flex-direction: column; padding: 24px; overflow-y: auto; gap: 0; }
+.export-section { margin-bottom: 20px; }
+.export-section h3 { font-size: 14px; margin-bottom: 8px; color: var(--accent3); }
+.export-code { background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 16px; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow: auto; max-height: 400px; white-space: pre; color: #c9d1d9; }
+.export-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.export-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 12px; text-align: center; }
+.stat-card .stat-num { font-size: 28px; font-weight: 700; color: var(--accent); }
+.stat-card .stat-label { font-size: 11px; color: var(--text2); margin-top: 4px; }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #556; }
+
+/* Empty state */
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; color: var(--text2); font-size: 13px; }
+
+/* ===================== MOBILE SIDEBAR TOGGLE ===================== */
+.mobile-toggle { display: none; width: 100%; padding: 10px 16px; background: var(--surface2); border: none; border-bottom: 1px solid var(--border); color: var(--accent); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; flex-shrink: 0; }
+.mobile-toggle::after { content: ' \25BC'; font-size: 10px; opacity: 0.6; }
+.mobile-toggle.collapsed::after { content: ' \25B6'; }
+
+/* Mobile presence bar (shown only on mobile) */
+.mobile-presence { display: none; padding: 6px 12px; background: var(--bg2); border-bottom: 1px solid var(--border); gap: 6px; align-items: center; font-size: 11px; overflow-x: auto; }
+.mobile-presence .presence-dot { width: 24px; height: 24px; font-size: 14px; flex-shrink: 0; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .side-list { width: 200px; }
+  #sm-detail { width: 320px; }
+  .form-row { grid-template-columns: 1fr; }
+  .char-prefs { grid-template-columns: 1fr; }
+  #change-feed { width: 240px; }
+}
+
+@media (max-width: 768px) {
+  html, body { height: 100dvh; }
+  #app { height: 100dvh; }
+
+  /* --- Topbar: scrollable tabs --- */
+  #topbar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; height: auto; min-height: 44px; padding: 0 8px; gap: 0; }
+  #topbar::-webkit-scrollbar { display: none; }
+  #topbar h1 { font-size: 12px; margin-right: 6px; flex-shrink: 0; letter-spacing: 2px; }
+  #topbar h1 span { display: none; }
+  .tab-btn { padding: 12px 10px; font-size: 11px; flex-shrink: 0; min-height: 44px; }
+  .spacer { flex: 0 0 4px; }
+  .top-action { padding: 8px 10px; font-size: 11px; flex-shrink: 0; min-height: 36px; }
+  .sync-status { display: none; }
+  #saveIndicator { flex-shrink: 0; }
+
+  /* --- Show mobile presence bar, hide desktop one --- */
+  .presence-area { display: none !important; }
+  .mobile-presence { display: flex; }
+
+  /* --- Sidebar: collapsible with toggle button --- */
+  .split-view { flex-direction: column !important; }
+  .mobile-toggle { display: block; }
+  .side-list {
+    width: 100% !important; max-height: 40vh; border-right: none !important; border-bottom: 1px solid var(--border);
+    overflow-y: auto; transition: max-height 0.25s ease;
+  }
+  .side-list.collapsed { max-height: 0 !important; overflow: hidden; border-bottom: none; }
+  .side-list h3 { position: sticky; top: 0; background: var(--surface); z-index: 2; }
+
+  /* --- Touch-friendly list items (44px min) --- */
+  .list-item { padding: 14px 16px; min-height: 48px; }
+  .list-item .li-name { font-size: 14px; }
+
+  /* --- Editor panel --- */
+  .editor-panel { padding: 16px; max-width: 100% !important; }
+  .form-group textarea { font-size: 16px; padding: 12px; min-height: 90px; line-height: 1.5; }
+  .form-group input[type=text], .form-group input[type=number], .form-group select { font-size: 16px; padding: 12px; min-height: 44px; }
+  .form-group label { font-size: 12px; margin-bottom: 6px; }
+  .form-group { margin-bottom: 14px; }
+
+  /* --- Buttons bigger on touch --- */
+  .btn { min-height: 40px; padding: 10px 16px; font-size: 13px; }
+  .btn-row { flex-wrap: wrap; }
+
+  /* --- Tags bigger --- */
+  .tag { font-size: 12px; padding: 4px 10px; min-height: 28px; display: inline-flex; align-items: center; }
+  .tag-input-row input { min-height: 40px; font-size: 16px; }
+  .tag-input-row button { min-height: 40px; padding: 8px 14px; }
+
+  /* --- Char prefs stack --- */
+  .char-prefs { grid-template-columns: 1fr; }
+  .char-portrait { width: 48px; height: 48px; font-size: 20px; }
+
+  /* --- Mystery pips bigger --- */
+  .mystery-pip { width: 20px; height: 20px; }
+
+  /* --- Map detail: full-screen overlay --- */
+  #sm-detail { width: 100% !important; max-width: 100%; }
+  #sm-detail .close-btn { font-size: 24px; padding: 8px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+  .sm-node { padding: 8px 10px; font-size: 11px; }
+  .sm-node.type-character { width: 70px; height: 70px; }
+  .sm-node.type-item { width: 110px; }
+  .sm-node.type-beat { width: 120px; }
+  .sm-legend { font-size: 10px; padding: 6px 10px; }
+  .sm-zoom-controls { bottom: 8px; }
+  .sm-zoom-btn { width: 40px; height: 40px; font-size: 20px; }
+
+  /* --- Map toolbar wraps --- */
+  #storymap-toolbar { flex-wrap: wrap; padding: 6px 10px; gap: 6px; }
+  #storymap-toolbar label { font-size: 11px; }
+  #storymap-toolbar select { font-size: 14px !important; min-height: 36px; }
+
+  /* --- Timeline mobile --- */
+  #tab-timeline { padding: 14px; }
+  .timeline-row { flex-direction: column; min-height: auto; margin-bottom: 8px; }
+  .tl-day-label { width: 100%; flex-direction: row; justify-content: flex-start; gap: 8px; padding: 8px 12px; border-radius: 4px 4px 0 0; }
+  .tl-day-label .tl-day-num { font-size: 16px; }
+  .tl-day-content { border-radius: 0 0 4px 4px; border-left: 1px solid var(--border); padding: 10px; }
+  .tl-chip { font-size: 12px; padding: 6px 10px; min-height: 32px; display: inline-flex; align-items: center; }
+  .tl-chip .chip-x { opacity: 1; font-size: 12px; } /* always show remove button on touch */
+  .tl-add-entity { flex-wrap: wrap; }
+  .tl-add-entity select { font-size: 14px !important; min-height: 40px; max-width: 100%; }
+  .tl-add-entity button { min-height: 40px; padding: 8px 12px; font-size: 12px; }
+  .tl-row-label { width: 100%; margin-bottom: 2px; font-size: 10px; }
+  .tl-row-group { flex-direction: column; align-items: flex-start; }
+
+  /* --- Beat effect selects --- */
+  .beat-effect { flex-direction: column; }
+  .beat-effect select { width: 100%; min-height: 40px; font-size: 14px !important; }
+  .beat-trigger .form-row { grid-template-columns: 1fr; }
+
+  /* --- Chain steps --- */
+  .chain-step { flex-direction: column; gap: 4px; }
+  .chain-step-card .form-row { grid-template-columns: 1fr; }
+  .chain-step-card select { min-height: 40px; font-size: 14px !important; }
+  .chain-arrow { flex-direction: row; padding: 0; }
+
+  /* --- Export --- */
+  #tab-export { padding: 14px; }
+  .export-stats { grid-template-columns: repeat(3, 1fr); }
+  .stat-card .stat-num { font-size: 22px; }
+  .export-actions { flex-direction: column; }
+  .export-code { font-size: 10px; max-height: 300px; }
+
+  /* --- Cursor avatars: bigger on mobile --- */
+  .cursor-avatar .ca-bubble { width: 42px; height: 42px; font-size: 24px; }
+  .cursor-avatar .ca-name { font-size: 10px; top: 46px; }
+
+  /* --- Change feed: show as compact bar --- */
+  #change-feed { display: none; }
+
+  /* --- Modal: full-screen on mobile --- */
+  .modal { max-width: 100%; border-radius: 0; max-height: 100dvh; padding: 20px; }
+  .modal h2 { font-size: 18px; }
+  .modal .form-group input { font-size: 16px; min-height: 44px; }
+  .modal .form-group textarea { font-size: 14px; min-height: 80px; }
+  .avatar-picker { gap: 8px; }
+  .avatar-option { width: 48px; height: 48px; font-size: 26px; }
+  .color-swatch { width: 36px; height: 36px; }
+  .modal .modal-actions { flex-direction: column; }
+  .modal .modal-actions button { width: 100%; min-height: 48px; font-size: 15px; }
+
+  /* --- Desc variants on mobile --- */
+  .desc-variant { padding: 12px; }
+  .desc-variant input { font-size: 14px !important; min-height: 36px; }
+  .desc-variant textarea { font-size: 16px !important; }
+
+  /* --- Outcome sections --- */
+  .outcome-section { padding: 14px; }
+}
+
+/* ===================== SMALL PHONES (<420px) ===================== */
+@media (max-width: 420px) {
+  #topbar h1 { display: none; }
+  .tab-btn { padding: 10px 8px; font-size: 10px; }
+  .export-stats { grid-template-columns: repeat(2, 1fr); }
+  .avatar-option { width: 40px; height: 40px; font-size: 22px; }
+  .sm-legend { display: none; }
+}
+
+/* ===================== SAFE AREAS (notch phones) ===================== */
+@supports (padding: env(safe-area-inset-top)) {
+  #topbar { padding-top: env(safe-area-inset-top); padding-left: max(8px, env(safe-area-inset-left)); padding-right: max(8px, env(safe-area-inset-right)); }
+  .mobile-presence { padding-left: max(12px, env(safe-area-inset-left)); }
+  .sm-legend { left: max(12px, env(safe-area-inset-left)); }
+  .sm-zoom-controls { right: max(12px, env(safe-area-inset-right)); }
+  #tab-timeline, #tab-export { padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+  .editor-panel { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+}
+
+/* ===================== LANDSCAPE PHONE ===================== */
+@media (max-height: 500px) and (max-width: 900px) {
+  .side-list { max-height: 25vh; }
+  #storymap-toolbar { padding: 4px 8px; }
+  .sm-legend { display: none; }
+  .modal { padding: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SETUP MODAL -->
+<div class="modal-overlay" id="setupModal">
+  <div class="modal">
+    <h2>Story Weaver Setup</h2>
+    <p class="modal-sub">Pick your name and color, then choose how to sync.</p>
+
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" id="setupName" placeholder="e.g. Marty" value="">
+    </div>
+    <div class="form-group">
+      <label>Your Avatar</label>
+      <div class="avatar-picker" id="avatarPicker"></div>
+    </div>
+    <div class="form-group">
+      <label>Your Color</label>
+      <div class="color-picker-row" id="colorPicker"></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:20px 0">
+
+    <div class="setup-step">
+      <strong>Collaboration:</strong> Place <code>story_weaver.html</code> and <code>story_sync.php</code> on any PHP web server. Both you and your partner open the same URL. That's it &mdash; changes sync automatically, you see each other's presence and edits live.
+    </div>
+
+    <div class="form-group">
+      <label>Sync URL (auto-detected if on same server)</label>
+      <input type="text" id="setupSyncUrl" placeholder="Leave blank for auto-detect, or enter full URL to story_sync.php">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="finishSetup(true)">Connect & Start</button>
+      <button class="btn-secondary" onclick="finishSetup(false)">Work Offline</button>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+  <div id="topbar">
+    <h1>Iris <span>Story Weaver</span></h1>
+    <button class="tab-btn active" data-tab="storymap">Story Map</button>
+    <button class="tab-btn" data-tab="characters">Characters</button>
+    <button class="tab-btn" data-tab="items">Items</button>
+    <button class="tab-btn" data-tab="threads">Threads</button>
+    <button class="tab-btn" data-tab="beats">Beats</button>
+    <button class="tab-btn" data-tab="chains">Item Chains</button>
+    <button class="tab-btn" data-tab="timeline">Timeline</button>
+    <button class="tab-btn" data-tab="export">Export</button>
+    <div class="spacer"></div>
+    <div class="presence-area" id="presenceArea"></div>
+    <span class="sync-status offline" id="syncStatus">Local Only</span>
+    <span class="save-indicator" id="saveIndicator">Saved</span>
+    <button class="top-action" onclick="showSetup()">Setup</button>
+    <button class="top-action" onclick="exportJSON()">Export</button>
+    <button class="top-action" onclick="importJSON()">Import</button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+  </div>
+  <div class="mobile-presence" id="mobilePresence"></div>
+  <div id="content">
+    <div id="tab-storymap" class="tab-content active">
+      <div id="storymap-toolbar">
+        <label>Show:</label>
+        <select id="sm-filter" onchange="renderStoryMap()">
+          <option value="all">Everything</option>
+          <option value="characters">Characters</option>
+          <option value="items">Items</option>
+          <option value="beats">Beats</option>
+          <option value="thread">By Thread...</option>
+        </select>
+        <select id="sm-thread-filter" onchange="renderStoryMap()" style="display:none"></select>
+        <label>Lines:</label>
+        <select id="sm-conn-mode" onchange="renderStoryMap()">
+          <option value="all">All</option>
+          <option value="threads">Threads</option>
+          <option value="chains">Chains</option>
+          <option value="triggers">Triggers</option>
+          <option value="none">None</option>
+        </select>
+        <button class="top-action" style="font-size:10px;padding:3px 8px" onclick="resetMapLayout()">Reset Layout</button>
+        <label style="margin-left:auto">Zoom:</label>
+        <input type="range" id="sm-zoom-slider" min="0.2" max="2" step="0.05" value="0.6" oninput="setSmZoom(this.value)">
+        <span id="sm-zoom-label">60%</span>
+      </div>
+      <div id="storymap-container">
+        <div id="storymap-world"></div>
+        <svg id="storymap-svg"></svg>
+      </div>
+      <div id="sm-detail">
+        <button class="close-btn" onclick="closeSmDetail()">&times;</button>
+        <div id="sm-detail-content"></div>
+      </div>
+      <div class="sm-legend">
+        <div><span class="dot" style="background:var(--accent)"></span> Character</div>
+        <div><span class="dot" style="background:var(--accent3)"></span> Item</div>
+        <div><span class="dot" style="background:var(--accent2)"></span> Beat</div>
+        <div><span class="dot" style="background:var(--green)"></span> Chain Link</div>
+        <div><span class="dot" style="background:var(--accent4)"></span> Mystery</div>
+      </div>
+      <div class="sm-zoom-controls">
+        <button class="sm-zoom-btn" onclick="setSmZoom(smZoom-0.1)">-</button>
+        <button class="sm-zoom-btn" onclick="setSmZoom(1)">1:1</button>
+        <button class="sm-zoom-btn" onclick="setSmZoom(smZoom+0.1)">+</button>
+      </div>
+    </div>
+    <div id="tab-characters" class="tab-content split-view"></div>
+    <div id="tab-items" class="tab-content split-view"></div>
+    <div id="tab-threads" class="tab-content split-view"></div>
+    <div id="tab-beats" class="tab-content split-view"></div>
+    <div id="tab-chains" class="tab-content split-view"></div>
+    <div id="tab-timeline" class="tab-content"></div>
+    <div id="tab-export" class="tab-content"></div>
+  </div>
+</div>
+
+<!-- Change Feed (overlay) -->
+<div id="change-feed" class="collapsed">
+  <div class="cf-header" onclick="toggleFeed()"><span>Activity Feed</span><span id="cf-count"></span></div>
+  <div class="cf-body" id="cf-body"></div>
+</div>
+
+<script>
+// =====================================================
+// CONSTANTS
+// =====================================================
+const CHAR_COLORS = ['#e94560','#f5a623','#4ecdc4','#a78bfa','#60a5fa','#f87171','#4ade80','#fbbf24'];
+const USER_COLORS = ['#e94560','#f5a623','#4ecdc4','#a78bfa','#60a5fa','#f87171','#4ade80','#fbbf24','#c084fc','#fb923c','#22d3ee','#a3e635'];
+const AVATARS = [
+  { id:'blossom', emoji:'🌸', name:'Blossom', react:'💕' },
+  { id:'moon', emoji:'🌙', name:'Moon', react:'✨' },
+  { id:'mushroom', emoji:'🍄', name:'Mushroom', react:'💫' },
+  { id:'cat', emoji:'🐱', name:'Cat', react:'💛' },
+  { id:'ghost', emoji:'👻', name:'Ghost', react:'💜' },
+  { id:'butterfly', emoji:'🦋', name:'Butterfly', react:'🌈' },
+  { id:'fern', emoji:'🌿', name:'Fern', react:'🌱' },
+  { id:'crystal', emoji:'🔮', name:'Crystal', react:'💎' },
+  { id:'candle', emoji:'🕯️', name:'Candle', react:'🔥' },
+  { id:'star', emoji:'⭐', name:'Star', react:'💫' },
+  { id:'snail', emoji:'🐌', name:'Snail', react:'💚' },
+  { id:'moth', emoji:'🦋', name:'Moth', react:'🌙' },
+];
+const ITEM_TYPES = ['souvenir','apartment','mess','mystery','crafted'];
+const MYSTERY_LABELS = ['Mundane','Curious','Suspicious','Horrifying'];
+const TRIGGER_TYPES = ['dateOutcome','dayReached','itemDiscovered','itemCombined','nemaState','manual'];
+const EFFECT_TYPES = ['itemAppears','descriptionChanges','nemaBehavior','moodShift','unlockItem','threadAdvance'];
+const PACING_TYPES = ['setup','tension','reveal','calm'];
+const EMOTIONS = [
+  { id:'love', emoji:'💕', label:'Love' },
+  { id:'warm', emoji:'😊', label:'Warm' },
+  { id:'curious', emoji:'🤔', label:'Curious' },
+  { id:'fascinated', emoji:'✨', label:'Fascinated' },
+  { id:'neutral', emoji:'😐', label:'Neutral' },
+  { id:'uncomfortable', emoji:'😒', label:'Uncomfortable' },
+  { id:'uneasy', emoji:'😨', label:'Uneasy' },
+  { id:'sad', emoji:'😢', label:'Sad' },
+  { id:'disgusted', emoji:'🤢', label:'Disgusted' },
+  { id:'annoyed', emoji:'😤', label:'Annoyed' },
+];
+const STORAGE_KEY = 'iris_story_weaver';
+const CONFIG_KEY = 'iris_sw_config';
+
+// =====================================================
+// STATE
+// =====================================================
+let data = null;
+let currentTab = 'storymap';
+let selectedChar = 0, selectedItem = 0, selectedThread = 0, selectedBeat = 0, selectedChain = 0;
+let smZoom = 0.6, smPanX = 0, smPanY = 0, smDragging = false, smDragStartX = 0, smDragStartY = 0, smSelectedNode = null;
+
+// Collaboration state
+let syncUrl = null; // URL to story_sync.php (null = offline)
+let myUserId = null;
+let myName = 'Anonymous';
+let myColor = USER_COLORS[0];
+let myAvatar = AVATARS[0].id;
+let myCursorX = 0, myCursorY = 0; // world-space coordinates on the map
+let cursorOnMap = false;
+let peers = {}; // { oderId: { name, color, tab, selection, lastSeen } }
+let changeFeed = []; // recent changes
+let feedCollapsed = true;
+let lastSyncVersion = 0;
+let pollTimer = null;
+let isPushing = false; // debounce guard
+
+// =====================================================
+// UTILITIES
+// =====================================================
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+// =====================================================
+// KEYWORD HIGHLIGHTING ENGINE
+// =====================================================
+// Builds a keyword map from all characters + items, returns highlighted HTML
+function buildKeywordMap() {
+  const kws = {}; // { lowercase_keyword: { word, type, color, tip } }
+
+  // Character profile keywords (highest priority — have commentary)
+  data.characters.forEach(ch => {
+    (ch.profile?.keywords || []).forEach(k => {
+      if (!k.keyword) return;
+      const lc = k.keyword.toLowerCase();
+      kws[lc] = { word: k.keyword, type: 'profile', color: ch.color, tip: `<strong style="color:${ch.color}">${esc(ch.name)}</strong>: ${esc(k.commentary)}` };
+    });
+  });
+
+  // Character liked tags
+  data.characters.forEach(ch => {
+    (ch.likedTags || []).forEach(tag => {
+      const lc = tag.toLowerCase();
+      if (!kws[lc]) kws[lc] = { word: tag, type: 'liked', color: 'var(--green)', tip: `<span style="color:var(--green)">Liked by</span> <strong style="color:${ch.color}">${esc(ch.name)}</strong>` };
+      else if (kws[lc].type === 'liked') kws[lc].tip += `, <strong style="color:${ch.color}">${esc(ch.name)}</strong>`;
+    });
+  });
+
+  // Character disliked tags
+  data.characters.forEach(ch => {
+    (ch.dislikedTags || []).forEach(tag => {
+      const lc = tag.toLowerCase();
+      if (!kws[lc]) kws[lc] = { word: tag, type: 'disliked', color: 'var(--red)', tip: `<span style="color:var(--red)">Disliked by</span> <strong style="color:${ch.color}">${esc(ch.name)}</strong>` };
+      else if (kws[lc].type === 'disliked') kws[lc].tip += `, <strong style="color:${ch.color}">${esc(ch.name)}</strong>`;
+    });
+  });
+
+  return kws;
+}
+
+// Highlight keywords in a text string — returns HTML
+function highlightKW(text) {
+  if (!text) return '';
+  const kws = buildKeywordMap();
+  let html = esc(text);
+
+  // Sort by length descending so longer matches take priority
+  const sorted = Object.entries(kws).sort((a, b) => b[0].length - a[0].length);
+
+  // Replace each keyword (case-insensitive, whole word boundaries where possible)
+  sorted.forEach(([lc, kw]) => {
+    const escaped = kw.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // Match the keyword case-insensitively, but preserve original case in output
+    const regex = new RegExp(`(${escaped})`, 'gi');
+    html = html.replace(regex, (match) => {
+      const cls = 'kw kw-' + kw.type;
+      const style = kw.type === 'profile' ? ` style="color:${kw.color};text-decoration-color:${kw.color}"` : '';
+      return `<span class="${cls}"${style}>${match}<span class="kw-tip">${kw.tip}</span></span>`;
+    });
+  });
+
+  return html;
+}
+function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function timeAgo(ts) { const s = Math.floor((Date.now()-ts)/1000); if(s<60) return s+'s'; if(s<3600) return Math.floor(s/60)+'m'; return Math.floor(s/3600)+'h'; }
+
+function flashSave(msg) {
+  const ind = document.getElementById('saveIndicator');
+  ind.textContent = msg || 'Saved';
+  ind.classList.add('show');
+  setTimeout(() => { ind.classList.remove('show'); ind.textContent = 'Saved'; }, 1500);
+}
+
+// =====================================================
+// SETUP / CONFIG
+// =====================================================
+function loadConfig() {
+  try { return JSON.parse(localStorage.getItem(CONFIG_KEY)) || null; } catch(e) { return null; }
+}
+function saveConfig(cfg) { localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); }
+
+function initSetupModal() {
+  const cfg = loadConfig();
+  const picker = document.getElementById('colorPicker');
+  picker.innerHTML = USER_COLORS.map(c => `<div class="color-swatch${(cfg?.color||USER_COLORS[0])===c?' selected':''}" style="background:${c}" onclick="pickColor('${c}')"></div>`).join('');
+  const avPicker = document.getElementById('avatarPicker');
+  avPicker.innerHTML = AVATARS.map(a => `<div class="avatar-option${(cfg?.avatar||AVATARS[0].id)===a.id?' selected':''}" onclick="pickAvatar('${a.id}')" title="${a.name}">${a.emoji}</div>`).join('');
+  if (cfg) {
+    document.getElementById('setupName').value = cfg.name || '';
+    if (cfg.syncUrl) document.getElementById('setupSyncUrl').value = cfg.syncUrl;
+    document.getElementById('setupModal').classList.add('hidden');
+    myName = cfg.name || 'Anonymous';
+    myColor = cfg.color || USER_COLORS[0];
+    myAvatar = cfg.avatar || AVATARS[0].id;
+    myUserId = cfg.userId || genId();
+    if (cfg.syncUrl) initSync(cfg.syncUrl);
+    else updateSyncStatus(false);
+  }
+}
+
+function pickColor(c) {
+  document.querySelectorAll('#colorPicker .color-swatch').forEach(el => el.classList.toggle('selected', el.style.background === c));
+  myColor = c;
+}
+
+function pickAvatar(id) {
+  myAvatar = id;
+  document.querySelectorAll('#avatarPicker .avatar-option').forEach((el, i) => el.classList.toggle('selected', AVATARS[i].id === id));
+}
+
+function showSetup() {
+  const cfg = loadConfig();
+  if (cfg) {
+    document.getElementById('setupName').value = cfg.name || '';
+    if (cfg.syncUrl) document.getElementById('setupSyncUrl').value = cfg.syncUrl;
+  }
+  // Refresh pickers
+  document.querySelectorAll('#colorPicker .color-swatch').forEach(el => el.classList.toggle('selected', el.style.background === myColor));
+  document.querySelectorAll('#avatarPicker .avatar-option').forEach((el, i) => el.classList.toggle('selected', AVATARS[i].id === myAvatar));
+  document.getElementById('setupModal').classList.remove('hidden');
+}
+
+function finishSetup(withSync) {
+  const name = document.getElementById('setupName').value.trim() || 'Anonymous';
+  myName = name;
+  myUserId = myUserId || genId();
+
+  let url = null;
+  if (withSync) {
+    url = document.getElementById('setupSyncUrl').value.trim();
+    if (!url) {
+      // Auto-detect: story_sync.php in same directory
+      const base = window.location.href.replace(/[^/]*$/, '');
+      url = base + 'story_sync.php';
+    }
+  }
+
+  saveConfig({ name: myName, color: myColor, avatar: myAvatar, userId: myUserId, syncUrl: url });
+  document.getElementById('setupModal').classList.add('hidden');
+
+  if (url) initSync(url);
+  else updateSyncStatus(false);
+}
+
+// =====================================================
+// SYNC LAYER (simple fetch polling to PHP backend)
+// =====================================================
+function initSync(url) {
+  syncUrl = url;
+
+  // Test connection
+  fetch(syncUrl + '?action=pull&since=0')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(res => {
+      updateSyncStatus(true);
+      lastSyncVersion = res.version || 0;
+
+      if (res.data) {
+        // Server has data — use it
+        data = res.data;
+        ensureDataStructure();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        renderCurrentTab();
+        addFeedEntry('system', 'Connected — loaded shared data');
+      } else {
+        // Server empty — push our local data
+        pushData('seeded server with local data');
+      }
+
+      if (res.presence) {
+        peers = {};
+        Object.entries(res.presence).forEach(([uid, p]) => { if (uid !== myUserId) peers[uid] = p; });
+        renderPresence();
+      }
+
+      if (res.feed) { changeFeed = res.feed; renderFeed(); }
+
+      // Start polling
+      startPolling();
+    })
+    .catch(err => {
+      console.error('Sync connect failed:', err);
+      updateSyncStatus(false);
+      addFeedEntry('system', 'Could not reach sync server — working offline');
+    });
+}
+
+function startPolling() {
+  if (pollTimer) clearInterval(pollTimer);
+
+  // Poll every 2 seconds for changes
+  pollTimer = setInterval(() => {
+    if (!syncUrl || isPushing) return;
+
+    // Send presence heartbeat along with pull
+    fetch(syncUrl + '?action=pull&since=' + lastSyncVersion)
+      .then(r => r.json())
+      .then(res => {
+        updateSyncStatus(true);
+
+        // Update presence
+        if (res.presence) {
+          peers = {};
+          Object.entries(res.presence).forEach(([uid, p]) => { if (uid !== myUserId) peers[uid] = p; });
+          renderPresence();
+        }
+
+        // Update data if version changed (and we aren't the ones who just pushed)
+        if (res.data && res.version > lastSyncVersion) {
+          lastSyncVersion = res.version;
+          data = res.data;
+          ensureDataStructure();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          renderCurrentTab();
+        } else if (res.version) {
+          lastSyncVersion = res.version;
+        }
+
+        // Update feed
+        if (res.feed && res.feed.length) {
+          changeFeed = res.feed;
+          renderFeed();
+        }
+      })
+      .catch(() => { updateSyncStatus(false); });
+
+    // Send our presence heartbeat
+    sendPresence();
+
+  }, 2000);
+}
+
+function sendPresence() {
+  if (!syncUrl) return;
+  fetch(syncUrl + '?action=presence', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      user: { id: myUserId, name: myName, color: myColor, avatar: myAvatar, tab: currentTab, selection: getSelectionKey(), cursorX: myCursorX, cursorY: myCursorY, cursorOn: cursorOnMap }
+    })
+  }).catch(() => {});
+}
+
+function pushData(changeDesc) {
+  if (!syncUrl) return;
+  isPushing = true;
+  fetch(syncUrl + '?action=push', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      data: data,
+      user: { id: myUserId, name: myName, color: myColor, tab: currentTab, selection: getSelectionKey() },
+      changeDesc: changeDesc || null
+    })
+  })
+    .then(r => r.json())
+    .then(res => {
+      if (res.version) lastSyncVersion = res.version;
+      isPushing = false;
+      updateSyncStatus(true);
+    })
+    .catch(() => { isPushing = false; });
+}
+
+function updateSyncStatus(online) {
+  const el = document.getElementById('syncStatus');
+  if (online) { el.textContent = 'Synced'; el.className = 'sync-status online'; }
+  else { el.textContent = 'Local Only'; el.className = 'sync-status offline'; }
+}
+
+function getSelectionKey() {
+  switch(currentTab) {
+    case 'characters': return data.characters[selectedChar]?.id || '';
+    case 'items': return data.items[selectedItem]?.id || '';
+    case 'threads': return data.threads[selectedThread]?.id || '';
+    case 'beats': return data.beats[selectedBeat]?.id || '';
+    case 'chains': return data.chains[selectedChain]?.id || '';
+    default: return '';
+  }
+}
+
+function updateMyPresence() { sendPresence(); }
+
+function renderPresence() {
+  const area = document.getElementById('presenceArea');
+  const entries = Object.values(peers);
+  const myAv = AVATARS.find(a => a.id === myAvatar) || AVATARS[0];
+  let html = '';
+  html += `<div class="presence-dot" style="background:${myColor}"><span>${myAv.emoji}</span><div class="pd-tooltip">${esc(myName)} (you) — ${currentTab}</div></div>`;
+  entries.forEach(p => {
+    const av = AVATARS.find(a => a.id === p.avatar) || AVATARS[0];
+    html += `<div class="presence-dot" style="background:${p.color}"><span>${av.emoji}</span><div class="pd-tab">${(p.tab||'').slice(0,4)}</div><div class="pd-tooltip">${esc(p.name)} — ${p.tab||'?'}</div></div>`;
+  });
+  area.innerHTML = html;
+  // Mobile presence bar
+  const mob = document.getElementById('mobilePresence');
+  if (mob) {
+    let mhtml = '';
+    mhtml += `<div class="presence-dot" style="background:${myColor}"><span>${myAv.emoji}</span></div><span style="color:var(--text2)">${esc(myName)}</span>`;
+    entries.forEach(p => {
+      const av = AVATARS.find(a => a.id === p.avatar) || AVATARS[0];
+      mhtml += `<div class="presence-dot" style="background:${p.color}"><span>${av.emoji}</span></div><span style="color:${p.color}">${esc(p.name)} <small style="opacity:0.6">${p.tab||''}</small></span>`;
+    });
+    mob.innerHTML = mhtml;
+  }
+  // Also update cursor avatars on the map
+  renderCursorAvatars();
+}
+
+function syncSave(changeDesc) {
+  // Always save locally
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  flashSave();
+
+  // Push to server if connected
+  if (syncUrl) {
+    pushData(changeDesc);
+    if (changeDesc) addFeedEntry(myName, changeDesc);
+  }
+}
+
+function ensureDataStructure() {
+  if (!data) data = defaultData();
+  if (!data.characters) data.characters = [];
+  if (!data.items) data.items = [];
+  if (!data.threads) data.threads = [];
+  if (!data.beats) data.beats = [];
+  if (!data.chains) data.chains = [];
+  if (!data.timeline) data.timeline = { days: [] };
+  if (!data.mapPositions) data.mapPositions = {};
+  // Ensure timeline days have linkedEntities
+  data.timeline.days.forEach(d => { if (!d.linkedEntities) d.linkedEntities = []; });
+}
+
+// =====================================================
+// CHANGE FEED
+// =====================================================
+function addFeedEntry(who, action) {
+  changeFeed.push({ name: who, action, ts: Date.now(), color: who === 'system' ? 'var(--text2)' : myColor });
+  if (changeFeed.length > 50) changeFeed.shift();
+  renderFeed();
+}
+
+function renderFeed() {
+  const body = document.getElementById('cf-body');
+  const count = document.getElementById('cf-count');
+  count.textContent = changeFeed.length;
+  body.innerHTML = changeFeed.slice(-15).reverse().map(e => {
+    const c = e.color || 'var(--text2)';
+    return `<div class="cf-entry"><div class="cf-avatar" style="background:${c}">${(e.name||'?')[0].toUpperCase()}</div><div class="cf-text"><strong>${esc(e.name)}</strong> ${esc(e.action)}</div><div class="cf-time">${e.ts ? timeAgo(e.ts) : ''}</div></div>`;
+  }).join('');
+}
+
+function toggleFeed() {
+  feedCollapsed = !feedCollapsed;
+  document.getElementById('change-feed').classList.toggle('collapsed', feedCollapsed);
+}
+
+// =====================================================
+// LOCAL SAVE / LOAD
+// =====================================================
+function saveData(changeDesc) { syncSave(changeDesc); }
+
+function loadData() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) { try { data = JSON.parse(stored); ensureDataStructure(); } catch(e) { data = defaultData(); } }
+  else { data = defaultData(); }
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'iris_story_data.json'; a.click();
+}
+function importJSON() { document.getElementById('importFile').click(); }
+function handleImport(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try { data = JSON.parse(ev.target.result); ensureDataStructure(); saveData('imported data from file'); renderCurrentTab(); alert('Imported!'); }
+    catch(err) { alert('Failed: ' + err.message); }
+  };
+  reader.readAsText(file); e.target.value = '';
+}
+
+// =====================================================
+// DEFAULT DATA (same as before, pre-populated for Iris)
+// =====================================================
+function defaultData() {
+  return {
+    characters: [
+      { id:'nema', name:'Nema', color:'#c44569', role:'protagonist', personality:'The player character. Dates people through newspaper personals in The Daily Bloom. Potential serial killer — told entirely through environmental storytelling. Player slowly realizes what is happening through accumulating souvenirs, shifting item descriptions, and dates that stop calling back.', traits:{warm:3,transparent:1,playful:2,bold:4,romantic:3}, likedTags:[], dislikedTags:[], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'', keywords:[] }, arc:'Arc told through the apartment changing over time. Souvenirs accumulate. Messes tell stories. The locked drawer. The garden. What is she cultivating?', notes:'Visible in apartment doing contextual things: leaning on counter, reading mail, swaying to music, adjusting hair. Disco ball click = Nema dances.' },
+      { id:'livii', name:'Livii', color:'#e94560', role:'date', personality:'"She wanted to die, but she also wanted to live in Paris" (she/her). She dresses with deliberate glamour and moves at her own tempo. By day, she sells other people\'s fantasy — five-star stays, upgrades, and seamless arrivals (ig: travelwithlivii). By night, she searches for romance with the same precision, holding lovers to novel-worthy standards, and mistaking the ideal for the real.', traits:{}, likedTags:['vinyl','perfume','book','plant'], dislikedTags:['mecha','gundam'], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'F, 25, $2,000/mo. Seeking a lover to move to Paris with and co-parent a cat. Are we doing the ch\u00e2teau, long dinner, string quartet version, or the coastal-cliff elopement with the wind trying to steal my veil?', keywords:[{keyword:'move to Paris',commentary:'She dresses with deliberate glamour. By day she sells five-star stays and upgrades.',prepTag:'perfume'},{keyword:'co-parent a cat',commentary:'She holds lovers to novel-worthy standards — and mistakes the ideal for the real.',prepTag:'book'},{keyword:'coastal-cliff elopement',commentary:'Tonic water or champagne. She likes things a certain way.',prepTag:'vinyl'}] }, arc:'', notes:'Tonic water or champagne. Why can\'t Nema ask what her date wants? Because she needs to place the order ahead of time — sometimes she simply doesn\'t have what they want in stock. Unpacking/organization, pouring water mini interaction like Dave the Diver. Quote from Flaubert\'s Madame Bovary — need to change city. Preferred mood: 0.3-0.6.' },
+      { id:'sterling', name:'Sterling', color:'#f5a623', role:'date', personality:'"Not your typical finance bro" (he/him). Wearing expensive watch. Wearing suit. Just got off from work. Is complaining about work. Will yap about wine/whiskey, but not other drinks we offer. Confident he\'s a rare breed. Objectifies himself.', traits:{}, likedTags:['vinyl','drink','cocktail'], dislikedTags:['plant','greenery','incense'], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'FINANCE GENT (proudly atypical), unmarried, Net worth 5M. Seeking wife, or partner to adore and spoil (ski trip on the table). Enjoys the classics: watches, gym, and whiskey. Confident he\'s a rare breed. Photo appreciated with reply.', keywords:[{keyword:'rare breed',commentary:'Confident. Very confident. He will yap about wine and whiskey all night.',prepTag:'vinyl'},{keyword:'ski trip',commentary:'He\'ll bring you a gift — that was gifted to him by someone else.',prepTag:''},{keyword:'watches, gym, and whiskey',commentary:'Wearing a suit. Just got off work. Will complain about work.',prepTag:'drink'}] }, arc:'', notes:'Brought Nema a gift (flowers) that was gifted to him by someone else / free sample from somewhere. Affects interaction and other systems. Complaints about work (a big corp in this universe). Him objectifying himself. Preferred mood: 0.1-0.4, reaction strength: 0.9.' },
+      { id:'sage', name:'Sage', color:'#4ecdc4', role:'date', personality:'"The cold reader" (they/them). First date comes with a spontaneous reading (donation suggested). Just when Nema is ready to write it off as a scam, the psychic lands one eerie, specific truth about Nema — and accidentally drops a piece of Nema\'s lore. We don\'t know if the date is a genius or had too much mushroom even when they left. On the bright side, they are warm, attentive, and weirdly good at making people feel seen.', traits:{}, likedTags:['perfume','plant','greenery','incense','book'], dislikedTags:['mecha','gundam'], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'Single. Intuitive. Self-employed. I can sense you are reading this right now. You have been through a lot lately (haven\'t we all), and you sometimes overthink at night. There is a name that starts with a letter, and it still affects you. I\'m feeling an upcoming change \u2014 possibly travel, possibly a haircut.', keywords:[{keyword:'overthink at night',commentary:'First date comes with a spontaneous reading (donation suggested).',prepTag:'book'},{keyword:'upcoming change',commentary:'They\'ll land one eerie, specific truth about you — and accidentally drop a piece of your lore.',prepTag:'perfume'},{keyword:'a letter',commentary:'Warm, attentive, and weirdly good at making people feel seen. May offer... substances.',prepTag:'plant'}] }, arc:'Key narrative role: accidentally drops Nema\'s lore during cold reading. The one date who might actually SEE what Nema is.', notes:'Offered Nema DMT equivalent. Cleaned parts of the apartment unsolicited. Preferred mood: 0.5-0.9, reaction strength: 1.4.' },
+      { id:'clover', name:'Clover', color:'#a78bfa', role:'date', personality:'"Tradwife". Soft, gentle, and a little catlike. Cooks from scratch, keeps a peaceful home, takes pride in caring for her person. Seeking someone who\'ll treat her accordingly.', traits:{}, likedTags:['plant','greenery','book'], dislikedTags:['mecha','gundam','music'], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'I cook from scratch, keep a peaceful home, and take pride in caring for my person. Soft, gentle, and a little catlike \u2014 seeking someone who\'ll treat me accordingly\u2026', keywords:[{keyword:'cook from scratch',commentary:'She means it. Everything from scratch. No shortcuts.',prepTag:''},{keyword:'peaceful home',commentary:'She takes pride in the space. She\'ll notice what you\'ve done with yours.',prepTag:'plant'},{keyword:'catlike',commentary:'Soft and gentle, but on her own terms. Don\'t push.',prepTag:'book'}] }, arc:'', notes:'Preferred mood: 0-0.3 (very low), clutter tolerance: 0.5.' },
+      { id:'lily', name:'Lily', color:'#f9a8d4', role:'date', personality:'Gentle spirit with a pure heart. Allergic to drama. Loves ponds and moonlight.', traits:{}, likedTags:['plant','nature','cute'], dislikedTags:['perfume_floral'], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'Gentle spirit with a pure heart. Allergic to drama, loves ponds and moonlight.', keywords:[] }, arc:'', notes:'Preferred mood: 0-0.3. No keywords defined yet.' },
+      { id:'paris', name:'Paris', color:'#fb923c', role:'date', personality:'Art school dropout turned florist. Traded brushes for bouquets. Probably still has paint under her nails. A simple test of care: do you keep things alive? Wants someone who owns real records — not just a Spotify playlist.', traits:{}, likedTags:['vinyl','plant','book'], dislikedTags:['edgy','dark'], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'Art school dropout turned florist. Looking for someone who waters their plants and owns at least one record player. Vinyl snobs welcome.', keywords:[{keyword:'Art school dropout',commentary:'She traded brushes for bouquets. Probably still has paint under her nails.',prepTag:'book'},{keyword:'waters their plants',commentary:'A simple test of care. Do you keep things alive?',prepTag:'plant'},{keyword:'Vinyl snobs welcome',commentary:'She wants someone who owns real records — not just a Spotify playlist.',prepTag:'vinyl'}] }, arc:'', notes:'Preferred mood: 0.1-0.4. Likes floral/elegant outfits, dislikes edgy.' },
+      { id:'psychic', name:'Psychic', color:'#c084fc', role:'date', personality:'Tarot reader, incense enthusiast, lava lamp collector. Comfortable in the dark. Already knew you were going to call.', traits:{}, likedTags:['incense','candle','lava_lamp'], dislikedTags:['bright','clean'], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'I already know you\'re going to call. Tarot reader, incense enthusiast, lava lamp collector. Looking for someone comfortable in the dark.', keywords:[] }, arc:'', notes:'Preferred mood: 0.5-0.9 (high). Likes edgy/whimsical outfits, dislikes formal. Reaction strength: 1.2. No keywords defined yet.' },
+      { id:'alien', name:'Alien', color:'#22d3ee', role:'date', personality:'Retro futurist. Communicates like the human character in a sci-fi movie — but because WE are the higher intelligence. Everything they say sounds slightly off, slightly too formal, slightly too knowing.', traits:{}, likedTags:[], dislikedTags:[], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'', keywords:[] }, arc:'', notes:'Retro futurist furniture aesthetic. Communicates like the human in sci-fi — but we are the higher intelligence. Character and preferences TBD.' },
+      { id:'architect', name:'Architect', color:'#a3e635', role:'date', personality:'Makes miniature houses. City-building with the same game mechanics. Nema could date an architect.', traits:{}, likedTags:[], dislikedTags:[], outcomes:{ success:'', failure:'', disappearance:'' }, profile:{ adText:'', keywords:[] }, arc:'', notes:'Miniature houses like city building with same mechanics. Character and preferences TBD.' },
+    ],
+    items: [
+      // ── REAL MESSES (in game, exact descriptions) ──
+      { id:'broken_glass', name:'Broken Glass', type:'mess', thread:'', mysteryLevel:0, tags:['glass','sharp','date_remnant'], description:'Shattered glass \u2014 the date didn\'t end well.', descriptions:{}, discoveryCondition:'Requires date failure', notes:'Category: entrance area.' },
+      { id:'cat_hair', name:'Cat Hair Clump', type:'mess', thread:'nema_inner', mysteryLevel:1, tags:['hair','cat','nema'], description:'Nema doesn\'t own a cat. Or does she?', descriptions:{}, discoveryCondition:'General spawn', notes:'' },
+      { id:'crumpled_note', name:'Crumpled Note', type:'mess', thread:'nema_past', mysteryLevel:1, tags:['paper','handwriting'], description:'A hastily written note, balled up and tossed.', descriptions:{}, discoveryCondition:'General spawn', notes:'' },
+      { id:'wine_bottle', name:'Empty Wine Bottle', type:'mess', thread:'', mysteryLevel:0, tags:['wine','glass','date_remnant'], description:'Last night was... something.', descriptions:{}, discoveryCondition:'General spawn', notes:'' },
+      { id:'lipstick_smear', name:'Lipstick Smear', type:'mess', thread:'disappearances', mysteryLevel:1, tags:['lipstick','stain','date_remnant'], description:'A smudge of deep red \u2014 things went well.', descriptions:{}, discoveryCondition:'Requires date success, 70+ affection. Stain type.', notes:'Category: entrance area.' },
+      { id:'mystery_stain', name:'Mystery Stain', type:'mess', thread:'', mysteryLevel:1, tags:['stain','suspicious'], description:'Best not to think about where this came from.', descriptions:{}, discoveryCondition:'General spawn. Stain type.', notes:'' },
+      { id:'nails', name:'Pretty Press-on Nails', type:'mess', thread:'', mysteryLevel:0, tags:['nails','fashion'], description:'An elaborate design of a French building on each one.', descriptions:{}, discoveryCondition:'General spawn. Stain type.', notes:'1 of 10 — collectible set?' },
+      { id:'petal_debris', name:'Petal Debris', type:'mess', thread:'the_garden', mysteryLevel:0, tags:['plant','flower','trimming'], description:'Scattered petals from a badly trimmed flower.', descriptions:{}, discoveryCondition:'Entrance area spawn', notes:'' },
+      { id:'stem_clippings', name:'Stem Clippings', type:'mess', thread:'the_garden', mysteryLevel:0, tags:['plant','stem','trimming'], description:'Thin green stem clippings left over from last night\'s trimming.', descriptions:{}, discoveryCondition:'Requires date success. Entrance area.', notes:'' },
+      { id:'tear_tissue', name:'Tear-stained Tissue', type:'mess', thread:'nema_inner', mysteryLevel:1, tags:['tissue','tears','nema'], description:'A crumpled tissue \u2014 someone cried.', descriptions:{}, discoveryCondition:'Requires date failure, under 30 affection.', notes:'' },
+      { id:'wilted_leaves', name:'Wilted Leaves', type:'mess', thread:'the_garden', mysteryLevel:0, tags:['plant','decay'], description:'Brown, curled leaves shed from a dying plant.', descriptions:{}, discoveryCondition:'General spawn', notes:'' },
+      { id:'wilted_petals', name:'Wilted Petals', type:'mess', thread:'the_garden', mysteryLevel:0, tags:['plant','decay'], description:'Dried petals from a dying bouquet.', descriptions:{}, discoveryCondition:'General spawn', notes:'' },
+      // ── SOUVENIRS (designed, not yet implemented) ──
+      // Design doc lists generic: necklace, ring, hat, sweater, watch, scarf
+      // Character assignments TBD — to be authored in this tool
+      { id:'souvenir_placeholder', name:'[Souvenir Template]', type:'souvenir', thread:'disappearances', mysteryLevel:2, tags:['souvenir'], description:'', descriptions:{}, discoveryCondition:'After a date disappears (90+ affection)', notes:'Design doc lists possible souvenirs: necklace, ring, hat, sweater, watch, scarf. Each should be assigned to a specific character and authored here. New dates react to souvenirs ("whose ring is that?").' },
+    ],
+    threads: [
+      { id:'disappearances', name:'The Disappearances', color:'#c44569', description:'Dates that go very well vanish. Their belongings remain as souvenirs. The pattern becomes horrifying.', notes:'' },
+      { id:'nema_past', name:'Nema\'s Past', color:'#a78bfa', description:'Fragments of Nema\'s history revealed through hidden items, notes, and the locked drawer.', notes:'' },
+      { id:'nema_inner', name:'Nema\'s Inner Life', color:'#f87171', description:'Nema\'s emotions shown through messes and small details.', notes:'' },
+      { id:'the_garden', name:'The Garden', color:'#4ade80', description:'Plants, flowers, and growth. The garden is both literal and metaphorical.', notes:'' },
+    ],
+    beats: [
+      { id:'first_disappearance', name:'First Disappearance', thread:'disappearances', trigger:{ type:'dateOutcome', params:{ outcome:'success', affection:'90+', count:1 } }, effects:[{ type:'itemAppears', params:{ note:'Character-specific souvenir appears in apartment' } }], day:0, notes:'Person stops appearing in newspaper. Doesn\'t respond to calls. Souvenir left behind.' },
+      { id:'second_disappearance', name:'Second Disappearance', thread:'disappearances', trigger:{ type:'dateOutcome', params:{ outcome:'success', affection:'90+', count:2 } }, effects:[{ type:'itemAppears', params:{ note:'Second souvenir. Pattern begins.' } }], day:0, notes:'Two souvenirs now. Neither person called back.' },
+      { id:'missing_person_notice', name:'Missing Person in Mail', thread:'disappearances', trigger:{ type:'dateOutcome', params:{ note:'After first disappearance, arrives in daily mail' } }, effects:[{ type:'itemAppears', params:{ note:'Missing person notice in mailbox — escalating horror' } }], day:0, notes:'Mail system: 4pm daily delivery. Missing person notices for disappeared dates. Escalating.' },
+      { id:'sage_reads_nema', name:'Sage Drops Nema\'s Lore', thread:'nema_past', trigger:{ type:'dateOutcome', params:{ character:'sage', note:'During Sage\'s first date, cold reading phase' } }, effects:[{ type:'nemaBehavior', params:{ note:'Sage accidentally reveals a piece of Nema\'s backstory during reading' } }], day:0, notes:'The psychic lands one eerie, specific truth about Nema. Key narrative moment — player learns something about Nema through a date\'s ability.' },
+      { id:'date_reacts_to_souvenir', name:'Date Notices Souvenir', thread:'disappearances', trigger:{ type:'manual', params:{ note:'Any new date sees a previous date\'s souvenir in the apartment' } }, effects:[{ type:'nemaBehavior', params:{ note:'"Whose ring is that?" — new dates react to souvenirs from disappeared dates' } }], day:0, notes:'This is the core horror loop. Souvenirs accumulate, new dates notice them, player connects the dots.' },
+    ],
+    chains: [
+      { id:'souvenir_accumulation', name:'The Souvenir Collection', thread:'disappearances', steps:[], notes:'Not a puzzle — a slow accumulation. Design doc souvenirs: necklace, ring, hat, sweater, watch, scarf. Each assigned to a character. Author specific souvenirs as items in the Items tab, then sequence them here.' },
+    ],
+    timeline: { days: [
+      { day:1, pacing:'setup', events:['First date available. Apartment exploration.'], notes:'' },
+      { day:2, pacing:'setup', events:['Second date possible. Learning preferences.'], notes:'' },
+      { day:3, pacing:'tension', events:['First crumpled note appears.'], notes:'' },
+      { day:4, pacing:'tension', events:['Mystery stain appears.'], notes:'' },
+      { day:5, pacing:'reveal', events:['Souvenir descriptions may update.'], notes:'' },
+      { day:6, pacing:'calm', events:['A quiet day. Garden needs tending.'], notes:'' },
+      { day:7, pacing:'reveal', events:['Key can be found. Drawer can be opened.'], notes:'' },
+    ]}
+  };
+}
+
+// =====================================================
+// TAB SYSTEM
+// =====================================================
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.toggle('active', t.id === 'tab-'+tab));
+  renderCurrentTab();
+  updateMyPresence();
+}
+
+function renderCurrentTab() {
+  switch(currentTab) {
+    case 'storymap': renderStoryMap(); break;
+    case 'characters': renderCharacters(); break;
+    case 'items': renderItems(); break;
+    case 'threads': renderThreads(); break;
+    case 'beats': renderBeats(); break;
+    case 'chains': renderChains(); break;
+    case 'timeline': renderTimeline(); break;
+    case 'export': renderExport(); break;
+  }
+}
+
+// =====================================================
+// STORY MAP
+// =====================================================
+// Compute default (algorithmic) layout for any node without a saved position
+function defaultNodePos(key, allKeys) {
+  const cx = 900, cy = 500;
+  const parts = key.split('_'); const type = parts[0]; const id = parts.slice(1).join('_');
+  if (type === 'char') {
+    const charKeys = allKeys.filter(k => k.startsWith('char_'));
+    const i = charKeys.indexOf(key);
+    const angle = (i / charKeys.length) * Math.PI * 2 - Math.PI / 2;
+    return { x: cx + Math.cos(angle)*250 - 40, y: cy + Math.sin(angle)*250 - 40 };
+  } else if (type === 'item') {
+    const itemKeys = allKeys.filter(k => k.startsWith('item_'));
+    const i = itemKeys.indexOf(key);
+    const angle = (i / Math.max(itemKeys.length,1)) * Math.PI * 2 - Math.PI / 2;
+    const r = 450 + (i % 5) * 70;
+    const spread = (i - itemKeys.length/2) * 0.12;
+    return { x: cx + Math.cos(angle + spread)*r - 60, y: cy + Math.sin(angle + spread)*r - 20 };
+  } else {
+    const beatKeys = allKeys.filter(k => k.startsWith('beat_'));
+    const i = beatKeys.indexOf(key);
+    const angle = (i / Math.max(beatKeys.length,1)) * Math.PI * 2;
+    return { x: cx + Math.cos(angle)*350 - 65, y: cy + Math.sin(angle)*350 - 20 };
+  }
+}
+
+function getSmNodePositions() {
+  const positions = {};
+  // Build all keys first
+  const allKeys = [];
+  data.characters.forEach(ch => allKeys.push('char_'+ch.id));
+  data.items.forEach(it => allKeys.push('item_'+it.id));
+  data.beats.forEach(b => allKeys.push('beat_'+b.id));
+
+  const saved = data.mapPositions || {};
+
+  data.characters.forEach((ch, i) => {
+    const key = 'char_'+ch.id;
+    const pos = saved[key] || defaultNodePos(key, allKeys);
+    positions[key] = { x: pos.x, y: pos.y, type:'character', idx:i, data:ch };
+  });
+  data.items.forEach((item, i) => {
+    const key = 'item_'+item.id;
+    const pos = saved[key] || defaultNodePos(key, allKeys);
+    positions[key] = { x: pos.x, y: pos.y, type:'item', idx:i, data:item };
+  });
+  data.beats.forEach((beat, i) => {
+    const key = 'beat_'+beat.id;
+    const pos = saved[key] || defaultNodePos(key, allKeys);
+    positions[key] = { x: pos.x, y: pos.y, type:'beat', idx:i, data:beat };
+  });
+  return positions;
+}
+
+function resetMapLayout() {
+  if (!confirm('Reset all node positions to auto-layout?')) return;
+  data.mapPositions = {};
+  saveData('reset map layout');
+  renderStoryMap();
+}
+
+function renderStoryMap() {
+  const world = document.getElementById('storymap-world');
+  const svg = document.getElementById('storymap-svg');
+  const filter = document.getElementById('sm-filter').value;
+  const connMode = document.getElementById('sm-conn-mode').value;
+  const threadSel = document.getElementById('sm-thread-filter');
+  threadSel.style.display = filter==='thread'?'':'none';
+  if (filter==='thread') threadSel.innerHTML = data.threads.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('');
+  const threadFilter = filter==='thread'?threadSel.value:null;
+  const positions = getSmNodePositions();
+  let html = '';
+
+  // Peer cursors on map (show which node they have selected)
+  const peerSelections = {};
+  Object.values(peers).forEach(p => { if (p.tab === 'storymap' && p.selection) peerSelections[p.selection] = p; });
+
+  Object.entries(positions).forEach(([key, pos]) => {
+    let show = true;
+    if(filter==='characters'&&pos.type!=='character') show=false;
+    if(filter==='items'&&pos.type!=='item') show=false;
+    if(filter==='beats'&&pos.type!=='beat') show=false;
+    if(threadFilter&&pos.type==='item'&&pos.data.thread!==threadFilter) show=false;
+    if(threadFilter&&pos.type==='beat'&&pos.data.thread!==threadFilter) show=false;
+    if(!show) return;
+    const sel = smSelectedNode===key?' selected':'';
+    const d = pos.data;
+
+    if(pos.type==='character') {
+      html += `<div class="sm-node type-character${sel}" data-key="${key}" style="left:${pos.x}px;top:${pos.y}px;border-color:${d.color};background:${d.color}22"><div class="node-name" style="color:${d.color}">${esc(d.name)}</div><div class="node-sub">${esc(d.role)}</div></div>`;
+    } else if(pos.type==='item') {
+      const thread = data.threads.find(t=>t.id===d.thread);
+      const bc = d.mysteryLevel>=2?'var(--accent4)':thread?thread.color:'var(--border)';
+      html += `<div class="sm-node type-item${sel}" data-key="${key}" style="left:${pos.x}px;top:${pos.y}px;border-color:${bc}"><div class="node-name">${esc(d.name)}</div><span class="item-type-badge ${d.type}">${d.type}</span>`;
+      if(d.mysteryLevel>0) html += `<div class="node-sub" style="color:var(--accent4)">${'?'.repeat(d.mysteryLevel)} ${MYSTERY_LABELS[d.mysteryLevel]}</div>`;
+      html += `</div>`;
+    } else if(pos.type==='beat') {
+      html += `<div class="sm-node type-beat${sel}" data-key="${key}" style="left:${pos.x}px;top:${pos.y}px;border-color:var(--accent2)"><div class="node-name">${esc(d.name)}</div><div class="node-sub">${esc(d.trigger?.type||'')}</div>`;
+      if(d.day>0) html += `<div class="node-badge" style="background:var(--accent2);color:#000">Day ${d.day}</div>`;
+      html += `</div>`;
+    }
+  });
+  world.innerHTML = html;
+
+  // Compute canvas bounds from all node positions (with padding)
+  let maxX = 1800, maxY = 1200;
+  Object.values(positions).forEach(p => {
+    if (p.x + 200 > maxX) maxX = p.x + 200;
+    if (p.y + 150 > maxY) maxY = p.y + 150;
+  });
+  // Also ensure negatives work — shift everything if needed
+  let minX = 0, minY = 0;
+  Object.values(positions).forEach(p => {
+    if (p.x < minX) minX = p.x;
+    if (p.y < minY) minY = p.y;
+  });
+  const canvasW = maxX - minX + 200;
+  const canvasH = maxY - minY + 200;
+
+  world.style.transform = `scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;
+  world.style.width = canvasW + 'px'; world.style.height = canvasH + 'px';
+
+  let svgContent = '';
+  svg.setAttribute('width', canvasW); svg.setAttribute('height', canvasH);
+  svg.style.transform = `scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;
+  svg.style.transformOrigin = '0 0';
+
+  if(connMode!=='none') {
+    if(connMode==='all'||connMode==='threads') data.threads.forEach(thread => {
+      const ti = data.items.filter(it=>it.thread===thread.id).map(it=>'item_'+it.id);
+      for(let i=0;i<ti.length-1;i++){const a=positions[ti[i]],b=positions[ti[i+1]];if(a&&b) svgContent+=`<line x1="${a.x+60}" y1="${a.y+20}" x2="${b.x+60}" y2="${b.y+20}" stroke="${thread.color}" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,4"/>`;}
+    });
+    if(connMode==='all'||connMode==='triggers') data.beats.forEach(beat => {
+      const bp=positions['beat_'+beat.id]; if(!bp) return;
+      beat.effects.forEach(eff=>{if(eff.type==='itemAppears'&&eff.params?.itemId){const ip=positions['item_'+eff.params.itemId];if(ip) svgContent+=`<line x1="${bp.x+65}" y1="${bp.y+20}" x2="${ip.x+60}" y2="${ip.y+20}" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>`;}});
+    });
+    if(connMode==='all'||connMode==='chains') data.chains.forEach(chain => {
+      for(let i=0;i<chain.steps.length-1;i++){const a=positions['item_'+chain.steps[i].itemId],bId=chain.steps[i].result||chain.steps[i+1].itemId,b=positions['item_'+bId];if(a&&b) svgContent+=`<line x1="${a.x+60}" y1="${a.y+20}" x2="${b.x+60}" y2="${b.y+20}" stroke="var(--green)" stroke-width="2" opacity="0.6"/>`;}
+    });
+    if(connMode==='all') data.characters.forEach(ch => {
+      const cp=positions['char_'+ch.id]; if(!cp) return;
+      data.items.filter(it=>it.type==='souvenir'&&it.tags.includes(ch.id)).forEach(it=>{const ip=positions['item_'+it.id];if(ip) svgContent+=`<line x1="${cp.x+40}" y1="${cp.y+40}" x2="${ip.x+60}" y2="${ip.y+20}" stroke="${ch.color}" stroke-width="1.5" opacity="0.3"/>`;});
+    });
+  }
+  svg.innerHTML = svgContent;
+}
+
+function selectSmNode(key){smSelectedNode=key;renderStoryMap();showSmDetail(key);}
+function closeSmDetail(){document.getElementById('sm-detail').classList.remove('open');smSelectedNode=null;renderStoryMap();}
+
+function showSmDetail(key) {
+  const panel=document.getElementById('sm-detail'),content=document.getElementById('sm-detail-content');
+  const positions=getSmNodePositions(),pos=positions[key]; if(!pos) return;
+  let html=''; const d=pos.data;
+  if(pos.type==='character'){
+    html+=`<h3 style="color:${d.color}">${esc(d.name)}</h3>`;
+    html+=`<div class="detail-section"><h4>Personality</h4><p>${highlightKW(d.personality)}</p></div>`;
+    if(d.profile?.adText) html+=`<div class="detail-section"><h4>Personal Ad</h4><p style="font-style:italic">${highlightKW(d.profile.adText)}</p></div>`;
+    if(d.likedTags?.length) html+=`<div class="detail-section"><h4>Likes</h4><div class="tag-list">${d.likedTags.map(t=>`<span class="tag" style="color:var(--green);border-color:var(--green)">${esc(t)}</span>`).join('')}</div></div>`;
+    if(d.outcomes?.disappearance) html+=`<div class="detail-section"><h4>Disappearance</h4><p>${highlightKW(d.outcomes.disappearance)}</p></div>`;
+    const souvenirs=data.items.filter(it=>it.type==='souvenir'&&it.tags.includes(d.id));
+    if(souvenirs.length){html+=`<div class="detail-section"><h4>Souvenirs</h4>`;souvenirs.forEach(s=>{html+=`<div class="card"><div class="card-head">${esc(s.name)}</div><div class="card-body">${highlightKW(s.description)}</div></div>`;});html+=`</div>`;}
+    html+=`<div class="btn-row"><button class="btn" onclick="selectedChar=${pos.idx};switchTab('characters')">Edit Character</button></div>`;
+  } else if(pos.type==='item'){
+    const thread=data.threads.find(t=>t.id===d.thread);
+    html+=`<h3>${esc(d.name)}</h3><span class="item-type-badge ${d.type}">${d.type}</span>`;
+    if(thread) html+=` <span style="color:${thread.color};font-size:12px">${esc(thread.name)}</span>`;
+    html+=`<div class="detail-section" style="margin-top:12px"><h4>Description</h4><p>${highlightKW(d.description)}</p></div>`;
+    if(Object.keys(d.descriptions||{}).length) {html+=`<div class="detail-section"><h4>Variants</h4>`;Object.entries(d.descriptions).forEach(([k,v])=>{html+=`<div class="desc-variant"><div class="dv-label">${esc(k)}</div><p>${highlightKW(v)}</p></div>`;});html+=`</div>`;}
+    const rb=data.beats.filter(b=>b.effects.some(e=>e.params?.itemId===d.id));
+    if(rb.length){html+=`<div class="detail-section"><h4>Triggered By</h4>`;rb.forEach(b=>{html+=`<div class="card"><div class="card-head">${esc(b.name)}</div></div>`;});html+=`</div>`;}
+    html+=`<div class="btn-row"><button class="btn" onclick="selectedItem=${pos.idx};switchTab('items')">Edit Item</button></div>`;
+  } else if(pos.type==='beat'){
+    const thread=data.threads.find(t=>t.id===d.thread);
+    html+=`<h3>${esc(d.name)}</h3>`;if(thread) html+=`<p style="color:${thread.color};font-size:12px;margin-bottom:12px">${esc(thread.name)}</p>`;
+    html+=`<div class="detail-section"><h4>Trigger</h4><div class="card"><div class="card-head">${esc(d.trigger?.type)}</div><div class="card-body">${esc(JSON.stringify(d.trigger?.params||{}))}</div></div></div>`;
+    if(d.notes) html+=`<div class="detail-section"><h4>Notes</h4><p>${esc(d.notes)}</p></div>`;
+    html+=`<div class="btn-row"><button class="btn" onclick="selectedBeat=${pos.idx};switchTab('beats')">Edit Beat</button></div>`;
+  }
+  content.innerHTML=html; panel.classList.add('open');
+}
+
+function setSmZoom(val){smZoom=Math.max(0.2,Math.min(2,parseFloat(val)));document.getElementById('sm-zoom-slider').value=smZoom;document.getElementById('sm-zoom-label').textContent=Math.round(smZoom*100)+'%';const w=document.getElementById('storymap-world'),s=document.getElementById('storymap-svg');w.style.transform=`scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;s.style.transform=`scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;}
+
+// --- Node dragging + canvas panning ---
+let nodeDrag = null; // { key, el, startX, startY, origX, origY, moved }
+
+function initSmPan(){
+  const c = document.getElementById('storymap-container');
+
+  // MOUSEDOWN: decide if dragging a node or panning
+  c.addEventListener('mousedown', e => {
+    const nodeEl = e.target.closest('.sm-node');
+    if (nodeEl && nodeEl.dataset.key) {
+      // Start node drag
+      const key = nodeEl.dataset.key;
+      const positions = getSmNodePositions();
+      const pos = positions[key];
+      nodeDrag = { key, el: nodeEl, startX: e.clientX, startY: e.clientY, origX: pos?.x || 0, origY: pos?.y || 0, moved: false };
+      nodeEl.classList.add('dragging-node');
+      e.preventDefault();
+      return;
+    }
+    // Canvas pan
+    smDragging = true;
+    smDragStartX = e.clientX - smPanX * smZoom;
+    smDragStartY = e.clientY - smPanY * smZoom;
+    c.classList.add('dragging');
+  });
+
+  // MOUSEMOVE: move node or pan
+  c.addEventListener('mousemove', e => {
+    if (nodeDrag) {
+      const dx = (e.clientX - nodeDrag.startX) / smZoom;
+      const dy = (e.clientY - nodeDrag.startY) / smZoom;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) nodeDrag.moved = true;
+      if (nodeDrag.moved) {
+        const nx = nodeDrag.origX + dx;
+        const ny = nodeDrag.origY + dy;
+        nodeDrag.el.style.left = nx + 'px';
+        nodeDrag.el.style.top = ny + 'px';
+        // Live-update SVG connections
+        updateSvgForDrag(nodeDrag.key, nx, ny);
+      }
+      return;
+    }
+    if (!smDragging) return;
+    smPanX = (e.clientX - smDragStartX) / smZoom;
+    smPanY = (e.clientY - smDragStartY) / smZoom;
+    const w = document.getElementById('storymap-world'), s = document.getElementById('storymap-svg');
+    w.style.transform = `scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;
+    s.style.transform = `scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;
+  });
+
+  // MOUSEUP: finish drag or select
+  c.addEventListener('mouseup', e => {
+    if (nodeDrag) {
+      const nd = nodeDrag;
+      nd.el.classList.remove('dragging-node');
+      if (nd.moved) {
+        // Save new position
+        const dx = (e.clientX - nd.startX) / smZoom;
+        const dy = (e.clientY - nd.startY) / smZoom;
+        if (!data.mapPositions) data.mapPositions = {};
+        data.mapPositions[nd.key] = { x: nd.origX + dx, y: nd.origY + dy };
+        saveData(); // silent save, no feed entry for dragging
+        renderStoryMap();
+      } else {
+        // It was a click, not a drag
+        selectSmNode(nd.key);
+      }
+      nodeDrag = null;
+      return;
+    }
+    smDragging = false;
+    c.classList.remove('dragging');
+  });
+
+  c.addEventListener('mouseleave', () => {
+    if (nodeDrag) { nodeDrag.el.classList.remove('dragging-node'); nodeDrag = null; }
+    smDragging = false;
+    c.classList.remove('dragging');
+  });
+
+  c.addEventListener('wheel', e => { e.preventDefault(); setSmZoom(smZoom - e.deltaY * 0.001); }, { passive: false });
+
+  // Touch: pan + pinch zoom (node taps/drags handled by initTouchNodeDrag)
+  let lx=0, ly=0, lp=0;
+  let touchStartedOnNode = false;
+  c.addEventListener('touchstart', e => {
+    const nodeEl = e.target.closest('.sm-node');
+    if (nodeEl) {
+      // Node touch — let initTouchNodeDrag handle it entirely
+      touchStartedOnNode = true;
+      return;
+    }
+    touchStartedOnNode = false;
+    if (e.touches.length===1) { smDragging=true; lx=e.touches[0].clientX; ly=e.touches[0].clientY; }
+    else if (e.touches.length===2) { smDragging=false; lp=Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY); }
+  }, {passive:true});
+  c.addEventListener('touchmove', e => {
+    if (touchStartedOnNode && touchNodeDrag) return; // node drag in progress, don't pan
+    if (touchStartedOnNode && !touchNodeDrag) {
+      // Finger started on node but no long-press yet — treat as pan
+      if (!smDragging) { smDragging=true; lx=e.touches[0].clientX; ly=e.touches[0].clientY; touchStartedOnNode=false; }
+    }
+    if (e.touches.length===1 && smDragging) {
+      e.preventDefault();
+      smPanX += (e.touches[0].clientX-lx)/smZoom; smPanY += (e.touches[0].clientY-ly)/smZoom;
+      lx=e.touches[0].clientX; ly=e.touches[0].clientY;
+      const w=document.getElementById('storymap-world'), s=document.getElementById('storymap-svg');
+      w.style.transform=`scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;
+      s.style.transform=`scale(${smZoom}) translate(${smPanX}px, ${smPanY}px)`;
+    } else if (e.touches.length===2) {
+      e.preventDefault();
+      const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+      if (lp>0) setSmZoom(smZoom*(d/lp)); lp=d;
+    }
+  }, {passive:false});
+  c.addEventListener('touchend', () => { smDragging=false; lp=0; touchStartedOnNode=false; });
+}
+
+// Live SVG update during node drag (recalculates all lines)
+function updateSvgForDrag(dragKey, nx, ny) {
+  const positions = getSmNodePositions();
+  if (positions[dragKey]) { positions[dragKey].x = nx; positions[dragKey].y = ny; }
+  const svg = document.getElementById('storymap-svg');
+  // Dynamic SVG size
+  let maxX = 1800, maxY = 1200;
+  Object.values(positions).forEach(p => { if(p.x+200>maxX) maxX=p.x+200; if(p.y+150>maxY) maxY=p.y+150; });
+  svg.setAttribute('width', maxX+200); svg.setAttribute('height', maxY+200);
+  const connMode = document.getElementById('sm-conn-mode').value;
+  let svgContent = '';
+  const nodeW = { character: 40, item: 60, beat: 65 };
+  const nodeH = { character: 40, item: 20, beat: 20 };
+  function cx(k) { const p=positions[k]; return p ? p.x + (nodeW[p.type]||60) : 0; }
+  function cy(k) { const p=positions[k]; return p ? p.y + (nodeH[p.type]||20) : 0; }
+
+  if (connMode!=='none') {
+    if (connMode==='all'||connMode==='threads') data.threads.forEach(thread => {
+      const ti=data.items.filter(it=>it.thread===thread.id).map(it=>'item_'+it.id);
+      for(let i=0;i<ti.length-1;i++) if(positions[ti[i]]&&positions[ti[i+1]]) svgContent+=`<line x1="${cx(ti[i])}" y1="${cy(ti[i])}" x2="${cx(ti[i+1])}" y2="${cy(ti[i+1])}" stroke="${thread.color}" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,4"/>`;
+    });
+    if (connMode==='all'||connMode==='triggers') data.beats.forEach(beat => {
+      const bk='beat_'+beat.id; if(!positions[bk]) return;
+      beat.effects.forEach(eff=>{if(eff.type==='itemAppears'&&eff.params?.itemId){const ik='item_'+eff.params.itemId;if(positions[ik]) svgContent+=`<line x1="${cx(bk)}" y1="${cy(bk)}" x2="${cx(ik)}" y2="${cy(ik)}" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>`;}});
+    });
+    if (connMode==='all'||connMode==='chains') data.chains.forEach(chain => {
+      for(let i=0;i<chain.steps.length-1;i++){const ak='item_'+chain.steps[i].itemId,bId=chain.steps[i].result||chain.steps[i+1].itemId,bk='item_'+bId;if(positions[ak]&&positions[bk]) svgContent+=`<line x1="${cx(ak)}" y1="${cy(ak)}" x2="${cx(bk)}" y2="${cy(bk)}" stroke="var(--green)" stroke-width="2" opacity="0.6"/>`;}
+    });
+    if (connMode==='all') data.characters.forEach(ch => {
+      const ck='char_'+ch.id; if(!positions[ck]) return;
+      data.items.filter(it=>it.type==='souvenir'&&it.tags.includes(ch.id)).forEach(it=>{const ik='item_'+it.id;if(positions[ik]) svgContent+=`<line x1="${cx(ck)}" y1="${cy(ck)}" x2="${cx(ik)}" y2="${cy(ik)}" stroke="${ch.color}" stroke-width="1.5" opacity="0.3"/>`;});
+    });
+  }
+  svg.innerHTML = svgContent;
+}
+
+// =====================================================
+// CHARACTERS TAB
+// =====================================================
+function renderCharacters() {
+  const tab=document.getElementById('tab-characters');
+  if(selectedChar>=data.characters.length)selectedChar=0;
+  const ch=data.characters[selectedChar];
+
+  // Check which chars peers are viewing
+  const peerViewing={};
+  Object.values(peers).forEach(p=>{if(p.tab==='characters'&&p.selection){const ci=data.characters.findIndex(c=>c.id===p.selection);if(ci>=0) peerViewing[ci]=p;}});
+
+  let L=`<button class="mobile-toggle" onclick="toggleSidebar(this)">Characters List</button><div class="side-list"><h3>Characters <button onclick="addCharacter()">+ New</button></h3><div class="list-items">`;
+  data.characters.forEach((c,i)=>{
+    const pv=peerViewing[i];
+    L+=`<div class="list-item${i===selectedChar?' active':''}" onclick="selectedChar=${i};renderCharacters();updateMyPresence()">`;
+    L+=`<div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0"><span class="char-color-dot" style="background:${c.color}"></span><div><div class="li-name">${esc(c.name)}</div><div class="li-sub">${esc(c.role)}</div></div></div>`;
+    if(pv) L+=`<div class="collab-viewing" style="background:${pv.color}" title="${esc(pv.name)} is here"></div>`;
+    L+=`<div class="reorder-btns" onclick="event.stopPropagation()"><button class="reorder-btn" onclick="reorderChar(${i},-1)">&uarr;</button><button class="reorder-btn" onclick="reorderChar(${i},1)">&darr;</button></div>`;
+    L+=`</div>`;
+  });
+  L+=`</div></div>`;
+
+  let E=`<div class="editor-panel">`;
+  if(ch){
+    E+=`<div style="display:flex;align-items:center;gap:16px;margin-bottom:16px"><div class="char-portrait" style="border-color:${ch.color};color:${ch.color}">${esc(ch.name[0])}</div><div><h2>${esc(ch.name)}</h2><div class="ep-sub">${esc(ch.role)}</div></div></div>`;
+    E+=`<div class="form-row"><div class="form-group"><label>Name</label><input type="text" value="${esc(ch.name)}" onchange="data.characters[${selectedChar}].name=this.value;saveData('edited ${esc(ch.name)}');renderCharacters()"></div><div class="form-group"><label>Color</label><input type="text" value="${esc(ch.color)}" onchange="data.characters[${selectedChar}].color=this.value;saveData();renderCharacters()"></div></div>`;
+    E+=`<div class="form-row"><div class="form-group"><label>Role</label><select onchange="data.characters[${selectedChar}].role=this.value;saveData()"><option value="protagonist"${ch.role==='protagonist'?' selected':''}>Protagonist</option><option value="date"${ch.role==='date'?' selected':''}>Date</option><option value="npc"${ch.role==='npc'?' selected':''}>NPC</option></select></div><div class="form-group"><label>ID</label><input type="text" value="${esc(ch.id)}" disabled style="opacity:0.5"></div></div>`;
+    E+=`<div class="form-group"><label>Personality</label><textarea onchange="data.characters[${selectedChar}].personality=this.value;saveData('updated ${esc(ch.name)} personality')">${esc(ch.personality)}</textarea></div>`;
+    if(ch.role==='date'){
+      E+=`<div class="char-prefs"><div class="pref-box"><h4>Liked Tags</h4><div class="tag-list">${(ch.likedTags||[]).map((t,ti)=>`<span class="tag removable" style="color:var(--green);border-color:var(--green)" onclick="data.characters[${selectedChar}].likedTags.splice(${ti},1);saveData('removed tag from ${esc(ch.name)}');renderCharacters()">${esc(t)} &times;</span>`).join('')}</div><div class="tag-input-row"><input type="text" id="cLI" placeholder="Add..." onkeydown="if(event.key==='Enter'){addCharTag(${selectedChar},'liked',this.value);this.value=''}"><button onclick="addCharTag(${selectedChar},'liked',document.getElementById('cLI').value);document.getElementById('cLI').value=''">+</button></div></div>`;
+      E+=`<div class="pref-box"><h4>Disliked Tags</h4><div class="tag-list">${(ch.dislikedTags||[]).map((t,ti)=>`<span class="tag removable" style="color:var(--red);border-color:var(--red)" onclick="data.characters[${selectedChar}].dislikedTags.splice(${ti},1);saveData();renderCharacters()">${esc(t)} &times;</span>`).join('')}</div><div class="tag-input-row"><input type="text" id="cDI" placeholder="Add..." onkeydown="if(event.key==='Enter'){addCharTag(${selectedChar},'disliked',this.value);this.value=''}"><button onclick="addCharTag(${selectedChar},'disliked',document.getElementById('cDI').value);document.getElementById('cDI').value=''">+</button></div></div></div>`;
+      // Dating Profile (personal ad)
+      if (!ch.profile) ch.profile = { adText:'', keywords:[] };
+      E+=`<div style="background:var(--bg);border:1px solid var(--accent);border-radius:8px;padding:14px;margin-top:16px">`;
+      E+=`<h4 style="color:var(--accent);font-size:13px;margin-bottom:10px">Newspaper Personal Ad</h4>`;
+      E+=`<div class="form-group"><label>Ad Text</label><textarea style="font-style:italic;min-height:70px" onchange="data.characters[${selectedChar}].profile.adText=this.value;saveData('wrote ${esc(ch.name)} personal ad')" placeholder="The newspaper ad text the player reads...">${esc(ch.profile.adText)}</textarea></div>`;
+      E+=`<div class="detail-section"><h4>Keywords <button class="btn" style="font-size:10px;padding:2px 8px;margin-left:8px" onclick="addProfileKeyword(${selectedChar})">+ Keyword</button></h4>`;
+      (ch.profile.keywords||[]).forEach((kw, ki) => {
+        E+=`<div class="card" style="border-left:3px solid var(--accent2)">`;
+        E+=`<div style="display:flex;gap:8px;align-items:flex-start"><div style="flex:1">`;
+        E+=`<div class="form-group" style="margin-bottom:6px"><label>Keyword (exact match in ad text)</label><input type="text" value="${esc(kw.keyword)}" onchange="data.characters[${selectedChar}].profile.keywords[${ki}].keyword=this.value;saveData()"></div>`;
+        E+=`<div class="form-group" style="margin-bottom:6px"><label>Commentary (tooltip on hover)</label><textarea style="min-height:40px" onchange="data.characters[${selectedChar}].profile.keywords[${ki}].commentary=this.value;saveData()">${esc(kw.commentary)}</textarea></div>`;
+        E+=`<div class="form-group" style="margin-bottom:0"><label>Prep Tag (links to liked tag for checklist)</label><input type="text" value="${esc(kw.prepTag||'')}" onchange="data.characters[${selectedChar}].profile.keywords[${ki}].prepTag=this.value;saveData()"></div>`;
+        E+=`</div><button class="btn btn-danger" onclick="data.characters[${selectedChar}].profile.keywords.splice(${ki},1);saveData();renderCharacters()">&times;</button></div></div>`;
+      });
+      E+=`</div></div>`;
+
+      E+=`<div class="outcome-section success"><h4>Success</h4><div class="form-group"><textarea onchange="data.characters[${selectedChar}].outcomes.success=this.value;saveData()">${esc(ch.outcomes?.success)}</textarea></div></div>`;
+      E+=`<div class="outcome-section failure"><h4>Failure</h4><div class="form-group"><textarea onchange="data.characters[${selectedChar}].outcomes.failure=this.value;saveData()">${esc(ch.outcomes?.failure)}</textarea></div></div>`;
+      E+=`<div class="outcome-section disappear"><h4>Disappearance</h4><div class="form-group"><textarea onchange="data.characters[${selectedChar}].outcomes.disappearance=this.value;saveData('wrote ${esc(ch.name)} disappearance')">${esc(ch.outcomes?.disappearance)}</textarea></div></div>`;
+      const souvenirs=data.items.filter(it=>it.type==='souvenir'&&it.tags.includes(ch.id));
+      if(souvenirs.length){E+=`<div class="detail-section" style="margin-top:16px"><h4>Linked Souvenirs</h4>`;souvenirs.forEach(s=>{const si=data.items.indexOf(s);E+=`<div class="card" style="cursor:pointer" onclick="selectedItem=${si};switchTab('items')"><div class="card-head">${esc(s.name)} <span class="item-type-badge souvenir">souvenir</span></div><div class="card-body">${highlightKW(s.description)}</div></div>`;});E+=`</div>`;}
+    }
+    E+=`<div class="form-group" style="margin-top:16px"><label>Arc / Notes</label><textarea onchange="data.characters[${selectedChar}].arc=this.value;saveData()" style="min-height:100px">${esc(ch.arc)}</textarea></div>`;
+    E+=`<div class="form-group"><label>Working Notes</label><textarea onchange="data.characters[${selectedChar}].notes=this.value;saveData()">${esc(ch.notes)}</textarea></div>`;
+    if(ch.role!=='protagonist') E+=`<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete?')){data.characters.splice(${selectedChar},1);selectedChar=0;saveData('deleted character');renderCharacters()}">Delete</button></div>`;
+  }
+  E+=`</div>`;
+  tab.innerHTML=L+E;
+}
+function addCharacter(){data.characters.push({id:genId(),name:'New Character',color:CHAR_COLORS[data.characters.length%CHAR_COLORS.length],role:'date',personality:'',traits:{},likedTags:[],dislikedTags:[],outcomes:{success:'',failure:'',disappearance:''},profile:{adText:'',keywords:[]},arc:'',notes:''});selectedChar=data.characters.length-1;saveData('added new character');renderCharacters();}
+function addProfileKeyword(ci){if(!data.characters[ci].profile) data.characters[ci].profile={adText:'',keywords:[]};data.characters[ci].profile.keywords.push({keyword:'',commentary:'',prepTag:''});saveData();renderCharacters();}
+function addCharTag(ci,type,val){if(!val.trim())return;const arr=type==='liked'?'likedTags':'dislikedTags';if(!data.characters[ci][arr].includes(val.trim())){data.characters[ci][arr].push(val.trim());saveData();renderCharacters();}}
+
+// =====================================================
+// ITEMS TAB
+// =====================================================
+function renderItems(){
+  const tab=document.getElementById('tab-items');
+  if(selectedItem>=data.items.length)selectedItem=0;
+  const item=data.items[selectedItem];
+  const peerViewing={};Object.values(peers).forEach(p=>{if(p.tab==='items'&&p.selection){const i=data.items.findIndex(it=>it.id===p.selection);if(i>=0)peerViewing[i]=p;}});
+
+  let L=`<button class="mobile-toggle" onclick="toggleSidebar(this)">Items List</button><div class="side-list"><h3>Items <button onclick="addItem()">+ New</button></h3><div class="list-items">`;
+  data.items.forEach((it,i)=>{const thread=data.threads.find(t=>t.id===it.thread);const pv=peerViewing[i];L+=`<div class="list-item${i===selectedItem?' active':''}" onclick="selectedItem=${i};renderItems();updateMyPresence()"><div style="flex:1;min-width:0"><div class="li-name">${esc(it.name)}</div><div class="li-sub"><span class="item-type-badge ${it.type}">${it.type}</span>${thread?` <span style="color:${thread.color}">${esc(thread.name)}</span>`:''}</div>${it.mysteryLevel>0?`<div class="li-sub" style="color:var(--accent4)">${'?'.repeat(it.mysteryLevel)}</div>`:''}</div>${pv?`<div class="collab-viewing" style="background:${pv.color}"></div>`:''}<div class="reorder-btns" onclick="event.stopPropagation()"><button class="reorder-btn" onclick="reorderItem(${i},-1)">&uarr;</button><button class="reorder-btn" onclick="reorderItem(${i},1)">&darr;</button></div></div>`;});
+  L+=`</div></div>`;
+
+  let E=`<div class="editor-panel">`;
+  if(item){
+    const thread=data.threads.find(t=>t.id===item.thread);
+    E+=`<h2>${esc(item.name)}</h2><div class="ep-sub"><span class="item-type-badge ${item.type}">${item.type}</span>${thread?` <span style="color:${thread.color}">${esc(thread.name)}</span>`:''}</div>`;
+    E+=`<div class="form-row"><div class="form-group"><label>Name</label><input type="text" value="${esc(item.name)}" onchange="data.items[${selectedItem}].name=this.value;saveData('renamed item');renderItems()"></div><div class="form-group"><label>Type</label><select onchange="data.items[${selectedItem}].type=this.value;saveData();renderItems()">${ITEM_TYPES.map(t=>`<option value="${t}"${item.type===t?' selected':''}>${t}</option>`).join('')}</select></div></div>`;
+    E+=`<div class="form-row"><div class="form-group"><label>Thread</label><select onchange="data.items[${selectedItem}].thread=this.value;saveData();renderItems()"><option value="">None</option>${data.threads.map(t=>`<option value="${t.id}"${item.thread===t.id?' selected':''}>${esc(t.name)}</option>`).join('')}</select></div><div class="form-group"><label>Mystery Level</label><div class="mystery-meter">${[0,1,2,3].map(n=>`<div class="mystery-pip${n<=item.mysteryLevel?' filled':''}" onclick="data.items[${selectedItem}].mysteryLevel=${n===item.mysteryLevel?0:n};saveData();renderItems()"></div>`).join('')}<span class="mystery-label">${MYSTERY_LABELS[item.mysteryLevel]}</span></div></div></div>`;
+    E+=`<div class="form-group"><label>Default Description</label><textarea onchange="data.items[${selectedItem}].description=this.value;saveData('wrote ${esc(item.name)} description')">${esc(item.description)}</textarea></div>`;
+    E+=`<div class="detail-section"><h4>Contextual Descriptions <button class="btn" style="font-size:10px;padding:2px 8px;margin-left:8px" onclick="addItemDesc(${selectedItem})">+ Variant</button></h4>`;
+    Object.entries(item.descriptions||{}).forEach(([key,val])=>{E+=`<div class="desc-variant"><div style="display:flex;justify-content:space-between"><input type="text" value="${esc(key)}" style="background:transparent;border:none;color:var(--accent2);font-size:11px;font-weight:600;padding:0;flex:1" onchange="renameDescKey(${selectedItem},'${esc(key)}',this.value)"><button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="delete data.items[${selectedItem}].descriptions['${esc(key)}'];saveData();renderItems()">&times;</button></div><textarea style="margin-top:4px;min-height:50px" onchange="data.items[${selectedItem}].descriptions['${esc(key)}']=this.value;saveData()">${esc(val)}</textarea></div>`;});
+    E+=`</div>`;
+    E+=`<div class="form-group"><label>Tags</label><div class="tag-list">${(item.tags||[]).map((t,ti)=>`<span class="tag removable" onclick="data.items[${selectedItem}].tags.splice(${ti},1);saveData();renderItems()">${esc(t)} &times;</span>`).join('')}</div><div class="tag-input-row"><input type="text" id="iTI" placeholder="Add..." onkeydown="if(event.key==='Enter'){addItemTag(${selectedItem},this.value);this.value=''}"><button onclick="addItemTag(${selectedItem},document.getElementById('iTI').value);document.getElementById('iTI').value=''">+</button></div></div>`;
+    E+=`<div class="form-group"><label>Discovery Condition</label><textarea onchange="data.items[${selectedItem}].discoveryCondition=this.value;saveData()" style="min-height:50px">${esc(item.discoveryCondition)}</textarea></div>`;
+
+    // Character Reactions
+    if (!item.reactions) item.reactions = [];
+    E+=`<div class="detail-section" style="margin-top:16px"><h4>Character Reactions</h4>`;
+    E+=`<p style="font-size:10px;color:var(--text2);margin-bottom:8px">How each date reacts when they notice this item. Emotion first, words optional.</p>`;
+    E+=`<div class="reactions-grid">`;
+    item.reactions.forEach((r, ri) => {
+      const ch = data.characters.find(c => c.id === r.characterId);
+      const charColor = ch?.color || 'var(--text2)';
+      E+=`<div class="reaction-row">`;
+      E+=`<div class="rr-char" style="color:${charColor}">${ch ? esc(ch.name) : esc(r.characterId)}</div>`;
+      E+=`<div class="rr-emotion">${EMOTIONS.map(em => `<button class="emotion-btn${r.emotion===em.id?' active':''}" title="${em.label}" onclick="data.items[${selectedItem}].reactions[${ri}].emotion='${em.id}';saveData();renderItems()">${em.emoji}</button>`).join('')}</div>`;
+      E+=`<div class="rr-text"><input type="text" value="${esc(r.text||'')}" placeholder="(optional brief text)" onchange="data.items[${selectedItem}].reactions[${ri}].text=this.value;saveData()"></div>`;
+      E+=`<button class="btn btn-danger" style="flex-shrink:0" onclick="data.items[${selectedItem}].reactions.splice(${ri},1);saveData();renderItems()">&times;</button>`;
+      E+=`</div>`;
+    });
+    E+=`</div>`;
+    // Add reaction
+    const charsWithoutReaction = data.characters.filter(c => c.role === 'date' && !item.reactions.find(r => r.characterId === c.id));
+    if (charsWithoutReaction.length) {
+      E+=`<div class="reaction-add"><select id="addReactChar_${selectedItem}">${charsWithoutReaction.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select><button class="btn" onclick="addItemReaction(${selectedItem})">+ Add Reaction</button></div>`;
+    }
+    E+=`</div>`;
+
+    E+=`<div class="form-group"><label>Notes</label><textarea onchange="data.items[${selectedItem}].notes=this.value;saveData()">${esc(item.notes)}</textarea></div>`;
+    const rb=data.beats.filter(b=>b.effects.some(e=>e.params?.itemId===item.id));const rc=data.chains.filter(c=>c.steps.some(s=>s.itemId===item.id||s.result===item.id));
+    if(rb.length||rc.length){E+=`<div class="detail-section" style="margin-top:16px"><h4>Referenced By</h4>`;rb.forEach(b=>{E+=`<div class="card" style="cursor:pointer;border-left:3px solid var(--accent2)" onclick="selectedBeat=${data.beats.indexOf(b)};switchTab('beats')"><div class="card-head">Beat: ${esc(b.name)}</div></div>`;});rc.forEach(c=>{E+=`<div class="card" style="cursor:pointer;border-left:3px solid var(--green)" onclick="selectedChain=${data.chains.indexOf(c)};switchTab('chains')"><div class="card-head">Chain: ${esc(c.name)}</div></div>`;});E+=`</div>`;}
+    E+=`<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete?')){data.items.splice(${selectedItem},1);selectedItem=0;saveData('deleted item');renderItems()}">Delete</button></div>`;
+  }
+  E+=`</div>`;tab.innerHTML=L+E;
+}
+function addItem(){data.items.push({id:genId(),name:'New Item',type:'apartment',thread:'',mysteryLevel:0,tags:[],description:'',descriptions:{},discoveryCondition:'',notes:''});selectedItem=data.items.length-1;saveData('added new item');renderItems();}
+function addItemTag(idx,val){if(!val.trim())return;if(!data.items[idx].tags.includes(val.trim())){data.items[idx].tags.push(val.trim());saveData();renderItems();}}
+function addItemDesc(idx){const k='context_'+(Object.keys(data.items[idx].descriptions||{}).length+1);if(!data.items[idx].descriptions)data.items[idx].descriptions={};data.items[idx].descriptions[k]='';saveData();renderItems();}
+function addItemReaction(idx){const sel=document.getElementById('addReactChar_'+idx);if(!sel)return;if(!data.items[idx].reactions)data.items[idx].reactions=[];data.items[idx].reactions.push({characterId:sel.value,emotion:'neutral',text:''});saveData();renderItems();}
+function renameDescKey(ii,ok,nk){if(!nk.trim()||nk===ok)return;const d=data.items[ii].descriptions;d[nk.trim()]=d[ok];delete d[ok];saveData();renderItems();}
+
+// =====================================================
+// THREADS TAB
+// =====================================================
+function renderThreads(){
+  const tab=document.getElementById('tab-threads');if(selectedThread>=data.threads.length)selectedThread=0;const thread=data.threads[selectedThread];
+  let L=`<button class="mobile-toggle" onclick="toggleSidebar(this)">Threads List</button><div class="side-list"><h3>Threads <button onclick="addThread()">+ New</button></h3><div class="list-items">`;
+  data.threads.forEach((t,i)=>{const ic=data.items.filter(it=>it.thread===t.id).length;const bc=data.beats.filter(b=>b.thread===t.id).length;L+=`<div class="list-item${i===selectedThread?' active':''}" onclick="selectedThread=${i};renderThreads();updateMyPresence()"><div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0"><span class="char-color-dot" style="background:${t.color}"></span><div><div class="li-name">${esc(t.name)}</div><div class="li-sub">${ic} items, ${bc} beats</div></div></div><div class="reorder-btns" onclick="event.stopPropagation()"><button class="reorder-btn" onclick="reorderThread(${i},-1)">&uarr;</button><button class="reorder-btn" onclick="reorderThread(${i},1)">&darr;</button></div></div>`;});
+  L+=`</div></div>`;
+  let E=`<div class="editor-panel">`;
+  if(thread){
+    E+=`<h2 style="color:${thread.color}">${esc(thread.name)}</h2>`;
+    E+=`<div class="form-row"><div class="form-group"><label>Name</label><input type="text" value="${esc(thread.name)}" onchange="data.threads[${selectedThread}].name=this.value;saveData('renamed thread');renderThreads()"></div><div class="form-group"><label>Color</label><input type="text" value="${esc(thread.color)}" onchange="data.threads[${selectedThread}].color=this.value;saveData();renderThreads()"></div></div>`;
+    E+=`<div class="form-group"><label>Description</label><textarea onchange="data.threads[${selectedThread}].description=this.value;saveData()">${esc(thread.description)}</textarea></div>`;
+    const ti=data.items.filter(it=>it.thread===thread.id);E+=`<div class="detail-section"><h4>Items (${ti.length})</h4>`;if(!ti.length)E+=`<div class="empty-state" style="height:60px">No items assigned</div>`;else ti.forEach(it=>{const idx=data.items.indexOf(it);E+=`<div class="card" style="cursor:pointer;border-left:3px solid ${thread.color}" onclick="selectedItem=${idx};switchTab('items')"><div class="card-head">${esc(it.name)} <span class="item-type-badge ${it.type}">${it.type}</span></div><div class="card-body">${highlightKW(it.description?.substring(0,80)||'')}</div></div>`;});E+=`</div>`;
+    const tb=data.beats.filter(b=>b.thread===thread.id);E+=`<div class="detail-section"><h4>Beats (${tb.length})</h4>`;tb.forEach(b=>{const idx=data.beats.indexOf(b);E+=`<div class="card" style="cursor:pointer;border-left:3px solid var(--accent2)" onclick="selectedBeat=${idx};switchTab('beats')"><div class="card-head">${esc(b.name)}</div><div class="card-body">${esc(b.trigger?.type)} ${b.day>0?'(Day '+b.day+')':''}</div></div>`;});E+=`</div>`;
+    const tc=data.chains.filter(c=>c.thread===thread.id);if(tc.length){E+=`<div class="detail-section"><h4>Chains (${tc.length})</h4>`;tc.forEach(c=>{const idx=data.chains.indexOf(c);E+=`<div class="card" style="cursor:pointer;border-left:3px solid var(--green)" onclick="selectedChain=${idx};switchTab('chains')"><div class="card-head">${esc(c.name)}</div></div>`;});E+=`</div>`;}
+    E+=`<div class="form-group"><label>Notes</label><textarea onchange="data.threads[${selectedThread}].notes=this.value;saveData()">${esc(thread.notes)}</textarea></div>`;
+    E+=`<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete?')){data.threads.splice(${selectedThread},1);selectedThread=0;saveData('deleted thread');renderThreads()}">Delete</button></div>`;
+  }
+  E+=`</div>`;tab.innerHTML=L+E;
+}
+function addThread(){data.threads.push({id:genId(),name:'New Thread',color:CHAR_COLORS[data.threads.length%CHAR_COLORS.length],description:'',notes:''});selectedThread=data.threads.length-1;saveData('added new thread');renderThreads();}
+
+// =====================================================
+// BEATS TAB
+// =====================================================
+function renderBeats(){
+  const tab=document.getElementById('tab-beats');if(selectedBeat>=data.beats.length)selectedBeat=0;const beat=data.beats[selectedBeat];
+  let L=`<button class="mobile-toggle" onclick="toggleSidebar(this)">Beats List</button><div class="side-list"><h3>Beats <button onclick="addBeat()">+ New</button></h3><div class="list-items">`;
+  data.beats.forEach((b,i)=>{const thread=data.threads.find(t=>t.id===b.thread);L+=`<div class="list-item${i===selectedBeat?' active':''}" onclick="selectedBeat=${i};renderBeats();updateMyPresence()"><div style="flex:1;min-width:0"><div class="li-name">${esc(b.name)}</div><div class="li-sub">${esc(b.trigger?.type||'')}${b.day>0?' (Day '+b.day+')':''}</div>${thread?`<span class="li-tag" style="color:${thread.color};border:1px solid ${thread.color}">${esc(thread.name)}</span>`:''}</div><div class="reorder-btns" onclick="event.stopPropagation()"><button class="reorder-btn" onclick="reorderBeat(${i},-1)">&uarr;</button><button class="reorder-btn" onclick="reorderBeat(${i},1)">&darr;</button></div></div>`;});
+  L+=`</div></div>`;
+  let E=`<div class="editor-panel">`;
+  if(beat){
+    const thread=data.threads.find(t=>t.id===beat.thread);
+    E+=`<h2>${esc(beat.name)}</h2>${thread?`<div class="ep-sub" style="color:${thread.color}">${esc(thread.name)}</div>`:''}`;
+    E+=`<div class="form-row"><div class="form-group"><label>Name</label><input type="text" value="${esc(beat.name)}" onchange="data.beats[${selectedBeat}].name=this.value;saveData('renamed beat');renderBeats()"></div><div class="form-group"><label>Thread</label><select onchange="data.beats[${selectedBeat}].thread=this.value;saveData();renderBeats()"><option value="">None</option>${data.threads.map(t=>`<option value="${t.id}"${beat.thread===t.id?' selected':''}>${esc(t.name)}</option>`).join('')}</select></div></div>`;
+    E+=`<div class="beat-trigger"><h4>Trigger</h4><div class="form-row"><div class="form-group"><label>Type</label><select onchange="data.beats[${selectedBeat}].trigger.type=this.value;saveData()">${TRIGGER_TYPES.map(t=>`<option value="${t}"${beat.trigger?.type===t?' selected':''}>${t}</option>`).join('')}</select></div><div class="form-group"><label>Day (0=any)</label><input type="number" value="${beat.day||0}" min="0" onchange="data.beats[${selectedBeat}].day=parseInt(this.value)||0;saveData()"></div></div>`;
+    E+=`<div class="form-group"><label>Parameters</label><textarea style="min-height:60px;font-family:monospace;font-size:11px" onchange="try{data.beats[${selectedBeat}].trigger.params=JSON.parse(this.value)}catch(e){data.beats[${selectedBeat}].trigger.params={note:this.value}};saveData()">${esc(JSON.stringify(beat.trigger?.params||{},null,2))}</textarea></div></div>`;
+    E+=`<div class="detail-section"><h4>Effects <button class="btn" style="font-size:10px;padding:2px 8px;margin-left:8px" onclick="addBeatEffect(${selectedBeat})">+ Effect</button></h4>`;
+    (beat.effects||[]).forEach((eff,ei)=>{
+      E+=`<div class="beat-effect"><select onchange="data.beats[${selectedBeat}].effects[${ei}].type=this.value;saveData();renderBeats()">${EFFECT_TYPES.map(t=>`<option value="${t}"${eff.type===t?' selected':''}>${t}</option>`).join('')}</select><div class="ef-detail">`;
+      if(eff.type==='itemAppears'||eff.type==='unlockItem') E+=`<select onchange="data.beats[${selectedBeat}].effects[${ei}].params.itemId=this.value;saveData()"><option value="">Select...</option>${data.items.map(it=>`<option value="${it.id}"${eff.params?.itemId===it.id?' selected':''}>${esc(it.name)}</option>`).join('')}</select>`;
+      E+=`<textarea style="margin-top:4px;min-height:40px;font-size:11px" onchange="data.beats[${selectedBeat}].effects[${ei}].params.note=this.value;saveData()" placeholder="Details...">${esc(eff.params?.note||'')}</textarea></div><button class="btn btn-danger" onclick="data.beats[${selectedBeat}].effects.splice(${ei},1);saveData();renderBeats()">&times;</button></div>`;
+    });
+    E+=`</div>`;
+    E+=`<div class="form-group"><label>Notes</label><textarea onchange="data.beats[${selectedBeat}].notes=this.value;saveData()">${esc(beat.notes)}</textarea></div>`;
+    E+=`<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete?')){data.beats.splice(${selectedBeat},1);selectedBeat=0;saveData('deleted beat');renderBeats()}">Delete</button></div>`;
+  }
+  E+=`</div>`;tab.innerHTML=L+E;
+}
+function addBeat(){data.beats.push({id:genId(),name:'New Beat',thread:'',trigger:{type:'manual',params:{}},effects:[],day:0,notes:''});selectedBeat=data.beats.length-1;saveData('added new beat');renderBeats();}
+function addBeatEffect(bi){if(!data.beats[bi].effects)data.beats[bi].effects=[];data.beats[bi].effects.push({type:'itemAppears',params:{}});saveData();renderBeats();}
+
+// =====================================================
+// CHAINS TAB
+// =====================================================
+function renderChains(){
+  const tab=document.getElementById('tab-chains');if(selectedChain>=data.chains.length)selectedChain=0;const chain=data.chains[selectedChain];
+  let L=`<button class="mobile-toggle" onclick="toggleSidebar(this)">Chains List</button><div class="side-list"><h3>Chains <button onclick="addChain()">+ New</button></h3><div class="list-items">`;
+  data.chains.forEach((c,i)=>{const thread=data.threads.find(t=>t.id===c.thread);L+=`<div class="list-item${i===selectedChain?' active':''}" onclick="selectedChain=${i};renderChains();updateMyPresence()"><div style="flex:1;min-width:0"><div class="li-name">${esc(c.name)}</div><div class="li-sub">${c.steps.length} steps</div>${thread?`<span class="li-tag" style="color:${thread.color};border:1px solid ${thread.color}">${esc(thread.name)}</span>`:''}</div><div class="reorder-btns" onclick="event.stopPropagation()"><button class="reorder-btn" onclick="reorderChain(${i},-1)">&uarr;</button><button class="reorder-btn" onclick="reorderChain(${i},1)">&darr;</button></div></div>`;});
+  L+=`</div></div>`;
+  let E=`<div class="editor-panel">`;
+  if(chain){
+    const thread=data.threads.find(t=>t.id===chain.thread);
+    E+=`<h2>${esc(chain.name)}</h2>${thread?`<div class="ep-sub" style="color:${thread.color}">${esc(thread.name)}</div>`:''}`;
+    E+=`<div class="form-row"><div class="form-group"><label>Name</label><input type="text" value="${esc(chain.name)}" onchange="data.chains[${selectedChain}].name=this.value;saveData('renamed chain');renderChains()"></div><div class="form-group"><label>Thread</label><select onchange="data.chains[${selectedChain}].thread=this.value;saveData();renderChains()"><option value="">None</option>${data.threads.map(t=>`<option value="${t.id}"${chain.thread===t.id?' selected':''}>${esc(t.name)}</option>`).join('')}</select></div></div>`;
+    E+=`<div class="detail-section"><h4>Steps</h4>`;
+    chain.steps.forEach((step,si)=>{
+      const resultItem=step.result?data.items.find(it=>it.id===step.result):null;
+      E+=`<div class="chain-step">${si>0?`<div class="chain-arrow"><div style="width:2px;height:20px;background:var(--accent2)"></div><div>&#9660;</div></div>`:'<div style="width:18px"></div>'}<div class="chain-step-card"><div class="cs-num">Step ${si+1} <button class="btn btn-danger" style="font-size:9px;padding:1px 4px;float:right" onclick="data.chains[${selectedChain}].steps.splice(${si},1);saveData();renderChains()">&times;</button></div><div class="form-row" style="margin-bottom:6px"><select onchange="data.chains[${selectedChain}].steps[${si}].itemId=this.value;saveData();renderChains()"><option value="">Item...</option>${data.items.map(it=>`<option value="${it.id}"${step.itemId===it.id?' selected':''}>${esc(it.name)}</option>`).join('')}</select><select onchange="data.chains[${selectedChain}].steps[${si}].action=this.value;saveData()"><option value="discover"${step.action==='discover'?' selected':''}>Discover</option><option value="examine"${step.action==='examine'?' selected':''}>Examine</option><option value="combine"${step.action==='combine'?' selected':''}>Combine</option><option value="place"${step.action==='place'?' selected':''}>Place</option><option value="use"${step.action==='use'?' selected':''}>Use</option></select></div><textarea style="min-height:40px;font-size:11px" onchange="data.chains[${selectedChain}].steps[${si}].description=this.value;saveData()">${esc(step.description)}</textarea><div style="margin-top:6px"><label style="font-size:10px;color:var(--green)">Result Item</label><select onchange="data.chains[${selectedChain}].steps[${si}].result=this.value;saveData();renderChains()" style="font-size:11px"><option value="">None</option>${data.items.map(it=>`<option value="${it.id}"${step.result===it.id?' selected':''}>${esc(it.name)}</option>`).join('')}</select></div></div></div>`;
+      if(resultItem) E+=`<div class="chain-result"><h5>Produces: ${esc(resultItem.name)}</h5><div class="card-body">${esc(resultItem.description?.substring(0,100)||'')}</div></div>`;
+    });
+    E+=`<button class="btn" style="margin-top:8px" onclick="addChainStep(${selectedChain})">+ Step</button></div>`;
+    E+=`<div class="form-group"><label>Notes</label><textarea onchange="data.chains[${selectedChain}].notes=this.value;saveData()">${esc(chain.notes)}</textarea></div>`;
+    E+=`<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete?')){data.chains.splice(${selectedChain},1);selectedChain=0;saveData('deleted chain');renderChains()}">Delete</button></div>`;
+  }
+  E+=`</div>`;tab.innerHTML=L+E;
+}
+function addChain(){data.chains.push({id:genId(),name:'New Chain',thread:'',steps:[],notes:''});selectedChain=data.chains.length-1;saveData('added new chain');renderChains();}
+function addChainStep(ci){data.chains[ci].steps.push({itemId:'',action:'discover',description:'',result:''});saveData();renderChains();}
+
+// =====================================================
+// TIMELINE TAB (deeply integrated)
+// =====================================================
+function gatherDayData(dayNum) {
+  // Auto-gather everything linked to this day
+  const result = { beats: [], items: [], chains: [] };
+
+  // Beats explicitly scheduled for this day
+  data.beats.filter(b => b.day === dayNum).forEach(b => result.beats.push(b));
+
+  // Items that appear via beats on this day
+  result.beats.forEach(b => {
+    (b.effects || []).forEach(eff => {
+      if ((eff.type === 'itemAppears' || eff.type === 'unlockItem') && eff.params?.itemId) {
+        const item = data.items.find(it => it.id === eff.params.itemId);
+        if (item && !result.items.find(i => i.id === item.id)) result.items.push(item);
+      }
+    });
+  });
+
+  // Chains that have steps triggering on this day
+  data.chains.forEach(ch => {
+    ch.steps.forEach(s => {
+      if (result.items.find(it => it.id === s.itemId) || result.items.find(it => it.id === s.result)) {
+        if (!result.chains.find(c => c.id === ch.id)) result.chains.push(ch);
+      }
+    });
+  });
+
+  return result;
+}
+
+function renderTimeline(){
+  const tab = document.getElementById('tab-timeline');
+  let html = `<h2 style="margin-bottom:4px">Timeline</h2>`;
+  html += `<p style="color:var(--text2);font-size:12px;margin-bottom:20px">Narrative pacing — auto-gathers beats, items, and chains per day. Add manual links with the + menu.</p>`;
+
+  data.timeline.days.forEach((day, di) => {
+    const gathered = gatherDayData(day.day);
+    const linked = day.linkedEntities || [];
+    const pacing = day.pacing || 'setup';
+
+    html += `<div class="timeline-row">`;
+    html += `<div class="tl-day-label"><div class="tl-day-num">${day.day}</div><select style="font-size:9px !important;padding:1px 2px !important;background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:2px;width:54px" onchange="data.timeline.days[${di}].pacing=this.value;saveData();renderTimeline()">${PACING_TYPES.map(p => `<option value="${p}"${pacing===p?' selected':''}>${p}</option>`).join('')}</select></div>`;
+    html += `<div class="tl-day-content">`;
+
+    // Pacing bar
+    html += `<div class="tl-pacing-bar ${pacing}" style="width:100%"></div>`;
+
+    // BEATS row (auto-gathered)
+    if (gathered.beats.length) {
+      html += `<div class="tl-row-group"><span class="tl-row-label">Beats</span>`;
+      gathered.beats.forEach(b => {
+        const thread = data.threads.find(t => t.id === b.thread);
+        const color = thread ? thread.color : 'var(--accent2)';
+        html += `<div class="tl-chip beat" style="border-color:${color};color:${color}" onclick="selectedBeat=${data.beats.indexOf(b)};switchTab('beats')">${esc(b.name)}</div>`;
+      });
+      html += `</div>`;
+    }
+
+    // ITEMS row (auto-gathered from beat effects)
+    if (gathered.items.length) {
+      html += `<div class="tl-row-group"><span class="tl-row-label">Items</span>`;
+      gathered.items.forEach(it => {
+        const thread = data.threads.find(t => t.id === it.thread);
+        const color = thread ? thread.color : 'var(--accent3)';
+        html += `<div class="tl-chip item" style="border-color:${color};color:${color}" onclick="selectedItem=${data.items.indexOf(it)};switchTab('items')">${esc(it.name)}</div>`;
+      });
+      html += `</div>`;
+    }
+
+    // CHAINS row (auto-gathered)
+    if (gathered.chains.length) {
+      html += `<div class="tl-row-group"><span class="tl-row-label">Chains</span>`;
+      gathered.chains.forEach(ch => {
+        html += `<div class="tl-chip chain" onclick="selectedChain=${data.chains.indexOf(ch)};switchTab('chains')">${esc(ch.name)}</div>`;
+      });
+      html += `</div>`;
+    }
+
+    // LINKED entities (manually added)
+    if (linked.length) {
+      html += `<div class="tl-row-group"><span class="tl-row-label">Linked</span>`;
+      linked.forEach((le, lei) => {
+        let chipClass = 'event', label = le.label || '?', clickAction = '';
+        if (le.type === 'character') {
+          const ch = data.characters.find(c => c.id === le.id);
+          chipClass = 'char'; label = ch?.name || le.id;
+          if (ch) clickAction = `selectedChar=${data.characters.indexOf(ch)};switchTab('characters')`;
+        } else if (le.type === 'item') {
+          const it = data.items.find(i => i.id === le.id);
+          chipClass = 'item'; label = it?.name || le.id;
+          if (it) clickAction = `selectedItem=${data.items.indexOf(it)};switchTab('items')`;
+        } else if (le.type === 'beat') {
+          const b = data.beats.find(b => b.id === le.id);
+          chipClass = 'beat'; label = b?.name || le.id;
+          if (b) clickAction = `selectedBeat=${data.beats.indexOf(b)};switchTab('beats')`;
+        } else if (le.type === 'chain') {
+          const ch = data.chains.find(c => c.id === le.id);
+          chipClass = 'chain'; label = ch?.name || le.id;
+          if (ch) clickAction = `selectedChain=${data.chains.indexOf(ch)};switchTab('chains')`;
+        } else if (le.type === 'thread') {
+          const t = data.threads.find(t => t.id === le.id);
+          chipClass = 'beat'; label = t?.name || le.id;
+          if (t) clickAction = `selectedThread=${data.threads.indexOf(t)};switchTab('threads')`;
+        } else {
+          label = le.label || le.id || '?';
+        }
+        html += `<div class="tl-chip ${chipClass}" ${clickAction ? `onclick="${clickAction}"` : ''}>${esc(label)}<span class="chip-x" onclick="event.stopPropagation();data.timeline.days[${di}].linkedEntities.splice(${lei},1);saveData();renderTimeline()">&times;</span></div>`;
+      });
+      html += `</div>`;
+    }
+
+    // EVENTS row (manual freetext)
+    if ((day.events || []).length) {
+      html += `<div class="tl-row-group"><span class="tl-row-label">Notes</span>`;
+      (day.events || []).forEach((ev, ei) => {
+        html += `<div class="tl-chip event" contenteditable="true" onblur="data.timeline.days[${di}].events[${ei}]=this.textContent;saveData()">${esc(ev)}<span class="chip-x" onclick="event.stopPropagation();data.timeline.days[${di}].events.splice(${ei},1);saveData();renderTimeline()">&times;</span></div>`;
+      });
+      html += `</div>`;
+    }
+
+    // ADD controls — link existing OR create new
+    html += `<div class="tl-add-entity" style="flex-wrap:wrap;gap:4px">`;
+
+    // Link existing
+    html += `<select id="tlAdd_${di}"><option value="">Link existing...</option>`;
+    html += `<optgroup label="Characters">${data.characters.map(c => `<option value="character:${c.id}">${esc(c.name)}</option>`).join('')}</optgroup>`;
+    html += `<optgroup label="Items">${data.items.map(i => `<option value="item:${i.id}">${esc(i.name)}</option>`).join('')}</optgroup>`;
+    html += `<optgroup label="Beats">${data.beats.map(b => `<option value="beat:${b.id}">${esc(b.name)}</option>`).join('')}</optgroup>`;
+    html += `<optgroup label="Chains">${data.chains.map(c => `<option value="chain:${c.id}">${esc(c.name)}</option>`).join('')}</optgroup>`;
+    html += `<optgroup label="Threads">${data.threads.map(t => `<option value="thread:${t.id}">${esc(t.name)}</option>`).join('')}</optgroup>`;
+    html += `</select>`;
+    html += `<button onclick="tlLinkEntity(${di})">Link</button>`;
+
+    // Create new inline
+    html += `<span style="color:var(--text2);font-size:10px;margin:0 2px">or create:</span>`;
+    html += `<button onclick="tlNewItem(${di})" style="color:var(--accent3)">+ Item</button>`;
+    html += `<button onclick="tlNewBeat(${di})" style="color:var(--accent2)">+ Beat</button>`;
+    html += `<button onclick="tlNewEvent(${di})">+ Note</button>`;
+    html += `</div>`;
+
+    html += `</div></div>`;
+
+    // Dream interstitial AFTER each day (except the last)
+    if (di < data.timeline.days.length - 1) {
+      if (!day.dreamText && day.dreamText !== '') day.dreamText = '';
+      const hasDream = (day.dreamText || '').trim();
+      html += `<div class="tl-dream" onclick="this.querySelector('textarea').style.display='block';this.querySelector('.dream-preview')&&(this.querySelector('.dream-preview').style.display='none')">`;
+      if (hasDream) html += `<div class="dream-preview" style="color:#9080b0;font-family:Georgia,serif;font-style:italic;font-size:14px;line-height:1.8;cursor:text">${highlightKW(day.dreamText)}</div>`;
+      html += `<textarea style="${hasDream?'display:none;':''}}" placeholder="Dream text between Day ${day.day} and Day ${data.timeline.days[di+1].day}..." onblur="data.timeline.days[${di}].dreamText=this.value;saveData('wrote dream for day ${day.day}');renderTimeline()" onfocus="var p=this.parentNode.querySelector('.dream-preview');if(p)p.style.display='none';this.style.display='block'">${esc(day.dreamText || '')}</textarea>`;
+      html += `</div>`;
+    }
+  });
+
+  html += `<div style="margin-top:12px;display:flex;gap:8px"><button class="btn" onclick="addTimelineDay()">+ Add Day</button><button class="btn btn-danger" style="font-size:11px" onclick="if(data.timeline.days.length&&confirm('Remove last day?')){data.timeline.days.pop();saveData();renderTimeline()}">Remove Last</button></div>`;
+  tab.innerHTML = html;
+}
+
+function tlNewItem(dayIdx) {
+  const dayNum = data.timeline.days[dayIdx].day;
+  const name = prompt('New item name (appears on Day ' + dayNum + '):');
+  if (!name || !name.trim()) return;
+  const id = genId();
+  data.items.push({ id, name: name.trim(), type:'apartment', thread:'', mysteryLevel:0, tags:[], description:'', descriptions:{}, discoveryCondition:'Day ' + dayNum, notes:'Created from timeline.', reactions:[] });
+  if (!data.timeline.days[dayIdx].linkedEntities) data.timeline.days[dayIdx].linkedEntities = [];
+  data.timeline.days[dayIdx].linkedEntities.push({ type:'item', id });
+  saveData('created item "' + name.trim() + '" on day ' + dayNum);
+  renderTimeline();
+}
+
+function tlNewBeat(dayIdx) {
+  const dayNum = data.timeline.days[dayIdx].day;
+  const name = prompt('New beat name (fires on Day ' + dayNum + '):');
+  if (!name || !name.trim()) return;
+  const id = genId();
+  data.beats.push({ id, name: name.trim(), thread:'', trigger:{ type:'dayReached', params:{ day: dayNum } }, effects:[], day: dayNum, notes:'Created from timeline.' });
+  // Auto-linked via day number — no need to manually link
+  saveData('created beat "' + name.trim() + '" on day ' + dayNum);
+  renderTimeline();
+}
+
+function tlNewEvent(dayIdx) {
+  data.timeline.days[dayIdx].events.push('');
+  saveData();
+  renderTimeline();
+  // Focus the new empty chip for immediate typing
+  setTimeout(() => {
+    const chips = document.querySelectorAll(`#tab-timeline .timeline-row:nth-child(${dayIdx + 3}) .tl-chip.event[contenteditable]`);
+    const last = chips[chips.length - 1];
+    if (last) { last.focus(); last.textContent = ''; }
+  }, 50);
+}
+
+function tlLinkEntity(dayIdx) {
+  const sel = document.getElementById('tlAdd_' + dayIdx);
+  if (!sel || !sel.value) return;
+  const [type, id] = sel.value.split(':');
+  if (!data.timeline.days[dayIdx].linkedEntities) data.timeline.days[dayIdx].linkedEntities = [];
+  if (data.timeline.days[dayIdx].linkedEntities.find(e => e.type === type && e.id === id)) return;
+  data.timeline.days[dayIdx].linkedEntities.push({ type, id });
+  saveData('linked entity to day ' + data.timeline.days[dayIdx].day);
+  renderTimeline();
+}
+
+function addTimelineDay() {
+  const nd = data.timeline.days.length > 0 ? data.timeline.days[data.timeline.days.length-1].day + 1 : 1;
+  data.timeline.days.push({ day: nd, pacing: 'setup', events: [], notes: '', linkedEntities: [] });
+  saveData('added timeline day');
+  renderTimeline();
+}
+
+// =====================================================
+// EXPORT TAB (with Unity formats)
+// =====================================================
+function renderExport(){
+  const tab=document.getElementById('tab-export');
+  const counts={chars:data.characters.length,items:data.items.length,souvenirs:data.items.filter(i=>i.type==='souvenir').length,mysteries:data.items.filter(i=>i.mysteryLevel>=2).length,variants:data.items.reduce((s,i)=>s+Object.keys(i.descriptions||{}).length,0),threads:data.threads.length,beats:data.beats.length,chains:data.chains.length,days:data.timeline.days.length};
+  let html=`<h2 style="margin-bottom:16px">Export & Stats</h2>`;
+  html+=`<div class="export-stats">${Object.entries({Characters:counts.chars,Items:counts.items,Souvenirs:counts.souvenirs,Mysteries:counts.mysteries,'Desc Variants':counts.variants,Threads:counts.threads,Beats:counts.beats,Chains:counts.chains,Days:counts.days}).map(([k,v])=>`<div class="stat-card"><div class="stat-num">${v}</div><div class="stat-label">${k}</div></div>`).join('')}</div>`;
+
+  // Completeness
+  html+=`<div class="export-section"><h3>Completeness</h3>`;
+  const issues=[];
+  data.items.filter(i=>!i.description).forEach(i=>issues.push(`"${i.name}" has no description`));
+  data.items.filter(i=>!i.thread).forEach(i=>issues.push(`"${i.name}" has no thread`));
+  data.beats.filter(b=>!b.effects?.length).forEach(b=>issues.push(`Beat "${b.name}" has no effects`));
+  data.characters.filter(c=>c.role==='date'&&!c.outcomes?.disappearance).forEach(c=>issues.push(`"${c.name}" missing disappearance`));
+  if(!issues.length) html+=`<div class="card" style="border-color:var(--green)"><div class="card-body" style="color:var(--green)">All checks passed!</div></div>`;
+  else issues.forEach(i=>{html+=`<div class="card" style="border-left:3px solid var(--accent2)"><div class="card-body" style="color:var(--accent2)">${esc(i)}</div></div>`;});
+  html+=`</div>`;
+
+  // Export buttons
+  html+=`<div class="export-actions">`;
+  html+=`<button class="btn btn-accent" onclick="exportJSON()">Download Full JSON</button>`;
+  html+=`<button class="btn" onclick="copyToClip(JSON.stringify(data,null,2))">Copy JSON</button>`;
+  html+=`<button class="btn" onclick="exportUnityItems()">Unity Items JSON</button>`;
+  html+=`<button class="btn" onclick="exportUnityMesses()">Unity Messes JSON</button>`;
+  html+=`<button class="btn" onclick="exportUnitySouvenirs()">Unity Souvenirs JSON</button>`;
+  html+=`<button class="btn" onclick="exportUnityInfoBits()">Unity InfoBits JSON</button>`;
+  html+=`<button class="btn" onclick="exportNarrativeDoc()">Narrative Doc (MD)</button>`;
+  html+=`</div>`;
+
+  // Unity Items preview
+  html+=`<div class="export-section"><h3>Unity GameItemDefinition Format</h3><div class="export-code" id="unityPreview">${esc(JSON.stringify(generateUnityItems(),null,2))}</div></div>`;
+
+  // Thread summary
+  html+=`<div class="export-section"><h3>Thread Summary</h3><div class="export-code">`;
+  data.threads.forEach(t=>{const items=data.items.filter(i=>i.thread===t.id);const beats=data.beats.filter(b=>b.thread===t.id);html+=`<strong style="color:${t.color}">${esc(t.name)}</strong>\n  ${esc(t.description)}\n  Items: ${items.map(i=>i.name).join(', ')||'none'}\n  Beats: ${beats.map(b=>b.name).join(', ')||'none'}\n\n`;});
+  html+=`</div></div>`;
+  tab.innerHTML=html;
+}
+
+// Unity export formatters
+function generateUnityItems(){
+  return data.items.map(item => ({
+    itemId: item.id,
+    displayName: item.name,
+    description: item.description,
+    kind: item.type === 'souvenir' || item.type === 'mystery' ? 'Equipment' : 'InfoOnly',
+    tags: item.tags,
+    mysteryLevel: item.mysteryLevel,
+    thread: item.thread,
+    contextualDescriptions: item.descriptions || {},
+    discoveryCondition: item.discoveryCondition
+  }));
+}
+
+function generateUnityMesses(){
+  return data.items.filter(i=>i.type==='mess').map(item => ({
+    messName: item.name,
+    description: item.description,
+    category: item.tags.includes('date_remnant') ? 'DateAftermath' : 'General',
+    messType: item.tags.includes('stain') ? 'Stain' : 'Object',
+    tags: item.tags,
+    conditions: { discoveryCondition: item.discoveryCondition },
+    contextualDescriptions: item.descriptions || {}
+  }));
+}
+
+function generateUnitySouvenirs(){
+  return data.items.filter(i=>i.type==='souvenir').map(item => {
+    const charTag = item.tags.find(t => data.characters.find(c=>c.id===t));
+    return {
+      souvenirId: item.id,
+      displayName: item.name,
+      linkedCharacterId: charTag || '',
+      description: item.description,
+      descriptions: item.descriptions || {},
+      tags: item.tags,
+      mysteryLevel: item.mysteryLevel
+    };
+  });
+}
+
+function generateUnityInfoBits(){
+  return data.items.filter(i=>i.mysteryLevel>0).map(item=>({
+    infoId: 'info_'+item.id,
+    title: item.name,
+    description: item.description,
+    isTutorial: false,
+    learnOnce: item.mysteryLevel >= 3,
+    thread: item.thread,
+    contextualDescriptions: item.descriptions || {}
+  }));
+}
+
+function exportUnityItems(){downloadJSON(generateUnityItems(),'iris_unity_items.json');}
+function exportUnityMesses(){downloadJSON(generateUnityMesses(),'iris_unity_messes.json');}
+function exportUnitySouvenirs(){downloadJSON(generateUnitySouvenirs(),'iris_unity_souvenirs.json');}
+function exportUnityInfoBits(){downloadJSON(generateUnityInfoBits(),'iris_unity_infobits.json');}
+
+function exportNarrativeDoc(){
+  let md = '# Iris - Narrative Design Document\n\n';
+  md += `*Generated ${new Date().toLocaleDateString()}*\n\n`;
+  data.threads.forEach(t=>{
+    md += `## Thread: ${t.name}\n\n${t.description}\n\n`;
+    const items=data.items.filter(i=>i.thread===t.id);
+    if(items.length){md+=`### Items\n\n`;items.forEach(i=>{md+=`**${i.name}** (${i.type}, mystery: ${MYSTERY_LABELS[i.mysteryLevel]})\n`;md+=`> ${i.description}\n\n`;Object.entries(i.descriptions||{}).forEach(([k,v])=>{md+=`- *${k}*: ${v}\n`;});md+=`\nDiscovery: ${i.discoveryCondition}\n\n`;});}
+    const beats=data.beats.filter(b=>b.thread===t.id);
+    if(beats.length){md+=`### Beats\n\n`;beats.forEach(b=>{md+=`**${b.name}**${b.day>0?' (Day '+b.day+')':''}\n`;md+=`Trigger: ${b.trigger?.type} ${JSON.stringify(b.trigger?.params||{})}\n`;(b.effects||[]).forEach(e=>{md+=`- Effect: ${e.type} ${JSON.stringify(e.params||{})}\n`;});md+=`\n`;});}
+    const chains=data.chains.filter(c=>c.thread===t.id);
+    if(chains.length){md+=`### Item Chains\n\n`;chains.forEach(c=>{md+=`**${c.name}**\n`;c.steps.forEach((s,si)=>{const it=data.items.find(i=>i.id===s.itemId);md+=`${si+1}. [${s.action}] ${it?.name||'?'}: ${s.description}\n`;if(s.result){const ri=data.items.find(i=>i.id===s.result);md+=`   -> Produces: ${ri?.name||s.result}\n`;}});md+=`\n`;});}
+    md+=`---\n\n`;
+  });
+  const blob=new Blob([md],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='iris_narrative_doc.md';a.click();
+}
+
+function downloadJSON(obj,filename){const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();}
+function copyToClip(text){navigator.clipboard.writeText(text).then(()=>flashSave('Copied!'));}
+
+// =====================================================
+// LIST REORDER (shared by all tabs)
+// =====================================================
+function moveItem(arr, from, to) {
+  if (to < 0 || to >= arr.length) return;
+  const item = arr.splice(from, 1)[0];
+  arr.splice(to, 0, item);
+}
+
+function reorderChar(i, dir) {
+  moveItem(data.characters, i, i+dir);
+  selectedChar = Math.max(0, Math.min(i+dir, data.characters.length-1));
+  saveData('reordered characters');
+  renderCharacters();
+}
+function reorderItem(i, dir) {
+  moveItem(data.items, i, i+dir);
+  selectedItem = Math.max(0, Math.min(i+dir, data.items.length-1));
+  saveData('reordered items');
+  renderItems();
+}
+function reorderThread(i, dir) {
+  moveItem(data.threads, i, i+dir);
+  selectedThread = Math.max(0, Math.min(i+dir, data.threads.length-1));
+  saveData('reordered threads');
+  renderThreads();
+}
+function reorderBeat(i, dir) {
+  moveItem(data.beats, i, i+dir);
+  selectedBeat = Math.max(0, Math.min(i+dir, data.beats.length-1));
+  saveData('reordered beats');
+  renderBeats();
+}
+function reorderChain(i, dir) {
+  moveItem(data.chains, i, i+dir);
+  selectedChain = Math.max(0, Math.min(i+dir, data.chains.length-1));
+  saveData('reordered chains');
+  renderChains();
+}
+
+// =====================================================
+// MOBILE: SIDEBAR TOGGLE
+// =====================================================
+function toggleSidebar(btn) {
+  const list = btn.nextElementSibling;
+  if (list && list.classList.contains('side-list')) {
+    list.classList.toggle('collapsed');
+    btn.classList.toggle('collapsed');
+  }
+}
+
+// =====================================================
+// TOUCH NODE DRAG (long-press on map nodes)
+// =====================================================
+let touchNodeTimer = null;
+let touchNodeDrag = null; // { key, el, startX, startY, origX, origY }
+let touchNodeTapKey = null; // track tap-to-select vs long-press
+let touchNodeMoved = false;
+
+function initTouchNodeDrag() {
+  const c = document.getElementById('storymap-container');
+
+  c.addEventListener('touchstart', e => {
+    const nodeEl = e.target.closest('.sm-node');
+    if (!nodeEl || !nodeEl.dataset.key || e.touches.length !== 1) return;
+
+    const key = nodeEl.dataset.key;
+    const touch = e.touches[0];
+    const positions = getSmNodePositions();
+    const pos = positions[key];
+
+    touchNodeTapKey = key;
+    touchNodeMoved = false;
+
+    // Start long-press timer (400ms hold = drag mode)
+    touchNodeTimer = setTimeout(() => {
+      touchNodeDrag = {
+        key, el: nodeEl,
+        startX: touch.clientX, startY: touch.clientY,
+        origX: pos?.x || 0, origY: pos?.y || 0
+      };
+      nodeEl.classList.add('dragging-node');
+      if (navigator.vibrate) navigator.vibrate(30);
+      touchNodeTapKey = null; // no longer a tap
+    }, 400);
+  }, { passive: true });
+
+  c.addEventListener('touchmove', e => {
+    if (touchNodeTimer && !touchNodeDrag) {
+      // Finger moved before long-press fired — cancel, let pan take over
+      const touch = e.touches[0];
+      clearTimeout(touchNodeTimer);
+      touchNodeTimer = null;
+      touchNodeTapKey = null;
+      touchNodeMoved = true;
+      return;
+    }
+
+    if (touchNodeDrag && e.touches.length === 1) {
+      e.preventDefault();
+      e.stopPropagation();
+      const touch = e.touches[0];
+      const dx = (touch.clientX - touchNodeDrag.startX) / smZoom;
+      const dy = (touch.clientY - touchNodeDrag.startY) / smZoom;
+      touchNodeDrag.el.style.left = (touchNodeDrag.origX + dx) + 'px';
+      touchNodeDrag.el.style.top = (touchNodeDrag.origY + dy) + 'px';
+      updateSvgForDrag(touchNodeDrag.key, touchNodeDrag.origX + dx, touchNodeDrag.origY + dy);
+    }
+  }, { passive: false });
+
+  c.addEventListener('touchend', e => {
+    clearTimeout(touchNodeTimer);
+    touchNodeTimer = null;
+
+    if (touchNodeDrag) {
+      // Finish drag
+      const nd = touchNodeDrag;
+      nd.el.classList.remove('dragging-node');
+      const touch = e.changedTouches[0];
+      const dx = (touch.clientX - nd.startX) / smZoom;
+      const dy = (touch.clientY - nd.startY) / smZoom;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        if (!data.mapPositions) data.mapPositions = {};
+        data.mapPositions[nd.key] = { x: nd.origX + dx, y: nd.origY + dy };
+        saveData();
+      }
+      touchNodeDrag = null;
+      renderStoryMap();
+    } else if (touchNodeTapKey && !touchNodeMoved) {
+      // Short tap on node — select it
+      selectSmNode(touchNodeTapKey);
+    }
+    touchNodeTapKey = null;
+    touchNodeMoved = false;
+  }, { passive: true });
+
+  c.addEventListener('touchcancel', () => {
+    clearTimeout(touchNodeTimer); touchNodeTimer = null;
+    if (touchNodeDrag) { touchNodeDrag.el.classList.remove('dragging-node'); touchNodeDrag = null; renderStoryMap(); }
+    touchNodeTapKey = null; touchNodeMoved = false;
+  });
+}
+
+// =====================================================
+// CURSOR AVATARS ON MAP
+// =====================================================
+function initCursorTracking() {
+  const container = document.getElementById('storymap-container');
+
+  // Mouse tracking
+  container.addEventListener('mousemove', e => {
+    if (nodeDrag || smDragging) return;
+    const rect = container.getBoundingClientRect();
+    myCursorX = (e.clientX - rect.left) / smZoom - smPanX;
+    myCursorY = (e.clientY - rect.top) / smZoom - smPanY;
+    cursorOnMap = true;
+    renderCursorAvatars();
+  });
+
+  container.addEventListener('mouseleave', () => {
+    cursorOnMap = false;
+    renderCursorAvatars();
+  });
+
+  // Touch tracking — show avatar at last tap/touch position
+  container.addEventListener('touchstart', e => {
+    if (e.touches.length === 1 && !touchNodeDrag) {
+      const rect = container.getBoundingClientRect();
+      myCursorX = (e.touches[0].clientX - rect.left) / smZoom - smPanX;
+      myCursorY = (e.touches[0].clientY - rect.top) / smZoom - smPanY;
+      cursorOnMap = true;
+      renderCursorAvatars();
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    // Keep avatar visible for a moment, then fade
+    setTimeout(() => { cursorOnMap = false; renderCursorAvatars(); }, 3000);
+  }, { passive: true });
+}
+
+function renderCursorAvatars() {
+  let overlay = document.getElementById('cursor-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'cursor-overlay';
+    overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:90;';
+    const container = document.getElementById('storymap-container');
+    if (container) container.appendChild(overlay);
+    else return;
+  }
+
+  if (currentTab !== 'storymap') { overlay.innerHTML = ''; updateMapCursor(); return; }
+
+  let html = '';
+
+  // Partner cursors only — our own cursor is the CSS custom cursor
+  Object.values(peers).forEach(p => {
+    if (!p.cursorOn || p.tab !== 'storymap') return;
+    const av = AVATARS.find(a => a.id === p.avatar) || AVATARS[0];
+    const sx = ((p.cursorX || 0) + smPanX) * smZoom;
+    const sy = ((p.cursorY || 0) + smPanY) * smZoom;
+
+    // Proximity check
+    let proximityClass = '';
+    let reactionEmoji = '';
+    if (cursorOnMap) {
+      const msx = (myCursorX + smPanX) * smZoom;
+      const msy = (myCursorY + smPanY) * smZoom;
+      const dist = Math.hypot(sx - msx, sy - msy);
+      if (dist < 60) { proximityClass = ' close'; reactionEmoji = av.react; }
+      else if (dist < 150) { proximityClass = ' reacting'; reactionEmoji = av.react; }
+    }
+
+    html += `<div class="cursor-avatar${proximityClass}" style="left:${sx}px;top:${sy}px;">`;
+    html += `<div class="ca-pointer"><div class="ca-arrow" style="border-left-color:${p.color};border-top-color:${p.color}"></div><div class="ca-emoji">${av.emoji}</div></div>`;
+    html += `<div class="ca-name" style="color:${p.color}">${esc(p.name)}</div>`;
+    if (reactionEmoji) html += `<div class="ca-reaction">${reactionEmoji}</div>`;
+    html += `</div>`;
+  });
+
+  overlay.innerHTML = html;
+  updateMapCursor();
+}
+
+// Set CSS custom cursor on the map container — avatar emoji as cursor image
+function updateMapCursor() {
+  const container = document.getElementById('storymap-container');
+  if (!container) return;
+  if (currentTab !== 'storymap') { container.style.cursor = ''; return; }
+
+  const av = AVATARS.find(a => a.id === myAvatar) || AVATARS[0];
+  // Generate cursor from canvas: small emoji with a pointer tip in top-left
+  if (!container._cursorCanvas) {
+    container._cursorCanvas = document.createElement('canvas');
+    container._cursorCanvas.width = 32;
+    container._cursorCanvas.height = 32;
+  }
+  const cvs = container._cursorCanvas;
+  const ctx = cvs.getContext('2d');
+  ctx.clearRect(0, 0, 32, 32);
+  // Draw pointer triangle
+  ctx.fillStyle = myColor;
+  ctx.beginPath();
+  ctx.moveTo(0, 0); ctx.lineTo(0, 14); ctx.lineTo(5, 11); ctx.lineTo(9, 18); ctx.lineTo(12, 16); ctx.lineTo(8, 9); ctx.lineTo(12, 7);
+  ctx.closePath(); ctx.fill();
+  // Draw emoji offset
+  ctx.font = '14px serif';
+  ctx.fillText(av.emoji, 14, 26);
+
+  try {
+    container.style.cursor = `url(${cvs.toDataURL()}) 0 0, auto`;
+  } catch(e) {
+    container.style.cursor = 'crosshair'; // fallback
+  }
+}
+
+// =====================================================
+// INIT
+// =====================================================
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));
+loadData();
+initSetupModal();
+renderCurrentTab();
+initSmPan();
+initTouchNodeDrag();
+initCursorTracking();
+renderPresence();
+renderFeed();
+</script>
+</body>
+</html>

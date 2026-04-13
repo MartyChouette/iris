@@ -105,6 +105,15 @@ public class ObjectGrabber : MonoBehaviour
     [Tooltip("Grid cell size in world units. Placement is always grid-snapped — no toggle.")]
     [SerializeField] private float gridSize = 0.03f;
 
+    [Tooltip("Multiplier for wall grid size. Walls feel better with a coarser grid (2-3x). 1 = same as tables.")]
+    [SerializeField] private float _wallGridMultiplier = 2f;
+
+    /// <summary>Grid size adjusted for wall surfaces.</summary>
+    private float GetGridSize(PlacementSurface surface)
+    {
+        return surface != null && surface.IsVertical ? gridSize * _wallGridMultiplier : gridSize;
+    }
+
     public float GridSize
     {
         get => gridSize;
@@ -294,6 +303,7 @@ public class ObjectGrabber : MonoBehaviour
         if (_held != null)
         {
             UpdateGrabTarget();
+            ClampGrabTargetToWalls();
             UpdateScrollInput();
             UpdateShadow();
         }
@@ -786,9 +796,15 @@ public class ObjectGrabber : MonoBehaviour
         }
 
         // No surface under cursor — snap to the nearest surface as a fallback
-        // so items don't free-fall through the floor.
+        // so items don't free-fall through the floor. BUT only if there's no
+        // barrier geometry nearby — if the occlusion check rejected surfaces
+        // because of a barrier (inside furniture), don't bypass it with fallback.
         if (_currentSurface == null)
         {
+            int blockMask = _wallLayer | _barrierLayer;
+            bool nearBarrier = Physics.CheckSphere(_grabTarget, 0.15f, blockMask);
+            if (nearBarrier) return; // inside furniture — don't place here
+
             var fallbackSurface = PlacementSurface.FindNearest(_grabTarget, skipVertical: true);
             if (fallbackSurface == null) return;
             _currentSurface = fallbackSurface;
@@ -912,7 +928,7 @@ public class ObjectGrabber : MonoBehaviour
         // Use _grabTarget (cursor-tracked) instead of _heldRb.position for wall face
         // detection — the rigidbody can overshoot through thin wall triggers.
         var hitResult = _currentSurface.ProjectOntoSurface(_grabTarget, cam.transform.position);
-        Vector3 pos = _currentSurface.SnapToGrid(hitResult.worldPosition, gridSize, cam.transform.position);
+        Vector3 pos = _currentSurface.SnapToGrid(hitResult.worldPosition, GetGridSize(_currentSurface), cam.transform.position);
 
         float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
         pos += hitResult.surfaceNormal * halfExtent;
@@ -933,6 +949,13 @@ public class ObjectGrabber : MonoBehaviour
         {
             pos = _held.HomePosition;
             rot = _held.HomeRotation;
+        }
+
+        // Barrier check — reject if placement position is inside a barrier cube
+        if (_barrierLayer != 0 && Physics.CheckSphere(pos, 0.02f, _barrierLayer))
+        {
+            Debug.Log($"[ObjectGrabber] BLOCKED: placement at {pos} is inside barrier geometry.");
+            return;
         }
 
         // Cubby capacity check — reject placement if cubby is full
@@ -1141,7 +1164,7 @@ public class ObjectGrabber : MonoBehaviour
         // If on a surface, grid-snap the pair position so items still
         // "click" into the surface grid instead of floating freely.
         if (_currentSurface != null)
-            snapPos = _currentSurface.SnapToGrid(snapPos, gridSize, cam.transform.position);
+            snapPos = _currentSurface.SnapToGrid(snapPos, GetGridSize(_currentSurface), cam.transform.position);
 
         _grabTarget = snapPos;
 
@@ -1608,7 +1631,7 @@ public class ObjectGrabber : MonoBehaviour
                 _lastValidSurface = surface;
                 _isOnWall = surface.IsVertical;
 
-                Vector3 pos = surface.SnapToGrid(hitResult.worldPosition, gridSize, camPos);
+                Vector3 pos = surface.SnapToGrid(hitResult.worldPosition, GetGridSize(surface), camPos);
 
                 float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
                 pos += hitResult.surfaceNormal * halfExtent;
@@ -1684,9 +1707,12 @@ public class ObjectGrabber : MonoBehaviour
     private void ClampGrabTargetToWalls()
     {
         if (_heldRb == null) return;
+        // Only clamp against explicit barrier cubes — not general wall geometry,
+        // which catches the entire room and makes carrying feel sticky.
+        if (_barrierLayer == 0) return;
 
         const float margin = 0.05f;
-        int blockMask = _wallLayer | _barrierLayer;
+        int blockMask = _barrierLayer;
 
         // 1) Camera → target: keep item on camera's side of any wall/barrier
         //    (skip when on a surface to allow cross-room placement)
@@ -1819,12 +1845,22 @@ public class ObjectGrabber : MonoBehaviour
     {
         if (_held == null) return null;
 
-        // Use the larger horizontal half-extent shrunk slightly so flush neighbors
-        // along the grid don't trip the check.
-        float radius = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.z) * 0.85f;
-        if (radius < 0.02f) radius = 0.02f;
+        // For wall items: use the tangent-plane extents (X and Y in wall space)
+        // which are larger than the thin Z depth. This prevents wall items from
+        // overlapping each other on the same wall.
+        float radius;
+        if (_isOnWall)
+        {
+            radius = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.y) * 0.8f;
+            if (radius < 0.04f) radius = 0.04f;
+        }
+        else
+        {
+            radius = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.z) * 0.85f;
+            if (radius < 0.02f) radius = 0.02f;
+        }
 
-        int count = Physics.OverlapSphereNonAlloc(worldPos, radius, s_occupancyBuffer, placeableLayer);
+        int count = Physics.OverlapSphereNonAlloc(worldPos, radius, s_occupancyBuffer, placeableLayer, QueryTriggerInteraction.Ignore);
         for (int i = 0; i < count; i++)
         {
             var po = s_occupancyBuffer[i].GetComponentInParent<PlaceableObject>();
@@ -2053,7 +2089,7 @@ public class ObjectGrabber : MonoBehaviour
 
         // Snap the preview to the same grid cell Place() will use, so what you
         // see is exactly what you'll get.
-        Vector3 snapped = _currentSurface.SnapToGrid(hitResult.worldPosition, gridSize, cam.transform.position);
+        Vector3 snapped = _currentSurface.SnapToGrid(hitResult.worldPosition, GetGridSize(_currentSurface), cam.transform.position);
         float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
         Vector3 placePos = snapped + hitResult.surfaceNormal * halfExtent;
 

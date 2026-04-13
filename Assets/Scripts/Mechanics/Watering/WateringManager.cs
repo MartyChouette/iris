@@ -121,7 +121,7 @@ public class WateringManager : MonoBehaviour
         _activeLiving = plant.GetComponent<LivingFlowerPlant>();
 
         // Start from the plant's current water level (persistence — never resets)
-        _waterLevel = _activeLiving != null ? _activeLiving.CurrentWaterLevel : 0f;
+        _waterLevel = plant.WaterLevel;
         _foamLevel = _waterLevel;
         _overflowed = _waterLevel > 1f;
         _overflowSFXPlayed = _overflowed;
@@ -139,6 +139,11 @@ public class WateringManager : MonoBehaviour
     /// <summary>Save current water level to the plant without ending the session.</summary>
     private void SaveWaterLevel()
     {
+        // Save to WaterablePlant (works for ALL plants)
+        if (_activePlant != null)
+            _activePlant.WaterLevel = Mathf.Min(_waterLevel, 1f);
+
+        // Also sync to LivingFlowerPlant if present (for overnight drying/scoring)
         if (_activeLiving != null)
             _activeLiving.SetWaterLevel(Mathf.Min(_waterLevel, 1f));
     }

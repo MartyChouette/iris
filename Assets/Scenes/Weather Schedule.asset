@@ -19,13 +19,11 @@ MonoBehaviour:
       weather: 2
     - time: 0.063
       weather: 1
+    - time: 0.063
+      weather: 1
     - time: 0.123
       weather: 2
     - time: 0.192
       weather: 4
     - time: 0.213
       weather: 5
-  - day: 2
-    keyframes: []
-  - day: 0
-    keyframes: []

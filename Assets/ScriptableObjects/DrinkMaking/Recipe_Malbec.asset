@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa76e9de32addb547babc27455a914b5, type: 3}
+  m_Name: Recipe_Malbec
+  m_EditorClassIdentifier: Assembly-CSharp::DrinkRecipeDefinition
+  drinkName: Malbec 2017
+  requiredGlass: {fileID: 11400000, guid: 35ce32132b06fb94d9499e9f66b1ce88, type: 2}
+  ingredients:
+  - {fileID: 11400000, guid: 6107f8d7addf45d478042f579cfada2d, type: 2}
+  portionNormalized:
+  - 1
+  requiresStir: 0
+  stirDuration: 2
+  perfectStirSpeedMin: 1.5
+  perfectStirSpeedMax: 4
+  baseScore: 100
+  idealFillLevel: 0.5
+  fillTolerance: 0.12
+  pourRate: 0.15
+  foamRateMultiplier: 1.3
+  targetOscSpeed: 0.4
+  targetOscAmplitude: 0.12
+  foamSettleRate: 0.25
+  liquidColor: {r: 0.4, g: 0.05, b: 0.1, a: 0.9}
+  portionTolerance: 0.15
+  garnishes: []

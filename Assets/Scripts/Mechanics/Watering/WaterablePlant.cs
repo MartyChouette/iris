@@ -5,6 +5,7 @@ using UnityEngine;
 /// Marker component placed on each plant pot in the apartment scene.
 /// WateringManager and ObjectGrabber use the static registry to find
 /// nearby plants for the watering can magnetic snap.
+/// Also stores the persistent water level for the watering system.
 /// </summary>
 public class WaterablePlant : MonoBehaviour
 {
@@ -17,4 +18,14 @@ public class WaterablePlant : MonoBehaviour
 
     [Tooltip("Which plant definition this pot uses.")]
     public PlantDefinition definition;
+
+    [Tooltip("Current water level (0-1). Persists between watering sessions.")]
+    [SerializeField] private float _waterLevel;
+
+    /// <summary>Current water level (0-1). Persists across sessions within a day.</summary>
+    public float WaterLevel
+    {
+        get => _waterLevel;
+        set => _waterLevel = Mathf.Clamp01(value);
+    }
 }

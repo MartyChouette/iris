@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3158339bb32dd044bbae2d3796154796, type: 3}
-  m_Name: Glass_Highball
+  m_Name: Glass_Wine_Glass
   m_EditorClassIdentifier: Assembly-CSharp::GlassDefinition
-  glassName: Highball
+  glassName: Wine Glass
   capacity: 1
   fillLineNormalized: 0.8
-  fillLineTolerance: 0.08
+  fillLineTolerance: 0.05
   foamHeadroom: 0.2
-  worldHeight: 0.15
-  worldRadius: 0.03
+  worldHeight: 0.12
+  worldRadius: 0.025
   glassColor: {r: 0.9, g: 0.95, b: 1, a: 0.3}
-  fillRateMultiplier: 1.5
+  fillRateMultiplier: 1

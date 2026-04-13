@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5467a6acf12dd554288885423b174038, type: 3}
+  m_Name: Ingredient_Malbec
+  m_EditorClassIdentifier: Assembly-CSharp::DrinkIngredientDefinition
+  ingredientName: Malbec 2017
+  liquidColor: {r: 0.4, g: 0.05, b: 0.1, a: 0.9}
+  pourRate: 0.1
+  fizziness: 0
+  foamRateMultiplier: 1
+  foamSettleRate: 0.3
+  flattenRate: 0
+  viscosity: 0.5
+  weight: 0.8
