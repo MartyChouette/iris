@@ -23,7 +23,6 @@ public class DrinkCutawayUI : MonoBehaviour
     [SerializeField] private Color _targetLineColor = new Color(1f, 0.894f, 0.71f, 0.85f);
     [SerializeField] private Color _targetBandColor = new Color(1f, 0.894f, 0.71f, 0.15f);
     [SerializeField] private Color _overflowColor = new Color(0.85f, 0.35f, 0.3f, 0.6f);
-    [SerializeField] private Color _bgDimColor = new Color(0f, 0f, 0f, 0.4f);
 
     [Header("Animation")]
     [SerializeField] private float _lerpSpeed = 6f;
@@ -361,19 +360,13 @@ public class DrinkCutawayUI : MonoBehaviour
         // No GraphicRaycaster — this is a display-only overlay.
         // Adding one would block all game clicks via IsPointerOverGameObject.
 
-        // Dim background
-        var dimGO = CreateUI("BgDim", _canvasRoot.transform);
-        var dimRT = dimGO.GetComponent<RectTransform>();
-        dimRT.anchorMin = Vector2.zero; dimRT.anchorMax = Vector2.one;
-        dimRT.offsetMin = Vector2.zero; dimRT.offsetMax = Vector2.zero;
-        dimGO.AddComponent<Image>().color = _bgDimColor;
-
-        // Glass container
+        // Glass container — right side of screen, vertically centered
         var glassGO = CreateUI("Glass", _canvasRoot.transform);
         _glassRT = glassGO.GetComponent<RectTransform>();
-        _glassRT.anchorMin = new Vector2(0.5f, 0.5f);
-        _glassRT.anchorMax = new Vector2(0.5f, 0.5f);
+        _glassRT.anchorMin = new Vector2(1f, 0.5f);
+        _glassRT.anchorMax = new Vector2(1f, 0.5f);
         _glassRT.pivot = new Vector2(0.5f, 0.5f);
+        _glassRT.anchoredPosition = new Vector2(-100f, 0f); // 100px inset from right edge
         _glassRT.sizeDelta = new Vector2(_glassWidthHighball, _glassHeight);
         glassGO.AddComponent<Image>().color = _glassColor;
 
@@ -410,27 +403,27 @@ public class DrinkCutawayUI : MonoBehaviour
         _overflowImage.color = _overflowColor;
         overflowGO.SetActive(false);
 
-        // Drink name
-        var nameGO = CreateUI("DrinkName", _canvasRoot.transform);
+        // Drink name — above the glass
+        var nameGO = CreateUI("DrinkName", glassGO.transform);
         var nameRT = nameGO.GetComponent<RectTransform>();
-        nameRT.anchorMin = new Vector2(0.5f, 0.5f); nameRT.anchorMax = new Vector2(0.5f, 0.5f);
+        nameRT.anchorMin = new Vector2(0.5f, 1f); nameRT.anchorMax = new Vector2(0.5f, 1f);
         nameRT.pivot = new Vector2(0.5f, 0f);
-        nameRT.anchoredPosition = new Vector2(0f, _glassHeight * 0.5f + 20f);
-        nameRT.sizeDelta = new Vector2(400f, 40f);
+        nameRT.anchoredPosition = new Vector2(0f, 12f);
+        nameRT.sizeDelta = new Vector2(250f, 36f);
         _drinkNameText = nameGO.AddComponent<TextMeshProUGUI>();
-        _drinkNameText.text = ""; _drinkNameText.fontSize = 28f;
+        _drinkNameText.text = ""; _drinkNameText.fontSize = 22f;
         _drinkNameText.alignment = TextAlignmentOptions.Center;
         _drinkNameText.color = Color.white;
 
-        // Status
-        var statusGO = CreateUI("Status", _canvasRoot.transform);
+        // Status — below the glass
+        var statusGO = CreateUI("Status", glassGO.transform);
         var statusRT = statusGO.GetComponent<RectTransform>();
-        statusRT.anchorMin = new Vector2(0.5f, 0.5f); statusRT.anchorMax = new Vector2(0.5f, 0.5f);
+        statusRT.anchorMin = new Vector2(0.5f, 0f); statusRT.anchorMax = new Vector2(0.5f, 0f);
         statusRT.pivot = new Vector2(0.5f, 1f);
-        statusRT.anchoredPosition = new Vector2(0f, -_glassHeight * 0.5f - 10f);
-        statusRT.sizeDelta = new Vector2(400f, 30f);
+        statusRT.anchoredPosition = new Vector2(0f, -8f);
+        statusRT.sizeDelta = new Vector2(250f, 28f);
         _statusText = statusGO.AddComponent<TextMeshProUGUI>();
-        _statusText.text = ""; _statusText.fontSize = 20f;
+        _statusText.text = ""; _statusText.fontSize = 18f;
         _statusText.alignment = TextAlignmentOptions.Center;
         _statusText.color = new Color(1f, 1f, 1f, 0.7f);
     }
