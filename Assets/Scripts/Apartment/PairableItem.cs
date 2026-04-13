@@ -151,11 +151,10 @@ public class PairableItem : MonoBehaviour
             && _specificPartner != null && !_specificPartner._isPaired)
         {
             var partnerHL = _specificPartner.GetComponent<InteractableHighlight>();
-            if (partnerHL != null)
-            {
-                partnerHL.SetHighlighted(true);
-                _partnerHighlightActive = true;
-            }
+            if (partnerHL == null)
+                partnerHL = _specificPartner.gameObject.AddComponent<InteractableHighlight>();
+            partnerHL.SetHighlighted(true);
+            _partnerHighlightActive = true;
         }
     }
 
@@ -336,7 +335,20 @@ public class PairableItem : MonoBehaviour
                 root.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
             }
 
+            // For shoes: straighten root so both shoes sit flat and face forward.
+            // Keeps Y rotation (facing direction) but levels out any tilt.
+            if (_pairMode == PairMode.SpecificPartner && root.GetComponent<BookCollectionItem>() == null)
+            {
+                Vector3 rootEuler = root.eulerAngles;
+                root.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
+            }
+
             Vector3 localPos = GetSideBySideLocalOffset(root, held);
+
+            // Calculate world-space target position so both items sit at the
+            // same ground level — prevents one shoe floating above the other.
+            Vector3 worldSnapPos = root.TransformPoint(localPos);
+            worldSnapPos.y = root.position.y; // match root's Y exactly
 
             // Preserve world scale — parent may have different scale that deforms the child
             Vector3 heldWorldScale = held.transform.lossyScale;
@@ -346,7 +358,10 @@ public class PairableItem : MonoBehaviour
                 parentScale.x != 0f ? heldWorldScale.x / parentScale.x : 1f,
                 parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
                 parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
-            held.transform.localPosition = localPos;
+
+            // Set position in world space then convert back to local, so the
+            // Y stays aligned regardless of parent rotation or pivot offset.
+            held.transform.position = worldSnapPos;
             held.transform.localRotation = Quaternion.identity;
         }
 
