@@ -322,7 +322,10 @@ public class ObjectGrabber : MonoBehaviour
         AlbumSleeve hovered = null;
 
         Ray ray = cam.ScreenPointToRay(IrisInput.CursorPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, placeableLayer))
+        // Check both placeable layer and RecordSleeves layer (30) so all
+        // sleeves are hoverable regardless of which layer they're on.
+        int sleeveMask = placeableLayer | (1 << 30);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, sleeveMask))
         {
             hovered = hit.collider.GetComponent<AlbumSleeve>();
             if (hovered == null) hovered = hit.collider.GetComponentInParent<AlbumSleeve>();
@@ -404,8 +407,9 @@ public class ObjectGrabber : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(screenPos);
 
         // QueryTriggerInteraction.Collide so mess items (petals, trimmings)
-        // with trigger colliders can be clicked.
-        if (!Physics.Raycast(ray, out RaycastHit hit, 100f, placeableLayer, QueryTriggerInteraction.Collide))
+        // with trigger colliders can be clicked. Also check RecordSleeves layer (30).
+        int pickupMask = placeableLayer | (1 << 30);
+        if (!Physics.Raycast(ray, out RaycastHit hit, 100f, pickupMask, QueryTriggerInteraction.Collide))
             return;
 
         var placeable = hit.collider.GetComponent<PlaceableObject>();

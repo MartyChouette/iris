@@ -382,10 +382,8 @@ public class PlaceableObject : MonoBehaviour
 
         // Ensure every placeable has an InteractableHighlight for hover/proximity effects
         // (skip plants — they have their own watering interaction)
-        // InteractableHighlight auto-add disabled — cursor system handles feedback
-        // Component still works for static registry (cursor detection) if manually added
-        // if (GetComponent<InteractableHighlight>() == null && GetComponent<WaterablePlant>() == null)
-        //     gameObject.AddComponent<InteractableHighlight>();
+        if (GetComponent<InteractableHighlight>() == null && GetComponent<WaterablePlant>() == null)
+            gameObject.AddComponent<InteractableHighlight>();
 
         // Auto-capture spawn position/rotation as home whenever unset
         if (_homePosition == Vector3.zero)
