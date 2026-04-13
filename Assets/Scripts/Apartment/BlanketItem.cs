@@ -96,8 +96,9 @@ public class BlanketItem : MonoBehaviour
             Vector3 spawnPos = transform.position + Vector3.up * 0.05f;
             var item = Instantiate(_hiddenItemPrefab, spawnPos, Quaternion.identity);
 
-            // Frame the discovery
-            MomentCamera.FrameTarget(spawnPos, 2f);
+            // Frame the discovery (if moments enabled)
+            if (ApartmentManager.Instance == null || ApartmentManager.Instance.ItemDiscoveryMoments)
+                MomentCamera.FrameTarget(spawnPos, 2f);
 
             // Caption
             if (!string.IsNullOrEmpty(_hiddenItemCaption))

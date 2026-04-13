@@ -32,6 +32,17 @@ public class ApartmentManager : MonoBehaviour
     [Tooltip("How fast the camera lerps between area positions (higher = faster).")]
     [SerializeField, Range(1f, 15f)] private float transitionSpeed = 5f;
 
+    [Header("Item Discovery")]
+    [Tooltip("When true, item discoveries (blanket/book reveals) trigger the moment camera zoom + pause. When false, items just spawn with no camera or pause.")]
+    [SerializeField] private bool _itemDiscoveryMoments = true;
+
+    /// <summary>Whether item discovery moments (camera zoom + pause) are enabled.</summary>
+    public bool ItemDiscoveryMoments
+    {
+        get => _itemDiscoveryMoments;
+        set => _itemDiscoveryMoments = value;
+    }
+
     [Header("Cursor Parallax")]
     [Tooltip("Maximum camera shift distance toward cursor.")]
     [SerializeField, Range(0f, 0.5f)] private float parallaxMaxOffset = 0.05f;

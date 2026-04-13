@@ -153,7 +153,8 @@ public class BookCollectionItem : MonoBehaviour
     private IEnumerator CelebrationSequence()
     {
         // Frame the books with the moment camera
-        MomentCamera.FrameTarget(transform.position, _celebrationDelay + 2f);
+        if (ApartmentManager.Instance == null || ApartmentManager.Instance.ItemDiscoveryMoments)
+            MomentCamera.FrameTarget(transform.position, _celebrationDelay + 2f);
 
         yield return new WaitForSeconds(_celebrationDelay);
 

@@ -91,8 +91,9 @@ public class BookItem : MonoBehaviour
         // Spawn hidden item at book's last resting position
         var spawnedItem = Instantiate(_hiddenItemPrefab, transform.position, Quaternion.identity);
 
-        // Frame the discovery with moment camera
-        MomentCamera.FrameTarget(transform.position, 2f);
+        // Frame the discovery (if moments enabled)
+        if (ApartmentManager.Instance == null || ApartmentManager.Instance.ItemDiscoveryMoments)
+            MomentCamera.FrameTarget(transform.position, 2f);
 
         // Show caption
         string desc = !string.IsNullOrEmpty(_definition.hiddenItemDescription)
