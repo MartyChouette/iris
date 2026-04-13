@@ -45,6 +45,8 @@ public class AlbumSleeve : MonoBehaviour
     private Quaternion _restRotation;
     private Quaternion _tiltRotation;
     private Vector3 _vinylRestLocal;
+    private Vector3 _vinylRestScale;
+    private Quaternion _vinylRestRotation;
     private float _tiltBlend;
     private float _peekBlend;
     private bool _peekSFXPlayed;
@@ -55,7 +57,11 @@ public class AlbumSleeve : MonoBehaviour
         _tiltRotation = _restRotation * Quaternion.Euler(_tiltEulers);
 
         if (_vinylChild != null)
+        {
             _vinylRestLocal = _vinylChild.localPosition;
+            _vinylRestScale = _vinylChild.localScale;
+            _vinylRestRotation = _vinylChild.localRotation;
+        }
     }
 
     private void Update()
@@ -126,7 +132,12 @@ public class AlbumSleeve : MonoBehaviour
         if (vinyl == null) return;
 
         vinyl.ConfigureForSleeve();
-        vinyl.transform.SetParent(transform, true);
+        vinyl.transform.SetParent(transform, false); // false = reset to local space
+
+        // Restore the vinyl's original local transform so it doesn't carry
+        // deformed scale/rotation from the turntable.
+        vinyl.transform.localScale = _vinylRestScale;
+        vinyl.transform.localRotation = _vinylRestRotation;
 
         _vinylChild = vinyl.transform;
         WaitingForReturn = false;

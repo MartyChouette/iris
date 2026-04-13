@@ -209,23 +209,25 @@ public class GameClock : MonoBehaviour
         RecordSlot.Instance?.Stop();
         DateEndScreen.Instance?.Dismiss();
 
-        // 1. Fade to black
-        if (ScreenFade.Instance != null)
-            yield return ScreenFade.Instance.FadeOut(1f);
-
-        // 2. Show dream interstitial text
-        if (_dreamText != null)
+        // Dream interstitial — psychedelic overlay instead of black screen
+        if (DreamScreen.Instance != null)
         {
-            _dreamText.text = "Nema drifts to sleep...";
-            _dreamText.gameObject.SetActive(true);
+            yield return DreamScreen.Instance.Play();
         }
-
-        // 3. Hold on black for dream
-        yield return new WaitForSecondsRealtime(3f);
-
-        // 4. Hide dream text
-        if (_dreamText != null)
-            _dreamText.gameObject.SetActive(false);
+        else
+        {
+            // Fallback: simple fade to black
+            if (ScreenFade.Instance != null)
+                yield return ScreenFade.Instance.FadeOut(1f);
+            if (_dreamText != null)
+            {
+                _dreamText.text = "Nema drifts to sleep...";
+                _dreamText.gameObject.SetActive(true);
+            }
+            yield return new WaitForSecondsRealtime(3f);
+            if (_dreamText != null)
+                _dreamText.gameObject.SetActive(false);
+        }
 
         // 5. Auto-save before advancing
         AutoSaveController.Instance?.PerformSave("end_of_day");
