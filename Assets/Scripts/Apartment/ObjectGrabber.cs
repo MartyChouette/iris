@@ -731,13 +731,29 @@ public class ObjectGrabber : MonoBehaviour
         // ── Deliver finished drink to date character ──
         if (_held.GetComponent<DrinkGlass>() != null
             && DrinkPourManager.Instance != null
-            && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.WaitingForDelivery)
+            && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.WaitingForDelivery
+            && DateSessionManager.Instance != null
+            && DateSessionManager.Instance.DateCharacter != null)
         {
-            Ray deliverRay = cam.ScreenPointToRay(IrisInput.CursorPosition);
-            if (Physics.Raycast(deliverRay, out RaycastHit dateHit, 100f))
+            // Proximity check — click anywhere while near the date to deliver.
+            // More forgiving than requiring a precise raycast hit on the character model.
+            Vector3 datePos = DateSessionManager.Instance.DateCharacter.transform.position;
+            float dist = Vector3.Distance(_grabTarget, datePos);
+            if (dist < 1.5f)
             {
-                var dateChar = dateHit.collider.GetComponent<DateCharacterController>();
-                if (dateChar == null) dateChar = dateHit.collider.GetComponentInParent<DateCharacterController>();
+                DrinkPourManager.Instance.DeliverToDate();
+                ClearHeld();
+                ConsumeClick();
+                return;
+            }
+
+            // Fallback: raycast through all objects to find the date character
+            Ray deliverRay = cam.ScreenPointToRay(IrisInput.CursorPosition);
+            var hits = Physics.RaycastAll(deliverRay, 100f);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                var dateChar = hits[i].collider.GetComponent<DateCharacterController>();
+                if (dateChar == null) dateChar = hits[i].collider.GetComponentInParent<DateCharacterController>();
                 if (dateChar != null)
                 {
                     DrinkPourManager.Instance.DeliverToDate();

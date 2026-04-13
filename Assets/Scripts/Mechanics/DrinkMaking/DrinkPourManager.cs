@@ -361,12 +361,25 @@ public class DrinkPourManager : MonoBehaviour
             hl.SetHighlighted(true);
         }
 
-        // Highlight the date character too
+        // Highlight the date character and ensure it has a collider for raycasts
         if (DateSessionManager.Instance != null && DateSessionManager.Instance.DateCharacter != null)
         {
-            var highlight = DateSessionManager.Instance.DateCharacter.GetComponent<InteractableHighlight>();
+            var dateGO = DateSessionManager.Instance.DateCharacter.gameObject;
+
+            // Add a collider if the model doesn't have one — needed for
+            // raycast fallback and InteractableHighlight visibility
+            if (dateGO.GetComponent<Collider>() == null
+                && dateGO.GetComponentInChildren<Collider>() == null)
+            {
+                var col = dateGO.AddComponent<CapsuleCollider>();
+                col.height = 1.8f;
+                col.center = Vector3.up * 0.9f;
+                col.radius = 0.3f;
+            }
+
+            var highlight = dateGO.GetComponent<InteractableHighlight>();
             if (highlight == null)
-                highlight = DateSessionManager.Instance.DateCharacter.gameObject.AddComponent<InteractableHighlight>();
+                highlight = dateGO.AddComponent<InteractableHighlight>();
             highlight.SetHighlighted(true);
         }
 
