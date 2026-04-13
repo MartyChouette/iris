@@ -675,30 +675,24 @@ public class DateSessionManager : MonoBehaviour
                 activeHL = highlight;
             }
 
-            // Resolve + log the visual center BEFORE spawning particles so
-            // we can diagnose any "particles in the wrong place" issues.
-            Vector3 visualCenter = GetVisualCenter(tag.transform);
+            // Use the item's actual transform position — GetVisualCenter
+            // uses renderer bounds which can be wrong for paired/stacked items.
+            Vector3 itemPos = tag.transform.position;
 
 #if UNITY_EDITOR
-            var firstRenderer = tag.GetComponentInChildren<Renderer>();
-            Debug.Log($"[DateSessionManager] Reveal: '{tag.DisplayName}' → {reaction} ×{multiplier} | " +
-                      $"tagPos={tag.transform.position:F3} | visualCenter={visualCenter:F3} | " +
-                      $"renderer={(firstRenderer != null ? firstRenderer.gameObject.name : "<none>")} | " +
-                      $"highlight={(highlight != null ? "yes" : "NO")}");
+            Debug.Log($"[DateSessionManager] Reveal: '{tag.DisplayName}' → {reaction} ×{multiplier} | pos={itemPos:F3}");
 #endif
 
-            // Frame the item with the moment camera (quick push for each item)
-            MomentCamera.FrameTarget(visualCenter, 0.25f);
+            // No camera zoom — items highlight and react in place.
+            // The player can see everything from the current camera angle.
 
-            // Spawn particles at the item's visual center (not pivot)
-            SpawnReactionParticles(visualCenter, reaction);
+            // Spawn particles at the item
+            SpawnReactionParticles(itemPos, reaction);
 
-            // Spawn the floating "2×" popup so the player can see which items
-            // contributed more to the affection score. Sits slightly above the
-            // particles so they don't cover the text.
-            SpawnMultiplierPopup(visualCenter + Vector3.up * 0.22f, multiplier, reaction);
+            // Spawn the floating "2×" popup slightly above
+            SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
 
-            // Stagger for visual clarity — wait for moment camera to finish
+            // Stagger so each item is readable
             yield return new WaitForSeconds(0.5f);
         }
 
