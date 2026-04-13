@@ -74,6 +74,8 @@ public class DreamScreen : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
+    private int _updateFrame;
+
     private void Update()
     {
         if (!_isShowing) return;
@@ -84,8 +86,10 @@ public class DreamScreen : MonoBehaviour
         if (_psychedelicRT != null)
             _psychedelicRT.localRotation = Quaternion.Euler(0f, 0f, _time * _rotateSpeed);
 
-        // Shift the hue over time by regenerating the texture
-        UpdateGradientTexture(_time * _hueShiftSpeed);
+        // Regenerate texture every 3rd frame to save CPU
+        _updateFrame++;
+        if (_updateFrame % 3 == 0)
+            UpdateGradientTexture(_time * _hueShiftSpeed);
     }
 
     // ── Public API ──────────────────────────────────────────────────

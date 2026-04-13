@@ -56,6 +56,13 @@ public class AlbumSleeve : MonoBehaviour
         _restRotation = transform.localRotation;
         _tiltRotation = _restRotation * Quaternion.Euler(_tiltEulers);
 
+        // Auto-find vinyl child if not assigned in inspector
+        if (_vinylChild == null)
+        {
+            var vinyl = GetComponentInChildren<VinylDisc>(true);
+            if (vinyl != null) _vinylChild = vinyl.transform;
+        }
+
         if (_vinylChild != null)
         {
             _vinylRestLocal = _vinylChild.localPosition;

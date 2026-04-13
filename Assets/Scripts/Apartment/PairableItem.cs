@@ -193,9 +193,13 @@ public class PairableItem : MonoBehaviour
 
     private void SetColor(Color c)
     {
-        if (_placeable != null && _placeable.SetInstanceColor(c)) return;
-        // Last resort — no PlaceableObject
-        if (_renderer != null && _renderer.sharedMaterial != null)
+        // Use PlaceableObject's instance material if available AND enabled.
+        // After pairing, the held item's PlaceableObject is disabled — fall
+        // through to the MPB path so the pulse still works on both shoes.
+        if (_placeable != null && _placeable.enabled && _placeable.SetInstanceColor(c)) return;
+
+        if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
+        if (_renderer != null)
         {
             var mpb = new MaterialPropertyBlock();
             _renderer.GetPropertyBlock(mpb);
@@ -207,12 +211,12 @@ public class PairableItem : MonoBehaviour
 
     private void RestoreColor()
     {
-        if (_placeable != null) { _placeable.ForceRestoreMaterial(); return; }
-        // Last resort
-        if (_renderer != null && _renderer.sharedMaterial != null)
+        if (_placeable != null && _placeable.enabled) { _placeable.ForceRestoreMaterial(); return; }
+
+        if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
+        if (_renderer != null)
         {
-            var mpb = new MaterialPropertyBlock();
-            _renderer.SetPropertyBlock(mpb); // clear all overrides
+            _renderer.SetPropertyBlock(new MaterialPropertyBlock()); // clear all overrides
         }
     }
 

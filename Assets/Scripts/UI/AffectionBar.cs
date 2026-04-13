@@ -13,27 +13,27 @@ public class AffectionBar : MonoBehaviour
 
     [Header("Layout")]
     [Tooltip("Total height of the flower meter in pixels.")]
-    [SerializeField] private float _meterHeight = 200f;
+    [SerializeField] private float _meterHeight = 400f;
 
     [Tooltip("Distance from left edge of screen.")]
-    [SerializeField] private float _edgeMargin = 30f;
+    [SerializeField] private float _edgeMargin = 40f;
 
     [Tooltip("Vertical offset from center of screen.")]
-    [SerializeField] private float _verticalOffset = -50f;
+    [SerializeField] private float _verticalOffset = -60f;
 
     [Header("Stem")]
     [Tooltip("Stem width in pixels.")]
-    [SerializeField] private float _stemWidth = 4f;
+    [SerializeField] private float _stemWidth = 6f;
 
     [Tooltip("Stem color.")]
     [SerializeField] private Color _stemColor = new Color(0.35f, 0.65f, 0.3f, 0.9f);
 
     [Header("Flower Head")]
     [Tooltip("Max flower head size in pixels (at 100% affection).")]
-    [SerializeField] private float _flowerMaxSize = 32f;
+    [SerializeField] private float _flowerMaxSize = 60f;
 
     [Tooltip("Min flower head size in pixels (at 0% affection — tiny bud).")]
-    [SerializeField] private float _flowerMinSize = 8f;
+    [SerializeField] private float _flowerMinSize = 14f;
 
     [Tooltip("Flower color at low affection (bud).")]
     [SerializeField] private Color _budColor = new Color(0.5f, 0.7f, 0.4f, 0.9f);
@@ -43,14 +43,14 @@ public class AffectionBar : MonoBehaviour
 
     [Header("Leaves")]
     [Tooltip("Leaf size in pixels.")]
-    [SerializeField] private float _leafSize = 10f;
+    [SerializeField] private float _leafSize = 16f;
 
     [Tooltip("Leaf color.")]
     [SerializeField] private Color _leafColor = new Color(0.3f, 0.6f, 0.25f, 0.8f);
 
     [Header("Pot")]
     [Tooltip("Pot width in pixels.")]
-    [SerializeField] private float _potWidth = 24f;
+    [SerializeField] private float _potWidth = 36f;
 
     [Tooltip("Pot height in pixels.")]
     [SerializeField] private float _potHeight = 18f;
@@ -67,6 +67,7 @@ public class AffectionBar : MonoBehaviour
     private float _currentFill;
     private float _targetFill;
     private float _pulseTimer;
+    private float _wiltTimer;
     private float _lastFill;
     private bool _visible;
 
@@ -154,17 +155,31 @@ public class AffectionBar : MonoBehaviour
         if (_flowerRT != null && _flowerImage != null)
         {
             float size = Mathf.Lerp(_flowerMinSize, _flowerMaxSize, _currentFill);
+            float rotation = 0f;
 
-            // Juice: pulse the flower bigger when affection just increased
+            // Celebration juice: big bouncy pulse when affection increases
             if (_pulseTimer > 0f)
             {
                 _pulseTimer -= Time.deltaTime;
-                float pulse = Mathf.Sin(_pulseTimer / 0.4f * Mathf.PI * 3f); // 3 bounces
-                size *= 1f + Mathf.Abs(pulse) * 0.3f; // up to 30% bigger during pulse
+                float t = _pulseTimer / 0.8f;
+                float pulse = Mathf.Sin(t * Mathf.PI * 5f) * Mathf.Pow(t, 0.5f); // 5 bounces, decaying
+                size *= 1f + Mathf.Abs(pulse) * 0.6f; // up to 60% bigger
+                rotation = pulse * 15f; // wobble rotation
+            }
+
+            // Wilt juice: droop and grey out when affection drops
+            if (_wiltTimer > 0f)
+            {
+                _wiltTimer -= Time.deltaTime;
+                float t = _wiltTimer / 0.6f;
+                float droop = Mathf.Sin(t * Mathf.PI * 2f) * t;
+                rotation = droop * -25f; // droop to the side
+                size *= 1f - Mathf.Abs(droop) * 0.2f; // shrink slightly
             }
 
             _flowerRT.sizeDelta = new Vector2(size, size);
             _flowerRT.anchoredPosition = new Vector2(0f, 0f);
+            _flowerRT.localRotation = Quaternion.Euler(0f, 0f, rotation);
             _flowerImage.color = Color.Lerp(_budColor, _bloomColor, _currentFill);
         }
 
@@ -188,9 +203,12 @@ public class AffectionBar : MonoBehaviour
     private void OnAffectionChanged(float affection)
     {
         float newFill = Mathf.Clamp01(affection / 100f);
-        // Trigger pulse when affection increases
+        // Celebration pulse when affection increases
         if (newFill > _targetFill + 0.01f)
-            _pulseTimer = 0.4f;
+            _pulseTimer = 0.8f;
+        // Wilt droop when affection decreases
+        else if (newFill < _targetFill - 0.01f)
+            _wiltTimer = 0.6f;
         _targetFill = newFill;
     }
 

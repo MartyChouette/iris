@@ -23,6 +23,9 @@ public class FridgeController : MonoBehaviour
     [Tooltip("Degrees to rotate the right door (mirrored — positive = opens outward).")]
     [SerializeField] private float _openAngleR = 110f;
 
+    [Tooltip("Local axis the doors rotate around. Y = vertical hinge (default). Change if model has a different up axis.")]
+    [SerializeField] private Vector3 _hingeAxis = Vector3.up;
+
     [Tooltip("Seconds for the open / close tween.")]
     [SerializeField] private float _tweenDuration = 0.6f;
 
@@ -77,12 +80,12 @@ public class FridgeController : MonoBehaviour
         if (_doorPivotL != null)
         {
             _closedRotL = _doorPivotL.localRotation;
-            _openRotL = _closedRotL * Quaternion.Euler(0f, _openAngleL, 0f);
+            _openRotL = _closedRotL * Quaternion.AngleAxis(_openAngleL, _hingeAxis);
         }
         if (_doorPivotR != null)
         {
             _closedRotR = _doorPivotR.localRotation;
-            _openRotR = _closedRotR * Quaternion.Euler(0f, _openAngleR, 0f);
+            _openRotR = _closedRotR * Quaternion.AngleAxis(_openAngleR, _hingeAxis);
         }
 
         if (_interiorLight != null)
