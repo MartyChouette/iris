@@ -1006,11 +1006,26 @@ public class ObjectGrabber : MonoBehaviour
             rot = _held.HomeRotation;
         }
 
-        // Barrier check — reject if placement position is inside a barrier cube
-        if (_barrierLayer != 0 && Physics.CheckSphere(pos, 0.02f, _barrierLayer))
+        // Barrier check — reject if placement position overlaps or sits directly
+        // above a barrier volume (counter body, furniture interior, etc.).
+        // Sphere check catches items placed inside barriers, downward ray catches
+        // barriers beneath the surface that the sphere can't reach.
+        if (_barrierLayer != 0)
         {
-            Debug.Log($"[ObjectGrabber] BLOCKED: placement at {pos} is inside barrier geometry.");
-            return;
+            bool blocked = Physics.CheckSphere(pos, 0.08f, _barrierLayer);
+            if (!blocked)
+            {
+                // Probe downward from placement pos — catches barriers inside
+                // counter/table bodies that sit just below the surface
+                Vector3 probeDir = _currentSurface != null && _currentSurface.IsVertical
+                    ? -hitResult.surfaceNormal : Vector3.down;
+                blocked = Physics.Raycast(pos, probeDir, 0.15f, _barrierLayer);
+            }
+            if (blocked)
+            {
+                Debug.Log($"[ObjectGrabber] BLOCKED: placement at {pos} is over barrier geometry.");
+                return;
+            }
         }
 
         // Cubby capacity check — reject placement if cubby is full
@@ -2189,6 +2204,14 @@ public class ObjectGrabber : MonoBehaviour
             var zone = _currentSurface.GetComponent<DropZone>();
             bool isTrashCan = zone != null && zone.DestroyOnDeposit;
             canPlace = _currentSurface.IsFloor || isTrashCan;
+        }
+
+        // Barrier: blocked if placement sits over barrier geometry
+        if (canPlace && _barrierLayer != 0)
+        {
+            bool overBarrier = Physics.CheckSphere(placePos, 0.08f, _barrierLayer)
+                || Physics.Raycast(placePos, Vector3.down, 0.15f, _barrierLayer);
+            if (overBarrier) canPlace = false;
         }
 
         // Occupancy: blocked unless the occupant is a valid pair partner of the held item.
