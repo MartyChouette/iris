@@ -20,6 +20,9 @@ public class MomentCamera : MonoBehaviour
     [Tooltip("FOV when framing a moment (lower = tighter zoom). Set to 0 to keep current FOV.")]
     [SerializeField] private float _frameFOV = 0f;
 
+    [Tooltip("Pause the game during the hold phase (time scale 0). Camera lerps use unscaled time.")]
+    [SerializeField] private bool _pauseDuringHold = true;
+
     [Header("Timing")]
     [Tooltip("Seconds to glide the camera to the target.")]
     [SerializeField] private float _pushDuration = 1.0f;
@@ -104,9 +107,12 @@ public class MomentCamera : MonoBehaviour
         if (_isMomentActive)
         {
             _isMomentActive = false;
+            TimeScaleManager.Clear(s_momentPriority);
             ApartmentManager.Instance?.ClearPresetBase();
         }
     }
+
+    private static readonly int s_momentPriority = 80; // below pause (100)
 
     private IEnumerator MomentRoutine(Vector3 target, float holdTime)
     {
@@ -124,18 +130,17 @@ public class MomentCamera : MonoBehaviour
         float startFOV = cam.fieldOfView;
 
         // Keep the same rotation — just slide the camera so the target is centered.
-        // Project the target onto the camera's depth axis to preserve distance.
         Vector3 camForward = cam.transform.forward;
         float depth = Vector3.Dot(target - startPos, camForward);
         Vector3 framePos = target - camForward * depth;
-        Quaternion frameRot = startRot; // no rotation change
+        Quaternion frameRot = startRot;
         float frameFOV = _frameFOV > 0f ? _frameFOV : startFOV;
 
-        // ── Push: smooth glide to frame position ──
+        // ── Push: smooth glide to frame position (unscaled so it works while paused) ──
         float elapsed = 0f;
         while (elapsed < _pushDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = _pushCurve.Evaluate(Mathf.Clamp01(elapsed / _pushDuration));
 
             Vector3 pos = Vector3.Lerp(startPos, framePos, t);
@@ -147,24 +152,28 @@ public class MomentCamera : MonoBehaviour
 
         am.SetPresetBase(framePos, frameRot, frameFOV);
 
-        // ── Hold ──
-        yield return new WaitForSeconds(holdTime);
+        // ── Hold: freeze the game so the player can admire the item ──
+        if (_pauseDuringHold)
+            TimeScaleManager.Set(s_momentPriority, 0f);
+
+        yield return new WaitForSecondsRealtime(holdTime);
+
+        if (_pauseDuringHold)
+            TimeScaleManager.Clear(s_momentPriority);
 
         // ── Return: get the CURRENT correct camera target from ApartmentManager ──
-        // (not the stale startPos — the player may have changed areas during the hold)
-        am.ClearPresetBase(); // briefly clear so we can read where the camera SHOULD be
-        yield return null;    // one frame for ApartmentManager to update position
+        am.ClearPresetBase();
+        yield return null;
 
         Vector3 returnPos = cam.transform.position;
         float returnFOV = cam.fieldOfView;
 
-        // Re-override so we can lerp smoothly from the moment frame back
         am.SetPresetBase(framePos, frameRot, frameFOV);
 
         elapsed = 0f;
         while (elapsed < _returnDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = _returnCurve.Evaluate(Mathf.Clamp01(elapsed / _returnDuration));
 
             Vector3 pos = Vector3.Lerp(framePos, returnPos, t);
