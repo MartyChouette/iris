@@ -30,7 +30,7 @@ public class FlyController : MonoBehaviour
 
     [Header("Audio")]
     [Tooltip("Buzz volume at closest approach.")]
-    [SerializeField, Range(0f, 1f)] private float _buzzVolume = 0.15f;
+    [SerializeField, Range(0f, 1f)] private float _buzzVolume = 0.04f;
 
     [Tooltip("Buzz frequency (Hz).")]
     [SerializeField] private float _buzzFrequency = 180f;

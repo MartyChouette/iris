@@ -11494,3 +11494,295 @@ Assets/Scripts/Mechanics/Watering/WateringManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260413_082424
+### Commits
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+---
+
+## Session End: 20260413_083203
+### Commits
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_084510
+### Commits
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_093448
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_101704
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_102033
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_111817
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_121043
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_122245
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_123745
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_124414
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_124838
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_124850
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_125707
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_125935
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_133750
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_133928
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_134120
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/MomentCamera.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_134226
+### Commits
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/MomentCamera.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/DrinkCutawayUI.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/Scripts/UI/SimplePauseMenu.cs
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+

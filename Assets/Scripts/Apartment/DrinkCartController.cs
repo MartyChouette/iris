@@ -79,7 +79,14 @@ public class DrinkCartController : MonoBehaviour
             && wallHit.distance < cartHit.distance)
             return;
 
-        // Open the recipe panel
+        // Physical bottle-pour system replaces the old recipe panel
+        if (DrinkPourManager.Instance != null)
+        {
+            ObjectGrabber.ConsumeClickExternal();
+            return;
+        }
+
+        // Fallback: open the recipe panel (old SimpleDrinkManager path)
         if (_activateSFX != null)
             AudioManager.Instance?.PlaySFX(_activateSFX);
 

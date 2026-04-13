@@ -698,14 +698,53 @@ public class ObjectGrabber : MonoBehaviour
         }
 
         // ── Bottle near glass → start pouring instead of placing ──
+        // Only during BackgroundJudging date phase — bottles are normal items otherwise.
+        bool isDrinkPhase = DateSessionManager.Instance != null
+            && DateSessionManager.Instance.CurrentDatePhase == DateSessionManager.DatePhase.BackgroundJudging;
         var heldBottle = _held.GetComponent<BottleItem>();
-        if (heldBottle != null && _nearestDrinkGlass != null)
+        if (isDrinkPhase && heldBottle != null && heldBottle.Ingredient != null && _nearestDrinkGlass != null)
         {
             if (DrinkPourManager.Instance != null)
             {
-                DrinkPourManager.Instance.StartPouring(_nearestDrinkGlass, heldBottle.Ingredient);
-                ConsumeClick();
-                return; // keep holding the bottle
+                // If this ingredient was already poured into this glass during
+                // the current session, the player wants to put the bottle down
+                // rather than re-enter the pour loop.
+                bool alreadyPoured =
+                    DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Pouring
+                    && DrinkPourManager.Instance.ActiveGlass == _nearestDrinkGlass
+                    && _nearestDrinkGlass.PourOrder.Contains(heldBottle.Ingredient);
+
+                if (alreadyPoured)
+                {
+                    DrinkPourManager.Instance.StopPouring();
+                    // Fall through to normal placement
+                }
+                else
+                {
+                    DrinkPourManager.Instance.StartPouring(_nearestDrinkGlass, heldBottle.Ingredient);
+                    ConsumeClick();
+                    return; // keep holding the bottle
+                }
+            }
+        }
+
+        // ── Deliver finished drink to date character ──
+        if (_held.GetComponent<DrinkGlass>() != null
+            && DrinkPourManager.Instance != null
+            && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.WaitingForDelivery)
+        {
+            Ray deliverRay = cam.ScreenPointToRay(IrisInput.CursorPosition);
+            if (Physics.Raycast(deliverRay, out RaycastHit dateHit, 100f))
+            {
+                var dateChar = dateHit.collider.GetComponent<DateCharacterController>();
+                if (dateChar == null) dateChar = dateHit.collider.GetComponentInParent<DateCharacterController>();
+                if (dateChar != null)
+                {
+                    DrinkPourManager.Instance.DeliverToDate();
+                    ClearHeld();
+                    ConsumeClick();
+                    return;
+                }
             }
         }
 
@@ -1258,6 +1297,11 @@ public class ObjectGrabber : MonoBehaviour
     {
         _nearestDrinkGlass = null;
         if (_held == null) return;
+
+        // Only snap bottles toward glasses during the drink-making date phase
+        if (DateSessionManager.Instance == null
+            || DateSessionManager.Instance.CurrentDatePhase != DateSessionManager.DatePhase.BackgroundJudging)
+            return;
 
         var bottle = _held.GetComponent<BottleItem>();
         if (bottle == null) return;
@@ -2046,6 +2090,16 @@ public class ObjectGrabber : MonoBehaviour
     private void UpdateShadow()
     {
         if (_shadowGO == null || _heldRb == null) return;
+
+        // Hide shadow and ghost while magnetically snapped to an interaction
+        // target (bottle→glass, watering can→plant, shoe→partner) — the snap
+        // itself is the visual feedback, not the placement preview
+        if (_nearestDrinkGlass != null || _nearestWaterablePlant != null || _pairSnapTarget != null)
+        {
+            _shadowGO.SetActive(false);
+            UpdateGhostPreview(Vector3.zero, Quaternion.identity, show: false);
+            return;
+        }
 
         // Only show shadow when hovering a valid placement surface
         if (_currentSurface == null)

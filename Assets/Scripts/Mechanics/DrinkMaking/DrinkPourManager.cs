@@ -16,7 +16,7 @@ public class DrinkPourManager : MonoBehaviour
 {
     public static DrinkPourManager Instance { get; private set; }
 
-    public enum State { Idle, Pouring, Garnishing, Scoring }
+    public enum State { Idle, Pouring, Garnishing, Scoring, WaitingForDelivery }
 
     [Header("Recipes")]
     [Tooltip("Available recipes the player can make.")]
@@ -61,16 +61,46 @@ public class DrinkPourManager : MonoBehaviour
     private void OnEnable() { _clickAction.Enable(); }
     private void OnDisable() { _clickAction.Disable(); }
 
+    private bool _glassHighlightActive;
+
     private void Update()
     {
         switch (CurrentState)
         {
             case State.Pouring:
                 UpdatePouring();
+                // Prompt to click the glass when hands are empty and liquid has been poured
+                if (!ObjectGrabber.IsHoldingObject && _activeGlass != null && _activeGlass.TotalFill > 0f)
+                {
+                    if (!_glassHighlightActive)
+                    {
+                        _glassHighlightActive = true;
+                        var hl = _activeGlass.GetComponent<InteractableHighlight>();
+                        if (hl != null) hl.SetHighlighted(true);
+                        PickupDescriptionHUD.Instance?.Show("Click the glass to finish the drink");
+                    }
+                }
+                else if (_glassHighlightActive)
+                {
+                    _glassHighlightActive = false;
+                    var hl = _activeGlass != null ? _activeGlass.GetComponent<InteractableHighlight>() : null;
+                    if (hl != null) hl.SetHighlighted(false);
+                    PickupDescriptionHUD.Instance?.Hide();
+                }
                 break;
             case State.Scoring:
                 _scoreTimer -= Time.deltaTime;
-                if (_scoreTimer <= 0f) EndSession();
+                if (_scoreTimer <= 0f) EnterDeliveryMode();
+                break;
+            case State.WaitingForDelivery:
+                // Update prompt based on whether the player is holding the glass
+                if (ObjectGrabber.IsHoldingObject
+                    && ObjectGrabber.HeldObject != null
+                    && ObjectGrabber.HeldObject.GetComponent<DrinkGlass>() != null)
+                {
+                    string dateName = DateSessionManager.Instance?.CurrentDate?.characterName ?? "your date";
+                    PickupDescriptionHUD.Instance?.Show($"Click on {dateName}!");
+                }
                 break;
         }
     }
@@ -81,6 +111,13 @@ public class DrinkPourManager : MonoBehaviour
     public void StartPouring(DrinkGlass glass, DrinkIngredientDefinition ingredient)
     {
         if (glass == null || ingredient == null) return;
+
+        // Close the old recipe panel if it's open — the two systems are mutually exclusive
+        SimpleDrinkManager.Instance?.HideRecipePanel();
+
+        // Ensure glass has a highlight component for later prompts
+        if (glass.GetComponent<InteractableHighlight>() == null)
+            glass.gameObject.AddComponent<InteractableHighlight>();
 
         // If switching to a new glass, reset
         if (_activeGlass != null && _activeGlass != glass)
@@ -115,6 +152,15 @@ public class DrinkPourManager : MonoBehaviour
     {
         if (CurrentState == State.Pouring || CurrentState == State.Garnishing)
         {
+            // Clear the "click glass" prompt
+            _glassHighlightActive = false;
+            if (_activeGlass != null)
+            {
+                var hl = _activeGlass.GetComponent<InteractableHighlight>();
+                if (hl != null) hl.SetHighlighted(false);
+            }
+            PickupDescriptionHUD.Instance?.Hide();
+
             CalculateScore();
             CurrentState = State.Scoring;
             _scoreTimer = _scoreDisplayTime;
@@ -203,14 +249,6 @@ public class DrinkPourManager : MonoBehaviour
 
         DrinkCutawayUI.Instance?.SetStatus($"Score: {_lastScore}");
 
-        // Voice reaction
-        if (_lastScore >= 80)
-            DialoguePortraitBox.Instance?.Say("Mmm, that's delicious!", 2f);
-        else if (_lastScore >= 40)
-            DialoguePortraitBox.Instance?.Say("Not bad... interesting choice.", 2f);
-        else
-            DialoguePortraitBox.Instance?.Say("Um... what did you put in this?", 2f);
-
         Debug.Log($"[DrinkPourManager] Score: {_lastScore} (order={orderScore:F0} layer={layerScore:F0} fill={fillScore:F0} garnish={garnishBonus:F0} overflow={overflowPenalty:F0})");
     }
 
@@ -292,6 +330,73 @@ public class DrinkPourManager : MonoBehaviour
                 return layers[i].amount;
         }
         return 0f;
+    }
+
+    // ── Delivery ────────────────────────────────────────────────────
+
+    /// <summary>
+    /// After scoring, make the glass pickable so the player can hand it
+    /// to the date character.
+    /// </summary>
+    private void EnterDeliveryMode()
+    {
+        DrinkCutawayUI.Instance?.Hide();
+        _glassHighlightActive = false;
+        CurrentState = State.WaitingForDelivery;
+
+        // Make the glass a grabbable PlaceableObject
+        if (_activeGlass != null)
+        {
+            var go = _activeGlass.gameObject;
+            if (go.GetComponent<Rigidbody>() == null)
+            {
+                var rb = go.AddComponent<Rigidbody>();
+                rb.mass = 0.1f;
+                rb.angularDamping = 0.5f;
+            }
+            if (go.GetComponent<PlaceableObject>() == null)
+                go.AddComponent<PlaceableObject>();
+            var hl = go.GetComponent<InteractableHighlight>();
+            if (hl == null) hl = go.AddComponent<InteractableHighlight>();
+            hl.SetHighlighted(true);
+        }
+
+        // Highlight the date character too
+        if (DateSessionManager.Instance != null && DateSessionManager.Instance.DateCharacter != null)
+        {
+            var highlight = DateSessionManager.Instance.DateCharacter.GetComponent<InteractableHighlight>();
+            if (highlight == null)
+                highlight = DateSessionManager.Instance.DateCharacter.gameObject.AddComponent<InteractableHighlight>();
+            highlight.SetHighlighted(true);
+        }
+
+        PickupDescriptionHUD.Instance?.Show("Pick up the drink and hand it to your date!");
+        Debug.Log("[DrinkPourManager] Drink ready — pick up the glass and hand it to your date!");
+    }
+
+    /// <summary>
+    /// Called by ObjectGrabber when the player clicks the date character
+    /// while holding the finished glass.
+    /// </summary>
+    public void DeliverToDate()
+    {
+        PickupDescriptionHUD.Instance?.Hide();
+
+        // Remove date character highlight
+        if (DateSessionManager.Instance != null && DateSessionManager.Instance.DateCharacter != null)
+        {
+            var highlight = DateSessionManager.Instance.DateCharacter.GetComponent<InteractableHighlight>();
+            if (highlight != null) highlight.SetHighlighted(false);
+        }
+
+        // Hand off to DateSessionManager — triggers reaction + phase 3
+        DateSessionManager.Instance?.ReceiveDrink(_activeRecipe, _lastScore);
+
+        // Destroy the glass object
+        if (_activeGlass != null)
+            Destroy(_activeGlass.gameObject);
+
+        EndSession();
     }
 
     // ── Session management ──────────────────────────────────────────

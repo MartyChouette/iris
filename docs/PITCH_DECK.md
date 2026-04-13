@@ -199,8 +199,8 @@ Omori through word-of-mouth.
 
 ## Team and Timeline
 
-**Team:** Solo developer with AI-assisted development (design documentation, code review,
-iteration support via Claude Code). All art, code, design, and systems by one person.
+**Team:** Two-person team with AI-assisted development (design documentation, code review,
+iteration support via Claude Code). Art, code, design, and systems built collaboratively.
 
 **Engine:** Unity 6.0.3 with URP
 

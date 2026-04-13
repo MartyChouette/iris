@@ -17,24 +17,18 @@ public class MomentCamera : MonoBehaviour
     public static MomentCamera Instance { get; private set; }
 
     [Header("Framing")]
-    [Tooltip("How far the camera sits from the target (world units).")]
-    [SerializeField] private float _frameDistance = 1.2f;
-
-    [Tooltip("Height offset above the target for the camera.")]
-    [SerializeField] private float _frameHeight = 0.4f;
-
-    [Tooltip("FOV when framing a moment (lower = tighter zoom).")]
-    [SerializeField] private float _frameFOV = 40f;
+    [Tooltip("FOV when framing a moment (lower = tighter zoom). Set to 0 to keep current FOV.")]
+    [SerializeField] private float _frameFOV = 0f;
 
     [Header("Timing")]
     [Tooltip("Seconds to glide the camera to the target.")]
-    [SerializeField] private float _pushDuration = 0.6f;
+    [SerializeField] private float _pushDuration = 1.0f;
 
     [Tooltip("Seconds the camera holds on the target before returning.")]
     [SerializeField] private float _holdDuration = 1.5f;
 
     [Tooltip("Seconds to glide the camera back to normal.")]
-    [SerializeField] private float _returnDuration = 0.4f;
+    [SerializeField] private float _returnDuration = 0.8f;
 
     [Header("Easing")]
     [SerializeField] private AnimationCurve _pushCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
@@ -86,19 +80,17 @@ public class MomentCamera : MonoBehaviour
 
     private void StartFrame(Vector3 target, float holdOverride)
     {
-        // Default approach: from the main camera's current forward direction
-        var cam = Camera.main;
-        Vector3 approachDir = cam != null ? -cam.transform.forward : Vector3.back;
-        StartFrameFrom(target, approachDir, holdOverride);
-    }
-
-    private void StartFrameFrom(Vector3 target, Vector3 approachDir, float holdOverride)
-    {
         if (_activeRoutine != null)
             StopCoroutine(_activeRoutine);
 
         float hold = holdOverride >= 0f ? holdOverride : _holdDuration;
-        _activeRoutine = StartCoroutine(MomentRoutine(target, approachDir.normalized, hold));
+        _activeRoutine = StartCoroutine(MomentRoutine(target, hold));
+    }
+
+    private void StartFrameFrom(Vector3 target, Vector3 approachDir, float holdOverride)
+    {
+        // approachDir ignored — camera keeps its current angle and slides over
+        StartFrame(target, holdOverride);
     }
 
     private void CancelMoment()
@@ -116,7 +108,7 @@ public class MomentCamera : MonoBehaviour
         }
     }
 
-    private IEnumerator MomentRoutine(Vector3 target, Vector3 approachDir, float holdTime)
+    private IEnumerator MomentRoutine(Vector3 target, float holdTime)
     {
         var am = ApartmentManager.Instance;
         if (am == null) yield break;
@@ -126,16 +118,20 @@ public class MomentCamera : MonoBehaviour
 
         _isMomentActive = true;
 
-        // Calculate frame position: offset from target along approach direction
-        Vector3 framePos = target + approachDir * _frameDistance + Vector3.up * _frameHeight;
-        Quaternion frameRot = Quaternion.LookRotation(target - framePos, Vector3.up);
-
         // Capture start values
         Vector3 startPos = cam.transform.position;
         Quaternion startRot = cam.transform.rotation;
         float startFOV = cam.fieldOfView;
 
-        // ── Push: glide to frame position ──
+        // Keep the same rotation — just slide the camera so the target is centered.
+        // Project the target onto the camera's depth axis to preserve distance.
+        Vector3 camForward = cam.transform.forward;
+        float depth = Vector3.Dot(target - startPos, camForward);
+        Vector3 framePos = target - camForward * depth;
+        Quaternion frameRot = startRot; // no rotation change
+        float frameFOV = _frameFOV > 0f ? _frameFOV : startFOV;
+
+        // ── Push: smooth glide to frame position ──
         float elapsed = 0f;
         while (elapsed < _pushDuration)
         {
@@ -143,14 +139,13 @@ public class MomentCamera : MonoBehaviour
             float t = _pushCurve.Evaluate(Mathf.Clamp01(elapsed / _pushDuration));
 
             Vector3 pos = Vector3.Lerp(startPos, framePos, t);
-            Quaternion rot = Quaternion.Slerp(startRot, frameRot, t);
-            float fov = Mathf.Lerp(startFOV, _frameFOV, t);
+            float fov = Mathf.Lerp(startFOV, frameFOV, t);
 
-            am.SetPresetBase(pos, rot, fov);
+            am.SetPresetBase(pos, frameRot, fov);
             yield return null;
         }
 
-        am.SetPresetBase(framePos, frameRot, _frameFOV);
+        am.SetPresetBase(framePos, frameRot, frameFOV);
 
         // ── Hold ──
         yield return new WaitForSeconds(holdTime);
@@ -161,11 +156,10 @@ public class MomentCamera : MonoBehaviour
         yield return null;    // one frame for ApartmentManager to update position
 
         Vector3 returnPos = cam.transform.position;
-        Quaternion returnRot = cam.transform.rotation;
         float returnFOV = cam.fieldOfView;
 
-        // Re-override so we can lerp smoothly from the moment frame to the correct position
-        am.SetPresetBase(framePos, frameRot, _frameFOV);
+        // Re-override so we can lerp smoothly from the moment frame back
+        am.SetPresetBase(framePos, frameRot, frameFOV);
 
         elapsed = 0f;
         while (elapsed < _returnDuration)
@@ -174,10 +168,9 @@ public class MomentCamera : MonoBehaviour
             float t = _returnCurve.Evaluate(Mathf.Clamp01(elapsed / _returnDuration));
 
             Vector3 pos = Vector3.Lerp(framePos, returnPos, t);
-            Quaternion rot = Quaternion.Slerp(frameRot, returnRot, t);
-            float fov = Mathf.Lerp(_frameFOV, returnFOV, t);
+            float fov = Mathf.Lerp(frameFOV, returnFOV, t);
 
-            am.SetPresetBase(pos, rot, fov);
+            am.SetPresetBase(pos, frameRot, fov);
             yield return null;
         }
 

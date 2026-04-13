@@ -14,6 +14,7 @@ public class SimplePauseMenu : MonoBehaviour
     [SerializeField] private SettingsPanel _settingsPanel;
 
     private bool _isPaused;
+    public bool IsPaused => _isPaused;
 
     private void Awake()
     {

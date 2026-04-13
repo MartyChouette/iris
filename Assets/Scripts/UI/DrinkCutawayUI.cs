@@ -43,6 +43,12 @@ public class DrinkCutawayUI : MonoBehaviour
     private DrinkGlass _activeGlass;
     private float _smoothFoam;
 
+    // Glass shape masking
+    private Image _glassImage;
+    private Mask _glassMask;
+    private Texture2D _silhouetteTexture;
+    private Sprite _silhouetteSprite;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoSpawn()
     {
@@ -60,15 +66,35 @@ public class DrinkCutawayUI : MonoBehaviour
         _canvasRoot.SetActive(false);
     }
 
-    private void OnDestroy() { if (Instance == this) Instance = null; }
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        // Hide drink UI when switching scenes (e.g. quit to main menu)
+        Hide();
+    }
+
+    private void OnDestroy()
+    {
+        CleanupSilhouette();
+        if (Instance == this) Instance = null;
+    }
 
     private void Update()
     {
         if (!_isShowing || _activeGlass == null) return;
 
-        // Auto-dismiss if pour manager is idle
-        if (DrinkPourManager.Instance != null
-            && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Idle)
+        // Auto-dismiss if pour manager is idle or destroyed (scene change)
+        if (DrinkPourManager.Instance == null
+            || DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Idle)
         {
             Hide();
             return;
@@ -85,11 +111,14 @@ public class DrinkCutawayUI : MonoBehaviour
         _activeGlass = glass;
         _smoothFoam = glass.TotalFill;
 
-        // Glass width based on type
-        bool isWine = recipe != null && recipe.requiredGlass != null
-            && recipe.requiredGlass.glassName.ToLower().Contains("wine");
+        // Detect glass shape
+        string glassName = recipe?.requiredGlass?.glassName ?? "";
+        bool isWine = glassName.ToLower().Contains("wine");
         float width = isWine ? _glassWidthWine : _glassWidthHighball;
         if (_glassRT != null) _glassRT.sizeDelta = new Vector2(width, _glassHeight);
+
+        // Apply silhouette mask for shaped glasses
+        ApplyGlassShape(isWine);
 
         // Target line
         float target = recipe != null ? recipe.idealFillLevel : 0.75f;
@@ -206,6 +235,116 @@ public class DrinkCutawayUI : MonoBehaviour
         _layerImages.Add((img, rt));
     }
 
+    // ── Glass shape silhouettes ────────────────────────────────────
+
+    /// <summary>
+    /// Apply a silhouette mask so the glass cutaway matches the actual glass shape.
+    /// Highball = plain rectangle (no mask). Wine = stem + bowl.
+    /// </summary>
+    private void ApplyGlassShape(bool isWine)
+    {
+        if (_glassImage == null)
+            _glassImage = _glassRT.GetComponent<Image>();
+
+        if (!isWine)
+        {
+            // Highball: plain rectangle — remove mask if it was set
+            _glassImage.sprite = null;
+            _glassImage.color = _glassColor;
+            if (_glassMask != null) _glassMask.enabled = false;
+            return;
+        }
+
+        // Wine glass: stem + bowl silhouette
+        CleanupSilhouette();
+
+        const int texW = 64;
+        const int texH = 128;
+        _silhouetteTexture = new Texture2D(texW, texH, TextureFormat.RGBA32, false);
+        _silhouetteTexture.filterMode = FilterMode.Bilinear;
+        _silhouetteTexture.wrapMode = TextureWrapMode.Clamp;
+
+        var pixels = new Color32[texW * texH];
+        var transparent = new Color32(0, 0, 0, 0);
+        var white = new Color32(255, 255, 255, 255);
+
+        float halfW = texW * 0.5f;
+
+        for (int y = 0; y < texH; y++)
+        {
+            float t = (float)y / (texH - 1); // 0 = bottom, 1 = top
+            float halfWidth = WineGlassProfile(t) * halfW;
+
+            for (int x = 0; x < texW; x++)
+            {
+                float distFromCenter = Mathf.Abs(x - halfW + 0.5f);
+                // Soft edge (1px anti-alias)
+                pixels[y * texW + x] = distFromCenter <= halfWidth ? white
+                    : distFromCenter <= halfWidth + 1f
+                        ? new Color32(255, 255, 255, (byte)(255 * (1f - (distFromCenter - halfWidth))))
+                        : transparent;
+            }
+        }
+
+        _silhouetteTexture.SetPixels32(pixels);
+        _silhouetteTexture.Apply();
+
+        _silhouetteSprite = Sprite.Create(
+            _silhouetteTexture,
+            new Rect(0, 0, texW, texH),
+            new Vector2(0.5f, 0.5f),
+            100f);
+
+        _glassImage.sprite = _silhouetteSprite;
+        _glassImage.type = Image.Type.Simple;
+        _glassImage.preserveAspect = false;
+        _glassImage.color = _glassColor;
+
+        // Mask clips liquid layers and foam to the glass shape
+        if (_glassMask == null)
+            _glassMask = _glassRT.gameObject.AddComponent<Mask>();
+        _glassMask.showMaskGraphic = true;
+        _glassMask.enabled = true;
+    }
+
+    /// <summary>
+    /// Wine glass profile: returns half-width multiplier (0-1) at normalized height t.
+    /// 0 = bottom (base), 1 = top (rim).
+    ///
+    ///   rim  ──╮     ╭──   0.92 wide, slight flare
+    ///          │     │
+    ///   bowl   ╰─────╯     widest at ~0.55
+    ///           │   │
+    ///   stem    │   │      narrow
+    ///          ─┴───┴─     base
+    /// </summary>
+    private static float WineGlassProfile(float t)
+    {
+        // Base (0.00 – 0.06): flat foot
+        if (t < 0.06f) return 0.28f;
+        // Base-to-stem taper (0.06 – 0.12)
+        if (t < 0.12f) return Mathf.Lerp(0.28f, 0.07f, (t - 0.06f) / 0.06f);
+        // Stem (0.12 – 0.32): thin
+        if (t < 0.32f) return 0.07f;
+        // Stem-to-bowl flare (0.32 – 0.50)
+        if (t < 0.50f)
+        {
+            float s = (t - 0.32f) / 0.18f;
+            return Mathf.Lerp(0.07f, 0.95f, s * s); // ease-in curve
+        }
+        // Bowl (0.50 – 0.75): widest
+        if (t < 0.75f) return Mathf.Lerp(0.95f, 1.0f, (t - 0.50f) / 0.25f);
+        // Bowl-to-rim taper (0.75 – 1.0): slight inward curve
+        float r = (t - 0.75f) / 0.25f;
+        return Mathf.Lerp(1.0f, 0.85f, r * r);
+    }
+
+    private void CleanupSilhouette()
+    {
+        if (_silhouetteSprite != null) { Destroy(_silhouetteSprite); _silhouetteSprite = null; }
+        if (_silhouetteTexture != null) { Destroy(_silhouetteTexture); _silhouetteTexture = null; }
+    }
+
     // ── Build UI ────────────────────────────────────────────────────
 
     private void BuildUI()
@@ -219,7 +358,8 @@ public class DrinkCutawayUI : MonoBehaviour
         var scaler = _canvasRoot.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920f, 1080f);
-        _canvasRoot.AddComponent<GraphicRaycaster>();
+        // No GraphicRaycaster — this is a display-only overlay.
+        // Adding one would block all game clicks via IsPointerOverGameObject.
 
         // Dim background
         var dimGO = CreateUI("BgDim", _canvasRoot.transform);

@@ -376,6 +376,15 @@ public class GlobalCursorManager : MonoBehaviour
             }
         }
 
+        // Force cursor visible when paused — menus need the cursor
+        if ((SimplePauseMenu.Instance != null && SimplePauseMenu.Instance.IsPaused)
+            || Time.timeScale == 0f)
+        {
+            if (!Cursor.visible) Cursor.visible = true;
+            ApplyCursor(CursorType.Default);
+            return;
+        }
+
         // While holding an item, hide the cursor entirely — the held object is the feedback
         if (ObjectGrabber.IsHoldingObject)
         {
