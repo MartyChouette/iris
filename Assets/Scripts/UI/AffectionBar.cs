@@ -70,6 +70,7 @@ public class AffectionBar : MonoBehaviour
     private float _wiltTimer;
     private float _lastFill;
     private bool _visible;
+    private RectTransform _rootRT; // cached for popup spawn position
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoSpawn()
@@ -225,6 +226,63 @@ public class AffectionBar : MonoBehaviour
             _canvasRoot.SetActive(visible);
     }
 
+    /// <summary>
+    /// Show a floating text popup that rises from the flower head and fades out.
+    /// Call from anywhere: AffectionBar.Instance?.ShowPopup("Shoes +5", true);
+    /// </summary>
+    public void ShowPopup(string text, bool positive)
+    {
+        if (_canvasRoot == null || !_visible) return;
+        StartCoroutine(RunPopup(text, positive));
+    }
+
+    private System.Collections.IEnumerator RunPopup(string text, bool positive)
+    {
+        var go = new GameObject("AffectionPopup");
+        go.transform.SetParent(_rootRT != null ? _rootRT : _canvasRoot.transform, false);
+        var rt = go.AddComponent<RectTransform>();
+        // Spawn above the flower head
+        rt.anchorMin = new Vector2(0.5f, 1f);
+        rt.anchorMax = new Vector2(0.5f, 1f);
+        rt.pivot = new Vector2(0f, 0f);
+        rt.anchoredPosition = new Vector2(10f, 10f);
+        rt.sizeDelta = new Vector2(200f, 30f);
+
+        var tmp = go.AddComponent<TextMeshProUGUI>();
+        tmp.text = text;
+        tmp.fontSize = 18f;
+        tmp.fontStyle = FontStyles.Bold;
+        tmp.alignment = TextAlignmentOptions.Left;
+        tmp.color = positive
+            ? new Color(1f, 0.45f, 0.6f, 1f)   // pink for likes
+            : new Color(0.5f, 0.45f, 0.55f, 1f); // grey-purple for dislikes
+        tmp.raycastTarget = false;
+
+        // Float up and fade out over 1.5 seconds
+        float duration = 1.5f;
+        Vector2 startPos = rt.anchoredPosition;
+        float riseDistance = 60f;
+
+        for (float t = 0f; t < duration; t += Time.deltaTime)
+        {
+            float norm = t / duration;
+            rt.anchoredPosition = startPos + Vector2.up * (riseDistance * norm);
+            // Quick fade in, slow fade out
+            float alpha = norm < 0.1f ? norm / 0.1f : 1f - Mathf.Pow((norm - 0.1f) / 0.9f, 2f);
+            tmp.color = new Color(tmp.color.r, tmp.color.g, tmp.color.b, alpha);
+
+            // Scale pop on entry
+            float scale = norm < 0.15f ? Mathf.Lerp(0.5f, 1.1f, norm / 0.15f)
+                : norm < 0.25f ? Mathf.Lerp(1.1f, 1f, (norm - 0.15f) / 0.1f)
+                : 1f;
+            rt.localScale = Vector3.one * scale;
+
+            yield return null;
+        }
+
+        Destroy(go);
+    }
+
     private void BuildUI()
     {
         _canvasRoot = new GameObject("AffectionFlowerCanvas");
@@ -240,7 +298,8 @@ public class AffectionBar : MonoBehaviour
         // Root container positioned on left side
         var rootGO = new GameObject("FlowerRoot");
         rootGO.transform.SetParent(_canvasRoot.transform, false);
-        var rootRT = rootGO.AddComponent<RectTransform>();
+        _rootRT = rootGO.AddComponent<RectTransform>();
+        var rootRT = _rootRT;
         rootRT.anchorMin = new Vector2(0f, 0.5f);
         rootRT.anchorMax = new Vector2(0f, 0.5f);
         rootRT.pivot = new Vector2(0f, 0f);

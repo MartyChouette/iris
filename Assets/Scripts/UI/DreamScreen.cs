@@ -116,7 +116,15 @@ public class DreamScreen : MonoBehaviour
     private IEnumerator DreamSequence(string overrideText)
     {
         yield return FadeIn(overrideText);
+
+        // Hold for minimum duration then wait for player click
         yield return new WaitForSecondsRealtime(_holdDuration);
+        // Subtle prompt
+        if (_dreamText != null)
+            _dreamText.text += "\n<size=60%><alpha=#88>click to continue";
+        yield return null; // skip the frame the click might already be down
+        while (!Input.GetMouseButtonDown(0) && !Input.GetKeyDown(KeyCode.Space))
+            yield return null;
         yield return FadeOut();
     }
 

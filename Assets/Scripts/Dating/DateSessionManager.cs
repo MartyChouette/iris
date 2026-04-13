@@ -637,6 +637,15 @@ public class DateSessionManager : MonoBehaviour
             // Apply affection with the surface multiplier baked into magnitude.
             ApplyReaction(reaction, multiplier);
 
+            // Pop the item name + reaction above the flower gauge
+            string popText = reaction == ReactionType.Like
+                ? $"{tag.DisplayName} \u2665"
+                : reaction == ReactionType.Dislike
+                    ? $"{tag.DisplayName} \u2639"
+                    : tag.DisplayName;
+            if (multiplier > 1) popText += $" {multiplier}\u00d7";
+            AffectionBar.Instance?.ShowPopup(popText, reaction == ReactionType.Like);
+
             // Fire reveal event for HUD
             OnRevealReaction?.Invoke(new AccumulatedReaction
             {
@@ -692,8 +701,12 @@ public class DateSessionManager : MonoBehaviour
             // Spawn the floating "2×" popup slightly above
             SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
 
-            // Stagger so each item is readable
-            yield return new WaitForSeconds(0.5f);
+            // Wait for player click before advancing to next item
+            yield return new WaitForSeconds(0.3f); // brief pause so particles register
+            PickupDescriptionHUD.Instance?.Show("Click to continue...");
+            yield return new WaitUntil(() =>
+                IrisInput.Instance != null && IrisInput.Instance.Click.WasPressedThisFrame());
+            PickupDescriptionHUD.Instance?.Hide();
         }
 
         // Clear the last item's highlight so nothing stays lit forever.
@@ -1509,6 +1522,13 @@ public class DateSessionManager : MonoBehaviour
     private void HandleCharacterReaction(ReactableTag tag, ReactionType type, string displayName)
     {
         ApplyReaction(type);
+
+        // Pop item name above the flower gauge during live reactions
+        if (type != ReactionType.Neutral)
+        {
+            string sym = type == ReactionType.Like ? " \u2665" : " \u2639";
+            AffectionBar.Instance?.ShowPopup(displayName + sym, type == ReactionType.Like);
+        }
 
         // Show labeled reaction bubble on the character (with item icon if available)
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
