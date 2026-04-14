@@ -8,6 +8,16 @@
 
 Nema is a potential serial killer who dates people and some of them... disappear. The player slowly realizes this through environmental storytelling — souvenirs left behind, empty chairs at the table, repeat dates that stop calling back.
 
+### Tone Ratio: 60 / 25 / 15
+
+| Pillar | Weight | What It Means |
+|--------|:------:|---------------|
+| **Cozy** | 60% | The apartment sim is genuine. Preparation, rituals, the satisfaction of a clean space and a good drink. This is the majority of playtime. |
+| **Mystery** | 25% | The observation/deduction layer runs constantly. Keywords, preferences, details that reward close reading across encounters. Golden Idol–inspired attention mechanics. |
+| **Creepy** | 15% | Rare but devastating. The strange third flower. The empty newspaper slot. The souvenir in the drawer. These moments land hard because the cozy earned trust first. |
+
+Creepy moments are **never jump scares, never gore, never explicit**. The dread is environmental and inferential.
+
 ---
 
 ## Game Modes
@@ -108,12 +118,23 @@ Dates fall into categories based on how they go:
 | Goes very well | Date stays late... then **disappears** | Souvenir left behind |
 | Repeat date | Same person comes back | Deeper relationship, or... |
 
+### Three Dates, Three Flowers
+
+Each date character visits **three times**. The player learns their preferences over repeated encounters, refining their preparation each visit.
+
+- **Date 1** — First meeting. Player is guessing. Flower left behind is normal and beautiful.
+- **Date 2** — Player applies knowledge from date 1. Better score. Flower is normal.
+- **Date 3** — Player knows them well. The flower left behind is **wrong** — wilted, dark, thorned, discolored, or off in some way the first two weren't. This is the horror signal.
+
+After the third date, the person **disappears**.
+
 ### Disappearances
-- Dates that go "very well" (high affection) → the person vanishes after that night
+- After the third date, the person vanishes
 - They stop appearing in the newspaper personals
 - They don't respond to calls
+- The strange third flower is the only warning
 - **No explicit violence shown** — the horror is in the implication
-- The player begins to question: did I do this? Did Nema do this?
+- The player begins to question: did I cause this? Did Nema do this?
 
 ### Souvenirs (Serial Killer Trophies)
 - After a date disappears, one of their personal items appears in the apartment:
@@ -144,20 +165,21 @@ SouvenirDefinition:
 
 ## Date Content Scaling
 
-The amount of unique date content determines game length:
+Each person visits **3 times** (3 flowers each). The amount of unique date characters determines game length:
 
-| Dates Available | Realistic Days | Notes |
-|-----------------|---------------|-------|
-| 4 (current) | 4-7 days | Repeat dates start quickly |
-| 8 | 7-14 days | Good for vertical slice |
-| 12+ | 14-30 days | Full game territory |
+| Characters | Total Dates | Calendar Days | Notes |
+|:----------:|:-----------:|:-------------:|-------|
+| 4 (current) | 12 | 7-12 days | Vertical slice — tight, focused |
+| 7 | 21 | 14-21 days | Full game — good variety |
+| 10+ | 30+ | 21-30 days | Extended content territory |
 
-### Repeat Date Mechanics
-- Same person, different conversation topics
+### Three-Date Arc Per Character
+- **Date 1** — First meeting, player guessing, normal flower
+- **Date 2** — Player applies learned preferences, better score, normal flower
+- **Date 3** — Player knows them well, strange/creepy flower, person disappears after
 - They remember previous visits (liked items, drinks)
-- Relationship deepens → more personal items visible
-- Eventually... they might disappear too
-- Or they become "the one who got away" (survived Nema)
+- Relationship deepens across encounters → more personal details revealed
+- Third date is always the last
 
 ---
 

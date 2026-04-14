@@ -1,3 +1,82 @@
+## Session: 20260413 — Massive drink system rework, UI fixes, polish pass
+
+### Summary
+Complete rework of Phase 2 drink-making flow, dozens of bug fixes across placement, pairing, camera, UI, and fridge systems. Added psychedelic dream screen, flower affection gauge with juice, and item discovery moments.
+
+### Drink System (Phase 2)
+- Bottle placement fix: alreadyPoured check lets player put bottle down near glass
+- Phase 2 gate: bottle pour + magnetic snap only active during BackgroundJudging
+- Delivery flow: finish drink → glass becomes pickable → hand to date → reaction → Phase 3
+- Date reacts via DateReactionUI (removed Nema DialoguePortraitBox lines)
+- HUD prompts at every step: "Click glass to finish" → "Pick up drink" → "Click on Paris!"
+- DrinkCartController skips SimpleDrinkManager when DrinkPourManager exists
+- DrinkCutawayUI: removed GraphicRaycaster (was blocking clicks), moved to right side, scene-change cleanup, wine glass silhouette with procedural Mask
+
+### Placement & Interaction
+- Ghost/shadow suppression during bottle→glass, can→plant, shoe→partner magnetic snaps
+- Barrier placement blocking: larger CheckSphere (0.08m) + downward probe, ghost turns red
+- Wall placement fix: barrier probe no longer fires into the wall itself
+- InteractableHighlight auto-added to all PlaceableObjects (shoes, plates, trash, bottles)
+- Shoe pairing: both shoes blink (MPB fallback when PlaceableObject disabled), Y-aligned, partner highlight added at runtime if missing
+- Record sleeves: pickup raycast includes RecordSleeves layer (30), auto-find VinylDisc child
+
+### Camera & UI
+- Cursor forced visible during pause menus
+- MomentCamera: pure lateral slide (no rotation), pause game during hold, ItemDiscoveryMoments toggle on ApartmentManager
+- Phase 1 camera: removed MomentCamera.FrameTarget that fought with ApplyPhaseCamera
+- Reveal: no camera zoom on liked items, particles spawn at item position, flower popups float up from gauge
+- DateSessionHUD: old affection bar/slider hidden
+- PickupDescriptionHUD: smooth 0.3s fade-out via CanvasGroup
+- Fly buzz volume: 0.15 → 0.04
+
+### Flower Affection Gauge
+- 2x bigger (400px height, 60px flower head)
+- Celebration pulse: 5 bounces, 60% size burst, wobble rotation
+- Wilt droop on affection decrease
+- Item name + heart/frown popups float from flower head
+- Resubscribes on scene load, hides on main menu
+
+### Dream Screen (new)
+- Psychedelic 1960s Fantasia overlay, 50% transparent over apartment
+- Procedural swirling color bands with hue shifting, slowly rotating
+- Floating italic dream text with random phrases
+- Click-to-continue after minimum hold
+- Replaces old black screen + text in SleepSequence
+
+### Vinyl/Record Fix
+- AlbumSleeve caches vinyl rest scale/rotation in Awake
+- ReturnVinyl restores original scale/rotation (was carrying turntable's compensated scale)
+
+### Fridge
+- Door hinge: RotateAround with auto-detected hinge edge from mesh bounds
+- Configurable hinge axis (world space), separate hinge point transforms
+- Removed teleport deposit — shelves use ObjectGrabber's PlacementSurface + DropZone slot system
+
+### Commits
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+7453780 fix shoe pairing: alignment + partner highlight
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+c295ad3 remove camera zoom on liked items, fix particle position
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+070356f fix vinyl morph on day transition + psychedelic dream screen
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+8b337c9 pause game during moment camera hold (item discoveries)
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+15bf9c3 add missing TMPro using in AffectionBar
+c0b447b fix wall placement blocked by barrier probe
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+a0cb55d fridge doors: world rotation, just a hinge
+ef94014 fridge doors: RotateAround with separate hinge points
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+4aa6135 remove fridge teleport deposit — use ObjectGrabber's slot system instead
+
+---
+
 ## Session End: 20260404_192520
 ### Commits
 ef16219 add scissors context cursor — shows when hovering over ScissorStation
@@ -11783,6 +11862,877 @@ Assets/Scripts/UI/PickupDescriptionHUD.cs
 Assets/Scripts/UI/SimplePauseMenu.cs
 docs/PITCH_DECK.html
 docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_134327
+### Commits
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+---
+
+## Session End: 20260413_135004
+### Commits
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_135258
+### Commits
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_135739
+### Commits
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_141054
+### Commits
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_141457
+### Commits
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_141754
+### Commits
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_142200
+### Commits
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_143028
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/LONGTERM_PLAN.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_143233
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_143355
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_143743
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_144400
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_144535
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_144614
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_151719
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_152951
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_153403
+### Commits
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Framework/GameClock.cs
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_153939
+### Commits
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_155140
+### Commits
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_155649
+### Commits
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_161845
+### Commits
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_162019
+### Commits
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+2d66e09 drink demo scene setup, water persistence fix, wall grid scale fix, barrier placement blocking, default material fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_162648
+### Commits
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+42900fb add elevated HTML pitch deck with scroll animations and timeline
+be12987 updated README with current mechanics + new PITCH_DECK.md for funding/publisher meetings
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_175707
+### Commits
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_191256
+### Commits
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_192910
+### Commits
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_193833
+### Commits
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_194122
+### Commits
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_195826
+### Commits
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_201442
+### Commits
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_202852
+### Commits
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_203225
+### Commits
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_204507
+### Commits
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_205950
+### Commits
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_211505
+### Commits
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_211646
+### Commits
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_211946
+### Commits
+4aa6135 remove fridge teleport deposit — use ObjectGrabber's slot system instead
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+4f64546 fix barrier placement blocking: larger sphere + downward probe + ghost feedback
+f9a83a0 fix drink delivery: proximity-based click detection + date character collider
+f9eea98 drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+docs/DESIGN_NEMA_LIFE.md
+docs/DEV_JOURNAL.md
+docs/LONGTERM_PLAN.md
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+docs/PRODUCTION_RUNWAY.md
 production/session-logs/session-log.md
 ---
 

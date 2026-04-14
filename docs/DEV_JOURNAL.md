@@ -2,6 +2,105 @@
 
 ---
 
+## 2026-04-06 to 2026-04-13 — Massive Systems Sprint, Drink Delivery, Polish
+
+### Session Summary
+
+Extended multi-session sprint: record player rework, book collection puzzle, watering system overhaul, full drink system rework with phase 2 gating and physical delivery to date, keyword highlighting, affection flower, Nema phase models + wellbeing/personality charts, weather timelines, dialogue portraits, fly system, tilt-shift camera, analog clock, item pairing improvements, surface multipliers, PSX glitch, ghost preview improvements, sink zone + dirty glass, edge scroll, fridge rework, barrier placement blocking, shoe pairing fixes, flower trimming enhancements (music, 5x zoom, phase title, leaf release), and extensive bug fixes. ~19 commits.
+
+---
+
+### 1. Drink System Rework (Major Feature)
+
+Complete rework of the Phase 2 dating experience:
+- **Phase 2 gating:** Bottle pour + magnetic snap only active during BackgroundJudging date phase
+- **Bottle placement:** `alreadyPoured` check lets player put bottle down near glass after pouring
+- **Drink delivery:** New `WaitingForDelivery` state — glass becomes pickable, click date to hand over drink
+- **Proximity delivery:** Primary: proximity check (within 1.5m of date = deliver). Fallback: RaycastAll through all objects to find DateCharacterController. Auto-adds CapsuleCollider to date if missing.
+- **HUD prompts** at every step: "Click glass to finish" → "Pick up and hand to date" → "Click on [name]!"
+- **DrinkCutawayUI:** Removed GraphicRaycaster (was blocking all clicks), scene-change cleanup, wine glass silhouette with Mask
+- **DrinkCartController:** Skips SimpleDrinkManager when DrinkPourManager exists
+
+**Files:** `DrinkPourManager.cs`, `DrinkCutawayUI.cs`, `DrinkCartController.cs`, `ObjectGrabber.cs`
+
+---
+
+### 2. Record Player, Books, Watering Reworks
+
+- **Record player:** Physical vinyl workflow — hover sleeve to peek, extract, carry to turntable, magnetic snap, platter spin, tone arm animation, album art tooltip
+- **Book collection puzzle:** 3 books pair side-by-side in any order, either-side snap, order validation triggers celebration + secret reward item
+- **Watering system:** Physical watering can with magnetic snap to plant rim, 2D pot cross-section with 4 vase shapes, bubbly soil, target fill line, day-to-day persistence, weather-affected drying
+
+---
+
+### 3. Nema & Atmosphere Systems
+
+- **Nema phase models:** Per-phase models (newspaper, exploration, arrival, kitchen, couch, dancing secret). Head tracking + bored glance animations
+- **NemaWellbeing:** Personality/wellbeing charts tracking emotional state from DateHistory
+- **Voice lines:** Nema voice line system
+- **Dialogue portraits:** Visual novel style portrait system
+- **Weather timelines:** Timeline-based weather progression
+- **Fly system:** FlyController environmental detail (volume tuned down)
+- **Tilt-shift camera:** Post-processing depth effect
+- **Analog clock:** Physical apartment clock with pivot hands
+
+---
+
+### 4. Interaction & Placement Polish
+
+- **Keyword highlighting:** Global database, per-category shimmer (Like=pink, Dislike=grey-blue, Hobby=gold, Personality=purple, Special=teal) across newspaper, dialogue, date end screen, item descriptions
+- **Pair hover snap:** Partner shoe highlights when picking up one shoe
+- **Surface multipliers:** Per-surface scoring multipliers for prominent placement spots
+- **Ghost/shadow suppression:** Hidden during bottle→glass, can→plant, shoe→partner snaps. Red/invalid over barrier geometry
+- **Barrier blocking:** Larger sphere (0.08m) + downward probe (0.15m) catches barriers inside furniture
+- **Shoe pairing fix:** Shoes straighten to flat (zero tilt), partner Y position matches exactly, InteractableHighlight auto-added
+- **Sink zone + dirty glass:** Dishwashing area with dirty glass mechanics
+- **Edge scroll:** Screen-edge scrolling for apartment browsing
+- **Blanket item:** Placeable/reactable blanket in apartment
+
+---
+
+### 5. Flower Trimming Enhancements
+
+- **Music:** Background music during trimming scene
+- **5x zoom UI:** Detail zoom for precise cuts
+- **Epic phase title drop:** Dramatic reveal animation
+- **Leaf release:** Leaves below cut plane released when stem is virtually cut
+- **Held items render on top:** Items render above scene geometry while held
+
+---
+
+### 6. Misc Fixes & Polish
+
+- **Cursor:** Force visible during pause menus (SimplePauseMenu.IsPaused + timeScale check)
+- **PickupDescriptionHUD:** Smooth 0.3s fade-out via CanvasGroup
+- **MomentCamera:** Pure lateral slide (no rotation), slower push/return (1.0s/0.8s), optional FOV
+- **Fly buzz volume:** 0.15 → 0.04
+- **PSX glitch dishevel:** Aesthetic glitch effect
+- **Fridge rework:** Improved controller with date scene model integration
+
+---
+
+### Commits (~19)
+
+| Hash | Description |
+|------|-------------|
+| `80da8f2` | massive session: flies, weather timelines, dialogue portraits, flower snapshot fixes, tilt-shift, cursor system |
+| `00f7a84` | perf fixes + Nema personality/wellbeing charts + voice lines + weather dialogue |
+| `2a8c5d7` | analog clock with pivot hands + disable VN dialogue box |
+| `1f0485a` | huge session: pair hover snap, surface multipliers, PSX glitch, ghost preview, sink zone, Nema phase models, edge scroll |
+| `01632f2` | massive bugfix + fridge rework + date scene models + drink cart |
+| `ecd714e` | massive session: record player rework, book collections, watering, drink rework, keyword highlighting, affection flower, blanket item |
+| `2d66e09` | drink demo scene, water persistence fix, barrier placement, default material fix |
+| `be12987` | updated README + PITCH_DECK.md |
+| `42900fb` | add elevated HTML pitch deck with scroll animations |
+| `f9eea98` | drink system rework: phase 2 gating, bottle placement, delivery to date, UI fixes, camera smoothing |
+| `f9a83a0` | fix drink delivery: proximity-based click detection + date character collider |
+| `4f64546` | fix barrier placement blocking: larger sphere + downward probe + ghost feedback |
+| `7453780` | fix shoe pairing: alignment + partner highlight |
+
+---
+
 ## 2026-04-05 — Bug/Polish Pass, New Mechanics, UX Overhaul
 
 ### Session Summary

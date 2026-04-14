@@ -49,7 +49,7 @@ NIGHT
   └─ Flower trimming scene (cut stems, score, spawn living plant)
   └─ Sleep → next day
         │
-        └─ [if the date went very well]
+        └─ [after the third date — the one with the strange flower]
               Souvenir appears. They don't call back.
 ```
 
@@ -71,11 +71,11 @@ mattered. Items the date likes boost affection. Items they dislike subtract it. 
 in prominent spots are worth more. The camera auto-pushes in on each discovery.
 
 ### 3. The Flower as Score
-Every successful date leaves a flower. You trim it in a standalone scene using virtual
-scissors — cutting angle, stem length, and part condition all feed into a score. That score
-determines how many days the trimmed flower survives as a living plant in your apartment.
-Healthy plants improve the apartment's air quality and affect the mood system. A bad trim
-leaves clippings on the floor and a plant that browns within days.
+Every date leaves a flower. You trim it in a standalone scene using virtual scissors —
+cutting angle, stem length, and part condition all feed into a score. That score determines
+how many days the trimmed flower survives as a living plant in your apartment. Healthy plants
+improve the apartment's air quality and affect the mood system. Each person brings three
+flowers across three dates. The first two are beautiful. The third one is... different.
 
 ### 4. The Keyword System
 Every character has preferences that surface as highlighted keywords in the newspaper,
@@ -91,11 +91,12 @@ time. A stormy evening with a dead plant and no music feels different from a cle
 with jazz and a healthy fern. The date notices.
 
 ### 6. The Horror Layer (Implicit)
-Dates who score very high affection — the great ones, the ones you prepared perfectly for —
-vanish after that night. They stop appearing in the newspaper. Calls go unanswered. A
-personal item of theirs appears in the apartment the next morning: a necklace on the counter,
-a ring in the kitchen drawer. These souvenirs accumulate. Future dates notice them. The game
-never explains Nema. The player connects the dots.
+Each person visits three times. You learn their preferences, refine your preparation, deepen
+the relationship. Their third flower arrives wrong — wilted, dark, thorned, off in a way the
+first two weren't. After that final date, they vanish. They stop appearing in the newspaper.
+Calls go unanswered. A personal item of theirs appears in the apartment: a necklace on the
+counter, a ring in the kitchen drawer. These souvenirs accumulate. Future dates notice them.
+The game never explains Nema. The player connects the dots.
 
 ---
 
@@ -111,14 +112,19 @@ sky system.
 The PSX aesthetic keeps the game feeling hand-made rather than procedural. Every surface reads
 as a deliberate choice.
 
-**Tone:** Cozy on the surface. Methodical preparation, small domestic rituals, the
-satisfaction of a well-poured drink and a clean apartment. Beneath that — a slow accumulation
-of dread. The horror is environmental and never explicit. Players who pay attention will
-understand what Nema is. Players who don't will have a pleasant apartment sim.
+**Tone:** 60% cozy, 25% mystery, 15% creepy. The apartment sim is genuine and unhurried —
+methodical preparation, small domestic rituals, the satisfaction of a well-poured drink and
+a clean apartment. The observation layer runs constantly: keywords, preferences, details that
+reward attention across encounters. The creepy moments are rare but land hard precisely
+because the rest of the game earned the player's trust. A strange third flower. An empty
+slot in the newspaper. A ring in the kitchen drawer that wasn't there yesterday.
 
-**References:** Shenmue (domestic physicality), Spiritfarer (cozy with weight), Disco
-Elysium (character surfaces through behavior), Killer7 (mundane horror, unreliable
-perspective).
+**Visual references:** Sorry We're Closed (primary — PSX aesthetic, warm domestic horror),
+Killer7 (mundane horror, unreliable perspective), Spiritfarer (cozy with emotional weight).
+
+**Mechanical references:** Unpacking (spatial arrangement as storytelling), The Case of the
+Golden Idol (point-and-click observation and deduction), Grim Fandango (point-and-click with
+physical world interaction).
 
 ---
 
@@ -135,12 +141,13 @@ Omori through word-of-mouth.
 
 | Title | Relevance |
 |-------|-----------|
+| Sorry We're Closed | PSX aesthetic, warm domestic horror — primary visual reference |
 | Unpacking | Spatial arrangement as emotional storytelling |
+| The Case of the Golden Idol | Point-and-click observation, deduction through details |
+| Grim Fandango | Point-and-click with physical world interaction, tone |
 | Coffee Talk | Date prep loop, character-driven relationship building |
 | Spiritfarer | Cozy management with meaningful loss |
-| Shenmue | Domestic physicality, daily rhythm |
 | Venba | Small kitchen mechanics with emotional weight |
-| Yume Nikki | Quiet horror beneath a domestic surface |
 
 ---
 
@@ -162,60 +169,70 @@ Omori through word-of-mouth.
 
 ## Current State
 
+**30+ systems built across 20,000+ lines of production-quality code (8/10 technical audit).**
+
 **Built and functional:**
 
-- Full apartment hub: 3 areas, physics interaction, placement system, ghost preview
+- Full apartment hub: 3 areas, physics interaction, grid-snap placement, ghost preview
 - Complete dating loop: 7-day calendar, newspaper ads, 3-phase dates, affection scoring
 - 7 fully defined date characters with preferences, reactions, and dialogue hooks
-- Record player, book collection puzzle, physical watering, physical drink making
-- Tidiness system with per-area scoring, stain wiping, mess spawning
-- MoodMachine with weather, time-of-day, music, plants, air quality inputs
-- Flower trimming: virtual cutting, scoring, living plant persistence in apartment
-- Keyword highlighting system active in newspaper, dialogue, and item descriptions
+- Entrance judgment sequence: outfit, perfume, greeting, cleanliness (4 sequential evaluations)
+- Physical drink making with bottle pour, magnetic snap, and delivery to date
+- Record player: physical vinyl workflow (extract, carry, snap, play), album art
+- Book collection puzzle with paired-item snap and celebration reward
+- Physical watering: 2D cross-section, 4 vase shapes, weather-affected drying, day-to-day persistence
+- Tidiness system with per-area scoring, stain wiping, mess spawning, surface multipliers
+- MoodMachine with weather timelines, time-of-day, music, plants, air quality inputs
+- Flower trimming: virtual cutting, scoring, grading, music, 5x zoom, living plant persistence
+- Keyword highlighting: per-category shimmer (like/dislike/hobby/personality) across all UI
 - Moment Camera for automatic cinematic framing of key events
 - Phase 3 scoring with multiplier popups, particle reactions, paired item bonuses
-- PSX rendering suite with per-object overrides
-- Full accessibility suite (15 settings, 5 categories)
+- PSX rendering suite with per-object overrides, volumetric light shafts, tilt-shift
+- Full accessibility suite (15 settings, 5 categories, tabbed panel, text theme)
 - Save system: auto-saves day/date history/plant records/apartment layout
-- Main menu, tutorial card, name entry, playtest feedback tools
+- Main menu (parallax Nema head), tutorial card, Earthbound-style name entry, outfit selection
+- Item pairing (shoes side-by-side, dishes stacked), visibility eye indicators
+- Calendar UI with date history, flower grades, preference tracking
+- Playtest feedback (F8/F9) with Discord webhook integration, screenshot capture
 
 **In development:**
 
+- Nema character: phase models exist, completing contextual behaviors
+- Phase 3 conversation and reaction polish
 - Date disappearance mechanic + souvenir accumulation
-- Phase 2 and Phase 3 dialogue and NPC flow polish
-- Half-folded newspaper visual rework
 - Player knowledge / dating journal (per-phase preference unlocks)
 - Couch win scene (post-successful date)
-- Nema visible character in apartment
+- Narrative content (Nema bible, mess narratives)
 
 **Remaining for vertical slice:**
 
 - Full 7-day scripted narrative arc (3–4 polished date characters)
-- Photo intro sequence
-- Horror payload delivery (souvenir accumulation, mail system, disappearances)
+- Horror payload delivery (souvenir accumulation, disappearances, environmental dread)
 - Convention demo mode (7-minute curated slice)
+- Photo intro sequence
+- Art and audio asset integration pass
 
 ---
 
 ## Team and Timeline
 
-**Team:** Two-person team with AI-assisted development (design documentation, code review,
-iteration support via Claude Code). Art, code, design, and systems built collaboratively.
+**Team:** Raspberry Rum — two-person studio. One programmer, one artist, shared creative
+direction. 30+ systems designed and built collaboratively.
 
-**Engine:** Unity 6.0.3 with URP
+**Engine:** Unity 6 with URP
 
-**Current milestone:** Vertical slice — full 7-day loop with polished Phase 3 and horror
-layer delivering by end of Q2 2026.
+**Current milestone:** Vertical slice — full loop with 3-4 characters, 3 flowers each,
+and horror layer.
 
 **Estimated milestones:**
 
 | Milestone | Target | Deliverable |
 |-----------|--------|-------------|
-| Vertical Slice | Q2 2026 | Full 7-day loop, 3-4 characters, horror layer |
-| Convention Demo | Q3 2026 | 7-minute curated slice, playable at events |
-| Content Alpha | Q4 2026 | All 7 characters, full souvenir system, journal |
-| Beta | Q1 2027 | Full platform builds, accessibility pass, localization |
-| Release | Q2 2027 | Steam (PC), itch.io |
+| Vertical Slice | Q3 2026 | Full loop, 3-4 characters, horror layer, 3 flowers each |
+| Playable Demo | Q4 2026 | Convention-ready build, 7-minute curated slice |
+| Content Complete | Q2 2027 | All 7 characters (21 dates), souvenirs, journal, full art + audio |
+| Polish & Beta | Summer 2027 | Playtesting, accessibility, localization, platform builds |
+| Release | Oct 2027 | Halloween launch window — Steam (PC), itch.io |
 
 ---
 
@@ -223,16 +240,22 @@ layer delivering by end of Q2 2026.
 
 **Distribution:** Steam (primary), itch.io (simultaneous)
 
-**Model:** Premium, one-time purchase. No DLC planned.
+**Model:** Premium, one-time purchase.
 
-**Price point:** $12–$15 USD (4–6 hour core experience, replayable for date variety and
+**Price point:** $15–$20 USD (4–6 hour core experience, replayable for date variety and
 horror discovery layer)
+
+**DLC potential:** Date packs — 3 new characters per pack with new furniture, items, and
+seasonal events. Each pack adds 9 new dates and fresh content to discover. The apartment
+grows. The souvenir collection grows.
 
 **Platforms:** PC (Windows, Mac). Console ports considered post-launch based on reception.
 
 **Wishlist / community:** Discord server active. Playtest feedback system built into the
 game (F8/F9 Discord webhooks). Dev journal maintained for community.
 
-**Why premium:** The game has a defined arc and a deliberate ending. A subscription or
-live-service model would undermine the tone. The horror layer only works once per player
-in its intended form.
+**Why it's replayable without new content:** The game never forces the horror on the player.
+Stains, sad notes, relics of Nema's past, and the strange third flower from each date are
+all there — but only players who look closely will piece it together. A first playthrough
+where you ignore the mess is a cozy apartment sim. A second where you read everything is
+a different game entirely. The observation layer drives replayability, not content volume.

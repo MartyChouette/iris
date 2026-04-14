@@ -2,7 +2,7 @@
 
 **Project:** Iris v3.0 - Contemplative Flower Trimming Game (Thesis)
 **Engine:** Unity 6.0.3 with URP
-**Last Updated:** April 5, 2026
+**Last Updated:** April 13, 2026
 **Forked from:** Iris v2.0
 
 ---
@@ -215,8 +215,8 @@ Each date character brings a specific flower. The flower trimming score determin
 - [x] **ReactableTag system** — Static registry, date NPC discovery (done)
 - [x] **DateReactionUI** — Thought bubble with emotes (done)
 - [x] **Phase 1 rework (Entrance)** — EntranceJudgmentSequence: 4 sequential judgments (outfit, perfume, welcome, cleanliness) with thought bubble + emote + SFX. Cleanliness via TidyScorer.
-- [ ] **Phase 2 rework (Kitchen Drinks)** — Date stands by kitchen counter. Player sees drink recipe HUD, selects correct alcohol bottle from shelf, does perfect-pour. Score → date reacts.
-- [ ] **Phase 3 living room flow** — Date walks to living room with drink. Investigates: coffee table book, vinyl playing, perfume scent, shelf items, apartment cleanliness.
+- [x] **Phase 2 rework (Kitchen Drinks)** — DrinkPourManager with phase 2 gating: bottle pour + magnetic snap only active during BackgroundJudging. Bottle placement after pouring. WaitingForDelivery state: glass becomes pickable, click date to hand over drink. Proximity-based delivery (1.5m) + RaycastAll fallback. HUD prompts at every step. DrinkCutawayUI with wine glass silhouette Mask.
+- [ ] **Phase 3 living room flow** — Date walks to living room with drink. Investigates: coffee table book, vinyl playing, perfume scent, shelf items, apartment cleanliness. Framework exists (excursions + ReactableTag discovery), needs conversation/reaction polish.
 - [ ] **Phase pass/fail gating** — If Phase 1 or 2 fails badly, date can leave early.
 
 ### VS-4: Nema's Life Systems (Design Doc: DESIGN_NEMA_LIFE.md)
@@ -224,7 +224,7 @@ Each date character brings a specific flower. The flower trimming score determin
 - [x] **Calendar system** — ApartmentCalendar: clickable 7-day grid with date history, flower grades, learned preferences per day. Built by ApartmentSceneBuilder.
 - [ ] **Time gates** — Mail arrives at 4pm daily, dates don't start until 8pm. GameClock expansion.
 - [ ] **Mail system** — Daily 4pm delivery via GameClock event. Contains: newspaper, letters from dates, bills/flyers, missing person notices (escalating horror). SO-driven content pool.
-- [ ] **Nema placeholder** — Visible player character in kitchen and living room. Contextual idle animations (leaning on counter, sitting on couch, swaying to music, reading mail). `NemaController` with room-aware state machine. All meshes/animations swappable via SO/prefab references.
+- [x] **Nema placeholder (partial)** — Per-phase Nema models exist (newspaper, exploration, arrival, kitchen, couch, dancing secret). Head tracking + bored glance animations. NemaWellbeing personality/wellbeing charts. Voice lines. Missing: full contextual idle animations (leaning, swaying to music, reading mail), NemaController room-aware state machine.
 - [ ] **Disco ball** — Clickable ceiling object, triggers Nema dance animation at current position. Particle effects (mirror reflections). Swappable mesh + particles.
 - [ ] **Date disappearance mechanic** — Dates that go "very well" (high affection) → person vanishes. Stops appearing in newspaper, doesn't respond to calls. No explicit violence — horror through implication.
 - [ ] **Souvenir system** — After date disappears, one of their items appears in apartment (necklace, ring, hat, sweater, watch, scarf). Persistent across days. Accumulates. New dates react to them via ReactableTag ("whose ring is that?"). `SouvenirDefinition` SO per item.
@@ -269,6 +269,42 @@ Each date character brings a specific flower. The flower trimming score determin
 - [x] **Grab feel presets** — 5 physics presets for ObjectGrabber (Default, Plucky, Floaty, Snappy, Heavy). F6 cycles, F3 panel sliders for spring/damper/accel/speed. Plucky preset gives resistant leaf-pulling Nintendo-like feel.
 - [x] **Item pairing system** — `PairableItem` component. Shoes: SpecificPartner mode, SideBySide snap. Dishes/Bowls: AnyOfCategory mode, Stacked snap. ObjectGrabber intercepts click-while-holding to pair. Per-item snap offset, snap sound. Coat removed from ItemCategory, Bowl added.
 - [x] **Discord playtest reporting** — `BugReportForm` (F9) + `PlaytestFeedbackForm` (F8) Discord webhook integration. JPEG screenshots, game state telemetry, crash log tail. `DiscordWebhookConfig` SO in Resources. Uses `System.Net.Http.HttpClient` (Unity 6 curl HTTP/2 workaround).
+
+### Phase 15: Massive Systems & Polish Sprint (Done — April 6-13, 2026)
+- [x] **Record player rework** — Physical vinyl workflow: hover sleeve to peek, extract, carry to turntable, magnetic snap, platter spin, tone arm animation, needle drop/lift SFX. Album art tooltip on hover.
+- [x] **Book collection puzzle** — 3 books pair side-by-side in any order. Either-side snap. Order validation triggers celebration + secret reward item arcing to coffee table.
+- [x] **Watering system rework** — Physical watering can with magnetic snap to plant rim. 2D pot cross-section with 4 vase shapes. Bubbly soil obscures water line. Target fill line. Pour persists day-to-day. Weather affects overnight drying. Under/overwater consequences.
+- [x] **Drink system rework** — Phase 2 gating (bottle pour only during BackgroundJudging). Bottle placement after pouring. WaitingForDelivery state. Glass becomes pickable, proximity-based delivery to date (1.5m + RaycastAll fallback). CapsuleCollider auto-added to date character.
+- [x] **Drink cutaway UI** — Removed GraphicRaycaster blocking clicks. Scene-change cleanup. Wine glass silhouette with Mask.
+- [x] **Drink cart controller** — Skips SimpleDrinkManager when DrinkPourManager exists (two systems no longer fight).
+- [x] **Keyword highlighting** — Global keyword database. Per-category shimmer animation on TMP text (Like=pink, Dislike=grey-blue, Hobby=gold, Personality=purple, Special=teal). Active in newspaper, dialogue, date end screen, item descriptions.
+- [x] **Affection flower meter** — Visual flower representing date affection during dates.
+- [x] **Moment camera improvements** — Pure lateral slide (no rotation), slower push/return (1.0s/0.8s), optional FOV.
+- [x] **Nema phase models** — Per-phase models (newspaper, exploration, arrival, kitchen, couch, dancing secret). Head tracking + bored glance animations.
+- [x] **Nema wellbeing/personality** — NemaWellbeing charts tracking personality traits and wellbeing state. DateHistory.Entries integration.
+- [x] **Voice lines** — Nema voice line system.
+- [x] **Weather timelines** — Extended weather system with timeline-based weather progression.
+- [x] **Dialogue portraits** — Visual novel style dialogue portrait system for date conversations.
+- [x] **Fly system** — FlyController environmental detail (volume reduced 0.15 → 0.04).
+- [x] **Tilt-shift camera** — Tilt-shift post-processing effect.
+- [x] **Analog clock** — Physical clock in apartment with pivot hands. Disabled VN dialogue box.
+- [x] **Pair hover snap** — PairableItem partner highlighting and snap preview on hover.
+- [x] **Surface multipliers** — Per-surface scoring multipliers for item placement importance.
+- [x] **PSX glitch dishevel** — PSX aesthetic glitch effect.
+- [x] **Ghost preview improvements** — Ghost/shadow suppression during bottle→glass, can→plant, shoe→partner snaps. Red/invalid feedback over barrier geometry.
+- [x] **Sink zone + dirty glass** — Dishwashing zone with dirty glass system.
+- [x] **Edge scroll** — Edge-of-screen scroll for apartment browsing.
+- [x] **Fridge rework** — FridgeController improvements with date scene model integration.
+- [x] **Blanket item** — Blanket as placeable/reactable item in apartment.
+- [x] **Barrier placement blocking** — Larger sphere (0.08m) + downward probe (0.15m) + ghost feedback for placement barriers inside furniture.
+- [x] **Shoe pairing fix** — Shoes straighten to flat before snapping (preserve Y rotation, zero tilt). Partner highlight with InteractableHighlight auto-add.
+- [x] **Flower trimming music** — Music during flower trimming scene.
+- [x] **Flower 5x zoom UI** — 5x zoom for detail work in flower trimming.
+- [x] **Epic phase title drop** — Dramatic phase title reveal in flower trimming.
+- [x] **Leaves below cut release** — Release leaves below cut plane when stem is virtually cut.
+- [x] **Held items render on top** — Items render above scene geometry while held. Fix broken silhouette overlay.
+- [x] **PickupDescriptionHUD** — Smooth 0.3s fade-out via CanvasGroup.
+- [x] **Cursor pause fix** — Force cursor visible during pause menus (SimplePauseMenu.IsPaused + timeScale check).
 
 ### Phase 14: UX Polish Pass (Done — April 2026)
 - [x] **Drag-to-pour mechanic** — Click to start, pull mouse down to control pour rate. Quadratic ease-in. Cursor rotates to show tilt. `PourDragHelper` shared by WateringManager + SimpleDrinkManager. `PourCursorOverlay` for visual feedback.

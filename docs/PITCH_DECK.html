@@ -18,17 +18,17 @@
   --text-dim:      #a89e90;
   --text-muted:    #6a6058;
 
-  --accent:        #C4724A;
-  --accent-dim:    #8f5234;
-  --accent-glow:   rgba(196, 114, 74, 0.18);
-  --accent-glow-s: rgba(196, 114, 74, 0.08);
+  --accent:        #B04050;
+  --accent-dim:    #7A2D38;
+  --accent-glow:   rgba(176, 64, 80, 0.18);
+  --accent-glow-s: rgba(176, 64, 80, 0.08);
 
   --pink:          #d4778a;
   --gold:          #c9a84c;
   --grey-blue:     #7a8fa6;
 
   --border:        rgba(232, 224, 212, 0.07);
-  --border-accent: rgba(196, 114, 74, 0.25);
+  --border-accent: rgba(176, 64, 80, 0.25);
 
   --font-serif:    Georgia, 'Times New Roman', Times, serif;
   --font-sans:     -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
@@ -165,7 +165,7 @@ section {
   transform: translate(-50%, -50%);
   width: 600px;
   height: 400px;
-  background: radial-gradient(ellipse at center, rgba(196,114,74,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(176,64,80,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -194,11 +194,11 @@ section {
 
 .hero-hook {
   font-family: var(--font-serif);
-  font-size: clamp(17px, 2.2vw, 22px);
+  font-size: clamp(16px, 2vw, 21px);
   font-weight: normal;
   font-style: italic;
   color: var(--text-dim);
-  max-width: 620px;
+  max-width: 680px;
   line-height: 1.65;
   overflow: hidden;
   white-space: nowrap;
@@ -342,7 +342,7 @@ section {
 }
 
 .timeline-phase:last-child .timeline-line {
-  display: none;
+  background: none;
 }
 
 .timeline-time {
@@ -412,19 +412,19 @@ section {
 }
 
 .timeline-souvenir {
-  margin-top: 16px;
-  padding: 14px 18px;
-  background: rgba(196,114,74,0.06);
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: rgba(176,64,80,0.06);
   border: 1px solid var(--border-accent);
   border-radius: var(--radius);
 }
 
 .timeline-souvenir p {
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: 13.5px;
   font-style: italic;
-  color: var(--text-muted);
-  line-height: 1.6;
+  color: var(--text-dim);
+  line-height: 1.65;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -469,7 +469,7 @@ section {
 /* Horror card — special treatment */
 .mechanic-card.horror {
   grid-column: 1 / -1;
-  border-color: rgba(196,114,74,0.15);
+  border-color: rgba(176,64,80,0.15);
   background: linear-gradient(135deg, #141414 0%, #160e0a 100%);
 }
 
@@ -724,6 +724,46 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
+   STATE STATS BAR
+   ═══════════════════════════════════════════════════ */
+.state-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.state-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.state-stat-value {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.state-stat-value .accent { color: var(--accent); }
+
+.state-stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (max-width: 720px) {
+  .state-stats { grid-template-columns: 1fr 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════
    CURRENT STATE
    ═══════════════════════════════════════════════════ */
 .state-grid {
@@ -771,11 +811,11 @@ section {
 }
 
 .state-list li {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--text-dim);
   padding: 5px 0;
   border-bottom: 1px solid rgba(255,255,255,0.03);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .state-list li:last-child {
@@ -841,7 +881,7 @@ section {
   letter-spacing: 0.1em;
   padding: 2px 9px;
   border-radius: 4px;
-  background: rgba(196,114,74,0.12);
+  background: rgba(176,64,80,0.12);
   color: var(--accent);
   border: 1px solid var(--border-accent);
   white-space: nowrap;
@@ -1073,14 +1113,15 @@ footer {
         <div class="timeline-time">Night</div>
         <div class="timeline-line"><div class="timeline-dot"></div></div>
         <div class="timeline-content">
-          <div class="timeline-heading">Aftermath</div>
+          <div class="timeline-heading">The Aftermath</div>
           <ul class="timeline-items">
-            <li>Date ends — flower left behind</li>
-            <li>Flower trimming scene: cut stems, score, spawn living plant</li>
-            <li>Sleep — next day begins</li>
+            <li>Date ends — a flower is left behind</li>
+            <li>Flower trimming scene: cut the stems, score the arrangement</li>
+            <li>Trimmed flower becomes a living plant in your apartment</li>
+            <li>Sleep — next morning begins</li>
           </ul>
           <div class="timeline-souvenir">
-            <p>If the date went very well — a souvenir appears the next morning.<br>They don't call back.</p>
+            <p>Each person visits three times. After the third date — the one with the strange flower — they don't call back. A souvenir appears the next morning.</p>
           </div>
         </div>
       </li>
@@ -1110,13 +1151,13 @@ footer {
       <div class="mechanic-card">
         <span class="mechanic-number">02</span>
         <div class="mechanic-title">The Date's Gaze</div>
-        <p class="mechanic-body">Your date notices specific things in a specific order. Phase 3 is an item-by-item reveal: the date walks to each object in the apartment, pauses, reacts. A thought bubble — heart, neutral face, or frown — appears while a multiplier popup shows how much the item mattered. Items in prominent spots are worth more. The camera auto-pushes in on each discovery.</p>
+        <p class="mechanic-body">Your date notices specific things in a specific order. Phase 3 is an item-by-item reveal: the date walks to each object in the apartment, pauses, reacts. A thought bubble — heart, neutral face, or frown — appears while a multiplier popup shows how much the item mattered. Items in prominent spots are worth more.</p>
       </div>
 
       <div class="mechanic-card">
         <span class="mechanic-number">03</span>
         <div class="mechanic-title">The Flower as Score</div>
-        <p class="mechanic-body">Every successful date leaves a flower. You trim it in a standalone scene using virtual scissors — cutting angle, stem length, and condition all feed into a score. That score determines how many days the trimmed flower survives as a living plant in your apartment. A bad trim leaves clippings on the floor and a plant that browns within days.</p>
+        <p class="mechanic-body">Every date leaves a flower. You trim it in a standalone scene using virtual scissors — cutting angle, stem length, and condition all feed into a score. That score determines how many days the trimmed flower survives as a living plant in your apartment. Each person brings three flowers across three dates. The first two are beautiful. The third one is... different.</p>
       </div>
 
       <div class="mechanic-card">
@@ -1142,8 +1183,8 @@ footer {
 
       <div class="mechanic-card horror">
         <span class="mechanic-number">06</span>
-        <div class="mechanic-title">The Horror Layer — Implicit</div>
-        <p class="mechanic-body">Dates who score very high affection — the great ones, the ones you prepared perfectly for — vanish after that night. They stop appearing in the newspaper. Calls go unanswered. A personal item of theirs appears in the apartment the next morning: a necklace on the counter, a ring in the kitchen drawer. These souvenirs accumulate. Future dates notice them. The game never explains Nema. The player connects the dots.</p>
+        <div class="mechanic-title">The Horror Layer — Opt-In Through Attention</div>
+        <p class="mechanic-body">The game never serves the horror to the player. Stains on the counter, sad notes in the mail, relics of Nema's past tucked in drawers, the strange third flower from each date — it's all there, but only for those who look. Players who don't mind the mess will have a pleasant apartment sim. Players who read closely will notice that each person visits three times, and the third flower is always wrong. That people stop appearing in the newspaper. That souvenirs accumulate. That future dates notice them. The game never explains Nema. The player connects the dots — or doesn't.</p>
       </div>
 
     </div>
@@ -1157,7 +1198,7 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">04 — Aesthetic and Tone</span>
-      <h2 class="section-title">Cozy on the surface.<br>A slow accumulation of dread beneath it.</h2>
+      <h2 class="section-title">Cozy first. Mystery always.<br>Dread only when it counts.</h2>
       <div class="section-divider"></div>
     </div>
     <div class="aesthetic-grid reveal-stagger">
@@ -1166,27 +1207,49 @@ footer {
         <p>PS2-era low-poly with warm URP rendering. Soft vertex snapping, affine texture warping, and 2D dithering give the game a distinctly retro texture while the lighting and color grading remain modern and intentional. Time-of-day shifts from morning blue-white to golden late-afternoon to cool night through a single shader-driven sky system.</p>
       </div>
       <div class="aesthetic-block">
-        <span class="aesthetic-block-label">Palette & Tone</span>
-        <p>Muted, warm. Cream walls, terracotta pots, soft greens, amber lamplight. The PSX aesthetic keeps the game feeling hand-made rather than procedural. Every surface reads as a deliberate choice. The horror is environmental and never explicit — players who pay close attention will understand what Nema is. Players who don't will have a pleasant apartment sim.</p>
+        <span class="aesthetic-block-label">Tone Balance</span>
+        <div style="display:flex; gap:8px; margin-bottom:14px;">
+          <div style="flex:60; height:6px; border-radius:3px; background:#7ec850;" title="60% Cozy"></div>
+          <div style="flex:25; height:6px; border-radius:3px; background:#5b8def;" title="25% Mystery"></div>
+          <div style="flex:15; height:6px; border-radius:3px; background:var(--accent);" title="15% Creepy"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:14px;">
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:#7ec850;">60% COZY</span>
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:#5b8def;">25% MYSTERY</span>
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--accent);">15% CREEPY</span>
+        </div>
+        <p>The apartment sim is genuine and unhurried. The observation layer rewards attention across every encounter. The rare moments of dread land hard precisely because the rest of the game earned your trust.</p>
       </div>
     </div>
     <div class="reveal">
+      <span class="section-label" style="margin-bottom: 14px; margin-top: 8px;">Visual Inspiration</span>
       <div class="reference-pills">
-        <div class="reference-pill">
-          <span class="pill-title">Shenmue</span>
-          <span class="pill-note">Domestic physicality</span>
-        </div>
-        <div class="reference-pill">
-          <span class="pill-title">Spiritfarer</span>
-          <span class="pill-note">Cozy with weight</span>
-        </div>
-        <div class="reference-pill">
-          <span class="pill-title">Disco Elysium</span>
-          <span class="pill-note">Character surfaces through behavior</span>
+        <div class="reference-pill" style="border-color: var(--border-accent);">
+          <span class="pill-title" style="color: var(--accent);">Sorry We're Closed</span>
+          <span class="pill-note">Primary — PSX aesthetic, warm domestic horror</span>
         </div>
         <div class="reference-pill">
           <span class="pill-title">Killer7</span>
           <span class="pill-note">Mundane horror, unreliable perspective</span>
+        </div>
+        <div class="reference-pill">
+          <span class="pill-title">Spiritfarer</span>
+          <span class="pill-note">Cozy with emotional weight</span>
+        </div>
+      </div>
+      <span class="section-label" style="margin-bottom: 14px; margin-top: 28px;">Mechanical Inspiration</span>
+      <div class="reference-pills">
+        <div class="reference-pill" style="border-color: var(--border-accent);">
+          <span class="pill-title" style="color: var(--accent);">Unpacking</span>
+          <span class="pill-note">Spatial arrangement as storytelling</span>
+        </div>
+        <div class="reference-pill">
+          <span class="pill-title">The Case of the Golden Idol</span>
+          <span class="pill-note">Point-and-click observation and deduction</span>
+        </div>
+        <div class="reference-pill">
+          <span class="pill-title">Grim Fandango</span>
+          <span class="pill-note">Point-and-click with physical world interaction</span>
         </div>
       </div>
     </div>
@@ -1226,8 +1289,20 @@ footer {
           </thead>
           <tbody>
             <tr>
+              <td class="td-title">Sorry We're Closed</td>
+              <td>PSX aesthetic, warm domestic horror, primary visual reference</td>
+            </tr>
+            <tr>
               <td class="td-title">Unpacking</td>
               <td>Spatial arrangement as emotional storytelling</td>
+            </tr>
+            <tr>
+              <td class="td-title">The Case of the Golden Idol</td>
+              <td>Point-and-click observation, deduction through details</td>
+            </tr>
+            <tr>
+              <td class="td-title">Grim Fandango</td>
+              <td>Point-and-click with physical world interaction, tone</td>
             </tr>
             <tr>
               <td class="td-title">Coffee Talk</td>
@@ -1238,16 +1313,8 @@ footer {
               <td>Cozy management with meaningful loss</td>
             </tr>
             <tr>
-              <td class="td-title">Shenmue</td>
-              <td>Domestic physicality, daily rhythm</td>
-            </tr>
-            <tr>
               <td class="td-title">Venba</td>
               <td>Small kitchen mechanics with emotional weight</td>
-            </tr>
-            <tr>
-              <td class="td-title">Yume Nikki</td>
-              <td>Quiet horror beneath a domestic surface</td>
             </tr>
           </tbody>
         </table>
@@ -1316,6 +1383,24 @@ footer {
       <h2 class="section-title">This is not a concept.<br>It is a working game.</h2>
       <div class="section-divider"></div>
     </div>
+    <div class="state-stats reveal-stagger">
+      <div class="state-stat">
+        <div class="state-stat-value"><span class="accent">30+</span></div>
+        <div class="state-stat-label">Systems Built</div>
+      </div>
+      <div class="state-stat">
+        <div class="state-stat-value">20K+</div>
+        <div class="state-stat-label">Lines of Code</div>
+      </div>
+      <div class="state-stat">
+        <div class="state-stat-value"><span class="accent">8</span>/10</div>
+        <div class="state-stat-label">Quality Audit</div>
+      </div>
+      <div class="state-stat">
+        <div class="state-stat-value">14</div>
+        <div class="state-stat-label">Dev Phases Done</div>
+      </div>
+    </div>
     <div class="state-grid reveal-stagger">
       <div class="state-column">
         <div class="state-column-label done">
@@ -1323,19 +1408,23 @@ footer {
           Built and Functional
         </div>
         <ul class="state-list">
-          <li>Full apartment hub — 3 areas, physics, placement system</li>
-          <li>Complete dating loop — 7-day calendar, newspaper ads, 3-phase dates</li>
-          <li>7 fully defined date characters</li>
-          <li>Record player, book puzzle, physical watering</li>
-          <li>Physical drink making</li>
-          <li>Tidiness system with per-area scoring</li>
-          <li>MoodMachine — weather, time, music, plants</li>
-          <li>Flower trimming with living plant persistence</li>
-          <li>Keyword highlighting system</li>
-          <li>Phase 3 scoring and multiplier popups</li>
-          <li>PSX rendering suite</li>
-          <li>Full accessibility suite — 15 settings</li>
-          <li>Save system — day/date history/plants/layout</li>
+          <li>Apartment hub — 3 areas, physics interaction, grid-snap placement</li>
+          <li>Dating loop — 7-day calendar, newspaper ads, 3-phase dates</li>
+          <li>7 date characters with preferences, reactions, dialogue</li>
+          <li>Entrance judgment — outfit, perfume, greeting, cleanliness</li>
+          <li>Drink making with physical pour and delivery to date</li>
+          <li>Record player — physical vinyl workflow, album art</li>
+          <li>Book collection puzzle with paired-item snap</li>
+          <li>Physical watering with 2D cross-section and weather drying</li>
+          <li>Flower trimming — virtual cutting, scoring, living plant persistence</li>
+          <li>MoodMachine — weather, time, music, plants, air quality</li>
+          <li>Keyword highlighting across all UI</li>
+          <li>Phase 3 scoring with multiplier popups</li>
+          <li>PSX rendering — vertex snap, affine, dithering, per-object overrides</li>
+          <li>Accessibility — 15 settings, 5 categories, text theme</li>
+          <li>Main menu, tutorial, name entry, outfit selection</li>
+          <li>Save system, calendar, item pairing, visibility indicators</li>
+          <li>Playtest feedback with Discord webhook integration</li>
         </ul>
       </div>
       <div class="state-column">
@@ -1344,12 +1433,13 @@ footer {
           In Development
         </div>
         <ul class="state-list">
+          <li>Nema character — phase models exist, completing behaviors</li>
+          <li>Phase 3 conversation and reaction polish</li>
           <li>Date disappearance mechanic</li>
-          <li>Souvenir accumulation system</li>
-          <li>Phase 2 and Phase 3 dialogue polish</li>
-          <li>Player knowledge / dating journal</li>
+          <li>Souvenir accumulation</li>
           <li>Couch win scene</li>
-          <li>Nema visible in apartment</li>
+          <li>Player knowledge / dating journal</li>
+          <li>Narrative content — Nema bible, mess narratives</li>
         </ul>
       </div>
       <div class="state-column">
@@ -1359,10 +1449,10 @@ footer {
         </div>
         <ul class="state-list">
           <li>Full 7-day scripted narrative arc</li>
-          <li>3–4 polished date characters</li>
-          <li>Photo intro sequence</li>
-          <li>Horror payload delivery</li>
+          <li>Horror payload — souvenirs, disappearances, dread</li>
           <li>Convention demo mode — 7-minute curated slice</li>
+          <li>Photo intro sequence</li>
+          <li>Art and audio asset integration pass</li>
         </ul>
       </div>
     </div>
@@ -1376,11 +1466,11 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">08 — Team and Timeline</span>
-      <h2 class="section-title">Two-person team.<br>Small studio. Clear vision. No noise.</h2>
+      <h2 class="section-title">Two people. One apartment.<br>Every system built in-house.</h2>
       <div class="section-divider"></div>
     </div>
     <div class="reveal concept-body" style="margin-bottom: 40px;">
-      <p>Two-person team with AI-assisted development — design, art, code, and systems built collaboratively with iteration support via Claude Code. Engine: Unity 6.0.3 with URP.</p>
+      <p>Raspberry Rum is a two-person studio. One programmer, one artist, shared creative direction. 30+ systems designed and built collaboratively. Engine: Unity 6 with URP.</p>
     </div>
     <div class="reveal">
       <div class="milestone-table-wrapper">
@@ -1395,28 +1485,28 @@ footer {
           <tbody>
             <tr>
               <td class="td-name">Vertical Slice</td>
-              <td><span class="milestone-badge">Q2 2026</span></td>
-              <td>Full 7-day loop, 3–4 characters, horror layer</td>
-            </tr>
-            <tr>
-              <td class="td-name">Convention Demo</td>
               <td><span class="milestone-badge">Q3 2026</span></td>
-              <td>7-minute curated slice, playable at events</td>
+              <td>Full loop, 3–4 characters, horror layer, 3 flowers each</td>
             </tr>
             <tr>
-              <td class="td-name">Content Alpha</td>
+              <td class="td-name">Playable Demo</td>
               <td><span class="milestone-badge">Q4 2026</span></td>
-              <td>All 7 characters, full souvenir system, journal</td>
+              <td>Convention-ready build, 7-minute curated slice</td>
             </tr>
             <tr>
-              <td class="td-name">Beta</td>
-              <td><span class="milestone-badge">Q1 2027</span></td>
-              <td>Full platform builds, accessibility pass, localization</td>
+              <td class="td-name">Content Complete</td>
+              <td><span class="milestone-badge">Q2 2027</span></td>
+              <td>All 7 characters (21 dates), souvenirs, journal, full art + audio</td>
+            </tr>
+            <tr>
+              <td class="td-name">Polish &amp; Beta</td>
+              <td><span class="milestone-badge">Summer 2027</span></td>
+              <td>Playtesting, accessibility, localization, platform builds</td>
             </tr>
             <tr>
               <td class="td-name">Release</td>
-              <td><span class="milestone-badge">Q2 2027</span></td>
-              <td>Steam (PC), itch.io</td>
+              <td><span class="milestone-badge">Oct 2027</span></td>
+              <td>Halloween launch window — Steam (PC), itch.io</td>
             </tr>
           </tbody>
         </table>
@@ -1437,7 +1527,7 @@ footer {
     </div>
     <div class="biz-grid reveal-stagger">
       <div class="biz-stat">
-        <div class="biz-stat-value">$12–15</div>
+        <div class="biz-stat-value">$15–20</div>
         <div class="biz-stat-label">Price Point</div>
       </div>
       <div class="biz-stat">
@@ -1450,7 +1540,8 @@ footer {
       </div>
     </div>
     <div class="biz-note reveal">
-      <p>The game has a defined arc and a deliberate ending. A subscription or live-service model would undermine the tone entirely. The horror layer only works once per player in its intended form — replayability comes from date variety and discovery, not from grinding content that never ends. One-time purchase. No DLC planned. PC (Windows, Mac) at launch; console ports considered post-release based on reception.</p>
+      <p>One-time premium purchase. The game never forces the horror on the player — stains, sad notes, relics of Nema's past, and the strange third flower from each date are all there, but only players who look closely will piece it together. A first playthrough where you ignore the mess is a cozy apartment sim. A second where you read everything is a different game entirely. Replayability is built into the observation layer, not the content volume.</p>
+      <p style="margin-top: 14px;"><strong style="color: var(--text);">DLC potential:</strong> Date packs — 3 new characters per pack with new furniture, items, and seasonal events. Each pack adds 9 new dates and fresh content to discover. The apartment grows. The souvenir collection grows. PC (Windows, Mac) at launch; console ports considered post-release.</p>
     </div>
   </div>
 </section>
@@ -1461,7 +1552,7 @@ footer {
 <footer>
   <div class="container">
     <span class="footer-iris">IRIS</span>
-    <p class="footer-text">Two-Person Team &nbsp;—&nbsp; AI-Assisted &nbsp;—&nbsp; Unity 6 URP &nbsp;—&nbsp; 2026</p>
+    <p class="footer-text">Raspberry Rum &nbsp;—&nbsp; Two-Person Studio &nbsp;—&nbsp; Unity 6 URP &nbsp;—&nbsp; 2026</p>
   </div>
 </footer>
 
