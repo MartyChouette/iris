@@ -11,20 +11,23 @@ public class FridgeController : MonoBehaviour
     public static FridgeController Instance { get; private set; }
 
     [Header("French Doors")]
-    [Tooltip("Left door pivot (hinge on left edge). Collider on its child determines click target.")]
+    [Tooltip("Left door transform (rotated by the script). Collider on it or its children is the click target.")]
     [SerializeField] private Transform _doorPivotL;
 
-    [Tooltip("Right door pivot (hinge on right edge). Collider on its child determines click target.")]
+    [Tooltip("Right door transform.")]
     [SerializeField] private Transform _doorPivotR;
+
+    [Tooltip("Empty GameObject at the LEFT EDGE of the left door (the hinge point). If null, uses the door transform's own position.")]
+    [SerializeField] private Transform _hingePointL;
+
+    [Tooltip("Empty GameObject at the RIGHT EDGE of the right door (the hinge point). If null, uses the door transform's own position.")]
+    [SerializeField] private Transform _hingePointR;
 
     [Tooltip("Degrees to rotate the left door (negative = opens outward).")]
     [SerializeField] private float _openAngleL = -110f;
 
     [Tooltip("Degrees to rotate the right door (mirrored — positive = opens outward).")]
     [SerializeField] private float _openAngleR = 110f;
-
-    [Tooltip("Axis the doors rotate around in WORLD space. (0,1,0) = vertical hinge for standard fridges. Ignores pivot's local orientation so imported models with baked rotations still work.")]
-    [SerializeField] private Vector3 _hingeAxis = Vector3.up;
 
     [Tooltip("Seconds for the open / close tween.")]
     [SerializeField] private float _tweenDuration = 0.6f;
@@ -64,8 +67,9 @@ public class FridgeController : MonoBehaviour
     private DoorState _stateL = DoorState.Closed;
     private DoorState _stateR = DoorState.Closed;
 
-    private Quaternion _closedRotL, _openRotL;
-    private Quaternion _closedRotR, _openRotR;
+    // Snapshot of each door's closed-state transform (world space)
+    private Vector3 _closedPosL, _closedPosR;
+    private Quaternion _closedRotL, _closedRotR;
 
     private void Awake()
     {
@@ -77,15 +81,16 @@ public class FridgeController : MonoBehaviour
         }
         Instance = this;
 
+        // Snapshot closed state
         if (_doorPivotL != null)
         {
-            _closedRotL = _doorPivotL.rotation; // world rotation
-            _openRotL = Quaternion.AngleAxis(_openAngleL, _hingeAxis.normalized) * _closedRotL;
+            _closedPosL = _doorPivotL.position;
+            _closedRotL = _doorPivotL.rotation;
         }
         if (_doorPivotR != null)
         {
+            _closedPosR = _doorPivotR.position;
             _closedRotR = _doorPivotR.rotation;
-            _openRotR = Quaternion.AngleAxis(_openAngleR, _hingeAxis.normalized) * _closedRotR;
         }
 
         if (_interiorLight != null)
@@ -142,16 +147,16 @@ public class FridgeController : MonoBehaviour
         // "Both together" mode or clicked the body → treat as both
         if (_openBothTogether || (!hitLeft && !hitRight))
         {
-            ToggleDoorIfReady(_doorPivotL, ref _stateL, _closedRotL, _openRotL);
-            ToggleDoorIfReady(_doorPivotR, ref _stateR, _closedRotR, _openRotR);
+            ToggleDoorIfReady(_doorPivotL, ref _stateL, true);
+            ToggleDoorIfReady(_doorPivotR, ref _stateR, false);
         }
         else if (hitLeft)
         {
-            ToggleDoorIfReady(_doorPivotL, ref _stateL, _closedRotL, _openRotL);
+            ToggleDoorIfReady(_doorPivotL, ref _stateL, true);
         }
         else if (hitRight)
         {
-            ToggleDoorIfReady(_doorPivotR, ref _stateR, _closedRotR, _openRotR);
+            ToggleDoorIfReady(_doorPivotR, ref _stateR, false);
         }
 
         UpdateInteriorLight();
@@ -239,22 +244,24 @@ public class FridgeController : MonoBehaviour
         }
     }
 
-    private void ToggleDoorIfReady(Transform pivot, ref DoorState state, Quaternion closedRot, Quaternion openRot)
+    private void ToggleDoorIfReady(Transform pivot, ref DoorState state, bool isLeft)
     {
         if (pivot == null || state == DoorState.Tweening) return;
+        float angle = isLeft ? _openAngleL : _openAngleR;
+        Transform hinge = isLeft ? _hingePointL : _hingePointR;
         if (state == DoorState.Closed)
-            StartCoroutine(TweenDoor(pivot, closedRot, openRot, true));
+            StartCoroutine(TweenDoor(pivot, hinge, angle, true, isLeft));
         else
-            StartCoroutine(TweenDoor(pivot, openRot, closedRot, false));
+            StartCoroutine(TweenDoor(pivot, hinge, -angle, false, isLeft));
     }
 
     /// <summary>Close all open doors.</summary>
     public void CloseDoor()
     {
         if (_stateL == DoorState.Open)
-            StartCoroutine(TweenDoor(_doorPivotL, _openRotL, _closedRotL, false));
+            StartCoroutine(TweenDoor(_doorPivotL, _hingePointL, -_openAngleL, false, true));
         if (_stateR == DoorState.Open)
-            StartCoroutine(TweenDoor(_doorPivotR, _openRotR, _closedRotR, false));
+            StartCoroutine(TweenDoor(_doorPivotR, _hingePointR, -_openAngleR, false, false));
     }
 
     /// <summary>Snap both doors shut immediately.</summary>
@@ -263,18 +270,19 @@ public class FridgeController : MonoBehaviour
         StopAllCoroutines();
         _stateL = DoorState.Closed;
         _stateR = DoorState.Closed;
-        if (_doorPivotL != null) _doorPivotL.rotation = _closedRotL;
-        if (_doorPivotR != null) _doorPivotR.rotation = _closedRotR;
+        if (_doorPivotL != null) { _doorPivotL.position = _closedPosL; _doorPivotL.rotation = _closedRotL; }
+        if (_doorPivotR != null) { _doorPivotR.position = _closedPosR; _doorPivotR.rotation = _closedRotR; }
         if (_interiorLight != null) _interiorLight.enabled = false;
     }
 
-    /// <summary>Tween a single door open or closed.</summary>
-    private IEnumerator TweenDoor(Transform pivot, Quaternion from, Quaternion to, bool opening)
+    /// <summary>
+    /// Tween a door open or closed using RotateAround.
+    /// Works regardless of pivot position — the hinge point is separate.
+    /// </summary>
+    private IEnumerator TweenDoor(Transform pivot, Transform hinge, float totalAngle, bool opening, bool isLeft)
     {
         if (pivot == null) yield break;
 
-        // Track which door this is
-        bool isLeft = pivot == _doorPivotL;
         if (isLeft) _stateL = DoorState.Tweening;
         else        _stateR = DoorState.Tweening;
 
@@ -283,16 +291,29 @@ public class FridgeController : MonoBehaviour
         else if (!opening && _closeSFX != null)
             AudioManager.Instance?.PlaySFX(_closeSFX);
 
+        // Hinge world position — if no hinge transform, use the pivot itself
+        Vector3 hingePos = hinge != null ? hinge.position : pivot.position;
+
+        float rotated = 0f;
         float elapsed = 0f;
         while (elapsed < _tweenDuration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / _tweenDuration);
             t = t * t * (3f - 2f * t); // smooth step
-            pivot.rotation = Quaternion.Lerp(from, to, t);
+
+            float target = totalAngle * t;
+            float delta = target - rotated;
+            pivot.RotateAround(hingePos, Vector3.up, delta);
+            rotated = target;
+
             yield return null;
         }
-        pivot.rotation = to;
+
+        // Snap to exact final angle
+        float remaining = totalAngle - rotated;
+        if (Mathf.Abs(remaining) > 0.001f)
+            pivot.RotateAround(hingePos, Vector3.up, remaining);
 
         if (isLeft) _stateL = opening ? DoorState.Open : DoorState.Closed;
         else        _stateR = opening ? DoorState.Open : DoorState.Closed;
