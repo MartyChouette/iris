@@ -150,8 +150,27 @@ public class RecordSlot : MonoBehaviour
         if (_placementLerp != null) StopCoroutine(_placementLerp);
         _placementLerp = StartCoroutine(LerpVinylToPlatter(held.transform));
 
+        // Clear turntable highlight, light up the Play button
+        var slotHL = GetComponent<InteractableHighlight>();
+        if (slotHL != null) slotHL.SetHighlighted(false);
+        HighlightPlayButton(true);
+
         Debug.Log($"[RecordSlot] Loaded: {vinyl.Definition.title} by {vinyl.Definition.artist}");
         return true;
+    }
+
+    /// <summary>Turn the Play button highlight on or off.</summary>
+    private void HighlightPlayButton(bool on)
+    {
+        var buttons = GetComponentsInChildren<TurntableButton>(true);
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttons[i].Type != TurntableButton.ButtonType.Play) continue;
+            var hl = buttons[i].GetComponent<InteractableHighlight>();
+            if (hl == null) hl = buttons[i].gameObject.AddComponent<InteractableHighlight>();
+            hl.SetHighlighted(on);
+            break;
+        }
     }
 
     private IEnumerator LerpVinylToPlatter(Transform vinyl)

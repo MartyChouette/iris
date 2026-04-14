@@ -14,6 +14,8 @@ public class TurntableButton : MonoBehaviour
     [Tooltip("Which action this button performs.")]
     [SerializeField] private ButtonType _buttonType = ButtonType.Play;
 
+    public ButtonType Type => _buttonType;
+
     [Header("References")]
     [Tooltip("The turntable's RecordSlot. Auto-finds from parent if null.")]
     [SerializeField] private RecordSlot _parentSlot;
@@ -47,6 +49,10 @@ public class TurntableButton : MonoBehaviour
             _parentSlot.Play();
         else
             _parentSlot.Pause();
+
+        // Clear highlight after pressing
+        var hl = GetComponent<InteractableHighlight>();
+        if (hl != null) hl.SetHighlighted(false);
 
         if (_clickSFX != null && AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(_clickSFX);

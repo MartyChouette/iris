@@ -649,9 +649,13 @@ public class ObjectGrabber : MonoBehaviour
         if (placeable.GetComponent<WateringCan>() != null)
             _plantBlinkRoutine = StartCoroutine(BlinkPlantHighlights(3));
 
-        // When picking up a vinyl record, blink the turntable 3 times
+        // When picking up a vinyl record, highlight the turntable until placed
         if (placeable.GetComponent<VinylDisc>() != null && RecordSlot.Instance != null)
-            StartCoroutine(BlinkHighlight(RecordSlot.Instance.gameObject, 3));
+        {
+            var slotHL = RecordSlot.Instance.GetComponent<InteractableHighlight>();
+            if (slotHL == null) slotHL = RecordSlot.Instance.gameObject.AddComponent<InteractableHighlight>();
+            slotHL.SetHighlighted(true);
+        }
 
         // Keep interactable highlight while held
         var heldHL = placeable.GetComponent<InteractableHighlight>();
@@ -1643,6 +1647,13 @@ public class ObjectGrabber : MonoBehaviour
         ShowShadow(false);
         DestroyGhostPreview();
         ClearPlantHighlights();
+
+        // Clear turntable highlight if we were holding a record
+        if (RecordSlot.Instance != null)
+        {
+            var slotHL = RecordSlot.Instance.GetComponent<InteractableHighlight>();
+            if (slotHL != null) slotHL.SetHighlighted(false);
+        }
 
         // Safety: unlock cursor in case an interaction lock was active
         GlobalCursorManager.UnlockCursor();
