@@ -143,13 +143,9 @@ public class FridgeController : MonoBehaviour
         if (ObjectGrabber.ClickConsumedThisFrame) return;
         if (_mainCamera == null) return;
 
-        // Holding an item while a door is open → try to deposit
-        if (ObjectGrabber.IsHoldingObject && IsOpen)
-        {
-            TryDepositHeldItem();
-            return;
-        }
-
+        // Don't open/close fridge while holding an item — ObjectGrabber's
+        // PlacementSurface + DropZone slotting handles shelf deposits naturally
+        // (magnetic snap to slot like the shoe rack).
         if (ObjectGrabber.IsHoldingObject) return;
 
         Vector2 mousePos = IrisInput.CursorPosition;
