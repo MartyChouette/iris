@@ -29,9 +29,20 @@ public class VolumetricLightShaft : MonoBehaviour
     [SerializeField] private float _noiseSpeed = 0.3f;
 
     [Header("Time Gate")]
-    [Tooltip("Only show shaft when directional light intensity is above this.")]
+    [Tooltip("Sun shaft visible when directional light intensity is above this.")]
     [Range(0f, 1f)]
     [SerializeField] private float _minLightIntensity = 0.3f;
+
+    [Header("Moonlight")]
+    [Tooltip("Enable a cool blue moonbeam at night instead of fading to nothing.")]
+    [SerializeField] private bool _enableMoonlight = true;
+
+    [Tooltip("Moonlight color — cool blue-silver.")]
+    [SerializeField] private Color _moonColor = new Color(0.35f, 0.45f, 0.7f, 0.06f);
+
+    [Tooltip("Sun intensity below which moonlight starts fading in.")]
+    [Range(0f, 1f)]
+    [SerializeField] private float _moonFadeStart = 0.25f;
 
     private Material _mat;
     private Renderer _renderer;
@@ -78,14 +89,26 @@ public class VolumetricLightShaft : MonoBehaviour
             lightInt = sun.intensity;
         }
 
-        // Fade shaft out when light is too dim (night time)
-        float nightFade = Mathf.InverseLerp(_minLightIntensity, _minLightIntensity + 0.3f, lightInt);
+        // Sun shaft: fade out when light dims
+        float sunFade = Mathf.InverseLerp(_minLightIntensity, _minLightIntensity + 0.3f, lightInt);
+        Color sunShaft = _baseColor * lightCol;
+        sunShaft.a = _baseColor.a * _intensity * sunFade;
 
-        // Compute final shaft color
-        Color shaftCol = _baseColor * lightCol;
-        shaftCol.a = _baseColor.a * _intensity * nightFade;
+        if (_enableMoonlight)
+        {
+            // Moon shaft: fade IN when sun fades out
+            float moonFade = Mathf.InverseLerp(_moonFadeStart + 0.15f, _moonFadeStart, lightInt);
+            Color moonShaft = _moonColor;
+            moonShaft.a = _moonColor.a * _intensity * moonFade;
 
-        _mat.SetColor(ShaftColorID, shaftCol);
+            // Crossfade — whichever is stronger wins
+            Color finalShaft = sunFade > moonFade ? sunShaft : moonShaft;
+            _mat.SetColor(ShaftColorID, finalShaft);
+        }
+        else
+        {
+            _mat.SetColor(ShaftColorID, sunShaft);
+        }
     }
 
     private void ApplyStaticProperties()
