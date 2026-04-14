@@ -147,7 +147,11 @@ public class GameClock : MonoBehaviour
 
         OnHourChanged?.Invoke(_currentHour);
 
-        if (_currentHour >= bedtimeHour)
+        // Don't force bedtime during flower trimming — that path has its own
+        // dream screen + day advance in FlowerTrimmingTransition.
+        bool inFlowerTrim = DayPhaseManager.Instance != null
+            && DayPhaseManager.Instance.CurrentPhase == DayPhaseManager.DayPhase.FlowerTrimming;
+        if (_currentHour >= bedtimeHour && !inFlowerTrim)
         {
             OnForcedBedtime?.Invoke();
             GoToBed();

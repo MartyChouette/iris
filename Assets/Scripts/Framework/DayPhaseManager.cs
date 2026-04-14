@@ -1055,12 +1055,18 @@ public class DayPhaseManager : MonoBehaviour
         RecordSlot.Instance?.Stop();
         DateEndScreen.Instance?.Dismiss();
 
-        // 11. Dream interstitial
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.ShowPhaseTitle("Nema drifts to sleep...");
-        yield return new WaitForSecondsRealtime(3f);
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.HidePhaseTitle();
+        // 11. Dream interstitial — psychedelic overlay (click to continue)
+        if (DreamScreen.Instance != null)
+            yield return DreamScreen.Instance.Play();
+        else
+        {
+            // Fallback text if DreamScreen not available
+            if (ScreenFade.Instance != null)
+                ScreenFade.Instance.ShowPhaseTitle("Nema drifts to sleep...");
+            yield return new WaitForSecondsRealtime(3f);
+            if (ScreenFade.Instance != null)
+                ScreenFade.Instance.HidePhaseTitle();
+        }
 
         // 12. Auto-save + advance day (still black — no flicker)
         AutoSaveController.Instance?.PerformSave("end_of_day");
