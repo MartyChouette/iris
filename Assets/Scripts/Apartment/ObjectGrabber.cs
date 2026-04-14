@@ -649,6 +649,10 @@ public class ObjectGrabber : MonoBehaviour
         if (placeable.GetComponent<WateringCan>() != null)
             _plantBlinkRoutine = StartCoroutine(BlinkPlantHighlights(3));
 
+        // When picking up a vinyl record, blink the turntable 3 times
+        if (placeable.GetComponent<VinylDisc>() != null && RecordSlot.Instance != null)
+            StartCoroutine(BlinkHighlight(RecordSlot.Instance.gameObject, 3));
+
         // Keep interactable highlight while held
         var heldHL = placeable.GetComponent<InteractableHighlight>();
         if (heldHL != null)
@@ -1647,7 +1651,24 @@ public class ObjectGrabber : MonoBehaviour
             PickupDescriptionHUD.Instance.Hide();
     }
 
-    // ── Plant highlight blink (when picking up watering can) ─────────
+    // ── Target highlight blink (generic + plant-specific) ────────────
+
+    /// <summary>Blink a single object's InteractableHighlight N times.</summary>
+    private static IEnumerator BlinkHighlight(GameObject target, int blinks)
+    {
+        if (target == null) yield break;
+        var hl = target.GetComponent<InteractableHighlight>();
+        if (hl == null) hl = target.AddComponent<InteractableHighlight>();
+
+        for (int b = 0; b < blinks; b++)
+        {
+            hl.SetHighlighted(true);
+            yield return new WaitForSeconds(0.25f);
+            hl.SetHighlighted(false);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
 
     private Coroutine _plantBlinkRoutine;
 
