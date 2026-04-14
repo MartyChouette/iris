@@ -161,29 +161,8 @@ public class MomentCamera : MonoBehaviour
         if (_pauseDuringHold)
             TimeScaleManager.Clear(s_momentPriority);
 
-        // ── Return: get the CURRENT correct camera target from ApartmentManager ──
-        am.ClearPresetBase();
-        yield return null;
-
-        Vector3 returnPos = cam.transform.position;
-        float returnFOV = cam.fieldOfView;
-
-        am.SetPresetBase(framePos, frameRot, frameFOV);
-
-        elapsed = 0f;
-        while (elapsed < _returnDuration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            float t = _returnCurve.Evaluate(Mathf.Clamp01(elapsed / _returnDuration));
-
-            Vector3 pos = Vector3.Lerp(framePos, returnPos, t);
-            float fov = Mathf.Lerp(frameFOV, returnFOV, t);
-
-            am.SetPresetBase(pos, frameRot, fov);
-            yield return null;
-        }
-
-        // Release to normal browsing
+        // Snap release — no lerp back, just let go and the apartment
+        // camera resumes from wherever it should be.
         am.ClearPresetBase();
         _isMomentActive = false;
         _activeRoutine = null;
