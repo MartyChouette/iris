@@ -79,21 +79,13 @@ public class FridgeController : MonoBehaviour
 
         if (_doorPivotL != null)
         {
-            _closedRotL = _doorPivotL.localRotation;
-            // Convert world-space hinge axis into the pivot's local space so
-            // the rotation works regardless of baked import rotations/scale.
-            Vector3 localAxis = _doorPivotL.parent != null
-                ? _doorPivotL.parent.InverseTransformDirection(_hingeAxis.normalized)
-                : _hingeAxis.normalized;
-            _openRotL = _closedRotL * Quaternion.AngleAxis(_openAngleL, localAxis);
+            _closedRotL = _doorPivotL.rotation; // world rotation
+            _openRotL = Quaternion.AngleAxis(_openAngleL, _hingeAxis.normalized) * _closedRotL;
         }
         if (_doorPivotR != null)
         {
-            _closedRotR = _doorPivotR.localRotation;
-            Vector3 localAxis = _doorPivotR.parent != null
-                ? _doorPivotR.parent.InverseTransformDirection(_hingeAxis.normalized)
-                : _hingeAxis.normalized;
-            _openRotR = _closedRotR * Quaternion.AngleAxis(_openAngleR, localAxis);
+            _closedRotR = _doorPivotR.rotation;
+            _openRotR = Quaternion.AngleAxis(_openAngleR, _hingeAxis.normalized) * _closedRotR;
         }
 
         if (_interiorLight != null)
@@ -271,8 +263,8 @@ public class FridgeController : MonoBehaviour
         StopAllCoroutines();
         _stateL = DoorState.Closed;
         _stateR = DoorState.Closed;
-        if (_doorPivotL != null) _doorPivotL.localRotation = _closedRotL;
-        if (_doorPivotR != null) _doorPivotR.localRotation = _closedRotR;
+        if (_doorPivotL != null) _doorPivotL.rotation = _closedRotL;
+        if (_doorPivotR != null) _doorPivotR.rotation = _closedRotR;
         if (_interiorLight != null) _interiorLight.enabled = false;
     }
 
@@ -297,10 +289,10 @@ public class FridgeController : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / _tweenDuration);
             t = t * t * (3f - 2f * t); // smooth step
-            pivot.localRotation = Quaternion.Lerp(from, to, t);
+            pivot.rotation = Quaternion.Lerp(from, to, t);
             yield return null;
         }
-        pivot.localRotation = to;
+        pivot.rotation = to;
 
         if (isLeft) _stateL = opening ? DoorState.Open : DoorState.Closed;
         else        _stateR = opening ? DoorState.Open : DoorState.Closed;
