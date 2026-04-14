@@ -70,6 +70,8 @@ public class FridgeController : MonoBehaviour
     // Snapshot of each door's closed-state transform (world space)
     private Vector3 _closedPosL, _closedPosR;
     private Quaternion _closedRotL, _closedRotR;
+    // Auto-computed hinge positions if no hinge transforms assigned
+    private Vector3 _hingePosL, _hingePosR;
 
     private void Awake()
     {
@@ -86,15 +88,37 @@ public class FridgeController : MonoBehaviour
         {
             _closedPosL = _doorPivotL.position;
             _closedRotL = _doorPivotL.rotation;
+            _hingePosL = _hingePointL != null
+                ? _hingePointL.position
+                : FindHingeEdge(_doorPivotL, left: true);
         }
         if (_doorPivotR != null)
         {
             _closedPosR = _doorPivotR.position;
             _closedRotR = _doorPivotR.rotation;
+            _hingePosR = _hingePointR != null
+                ? _hingePointR.position
+                : FindHingeEdge(_doorPivotR, left: false);
         }
 
         if (_interiorLight != null)
             _interiorLight.enabled = false;
+    }
+
+    /// <summary>
+    /// Auto-detect hinge position from the door's renderer bounds.
+    /// Left door hinges on its leftmost edge, right door on its rightmost.
+    /// Uses world-space bounds so model rotation/scale don't matter.
+    /// </summary>
+    private static Vector3 FindHingeEdge(Transform door, bool left)
+    {
+        var renderer = door.GetComponentInChildren<Renderer>();
+        if (renderer == null) return door.position;
+
+        Bounds b = renderer.bounds;
+        // Hinge at the outer edge — full height of the door, centered vertically
+        float x = left ? b.min.x : b.max.x;
+        return new Vector3(x, b.center.y, b.center.z);
     }
 
     // Input managed by IrisInput singleton — no local enable/disable needed.
@@ -248,20 +272,19 @@ public class FridgeController : MonoBehaviour
     {
         if (pivot == null || state == DoorState.Tweening) return;
         float angle = isLeft ? _openAngleL : _openAngleR;
-        Transform hinge = isLeft ? _hingePointL : _hingePointR;
         if (state == DoorState.Closed)
-            StartCoroutine(TweenDoor(pivot, hinge, angle, true, isLeft));
+            StartCoroutine(TweenDoor(pivot, angle, true, isLeft));
         else
-            StartCoroutine(TweenDoor(pivot, hinge, -angle, false, isLeft));
+            StartCoroutine(TweenDoor(pivot, -angle, false, isLeft));
     }
 
     /// <summary>Close all open doors.</summary>
     public void CloseDoor()
     {
         if (_stateL == DoorState.Open)
-            StartCoroutine(TweenDoor(_doorPivotL, _hingePointL, -_openAngleL, false, true));
+            StartCoroutine(TweenDoor(_doorPivotL, -_openAngleL, false, true));
         if (_stateR == DoorState.Open)
-            StartCoroutine(TweenDoor(_doorPivotR, _hingePointR, -_openAngleR, false, false));
+            StartCoroutine(TweenDoor(_doorPivotR, -_openAngleR, false, false));
     }
 
     /// <summary>Snap both doors shut immediately.</summary>
@@ -279,7 +302,7 @@ public class FridgeController : MonoBehaviour
     /// Tween a door open or closed using RotateAround.
     /// Works regardless of pivot position — the hinge point is separate.
     /// </summary>
-    private IEnumerator TweenDoor(Transform pivot, Transform hinge, float totalAngle, bool opening, bool isLeft)
+    private IEnumerator TweenDoor(Transform pivot, float totalAngle, bool opening, bool isLeft)
     {
         if (pivot == null) yield break;
 
@@ -291,8 +314,7 @@ public class FridgeController : MonoBehaviour
         else if (!opening && _closeSFX != null)
             AudioManager.Instance?.PlaySFX(_closeSFX);
 
-        // Hinge world position — if no hinge transform, use the pivot itself
-        Vector3 hingePos = hinge != null ? hinge.position : pivot.position;
+        Vector3 hingePos = isLeft ? _hingePosL : _hingePosR;
 
         float rotated = 0f;
         float elapsed = 0f;
