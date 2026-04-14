@@ -644,6 +644,11 @@ public class ObjectGrabber : MonoBehaviour
 
         placeable.OnPickedUp();
 
+        // When picking up the watering can, blink all plants 3 times so
+        // the player knows where to water.
+        if (placeable.GetComponent<WateringCan>() != null)
+            _plantBlinkRoutine = StartCoroutine(BlinkPlantHighlights(3));
+
         // Keep interactable highlight while held
         var heldHL = placeable.GetComponent<InteractableHighlight>();
         if (heldHL != null)
@@ -1633,12 +1638,67 @@ public class ObjectGrabber : MonoBehaviour
         _pairSnapTarget = null;
         ShowShadow(false);
         DestroyGhostPreview();
+        ClearPlantHighlights();
 
         // Safety: unlock cursor in case an interaction lock was active
         GlobalCursorManager.UnlockCursor();
 
         if (PickupDescriptionHUD.Instance != null)
             PickupDescriptionHUD.Instance.Hide();
+    }
+
+    // ── Plant highlight blink (when picking up watering can) ─────────
+
+    private Coroutine _plantBlinkRoutine;
+
+    private IEnumerator BlinkPlantHighlights(int blinks)
+    {
+        var plants = WaterablePlant.All;
+        // Ensure each plant has an InteractableHighlight
+        for (int i = 0; i < plants.Count; i++)
+        {
+            if (plants[i] == null) continue;
+            if (plants[i].GetComponent<InteractableHighlight>() == null)
+                plants[i].gameObject.AddComponent<InteractableHighlight>();
+        }
+
+        for (int b = 0; b < blinks; b++)
+        {
+            // On
+            for (int i = 0; i < plants.Count; i++)
+            {
+                if (plants[i] == null) continue;
+                var hl = plants[i].GetComponent<InteractableHighlight>();
+                if (hl != null) hl.SetHighlighted(true);
+            }
+            yield return new WaitForSeconds(0.25f);
+
+            // Off
+            for (int i = 0; i < plants.Count; i++)
+            {
+                if (plants[i] == null) continue;
+                var hl = plants[i].GetComponent<InteractableHighlight>();
+                if (hl != null) hl.SetHighlighted(false);
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+        _plantBlinkRoutine = null;
+    }
+
+    private void ClearPlantHighlights()
+    {
+        if (_plantBlinkRoutine != null)
+        {
+            StopCoroutine(_plantBlinkRoutine);
+            _plantBlinkRoutine = null;
+        }
+        var plants = WaterablePlant.All;
+        for (int i = 0; i < plants.Count; i++)
+        {
+            if (plants[i] == null) continue;
+            var hl = plants[i].GetComponent<InteractableHighlight>();
+            if (hl != null) hl.SetHighlighted(false);
+        }
     }
 
     // ── Grab target (surface raycast with depth-plane fallback) ──────
