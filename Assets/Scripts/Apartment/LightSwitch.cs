@@ -12,8 +12,8 @@ public class LightSwitch : MonoBehaviour
     [SerializeField] private Light[] _lights;
 
     [Header("State")]
-    [Tooltip("Whether the light starts on.")]
-    [SerializeField] private bool _startsOn = true;
+    [Tooltip("Whether the light starts on. False = room starts dark, player must click switch.")]
+    [SerializeField] private bool _startsOn = false;
 
     [Header("Visual")]
     [Tooltip("Renderer for the switch plate (optional — tints to show on/off state).")]

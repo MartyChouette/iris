@@ -31,13 +31,15 @@ public class GameClock : MonoBehaviour
     [Header("Time-of-Day Mood")]
     [Tooltip("Maps game hour (0-24) to mood value (0-1) for MoodMachine.")]
     [SerializeField] private AnimationCurve timeOfDayMoodCurve = new AnimationCurve(
-        new Keyframe(0f, 0.8f),
-        new Keyframe(6f, 0.3f),
-        new Keyframe(8f, 0f),
-        new Keyframe(12f, 0.05f),
-        new Keyframe(18f, 0.3f),
-        new Keyframe(21f, 0.6f),
-        new Keyframe(24f, 0.8f)
+        new Keyframe(0f, 0.9f),    // midnight — very dark mood
+        new Keyframe(6f, 0.4f),    // pre-dawn
+        new Keyframe(8f, 0f),      // morning — bright, clear
+        new Keyframe(12f, 0.05f),  // noon
+        new Keyframe(16f, 0.1f),   // afternoon
+        new Keyframe(18f, 0.4f),   // golden hour — mood shifts
+        new Keyframe(20f, 0.7f),   // evening — noticeably darker
+        new Keyframe(22f, 0.85f),  // late evening — player should want lights
+        new Keyframe(24f, 0.9f)    // night
     );
 
     [Header("References")]
