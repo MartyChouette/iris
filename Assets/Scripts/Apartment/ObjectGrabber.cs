@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -1016,8 +1017,10 @@ public class ObjectGrabber : MonoBehaviour
             rot = _held.transform.rotation;
         }
 
-        // Home snap: if placing near the item's home position, use exact home pos/rot
-        if (_held.HasHome && Vector3.Distance(pos, _held.HomePosition) < _held.HomeTolerance * 2f)
+        // Home snap: if placing very close to the item's home position, use exact home pos/rot.
+        // Use a tight radius so wall items can be placed freely on the wall without
+        // constantly snapping back to their spawn point.
+        if (_held.HasHome && Vector3.Distance(pos, _held.HomePosition) < _held.HomeTolerance)
         {
             pos = _held.HomePosition;
             rot = _held.HomeRotation;
@@ -1665,7 +1668,7 @@ public class ObjectGrabber : MonoBehaviour
     // ── Target highlight blink (generic + plant-specific) ────────────
 
     /// <summary>Blink a single object's InteractableHighlight N times.</summary>
-    private static IEnumerator BlinkHighlight(GameObject target, int blinks)
+    private static System.Collections.IEnumerator BlinkHighlight(GameObject target, int blinks)
     {
         if (target == null) yield break;
         var hl = target.GetComponent<InteractableHighlight>();
@@ -1683,7 +1686,7 @@ public class ObjectGrabber : MonoBehaviour
 
     private Coroutine _plantBlinkRoutine;
 
-    private IEnumerator BlinkPlantHighlights(int blinks)
+    private System.Collections.IEnumerator BlinkPlantHighlights(int blinks)
     {
         var plants = WaterablePlant.All;
         // Ensure each plant has an InteractableHighlight
@@ -2280,7 +2283,7 @@ public class ObjectGrabber : MonoBehaviour
             : _held.transform.rotation;
 
         // Mirror the home-snap override from Place() so ghost matches exactly
-        if (_held.HasHome && Vector3.Distance(placePos, _held.HomePosition) < _held.HomeTolerance * 2f)
+        if (_held.HasHome && Vector3.Distance(placePos, _held.HomePosition) < _held.HomeTolerance)
         {
             placePos = _held.HomePosition;
             placeRot = _held.HomeRotation;
