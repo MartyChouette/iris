@@ -23,7 +23,7 @@ public class FridgeController : MonoBehaviour
     [Tooltip("Degrees to rotate the right door (mirrored — positive = opens outward).")]
     [SerializeField] private float _openAngleR = 110f;
 
-    [Tooltip("Local axis the doors rotate around. Y = vertical hinge (default). Change if model has a different up axis.")]
+    [Tooltip("Axis the doors rotate around in WORLD space. (0,1,0) = vertical hinge for standard fridges. Ignores pivot's local orientation so imported models with baked rotations still work.")]
     [SerializeField] private Vector3 _hingeAxis = Vector3.up;
 
     [Tooltip("Seconds for the open / close tween.")]
@@ -80,12 +80,20 @@ public class FridgeController : MonoBehaviour
         if (_doorPivotL != null)
         {
             _closedRotL = _doorPivotL.localRotation;
-            _openRotL = _closedRotL * Quaternion.AngleAxis(_openAngleL, _hingeAxis);
+            // Convert world-space hinge axis into the pivot's local space so
+            // the rotation works regardless of baked import rotations/scale.
+            Vector3 localAxis = _doorPivotL.parent != null
+                ? _doorPivotL.parent.InverseTransformDirection(_hingeAxis.normalized)
+                : _hingeAxis.normalized;
+            _openRotL = _closedRotL * Quaternion.AngleAxis(_openAngleL, localAxis);
         }
         if (_doorPivotR != null)
         {
             _closedRotR = _doorPivotR.localRotation;
-            _openRotR = _closedRotR * Quaternion.AngleAxis(_openAngleR, _hingeAxis);
+            Vector3 localAxis = _doorPivotR.parent != null
+                ? _doorPivotR.parent.InverseTransformDirection(_hingeAxis.normalized)
+                : _hingeAxis.normalized;
+            _openRotR = _closedRotR * Quaternion.AngleAxis(_openAngleR, localAxis);
         }
 
         if (_interiorLight != null)
