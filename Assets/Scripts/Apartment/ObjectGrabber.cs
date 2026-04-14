@@ -1017,13 +1017,13 @@ public class ObjectGrabber : MonoBehaviour
         if (_barrierLayer != 0)
         {
             bool blocked = Physics.CheckSphere(pos, 0.08f, _barrierLayer);
-            if (!blocked)
+            if (!blocked && !_currentSurface.IsVertical)
             {
                 // Probe downward from placement pos — catches barriers inside
-                // counter/table bodies that sit just below the surface
-                Vector3 probeDir = _currentSurface != null && _currentSurface.IsVertical
-                    ? -hitResult.surfaceNormal : Vector3.down;
-                blocked = Physics.Raycast(pos, probeDir, 0.15f, _barrierLayer);
+                // counter/table bodies that sit just below the surface.
+                // Skip for vertical (wall) surfaces — the wall itself is on the
+                // barrier layer and the probe would always hit it.
+                blocked = Physics.Raycast(pos, Vector3.down, 0.15f, _barrierLayer);
             }
             if (blocked)
             {
@@ -2213,8 +2213,9 @@ public class ObjectGrabber : MonoBehaviour
         // Barrier: blocked if placement sits over barrier geometry
         if (canPlace && _barrierLayer != 0)
         {
-            bool overBarrier = Physics.CheckSphere(placePos, 0.08f, _barrierLayer)
-                || Physics.Raycast(placePos, Vector3.down, 0.15f, _barrierLayer);
+            bool overBarrier = Physics.CheckSphere(placePos, 0.08f, _barrierLayer);
+            if (!overBarrier && !_currentSurface.IsVertical)
+                overBarrier = Physics.Raycast(placePos, Vector3.down, 0.15f, _barrierLayer);
             if (overBarrier) canPlace = false;
         }
 
