@@ -10,6 +10,12 @@ using TMPro;
 /// </summary>
 public class DateReactionUI : MonoBehaviour
 {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        s_flashCanvas = null;
+    }
+
     [Header("Icon Sprites")]
     [SerializeField] private Sprite questionSprite;
     [SerializeField] private Sprite heartSprite;

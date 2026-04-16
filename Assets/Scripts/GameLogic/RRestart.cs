@@ -30,9 +30,15 @@ using UnityEngine.SceneManagement;
 
 public class RRestart : MonoBehaviour
 {
+    [Tooltip("When true, pressing R reloads the current scene. Leave off in shipping builds.")]
+    [SerializeField] private bool _enableRKeyRestart = false;
+
     void Update()
     {
-        RestartGame();
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        if (_enableRKeyRestart)
+            RestartGame();
+#endif
     }
 
 

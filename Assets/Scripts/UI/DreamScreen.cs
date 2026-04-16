@@ -164,11 +164,16 @@ public class DreamScreen : MonoBehaviour
 
     // ── Procedural gradient ─────────────────────────────────────────
 
+    // Reusable pixel buffer — allocated once, reused every update
+    private Color32[] _pixels;
+
     private void UpdateGradientTexture(float hueOffset)
     {
         if (_gradientTex == null) return;
 
-        var pixels = new Color32[TexW * TexH];
+        if (_pixels == null || _pixels.Length != TexW * TexH)
+            _pixels = new Color32[TexW * TexH];
+        var pixels = _pixels;
         byte alphaB = (byte)(255 * _overlayAlpha);
 
         for (int y = 0; y < TexH; y++)

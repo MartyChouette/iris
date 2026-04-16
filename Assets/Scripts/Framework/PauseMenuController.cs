@@ -75,9 +75,19 @@ public class PauseMenuController : MonoBehaviour
 
     private void OnDisable()
     {
-        _pauseAction.Disable();
-        _pageLeftAction.Disable();
-        _pageRightAction.Disable();
+        _pauseAction?.Disable();
+        _pageLeftAction?.Disable();
+        _pageRightAction?.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        _pauseAction?.Dispose();
+        _pageLeftAction?.Dispose();
+        _pageRightAction?.Dispose();
+        _pauseAction = null;
+        _pageLeftAction = null;
+        _pageRightAction = null;
     }
 
     private void Update()

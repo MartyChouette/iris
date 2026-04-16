@@ -155,11 +155,17 @@ public class NemaProfilePanel : MonoBehaviour
 
     // ── Drawing ────────────────────────────────────────────────
 
+    // Reusable pixel buffers — allocated once, reused on every redraw
+    private Color32[] _spiderPixels;
+    private Color32[] _flowerPixels;
+
     private void RedrawSpiderChart()
     {
         if (_personality == null || _spiderTex == null) return;
 
-        var px = new Color32[TexSize * TexSize];
+        if (_spiderPixels == null || _spiderPixels.Length != TexSize * TexSize)
+            _spiderPixels = new Color32[TexSize * TexSize];
+        var px = _spiderPixels;
         var bg = new Color32(0, 0, 0, 0);
         System.Array.Fill(px, bg);
 
@@ -217,7 +223,9 @@ public class NemaProfilePanel : MonoBehaviour
     {
         if (_flowerTex == null || NemaWellbeing.Instance == null) return;
 
-        var px = new Color32[TexSize * TexSize];
+        if (_flowerPixels == null || _flowerPixels.Length != TexSize * TexSize)
+            _flowerPixels = new Color32[TexSize * TexSize];
+        var px = _flowerPixels;
         System.Array.Fill(px, new Color32(0, 0, 0, 0));
 
         Vector2 center = new Vector2(TexSize / 2f, TexSize / 2f);

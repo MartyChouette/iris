@@ -89,6 +89,11 @@ public class DiscoBallController : MonoBehaviour
 
         if (_cachedCookie != null)
             Object.Destroy(_cachedCookie);
+
+        _mouseClick?.Dispose();
+        _mousePosition?.Dispose();
+        _mouseClick = null;
+        _mousePosition = null;
     }
 
     private void Update()

@@ -25,7 +25,7 @@ public static class GracefulQuit
         }
 
         // Minimize the window so the player isn't staring at a frozen frame
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_STANDALONE_WIN
         MinimizeWindow();
 #endif
 
@@ -38,7 +38,7 @@ public static class GracefulQuit
 #endif
     }
 
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_STANDALONE_WIN
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     private static extern bool ShowWindow(System.IntPtr hWnd, int nCmdShow);
 

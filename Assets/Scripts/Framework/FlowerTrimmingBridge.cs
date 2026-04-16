@@ -257,7 +257,7 @@ public class FlowerTrimmingBridge : MonoBehaviour
         }
 
         // Named listener so we can cleanly remove it after the session ends
-        UnityEngine.Events.UnityAction<FlowerEvaluation, int, int> resultListener = (eval, score, days) =>
+        UnityEngine.Events.UnityAction<FlowerGameBrain.EvaluationResult, int, int> resultListener = (eval, score, days) =>
         {
             if (guarantee)
             {

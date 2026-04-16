@@ -125,6 +125,12 @@ public class FlowerSessionController : MonoBehaviour
 
     private static int s_liveSessions = 0;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        s_liveSessions = 0;
+    }
+
     private bool _endRequested = false;
     private string _endRequestedStack = null;
 
@@ -191,7 +197,9 @@ public class FlowerSessionController : MonoBehaviour
         if (sessionEnded)
             return false;
 
-        if (_endRequested)
+        // Unified end-latch: both the public endRequested flag and the private
+        // _endRequested latch must agree. Previously the two were out of sync.
+        if (_endRequested || endRequested)
         {
             Debug.LogError(
                 $"[FlowerSessionController] END REQUESTED TWICE. reason={reason}\nfirst=\n{_endRequestedStack}\nsecond=\n{Environment.StackTrace}",
@@ -200,6 +208,7 @@ public class FlowerSessionController : MonoBehaviour
         }
 
         _endRequested = true;
+        endRequested = true;
         _endRequestedStack = Environment.StackTrace;
         return true;
     }

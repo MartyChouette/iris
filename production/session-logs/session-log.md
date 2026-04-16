@@ -15966,3 +15966,16 @@ docs/PITCH_DECK.md
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260416_084755
+### Commits
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+---
+
+## Session End: 20260416_090640
+### Commits
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+

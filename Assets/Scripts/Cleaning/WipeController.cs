@@ -63,8 +63,16 @@ public class WipeController : MonoBehaviour
 
     private void OnDisable()
     {
-        _mousePosition.Disable();
-        _mouseClick.Disable();
+        _mousePosition?.Disable();
+        _mouseClick?.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        _mousePosition?.Dispose();
+        _mouseClick?.Dispose();
+        _mousePosition = null;
+        _mouseClick = null;
     }
 
     private void Update()

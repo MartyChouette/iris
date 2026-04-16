@@ -71,6 +71,15 @@ public class DateDebugOverlay : MonoBehaviour
             Instance = null;
             IsTimePaused = false;
         }
+
+        _toggleAction?.Dispose();
+        _scrollUpAction?.Dispose();
+        _scrollDownAction?.Dispose();
+        _timePauseAction?.Dispose();
+        _toggleAction = null;
+        _scrollUpAction = null;
+        _scrollDownAction = null;
+        _timePauseAction = null;
     }
 
     private void Update()

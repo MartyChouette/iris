@@ -160,13 +160,17 @@ public class AudioManager : MonoBehaviour
         _nonMusicFadeRoutine = null;
     }
 
+    // Track the base (pre-mix) volume for each looping source so ApplyNonMusicMix
+    // can re-apply the multiplier without needing the caller to re-submit.
+    private float _ambienceBaseVolume = 1f;
+    private float _weatherBaseVolume = 1f;
+
     private void ApplyNonMusicMix()
     {
-        // Update looping non-music sources
         if (IsValid(ambienceSource) && ambienceSource.isPlaying)
-            ambienceSource.volume = ambienceSource.volume; // re-set on next PlayAmbience
+            ambienceSource.volume = EffectiveAmbVol(_ambienceBaseVolume);
         if (IsValid(weatherSource) && weatherSource.isPlaying)
-            weatherSource.volume = weatherSource.volume;
+            weatherSource.volume = EffectiveAmbVol(_weatherBaseVolume);
     }
 
     /// <summary>Effective SFX volume including non-music mix.</summary>
@@ -301,6 +305,7 @@ public class AudioManager : MonoBehaviour
     {
         if (clip == null || !IsValid(ambienceSource)) return;
         ambienceSource.clip = clip;
+        _ambienceBaseVolume = volume;
         ambienceSource.volume = EffectiveAmbVol(volume);
         ambienceSource.loop = loop;
         ambienceSource.Play();
@@ -318,6 +323,7 @@ public class AudioManager : MonoBehaviour
     {
         if (clip == null || !IsValid(weatherSource)) return;
         weatherSource.clip = clip;
+        _weatherBaseVolume = volume;
         weatherSource.volume = EffectiveAmbVol(volume);
         weatherSource.loop = loop;
         weatherSource.Play();

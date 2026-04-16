@@ -45,6 +45,14 @@ public class IrisInput : MonoBehaviour
     public static bool IsTouch => Scheme == ActiveControlScheme.Touch;
     public static event System.Action<ActiveControlScheme> OnSchemeChanged;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        // Clear subscribers from prior editor play sessions (Unity does not reset
+        // static event delegates on scene reload or with domain-reload off)
+        OnSchemeChanged = null;
+    }
+
     // ── Gamepad Cursor ──────────────────────────────────────────
     private Vector2 _gamepadCursorPos;
     private const float GamepadCursorSpeed = 800f;

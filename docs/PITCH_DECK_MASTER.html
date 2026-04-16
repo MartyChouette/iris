@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPENT BLOOMS — Master Pitch Deck</title>
+<style>
+/* ═══════════════════════════════════════════════════
+   CUSTOM PROPERTIES
+   ═══════════════════════════════════════════════════ */
+:root {
+  --bg:            #0d0d0d;
+  --bg-card:       #141414;
+  --bg-card-hover: #1a1a1a;
+  --bg-elevated:   #1e1e1e;
+
+  --text:          #e8e0d4;
+  --text-dim:      #a89e90;
+  --text-muted:    #6a6058;
+
+  --accent:        #B04050;
+  --accent-dim:    #7A2D38;
+  --accent-glow:   rgba(176, 64, 80, 0.18);
+  --accent-glow-s: rgba(176, 64, 80, 0.08);
+
+  --pink:          #d4778a;
+  --gold:          #c9a84c;
+  --grey-blue:     #7a8fa6;
+  --green:         #7ec850;
+  --blue:          #5b8def;
+
+  --border:        rgba(232, 224, 212, 0.07);
+  --border-accent: rgba(176, 64, 80, 0.25);
+
+  --font-serif:    Georgia, 'Times New Roman', Times, serif;
+  --font-sans:     -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono:     'Courier New', Courier, monospace;
+
+  --radius:        10px;
+  --transition:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before, body::after {
+  content: '';
+  position: fixed;
+  left: 0; right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 10;
+}
+body::before { top: 0; background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent); }
+body::after { bottom: 0; background: linear-gradient(to top, rgba(13,13,13,0.95), transparent); }
+
+/* Wordmark + Draft Badge */
+#wordmark {
+  position: fixed; top: 24px; left: 28px; z-index: 100;
+  font-family: var(--font-serif); font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--accent); opacity: 0.75; user-select: none;
+}
+#draft-badge {
+  position: fixed; top: 24px; right: 28px; z-index: 100;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold);
+  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+  padding: 5px 10px; border-radius: 4px;
+}
+
+/* Jump nav */
+#jump-nav {
+  position: fixed; right: 28px; bottom: 28px; z-index: 100;
+  background: var(--bg-card); border: 1px solid var(--border-accent);
+  border-radius: 24px; padding: 6px 16px; font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.2em; color: var(--accent);
+  text-transform: uppercase; cursor: pointer; text-decoration: none;
+  transition: background var(--transition);
+}
+#jump-nav:hover { background: var(--bg-card-hover); }
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+.container-wide { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+section { padding: 90px 0 20px; }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-stagger > * { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal-stagger.visible > *:nth-child(1)  { opacity: 1; transform: none; transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2)  { opacity: 1; transform: none; transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3)  { opacity: 1; transform: none; transition-delay: 0.19s; }
+.reveal-stagger.visible > *:nth-child(4)  { opacity: 1; transform: none; transition-delay: 0.26s; }
+.reveal-stagger.visible > *:nth-child(5)  { opacity: 1; transform: none; transition-delay: 0.33s; }
+.reveal-stagger.visible > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 0.40s; }
+.reveal-stagger.visible > *:nth-child(7)  { opacity: 1; transform: none; transition-delay: 0.47s; }
+.reveal-stagger.visible > *:nth-child(8)  { opacity: 1; transform: none; transition-delay: 0.54s; }
+.reveal-stagger.visible > *:nth-child(9)  { opacity: 1; transform: none; transition-delay: 0.61s; }
+.reveal-stagger.visible > *:nth-child(10) { opacity: 1; transform: none; transition-delay: 0.68s; }
+
+/* Hero */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 120px 40px 80px; position: relative;
+}
+#hero::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); width: 600px; height: 400px;
+  background: radial-gradient(ellipse at center, rgba(176,64,80,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--accent); opacity: 0;
+  animation: fadeUp 0.8s ease 0.3s forwards; margin-bottom: 28px;
+}
+.hero-title {
+  font-family: var(--font-serif); font-size: clamp(36px, 7vw, 72px);
+  font-weight: normal; color: var(--text); letter-spacing: 0.08em; line-height: 1.05;
+  opacity: 0; animation: fadeUp 0.9s ease 0.55s forwards; margin-bottom: 52px;
+}
+.hero-hook {
+  font-family: var(--font-serif); font-size: clamp(16px, 2vw, 21px);
+  font-weight: normal; font-style: italic; color: var(--text-dim);
+  max-width: 680px; line-height: 1.65; opacity: 0;
+  animation: fadeUp 1s ease 1.4s forwards; margin: 0 auto;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.hero-scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp 0.6s ease 2.4s forwards;
+}
+.scroll-line {
+  width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 2s ease-in-out 2.4s infinite;
+}
+@keyframes scrollPulse { 0%,100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 0.8; transform: scaleY(1.1); } }
+.scroll-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+
+/* Section headers */
+.section-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.45em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block;
+}
+.section-title {
+  font-family: var(--font-serif); font-size: clamp(26px, 4vw, 38px);
+  font-weight: normal; color: var(--text); margin-bottom: 36px; line-height: 1.2;
+}
+.section-divider { width: 48px; height: 2px; background: var(--accent); margin-bottom: 40px; opacity: 0.6; }
+
+/* Concept */
+.concept-body p { font-size: 16px; line-height: 1.85; color: var(--text-dim); margin-bottom: 22px; }
+.concept-body p:last-child { margin-bottom: 0; }
+.concept-callout {
+  border-left: 2px solid var(--accent); padding: 18px 28px; margin: 36px 0;
+  background: var(--accent-glow-s); border-radius: 0 var(--radius) var(--radius) 0;
+}
+.concept-callout p {
+  font-family: var(--font-serif); font-style: italic; font-size: 17px;
+  color: var(--text) !important; margin: 0 !important; line-height: 1.6;
+}
+
+/* Timeline */
+.timeline { position: relative; padding-left: 0; list-style: none; }
+.timeline-phase { display: grid; grid-template-columns: 110px 1px 1fr; gap: 0 28px; margin-bottom: 0; position: relative; }
+.timeline-phase:last-child .timeline-line { background: none; }
+.timeline-time {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--accent); padding-top: 4px;
+  text-align: right; padding-bottom: 44px;
+}
+.timeline-line {
+  width: 1px; flex-shrink: 0; position: relative;
+  background: linear-gradient(to bottom, var(--border-accent) 0%, var(--border-accent) calc(100% - 32px), transparent 100%);
+}
+.timeline-dot {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 8px var(--accent-glow);
+}
+.timeline-content { padding-bottom: 44px; }
+.timeline-heading {
+  font-family: var(--font-sans); font-size: 13px; font-weight: 600;
+  letter-spacing: 0.04em; color: var(--text); margin-bottom: 10px; padding-top: 2px;
+}
+.timeline-items { list-style: none; padding: 0; }
+.timeline-items li {
+  font-size: 14px; color: var(--text-dim); padding: 4px 0; padding-left: 16px;
+  position: relative; line-height: 1.5;
+}
+.timeline-items li::before { content: '\2014'; position: absolute; left: 0; color: var(--text-muted); font-size: 11px; }
+.timeline-souvenir {
+  margin-top: 18px; padding: 16px 20px;
+  background: rgba(176,64,80,0.06); border: 1px solid var(--border-accent); border-radius: var(--radius);
+}
+.timeline-souvenir p {
+  font-family: var(--font-serif); font-size: 13.5px; font-style: italic;
+  color: var(--text-dim); line-height: 1.65;
+}
+
+/* Mechanic cards */
+.mechanics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.mechanic-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px 26px; position: relative; overflow: hidden;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+.mechanic-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--accent), transparent);
+  opacity: 0; transition: opacity var(--transition);
+}
+.mechanic-card:hover { background: var(--bg-card-hover); border-color: var(--border-accent); transform: translateY(-2px); }
+.mechanic-card:hover::before { opacity: 1; }
+.mechanic-card.horror {
+  grid-column: 1 / -1; border-color: rgba(176,64,80,0.15);
+  background: linear-gradient(135deg, #141414 0%, #160e0a 100%);
+}
+.mechanic-card.horror::before { opacity: 0.4; background: linear-gradient(to right, var(--accent), var(--pink), transparent); }
+.mechanic-number {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em;
+  color: var(--accent); margin-bottom: 12px; display: block; opacity: 0.7;
+}
+.mechanic-title {
+  font-family: var(--font-sans); font-size: 15px; font-weight: 600;
+  color: var(--text); margin-bottom: 14px; line-height: 1.3;
+}
+.mechanic-body { font-size: 13.5px; color: var(--text-dim); line-height: 1.7; }
+
+/* Aesthetic */
+.aesthetic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+.aesthetic-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 22px; }
+.aesthetic-block-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block;
+}
+.aesthetic-block p { font-size: 13.5px; color: var(--text-dim); line-height: 1.7; }
+.reference-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.reference-pill {
+  display: inline-flex; flex-direction: column;
+  background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 18px; transition: border-color var(--transition);
+}
+.reference-pill:hover { border-color: var(--border-accent); }
+.pill-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.pill-note { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+/* Tables */
+.table-wrapper { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.data-table thead th {
+  background: var(--bg-elevated); color: var(--accent);
+  font-family: var(--font-mono); font-size: 10px; font-weight: normal;
+  letter-spacing: 0.35em; text-transform: uppercase; padding: 14px 20px;
+  text-align: left; border-bottom: 1px solid var(--border);
+}
+.data-table tbody tr { transition: background var(--transition); }
+.data-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.015); }
+.data-table tbody tr:hover { background: var(--accent-glow-s); }
+.data-table tbody td {
+  padding: 14px 20px; color: var(--text-dim);
+  border-bottom: 1px solid rgba(255,255,255,0.03); vertical-align: middle;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table .td-title, .data-table .td-name { color: var(--text); font-weight: 500; white-space: nowrap; }
+.data-table .td-number {
+  font-family: var(--font-mono); font-size: 13px; color: var(--text);
+  text-align: right; white-space: nowrap;
+}
+.data-table .td-accent { color: var(--accent); font-weight: 600; }
+.milestone-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.1em; padding: 2px 9px; border-radius: 4px;
+  background: rgba(176,64,80,0.12); color: var(--accent);
+  border: 1px solid var(--border-accent); white-space: nowrap;
+}
+
+/* Audience */
+.audience-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+.audience-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 22px; }
+.audience-tag {
+  display: inline-block; font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--bg);
+  background: var(--accent); padding: 3px 10px; border-radius: 4px; margin-bottom: 14px;
+}
+.audience-tag.secondary { background: var(--text-muted); }
+.audience-tag.tertiary { background: var(--gold); color: var(--bg); }
+.audience-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.7; }
+
+/* USP list */
+.usp-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.usp-item {
+  display: grid; grid-template-columns: 20px 1fr; gap: 18px; align-items: start;
+  padding: 22px 24px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); transition: border-color var(--transition), background var(--transition);
+}
+.usp-item:hover { border-color: var(--border-accent); background: var(--bg-card-hover); }
+.usp-marker {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  margin-top: 8px; flex-shrink: 0; box-shadow: 0 0 8px var(--accent-glow);
+}
+.usp-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.usp-text span { font-size: 13.5px; color: var(--text-dim); line-height: 1.65; }
+
+/* Stat bars */
+.stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.stat-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px 16px; text-align: center;
+}
+.stat-value { font-family: var(--font-serif); font-size: 26px; color: var(--text); line-height: 1; margin-bottom: 6px; }
+.stat-value .accent { color: var(--accent); }
+.stat-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+
+/* State columns */
+.state-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.state-column { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; }
+.state-column-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.35em;
+  text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.state-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.state-dot.green { background: var(--green); box-shadow: 0 0 6px rgba(126,200,80,0.5); }
+.state-dot.amber { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
+.state-column-label.done { color: var(--green); }
+.state-column-label.wip { color: var(--accent); }
+.state-list { list-style: none; padding: 0; }
+.state-list li {
+  font-size: 13px; color: var(--text-dim); padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03); line-height: 1.5;
+}
+.state-list li:last-child { border-bottom: none; }
+
+/* Team */
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+.team-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; }
+.team-name { font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.team-role {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block;
+}
+.team-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.7; }
+
+/* Gantt */
+.gantt { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px 16px; overflow-x: auto; }
+.gantt-header, .gantt-milestones, .gantt-row, .gantt-footer {
+  display: grid; grid-template-columns: 130px 1fr; gap: 0 16px; align-items: center;
+}
+.gantt-months { display: grid; grid-template-columns: repeat(17, 1fr); gap: 4px; position: relative; }
+.gantt-header .gantt-months span {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--text-muted); text-align: center; padding: 4px 0;
+}
+.gantt-milestone-row { margin-bottom: 12px; }
+.gantt-phase {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.15em;
+  text-transform: uppercase; text-align: center; padding: 4px 2px;
+  border-radius: 3px; line-height: 1.2;
+}
+.gantt-phase-vs { background: rgba(126,200,80,0.12); color: var(--green); border: 1px solid rgba(126,200,80,0.25); }
+.gantt-phase-demo { background: rgba(91,141,239,0.12); color: var(--blue); border: 1px solid rgba(91,141,239,0.25); }
+.gantt-phase-content { background: rgba(176,64,80,0.10); color: var(--accent); border: 1px solid var(--border-accent); }
+.gantt-row { margin-bottom: 6px; }
+.gantt-label-col { display: flex; flex-direction: column; min-width: 0; }
+.gantt-name { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.2; white-space: nowrap; }
+.gantt-role { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); letter-spacing: 0.1em; }
+.gantt-bar { height: 22px; border-radius: 4px; position: relative; }
+.gantt-bar-founder { background: linear-gradient(135deg, rgba(232,224,212,0.12) 0%, rgba(232,224,212,0.06) 100%); border: 1px solid rgba(232,224,212,0.15); }
+.gantt-bar-hire { background: linear-gradient(135deg, rgba(176,64,80,0.18) 0%, rgba(176,64,80,0.08) 100%); border: 1px solid var(--border-accent); }
+.gantt-footer { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.gantt-total { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--accent); }
+
+/* Business stats */
+.biz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+.biz-stat {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px 20px; text-align: center;
+}
+.biz-stat-value { font-family: var(--font-serif); font-size: 28px; color: var(--text); margin-bottom: 6px; line-height: 1; }
+.biz-stat-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.biz-note {
+  background: var(--bg-card); border: 1px solid var(--border); border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0; padding: 20px 24px;
+}
+.biz-note p { font-size: 13.5px; color: var(--text-dim); line-height: 1.7; }
+
+/* Marketing Cycles */
+.cycle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; margin-bottom: 28px; }
+.cycle-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 22px; }
+.cycle-card.cycle-discovery { border-color: var(--border-accent); background: linear-gradient(135deg, #141414 0%, #160e0a 100%); }
+.cycle-number {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block;
+}
+.cycle-title { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+.cycle-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.7; }
+
+/* Partnership / Ask */
+.ask-hero {
+  text-align: center; padding: 40px 0; margin-bottom: 32px;
+  border: 1px solid var(--border-accent); border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(176,64,80,0.04) 0%, transparent 100%);
+}
+.ask-amount {
+  font-family: var(--font-serif); font-size: clamp(36px, 6vw, 56px);
+  color: var(--text); letter-spacing: 0.04em; line-height: 1; margin-bottom: 10px;
+}
+.ask-model {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--accent);
+}
+.slider-wrap { max-width: 360px; margin: 28px auto 0; }
+.slider-labels {
+  display: flex; justify-content: space-between; margin-top: 8px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--text-muted);
+}
+#ask-slider, .range-slider {
+  -webkit-appearance: none; appearance: none; width: 100%;
+  height: 4px; border-radius: 2px;
+  background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--fill, 100%), var(--border) var(--fill, 100%), var(--border) 100%);
+  outline: none; cursor: pointer;
+}
+#ask-slider::-webkit-slider-thumb, .range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 18px; height: 18px;
+  border-radius: 50%; background: var(--accent); border: 2px solid var(--bg);
+  box-shadow: 0 0 10px var(--accent-glow), 0 0 0 1px var(--accent-dim);
+  cursor: pointer; transition: box-shadow 0.2s ease;
+}
+#ask-slider::-webkit-slider-thumb:hover, .range-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 16px rgba(176,64,80,0.4), 0 0 0 1px var(--accent);
+}
+#ask-slider::-moz-range-thumb, .range-slider::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%; background: var(--accent);
+  border: 2px solid var(--bg); box-shadow: 0 0 10px var(--accent-glow); cursor: pointer;
+}
+
+/* Split model toggle */
+.split-toggle {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+  padding: 6px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.split-opt {
+  flex: 1; min-width: 140px;
+  background: transparent; border: 1px solid transparent; border-radius: 6px;
+  padding: 10px 14px; color: var(--text-dim); cursor: pointer;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; transition: all var(--transition);
+  text-align: center;
+}
+.split-opt:hover { color: var(--text); background: var(--bg-card-hover); }
+.split-opt.active { background: var(--accent-glow); color: var(--accent); border-color: var(--border-accent); }
+.split-opt-label { display: block; font-size: 11px; margin-bottom: 4px; }
+.split-opt-desc { display: block; font-size: 8px; letter-spacing: 0.1em; color: var(--text-muted); font-weight: normal; text-transform: none; }
+
+/* Keyword demo */
+.keyword-demo { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.kw {
+  display: inline-block; font-size: 12px; padding: 4px 12px;
+  border-radius: 20px; font-family: var(--font-mono); letter-spacing: 0.05em;
+  cursor: pointer; transition: transform 0.2s ease;
+}
+.kw:hover { transform: translateY(-1px); }
+.kw.like    { background: rgba(212,119,138,0.12); color: var(--pink); border: 1px solid rgba(212,119,138,0.25); }
+.kw.hobby   { background: rgba(201,168,76,0.12);  color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+.kw.dislike { background: rgba(122,143,166,0.12); color: var(--grey-blue); border: 1px solid rgba(122,143,166,0.25); }
+
+/* ═══════════════════════════════════════════════════
+   WORKSHOP SECTION
+   ═══════════════════════════════════════════════════ */
+#workshop {
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(201,168,76,0.02) 100%);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding-top: 120px;
+  margin-top: 80px;
+}
+.workshop-badge {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold);
+  background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
+  padding: 6px 12px; border-radius: 4px; margin-bottom: 18px;
+}
+.workshop-section-label { color: var(--gold) !important; }
+.workshop-divider { background: var(--gold) !important; }
+
+/* Angle cards */
+.angles-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+.angle-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; transition: border-color var(--transition);
+}
+.angle-card:hover { border-color: rgba(201,168,76,0.3); }
+.angle-head {
+  padding: 20px 24px; cursor: pointer; display: grid;
+  grid-template-columns: auto 1fr auto; gap: 16px; align-items: center;
+  transition: background var(--transition);
+}
+.angle-head:hover { background: var(--bg-card-hover); }
+.angle-num {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em;
+  color: var(--gold); opacity: 0.7;
+}
+.angle-title {
+  font-family: var(--font-sans); font-size: 15px; font-weight: 600;
+  color: var(--text); line-height: 1.3;
+}
+.angle-vote {
+  display: flex; gap: 6px; align-items: center;
+}
+.vote-btn {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 4px; padding: 4px 8px; cursor: pointer;
+  font-size: 12px; color: var(--text-dim); transition: all var(--transition);
+  display: inline-flex; align-items: center; gap: 4px; min-width: 38px;
+  justify-content: center;
+}
+.vote-btn:hover { background: var(--bg-card-hover); color: var(--text); }
+.vote-btn.active.up { color: var(--green); border-color: rgba(126,200,80,0.4); background: rgba(126,200,80,0.08); }
+.vote-btn.active.down { color: var(--accent); border-color: var(--border-accent); background: var(--accent-glow-s); }
+.vote-count {
+  font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);
+  margin-left: 6px;
+}
+.angle-chevron {
+  color: var(--text-muted); transition: transform var(--transition);
+  font-family: var(--font-mono); font-size: 14px;
+}
+.angle-card.open .angle-chevron { transform: rotate(90deg); }
+.angle-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.angle-card.open .angle-body { max-height: 2000px; }
+.angle-inner {
+  padding: 0 24px 28px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+.angle-compare {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
+}
+.angle-col {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 6px; padding: 16px 18px;
+}
+.angle-col.current { border-color: var(--border); }
+.angle-col.proposed {
+  border-color: rgba(201,168,76,0.3);
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, rgba(201,168,76,0.05) 100%);
+}
+.angle-col-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; margin-bottom: 10px; display: block;
+}
+.angle-col.current .angle-col-label { color: var(--text-muted); }
+.angle-col.proposed .angle-col-label { color: var(--gold); }
+.angle-col p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.angle-col p strong { color: var(--text); }
+
+.angle-examples {
+  margin-bottom: 20px;
+}
+.angle-examples-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block;
+}
+.angle-ex-list { list-style: none; padding: 0; }
+.angle-ex-list li {
+  font-size: 13px; color: var(--text-dim); padding: 6px 0 6px 18px;
+  position: relative; line-height: 1.55;
+}
+.angle-ex-list li::before {
+  content: '\2022'; position: absolute; left: 4px; color: var(--gold);
+}
+
+/* Demo containers inside angles */
+.angle-demo {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 6px; padding: 20px; margin-top: 16px;
+}
+.angle-demo-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block;
+}
+
+/* Dialogue tree demo */
+.dialogue-demo { position: relative; }
+.dialogue-ad {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 16px 18px; margin-bottom: 14px;
+  font-family: var(--font-serif); font-size: 14px; color: var(--text-dim); line-height: 1.7;
+}
+.dialogue-ad .kw { cursor: help; }
+.dialogue-tooltip {
+  position: fixed; background: var(--bg-elevated); border: 1px solid var(--border-accent);
+  border-radius: 4px; padding: 8px 12px; font-size: 11px; color: var(--text);
+  font-family: var(--font-sans); max-width: 260px; pointer-events: none;
+  z-index: 1000; opacity: 0; transition: opacity 0.15s ease; line-height: 1.5;
+}
+.dialogue-tooltip.visible { opacity: 1; }
+.dialogue-tooltip::before {
+  content: attr(data-label); display: block; font-family: var(--font-mono);
+  font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 4px;
+}
+
+/* Three-act arc */
+.arc-demo {}
+.arc-slider-row {
+  display: grid; grid-template-columns: 60px 1fr 60px; gap: 16px;
+  align-items: center; margin-bottom: 20px;
+}
+.arc-slider-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+  color: var(--text-muted); text-align: center;
+}
+.arc-slider-label.active { color: var(--accent); }
+.arc-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 20px 22px; min-height: 200px;
+  transition: border-color var(--transition);
+}
+.arc-card.date-3 { border-color: var(--border-accent); background: linear-gradient(135deg, var(--bg-card) 0%, #1a0e0a 100%); }
+.arc-card-title {
+  font-family: var(--font-sans); font-size: 15px; font-weight: 600;
+  color: var(--text); margin-bottom: 12px;
+}
+.arc-stat-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px;
+}
+.arc-stat {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 4px; padding: 10px 12px;
+}
+.arc-stat-label {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;
+}
+.arc-stat-val { font-size: 12px; color: var(--text); }
+.arc-flower {
+  display: inline-block; font-size: 20px; margin-right: 10px;
+  transition: all var(--transition);
+}
+
+/* Verb gallery */
+.verb-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 18px;
+}
+.verb-chip {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 12px 10px; text-align: center;
+  cursor: pointer; transition: all var(--transition);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--text-dim);
+}
+.verb-chip:hover { background: var(--bg-card-hover); color: var(--text); transform: translateY(-1px); }
+.verb-chip.active {
+  background: var(--accent-glow); color: var(--accent);
+  border-color: var(--border-accent);
+  box-shadow: 0 0 12px var(--accent-glow-s);
+}
+.verb-detail {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 18px 22px; min-height: 90px;
+}
+.verb-detail-title {
+  font-family: var(--font-sans); font-size: 14px; font-weight: 600;
+  color: var(--text); margin-bottom: 8px;
+}
+.verb-detail-body { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+/* Content cost bars */
+.cost-demo { }
+.cost-row {
+  display: grid; grid-template-columns: 180px 1fr 80px;
+  gap: 14px; align-items: center; margin-bottom: 14px;
+}
+.cost-label { font-family: var(--font-sans); font-size: 12px; color: var(--text); font-weight: 500; }
+.cost-bar-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; height: 22px; position: relative; overflow: hidden; }
+.cost-bar-fill {
+  height: 100%; border-radius: 3px; width: 0;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+.cost-bar-fill.dialogue { background: linear-gradient(to right, var(--accent), var(--pink)); }
+.cost-bar-fill.env { background: linear-gradient(to right, var(--green), rgba(126,200,80,0.5)); }
+.cost-value { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); text-align: right; }
+
+/* Responsive */
+@media (max-width: 720px) {
+  .container, .container-wide { padding: 0 24px; }
+  .mechanics-grid, .aesthetic-grid, .audience-grid, .biz-grid, .team-grid, .cycle-grid,
+  .angle-compare { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .mechanic-card.horror { grid-column: auto; }
+  .state-grid { grid-template-columns: 1fr; }
+  .timeline-phase { grid-template-columns: 80px 1px 1fr; gap: 0 16px; }
+  .hero-hook { font-size: 16px; }
+  .hero-title { font-size: 36px; }
+  .gantt-header, .gantt-milestones, .gantt-row, .gantt-footer { grid-template-columns: 100px 1fr; gap: 0 10px; }
+  .verb-grid { grid-template-columns: repeat(3, 1fr); }
+  .cost-row { grid-template-columns: 120px 1fr 60px; }
+  .angle-head { grid-template-columns: auto 1fr; }
+  .angle-vote { grid-column: 1 / -1; margin-top: 10px; }
+  #draft-badge { display: none; }
+}
+
+@media (min-width: 1400px) { :root { font-size: 17px; } }
+
+/* Footer */
+footer { padding: 60px 40px 80px; text-align: center; border-top: 1px solid var(--border); margin-top: 60px; }
+.footer-text { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em; color: var(--text-muted); text-transform: uppercase; }
+.footer-title {
+  display: block; font-family: var(--font-serif); font-size: 28px;
+  color: var(--accent); letter-spacing: 0.12em; margin-bottom: 16px; opacity: 0.4;
+}
+</style>
+</head>
+<body>
+
+<div id="wordmark">Spent Blooms</div>
+<div id="draft-badge">Master Deck &bull; v1</div>
+<a id="jump-nav" href="#workshop">Workshop &darr;</a>
+
+<!-- HERO -->
+<section id="hero">
+  <span class="hero-label">Master Pitch Deck &mdash; Rum Rum Raspberry &mdash; 2026</span>
+  <h1 class="hero-title">SPENT<br>BLOOMS</h1>
+  <p class="hero-hook">A cozy apartment sim where you date strangers, tend your space, and slowly learn that love hurts.</p>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
+
+<!-- 01 CONCEPT -->
+<section id="concept">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">01 &mdash; Concept</span>
+      <h2 class="section-title">A contemplative life sim about<br>preparation and consequence.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal concept-body">
+      <p>Spent Blooms is a contemplative life sim about preparing for dates and living with the consequences. You play as Nema, alone in a small apartment. Each morning a newspaper arrives with personal ads. You choose someone to invite over, then spend the day making the apartment worthy of them &mdash; wiping stains, arranging objects, choosing music, watering plants, pouring drinks. Every choice is physical, unhurried, and tactile.</p>
+      <div class="concept-callout">
+        <p>Their affection &mdash; rendered as a growing flower &mdash; is the sum of your preparation. Afterward, you trim that flower. The trimmed bloom joins a growing bouquet in your refrigerator.</p>
+      </div>
+      <p>When your date arrives, they notice everything. They judge your outfit at the door, react to the drink you pour, wander the living room reading your shelves and reacting to your plants.</p>
+      <p>Over seven days, the calendar fills. Dates accumulate. Some of them go very well. Those are the ones who stop calling back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 WHY NOW -->
+<section id="why-now">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">02 &mdash; Why Now</span>
+      <h2 class="section-title">Five trends converging<br>on one empty apartment.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <ul class="usp-list reveal-stagger">
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Cozy is the fastest-growing indie category on Steam.</strong><span>Unpacking (3M+), Spiritfarer (1M+), Coffee Talk (500K+) proved that domestic ritual and emotional nuance sell at scale.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Horror-cozy crossover has no clear owner.</strong><span>Inscryption, Cult of the Lamb, and Doki Doki Literature Club proved "charming on the surface, dark underneath" creates massive word-of-mouth. No game owns the apartment-sim-to-horror pipeline.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>PSX aesthetic revival is at peak visibility.</strong><span>Buckshot Roulette, Iron Lung, and Sorry We're Closed turned retro rendering into a commercial differentiator.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Dating sims are booming.</strong><span>Steam dating sim revenue hit record highs in 2024&ndash;2025. The audience is growing and underserved by mechanically ambitious titles.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Built for content creators.</strong><span>"Cozy dating sim that's secretly about a serial killer" is engineered for reaction content &mdash; the same pattern that drove DDLC to 11M+ downloads.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 03 CORE LOOP -->
+<section id="core-loop">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">03 &mdash; Core Loop</span>
+      <h2 class="section-title">One day. Four phases.<br>One flower.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <ol class="timeline reveal-stagger">
+      <li class="timeline-phase"><div class="timeline-time">Morning</div><div class="timeline-line"><div class="timeline-dot"></div></div><div class="timeline-content"><div class="timeline-heading">Newspaper Arrives</div><ul class="timeline-items"><li>Read personal ads &mdash; scan for highlighted keywords</li><li>Choose tonight's date</li></ul></div></li>
+      <li class="timeline-phase"><div class="timeline-time">Afternoon</div><div class="timeline-line"><div class="timeline-dot"></div></div><div class="timeline-content"><div class="timeline-heading">Preparation Phase &mdash; Timed</div><ul class="timeline-items"><li>Clean stains, arrange objects, water plants</li><li>Select vinyl, spray perfume, prepare drinks</li><li>Set the apartment exactly how you want it seen</li></ul></div></li>
+      <li class="timeline-phase"><div class="timeline-time">Evening</div><div class="timeline-line"><div class="timeline-dot"></div></div><div class="timeline-content"><div class="timeline-heading">The Date Arrives</div><ul class="timeline-items"><li>Phase 1 &mdash; Entrance: outfit, perfume, greeting, cleanliness judged</li><li>Phase 2 &mdash; Kitchen: make their drink from memory or guesswork</li><li>Phase 3 &mdash; Living Room: they investigate everything you placed</li></ul></div></li>
+      <li class="timeline-phase"><div class="timeline-time">Night</div><div class="timeline-line"><div class="timeline-dot"></div></div><div class="timeline-content"><div class="timeline-heading">The Aftermath</div><ul class="timeline-items"><li>Date ends &mdash; a flower is left behind</li><li>Flower trimming scene: cut the stems, score the arrangement</li><li>Trimmed flower joins the growing bouquet in the fridge</li><li>Sleep &mdash; next morning begins</li></ul><div class="timeline-souvenir"><p>Each person visits three times. After the third date &mdash; the one with the strange flower &mdash; they don't call back. A souvenir appears the next morning.</p></div></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 04 KEY MECHANICS -->
+<section id="mechanics">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">04 &mdash; Key Mechanics</span>
+      <h2 class="section-title">Six interlocking systems<br>that share one emotional register.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="mechanics-grid reveal-stagger">
+      <div class="mechanic-card"><span class="mechanic-number">01</span><div class="mechanic-title">Physical Apartment Preparation</div><p class="mechanic-body">Every object is a physics prop. You pick things up, carry them, place them. The watering can needs to be filled and tilted. The vinyl record must be extracted from its sleeve and walked to the turntable. Drink bottles pour in real time with layered liquid physics. The preparation phase is not a menu &mdash; it is the game.</p></div>
+      <div class="mechanic-card"><span class="mechanic-number">02</span><div class="mechanic-title">The Date's Gaze</div><p class="mechanic-body">Your date notices specific things in a specific order. Phase 3 is an item-by-item reveal: the date walks to each object, pauses, reacts. A thought bubble appears &mdash; heart, neutral face, or frown &mdash; while a multiplier popup shows how much the item mattered.</p></div>
+      <div class="mechanic-card"><span class="mechanic-number">03</span><div class="mechanic-title">The Flower as Score</div><p class="mechanic-body">Every date leaves a flower. You trim it in a standalone scene using virtual scissors &mdash; cutting angle, stem length, and condition all feed into a score. The trimmed bloom joins a growing bouquet in the refrigerator &mdash; a physical record of every date you've had. The first two are beautiful. The third is... different.</p></div>
+      <div class="mechanic-card"><span class="mechanic-number">04</span><div class="mechanic-title">The Keyword System</div><p class="mechanic-body">Every character has preferences that surface as highlighted keywords across the newspaper, dialogue, and item descriptions.</p><div class="keyword-demo"><span class="kw like">jazz</span><span class="kw like">terracotta</span><span class="kw hobby">bookbinding</span><span class="kw hobby">fermentation</span><span class="kw dislike">synthetic</span><span class="kw dislike">clutter</span></div><p class="mechanic-body" style="margin-top:14px;">The system rewards close reading. Attention paid to a personal ad on day one pays off in affection on day three.</p></div>
+      <div class="mechanic-card"><span class="mechanic-number">05</span><div class="mechanic-title">The Mood Machine</div><p class="mechanic-body">Weather, time of day, music, plant health, and air quality all feed into a single 0&ndash;1 mood value. This drives light color, ambient tone, fog density, rain particles, and audio mix in real time. A stormy evening with a dead plant and no music feels different from a clear sunset with jazz and a healthy fern.</p></div>
+      <div class="mechanic-card horror"><span class="mechanic-number">06</span><div class="mechanic-title">The Horror Layer &mdash; Woven In, Never Explained</div><p class="mechanic-body">Each person visits three times. You learn their preferences, refine your preparation, deepen the romance. Their third flower arrives wrong &mdash; wilted, dark, thorned. After that final date, they vanish. A personal item appears in the apartment. Every player will notice people stop showing up. The horror isn't hidden &mdash; it's unavoidable. What's optional is how deeply you read into it. The game never explains Nema. The player decides what it means.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 AESTHETIC -->
+<section id="aesthetic">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">05 &mdash; Aesthetic &amp; Tone</span>
+      <h2 class="section-title">Cozy first. Mystery always.<br>Dread only when it counts.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="aesthetic-grid reveal-stagger">
+      <div class="aesthetic-block"><span class="aesthetic-block-label">Visual Style</span><p>PS2-era low-poly with warm URP rendering. Soft vertex snapping, affine texture warping, and 2D dithering give the game a distinctly retro texture while the lighting and color grading remain modern and intentional.</p></div>
+      <div class="aesthetic-block"><span class="aesthetic-block-label">Tone Balance</span>
+        <div style="display:flex; gap:8px; margin-bottom:14px;"><div style="flex:60; height:6px; border-radius:3px; background:var(--green);"></div><div style="flex:25; height:6px; border-radius:3px; background:var(--blue);"></div><div style="flex:15; height:6px; border-radius:3px; background:var(--accent);"></div></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:14px;"><span style="font-family:var(--font-mono); font-size:10px; color:var(--green);">60% COZY</span><span style="font-family:var(--font-mono); font-size:10px; color:var(--blue);">25% MYSTERY &amp; FUN</span><span style="font-family:var(--font-mono); font-size:10px; color:var(--accent);">15% CREEPY &amp; SEXY</span></div>
+        <p>The apartment sim is genuine. The observation layer is playful detective work. The romance lingers. The rare moments of dread land hard because the rest of the game earned your trust.</p>
+      </div>
+      <div class="aesthetic-block"><span class="aesthetic-block-label">Audio Identity</span><p>The record player is a core game object &mdash; vinyl selection directly affects the apartment's mood. Original lo-fi and jazz tracks scored for each in-game record. Sound design is tactile: the click of a bottle cap, water filling a can, scissors on a stem.</p></div>
+      <div class="aesthetic-block"><span class="aesthetic-block-label">Palette</span><p>Muted, warm. Cream walls, terracotta pots, soft greens, amber lamplight. The PSX aesthetic keeps the game feeling hand-made rather than procedural.</p></div>
+    </div>
+    <div class="reveal">
+      <span class="section-label" style="margin-bottom: 14px; margin-top: 8px;">Visual Inspiration</span>
+      <div class="reference-pills">
+        <div class="reference-pill" style="border-color: var(--border-accent);"><span class="pill-title" style="color: var(--accent);">Sorry We're Closed</span><span class="pill-note">Primary &mdash; PSX, warm domestic horror</span></div>
+        <div class="reference-pill"><span class="pill-title">Killer7</span><span class="pill-note">Mundane horror, unreliable perspective</span></div>
+        <div class="reference-pill"><span class="pill-title">Spiritfarer</span><span class="pill-note">Cozy with emotional weight</span></div>
+      </div>
+      <span class="section-label" style="margin-bottom: 14px; margin-top: 28px;">Mechanical Inspiration</span>
+      <div class="reference-pills">
+        <div class="reference-pill" style="border-color: var(--border-accent);"><span class="pill-title" style="color: var(--accent);">Unpacking</span><span class="pill-note">Spatial arrangement as storytelling</span></div>
+        <div class="reference-pill"><span class="pill-title">The Case of the Golden Idol</span><span class="pill-note">Point-and-click observation</span></div>
+        <div class="reference-pill"><span class="pill-title">Grim Fandango</span><span class="pill-note">Physical world interaction</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 AUDIENCE -->
+<section id="audience">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">06 &mdash; Audience &amp; Market</span>
+      <h2 class="section-title">Three audiences.<br>One game at their intersection.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="audience-grid reveal-stagger">
+      <div class="audience-card"><span class="audience-tag">Primary</span><p>Cozy game players who want more mechanical depth. Fans of apartment sims, slice-of-life games, and games where preparation and ritual are the gameplay.</p></div>
+      <div class="audience-card"><span class="audience-tag secondary">Secondary</span><p>Horror-adjacent and romance players drawn to psychological dread, romantic tension, and unreliable-narrator storytelling.</p></div>
+      <div class="audience-card"><span class="audience-tag tertiary">Content Creators</span><p>The hidden horror layer creates a natural reaction-video pipeline &mdash; the same dual-discovery mechanic that made DDLC a cultural event.</p></div>
+    </div>
+    <div class="reveal concept-body" style="margin-bottom: 36px;">
+      <p><strong style="color: var(--text);">Market position:</strong> Steam's cozy/life-sim tag has grown 40%+ YoY in revenue since 2022. Top cozy indie releases averaged well over 500K copies. Spent Blooms targets the intersection of three growing audiences that no current title occupies.</p>
+    </div>
+    <div class="reveal">
+      <span class="section-label" style="margin-bottom: 20px;">Comparable Titles</span>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Title</th><th>Similarity</th><th>Spent Blooms Adds</th><th>Performance</th></tr></thead>
+          <tbody>
+            <tr><td class="td-title">Unpacking</td><td>Spatial arrangement as storytelling</td><td>Every object has gameplay stakes &mdash; dates judge what you placed</td><td style="white-space:nowrap;">3M+ copies</td></tr>
+            <tr><td class="td-title">Spiritfarer</td><td>Cozy management with meaningful loss</td><td>Loss is a mystery you cause, not a story that happens to you</td><td style="white-space:nowrap;">1M+ copies</td></tr>
+            <tr><td class="td-title">Coffee Talk</td><td>Drink prep, character relationships</td><td>Physical pouring, full apartment to prepare, not just a counter</td><td style="white-space:nowrap;">500K+ franchise</td></tr>
+            <tr><td class="td-title">DDLC</td><td>Cute exterior, dark interior, viral pipeline</td><td>Horror is structural (dates vanish), not a twist ending</td><td style="white-space:nowrap;">11M+ downloads</td></tr>
+            <tr><td class="td-title">Golden Idol</td><td>Observation and deduction</td><td>You act on what you deduce &mdash; prep the apartment, not solve a case</td><td style="white-space:nowrap;">Very Positive</td></tr>
+            <tr><td class="td-title">Venba</td><td>Kitchen mechanics with emotional weight</td><td>Cooking is one station of many in a full living space</td><td style="white-space:nowrap;">Game Awards nom</td></tr>
+            <tr><td class="td-title">Sorry We're Closed</td><td>PSX aesthetic, domestic horror</td><td>The domestic routine IS the gameplay, not just the setting</td><td style="white-space:nowrap;">Strong wishlists</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 WHY THIS GAME -->
+<section id="usp">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">07 &mdash; Why This Game</span>
+      <h2 class="section-title">Five things Spent Blooms does<br>that no other game does.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <ul class="usp-list reveal-stagger">
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>The preparation IS the game.</strong><span>Not a menu between story beats &mdash; a tactile, physical ritual before every date. The hours arranging the apartment are the hours the game is most itself.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>A date who sees everything.</strong><span>The judgment phase rewards players who paid attention to keyword hints. Every item in the apartment has potential meaning. Observation is the core skill.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Cozy, romantic, and unsettling in the same scene.</strong><span>The horror is never delivered by a cutscene or jump scare. It emerges from the same systems the cozy gameplay and romance run on. The mechanics are the dread.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>The bouquet as a living record.</strong><span>Every trimmed flower joins a growing bouquet in the refrigerator. Open the fridge and your dating history stares back at you.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Two marketing cycles from one game.</strong><span>Launch sells a cozy apartment dating sim. Post-launch discovery of the horror layer drives a second wave of content creator coverage.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 08 PROOF -->
+<section id="proof">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">08 &mdash; Proof of Concept</span>
+      <h2 class="section-title">This is not a concept.<br>It is a working game.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="stats-bar reveal-stagger">
+      <div class="stat-card"><div class="stat-value"><span class="accent">30+</span></div><div class="stat-label">Systems Built</div></div>
+      <div class="stat-card"><div class="stat-value">20K+</div><div class="stat-label">Lines of Code</div></div>
+      <div class="stat-card"><div class="stat-value"><span class="accent">8</span>/10</div><div class="stat-label">Quality Audit</div></div>
+      <div class="stat-card"><div class="stat-value">18</div><div class="stat-label">Months Built</div></div>
+    </div>
+    <div class="state-grid reveal-stagger">
+      <div class="state-column">
+        <div class="state-column-label done"><div class="state-dot green"></div>De-Risked &mdash; Built &amp; Functional</div>
+        <ul class="state-list">
+          <li>Full dating loop: newspaper &rarr; prep &rarr; 3-phase date &rarr; flower &rarr; sleep</li>
+          <li>Physics interaction: pick up, carry, place, pour, water, spray, snap</li>
+          <li>Drink-making with physical pour, magnetic snap, delivery</li>
+          <li>Record player: extract vinyl, carry, snap, play, album art</li>
+          <li>Book collection, paired-item puzzles, 2D watering simulation</li>
+          <li>MoodMachine: weather, time, music, plants, air quality</li>
+          <li>Flower trimming: virtual cutting, scoring, fridge bouquet persistence</li>
+          <li>Keyword highlighting across all UI</li>
+          <li>7 date characters with preferences, reactions, dialogue</li>
+          <li>Entrance judgment: outfit, perfume, greeting, cleanliness</li>
+          <li>PSX rendering: vertex snap, affine warp, dithering, volumetrics</li>
+          <li>Accessibility suite: 15 settings, 5 categories</li>
+          <li>Save system, calendar, main menu, tutorial, name entry</li>
+          <li>Playtest feedback with Discord webhook integration</li>
+        </ul>
+      </div>
+      <div class="state-column">
+        <div class="state-column-label wip"><div class="state-dot amber"></div>Investment Funds &mdash; Content &amp; Polish</div>
+        <ul class="state-list">
+          <li>Scripted narrative arc for 3&ndash;4 characters (vertical slice)</li>
+          <li>Full 7-character cast (21 dates) with art + audio</li>
+          <li>Horror payload: disappearances, souvenir accumulation</li>
+          <li>Art asset scaling from blockout to final quality</li>
+          <li>Original soundtrack (vinyl tracks for record player)</li>
+          <li>Ambient sound design and SFX</li>
+          <li>Convention demo build (7-minute curated slice)</li>
+          <li>Localization and platform builds</li>
+        </ul>
+        <div class="biz-note" style="margin-top: 20px; border: none; background: rgba(176,64,80,0.06); padding: 16px 18px;"><p style="font-family: var(--font-serif); font-style: italic; font-size: 13px;">The core loop works. The technology is proven. The remaining work is production &mdash; not R&amp;D.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">09 &mdash; The Team</span>
+      <h2 class="section-title">Small team. Big systems.<br>Every one built in-house.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal"><span class="section-label" style="margin-bottom: 16px;">Founders</span></div>
+    <div class="team-grid reveal-stagger">
+      <div class="team-card">
+        <div class="team-name">Lancy Zhao</div>
+        <span class="team-role">Art &bull; Co-Creative Director</span>
+        <p>Responsible for the game's visual identity, PSX aesthetic pipeline, character and environment design, and UI art direction. Drives the tone and look that makes every surface in the apartment a deliberate choice.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Marty Scott</div>
+        <span class="team-role">Code &bull; Co-Creative Director</span>
+        <p>Architect of 30+ game systems, custom PSX rendering pipeline, and all technical infrastructure. 20,000+ lines of production code. Built every mechanic from drink pouring to flower trimming.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 28px;"><span class="section-label" style="margin-bottom: 16px;">Scaling With Investment</span></div>
+    <div class="audience-grid reveal-stagger" style="margin-bottom: 28px;">
+      <div class="audience-card"><span class="audience-tag">Hiring</span><p><strong style="color: var(--text);">3D Artist / Animator / Modeler</strong><br>Character models, environment assets, and animation for 7 date characters across 21 encounters.</p></div>
+      <div class="audience-card"><span class="audience-tag">Hiring</span><p><strong style="color: var(--text);">Programmer / QA / Tester</strong><br>Gameplay implementation, automated testing, bug triage, and platform builds.</p></div>
+    </div>
+    <div class="reveal concept-body">
+      <p>Shared creative vision. 18 months of pre-investment development across 30+ systems. The codebase is modular, documented, and data-driven (ScriptableObject architecture) &mdash; built to onboard new team members quickly. Engine: Unity 6 with URP.</p>
+    </div>
+
+    <!-- Gantt -->
+    <div class="reveal" style="margin-top: 40px;">
+      <span class="section-label" style="margin-bottom: 20px;">Team Allocation &mdash; Jun 2026 &ndash; Oct 2027</span>
+      <div class="gantt">
+        <div class="gantt-header">
+          <div class="gantt-label-col"></div>
+          <div class="gantt-months"><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span></div>
+        </div>
+        <div class="gantt-milestones">
+          <div class="gantt-label-col"></div>
+          <div class="gantt-months" style="margin-bottom: 4px;">
+            <div style="grid-column: 1 / 8; text-align: center; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; color: var(--text-muted);">2026</div>
+            <div style="grid-column: 8 / 18; text-align: center; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; color: var(--text-muted);">2027</div>
+          </div>
+        </div>
+        <div class="gantt-milestones">
+          <div class="gantt-label-col"></div>
+          <div class="gantt-months gantt-milestone-row">
+            <div class="gantt-phase gantt-phase-vs" style="grid-column: 1 / 5;">Vertical Slice</div>
+            <div class="gantt-phase gantt-phase-demo" style="grid-column: 5 / 8;">Demo</div>
+            <div class="gantt-phase gantt-phase-content" style="grid-column: 8 / 14;">Content Complete</div>
+            <div class="gantt-phase" style="grid-column: 14 / 17; background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.25);">Polish</div>
+            <div class="gantt-phase" style="grid-column: 17 / 18; background: rgba(176,64,80,0.18); color: var(--pink); border: 1px solid rgba(212,119,138,0.25);">Ship</div>
+          </div>
+        </div>
+        <div class="gantt-row"><div class="gantt-label-col"><span class="gantt-name">Lancy Zhao</span><span class="gantt-role">Art &bull; Co-CD</span></div><div class="gantt-months"><div class="gantt-bar gantt-bar-founder" style="grid-column: 1 / 18;"></div></div></div>
+        <div class="gantt-row"><div class="gantt-label-col"><span class="gantt-name">Marty Scott</span><span class="gantt-role">Code &bull; Co-CD</span></div><div class="gantt-months"><div class="gantt-bar gantt-bar-founder" style="grid-column: 1 / 18;"></div></div></div>
+        <div class="gantt-row"><div class="gantt-label-col"><span class="gantt-name">3D Artist</span><span class="gantt-role">Models &bull; Anim</span></div><div class="gantt-months"><div class="gantt-bar gantt-bar-hire" style="grid-column: 4 / 16;"></div></div></div>
+        <div class="gantt-row"><div class="gantt-label-col"><span class="gantt-name">Programmer</span><span class="gantt-role">QA &bull; Builds</span></div><div class="gantt-months"><div class="gantt-bar gantt-bar-hire" style="grid-column: 4 / 16;"></div></div></div>
+        <div class="gantt-footer"><div class="gantt-label-col"><span class="gantt-total">Founders: 17 mo &bull; Hires: 12 mo</span></div><div class="gantt-months"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 TIMELINE -->
+<section id="timeline">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">10 &mdash; Timeline</span>
+      <h2 class="section-title">Vertical slice in 4 months.<br>Halloween 2027 release.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Milestone</th><th>Target</th><th>Deliverable</th></tr></thead>
+          <tbody>
+            <tr><td class="td-name">Vertical Slice</td><td><span class="milestone-badge">Q3 2026</span></td><td>Full loop, 3&ndash;4 polished characters, horror layer</td></tr>
+            <tr><td class="td-name">Playable Demo</td><td><span class="milestone-badge">Q4 2026</span></td><td>Convention-ready build, 7-minute curated slice</td></tr>
+            <tr><td class="td-name">Content Complete</td><td><span class="milestone-badge">Q2 2027</span></td><td>All 7 characters (21 dates), souvenirs, journal</td></tr>
+            <tr><td class="td-name">Polish &amp; Beta</td><td><span class="milestone-badge">Summer 2027</span></td><td>Playtesting, accessibility, localization, platform builds</td></tr>
+            <tr><td class="td-name">Release</td><td><span class="milestone-badge">Oct 2027</span></td><td>Halloween launch &mdash; Steam (PC/Mac), itch.io</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 24px;">
+      <div class="biz-note">
+        <p><strong style="color: var(--text);">Halloween 2027</strong> is strategic: the horror discovery layer benefits from spooky-season content creator attention, Steam Halloween Sale visibility, and the cultural moment when players actively seek games that surprise them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 REVENUE (with interactive split model) -->
+<section id="revenue">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">11 &mdash; Revenue &amp; Return</span>
+      <h2 class="section-title">The math behind<br>the apartment.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="biz-grid reveal-stagger">
+      <div class="biz-stat"><div class="biz-stat-value">$15&ndash;20</div><div class="biz-stat-label">Price Point</div></div>
+      <div class="biz-stat"><div class="biz-stat-value">4&ndash;6 hrs</div><div class="biz-stat-label">Core Experience</div></div>
+      <div class="biz-stat"><div class="biz-stat-value">Steam + itch</div><div class="biz-stat-label">Distribution</div></div>
+    </div>
+
+    <div class="reveal" style="margin-bottom: 28px;">
+      <span class="section-label" style="margin-bottom: 20px;">PC Revenue Projections &mdash; Year 1</span>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Scenario</th><th style="text-align:right;">Units</th><th style="text-align:right;">Gross</th><th style="text-align:right;">Net (after Steam 30%)</th></tr></thead>
+          <tbody>
+            <tr><td class="td-name">Conservative</td><td class="td-number">75,000</td><td class="td-number">$1.31M</td><td class="td-number">$919K</td></tr>
+            <tr><td class="td-name">Base</td><td class="td-number td-accent">150,000</td><td class="td-number td-accent">$2.63M</td><td class="td-number td-accent">$1.84M</td></tr>
+            <tr><td class="td-name">Optimistic</td><td class="td-number">300,000</td><td class="td-number">$5.25M</td><td class="td-number">$3.68M</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-bottom: 28px;">
+      <span class="section-label" style="margin-bottom: 20px;">Publisher Return &mdash; Choose Deal Model</span>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px; font-family: var(--font-mono); letter-spacing: 0.05em;">Drag the investment slider below, then pick a split model &mdash; the return table updates live.</p>
+      <div class="split-toggle">
+        <button class="split-opt active" data-split="favorable">
+          <span class="split-opt-label">Favorable</span>
+          <span class="split-opt-desc">60% &rarr; 25% after recoup</span>
+        </button>
+        <button class="split-opt" data-split="fifty">
+          <span class="split-opt-label">Fifty-Fifty</span>
+          <span class="split-opt-desc">50% &rarr; 50% after recoup</span>
+        </button>
+        <button class="split-opt" data-split="royalty">
+          <span class="split-opt-label">Royalty</span>
+          <span class="split-opt-desc">30% flat revenue share</span>
+        </button>
+        <button class="split-opt" data-split="aggressive">
+          <span class="split-opt-label">Aggressive</span>
+          <span class="split-opt-desc">70% &rarr; 35% after recoup</span>
+        </button>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Scenario</th><th style="text-align:right;">Publisher Revenue</th><th style="text-align:right;">Publisher ROI</th><th style="text-align:right;">Developer Revenue</th></tr></thead>
+          <tbody>
+            <tr><td class="td-name">Conservative (75K)</td><td class="td-number" id="split-con-pub">&mdash;</td><td class="td-number" id="split-con-roi">&mdash;</td><td class="td-number" id="split-con-dev">&mdash;</td></tr>
+            <tr><td class="td-name">Base (150K)</td><td class="td-number td-accent" id="split-base-pub">&mdash;</td><td class="td-number td-accent" id="split-base-roi">&mdash;</td><td class="td-number td-accent" id="split-base-dev">&mdash;</td></tr>
+            <tr><td class="td-name">Optimistic (300K)</td><td class="td-number" id="split-opt-pub">&mdash;</td><td class="td-number" id="split-opt-roi">&mdash;</td><td class="td-number" id="split-opt-dev">&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="biz-note" style="margin-bottom: 28px;">
+        <p><strong style="color: var(--text);">Path to 3x:</strong> Favorable terms at a base case hit ~1.5x. Add DLC (2 date packs, 30% attach) and console ports matching half of PC revenue, and the base case reaches 2x+. The optimistic scenario with expansion revenue exceeds 3x. Cozy games sell for years.</p>
+      </div>
+    </div>
+
+    <div class="reveal"><span class="section-label" style="margin-bottom: 20px;">Two Marketing Cycles &mdash; One Investment</span></div>
+    <div class="cycle-grid reveal-stagger">
+      <div class="cycle-card">
+        <span class="cycle-number">Cycle 1 &mdash; Launch</span>
+        <div class="cycle-title">The Cozy Apartment Dating Sim</div>
+        <p>Market the cozy apartment dating sim &mdash; the warmth, ritual, and charm. Lead with preparation and romance. The horror is there, but it's not the headline.</p>
+      </div>
+      <div class="cycle-card cycle-discovery">
+        <span class="cycle-number">Cycle 2 &mdash; Discovery</span>
+        <div class="cycle-title">"Wait, where did they go?"</div>
+        <p>Content creators hit the disappearances and react. The moment a favourite date stops showing up drives a second wave of emotional, organic attention &mdash; the same pattern that turned DDLC into an 11M-download cultural event.</p>
+      </div>
+    </div>
+    <div class="reveal concept-body">
+      <p>One content investment. Two distinct marketing waves. A publisher's influencer network can strategically seed both cycles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">12 &mdash; Risks &amp; Mitigation</span>
+      <h2 class="section-title">What could go wrong.<br>How we handle it.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Risk</th><th style="width: 70px; text-align:center;">Likelihood</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td class="td-name">Small team &mdash; bus factor</td><td style="text-align:center;">Med</td><td>Modular codebase (8/10 audit), ScriptableObject architecture &mdash; content scales with new hires without code changes</td></tr>
+            <tr><td class="td-name">Content scope &mdash; 21 encounters</td><td style="text-align:center;">Med</td><td>Vertical slice scopes to 3&ndash;4 characters first. Full cast only after core arc validates in playtesting.</td></tr>
+            <tr><td class="td-name">Tone balance &mdash; cozy vs. horror</td><td style="text-align:center;">Med</td><td>60/25/15 ratio is structural. Horror is woven in but never graphic &mdash; dread comes from implication, not shock.</td></tr>
+            <tr><td class="td-name">PSX aesthetic limits appeal</td><td style="text-align:center;">Low</td><td>PSX revival at peak visibility. Proven differentiator (Buckshot Roulette, Iron Lung, Sorry We're Closed).</td></tr>
+            <tr><td class="td-name">Timeline &mdash; 18 months</td><td style="text-align:center;">Med</td><td>Core systems built. Remaining work is content. Investment funds team growth to accelerate production.</td></tr>
+            <tr><td class="td-name">Cozy market saturation</td><td style="text-align:center;">Low</td><td>No title occupies this niche. The horror layer and physical mechanics are the differentiator.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 PARTNERSHIP -->
+<section id="partnership">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">13 &mdash; Partnership</span>
+      <h2 class="section-title">What we're asking for.<br>What it buys.</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="reveal">
+      <div class="ask-hero">
+        <div class="ask-amount" id="ask-total">$500,000</div>
+        <div class="ask-model">Investment Target</div>
+        <div class="slider-wrap">
+          <input type="range" id="ask-slider" class="range-slider" min="150" max="500" value="500" step="10">
+          <div class="slider-labels"><span>$150K</span><span>$500K</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-bottom: 28px;">
+      <span class="section-label" style="margin-bottom: 20px;">Budget Allocation</span>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Category</th><th style="text-align:center;">Share</th><th style="text-align:right;">Amount</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td class="td-name">Advertisement &amp; Marketing</td><td class="td-number">50%</td><td class="td-number" id="amt-marketing">$250K</td><td>Trailers, influencer campaigns, paid ads, content creation, Steam page, PR, convention booths, community building</td></tr>
+            <tr><td class="td-name">Team</td><td class="td-number">25%</td><td class="td-number" id="amt-team">$125K</td><td>All 4 members (founders + 2 new hires) at full-time capacity through release</td></tr>
+            <tr><td class="td-name">Reserve</td><td class="td-number">20%</td><td class="td-number" id="amt-reserve">$100K</td><td>Contingency, scope flexibility, post-launch support, platform porting</td></tr>
+            <tr><td class="td-name">Production Assets</td><td class="td-number">5%</td><td class="td-number" id="amt-production">$25K</td><td>Licensed assets, outsourced specialties, tools and software</td></tr>
+            <tr style="background: var(--accent-glow-s) !important;"><td class="td-name" style="color: var(--accent);"><strong>Total</strong></td><td class="td-number" style="color: var(--accent);"><strong>100%</strong></td><td class="td-number" style="color: var(--accent);"><strong id="amt-total">$500K</strong></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reveal"><span class="section-label" style="margin-bottom: 20px;">What We Need From A Publisher Partner</span></div>
+    <div class="reveal concept-body" style="margin-bottom: 20px;"><p>Rum Rum Raspberry builds games. We need a partner who builds audiences.</p></div>
+    <ul class="usp-list reveal-stagger" style="margin-bottom: 36px;">
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Go-to-market strategy</strong><span>Full GTM plan: marketing beats, community tone, release timing, and the dual-cycle marketing approach.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Influencer campaigns</strong><span>The horror discovery layer is built for reaction content. A seeded influencer network starts the "wait, where did they go?" conversation at the right moment.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Convention support</strong><span>Presence at Gamescom, GDC, PAX, regional showcases. Spent Blooms' tactile gameplay demos exceptionally well in person.</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Business development</strong><span>Console port partnerships, bundle deals, platform featuring (Switch, PlayStation, Xbox Game Pass, Sony Indie Fund).</span></div></li>
+      <li class="usp-item"><div class="usp-marker"></div><div class="usp-text"><strong>Steam page optimization</strong><span>Store presence, tag strategy, and wishlist conversion &mdash; platform-specific expertise a small studio doesn't have.</span></div></li>
+    </ul>
+
+    <div class="reveal">
+      <div class="biz-note">
+        <p><strong style="color: var(--text);">The case:</strong> Spent Blooms is a mechanically ambitious, tonally distinctive indie game with a clear commercial hook, built by a small team that has proven it can ship systems-level code and now needs marketing to reach its audience. The game is built. The loop works. The investment funds the road from vertical slice to Halloween 2027 release.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     WORKSHOP SECTION — in development
+     ═══════════════════════════════════════════════════ -->
+<section id="workshop">
+  <div class="container-wide">
+    <div class="reveal">
+      <span class="workshop-badge">In Development</span>
+      <span class="section-label workshop-section-label">Workshop</span>
+      <h2 class="section-title">Angles we're developing.<br>Not yet in the pitch.</h2>
+      <div class="section-divider workshop-divider"></div>
+      <p class="concept-body" style="max-width: 720px;">These are differentiators, framings, and mechanics we're actively workshopping. Each card shows the current framing (if any), what we're considering adding or changing, working examples, and an interactive demo where relevant. Vote on which ones feel strongest &mdash; votes persist locally.</p>
+    </div>
+
+    <!-- ANGLE 1: No dialogue trees -->
+    <div class="angles-grid" style="margin-top: 48px;">
+      <div class="angle-card reveal" data-angle="dialogue">
+        <div class="angle-head">
+          <span class="angle-num">A1</span>
+          <span class="angle-title">No dialogue trees &mdash; environmental storytelling as a design &amp; financial advantage</span>
+          <div class="angle-vote">
+            <button class="vote-btn up" data-angle-vote="dialogue" data-dir="up" title="Strong">&uarr; <span class="vote-count" data-vote-count="dialogue-up">0</span></button>
+            <button class="vote-btn down" data-angle-vote="dialogue" data-dir="down" title="Weak">&darr; <span class="vote-count" data-vote-count="dialogue-down">0</span></button>
+            <span class="angle-chevron">&rsaquo;</span>
+          </div>
+        </div>
+        <div class="angle-body">
+          <div class="angle-inner">
+            <div class="angle-compare">
+              <div class="angle-col current">
+                <span class="angle-col-label">Current Framing</span>
+                <p>Not currently in the pitch. The Keyword System is described as a mechanic but the "no dialogue trees" stance isn't called out as a deliberate design choice.</p>
+              </div>
+              <div class="angle-col proposed">
+                <span class="angle-col-label">Proposed Framing</span>
+                <p>Every other dating sim runs on branching dialogue. Spent Blooms learns everything about a character through their <strong>personal ad</strong>, their <strong>reactions</strong> to your apartment, and the <strong>souvenir</strong> they leave behind. <strong>Zero dialogue trees.</strong> This is a narrative differentiator AND a production efficiency win.</p>
+              </div>
+            </div>
+
+            <div class="angle-examples">
+              <span class="angle-examples-label">Examples &amp; Evidence</span>
+              <ul class="angle-ex-list">
+                <li><strong>Narrative:</strong> What you learn about someone is inferred from signals, not stated. Closer to Golden Idol than Coffee Talk.</li>
+                <li><strong>Production:</strong> No 30,000-line VO-ready dialogue scripts. Lower content cost, faster iteration, cheaper localization.</li>
+                <li><strong>Replay:</strong> Signals are ambient &mdash; re-reading an ad after meeting the person means different things.</li>
+                <li><strong>Marketing:</strong> "The dating sim with no dialogue" is a headline-worthy hook.</li>
+              </ul>
+            </div>
+
+            <div class="angle-demo">
+              <span class="angle-demo-label">Interactive Demo &mdash; Hover a keyword</span>
+              <div class="dialogue-ad">
+                Seeking someone patient who loves <span class="kw like" data-tip="Preference: favours jazz vinyl in Phase 3" data-label="Like">jazz</span> records and <span class="kw hobby" data-tip="Hobby: reacts warmly to fermentation jars on shelves" data-label="Hobby">fermentation</span>. Allergic to <span class="kw dislike" data-tip="Dislike: penalty if perfume is sprayed in entrance" data-label="Dislike">synthetic</span> scents. My apartment runs warm; I prefer <span class="kw like" data-tip="Preference: terracotta plant pots trigger bonus multiplier" data-label="Like">terracotta</span> over clean lines.
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">This is the entire "dialogue system." Four highlighted keywords convey every preference the player needs &mdash; no branching trees, no voice lines, no conversation UI. Hover a keyword to see the gameplay implication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANGLE 2: Nema as protagonist -->
+      <div class="angle-card reveal" data-angle="nema">
+        <div class="angle-head">
+          <span class="angle-num">A2</span>
+          <span class="angle-title">Nema is a protagonist, not a self-insert</span>
+          <div class="angle-vote">
+            <button class="vote-btn up" data-angle-vote="nema" data-dir="up">&uarr; <span class="vote-count" data-vote-count="nema-up">0</span></button>
+            <button class="vote-btn down" data-angle-vote="nema" data-dir="down">&darr; <span class="vote-count" data-vote-count="nema-down">0</span></button>
+            <span class="angle-chevron">&rsaquo;</span>
+          </div>
+        </div>
+        <div class="angle-body">
+          <div class="angle-inner">
+            <div class="angle-compare">
+              <div class="angle-col current">
+                <span class="angle-col-label">Current Framing</span>
+                <p>Nema is mentioned as "alone in a small apartment." The game "never explains Nema." But Nema isn't positioned as a narrative differentiator &mdash; she reads as a neutral viewpoint character.</p>
+              </div>
+              <div class="angle-col proposed">
+                <span class="angle-col-label">Proposed Framing</span>
+                <p>99% of dating sims use blank-slate protagonists for player projection. <strong>Nema has her own pathology, her own apartment, her own agency in what's happening.</strong> You're not roleplaying yourself on dates &mdash; you're inhabiting a specific, strange person.</p>
+              </div>
+            </div>
+
+            <div class="angle-examples">
+              <span class="angle-examples-label">Examples &amp; Evidence</span>
+              <ul class="angle-ex-list">
+                <li><strong>Emotional stakes:</strong> The question "am I doing this?" has weight because Nema is a person, not a camera.</li>
+                <li><strong>Art direction:</strong> You see Nema in the apartment doing idle things (kitchen, couch, mirror) &mdash; she's present, not invisible.</li>
+                <li><strong>Precedent:</strong> Like Omori, Life is Strange, Spiritfarer &mdash; games where the protagonist's specific identity is the whole hook, not a customization layer.</li>
+                <li><strong>Writing:</strong> Nema has idle animations, a bathroom reflection, a disco ball moment. She is the game's main visual presence.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANGLE 3: Three-act structure per character -->
+      <div class="angle-card reveal" data-angle="arc">
+        <div class="angle-head">
+          <span class="angle-num">A3</span>
+          <span class="angle-title">Three-act structure per character &mdash; every date is a short story</span>
+          <div class="angle-vote">
+            <button class="vote-btn up" data-angle-vote="arc" data-dir="up">&uarr; <span class="vote-count" data-vote-count="arc-up">0</span></button>
+            <button class="vote-btn down" data-angle-vote="arc" data-dir="down">&darr; <span class="vote-count" data-vote-count="arc-down">0</span></button>
+            <span class="angle-chevron">&rsaquo;</span>
+          </div>
+        </div>
+        <div class="angle-body">
+          <div class="angle-inner">
+            <div class="angle-compare">
+              <div class="angle-col current">
+                <span class="angle-col-label">Current Framing</span>
+                <p>Mentioned in passing: "Each person visits three times." The three-visit structure is described mechanically but not as a narrative or commercial differentiator.</p>
+              </div>
+              <div class="angle-col proposed">
+                <span class="angle-col-label">Proposed Framing</span>
+                <p>Not one-and-done (Coffee Talk). Not infinite (Stardew). <strong>Every date character is a three-act short story.</strong> Date 1: first impression. Date 2: deepening. Date 3: the dark ending. A deliberate structure, not a treadmill.</p>
+              </div>
+            </div>
+
+            <div class="angle-examples">
+              <span class="angle-examples-label">Examples &amp; Evidence</span>
+              <ul class="angle-ex-list">
+                <li><strong>Reading experience:</strong> Like a short story collection &mdash; each person is a complete arc.</li>
+                <li><strong>Pacing:</strong> 3 visits guarantees a crescendo &mdash; the 3rd flower is always wrong.</li>
+                <li><strong>Scope:</strong> 7 characters &times; 3 visits = 21 encounters. Finite, shippable, reviewable.</li>
+                <li><strong>Replay:</strong> Different character orderings create different emotional shapes of the 7-day calendar.</li>
+              </ul>
+            </div>
+
+            <div class="angle-demo">
+              <span class="angle-demo-label">Interactive Demo &mdash; Slide through Sterling's arc</span>
+              <div class="arc-slider-row">
+                <span class="arc-slider-label active" id="arc-label-1">Date 1</span>
+                <input type="range" class="range-slider" id="arc-slider" min="1" max="3" value="1" step="1">
+                <span class="arc-slider-label" id="arc-label-3">Date 3</span>
+              </div>
+              <div class="arc-card" id="arc-card">
+                <div class="arc-card-title" id="arc-title">Sterling &mdash; Date 1: First Meeting</div>
+                <p id="arc-body" style="font-size: 13px; color: var(--text-dim); line-height: 1.7;">You know almost nothing. Read the ad carefully. Spray the wrong perfume, miss the drink, misread the room &mdash; but they're forgiving. Sterling leaves a perfect white flower.</p>
+                <div class="arc-stat-grid">
+                  <div class="arc-stat"><div class="arc-stat-label">Flower</div><div class="arc-stat-val" id="arc-flower"><span class="arc-flower">&#127800;</span>Pristine white</div></div>
+                  <div class="arc-stat"><div class="arc-stat-label">Known Keywords</div><div class="arc-stat-val" id="arc-keywords">2 / 8</div></div>
+                  <div class="arc-stat"><div class="arc-stat-label">Romantic Tension</div><div class="arc-stat-val" id="arc-tension">Polite curiosity</div></div>
+                  <div class="arc-stat"><div class="arc-stat-label">Aftermath</div><div class="arc-stat-val" id="arc-aftermath">Sterling waves goodbye. They'll be in tomorrow's paper.</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANGLE 4: Physical verbs as design pillar -->
+      <div class="angle-card reveal" data-angle="verbs">
+        <div class="angle-head">
+          <span class="angle-num">A4</span>
+          <span class="angle-title">Physical verbs, not buttons &mdash; make this the stated design pillar</span>
+          <div class="angle-vote">
+            <button class="vote-btn up" data-angle-vote="verbs" data-dir="up">&uarr; <span class="vote-count" data-vote-count="verbs-up">0</span></button>
+            <button class="vote-btn down" data-angle-vote="verbs" data-dir="down">&darr; <span class="vote-count" data-vote-count="verbs-down">0</span></button>
+            <span class="angle-chevron">&rsaquo;</span>
+          </div>
+        </div>
+        <div class="angle-body">
+          <div class="angle-inner">
+            <div class="angle-compare">
+              <div class="angle-col current">
+                <span class="angle-col-label">Current Framing</span>
+                <p>"Fully physical UI" and "preparation IS the game" are in USPs. But physicality is treated as a feature, not the design thesis that binds every system.</p>
+              </div>
+              <div class="angle-col proposed">
+                <span class="angle-col-label">Proposed Framing</span>
+                <p><strong>Every interaction has a visual body.</strong> This is the philosophy that makes cozy preparation feel real AND the horror feel implicating. It's the thread that runs through every mechanic. Frame it as the design pillar, not just a feature.</p>
+              </div>
+            </div>
+
+            <div class="angle-examples">
+              <span class="angle-examples-label">Examples &amp; Evidence</span>
+              <ul class="angle-ex-list">
+                <li><strong>Feel:</strong> Pouring a drink isn't clicking "serve" &mdash; it's tilting a bottle, watching liquid layer.</li>
+                <li><strong>Implication:</strong> Because you physically acted, you're implicated when the date disappears.</li>
+                <li><strong>Differentiator:</strong> Coffee Talk, Dream Daddy, Monster Prom &mdash; all button-based. Spent Blooms is verb-based.</li>
+                <li><strong>Marketing:</strong> Every physical verb is a 2-second GIF for social media.</li>
+              </ul>
+            </div>
+
+            <div class="angle-demo">
+              <span class="angle-demo-label">Interactive Demo &mdash; Click a verb</span>
+              <div class="verb-grid">
+                <button class="verb-chip active" data-verb="pour">Pour</button>
+                <button class="verb-chip" data-verb="wipe">Wipe</button>
+                <button class="verb-chip" data-verb="trim">Trim</button>
+                <button class="verb-chip" data-verb="water">Water</button>
+                <button class="verb-chip" data-verb="spray">Spray</button>
+                <button class="verb-chip" data-verb="extract">Extract</button>
+                <button class="verb-chip" data-verb="carry">Carry</button>
+                <button class="verb-chip" data-verb="arrange">Arrange</button>
+                <button class="verb-chip" data-verb="read">Read</button>
+                <button class="verb-chip" data-verb="snap">Snap</button>
+              </div>
+              <div class="verb-detail">
+                <div class="verb-detail-title" id="verb-title">Pour</div>
+                <div class="verb-detail-body" id="verb-body">Tilt a bottle over a glass. Layered liquid physics mean each drink has visible cross-section cocktails that accumulate in real time. Mess up the order, and the date can see it through the glass.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANGLE 5: You are implicated -->
+      <div class="angle-card reveal" data-angle="implicated">
+        <div class="angle-head">
+          <span class="angle-num">A5</span>
+          <span class="angle-title">You are implicated, not witnessing</span>
+          <div class="angle-vote">
+            <button class="vote-btn up" data-angle-vote="implicated" data-dir="up">&uarr; <span class="vote-count" data-vote-count="implicated-up">0</span></button>
+            <button class="vote-btn down" data-angle-vote="implicated" data-dir="down">&darr; <span class="vote-count" data-vote-count="implicated-down">0</span></button>
+            <span class="angle-chevron">&rsaquo;</span>
+          </div>
+        </div>
+        <div class="angle-body">
+          <div class="angle-inner">
+            <div class="angle-compare">
+              <div class="angle-col current">
+                <span class="angle-col-label">Current Framing</span>
+                <p>The horror layer says "the player decides what it means." True, but passive. Positions the player as an observer.</p>
+              </div>
+              <div class="angle-col proposed">
+                <span class="angle-col-label">Proposed Framing</span>
+                <p>You chose the ad. You set the apartment. You poured the drink. You trimmed the flower. <strong>The mechanical structure asks "did I do this?" rather than "what happened?"</strong> No comparable cozy game takes this stance &mdash; even Spiritfarer makes loss happen TO you.</p>
+              </div>
+            </div>
+
+            <div class="angle-examples">
+              <span class="angle-examples-label">Examples &amp; Evidence</span>
+              <ul class="angle-ex-list">
+                <li><strong>Agency = culpability:</strong> Every verb you perform before a disappearance rereads as evidence.</li>
+                <li><strong>Contrast:</strong> Spiritfarer = you receive souls. Spent Blooms = you select them.</li>
+                <li><strong>Emotional payload:</strong> Content creators visibly wrestle with this framing &mdash; exactly the reaction the game wants.</li>
+                <li><strong>Marketing:</strong> "The cozy game that asks if you're the villain" is a line that prints money.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANGLE 6: Timed prep pressure -->
+      <div class="angle-card reveal" data-angle="timed">
+        <div class="angle-head">
+          <span class="angle-num">A6</span>
+          <span class="angle-title">Timed preparation &mdash; tension is a cozy feature, not a flaw</span>
+          <div class="angle-vote">
+            <button class="vote-btn up" data-angle-vote="timed" data-dir="up">&uarr; <span class="vote-count" data-vote-count="timed-up">0</span></button>
+            <button class="vote-btn down" data-angle-vote="timed" data-dir="down">&darr; <span class="vote-count" data-vote-count="timed-down">0</span></button>
+            <span class="angle-chevron">&rsaquo;</span>
+          </div>
+        </div>
+        <div class="angle-body">
+          <div class="angle-inner">
+            <div class="angle-compare">
+              <div class="angle-col current">
+                <span class="angle-col-label">Current Framing</span>
+                <p>The afternoon is labeled "Timed" in the Core Loop but the timing isn't sold as a feature &mdash; it reads as a constraint.</p>
+              </div>
+              <div class="angle-col proposed">
+                <span class="angle-col-label">Proposed Framing</span>
+                <p>Most cozy games are stress-free. Spent Blooms has <strong>real time pressure during prep</strong>. That tension creates stakes that make preparation matter and makes the cozy moments feel earned. Cozy-with-bite, not cozy-as-meditation.</p>
+              </div>
+            </div>
+
+            <div class="angle-examples">
+              <span class="angle-examples-label">Examples &amp; Evidence</span>
+              <ul class="angle-ex-list">
+                <li><strong>Rhythm:</strong> Morning deliberation &rarr; afternoon sprint &rarr; evening performance. Three distinct emotional speeds per day.</li>
+                <li><strong>Tension:</strong> Watching the clock while deciding between watering a plant OR extracting a vinyl record.</li>
+                <li><strong>Precedent:</strong> Overcooked / Diner Dash showed timed prep is addictive; Spent Blooms slows it down but preserves the stakes.</li>
+                <li><strong>Accessibility:</strong> Can expose a "casual" timer mode for players who want zero pressure.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTENT COST COMPARISON -->
+    <div class="reveal" style="margin-top: 72px;">
+      <span class="section-label workshop-section-label" style="margin-bottom: 16px;">Supporting Data</span>
+      <h3 style="font-family: var(--font-serif); font-size: 24px; color: var(--text); margin-bottom: 16px; font-weight: normal;">Why "no dialogue trees" is a financial argument</h3>
+      <p class="concept-body" style="margin-bottom: 32px;">Estimated content effort to ship 7 characters &times; 3 encounters. Branching dialogue scales exponentially with choice count; environmental storytelling scales linearly.</p>
+      <div class="cost-demo">
+        <div class="cost-row">
+          <div class="cost-label">Dialogue Tree Design</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill dialogue" data-width="92"></div></div>
+          <div class="cost-value">~8,000 hrs</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">Dialogue Writing</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill dialogue" data-width="85"></div></div>
+          <div class="cost-value">~30K lines</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">VO Production</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill dialogue" data-width="78"></div></div>
+          <div class="cost-value">~$80K+</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">Localization</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill dialogue" data-width="72"></div></div>
+          <div class="cost-value">~$60K/lang</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">QA &amp; Branch Testing</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill dialogue" data-width="65"></div></div>
+          <div class="cost-value">Heavy</div>
+        </div>
+        <div style="height: 24px;"></div>
+        <div class="cost-row">
+          <div class="cost-label">Environmental Keywords</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill env" data-width="14"></div></div>
+          <div class="cost-value">~800 hrs</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">Ad + Reaction Writing</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill env" data-width="10"></div></div>
+          <div class="cost-value">~1.5K lines</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">VO Production</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill env" data-width="3"></div></div>
+          <div class="cost-value">$0</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">Localization</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill env" data-width="8"></div></div>
+          <div class="cost-value">~$5K/lang</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">QA &amp; Branch Testing</div>
+          <div class="cost-bar-container"><div class="cost-bar-fill env" data-width="6"></div></div>
+          <div class="cost-value">Linear</div>
+        </div>
+      </div>
+      <p style="font-size: 11px; color: var(--text-muted); margin-top: 20px; font-family: var(--font-mono); letter-spacing: 0.05em;">Figures are order-of-magnitude estimates based on industry benchmarks for narrative-driven indie games. Exact numbers depend on scope decisions.</p>
+    </div>
+
+    <!-- ANGLE INTEGRATION NOTES -->
+    <div class="reveal" style="margin-top: 72px; margin-bottom: 60px;">
+      <span class="section-label workshop-section-label" style="margin-bottom: 16px;">Integration Plan</span>
+      <h3 style="font-family: var(--font-serif); font-size: 24px; color: var(--text); margin-bottom: 16px; font-weight: normal;">How these land in the main deck</h3>
+      <p class="concept-body" style="margin-bottom: 24px;">Once workshopped and approved, each angle has a target home in the deck.</p>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Angle</th><th>Target Section</th><th>Treatment</th></tr></thead>
+          <tbody>
+            <tr><td class="td-name">A1 &mdash; No dialogue trees</td><td>Section 07 (Why This Game) + Section 11 (Revenue)</td><td>New USP + cost-advantage paragraph in revenue</td></tr>
+            <tr><td class="td-name">A2 &mdash; Nema as protagonist</td><td>Section 01 (Concept)</td><td>Rewrite concept lead: Nema is a person, not a camera</td></tr>
+            <tr><td class="td-name">A3 &mdash; Three-act structure</td><td>Section 04 (Mechanics) + Section 07 (USP)</td><td>New mechanic callout + USP replacing a weaker point</td></tr>
+            <tr><td class="td-name">A4 &mdash; Physical verbs pillar</td><td>Section 05 (Aesthetic)</td><td>Rename "Visual Style" block to "Design Pillar: Physical Verbs"</td></tr>
+            <tr><td class="td-name">A5 &mdash; You are implicated</td><td>Section 07 (Why This Game)</td><td>Replace "Cozy and unsettling" USP with stronger culpability framing</td></tr>
+            <tr><td class="td-name">A6 &mdash; Timed pressure</td><td>Section 04 (Mechanics)</td><td>Elevate the afternoon phase's time pressure into its own callout</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <span class="footer-title">SPENT BLOOMS</span>
+    <p class="footer-text">Rum Rum Raspberry &nbsp;&mdash;&nbsp; Lancy Zhao &amp; Marty Scott &nbsp;&mdash;&nbsp; Unity 6 URP &nbsp;&mdash;&nbsp; 2026</p>
+    <p class="footer-text" style="margin-top: 8px; color: var(--text-muted);">Master Deck &mdash; Publisher Agnostic &mdash; v1</p>
+  </div>
+</footer>
+
+<!-- Tooltip (global) -->
+<div class="dialogue-tooltip" id="tooltip" data-label=""></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // Scroll reveal
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) { observer.observe(el); });
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.querySelector(this.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // ═══════════════════════════════════════════════
+  //  INVESTMENT SLIDER + BUDGET
+  // ═══════════════════════════════════════════════
+  var slider = document.getElementById('ask-slider');
+  var totalEl = document.getElementById('ask-total');
+  var amtMarketing = document.getElementById('amt-marketing');
+  var amtTeam = document.getElementById('amt-team');
+  var amtReserve = document.getElementById('amt-reserve');
+  var amtProduction = document.getElementById('amt-production');
+  var amtTotalRow = document.getElementById('amt-total');
+
+  function formatK(v) { return '$' + Math.round(v) + 'K'; }
+
+  function updateBudget() {
+    var total = parseInt(slider.value, 10);
+    var pct = (total - 150) / (500 - 150) * 100;
+    slider.style.setProperty('--fill', pct + '%');
+    totalEl.textContent = '$' + (total * 1000).toLocaleString('en-US');
+    amtMarketing.textContent = formatK(total * 0.50);
+    amtTeam.textContent = formatK(total * 0.25);
+    amtReserve.textContent = formatK(total * 0.20);
+    amtProduction.textContent = formatK(total * 0.05);
+    amtTotalRow.textContent = formatK(total);
+    updateSplitTable(total);
+  }
+  slider.addEventListener('input', updateBudget);
+
+  // ═══════════════════════════════════════════════
+  //  SPLIT MODEL TOGGLE
+  // ═══════════════════════════════════════════════
+  var splitModels = {
+    favorable:  { pre: 0.60, post: 0.25, label: 'Favorable' },
+    fifty:      { pre: 0.50, post: 0.50, label: 'Fifty-Fifty' },
+    royalty:    { pre: 0.30, post: 0.30, label: 'Royalty' },
+    aggressive: { pre: 0.70, post: 0.35, label: 'Aggressive' }
+  };
+  var currentSplit = 'favorable';
+  var NET_PER_COPY = 12.25; // $17.50 * 0.70 after Steam cut
+
+  function computeReturn(invK, units, model) {
+    var netRev = units * NET_PER_COPY;
+    var recoup = invK * 1000 / model.pre; // net revenue needed to recoup
+    var pubRev, devRev;
+    if (netRev <= recoup) {
+      pubRev = netRev * model.pre;
+      devRev = netRev * (1 - model.pre);
+    } else {
+      pubRev = invK * 1000 + (netRev - recoup) * model.post;
+      devRev = recoup * (1 - model.pre) + (netRev - recoup) * (1 - model.post);
+    }
+    return { pub: pubRev, dev: devRev, roi: pubRev / (invK * 1000) };
+  }
+
+  function fmtMoney(v) {
+    if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
+    return '$' + Math.round(v / 1000) + 'K';
+  }
+
+  function updateSplitTable(invK) {
+    invK = invK || parseInt(slider.value, 10);
+    var model = splitModels[currentSplit];
+    var scenarios = [
+      { units: 75000,  prefix: 'con' },
+      { units: 150000, prefix: 'base' },
+      { units: 300000, prefix: 'opt' }
+    ];
+    scenarios.forEach(function (s) {
+      var r = computeReturn(invK, s.units, model);
+      document.getElementById('split-' + s.prefix + '-pub').textContent = fmtMoney(r.pub);
+      document.getElementById('split-' + s.prefix + '-roi').textContent = r.roi.toFixed(2) + 'x';
+      document.getElementById('split-' + s.prefix + '-dev').textContent = fmtMoney(r.dev);
+    });
+  }
+
+  document.querySelectorAll('.split-opt').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.split-opt').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentSplit = btn.getAttribute('data-split');
+      updateSplitTable();
+    });
+  });
+
+  updateBudget();
+
+  // ═══════════════════════════════════════════════
+  //  WORKSHOP — Angle card expand/collapse
+  // ═══════════════════════════════════════════════
+  document.querySelectorAll('.angle-head').forEach(function (head) {
+    head.addEventListener('click', function (e) {
+      if (e.target.closest('.vote-btn')) return;
+      head.parentElement.classList.toggle('open');
+    });
+  });
+
+  // ═══════════════════════════════════════════════
+  //  WORKSHOP — Vote persistence
+  // ═══════════════════════════════════════════════
+  var VOTE_KEY = 'sb_angle_votes_v1';
+  var votes = {};
+  try { votes = JSON.parse(localStorage.getItem(VOTE_KEY) || '{}'); } catch(e) { votes = {}; }
+
+  function renderVotes() {
+    Object.keys(votes).forEach(function (k) {
+      var el = document.querySelector('[data-vote-count="' + k + '"]');
+      if (el) el.textContent = votes[k] || 0;
+    });
+    document.querySelectorAll('.vote-btn[data-angle-vote]').forEach(function (btn) {
+      var ang = btn.getAttribute('data-angle-vote');
+      var dir = btn.getAttribute('data-dir');
+      var userKey = 'user_' + ang;
+      if (votes[userKey] === dir) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  }
+
+  document.querySelectorAll('.vote-btn[data-angle-vote]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var ang = btn.getAttribute('data-angle-vote');
+      var dir = btn.getAttribute('data-dir');
+      var userKey = 'user_' + ang;
+      var prev = votes[userKey];
+      // toggle: if already voted same way, un-vote
+      if (prev === dir) {
+        votes[ang + '-' + dir] = Math.max(0, (votes[ang + '-' + dir] || 0) - 1);
+        delete votes[userKey];
+      } else {
+        if (prev) votes[ang + '-' + prev] = Math.max(0, (votes[ang + '-' + prev] || 0) - 1);
+        votes[ang + '-' + dir] = (votes[ang + '-' + dir] || 0) + 1;
+        votes[userKey] = dir;
+      }
+      localStorage.setItem(VOTE_KEY, JSON.stringify(votes));
+      renderVotes();
+    });
+  });
+  renderVotes();
+
+  // ═══════════════════════════════════════════════
+  //  WORKSHOP — Dialogue tooltip
+  // ═══════════════════════════════════════════════
+  var tip = document.getElementById('tooltip');
+  document.querySelectorAll('.dialogue-ad .kw').forEach(function (kw) {
+    kw.addEventListener('mouseenter', function (e) {
+      tip.setAttribute('data-label', kw.getAttribute('data-label') || '');
+      tip.textContent = kw.getAttribute('data-tip') || '';
+      tip.classList.add('visible');
+    });
+    kw.addEventListener('mousemove', function (e) {
+      tip.style.left = (e.clientX + 14) + 'px';
+      tip.style.top = (e.clientY + 14) + 'px';
+    });
+    kw.addEventListener('mouseleave', function () {
+      tip.classList.remove('visible');
+    });
+  });
+
+  // ═══════════════════════════════════════════════
+  //  WORKSHOP — Three-act arc
+  // ═══════════════════════════════════════════════
+  var arcData = {
+    1: {
+      title: 'Sterling &mdash; Date 1: First Meeting',
+      body: 'You know almost nothing. Read the ad carefully. Spray the wrong perfume, miss the drink, misread the room &mdash; but they&#39;re forgiving. Sterling leaves a perfect white flower.',
+      flower: '<span class="arc-flower">&#127800;</span>Pristine white',
+      keywords: '2 / 8',
+      tension: 'Polite curiosity',
+      aftermath: 'Sterling waves goodbye. They&#39;ll be in tomorrow&#39;s paper.'
+    },
+    2: {
+      title: 'Sterling &mdash; Date 2: Deepening',
+      body: 'You apply what you learned. Gin, no perfume, the terracotta pot on the coffee table. Sterling reaches the couch and stays longer. The conversation crosses into something more personal.',
+      flower: '<span class="arc-flower">&#127801;</span>Full bloom, red',
+      keywords: '5 / 8',
+      tension: 'Warm, lingering',
+      aftermath: 'Sterling stays past midnight. They want to come back.'
+    },
+    3: {
+      title: 'Sterling &mdash; Date 3: The Last Visit',
+      body: 'You know everything. Perfect prep. Perfect drink. They tell you their dreams, their fears. They ask to stay. The flower left behind on the table is...wrong.',
+      flower: '<span class="arc-flower" style="filter:hue-rotate(120deg) saturate(0.4);">&#127794;</span>Wilted, thorned, dark',
+      keywords: '8 / 8',
+      tension: 'Intimate &mdash; then absent',
+      aftermath: 'Sterling does not appear in the newspaper. A silver necklace sits on the bathroom counter.'
+    }
+  };
+
+  var arcSlider = document.getElementById('arc-slider');
+  if (arcSlider) {
+    function renderArc() {
+      var n = parseInt(arcSlider.value, 10);
+      var d = arcData[n];
+      document.getElementById('arc-title').innerHTML = d.title;
+      document.getElementById('arc-body').innerHTML = d.body;
+      document.getElementById('arc-flower').innerHTML = d.flower;
+      document.getElementById('arc-keywords').textContent = d.keywords;
+      document.getElementById('arc-tension').textContent = d.tension;
+      document.getElementById('arc-aftermath').innerHTML = d.aftermath;
+      var card = document.getElementById('arc-card');
+      card.classList.toggle('date-3', n === 3);
+      document.getElementById('arc-label-1').classList.toggle('active', n === 1);
+      document.getElementById('arc-label-3').classList.toggle('active', n === 3);
+      var pct = ((n - 1) / 2) * 100;
+      arcSlider.style.setProperty('--fill', pct + '%');
+    }
+    arcSlider.addEventListener('input', renderArc);
+    renderArc();
+  }
+
+  // ═══════════════════════════════════════════════
+  //  WORKSHOP — Verb gallery
+  // ═══════════════════════════════════════════════
+  var verbData = {
+    pour: { title: 'Pour', body: 'Tilt a bottle over a glass. Layered liquid physics mean each drink has visible cross-section cocktails that accumulate in real time. Mess up the order, and the date can see it through the glass.' },
+    wipe: { title: 'Wipe', body: 'Drag a cloth across a stain. Surface cleanliness is tracked per-area and feeds the Phase 1 entrance judgment. The date sees the counter before they see you.' },
+    trim: { title: 'Trim', body: 'Open the scissors, cut the stem at an angle. Cutting angle, stem length, and part condition feed a score that determines how the bloom joins the fridge bouquet.' },
+    water: { title: 'Water', body: 'Fill the can at the sink, tilt over the plant. A 2D soil-and-water cross-section simulates absorption. Weather and time-of-day modify drying rate. Dead plants affect mood.' },
+    spray: { title: 'Spray', body: 'Select a perfume, press the pump. One spray locks in for the Phase 1 reaction. You can switch fragrances but the scent lingers &mdash; and dates can smell it.' },
+    extract: { title: 'Extract', body: 'Slide a vinyl record out of its sleeve, carry it upright, place it on the turntable, lower the needle. The physical record player workflow IS the music selection UI.' },
+    carry: { title: 'Carry', body: 'Most objects can be picked up and moved. Held items use spring-damper physics with a clicking shadow cue that reads as toy-like and deliberate.' },
+    arrange: { title: 'Arrange', body: 'Grid-snap placement with ghost preview on placement surfaces. Objects in prominent spots score higher in the Phase 3 judgment walk.' },
+    read: { title: 'Read', body: 'Pull a book from the shelf. The spine hides; the pages display. Reading reveals keyword hints about nearby characters. Observation is a mechanic.' },
+    snap: { title: 'Snap', body: 'Paired items (shoes side-by-side, dishes stacked) magnetize when placed correctly. Small bonuses from pairing reward tidiness without nagging.' }
+  };
+
+  var verbTitle = document.getElementById('verb-title');
+  var verbBody = document.getElementById('verb-body');
+  document.querySelectorAll('.verb-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      document.querySelectorAll('.verb-chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      var key = chip.getAttribute('data-verb');
+      if (verbData[key]) {
+        verbTitle.textContent = verbData[key].title;
+        verbBody.textContent = verbData[key].body;
+      }
+    });
+  });
+
+  // ═══════════════════════════════════════════════
+  //  WORKSHOP — Cost bar animations
+  // ═══════════════════════════════════════════════
+  var costObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.width = entry.target.getAttribute('data-width') + '%';
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.cost-bar-fill').forEach(function (bar) { costObserver.observe(bar); });
+
+})();
+</script>
+
+</body>
+</html>
