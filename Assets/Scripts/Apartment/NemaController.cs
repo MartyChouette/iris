@@ -179,6 +179,10 @@ public class NemaController : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        if (ApartmentManager.Instance != null)
+            ApartmentManager.Instance.OnAreaChanged -= OnAreaChanged;
+        if (DayPhaseManager.Instance != null)
+            DayPhaseManager.Instance.OnPhaseChanged.RemoveListener(OnPhaseChanged);
     }
 
     private void Start()

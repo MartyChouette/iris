@@ -125,10 +125,7 @@ public class LivingFlowerPlantManager : MonoBehaviour
 
         // Add ReactableTag for date NPC reactions
         var reactable = plantGO.AddComponent<ReactableTag>();
-        var tagsField = typeof(ReactableTag).GetField("tags",
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        if (tagsField != null)
-            tagsField.SetValue(reactable, new[] { "plant", "flower", "gift" });
+        reactable.Setup(new[] { "plant", "flower", "gift" }, reactable.DisplayName);
 
         MakePlaceable(plantGO);
 
@@ -264,10 +261,7 @@ public class LivingFlowerPlantManager : MonoBehaviour
                                      plantDef.dryingRatePerDay, plantDef.leafSheddingChance);
 
             var reactable = plantGO.AddComponent<ReactableTag>();
-            var tagsField = typeof(ReactableTag).GetField("tags",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (tagsField != null)
-                tagsField.SetValue(reactable, new[] { "plant", "flower", "gift" });
+            reactable.Setup(new[] { "plant", "flower", "gift" }, reactable.DisplayName);
 
             MakePlaceable(plantGO);
 

@@ -87,6 +87,10 @@ public class PrepChecklistPanel : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        if (NewspaperManager.Instance != null)
+            NewspaperManager.Instance.OnDateSelected.RemoveListener(OnDateSelected);
+        if (DayPhaseManager.Instance != null)
+            DayPhaseManager.Instance.OnPhaseChanged.RemoveListener(OnPhaseChanged);
     }
 
     private void Start()

@@ -118,7 +118,18 @@ public class PlaytestConsentScreen : MonoBehaviour
         CreateButton(panel, "DeclineBtn", "No Thanks", 120f, btnY, btnW, btnH,
             new Color(0.55f, 0.25f, 0.25f), () => OnChoice(false));
 
+        // Only pause time if the UI is actually going to be shown — the current
+        // ShowIfNeeded() auto-consent path destroys this object before pausing,
+        // but if future code calls BuildUI via a true show path, pause here.
+        // Safety: OnDestroy unconditionally clears the pause so it can never stick.
         TimeScaleManager.Set(TimeScaleManager.PRIORITY_PAUSE, 0f);
+    }
+
+    private void OnDestroy()
+    {
+        // Safety: always clear the pause so a destroyed consent screen
+        // can never leave the game frozen.
+        TimeScaleManager.Clear(TimeScaleManager.PRIORITY_PAUSE);
     }
 
     private void OnChoice(bool agreed)

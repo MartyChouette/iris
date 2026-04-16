@@ -46,6 +46,8 @@ public class DateEndScreen : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        if (continueButton != null)
+            continueButton.onClick.RemoveListener(OnContinue);
     }
 
     /// <summary>Show the date end screen with results.</summary>

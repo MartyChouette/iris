@@ -11,6 +11,12 @@ public class FlySpawner : MonoBehaviour
 {
     public static FlySpawner Instance { get; private set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        Instance = null;
+    }
+
     private static readonly RaycastHit[] s_swatHitBuffer = new RaycastHit[8];
 
     [Header("Spawning")]
@@ -48,11 +54,21 @@ public class FlySpawner : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+    {
+        // Clear stale per-scene state on any scene change so flies from a previous
+        // scene's items don't linger in the registry.
+        _fliesPerSource.Clear();
+        _cam = null;
     }
 
     private void Update()

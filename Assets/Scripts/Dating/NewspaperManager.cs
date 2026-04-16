@@ -147,6 +147,8 @@ public class NewspaperManager : MonoBehaviour, IStationManager
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        if (dayManager != null)
+            dayManager.OnNewNewspaper.RemoveListener(OnNewNewspaper);
     }
 
     private void Start()

@@ -125,13 +125,25 @@ public class AffectionBar : MonoBehaviour
         TrySubscribe();
     }
 
+    private bool _subscribed;
+
     private void TrySubscribe()
     {
+        // Dedupe: both OnEnable and the deferred coroutine can call this.
+        // RemoveListener is a no-op if not registered, so we remove first
+        // then add to guarantee exactly one subscription.
         if (DateSessionManager.Instance != null)
+        {
+            DateSessionManager.Instance.OnAffectionChanged.RemoveListener(OnAffectionChanged);
             DateSessionManager.Instance.OnAffectionChanged.AddListener(OnAffectionChanged);
+        }
 
         if (DayPhaseManager.Instance != null)
+        {
+            DayPhaseManager.Instance.OnPhaseChanged.RemoveListener(OnPhaseChanged);
             DayPhaseManager.Instance.OnPhaseChanged.AddListener(OnPhaseChanged);
+        }
+        _subscribed = true;
     }
 
     private void Unsubscribe()
@@ -141,6 +153,7 @@ public class AffectionBar : MonoBehaviour
 
         if (DayPhaseManager.Instance != null)
             DayPhaseManager.Instance.OnPhaseChanged.RemoveListener(OnPhaseChanged);
+        _subscribed = false;
     }
 
     private void Update()

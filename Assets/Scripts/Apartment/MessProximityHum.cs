@@ -10,6 +10,12 @@ public class MessProximityHum : MonoBehaviour
 {
     public static MessProximityHum Instance { get; private set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        Instance = null;
+    }
+
     [Header("Detection")]
     [Tooltip("Max distance (world units) at which the hum begins.")]
     [SerializeField] private float _detectionRadius = 1.85f;
@@ -60,6 +66,13 @@ public class MessProximityHum : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        // Destroy the procedural AudioClip we created in CreateSineClip
+        if (_source != null && _source.clip != null)
+        {
+            var clip = _source.clip;
+            _source.clip = null;
+            Destroy(clip);
+        }
     }
 
     private void Update()

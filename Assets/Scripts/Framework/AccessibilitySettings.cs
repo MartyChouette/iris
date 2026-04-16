@@ -312,6 +312,7 @@ public static class AccessibilitySettings
         PlayerPrefs.DeleteKey(K_ResolutionScale);
         PlayerPrefs.DeleteKey(K_QualityPreset);
         PlayerPrefs.DeleteKey(K_PSXEnabled);
+        PlayerPrefs.DeleteKey(K_InvertScroll);
         PlayerPrefs.Save();
 
         ScalableBufferManager.ResizeBuffers(1f, 1f);
