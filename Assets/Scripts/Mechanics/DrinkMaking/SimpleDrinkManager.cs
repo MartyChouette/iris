@@ -168,11 +168,14 @@ public class SimpleDrinkManager : MonoBehaviour, IStationManager
             AudioManager.Instance.PlaySFX(recipeSelectSFX);
 
         // Glow the glass so the player knows to click it to pour
-        var glass = Object.FindAnyObjectByType<GlassController>();
-        if (glass != null) glass.EnableGlow();
+        if (_cachedGlass == null)
+            _cachedGlass = Object.FindAnyObjectByType<GlassController>();
+        if (_cachedGlass != null) _cachedGlass.EnableGlow();
 
         Debug.Log($"[SimpleDrinkManager] Selected recipe: {_activeRecipe.drinkName}");
     }
+
+    private GlassController _cachedGlass;
 
     // ── Pouring ──────────────────────────────────────────────────────
 
@@ -202,9 +205,10 @@ public class SimpleDrinkManager : MonoBehaviour, IStationManager
                     if (PourCursorOverlay.Instance != null && GlobalCursorManager.Instance != null)
                         PourCursorOverlay.Instance.LockTexture(GlobalCursorManager.Instance.GetCurrentCursorTexture());
                     PourDragHelper.Begin();
-                    // Disable glass glow now that the player found it
-                    var glass = Object.FindAnyObjectByType<GlassController>();
-                    if (glass != null) glass.DisableGlow();
+                    // Disable glass glow now that the player found it (reuses cached ref)
+                    if (_cachedGlass == null)
+                        _cachedGlass = Object.FindAnyObjectByType<GlassController>();
+                    if (_cachedGlass != null) _cachedGlass.DisableGlow();
                     Debug.Log("[SimpleDrinkManager] Pour started (glass clicked).");
                 }
             }

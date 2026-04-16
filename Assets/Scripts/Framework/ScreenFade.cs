@@ -35,6 +35,9 @@ public class ScreenFade : MonoBehaviour
     /// <summary>True while a fade coroutine is running.</summary>
     public bool IsFading { get; private set; }
 
+    // Track the active fade coroutine so we can stop it before starting a new one
+    private Coroutine _activeFadeCoroutine;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -76,7 +79,9 @@ public class ScreenFade : MonoBehaviour
     /// </summary>
     public Coroutine FadeOut(float duration)
     {
-        return StartCoroutine(FadeCoroutine(0f, 1f, duration, true, fadeOutCurve));
+        if (_activeFadeCoroutine != null) StopCoroutine(_activeFadeCoroutine);
+        _activeFadeCoroutine = StartCoroutine(FadeCoroutine(0f, 1f, duration, true, fadeOutCurve));
+        return _activeFadeCoroutine;
     }
 
     /// <summary>
@@ -90,7 +95,9 @@ public class ScreenFade : MonoBehaviour
     /// </summary>
     public Coroutine FadeIn(float duration)
     {
-        return StartCoroutine(FadeCoroutine(1f, 0f, duration, false, fadeInCurve));
+        if (_activeFadeCoroutine != null) StopCoroutine(_activeFadeCoroutine);
+        _activeFadeCoroutine = StartCoroutine(FadeCoroutine(1f, 0f, duration, false, fadeInCurve));
+        return _activeFadeCoroutine;
     }
 
     /// <summary>Show phase title text on the black screen.</summary>
@@ -156,7 +163,9 @@ public class ScreenFade : MonoBehaviour
     /// </summary>
     public Coroutine FadeOutIn(float outDuration, float inDuration, System.Action onBlack = null)
     {
-        return StartCoroutine(FadeOutInCoroutine(outDuration, inDuration, onBlack));
+        if (_activeFadeCoroutine != null) StopCoroutine(_activeFadeCoroutine);
+        _activeFadeCoroutine = StartCoroutine(FadeOutInCoroutine(outDuration, inDuration, onBlack));
+        return _activeFadeCoroutine;
     }
 
     /// <summary>

@@ -126,6 +126,16 @@ public class CameraTestController : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+
+        // Dispose InputActions to free native memory
+        if (_presetActions != null)
+        {
+            for (int i = 0; i < _presetActions.Length; i++)
+                _presetActions[i]?.Dispose();
+            _presetActions = null;
+        }
+        _clearPresetAction?.Dispose();
+        _clearPresetAction = null;
     }
 
     /// <summary>

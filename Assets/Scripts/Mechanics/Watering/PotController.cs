@@ -285,7 +285,7 @@ public class PotController : MonoBehaviour
                     float s = Mathf.Lerp(0.5f, 1.2f, ping);
                     overflowDrips[i].localScale = new Vector3(
                         overflowDrips[i].localScale.x,
-                        overflowDrips[i].localScale.y * 0f + 0.01f * s,
+                        0.01f * s,
                         overflowDrips[i].localScale.z);
                 }
             }

@@ -73,6 +73,8 @@ public class WateringManager : MonoBehaviour
     private bool _overflowSFXPlayed;
     private float _pourTime;
     private bool _isPouring; // true while mouse is held during pour
+    private float _saveAccumulator;
+    private const float SaveInterval = 0.25f; // throttle per-frame SaveWaterLevel calls
 
     private InputAction _clickAction;
 
@@ -87,9 +89,14 @@ public class WateringManager : MonoBehaviour
         if (_mainCamera == null) _mainCamera = Camera.main;
     }
 
-    private void OnDestroy() { if (Instance == this) Instance = null; }
-    private void OnEnable() { _clickAction.Enable(); }
-    private void OnDisable() { _clickAction.Disable(); }
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
+        _clickAction?.Dispose();
+        _clickAction = null;
+    }
+    private void OnEnable() { _clickAction?.Enable(); }
+    private void OnDisable() { _clickAction?.Disable(); }
 
     private void Update()
     {
@@ -224,8 +231,14 @@ public class WateringManager : MonoBehaviour
 
             _isPouring = true;
 
-            // Save water level to plant continuously
-            SaveWaterLevel();
+            // Save water level to plant — throttled to 4 Hz (every 0.25s)
+            // instead of every frame to avoid spam.
+            _saveAccumulator += Time.deltaTime;
+            if (_saveAccumulator >= SaveInterval)
+            {
+                _saveAccumulator = 0f;
+                SaveWaterLevel();
+            }
 
             // Overflow check — EITHER water or foam going over the rim = spill
             bool rimOverflow = _waterLevel > 1f || _foamLevel > 1f;

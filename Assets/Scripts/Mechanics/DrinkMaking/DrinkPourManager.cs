@@ -57,9 +57,14 @@ public class DrinkPourManager : MonoBehaviour
         _clickAction = new InputAction("DrinkClick", InputActionType.Button, "<Mouse>/leftButton");
     }
 
-    private void OnDestroy() { if (Instance == this) Instance = null; }
-    private void OnEnable() { _clickAction.Enable(); }
-    private void OnDisable() { _clickAction.Disable(); }
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
+        _clickAction?.Dispose();
+        _clickAction = null;
+    }
+    private void OnEnable() { _clickAction?.Enable(); }
+    private void OnDisable() { _clickAction?.Disable(); }
 
     private bool _glassHighlightActive;
 

@@ -234,7 +234,9 @@ public class LoadingScreen : MonoBehaviour
         var op = SceneManager.LoadSceneAsync(buildIndex);
         if (op == null)
         {
-            Debug.LogError("[LoadingScreen] LoadSceneAsync returned null.");
+            Debug.LogError("[LoadingScreen] LoadSceneAsync returned null. Attempting to fade back to visibility.");
+            // Fade the ScreenFade back to clear so the player isn't soft-locked on black
+            ScreenFade.Instance?.FadeIn(0.5f);
             Destroy(gameObject);
             yield break;
         }

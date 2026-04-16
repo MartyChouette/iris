@@ -16,6 +16,12 @@ public class MainMenuManager : MonoBehaviour
     // ── Static state (survives scene load) ───────────────────────
     public static GameModeConfig ActiveConfig { get; private set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        ActiveConfig = null;
+    }
+
     private enum MenuState { ModeSelect, GamePanel, SaveSlots }
 
     // ── Scene ────────────────────────────────────────────────────
@@ -311,6 +317,14 @@ public class MainMenuManager : MonoBehaviour
     private void DoQuitToDesktop()
     {
         Debug.Log("[MainMenuManager] Quitting application.");
+
+        // Cancel any in-flight scene preload so it doesn't hold scene memory open
+        if (_preloadOp != null)
+        {
+            _preloadOp.allowSceneActivation = true; // release so Unity can clean up
+            _preloadOp = null;
+        }
+
         GracefulQuit.Execute();
     }
 

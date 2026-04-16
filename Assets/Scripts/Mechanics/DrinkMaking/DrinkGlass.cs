@@ -15,6 +15,11 @@ public class DrinkGlass : MonoBehaviour
     // ── Static registry ──
     private static readonly List<DrinkGlass> s_all = new();
     public static IReadOnlyList<DrinkGlass> All => s_all;
+
+    // Cached comparison so List.Sort doesn't allocate a delegate closure per call
+    private static readonly System.Comparison<LiquidLayer> s_layerWeightDesc =
+        (a, b) => b.ingredient.weight.CompareTo(a.ingredient.weight);
+
     private void OnEnable() => s_all.Add(this);
     private void OnDisable() => s_all.Remove(this);
 
@@ -90,8 +95,8 @@ public class DrinkGlass : MonoBehaviour
         if (!merged)
             _layers.Add(new LiquidLayer { ingredient = ingredient, amount = amount });
 
-        // Sort layers by weight (heaviest at bottom = index 0)
-        _layers.Sort((a, b) => b.ingredient.weight.CompareTo(a.ingredient.weight));
+        // Sort layers by weight (heaviest at bottom = index 0). Cached comparer avoids per-call closure alloc.
+        _layers.Sort(s_layerWeightDesc);
 
         // Update foam
         float foamDelta = amount * (ingredient.foamRateMultiplier > 0f ? ingredient.foamRateMultiplier : 1f);

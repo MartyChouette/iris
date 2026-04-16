@@ -19,6 +19,13 @@ public class RecordSlot : MonoBehaviour
     /// <summary>Fired when a record starts playing (for MidDateActionWatcher).</summary>
     public static event System.Action OnRecordChanged;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        // Clear static event subscribers from any prior editor play session
+        OnRecordChanged = null;
+    }
+
     [Header("Visuals")]
     [Tooltip("Transform of the disc visual (rotated during playback).")]
     [SerializeField] private Transform _discVisual;
@@ -60,6 +67,7 @@ public class RecordSlot : MonoBehaviour
     private bool _isPlaying;
     private float _currentSpinSpeed;
     private Coroutine _placementLerp;
+    private ReactableTag _cachedReactable;
 
     public bool IsPlaying => _isPlaying;
     public bool IsLoaded => _loadedVinyl != null;
@@ -79,6 +87,8 @@ public class RecordSlot : MonoBehaviour
             return;
         }
         Instance = this;
+
+        _cachedReactable = GetComponent<ReactableTag>();
 
         if (_discRenderer != null)
         {
@@ -222,8 +232,7 @@ public class RecordSlot : MonoBehaviour
 
         MoodMachine.Instance?.SetSource("Music", def.moodValue);
 
-        var reactable = GetComponent<ReactableTag>();
-        if (reactable != null) reactable.IsActive = true;
+        if (_cachedReactable != null) _cachedReactable.IsActive = true;
 
         if (_playSFX != null)
             AudioManager.Instance?.PlaySFX(_playSFX);
@@ -250,8 +259,7 @@ public class RecordSlot : MonoBehaviour
 
         AudioManager.Instance?.PauseMusic();
 
-        var reactable = GetComponent<ReactableTag>();
-        if (reactable != null) reactable.IsActive = false;
+        if (_cachedReactable != null) _cachedReactable.IsActive = false;
 
         Debug.Log("[RecordSlot] Paused.");
     }
@@ -278,8 +286,7 @@ public class RecordSlot : MonoBehaviour
         _isPlaying = true;
         AudioManager.Instance?.ResumeMusic();
 
-        var reactable = GetComponent<ReactableTag>();
-        if (reactable != null) reactable.IsActive = true;
+        if (_cachedReactable != null) _cachedReactable.IsActive = true;
 
         if (_playSFX != null)
             AudioManager.Instance?.PlaySFX(_playSFX);
@@ -298,7 +305,8 @@ public class RecordSlot : MonoBehaviour
         StopPlaybackInternal();
 
         var vinyl = _loadedVinyl;
-        _loadedPlaceable.transform.SetParent(null, true);
+        if (_loadedPlaceable != null)
+            _loadedPlaceable.transform.SetParent(null, true);
 
         if (vinyl.HomeSleeve != null)
             vinyl.HomeSleeve.ReturnVinyl(vinyl);
@@ -323,7 +331,7 @@ public class RecordSlot : MonoBehaviour
     /// </summary>
     public PlaceableObject EjectVinyl()
     {
-        if (_loadedPlaceable == null) return null;
+        if (_loadedPlaceable == null || _loadedVinyl == null) return null;
 
         StopPlaybackInternal();
 
@@ -351,20 +359,22 @@ public class RecordSlot : MonoBehaviour
     /// </summary>
     public void Stop()
     {
-        if (_loadedPlaceable == null) return;
+        if (_loadedPlaceable == null && _loadedVinyl == null) return;
 
         StopPlaybackInternal();
 
         // Return vinyl to its sleeve
         if (_loadedVinyl != null && _loadedVinyl.HomeSleeve != null)
         {
-            _loadedPlaceable.transform.SetParent(null, true);
+            if (_loadedPlaceable != null)
+                _loadedPlaceable.transform.SetParent(null, true);
             _loadedVinyl.HomeSleeve.ReturnVinyl(_loadedVinyl);
         }
         else
         {
             // No sleeve — just unparent
-            _loadedPlaceable.transform.SetParent(null, true);
+            if (_loadedPlaceable != null)
+                _loadedPlaceable.transform.SetParent(null, true);
             _loadedVinyl?.ConfigureForSleeve();
         }
 
@@ -377,11 +387,17 @@ public class RecordSlot : MonoBehaviour
         _isPlaying = false;
         _currentSpinSpeed = 0f;
 
+        // Stop any in-flight placement lerp so it doesn't call Play() after eject
+        if (_placementLerp != null)
+        {
+            StopCoroutine(_placementLerp);
+            _placementLerp = null;
+        }
+
         AudioManager.Instance?.StopMusic();
         MoodMachine.Instance?.RemoveSource("Music");
 
-        var reactable = GetComponent<ReactableTag>();
-        if (reactable != null) reactable.IsActive = false;
+        if (_cachedReactable != null) _cachedReactable.IsActive = false;
 
         if (_toneArm != null) _toneArm.SnapToRest();
     }

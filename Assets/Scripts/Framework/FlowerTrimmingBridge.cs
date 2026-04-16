@@ -256,7 +256,8 @@ public class FlowerTrimmingBridge : MonoBehaviour
             guarantee = DateSessionManager.Instance.CurrentDate.guaranteeFlowerSuccess;
         }
 
-        session.OnResult.AddListener((eval, score, days) =>
+        // Named listener so we can cleanly remove it after the session ends
+        UnityEngine.Events.UnityAction<FlowerEvaluation, int, int> resultListener = (eval, score, days) =>
         {
             if (guarantee)
             {
@@ -272,7 +273,8 @@ public class FlowerTrimmingBridge : MonoBehaviour
                 resultGameOver = eval.isGameOver;
             }
             gotResult = true;
-        });
+        };
+        session.OnResult.AddListener(resultListener);
 
         // Enable keyboard evaluate so player can press E to finish
         session.allowKeyboardEvaluate = true;
@@ -301,6 +303,10 @@ public class FlowerTrimmingBridge : MonoBehaviour
         // Wait until the session produces a result
         while (!gotResult)
             yield return null;
+
+        // Detach listener so repeated trim sessions don't accumulate subscribers
+        if (session != null && resultListener != null)
+            session.OnResult.RemoveListener(resultListener);
 
         // Remove the Done button now that we have a result
         if (doneButtonCanvas != null)

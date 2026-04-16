@@ -174,6 +174,17 @@ public class ObjectGrabber : MonoBehaviour
 
     private static ObjectGrabber s_instance;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        // Clear static state that would otherwise persist across editor play sessions
+        // (Unity does not reset statics on scene reload or domain reload in some configs)
+        s_instance = null;
+        s_lastConsumedFrame = -1;
+        ClickConsumedThisFrame = false;
+        OnObjectPlaced = null; // clear subscribers from previous sessions
+    }
+
     /// <summary>The active ObjectGrabber in the scene, or null.</summary>
     public static ObjectGrabber Instance => s_instance;
 
@@ -693,6 +704,14 @@ public class ObjectGrabber : MonoBehaviour
             stackable.PrepareForGrab();
 
         _heldRb = placeable.GetComponent<Rigidbody>();
+        if (_heldRb == null)
+        {
+            // PlaceableObject missing its Rigidbody — abort pickup cleanly
+            Debug.LogWarning($"[ObjectGrabber] Cannot grab '{placeable.name}' — no Rigidbody component.");
+            _held = null;
+            _pickupTimer = 0f;
+            return;
+        }
         _heldRb.useGravity = false;
         _heldRb.isKinematic = false;
         _heldRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;

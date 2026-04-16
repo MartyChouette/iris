@@ -294,13 +294,16 @@ public class FridgeController : MonoBehaviour
             StartCoroutine(TweenDoor(pivot, -angle, false, isLeft));
     }
 
-    /// <summary>Close all open doors.</summary>
+    /// <summary>Close all open doors. Skips doors that are currently tweening to avoid concurrent coroutines fighting over the same transform.</summary>
     public void CloseDoor()
     {
         if (_stateL == DoorState.Open)
             StartCoroutine(TweenDoor(_doorPivotL, -_openAngleL, false, true));
         if (_stateR == DoorState.Open)
             StartCoroutine(TweenDoor(_doorPivotR, -_openAngleR, false, false));
+        // Tweening states are intentionally not closed — the open tween will finish
+        // and the player can click again. Stacking a close tween on top of an open
+        // tween causes overshoot.
     }
 
     /// <summary>Snap both doors shut immediately.</summary>
