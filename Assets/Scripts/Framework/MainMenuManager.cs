@@ -75,6 +75,9 @@ public class MainMenuManager : MonoBehaviour
     private bool _loading;
     private bool _quitConfirmShowing;
     private GameObject _quitConfirmPanel;
+    private GameObject _musicVotePanel;
+    private Transform _musicVoteContainer;
+    private string _selectedMood;
 
     // ── Scene preloading ──────────────────────────────────────────
     private AsyncOperation _preloadOp;
@@ -119,12 +122,15 @@ public class MainMenuManager : MonoBehaviour
         if (_saveSlotBackButton != null) _saveSlotBackButton.onClick.AddListener(OnSaveSlotBack);
 
         BuildQuitConfirmPanel();
+        BuildMusicVotePanel();
 
-        ShowPanel(MenuState.ModeSelect);
+        // Skip mode select — go straight to demo game panel
+        if (_demoConfig != null)
+            SelectMode(_demoConfig);
+        else
+            ShowPanel(MenuState.ModeSelect);
 
-        // Start menu music (persists through loading screen via DDoL)
-        if (MusicDirector.Instance != null)
-            MusicDirector.Instance.PlayMenuSong();
+        // Start silent — music plays when the player previews a mood
 
         // Fade in from black
         if (ScreenFade.Instance != null)
@@ -345,6 +351,190 @@ public class MainMenuManager : MonoBehaviour
     public void OnSaveSlotBack()
     {
         ShowPanel(MenuState.GamePanel);
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // Music Vote Panel (bottom-left overlay on game panel)
+    // ═══════════════════════════════════════════════════════════════
+
+    private readonly Color _cozyTint   = new Color(1f, 0.75f, 0.45f);
+    private readonly Color _sadTint    = new Color(0.55f, 0.65f, 0.9f);
+    private readonly Color _creepyTint = new Color(0.6f, 0.4f, 0.65f);
+    private Image _cozyBtnImg, _sadBtnImg, _creepyBtnImg;
+
+    private void BuildMusicVotePanel()
+    {
+        // Own overlay canvas so it works regardless of scene canvas hierarchy
+        _musicVotePanel = new GameObject("MusicVoteCanvas");
+        _musicVotePanel.transform.SetParent(transform, false);
+        var canvas = _musicVotePanel.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 60;
+        var scaler = _musicVotePanel.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920f, 1080f);
+        _musicVotePanel.AddComponent<GraphicRaycaster>();
+
+        // Content container anchored to bottom-left
+        var container = new GameObject("VoteContent");
+        container.transform.SetParent(_musicVotePanel.transform, false);
+        var panelRT = container.AddComponent<RectTransform>();
+        panelRT.anchorMin = new Vector2(0f, 0f);
+        panelRT.anchorMax = new Vector2(0f, 0f);
+        panelRT.pivot = new Vector2(0f, 0f);
+        panelRT.anchoredPosition = new Vector2(30f, 30f);
+        panelRT.sizeDelta = new Vector2(220f, 180f);
+
+        // Redirect all child creation to the container
+        _musicVoteContainer = container.transform;
+
+        var theme = IrisTextTheme.Active;
+
+        // Question label
+        var labelGO = new GameObject("VoteLabel");
+        labelGO.transform.SetParent(_musicVoteContainer, false);
+        var labelRT = labelGO.AddComponent<RectTransform>();
+        labelRT.anchorMin = new Vector2(0f, 1f);
+        labelRT.anchorMax = new Vector2(1f, 1f);
+        labelRT.pivot = new Vector2(0.5f, 1f);
+        labelRT.anchoredPosition = Vector2.zero;
+        labelRT.sizeDelta = new Vector2(0f, 35f);
+        var labelTMP = labelGO.AddComponent<TextMeshProUGUI>();
+        labelTMP.text = "Menu music?";
+        labelTMP.fontSize = 18f;
+        labelTMP.fontStyle = FontStyles.Bold;
+        labelTMP.alignment = TextAlignmentOptions.Left;
+        labelTMP.color = new Color(0.85f, 0.82f, 0.78f);
+        if (theme != null && theme.primaryFont != null) labelTMP.font = theme.primaryFont;
+
+        // Three mood preview buttons stacked vertically
+        _cozyBtnImg   = MakeVoteButton("Cozy",   new Vector2(0f, -40f),  _cozyTint);
+        _sadBtnImg    = MakeVoteButton("Sad",    new Vector2(0f, -75f),  _sadTint);
+        _creepyBtnImg = MakeVoteButton("Creepy", new Vector2(0f, -110f), _creepyTint);
+
+        // Cast Vote button
+        var voteGO = new GameObject("CastVoteBtn");
+        voteGO.transform.SetParent(_musicVoteContainer, false);
+        var voteRT = voteGO.AddComponent<RectTransform>();
+        voteRT.anchorMin = new Vector2(0f, 1f);
+        voteRT.anchorMax = new Vector2(1f, 1f);
+        voteRT.pivot = new Vector2(0.5f, 1f);
+        voteRT.anchoredPosition = new Vector2(0f, -148f);
+        voteRT.sizeDelta = new Vector2(0f, 28f);
+
+        var voteImg = voteGO.AddComponent<Image>();
+        voteImg.color = new Color(0.15f, 0.15f, 0.18f, 0.8f);
+        var voteBtn = voteGO.AddComponent<Button>();
+        voteBtn.targetGraphic = voteImg;
+        voteBtn.onClick.AddListener(CastMusicVote);
+
+        var voteTxtGO = new GameObject("Label");
+        voteTxtGO.transform.SetParent(voteGO.transform, false);
+        var voteTxtRT = voteTxtGO.AddComponent<RectTransform>();
+        voteTxtRT.anchorMin = Vector2.zero;
+        voteTxtRT.anchorMax = Vector2.one;
+        voteTxtRT.sizeDelta = Vector2.zero;
+        var voteTMP = voteTxtGO.AddComponent<TextMeshProUGUI>();
+        voteTMP.text = "Cast Vote";
+        voteTMP.fontSize = 15f;
+        voteTMP.alignment = TextAlignmentOptions.Center;
+        voteTMP.color = new Color(0.7f, 0.85f, 0.7f);
+        voteTMP.raycastTarget = false;
+        if (theme != null && theme.primaryFont != null) voteTMP.font = theme.primaryFont;
+    }
+
+    private Image MakeVoteButton(string mood, Vector2 yOffset, Color tint)
+    {
+        var btnGO = new GameObject($"Vote_{mood}");
+        btnGO.transform.SetParent(_musicVoteContainer, false);
+        var btnRT = btnGO.AddComponent<RectTransform>();
+        btnRT.anchorMin = new Vector2(0f, 1f);
+        btnRT.anchorMax = new Vector2(1f, 1f);
+        btnRT.pivot = new Vector2(0.5f, 1f);
+        btnRT.anchoredPosition = yOffset;
+        btnRT.sizeDelta = new Vector2(0f, 30f);
+
+        var btnImg = btnGO.AddComponent<Image>();
+        btnImg.color = new Color(tint.r * 0.2f, tint.g * 0.2f, tint.b * 0.2f, 0.7f);
+
+        var btn = btnGO.AddComponent<Button>();
+        btn.targetGraphic = btnImg;
+        var colors = btn.colors;
+        colors.highlightedColor = new Color(tint.r * 0.4f, tint.g * 0.4f, tint.b * 0.4f);
+        colors.pressedColor = new Color(tint.r * 0.6f, tint.g * 0.6f, tint.b * 0.6f);
+        btn.colors = colors;
+        btn.onClick.AddListener(() => PreviewMood(mood));
+
+        var txtGO = new GameObject("Label");
+        txtGO.transform.SetParent(btnGO.transform, false);
+        var txtRT = txtGO.AddComponent<RectTransform>();
+        txtRT.anchorMin = Vector2.zero;
+        txtRT.anchorMax = Vector2.one;
+        txtRT.sizeDelta = Vector2.zero;
+        var tmp = txtGO.AddComponent<TextMeshProUGUI>();
+        tmp.text = mood;
+        tmp.fontSize = 17f;
+        tmp.alignment = TextAlignmentOptions.Center;
+        tmp.color = tint;
+        tmp.raycastTarget = false;
+
+        var theme = IrisTextTheme.Active;
+        if (theme != null && theme.primaryFont != null) tmp.font = theme.primaryFont;
+
+        return btnImg;
+    }
+
+    private void PreviewMood(string mood)
+    {
+        _selectedMood = mood;
+        MusicDirector.Instance?.SetMood(mood);
+
+        // Highlight the selected button, dim the others
+        float sel = 0.5f, dim = 0.2f;
+        _cozyBtnImg.color   = mood == "Cozy"   ? _cozyTint * sel   : new Color(_cozyTint.r * dim,   _cozyTint.g * dim,   _cozyTint.b * dim,   0.7f);
+        _sadBtnImg.color    = mood == "Sad"    ? _sadTint * sel    : new Color(_sadTint.r * dim,    _sadTint.g * dim,    _sadTint.b * dim,    0.7f);
+        _creepyBtnImg.color = mood == "Creepy" ? _creepyTint * sel : new Color(_creepyTint.r * dim, _creepyTint.g * dim, _creepyTint.b * dim, 0.7f);
+    }
+
+    private void CastMusicVote()
+    {
+        if (string.IsNullOrEmpty(_selectedMood))
+        {
+            Debug.Log("[MainMenuManager] No mood selected — pick one first.");
+            return;
+        }
+
+        var config = DiscordWebhookConfig.Instance;
+        string url = config != null ? config.FeedbackWebhookURL : null;
+
+        StartCoroutine(DiscordWebhookService.PostEmbed(
+            url,
+            "Menu Music Vote",
+            $"A player voted for **{_selectedMood}** menu music.",
+            _selectedMood switch
+            {
+                "Cozy"   => 0xFFBF73, // warm orange
+                "Sad"    => 0x8CA6E6, // soft blue
+                "Creepy" => 0x9966A6, // purple
+                _        => 0x888888
+            },
+            new (string, string, bool)[]
+            {
+                ("Mood", _selectedMood, true),
+                ("Player", PlayerData.PlayerName ?? "Unknown", true)
+            },
+            "Menu Music Poll",
+            null));
+
+        // Visual feedback — swap button text to "Voted!"
+        var voteLabel = _musicVoteContainer.Find("CastVoteBtn/Label");
+        if (voteLabel != null)
+        {
+            var tmp = voteLabel.GetComponent<TextMeshProUGUI>();
+            if (tmp != null) { tmp.text = "Voted!"; tmp.color = new Color(0.5f, 1f, 0.6f); }
+        }
+
+        Debug.Log($"[MainMenuManager] Music vote cast: {_selectedMood}");
     }
 
     // ═══════════════════════════════════════════════════════════════

@@ -370,27 +370,53 @@ Shader "Iris/NatureBox"
                 float3 fogCol = lerp(hCol, sCol, 0.25) * lerp(1.0, 0.3, nightFade);
                 col = lerp(col, fogCol, fogBand);
 
-                // ── 9. Rain streaks ──
+                // ── 9. Rain streaks (vertical) ──
                 if (_RainIntensity > 0.01)
                 {
                     float skyMask = smoothstep(-0.05, 0.05, elevation);
-                    float2 rainUV = float2(horiz.x * _RainScale, elevation * _RainScale * 2.0);
+
+                    // Always use screen UV — rain falls straight down on screen
+                    float2 screenUV = input.positionCS.xy / _ScreenParams.xy;
+
                     float t_rain = _Time.y * _RainSpeed;
+                    float rain = 0.0;
 
-                    // Three overlapping column layers at different speeds
-                    float r1 = hash21(floor(float2(rainUV.x * 1.0, 0.0)));
-                    float streak1 = step(0.92, r1) * step(0.97,
-                        frac(rainUV.y * 0.5 + t_rain * (0.8 + r1 * 0.4)));
+                    // Three layers of vertical streaks at different scales/speeds.
+                    // Each layer: hash a column, if selected draw a tall thin streak
+                    // that scrolls downward. The streak is a narrow band in X and
+                    // an elongated moving window in Y.
+                    for (int layer = 0; layer < 4; layer++)
+                    {
+                        float scale = _RainScale * (1.0 + layer * 0.35);
+                        float speed = 0.8 + layer * 0.25;
+                        float seed = layer * 53.7;
+                        float sparsity = 0.55 + layer * 0.05; // lower = more drops
 
-                    float r2 = hash21(floor(float2(rainUV.x * 1.3 + 50.0, 0.0)));
-                    float streak2 = step(0.90, r2) * step(0.96,
-                        frac(rainUV.y * 0.4 + t_rain * (1.0 + r2 * 0.3) + 0.5));
+                        // Column index — thin vertical columns
+                        float colX = screenUV.x * scale;
+                        float colID = floor(colX);
+                        float colFrac = frac(colX);
 
-                    float r3 = hash21(floor(float2(rainUV.x * 0.7 + 100.0, 0.0)));
-                    float streak3 = step(0.93, r3) * step(0.97,
-                        frac(rainUV.y * 0.6 + t_rain * (0.6 + r3 * 0.5) + 0.3));
+                        // Per-column random: does this column have rain?
+                        float colHash = hash21(float2(colID, seed));
+                        if (colHash < sparsity) continue;
 
-                    float rain = saturate(streak1 + streak2 + streak3) * skyMask;
+                        // Horizontal narrowness — streak is thin
+                        float xCenter = frac(colHash * 7.3);
+                        float xDist = abs(colFrac - xCenter);
+                        float xMask = 1.0 - smoothstep(0.0, 0.04, xDist);
+
+                        // Vertical scrolling — tall streak window
+                        float scrollY = screenUV.y * scale * 3.0 + t_rain * speed + colHash * 100.0;
+                        float streakPhase = frac(scrollY * 0.15);
+                        // Streak length: visible for ~15% of the cycle
+                        float yMask = smoothstep(0.0, 0.02, streakPhase)
+                                    * (1.0 - smoothstep(0.12, 0.15, streakPhase));
+
+                        rain += xMask * yMask;
+                    }
+
+                    rain = saturate(rain) * skyMask;
                     float3 rainCol = lerp(float3(0.7, 0.75, 0.85), float3(0.2, 0.22, 0.3), nightFade);
                     col = lerp(col, rainCol, rain * _RainIntensity * 0.6);
                 }

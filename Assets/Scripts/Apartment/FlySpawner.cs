@@ -11,6 +11,8 @@ public class FlySpawner : MonoBehaviour
 {
     public static FlySpawner Instance { get; private set; }
 
+    private static readonly RaycastHit[] s_swatHitBuffer = new RaycastHit[8];
+
     [Header("Spawning")]
     [Tooltip("Minimum SmellAmount on a ReactableTag before flies appear.")]
     [SerializeField] private float _smellThreshold = 0.3f;
@@ -88,17 +90,17 @@ public class FlySpawner : MonoBehaviour
         Ray ray = _cam.ScreenPointToRay(screenPos);
 
         // Check all hits — fly might be behind another collider
-        var hits = Physics.RaycastAll(ray, 100f, _clickMask);
+        int hitCount = Physics.RaycastNonAlloc(ray, s_swatHitBuffer, 100f, _clickMask);
         float closestDist = float.MaxValue;
         FlyController closestFly = null;
 
-        for (int i = 0; i < hits.Length; i++)
+        for (int i = 0; i < hitCount; i++)
         {
-            var fly = hits[i].collider.GetComponent<FlyController>();
+            var fly = s_swatHitBuffer[i].collider.GetComponent<FlyController>();
             if (fly == null) continue;
-            if (hits[i].distance < closestDist)
+            if (s_swatHitBuffer[i].distance < closestDist)
             {
-                closestDist = hits[i].distance;
+                closestDist = s_swatHitBuffer[i].distance;
                 closestFly = fly;
             }
         }
@@ -110,14 +112,16 @@ public class FlySpawner : MonoBehaviour
         }
     }
 
+    private static readonly List<ReactableTag> s_deadKeys = new();
+
     private void TrySpawnFlies()
     {
-        // Clean up dead entries
-        var deadKeys = new List<ReactableTag>();
+        // Clean up dead entries (reuse static list to avoid allocation)
+        s_deadKeys.Clear();
         foreach (var kvp in _fliesPerSource)
-            if (kvp.Key == null) deadKeys.Add(kvp.Key);
-        foreach (var k in deadKeys)
-            _fliesPerSource.Remove(k);
+            if (kvp.Key == null) s_deadKeys.Add(kvp.Key);
+        for (int i = 0; i < s_deadKeys.Count; i++)
+            _fliesPerSource.Remove(s_deadKeys[i]);
 
         int totalFlies = FlyController.All.Count;
         if (totalFlies >= _maxFlies) return;

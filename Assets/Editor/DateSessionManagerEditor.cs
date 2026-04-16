@@ -49,13 +49,20 @@ public class DateSessionManagerEditor : Editor
             var sv = SceneView.lastActiveSceneView;
             if (sv != null)
             {
+                if (!sv.orthographic)
+                {
+                    sv.orthographic = true;
+                    sv.Repaint();
+                    Debug.LogWarning($"[DateSessionManager] Scene View was in perspective — switched to ortho before capturing {label}.");
+                }
+
                 Undo.RecordObject(mgr, $"Capture {label} Camera");
                 frame.position = sv.camera.transform.position;
                 frame.rotation = sv.camera.transform.eulerAngles;
-                frame.fov = sv.camera.fieldOfView;
+                frame.fov = sv.camera.orthographicSize;
                 frame.captured = true;
                 EditorUtility.SetDirty(mgr);
-                Debug.Log($"[DateSessionManager] Captured {label}: pos={frame.position}, rot={frame.rotation}, fov={frame.fov:F1}");
+                Debug.Log($"[DateSessionManager] Captured {label}: pos={frame.position}, rot={frame.rotation}, orthoSize={frame.fov:F2}");
             }
             else
             {
@@ -70,9 +77,10 @@ public class DateSessionManagerEditor : Editor
                 var sv = SceneView.lastActiveSceneView;
                 if (sv != null)
                 {
-                    sv.pivot = frame.position + Quaternion.Euler(frame.rotation) * Vector3.forward * 5f;
+                    sv.orthographic = true;
+                    sv.pivot = frame.position + Quaternion.Euler(frame.rotation) * Vector3.forward * sv.cameraDistance;
                     sv.rotation = Quaternion.Euler(frame.rotation);
-                    sv.size = 5f;
+                    sv.size = frame.fov;
                     sv.Repaint();
                 }
             }

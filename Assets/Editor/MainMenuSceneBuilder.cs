@@ -186,7 +186,7 @@ public static class MainMenuSceneBuilder
         musicSourceGO.transform.SetParent(musicGO.transform, false);
         var audioSource = musicSourceGO.AddComponent<AudioSource>();
         audioSource.loop = true;
-        audioSource.playOnAwake = true;
+        audioSource.playOnAwake = false;
         audioSource.volume = 0.5f;
 
         // ── 8b. MusicDirector (persistent cross-scene music manager) ──

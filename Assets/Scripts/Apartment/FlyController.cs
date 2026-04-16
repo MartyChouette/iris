@@ -162,7 +162,12 @@ public class FlyController : MonoBehaviour
         // Visual: flatten and darken
         transform.localScale = new Vector3(0.03f, 0.002f, 0.03f);
         if (_renderer != null)
-            _renderer.material.color = new Color(0.05f, 0.05f, 0.05f);
+        {
+            var mpb = new MaterialPropertyBlock();
+            mpb.SetColor("_BaseColor", new Color(0.05f, 0.05f, 0.05f));
+            mpb.SetColor("_Color", new Color(0.05f, 0.05f, 0.05f));
+            _renderer.SetPropertyBlock(mpb);
+        }
 
         // Disable reactable tag so Nema stops reacting
         var tag = GetComponent<ReactableTag>();

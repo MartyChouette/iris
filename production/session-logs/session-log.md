@@ -12736,3 +12736,3233 @@ docs/PRODUCTION_RUNWAY.md
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260413_221127
+### Commits
+bc8a137 session log + scene + docs update for 20260413 massive session
+4aa6135 remove fridge teleport deposit — use ObjectGrabber's slot system instead
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+1a12b26 move drink cutaway UI to right side of screen, remove dim overlay
+7453780 fix shoe pairing: alignment + partner highlight
+---
+
+## Session End: 20260413_222110
+### Commits
+bc8a137 session log + scene + docs update for 20260413 massive session
+4aa6135 remove fridge teleport deposit — use ObjectGrabber's slot system instead
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+c295ad3 remove camera zoom on liked items, fix particle position
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_222446
+### Commits
+75ab7f7 add day/night lighting system — apartment gets dark at night
+bc8a137 session log + scene + docs update for 20260413 massive session
+4aa6135 remove fridge teleport deposit — use ObjectGrabber's slot system instead
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+c7e4ef8 fix phase 1 camera, kill old affection bar, fix flower meter visibility
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260413_224756
+### Commits
+35b8e44 add moonlight to volumetric light shaft quad
+75ab7f7 add day/night lighting system — apartment gets dark at night
+bc8a137 session log + scene + docs update for 20260413 massive session
+4aa6135 remove fridge teleport deposit — use ObjectGrabber's slot system instead
+19f0464 fridge: auto-detect hinge edge from door mesh bounds
+ef94014 fridge doors: RotateAround with separate hinge points
+a0cb55d fridge doors: world rotation, just a hinge
+7cdb725 fix fridge door hinge: world-space axis with parent transform conversion
+c0b447b fix wall placement blocked by barrier probe
+15bf9c3 add missing TMPro using in AffectionBar
+e556181 add ItemDiscoveryMoments toggle on ApartmentManager
+8b337c9 pause game during moment camera hold (item discoveries)
+8d852ad revert per-item click-to-continue in reveal, keep auto-paced
+0afd1d2 flower popups, click-to-continue on reveal + dream screen
+4e58e0d fridge axis fix, shoe pulse fix, sleeve auto-find, bigger flower, dream perf
+739f70a fix record sleeves + enable InteractableHighlight on all placeables
+070356f fix vinyl morph on day transition + psychedelic dream screen
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_104034
+### Commits
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_105447
+### Commits
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_110920
+### Commits
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_111736
+### Commits
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_142340
+### Commits
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_142534
+### Commits
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_142704
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_171922
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_173045
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_174017
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_174713
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_174827
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_174953
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_175449
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_175758
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_180558
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_181228
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_181740
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_182409
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_182526
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_182608
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_182736
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_183903
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+4c8ac6a fix dream screen during flower trimming — show AFTER trim, not during
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_184749
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_185120
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+f5c0bbb blink plant highlights 3 times when picking up watering can
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_185628
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+6ea2c9e record player highlight chain: turntable → play button
+5d6ecd0 blink turntable highlight when picking up a vinyl record
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_192740
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_194056
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_194946
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_195032
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_195113
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_195127
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_200250
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_201240
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_201717
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_203110
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_203352
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_205743
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_211159
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_211542
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_212146
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_212808
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_213936
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_214137
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_220247
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_220709
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_220934
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_222250
+### Commits
+899d56c moment camera: snap release instead of lerp return
+da813b1 fix IEnumerator compile errors + tighten home snap for wall items
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_224848
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260414_225542
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_165857
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_170246
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_172153
+### Uncommitted Changes
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_172428
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_172949
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_175002
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_175725
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_175854
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_180412
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_180803
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_182540
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_182923
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_190630
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_191547
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_193810
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_193838
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_194002
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_194119
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_195402
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_200217
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_200539
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_200737
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_200759
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_201100
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_202704
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_203509
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_203713
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_204442
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_205332
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_205528
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_205616
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_205748
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_210450
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_211339
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_211351
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_211838
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_212032
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_212703
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_212918
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_213053
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_213530
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_214332
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_214409
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_214921
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_220750
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_221855
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_224550
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_224806
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_230414
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_234854
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Apartment/WeatherSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+ProjectSettings/GraphicsSettings.asset
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260415_235548
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/MainMenuSceneBuilder.cs
+Assets/Scenes/Weather Schedule.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/ScriptableObjects/Messes/Mess_Nails.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/FlySpawner.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Apartment/WeatherSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Scripts/Framework/CuttingPlaneController.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/MusicDirector.cs
+Assets/Scripts/Mechanics/Watering/WateringManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/PlaytestConsentScreen.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Shader/NatureBox.shader
+ProjectSettings/GraphicsSettings.asset
+docs/PITCH_DECK.html
+docs/PITCH_DECK.md
+production/session-logs/session-log.md
+---
+

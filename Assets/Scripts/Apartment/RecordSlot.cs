@@ -119,11 +119,11 @@ public class RecordSlot : MonoBehaviour
         var vinyl = held.GetComponent<VinylDisc>();
         if (vinyl == null || vinyl.Definition == null) return false;
 
-        // Don't accept if already loaded — player must eject first
+        // Auto-swap: if a different record is already loaded, return it to its sleeve first
         if (_loadedVinyl != null)
         {
-            PickupDescriptionHUD.Instance?.Show("Eject the current record first.");
-            return false;
+            if (_loadedVinyl == vinyl) return false; // same record, no-op
+            EjectToSleeve();
         }
 
         _loadedPlaceable = held;
@@ -146,14 +146,13 @@ public class RecordSlot : MonoBehaviour
         if (_labelMat != null)
             _labelMat.color = vinyl.Definition.labelColor;
 
-        // Interpolate vinyl onto platter
+        // Interpolate vinyl onto platter, then auto-play
         if (_placementLerp != null) StopCoroutine(_placementLerp);
-        _placementLerp = StartCoroutine(LerpVinylToPlatter(held.transform));
+        _placementLerp = StartCoroutine(LerpVinylToPlatterAndPlay(held.transform));
 
-        // Clear turntable highlight, light up the Play button
+        // Clear turntable highlight
         var slotHL = GetComponent<InteractableHighlight>();
         if (slotHL != null) slotHL.SetHighlighted(false);
-        HighlightPlayButton(true);
 
         Debug.Log($"[RecordSlot] Loaded: {vinyl.Definition.title} by {vinyl.Definition.artist}");
         return true;
@@ -173,7 +172,7 @@ public class RecordSlot : MonoBehaviour
         }
     }
 
-    private IEnumerator LerpVinylToPlatter(Transform vinyl)
+    private IEnumerator LerpVinylToPlatterAndPlay(Transform vinyl)
     {
         Vector3 startPos = vinyl.position;
         Quaternion startRot = vinyl.rotation;
@@ -193,6 +192,9 @@ public class RecordSlot : MonoBehaviour
         vinyl.position = targetPos;
         vinyl.rotation = targetRot;
         _placementLerp = null;
+
+        // Auto-play once the vinyl settles on the platter
+        Play();
     }
 
     // ── Playback controls ────────────────────────────────────────────
@@ -252,6 +254,64 @@ public class RecordSlot : MonoBehaviour
         if (reactable != null) reactable.IsActive = false;
 
         Debug.Log("[RecordSlot] Paused.");
+    }
+
+    /// <summary>Toggle between play and pause. Called when clicking the turntable body.</summary>
+    public void TogglePlayPause()
+    {
+        if (_loadedVinyl == null) return;
+
+        if (_isPlaying)
+            Pause();
+        else
+        {
+            // Resume from where paused instead of restarting
+            if (_toneArm != null)
+                _toneArm.SwingToPlay(OnResumed);
+            else
+                OnResumed();
+        }
+    }
+
+    private void OnResumed()
+    {
+        _isPlaying = true;
+        AudioManager.Instance?.ResumeMusic();
+
+        var reactable = GetComponent<ReactableTag>();
+        if (reactable != null) reactable.IsActive = true;
+
+        if (_playSFX != null)
+            AudioManager.Instance?.PlaySFX(_playSFX);
+
+        Debug.Log("[RecordSlot] Resumed.");
+    }
+
+    /// <summary>
+    /// Eject the vinyl and return it directly to its sleeve. Stops playback.
+    /// Called when the player clicks the vinyl on the platter.
+    /// </summary>
+    public void EjectToSleeve()
+    {
+        if (_loadedVinyl == null) return;
+
+        StopPlaybackInternal();
+
+        var vinyl = _loadedVinyl;
+        _loadedPlaceable.transform.SetParent(null, true);
+
+        if (vinyl.HomeSleeve != null)
+            vinyl.HomeSleeve.ReturnVinyl(vinyl);
+        else
+            vinyl.ConfigureForSleeve();
+
+        _loadedPlaceable = null;
+        _loadedVinyl = null;
+
+        if (_stopSFX != null)
+            AudioManager.Instance?.PlaySFX(_stopSFX);
+
+        Debug.Log("[RecordSlot] Vinyl ejected to sleeve.");
     }
 
     // ── Eject ────────────────────────────────────────────────────────

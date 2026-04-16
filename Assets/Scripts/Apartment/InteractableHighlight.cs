@@ -386,6 +386,20 @@ public class InteractableHighlight : MonoBehaviour
         if (s_suppressVisuals)
             return;
 
+        // Materials weren't set up if visuals were suppressed during Awake —
+        // initialize them now on first actual use.
+        if (_baseMaterialArrays == null && _renderers != null && _renderers.Length > 0)
+        {
+            EnsureSharedMaterials();
+            _baseMaterialArrays = new Material[_renderers.Length][];
+            for (int i = 0; i < _renderers.Length; i++)
+                _baseMaterialArrays[i] = _renderers[i].sharedMaterials;
+            DetectGlitch();
+        }
+
+        if (_baseMaterialArrays == null)
+            return;
+
         int extraCount = (_interactActive ? 1 : 0)
                        + (_displayActive ? 1 : 0)
                        + (_prepLikedActive ? 1 : 0)

@@ -70,7 +70,8 @@ public class EntranceJudgmentSequence : MonoBehaviour
 
         // --- Judgment 1: Music ---
         PlayJudgingSFX();
-        var musicReaction = EvaluateMusic(date);
+        var musicReaction = EvaluateMusic(date, out ReactableTag musicTag);
+        int musicMultiplier = musicTag != null ? DateSessionManager.GetTagEffectMultiplier(musicTag) : 1;
         // If no music is playing, show a personality comment before the labeled reaction
         if (musicReaction == ReactionType.Neutral && !_alwaysPositive)
         {
@@ -80,7 +81,8 @@ public class EntranceJudgmentSequence : MonoBehaviour
         }
         if (_alwaysPositive) musicReaction = ReactionType.Like;
         reactionUI?.ShowLabeledReaction(musicReaction, "Your Music");
-        DateSessionManager.Instance?.ApplyReaction(musicReaction);
+        DateSessionManager.Instance?.ApplyReaction(musicReaction, musicMultiplier);
+        ShowJudgmentJuice(reactionUI, "Your Music", musicReaction, musicMultiplier);
         if (musicReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Music: {musicReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Music → {musicReaction}");
@@ -103,6 +105,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
         if (_alwaysPositive) moodReaction = ReactionType.Like;
         reactionUI?.ShowLabeledReaction(moodReaction, "The Perfume");
         DateSessionManager.Instance?.ApplyReaction(moodReaction);
+        ShowJudgmentJuice(reactionUI, "The Perfume", moodReaction);
         if (moodReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Perfume/Mood: {moodReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Perfume → {moodReaction}");
@@ -114,6 +117,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
         if (_alwaysPositive) outfitReaction = ReactionType.Like;
         reactionUI?.ShowLabeledReaction(outfitReaction, "Your Outfit");
         DateSessionManager.Instance?.ApplyReaction(outfitReaction);
+        ShowJudgmentJuice(reactionUI, "Your Outfit", outfitReaction);
         if (outfitReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Outfit: {outfitReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Outfit → {outfitReaction}");
@@ -135,6 +139,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
         if (_alwaysPositive) cleanReaction = ReactionType.Like;
         reactionUI?.ShowLabeledReaction(cleanReaction, "Apartment Cleanliness");
         DateSessionManager.Instance?.ApplyReaction(cleanReaction);
+        ShowJudgmentJuice(reactionUI, "Cleanliness", cleanReaction);
         if (cleanReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Cleanliness: {cleanReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Cleanliness → {cleanReaction}");
@@ -153,8 +158,9 @@ public class EntranceJudgmentSequence : MonoBehaviour
             AudioManager.Instance.PlaySFX(sneezeSFX);
     }
 
-    private ReactionType EvaluateMusic(DatePersonalDefinition date)
+    private ReactionType EvaluateMusic(DatePersonalDefinition date, out ReactableTag foundTag)
     {
+        foundTag = null;
         // Scan ReactableTag.All for active tags containing "vinyl" or "music"
         foreach (var tag in ReactableTag.All)
         {
@@ -162,7 +168,10 @@ public class EntranceJudgmentSequence : MonoBehaviour
             foreach (var t in tag.Tags)
             {
                 if (t.Contains("vinyl") || t.Contains("music"))
+                {
+                    foundTag = tag;
                     return ReactionEvaluator.EvaluateReactable(tag, date.preferences);
+                }
             }
         }
         // No music playing — neutral
@@ -206,5 +215,23 @@ public class EntranceJudgmentSequence : MonoBehaviour
             lines = s_dirtyEntranceLines;
 
         return lines[UnityEngine.Random.Range(0, lines.Length)];
+    }
+
+    /// <summary>Flower gauge popup + particles at NPC for a single judgment.</summary>
+    private static void ShowJudgmentJuice(DateReactionUI reactionUI, string label, ReactionType reaction, int multiplier = 1)
+    {
+        if (reaction == ReactionType.Neutral) return;
+
+        bool liked = reaction == ReactionType.Like;
+        string sym = liked ? " \u2665" : " \u2639";
+        string popText = label + sym;
+        if (multiplier > 1) popText += $" \u00d7{multiplier}";
+        AffectionBar.Instance?.ShowPopup(popText, liked);
+
+        if (reactionUI != null)
+        {
+            Vector3 npcPos = reactionUI.transform.position + Vector3.up * 0.5f;
+            DateSessionManager.SpawnReactionParticles(npcPos, reaction);
+        }
     }
 }

@@ -1703,6 +1703,7 @@ MonoBehaviour:
   _fadeInDuration: 0.35
   _fadeOutDuration: 0.2
   _scaleFrom: 0.92
+  _tutorialImage: {fileID: 0}
 --- !u!224 &658287898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2763,8 +2764,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 7671d8402b2fbc44789b0ae3014762fa, type: 3}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -3357,6 +3358,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190981932}
   m_CullTransparentMesh: 1
+--- !u!1 &1211187765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211187767}
+  - component: {fileID: 1211187766}
+  m_Layer: 0
+  m_Name: MusicDirector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1211187766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211187765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e61eaff3341ba4aa39b96d23709780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicDirector
+  _menuSong: {fileID: 8300000, guid: c882443110c27fd48846d2dbf3a391b7, type: 3}
+  _cozySong: {fileID: 8300000, guid: 16f49400c683b274cb117739d2f4363d, type: 3}
+  _sadSong: {fileID: 8300000, guid: 7671d8402b2fbc44789b0ae3014762fa, type: 3}
+  _creepySong: {fileID: 8300000, guid: bf7d3df5a495be74f81178600d3be0f2, type: 3}
+  _menuSongVolume: 0.5
+  _crossFadeDuration: 3
+--- !u!4 &1211187767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211187765}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.52952, y: 0, z: -0.1677}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1241973395
 GameObject:
   m_ObjectHideFlags: 0
@@ -6579,3 +6630,4 @@ SceneRoots:
   - {fileID: 658287898}
   - {fileID: 55855915}
   - {fileID: 372583438}
+  - {fileID: 1211187767}

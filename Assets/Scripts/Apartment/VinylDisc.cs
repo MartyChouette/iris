@@ -82,7 +82,7 @@ public class VinylDisc : MonoBehaviour
         if (!po.enabled) po.enabled = true;
     }
 
-    /// <summary>Prepare for turntable: disable physics + colliders.</summary>
+    /// <summary>Prepare for turntable: disable physics, keep colliders for click detection.</summary>
     public void ConfigureForTurntable()
     {
         var rb = GetComponent<Rigidbody>();
@@ -92,9 +92,6 @@ public class VinylDisc : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
-        foreach (var col in GetComponents<Collider>())
-            col.enabled = false;
     }
 
     /// <summary>Prepare for return to sleeve: disable physics + colliders.</summary>

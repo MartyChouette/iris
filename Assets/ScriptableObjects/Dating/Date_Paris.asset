@@ -16,8 +16,8 @@ MonoBehaviour:
   adText: Art school dropout turned florist. Looking for someone who waters their
     plants and owns at least one record player. Vinyl snobs welcome.
   arrivalTimeSec: 30
-  portrait: {fileID: 0}
-  characterPrefab: {fileID: 1428931125509037808, guid: 9aa7810534218084fbbf6b44e00301b2, type: 3}
+  portrait: {fileID: 21300000, guid: 4c786efe386cb5d438f94d2d11165974, type: 3}
+  characterPrefab: {fileID: 919132149155446097, guid: 34ce7c7b98635114e98aa51dfb51f89d, type: 3}
   phoneNumberRect:
     serializedVersion: 2
     x: 0.1

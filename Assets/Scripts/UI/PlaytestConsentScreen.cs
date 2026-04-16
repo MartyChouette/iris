@@ -29,15 +29,11 @@ public class PlaytestConsentScreen : MonoBehaviour
     /// </summary>
     public static void ShowIfNeeded(System.Action onComplete)
     {
-        if (WasShown)
-        {
-            onComplete?.Invoke();
-            return;
-        }
-
-        var go = new GameObject("PlaytestConsentScreen");
-        var screen = go.AddComponent<PlaytestConsentScreen>();
-        screen._onComplete = onComplete;
+        // Auto-consent — metrics are sent silently to Discord feedback channel.
+        // No consent screen shown to the player.
+        HasConsent = true;
+        WasShown = true;
+        onComplete?.Invoke();
     }
 
     private void Awake()

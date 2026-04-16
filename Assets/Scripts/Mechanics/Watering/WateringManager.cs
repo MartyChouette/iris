@@ -130,6 +130,10 @@ public class WateringManager : MonoBehaviour
 
         CurrentState = State.Pouring;
 
+        // Lock camera pan while watering
+        if (ApartmentManager.Instance != null)
+            ApartmentManager.Instance.SuppressPan = true;
+
         if (PotCrossSectionUI.Instance != null && _activeDef != null)
             PotCrossSectionUI.Instance.Show(_activeDef, _waterLevel);
 
@@ -163,6 +167,10 @@ public class WateringManager : MonoBehaviour
         // Hide UI
         PotCrossSectionUI.Instance?.Hide();
 
+        // Restore camera pan
+        if (ApartmentManager.Instance != null)
+            ApartmentManager.Instance.SuppressPan = false;
+
         _activePlant = null;
         _activeDef = null;
         _activeLiving = null;
@@ -175,6 +183,10 @@ public class WateringManager : MonoBehaviour
     public void ForceIdle()
     {
         PotCrossSectionUI.Instance?.Hide();
+
+        if (ApartmentManager.Instance != null)
+            ApartmentManager.Instance.SuppressPan = false;
+
         _activePlant = null;
         _activeDef = null;
         _activeLiving = null;

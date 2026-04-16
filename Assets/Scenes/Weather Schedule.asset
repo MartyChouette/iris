@@ -27,3 +27,9 @@ MonoBehaviour:
       weather: 4
     - time: 0.213
       weather: 5
+  - day: 2
+    keyframes:
+    - time: 0
+      weather: 2
+    - time: 1
+      weather: 2

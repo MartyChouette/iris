@@ -101,6 +101,10 @@ public class DateSessionManager : MonoBehaviour
     [SerializeField] private float phase3Duration = 40f;
 #pragma warning restore 0414
 
+    [Header("Drink Verdict")]
+    [Tooltip("Suspense pause (seconds) before the drink verdict is revealed.")]
+    [SerializeField] private float _drinkTastingHold = 1.5f;
+
     [Header("Fade Timing")]
     [Tooltip("Fade duration for phase transitions (seconds).")]
     [SerializeField] private float fadeDuration = 0.3f;
@@ -215,6 +219,7 @@ public class DateSessionManager : MonoBehaviour
     private DatePhase _datePhase = DatePhase.None;
     private DatePersonalDefinition _currentDate;
     private float _affection;
+    private bool _drinkVerdictRunning;
     private float _moodCheckTimer;
     private DateCharacterController _dateCharacter;
     private GameObject _dateCharacterGO;
@@ -378,6 +383,7 @@ public class DateSessionManager : MonoBehaviour
         _datePhase = DatePhase.Arrival;
         NemaController.Instance?.MoveToDatePhase(DatePhase.Arrival);
         _affection = startingAffection;
+        DateInspectSystem.Instance?.ResetForNewDate();
         _moodCheckTimer = 0f;
         _accumulatedReactions.Clear();
 
@@ -419,7 +425,15 @@ public class DateSessionManager : MonoBehaviour
         // Fail check after entrance
         if (CheckPhaseFailAndExit(_arrivalFailThreshold)) yield break;
 
-        // Auto-transition to Phase 2
+        // Wait for player to acknowledge Phase 1 results
+        if (PhaseContinueButton.Instance != null)
+        {
+            bool clicked = false;
+            PhaseContinueButton.Instance.Show(() => clicked = true);
+            yield return new WaitUntil(() => clicked || _state != SessionState.DateInProgress);
+            if (_state != SessionState.DateInProgress) yield break;
+        }
+
         yield return TransitionToPhase2();
     }
 
@@ -451,6 +465,9 @@ public class DateSessionManager : MonoBehaviour
 
         // Start pulsing fridge + drink station
         StartPhase2Pulse();
+
+        // Highlight drink glasses so the player knows where to pour
+        HighlightDrinkGlasses(true);
 
         // Switch to kitchen model (or warp legacy character)
         if (_activeSceneModels != null && _activeSceneModels.kitchenModel != null)
@@ -501,6 +518,7 @@ public class DateSessionManager : MonoBehaviour
     private IEnumerator TransitionToPhase3()
     {
         StopPhase2Pulse();
+        HighlightDrinkGlasses(false);
 
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
 
@@ -567,15 +585,28 @@ public class DateSessionManager : MonoBehaviour
         yield return s_wait25;
 
 #if UNITY_EDITOR
-        Debug.Log("[DateSessionManager] Phase 3: Instant reveal — evaluating all apartment items.");
+        Debug.Log("[DateSessionManager] Phase 3: Player-driven item inspection.");
 #endif
 
-        // Pre-reveal commentary
-        DialoguePortraitBox.Instance?.Say("Let me take a look around...", 2.5f);
+        // Phase 3 is player-driven — player clicks items to show the date.
+        DialoguePortraitBox.Instance?.Say("Show me what you've got!", 2.5f);
         yield return s_wait25;
 
-        // Reveal all reactions at once with staggered heart particles
-        yield return StartCoroutine(RevealAllReactions());
+        // Show Continue button — player explores at their own pace
+        if (PhaseContinueButton.Instance != null)
+        {
+            bool clicked = false;
+            PhaseContinueButton.Instance.Show(() => clicked = true);
+            yield return new WaitUntil(() => clicked || _state != SessionState.DateInProgress);
+            if (_state != SessionState.DateInProgress) yield break;
+        }
+
+        // Release phase camera back to original apartment angle for the sweep
+        ReleasePhaseCamera();
+        yield return s_wait05;
+
+        // Sweep remaining un-inspected items as a wave (from the wide OG angle)
+        yield return StartCoroutine(SweepRemainingItems());
 
         // Post-reveal commentary based on affection
         if (_affection >= 0.7f)
@@ -585,8 +616,17 @@ public class DateSessionManager : MonoBehaviour
         else
             DialoguePortraitBox.Instance?.Say("We can work on this...", 3f);
 
-        // Brief pause, then end the date
         yield return s_wait2;
+
+        // Final continue before flower gift / farewell
+        if (PhaseContinueButton.Instance != null)
+        {
+            bool clicked = false;
+            PhaseContinueButton.Instance.Show(() => clicked = true);
+            yield return new WaitUntil(() => clicked || _state != SessionState.DateInProgress);
+            if (_state != SessionState.DateInProgress) yield break;
+        }
+
         StartCoroutine(RunEndSequence());
     }
 
@@ -599,40 +639,76 @@ public class DateSessionManager : MonoBehaviour
     {
         if (_currentDate == null || _currentDate.preferences == null) yield break;
 
+        var items = GatherRevealItems(skipInspected: false);
+        yield return StartCoroutine(RunRevealWave(items));
+    }
+
+    /// <summary>
+    /// Sweep only the items the player didn't manually inspect in Phase 3.
+    /// Same visual wave as RevealAllReactions but filtered.
+    /// </summary>
+    private IEnumerator SweepRemainingItems()
+    {
+        if (_currentDate == null || _currentDate.preferences == null) yield break;
+
+        var items = GatherRevealItems(skipInspected: true);
+
+#if UNITY_EDITOR
+        Debug.Log($"[DateSessionManager] Sweep: {items.Count} un-inspected items remaining.");
+#endif
+
+        yield return StartCoroutine(RunRevealWave(items));
+    }
+
+    /// <summary>
+    /// Gather all qualifying ReactableTags into a sorted list.
+    /// When <paramref name="skipInspected"/> is true, tags already handled
+    /// by DateInspectSystem are excluded (for the Phase 3 remainder sweep).
+    /// </summary>
+    private List<(ReactableTag tag, ReactionType reaction, int multiplier)> GatherRevealItems(bool skipInspected)
+    {
         var prefs = _currentDate.preferences;
-        var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
         var apartmentScene = gameObject.scene;
+        var inspectSystem = DateInspectSystem.Instance;
 
-        // Track which highlights we've switched on so we can cleanly clear
-        // them on the next item in the wave and at the end of the reveal.
-        InteractableHighlight activeHL = null;
-        bool activeHLLiked = false;
-
-        // ── Pass 1: gather qualifying tags into a list and sort by multiplier
-        // descending so the wave starts with centerpieces (3×) and works its
-        // way down to normal shelves (1×). This makes the reveal feel curated.
-        var revealList = new List<(ReactableTag tag, ReactionType reaction, int multiplier)>();
+        var list = new List<(ReactableTag tag, ReactionType reaction, int multiplier)>();
         foreach (var tag in ReactableTag.All)
         {
             if (!tag.IsActive) continue;
             if (tag.IsPrivate) continue;
             if (tag.gameObject.scene != apartmentScene) continue;
 
+            if (skipInspected && inspectSystem != null && inspectSystem.IsInspected(tag))
+                continue;
+
             var reaction = ReactionEvaluator.EvaluateReactable(tag, prefs);
             if (reaction == ReactionType.Neutral) continue;
 
             int multiplier = GetTagEffectMultiplier(tag);
-            revealList.Add((tag, reaction, multiplier));
+            list.Add((tag, reaction, multiplier));
         }
         // Descending by multiplier so 3× items go first, then 2×, then 1×.
-        revealList.Sort((a, b) => b.multiplier.CompareTo(a.multiplier));
+        list.Sort((a, b) => b.multiplier.CompareTo(a.multiplier));
+        return list;
+    }
 
-        // ── Pass 2: the actual wave ──
-        for (int i = 0; i < revealList.Count; i++)
+    /// <summary>
+    /// The shared reveal wave — plays particles, popups, highlights, and
+    /// affection changes for each item with a 0.6s stagger. Used by both
+    /// RevealAllReactions (full scan) and SweepRemainingItems (filtered).
+    /// </summary>
+    private IEnumerator RunRevealWave(List<(ReactableTag tag, ReactionType reaction, int multiplier)> items)
+    {
+        var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
+
+        InteractableHighlight activeHL = null;
+        bool activeHLLiked = false;
+
+        for (int i = 0; i < items.Count; i++)
         {
-            var tag = revealList[i].tag;
-            var reaction = revealList[i].reaction;
-            int multiplier = revealList[i].multiplier;
+            var tag = items[i].tag;
+            var reaction = items[i].reaction;
+            int multiplier = items[i].multiplier;
 
             // Apply affection with the surface multiplier baked into magnitude.
             ApplyReaction(reaction, multiplier);
@@ -653,9 +729,7 @@ public class DateSessionManager : MonoBehaviour
                 type = reaction
             });
 
-            // ── Highlight the item that the reveal wave is hitting right now ──
-            // Clear any previously-lit item from the previous iteration so
-            // only the current item glows as the wave passes.
+            // Clear any previously-lit item so only the current item glows.
             if (activeHL != null)
             {
                 if (activeHLLiked) activeHL.SetPrepLikedHighlighted(false);
@@ -663,9 +737,6 @@ public class DateSessionManager : MonoBehaviour
                 activeHL = null;
             }
 
-            // Walk up the tag's hierarchy to find the InteractableHighlight —
-            // some tags live on child GameObjects while the highlight sits
-            // on the root (e.g. books in bookcases, paired shoes).
             var highlight = tag.GetComponent<InteractableHighlight>()
                          ?? tag.GetComponentInParent<InteractableHighlight>()
                          ?? tag.GetComponentInChildren<InteractableHighlight>();
@@ -684,35 +755,28 @@ public class DateSessionManager : MonoBehaviour
                 activeHL = highlight;
             }
 
-            // Use the item's actual transform position — GetVisualCenter
-            // uses renderer bounds which can be wrong for paired/stacked items.
             Vector3 itemPos = tag.transform.position;
 
 #if UNITY_EDITOR
-            Debug.Log($"[DateSessionManager] Reveal: '{tag.DisplayName}' → {reaction} ×{multiplier} | pos={itemPos:F3}");
+            Debug.Log($"[DateSessionManager] Reveal: '{tag.DisplayName}' \u2192 {reaction} \u00d7{multiplier} | pos={itemPos:F3}");
 #endif
 
-            // No camera zoom — items highlight and react in place.
-            // The player can see everything from the current camera angle.
-
-            // Spawn particles at the item
             SpawnReactionParticles(itemPos, reaction);
 
-            // Spawn the floating "2×" popup slightly above
-            SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
+            if (multiplier > 1)
+                SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
 
-            // Brief pause so particles and popup register before next item
             yield return new WaitForSeconds(0.6f);
         }
 
-        // Clear the last item's highlight so nothing stays lit forever.
+        // Clear the last item's highlight.
         if (activeHL != null)
         {
             if (activeHLLiked) activeHL.SetPrepLikedHighlighted(false);
             else activeHL.SetPrepDislikedHighlighted(false);
         }
 
-        // Also evaluate cleanliness as a whole-room judgment
+        // Evaluate cleanliness as a whole-room judgment
         if (TidyScorer.Instance != null)
         {
             var cleanReaction = ReactionEvaluator.EvaluateCleanliness(TidyScorer.Instance.OverallTidiness);
@@ -767,6 +831,23 @@ public class DateSessionManager : MonoBehaviour
             _drinkStationHighlightRenderer.material.color = _drinkOrigColor;
     }
 
+    private void HighlightDrinkGlasses(bool on)
+    {
+        if (on) InteractableHighlight.SuppressVisuals = false;
+
+        var glasses = DrinkGlass.All;
+        for (int i = 0; i < glasses.Count; i++)
+        {
+            if (glasses[i] == null) continue;
+            var hl = glasses[i].GetComponent<InteractableHighlight>();
+            if (hl == null && on)
+                hl = glasses[i].gameObject.AddComponent<InteractableHighlight>();
+            if (hl != null) hl.SetHighlighted(on);
+        }
+
+        if (!on) InteractableHighlight.SuppressVisuals = true;
+    }
+
     private IEnumerator Phase2PulseLoop()
     {
         while (true)
@@ -803,7 +884,7 @@ public class DateSessionManager : MonoBehaviour
     /// returns its current surface effect multiplier (1-5). Defaults to 1
     /// if the tag has no PlaceableObject or the item isn't on a surface.
     /// </summary>
-    private static int GetTagEffectMultiplier(ReactableTag tag)
+    public static int GetTagEffectMultiplier(ReactableTag tag)
     {
         if (tag == null) return 1;
         var po = tag.GetComponent<PlaceableObject>();
@@ -818,7 +899,7 @@ public class DateSessionManager : MonoBehaviour
     /// wiring is required. Color matches the reaction (pink for Like, grey
     /// for Dislike). Animates via a coroutine on DateSessionManager itself.
     /// </summary>
-    private void SpawnMultiplierPopup(Vector3 worldPos, int multiplier, ReactionType reaction)
+    public void SpawnMultiplierPopup(Vector3 worldPos, int multiplier, ReactionType reaction)
     {
         var go = new GameObject($"MultiplierPopup_x{multiplier}");
         go.transform.position = worldPos;
@@ -947,7 +1028,7 @@ public class DateSessionManager : MonoBehaviour
         return t.position;
     }
 
-    private static void SpawnReactionParticles(Vector3 position, ReactionType reaction)
+    public static void SpawnReactionParticles(Vector3 position, ReactionType reaction)
     {
         Vector3 spawnPos = position + Vector3.up * 0.15f;
         var go = new GameObject("ReactionParticles");
@@ -1133,21 +1214,68 @@ public class DateSessionManager : MonoBehaviour
     public void ReceiveDrink(DrinkRecipeDefinition recipe, int score)
     {
         if (_state != SessionState.DateInProgress || _currentDate == null) return;
+        if (_drinkVerdictRunning) return;
+        StartCoroutine(DrinkVerdictSequence(recipe, score));
+    }
+
+    /// <summary>Dramatic drink tasting beat → verdict → continue button → Phase 3.</summary>
+    private IEnumerator DrinkVerdictSequence(DrinkRecipeDefinition recipe, int score)
+    {
+        _drinkVerdictRunning = true;
 
         var reactionType = ReactionEvaluator.EvaluateDrink(recipe, score, _currentDate.preferences);
         float magnitude = score / 100f;
+        var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
+        string drinkName = recipe != null ? recipe.drinkName : "Drink";
 
+        // 1. Suspense — thinking face
+        reactionUI?.ShowText("Hmm...", _drinkTastingHold);
+        yield return new WaitForSeconds(_drinkTastingHold);
+
+        // 2. Verdict reaction
+        reactionUI?.ShowLabeledReaction(reactionType, drinkName);
         ApplyReaction(reactionType, magnitude);
 
+        // 3. Flower popup + particles
+        if (reactionType != ReactionType.Neutral)
+        {
+            string sym = reactionType == ReactionType.Like ? " \u2665" : " \u2639";
+            AffectionBar.Instance?.ShowPopup(drinkName + sym, reactionType == ReactionType.Like);
+
+            if (_dateCharacterGO != null)
+                SpawnReactionParticles(_dateCharacterGO.transform.position + Vector3.up * 0.5f, reactionType);
+        }
+
+        // Hold for flower animation
+        yield return s_wait1;
+
 #if UNITY_EDITOR
-        Debug.Log($"[DateSessionManager] Drink received: {recipe?.drinkName} (score={score}) → {reactionType}");
+        Debug.Log($"[DateSessionManager] Drink verdict: {drinkName} (score={score}) \u2192 {reactionType}");
 #endif
 
-        // Fail check after drink
-        if (CheckPhaseFailAndExit(_bgJudgingFailThreshold)) return;
+        // 4. Fail check after drink
+        if (CheckPhaseFailAndExit(_bgJudgingFailThreshold))
+        {
+            _drinkVerdictRunning = false;
+            yield break;
+        }
 
-        // Transition to Phase 3
-        StartCoroutine(TransitionToPhase3());
+        // 5. Wait for player to acknowledge
+        if (PhaseContinueButton.Instance != null)
+        {
+            bool clicked = false;
+            PhaseContinueButton.Instance.Show(() => clicked = true);
+            yield return new WaitUntil(() => clicked || _state != SessionState.DateInProgress);
+            if (_state != SessionState.DateInProgress)
+            {
+                _drinkVerdictRunning = false;
+                yield break;
+            }
+        }
+
+        // 6. Transition to Phase 3
+        yield return TransitionToPhase3();
+        _drinkVerdictRunning = false;
     }
 
     // ──────────────────────────────────────────────────────────────

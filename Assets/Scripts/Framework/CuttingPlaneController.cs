@@ -636,7 +636,7 @@ public class CuttingPlaneController : MonoBehaviour
     {
         if (AudioManager.Instance == null || (first == null && second == null)) return;
 
-        const float trimVolume = 0.9f;
+        const float trimVolume = 0.8f;
         if (second != null || delay > 0f)
             AudioManager.Instance.PlayDualSFX(first, second, delay, trimVolume);
         else

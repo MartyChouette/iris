@@ -21,8 +21,8 @@ public class DreamScreen : MonoBehaviour
     [SerializeField] private float _fadeOutDuration = 1.5f;
 
     [Header("Visuals")]
-    [Tooltip("Overlay opacity at full visibility (0.5 = 50% over apartment).")]
-    [SerializeField, Range(0f, 1f)] private float _overlayAlpha = 0.5f;
+    [Tooltip("Overlay opacity at full visibility (1.0 = fully opaque).")]
+    [SerializeField, Range(0f, 1f)] private float _overlayAlpha = 1f;
 
     [Tooltip("How fast the color bands rotate (degrees/sec).")]
     [SerializeField] private float _rotateSpeed = 15f;
@@ -116,15 +116,7 @@ public class DreamScreen : MonoBehaviour
     private IEnumerator DreamSequence(string overrideText)
     {
         yield return FadeIn(overrideText);
-
-        // Hold for minimum duration then wait for player click
         yield return new WaitForSecondsRealtime(_holdDuration);
-        // Subtle prompt
-        if (_dreamText != null)
-            _dreamText.text += "\n<size=60%><alpha=#88>click to continue";
-        yield return null; // skip the frame the click might already be down
-        while (!Input.GetMouseButtonDown(0) && !Input.GetKeyDown(KeyCode.Space))
-            yield return null;
         yield return FadeOut();
     }
 
@@ -224,7 +216,7 @@ public class DreamScreen : MonoBehaviour
         _canvasRoot.transform.SetParent(transform, false);
         var canvas = _canvasRoot.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 90; // above most UI but below pause
+        canvas.sortingOrder = 105; // above ScreenFade (100) so dream shows over black
 
         var scaler = _canvasRoot.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;

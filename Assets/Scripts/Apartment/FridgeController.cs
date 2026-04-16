@@ -247,6 +247,26 @@ public class FridgeController : MonoBehaviour
         Debug.Log($"[FridgeController] Stored {held.name} on shelf '{targetShelf.ZoneName}'.");
     }
 
+    /// <summary>
+    /// Returns true if the given surface is a fridge interior shelf
+    /// and the fridge doors are closed. ObjectGrabber uses this to
+    /// block placement on shelves the player can't reach.
+    /// </summary>
+    public bool IsShelfAndClosed(PlacementSurface surface)
+    {
+        if (surface == null || IsOpen) return false;
+        if (_interiorShelves == null) return false;
+        for (int i = 0; i < _interiorShelves.Length; i++)
+        {
+            if (_interiorShelves[i] == null) continue;
+            var shelfSurface = _interiorShelves[i].GetComponent<PlacementSurface>();
+            if (shelfSurface == null)
+                shelfSurface = _interiorShelves[i].GetComponentInParent<PlacementSurface>();
+            if (shelfSurface == surface) return true;
+        }
+        return false;
+    }
+
     /// <summary>Total free slots across all interior shelves.</summary>
     public int TotalFreeSlots
     {

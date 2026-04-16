@@ -215,8 +215,11 @@ public class GameClock : MonoBehaviour
         RecordSlot.Instance?.Stop();
         DateEndScreen.Instance?.Dismiss();
 
-        // Dream interstitial — psychedelic overlay instead of black screen
-        if (DreamScreen.Instance != null)
+        // Dream interstitial — psychedelic overlay instead of black screen.
+        // Skip if FlowerTrimmingTransition is currently playing (or already played) its own dream.
+        bool skipDream = DateSessionManager.PendingFlowerTrim
+                      || DayPhaseManager.SuppressSleepDream;
+        if (!skipDream && DreamScreen.Instance != null)
         {
             yield return DreamScreen.Instance.Play();
         }

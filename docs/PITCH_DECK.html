@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRIS — Pitch Deck</title>
+<title>SPENT BLOOMS — Pitch Deck</title>
 <style>
 /* ═══════════════════════════════════════════════════
    CUSTOM PROPERTIES
@@ -26,6 +26,8 @@
   --pink:          #d4778a;
   --gold:          #c9a84c;
   --grey-blue:     #7a8fa6;
+  --green:         #7ec850;
+  --blue:          #5b8def;
 
   --border:        rgba(232, 224, 212, 0.07);
   --border-accent: rgba(176, 64, 80, 0.25);
@@ -59,7 +61,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════
-   TOP VIGNETTE
+   TOP / BOTTOM VIGNETTE
    ═══════════════════════════════════════════════════ */
 body::before {
   content: '';
@@ -90,9 +92,9 @@ body::after {
   left: 28px;
   z-index: 100;
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: normal;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--accent);
   opacity: 0.75;
@@ -126,21 +128,22 @@ section {
   transform: translateY(0);
 }
 
-/* Stagger children */
 .reveal-stagger > * {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
-.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.12s; }
-.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.19s; }
-.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.26s; }
-.reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.33s; }
-.reveal-stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.40s; }
-.reveal-stagger.visible > *:nth-child(7) { opacity: 1; transform: none; transition-delay: 0.47s; }
-.reveal-stagger.visible > *:nth-child(8) { opacity: 1; transform: none; transition-delay: 0.54s; }
+.reveal-stagger.visible > *:nth-child(1)  { opacity: 1; transform: none; transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2)  { opacity: 1; transform: none; transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3)  { opacity: 1; transform: none; transition-delay: 0.19s; }
+.reveal-stagger.visible > *:nth-child(4)  { opacity: 1; transform: none; transition-delay: 0.26s; }
+.reveal-stagger.visible > *:nth-child(5)  { opacity: 1; transform: none; transition-delay: 0.33s; }
+.reveal-stagger.visible > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 0.40s; }
+.reveal-stagger.visible > *:nth-child(7)  { opacity: 1; transform: none; transition-delay: 0.47s; }
+.reveal-stagger.visible > *:nth-child(8)  { opacity: 1; transform: none; transition-delay: 0.54s; }
+.reveal-stagger.visible > *:nth-child(9)  { opacity: 1; transform: none; transition-delay: 0.61s; }
+.reveal-stagger.visible > *:nth-child(10) { opacity: 1; transform: none; transition-delay: 0.68s; }
 
 /* ═══════════════════════════════════════════════════
    HERO SECTION
@@ -156,7 +159,6 @@ section {
   position: relative;
 }
 
-/* Radial warm glow behind hero text */
 #hero::before {
   content: '';
   position: absolute;
@@ -182,7 +184,7 @@ section {
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(52px, 8vw, 88px);
+  font-size: clamp(36px, 7vw, 72px);
   font-weight: normal;
   color: var(--text);
   letter-spacing: 0.08em;
@@ -200,14 +202,8 @@ section {
   color: var(--text-dim);
   max-width: 680px;
   line-height: 1.65;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0;
-  border-right: 2px solid var(--accent);
-  animation:
-    typewriter 2.4s steps(80, end) 1.4s forwards,
-    blink 0.8s step-end 1.4s 4,
-    hideCursor 0.1s ease 3.9s forwards;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.4s forwards;
   margin: 0 auto;
 }
 
@@ -293,7 +289,7 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
-   CONCEPT SECTION
+   CONCEPT
    ═══════════════════════════════════════════════════ */
 .concept-body p {
   font-size: 16px;
@@ -306,7 +302,6 @@ section {
   margin-bottom: 0;
 }
 
-/* Callout — the punchline sentence */
 .concept-callout {
   border-left: 2px solid var(--accent);
   padding: 18px 28px;
@@ -404,7 +399,7 @@ section {
 }
 
 .timeline-items li::before {
-  content: '—';
+  content: '\2014';
   position: absolute;
   left: 0;
   color: var(--text-muted);
@@ -466,7 +461,6 @@ section {
   opacity: 1;
 }
 
-/* Horror card — special treatment */
 .mechanic-card.horror {
   grid-column: 1 / -1;
   border-color: rgba(176,64,80,0.15);
@@ -504,7 +498,7 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
-   AESTHETIC SECTION
+   AESTHETIC
    ═══════════════════════════════════════════════════ */
 .aesthetic-grid {
   display: grid;
@@ -571,21 +565,21 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
-   COMPARABLE TITLES TABLE
+   TABLES (shared)
    ═══════════════════════════════════════════════════ */
-.comp-table-wrapper {
+.table-wrapper {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
 }
 
-.comp-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
 }
 
-.comp-table thead th {
+.data-table thead th {
   background: var(--bg-elevated);
   color: var(--accent);
   font-family: var(--font-mono);
@@ -598,45 +592,72 @@ section {
   border-bottom: 1px solid var(--border);
 }
 
-.comp-table tbody tr {
+.data-table tbody tr {
   transition: background var(--transition);
 }
 
-.comp-table tbody tr:nth-child(odd) {
+.data-table tbody tr:nth-child(odd) {
   background: rgba(255,255,255,0.015);
 }
 
-.comp-table tbody tr:nth-child(even) {
+.data-table tbody tr:nth-child(even) {
   background: transparent;
 }
 
-.comp-table tbody tr:hover {
+.data-table tbody tr:hover {
   background: var(--accent-glow-s);
 }
 
-.comp-table tbody td {
+.data-table tbody td {
   padding: 14px 20px;
   color: var(--text-dim);
   border-bottom: 1px solid rgba(255,255,255,0.03);
   vertical-align: middle;
 }
 
-.comp-table tbody tr:last-child td {
+.data-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-.comp-table .td-title {
+.data-table .td-title,
+.data-table .td-name {
   color: var(--text);
   font-weight: 500;
   white-space: nowrap;
 }
 
+.data-table .td-number {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.data-table .td-accent {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.milestone-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 2px 9px;
+  border-radius: 4px;
+  background: rgba(176,64,80,0.12);
+  color: var(--accent);
+  border: 1px solid var(--border-accent);
+  white-space: nowrap;
+}
+
 /* ═══════════════════════════════════════════════════
-   AUDIENCE SECTION
+   AUDIENCE
    ═══════════════════════════════════════════════════ */
 .audience-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
   margin-bottom: 48px;
 }
@@ -665,6 +686,11 @@ section {
   background: var(--text-muted);
 }
 
+.audience-tag.tertiary {
+  background: var(--gold);
+  color: var(--bg);
+}
+
 .audience-card p {
   font-size: 13.5px;
   color: var(--text-dim);
@@ -672,7 +698,7 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
-   USP SECTION
+   USP LIST
    ═══════════════════════════════════════════════════ */
 .usp-list {
   list-style: none;
@@ -724,16 +750,16 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
-   STATE STATS BAR
+   STAT BARS
    ═══════════════════════════════════════════════════ */
-.state-stats {
+.stats-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-bottom: 28px;
 }
 
-.state-stat {
+.stat-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -741,7 +767,7 @@ section {
   text-align: center;
 }
 
-.state-stat-value {
+.stat-value {
   font-family: var(--font-serif);
   font-size: 26px;
   color: var(--text);
@@ -749,9 +775,9 @@ section {
   margin-bottom: 6px;
 }
 
-.state-stat-value .accent { color: var(--accent); }
+.stat-value .accent { color: var(--accent); }
 
-.state-stat-label {
+.stat-label {
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.3em;
@@ -759,16 +785,12 @@ section {
   color: var(--text-muted);
 }
 
-@media (max-width: 720px) {
-  .state-stats { grid-template-columns: 1fr 1fr; }
-}
-
 /* ═══════════════════════════════════════════════════
-   CURRENT STATE
+   STATE COLUMNS (Proof of Concept)
    ═══════════════════════════════════════════════════ */
 .state-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
@@ -797,13 +819,11 @@ section {
   flex-shrink: 0;
 }
 
-.state-dot.green  { background: #7ec850; box-shadow: 0 0 6px rgba(126,200,80,0.5); }
+.state-dot.green  { background: var(--green); box-shadow: 0 0 6px rgba(126,200,80,0.5); }
 .state-dot.amber  { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
-.state-dot.grey   { background: var(--text-muted); }
 
-.state-column-label.done  { color: #7ec850; }
+.state-column-label.done  { color: var(--green); }
 .state-column-label.wip   { color: var(--accent); }
-.state-column-label.ahead { color: var(--text-muted); }
 
 .state-list {
   list-style: none;
@@ -823,72 +843,183 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
-   MILESTONE TABLE
+   TEAM
    ═══════════════════════════════════════════════════ */
-.milestone-table-wrapper {
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.team-card {
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
+  padding: 28px 24px;
 }
 
-.milestone-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-
-.milestone-table thead th {
-  background: var(--bg-elevated);
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: normal;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  padding: 14px 20px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-}
-
-.milestone-table tbody tr:nth-child(odd) {
-  background: rgba(255,255,255,0.015);
-}
-
-.milestone-table tbody tr:nth-child(even) {
-  background: transparent;
-}
-
-.milestone-table tbody td {
-  padding: 14px 20px;
-  color: var(--text-dim);
-  border-bottom: 1px solid rgba(255,255,255,0.03);
-  vertical-align: middle;
-}
-
-.milestone-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.milestone-table .td-name {
+.team-name {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
   color: var(--text);
-  font-weight: 500;
+  margin-bottom: 6px;
 }
 
-.milestone-badge {
-  display: inline-block;
+.team-role {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.1em;
-  padding: 2px 9px;
-  border-radius: 4px;
-  background: rgba(176,64,80,0.12);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
   color: var(--accent);
-  border: 1px solid var(--border-accent);
-  white-space: nowrap;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.team-card p {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.7;
 }
 
 /* ═══════════════════════════════════════════════════
-   BUSINESS MODEL
+   GANTT CHART
+   ═══════════════════════════════════════════════════ */
+.gantt {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 20px 16px;
+  overflow-x: auto;
+}
+
+.gantt-header,
+.gantt-milestones,
+.gantt-row,
+.gantt-footer {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 0 16px;
+  align-items: center;
+}
+
+.gantt-months {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  position: relative;
+}
+
+.gantt-header .gantt-months span {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.gantt-milestone-row {
+  margin-bottom: 12px;
+}
+
+.gantt-phase {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px 2px;
+  border-radius: 3px;
+  line-height: 1.2;
+}
+
+.gantt-phase-vs {
+  background: rgba(126,200,80,0.12);
+  color: var(--green);
+  border: 1px solid rgba(126,200,80,0.25);
+}
+
+.gantt-phase-demo {
+  background: rgba(91,141,239,0.12);
+  color: var(--blue);
+  border: 1px solid rgba(91,141,239,0.25);
+}
+
+.gantt-phase-content {
+  background: rgba(176,64,80,0.10);
+  color: var(--accent);
+  border: 1px solid var(--border-accent);
+}
+
+.gantt-row {
+  margin-bottom: 6px;
+}
+
+.gantt-label-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.gantt-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.gantt-role {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.gantt-bar {
+  height: 22px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.gantt-bar-founder {
+  background: linear-gradient(135deg, rgba(232,224,212,0.12) 0%, rgba(232,224,212,0.06) 100%);
+  border: 1px solid rgba(232,224,212,0.15);
+}
+
+.gantt-bar-hire {
+  background: linear-gradient(135deg, rgba(176,64,80,0.18) 0%, rgba(176,64,80,0.08) 100%);
+  border: 1px solid var(--border-accent);
+}
+
+.gantt-footer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.gantt-total {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .gantt-header,
+  .gantt-milestones,
+  .gantt-row,
+  .gantt-footer {
+    grid-template-columns: 100px 1fr;
+    gap: 0 10px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   BUSINESS STATS
    ═══════════════════════════════════════════════════ */
 .biz-grid {
   display: grid;
@@ -936,7 +1067,136 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════
-   KEYWORD PALETTE (decorative)
+   MARKETING CYCLES
+   ═══════════════════════════════════════════════════ */
+.cycle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
+
+.cycle-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+}
+
+.cycle-card.cycle-discovery {
+  border-color: var(--border-accent);
+  background: linear-gradient(135deg, #141414 0%, #160e0a 100%);
+}
+
+.cycle-number {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cycle-title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.cycle-card p {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════
+   ASK — BIG NUMBER
+   ═══════════════════════════════════════════════════ */
+.ask-hero {
+  text-align: center;
+  padding: 40px 0;
+  margin-bottom: 32px;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(176,64,80,0.04) 0%, transparent 100%);
+}
+
+.ask-amount {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 6vw, 56px);
+  color: var(--text);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.ask-model {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.slider-wrap {
+  max-width: 360px;
+  margin: 28px auto 0;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+#ask-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--fill, 100%), var(--border) var(--fill, 100%), var(--border) 100%);
+  outline: none;
+  cursor: pointer;
+}
+
+#ask-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 10px var(--accent-glow), 0 0 0 1px var(--accent-dim);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+#ask-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 16px rgba(176,64,80,0.4), 0 0 0 1px var(--accent);
+}
+
+#ask-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 10px var(--accent-glow);
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════════
+   KEYWORD DEMO
    ═══════════════════════════════════════════════════ */
 .keyword-demo {
   display: flex;
@@ -976,12 +1236,12 @@ footer {
   text-transform: uppercase;
 }
 
-.footer-iris {
+.footer-title {
   display: block;
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: 28px;
   color: var(--accent);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   margin-bottom: 16px;
   opacity: 0.4;
 }
@@ -995,7 +1255,11 @@ footer {
   .mechanics-grid,
   .aesthetic-grid,
   .audience-grid,
-  .biz-grid { grid-template-columns: 1fr; }
+  .biz-grid,
+  .team-grid,
+  .cycle-grid { grid-template-columns: 1fr; }
+
+  .stats-bar { grid-template-columns: 1fr 1fr; }
 
   .mechanic-card.horror { grid-column: auto; }
 
@@ -1004,16 +1268,12 @@ footer {
   .timeline-phase { grid-template-columns: 80px 1px 1fr; gap: 0 16px; }
 
   .hero-hook {
-    white-space: normal;
-    width: 100%;
-    border-right: none;
-    animation: fadeUp 0.8s ease 1.4s forwards;
+    font-size: 16px;
   }
 
-  .hero-title { font-size: 44px; }
+  .hero-title { font-size: 36px; }
 }
 
-/* Projector aspect — bump up font sizes slightly for 16:9 projection */
 @media (min-width: 1400px) {
   :root { font-size: 17px; }
 }
@@ -1023,15 +1283,15 @@ footer {
 <body>
 
 <!-- Fixed wordmark -->
-<div id="wordmark">IRIS</div>
+<div id="wordmark">Spent Blooms</div>
 
 <!-- ═══════════════════════════════════════════════
      HERO
      ═══════════════════════════════════════════════ -->
 <section id="hero">
-  <span class="hero-label">Pitch Deck — 2026</span>
-  <h1 class="hero-title">IRIS</h1>
-  <p class="hero-hook">A cozy apartment sim where you date strangers, tend your space,<br>and slowly realize some of them never leave.</p>
+  <span class="hero-label">Pitch Deck &mdash; Rum Rum Raspberry &mdash; 2026</span>
+  <h1 class="hero-title">SPENT<br>BLOOMS</h1>
+  <p class="hero-hook">A cozy apartment sim where you date strangers, tend your space, and slowly learn that love hurts.</p>
   <div class="hero-scroll-hint">
     <div class="scroll-line"></div>
     <span class="scroll-label">Scroll</span>
@@ -1039,19 +1299,19 @@ footer {
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     CONCEPT
+     01 — CONCEPT
      ═══════════════════════════════════════════════ -->
 <section id="concept">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">01 — Concept</span>
+      <span class="section-label">01 &mdash; Concept</span>
       <h2 class="section-title">A contemplative life sim about<br>preparation and consequence.</h2>
       <div class="section-divider"></div>
     </div>
     <div class="reveal concept-body">
-      <p>Iris is a contemplative life sim about preparing for dates and living with the consequences. You play as Nema, alone in a small apartment. Each morning a newspaper arrives with personal ads. You choose someone to invite over, then spend the day making the apartment worthy of them — wiping stains, arranging objects, choosing music, watering plants, pouring drinks. Every choice is physical, unhurried, and tactile.</p>
+      <p>Spent Blooms is a contemplative life sim about preparing for dates and living with the consequences. You play as Nema, alone in a small apartment. Each morning a newspaper arrives with personal ads. You choose someone to invite over, then spend the day making the apartment worthy of them &mdash; wiping stains, arranging objects, choosing music, watering plants, pouring drinks. Every choice is physical, unhurried, and tactile.</p>
       <div class="concept-callout">
-        <p>Their affection — rendered as a growing flower — is the sum of your preparation. Afterward, you trim that flower. How well you cut determines how long it lives in your apartment.</p>
+        <p>Their affection &mdash; rendered as a growing flower &mdash; is the sum of your preparation. Afterward, you trim that flower. The trimmed bloom joins a growing bouquet in your refrigerator.</p>
       </div>
       <p>When your date arrives, they notice everything. They judge your outfit at the door, react to the drink you pour, wander the living room reading your shelves and reacting to your plants.</p>
       <p>Over seven days, the calendar fills. Dates accumulate. Some of them go very well. Those are the ones who stop calling back.</p>
@@ -1060,34 +1320,82 @@ footer {
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     CORE LOOP
+     02 — WHY NOW
+     ═══════════════════════════════════════════════ -->
+<section id="why-now">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">02 &mdash; Why Now</span>
+      <h2 class="section-title">Five trends converging<br>on one empty apartment.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <ul class="usp-list reveal-stagger">
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Cozy is the fastest-growing indie category on Steam.</strong>
+          <span>Unpacking (3M+ copies), Spiritfarer (1M+), and Coffee Talk (500K+) proved that domestic ritual and emotional nuance sell at scale.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Horror-cozy crossover has no clear owner.</strong>
+          <span>Inscryption, Cult of the Lamb, and Doki Doki Literature Club proved "charming on the surface, dark underneath" creates massive word-of-mouth. No game owns the apartment-sim-to-horror pipeline.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>PSX aesthetic revival is at peak visibility.</strong>
+          <span>Buckshot Roulette, Iron Lung, and Sorry We're Closed turned retro rendering into a commercial differentiator.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Dating sims are booming.</strong>
+          <span>Steam dating sim revenue hit record highs in 2024&ndash;2025. The audience is growing and underserved by mechanically ambitious titles.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Built for content creators.</strong>
+          <span>"Cozy dating sim that's secretly about a serial killer" is engineered for reaction content &mdash; the same pattern that drove Doki Doki Literature Club to 11M+ downloads.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     03 — CORE LOOP
      ═══════════════════════════════════════════════ -->
 <section id="core-loop">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">02 — Core Loop</span>
+      <span class="section-label">03 &mdash; Core Loop</span>
       <h2 class="section-title">One day. Four phases.<br>One flower.</h2>
       <div class="section-divider"></div>
     </div>
     <ol class="timeline reveal-stagger">
-
       <li class="timeline-phase">
         <div class="timeline-time">Morning</div>
         <div class="timeline-line"><div class="timeline-dot"></div></div>
         <div class="timeline-content">
           <div class="timeline-heading">Newspaper Arrives</div>
           <ul class="timeline-items">
-            <li>Read personal ads — scan for highlighted keywords</li>
+            <li>Read personal ads &mdash; scan for highlighted keywords</li>
             <li>Choose tonight's date</li>
           </ul>
         </div>
       </li>
-
       <li class="timeline-phase">
         <div class="timeline-time">Afternoon</div>
         <div class="timeline-line"><div class="timeline-dot"></div></div>
         <div class="timeline-content">
-          <div class="timeline-heading">Preparation Phase — Timed</div>
+          <div class="timeline-heading">Preparation Phase &mdash; Timed</div>
           <ul class="timeline-items">
             <li>Clean stains, arrange objects, water plants</li>
             <li>Select vinyl, spray perfume, prepare drinks</li>
@@ -1095,76 +1403,69 @@ footer {
           </ul>
         </div>
       </li>
-
       <li class="timeline-phase">
         <div class="timeline-time">Evening</div>
         <div class="timeline-line"><div class="timeline-dot"></div></div>
         <div class="timeline-content">
           <div class="timeline-heading">The Date Arrives</div>
           <ul class="timeline-items">
-            <li>Phase 1 — Entrance: outfit, perfume, greeting, cleanliness judged</li>
-            <li>Phase 2 — Kitchen: make their drink from memory or guesswork</li>
-            <li>Phase 3 — Living Room: they investigate everything you placed</li>
+            <li>Phase 1 &mdash; Entrance: outfit, perfume, greeting, cleanliness judged</li>
+            <li>Phase 2 &mdash; Kitchen: make their drink from memory or guesswork</li>
+            <li>Phase 3 &mdash; Living Room: they investigate everything you placed</li>
           </ul>
         </div>
       </li>
-
       <li class="timeline-phase">
         <div class="timeline-time">Night</div>
         <div class="timeline-line"><div class="timeline-dot"></div></div>
         <div class="timeline-content">
           <div class="timeline-heading">The Aftermath</div>
           <ul class="timeline-items">
-            <li>Date ends — a flower is left behind</li>
+            <li>Date ends &mdash; a flower is left behind</li>
             <li>Flower trimming scene: cut the stems, score the arrangement</li>
-            <li>Trimmed flower becomes a living plant in your apartment</li>
-            <li>Sleep — next morning begins</li>
+            <li>Trimmed flower joins the growing bouquet in the fridge</li>
+            <li>Sleep &mdash; next morning begins</li>
           </ul>
           <div class="timeline-souvenir">
-            <p>Each person visits three times. After the third date — the one with the strange flower — they don't call back. A souvenir appears the next morning.</p>
+            <p>Each person visits three times. After the third date &mdash; the one with the strange flower &mdash; they don't call back. A souvenir appears the next morning.</p>
           </div>
         </div>
       </li>
-
     </ol>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     KEY MECHANICS
+     04 — KEY MECHANICS
      ═══════════════════════════════════════════════ -->
 <section id="mechanics">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">03 — Key Mechanics</span>
+      <span class="section-label">04 &mdash; Key Mechanics</span>
       <h2 class="section-title">Six interlocking systems<br>that share one emotional register.</h2>
       <div class="section-divider"></div>
     </div>
     <div class="mechanics-grid reveal-stagger">
-
       <div class="mechanic-card">
         <span class="mechanic-number">01</span>
         <div class="mechanic-title">Physical Apartment Preparation</div>
-        <p class="mechanic-body">Every object in the apartment is a physics prop. You pick things up, carry them, place them. The watering can needs to be filled and tilted. The vinyl record must be extracted from its sleeve and walked to the turntable. Drink bottles pour in real time with layered liquid physics. The preparation phase is not a menu — it is the game.</p>
+        <p class="mechanic-body">Every object in the apartment is a physics prop. You pick things up, carry them, place them. The watering can needs to be filled and tilted. The vinyl record must be extracted from its sleeve and walked to the turntable. Drink bottles pour in real time with layered liquid physics. The preparation phase is not a menu &mdash; it is the game.</p>
       </div>
-
       <div class="mechanic-card">
         <span class="mechanic-number">02</span>
         <div class="mechanic-title">The Date's Gaze</div>
-        <p class="mechanic-body">Your date notices specific things in a specific order. Phase 3 is an item-by-item reveal: the date walks to each object in the apartment, pauses, reacts. A thought bubble — heart, neutral face, or frown — appears while a multiplier popup shows how much the item mattered. Items in prominent spots are worth more.</p>
+        <p class="mechanic-body">Your date notices specific things in a specific order. Phase 3 is an item-by-item reveal: the date walks to each object, pauses, reacts. A thought bubble &mdash; heart, neutral face, or frown &mdash; appears while a multiplier popup shows how much the item mattered. Items in prominent spots are worth more.</p>
       </div>
-
       <div class="mechanic-card">
         <span class="mechanic-number">03</span>
         <div class="mechanic-title">The Flower as Score</div>
-        <p class="mechanic-body">Every date leaves a flower. You trim it in a standalone scene using virtual scissors — cutting angle, stem length, and condition all feed into a score. That score determines how many days the trimmed flower survives as a living plant in your apartment. Each person brings three flowers across three dates. The first two are beautiful. The third one is... different.</p>
+        <p class="mechanic-body">Every date leaves a flower. You trim it in a standalone scene using virtual scissors &mdash; cutting angle, stem length, and condition all feed into a score. The trimmed bloom joins a growing bouquet in the refrigerator &mdash; a physical record of every date you've had. Each person brings three flowers across three dates. The first two are beautiful. The third one is... different.</p>
       </div>
-
       <div class="mechanic-card">
         <span class="mechanic-number">04</span>
         <div class="mechanic-title">The Keyword System</div>
         <p class="mechanic-body">Every character has preferences that surface as highlighted keywords across the newspaper, dialogue, and item descriptions.</p>
-        <div class="keyword-demo" style="margin-top:16px;">
+        <div class="keyword-demo">
           <span class="kw like">jazz</span>
           <span class="kw like">terracotta</span>
           <span class="kw hobby">bookbinding</span>
@@ -1174,30 +1475,27 @@ footer {
         </div>
         <p class="mechanic-body" style="margin-top:14px;">The system rewards close reading. Attention paid to a personal ad on day one pays off in affection on day three.</p>
       </div>
-
       <div class="mechanic-card">
         <span class="mechanic-number">05</span>
         <div class="mechanic-title">The Mood Machine</div>
-        <p class="mechanic-body">Weather, time of day, music, plant health, and air quality all feed into a single 0–1 mood value. This drives the directional light color, ambient tone, fog density, rain particles, and audio mix in real time. A stormy evening with a dead plant and no music feels different from a clear sunset with jazz and a healthy fern. The date notices.</p>
+        <p class="mechanic-body">Weather, time of day, music, plant health, and air quality all feed into a single 0&ndash;1 mood value. This drives light color, ambient tone, fog density, rain particles, and audio mix in real time. A stormy evening with a dead plant and no music feels different from a clear sunset with jazz and a healthy fern. The date notices.</p>
       </div>
-
       <div class="mechanic-card horror">
         <span class="mechanic-number">06</span>
-        <div class="mechanic-title">The Horror Layer — Opt-In Through Attention</div>
-        <p class="mechanic-body">The game never serves the horror to the player. Stains on the counter, sad notes in the mail, relics of Nema's past tucked in drawers, the strange third flower from each date — it's all there, but only for those who look. Players who don't mind the mess will have a pleasant apartment sim. Players who read closely will notice that each person visits three times, and the third flower is always wrong. That people stop appearing in the newspaper. That souvenirs accumulate. That future dates notice them. The game never explains Nema. The player connects the dots — or doesn't.</p>
+        <div class="mechanic-title">The Horror Layer &mdash; Woven In, Never Explained</div>
+        <p class="mechanic-body">Each person visits three times. You learn their preferences, refine your preparation, deepen the romance. Their third flower arrives wrong &mdash; wilted, dark, thorned. After that final date, they vanish. They stop appearing in the newspaper. Calls go unanswered. A personal item appears in the apartment: a necklace on the counter, a ring in the kitchen drawer. Every player will notice people stop showing up. The horror isn't hidden &mdash; it's unavoidable. What's optional is how deeply you read into it. The game never explains Nema. The player decides what it means.</p>
       </div>
-
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     AESTHETIC AND TONE
+     05 — AESTHETIC & TONE
      ═══════════════════════════════════════════════ -->
 <section id="aesthetic">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">04 — Aesthetic and Tone</span>
+      <span class="section-label">05 &mdash; Aesthetic &amp; Tone</span>
       <h2 class="section-title">Cozy first. Mystery always.<br>Dread only when it counts.</h2>
       <div class="section-divider"></div>
     </div>
@@ -1209,16 +1507,24 @@ footer {
       <div class="aesthetic-block">
         <span class="aesthetic-block-label">Tone Balance</span>
         <div style="display:flex; gap:8px; margin-bottom:14px;">
-          <div style="flex:60; height:6px; border-radius:3px; background:#7ec850;" title="60% Cozy"></div>
-          <div style="flex:25; height:6px; border-radius:3px; background:#5b8def;" title="25% Mystery"></div>
-          <div style="flex:15; height:6px; border-radius:3px; background:var(--accent);" title="15% Creepy"></div>
+          <div style="flex:60; height:6px; border-radius:3px; background:var(--green);" title="60% Cozy"></div>
+          <div style="flex:25; height:6px; border-radius:3px; background:var(--blue);" title="25% Mystery & Fun"></div>
+          <div style="flex:15; height:6px; border-radius:3px; background:var(--accent);" title="15% Creepy & Sexy"></div>
         </div>
         <div style="display:flex; justify-content:space-between; margin-bottom:14px;">
-          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:#7ec850;">60% COZY</span>
-          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:#5b8def;">25% MYSTERY</span>
-          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--accent);">15% CREEPY</span>
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--green);">60% COZY</span>
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--blue);">25% MYSTERY &amp; FUN</span>
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--accent);">15% CREEPY &amp; SEXY</span>
         </div>
-        <p>The apartment sim is genuine and unhurried. The observation layer rewards attention across every encounter. The rare moments of dread land hard precisely because the rest of the game earned your trust.</p>
+        <p>The apartment sim is genuine. The observation layer is playful detective work. The romance lingers. The rare moments of dread land hard because the rest of the game earned your trust.</p>
+      </div>
+      <div class="aesthetic-block">
+        <span class="aesthetic-block-label">Audio Identity</span>
+        <p>The record player is a core game object &mdash; vinyl selection directly affects the apartment's mood. Original lo-fi and jazz tracks scored for each in-game record. Ambient audio shifts with weather and time of day. Sound design is tactile: the click of a bottle cap, water filling a can, scissors on a stem. Every interaction sounds as physical as it looks.</p>
+      </div>
+      <div class="aesthetic-block">
+        <span class="aesthetic-block-label">Palette</span>
+        <p>Muted, warm. Cream walls, terracotta pots, soft greens, amber lamplight. The PSX aesthetic keeps the game feeling hand-made rather than procedural. Every surface reads as a deliberate choice.</p>
       </div>
     </div>
     <div class="reveal">
@@ -1226,7 +1532,7 @@ footer {
       <div class="reference-pills">
         <div class="reference-pill" style="border-color: var(--border-accent);">
           <span class="pill-title" style="color: var(--accent);">Sorry We're Closed</span>
-          <span class="pill-note">Primary — PSX aesthetic, warm domestic horror</span>
+          <span class="pill-note">Primary &mdash; PSX aesthetic, warm domestic horror</span>
         </div>
         <div class="reference-pill">
           <span class="pill-title">Killer7</span>
@@ -1257,64 +1563,88 @@ footer {
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     TARGET AUDIENCE
+     06 — AUDIENCE & MARKET
      ═══════════════════════════════════════════════ -->
 <section id="audience">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">05 — Target Audience</span>
-      <h2 class="section-title">Two audiences.<br>One game that delivers for both.</h2>
+      <span class="section-label">06 &mdash; Audience &amp; Market</span>
+      <h2 class="section-title">Three audiences.<br>One game at their intersection.</h2>
       <div class="section-divider"></div>
     </div>
-    <div class="audience-grid reveal">
+    <div class="audience-grid reveal-stagger">
       <div class="audience-card">
         <span class="audience-tag">Primary</span>
-        <p>Cozy game players who want more mechanical depth. Fans of apartment sims, slice-of-life games, and games where preparation and ritual are the gameplay.</p>
+        <p>Cozy game players who want more mechanical depth. Fans of apartment sims, slice-of-life games, and games where preparation and ritual are the gameplay. This audience drove Unpacking past 3M copies.</p>
       </div>
       <div class="audience-card">
         <span class="audience-tag secondary">Secondary</span>
-        <p>Horror-adjacent players drawn to psychological dread and unreliable-narrator storytelling. Players who discovered games like Yume Nikki, LSD: Dream Emulator, or Omori through word-of-mouth.</p>
+        <p>Horror-adjacent and romance players drawn to psychological dread, romantic tension, and unreliable-narrator storytelling. Players who found Doki Doki Literature Club, Omori, or Boyfriend Dungeon through word-of-mouth.</p>
+      </div>
+      <div class="audience-card">
+        <span class="audience-tag tertiary">Content Creators</span>
+        <p>The hidden horror layer creates a natural "reaction video" pipeline &mdash; the same dual-discovery mechanic that made DDLC a cultural event with 11M+ downloads.</p>
       </div>
     </div>
 
-    <div class="reveal" style="margin-top: 48px;">
+    <div class="reveal concept-body" style="margin-bottom: 36px;">
+      <p><strong style="color: var(--text);">Market position:</strong> Steam's cozy/life-sim tag has grown 40%+ year-over-year in revenue since 2022. Top cozy indie releases averaged well over 500K copies. Spent Blooms targets the intersection of three growing audiences &mdash; cozy, dating, and horror &mdash; that no current title occupies.</p>
+    </div>
+
+    <div class="reveal">
       <span class="section-label" style="margin-bottom: 20px;">Comparable Titles</span>
-      <div class="comp-table-wrapper">
-        <table class="comp-table">
+      <div class="table-wrapper">
+        <table class="data-table">
           <thead>
             <tr>
               <th>Title</th>
-              <th>Relevance to Iris</th>
+              <th>Similarity</th>
+              <th>Spent Blooms Adds</th>
+              <th>Performance</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="td-title">Sorry We're Closed</td>
-              <td>PSX aesthetic, warm domestic horror, primary visual reference</td>
-            </tr>
-            <tr>
               <td class="td-title">Unpacking</td>
-              <td>Spatial arrangement as emotional storytelling</td>
-            </tr>
-            <tr>
-              <td class="td-title">The Case of the Golden Idol</td>
-              <td>Point-and-click observation, deduction through details</td>
-            </tr>
-            <tr>
-              <td class="td-title">Grim Fandango</td>
-              <td>Point-and-click with physical world interaction, tone</td>
-            </tr>
-            <tr>
-              <td class="td-title">Coffee Talk</td>
-              <td>Date prep loop, character-driven relationship building</td>
+              <td>Spatial arrangement as storytelling</td>
+              <td>Every object has gameplay stakes &mdash; dates judge what you placed</td>
+              <td style="white-space:nowrap;">3M+ copies</td>
             </tr>
             <tr>
               <td class="td-title">Spiritfarer</td>
               <td>Cozy management with meaningful loss</td>
+              <td>Loss is a mystery you cause, not a story that happens to you</td>
+              <td style="white-space:nowrap;">1M+ copies</td>
+            </tr>
+            <tr>
+              <td class="td-title">Coffee Talk</td>
+              <td>Drink prep, character relationships</td>
+              <td>Physical pouring, full apartment to prepare, not just a counter</td>
+              <td style="white-space:nowrap;">500K+ franchise</td>
+            </tr>
+            <tr>
+              <td class="td-title">Doki Doki Literature Club</td>
+              <td>Cute exterior, dark interior, viral pipeline</td>
+              <td>Horror is structural (dates vanish), not a twist ending</td>
+              <td style="white-space:nowrap;">11M+ downloads</td>
+            </tr>
+            <tr>
+              <td class="td-title">Golden Idol</td>
+              <td>Observation and deduction</td>
+              <td>You act on what you deduce &mdash; prep the apartment, not solve a case</td>
+              <td style="white-space:nowrap;">Very Positive</td>
             </tr>
             <tr>
               <td class="td-title">Venba</td>
-              <td>Small kitchen mechanics with emotional weight</td>
+              <td>Kitchen mechanics with emotional weight</td>
+              <td>Cooking is one station of many in a full living space</td>
+              <td style="white-space:nowrap;">Game Awards nom</td>
+            </tr>
+            <tr>
+              <td class="td-title">Sorry We're Closed</td>
+              <td>PSX aesthetic, domestic horror</td>
+              <td>The domestic routine IS the gameplay, not just the setting</td>
+              <td style="white-space:nowrap;">Strong wishlists</td>
             </tr>
           </tbody>
         </table>
@@ -1324,13 +1654,13 @@ footer {
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     UNIQUE SELLING POINTS
+     07 — WHY THIS GAME
      ═══════════════════════════════════════════════ -->
 <section id="usp">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">06 — Why This Game</span>
-      <h2 class="section-title">Five things Iris does<br>that no other game does.</h2>
+      <span class="section-label">07 &mdash; Why This Game</span>
+      <h2 class="section-title">Five things Spent Blooms does<br>that no other game does.</h2>
       <div class="section-divider"></div>
     </div>
     <ul class="usp-list reveal-stagger">
@@ -1338,35 +1668,35 @@ footer {
         <div class="usp-marker"></div>
         <div class="usp-text">
           <strong>The preparation IS the game.</strong>
-          <span>Not a menu between story beats — a tactile, physical ritual you perform before every date. The hours spent arranging the apartment are the hours the game is most itself.</span>
+          <span>Not a menu between story beats &mdash; a tactile, physical ritual you perform before every date. The hours spent arranging the apartment are the hours the game is most itself.</span>
         </div>
       </li>
       <li class="usp-item">
         <div class="usp-marker"></div>
         <div class="usp-text">
           <strong>A date who sees everything.</strong>
-          <span>The judgment phase rewards players who paid attention to keyword hints. Every item in the apartment has a potential meaning. Observation is the core skill.</span>
+          <span>The judgment phase rewards players who paid attention to keyword hints. Every item in the apartment has potential meaning. Observation is the core skill.</span>
         </div>
       </li>
       <li class="usp-item">
         <div class="usp-marker"></div>
         <div class="usp-text">
-          <strong>Cozy and unsettling in the same scene.</strong>
-          <span>The horror is never delivered by a cutscene or a jump scare. It emerges from the same systems the cozy gameplay runs on. The mechanics are the dread.</span>
+          <strong>Cozy, romantic, and unsettling in the same scene.</strong>
+          <span>The horror is never delivered by a cutscene or a jump scare. It emerges from the same systems the cozy gameplay and romance run on. The mechanics are the dread.</span>
         </div>
       </li>
       <li class="usp-item">
         <div class="usp-marker"></div>
         <div class="usp-text">
-          <strong>The flower as a living consequence.</strong>
-          <span>How you trim your date's flower becomes part of the apartment for days. A bad cut changes the smell, the mood, the mess. Your carefulness persists visually.</span>
+          <strong>The bouquet as a living record.</strong>
+          <span>Every trimmed flower joins a growing bouquet in the refrigerator. Open the fridge and your dating history stares back at you &mdash; beautiful stems beside wilted ones, strange third flowers next to perfect first dates.</span>
         </div>
       </li>
       <li class="usp-item">
         <div class="usp-marker"></div>
         <div class="usp-text">
-          <strong>Fully physical UI.</strong>
-          <span>Drinks pour in layered cross-sections. Watering shows a 2D soil-and-water simulation. The record player requires physical handling. Every mechanic has a visual body.</span>
+          <strong>Two marketing cycles from one game.</strong>
+          <span>Launch sells a cozy apartment dating sim. Post-launch discovery of the horror layer drives a second wave of organic content creator coverage &mdash; the same pattern that made Doki Doki Literature Club a phenomenon.</span>
         </div>
       </li>
     </ul>
@@ -1374,107 +1704,191 @@ footer {
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     CURRENT STATE
+     08 — PROOF OF CONCEPT
      ═══════════════════════════════════════════════ -->
-<section id="state">
+<section id="proof">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">07 — Current State</span>
+      <span class="section-label">08 &mdash; Proof of Concept</span>
       <h2 class="section-title">This is not a concept.<br>It is a working game.</h2>
       <div class="section-divider"></div>
     </div>
-    <div class="state-stats reveal-stagger">
-      <div class="state-stat">
-        <div class="state-stat-value"><span class="accent">30+</span></div>
-        <div class="state-stat-label">Systems Built</div>
+    <div class="stats-bar reveal-stagger">
+      <div class="stat-card">
+        <div class="stat-value"><span class="accent">30+</span></div>
+        <div class="stat-label">Systems Built</div>
       </div>
-      <div class="state-stat">
-        <div class="state-stat-value">20K+</div>
-        <div class="state-stat-label">Lines of Code</div>
+      <div class="stat-card">
+        <div class="stat-value">20K+</div>
+        <div class="stat-label">Lines of Code</div>
       </div>
-      <div class="state-stat">
-        <div class="state-stat-value"><span class="accent">8</span>/10</div>
-        <div class="state-stat-label">Quality Audit</div>
+      <div class="stat-card">
+        <div class="stat-value"><span class="accent">8</span>/10</div>
+        <div class="stat-label">Quality Audit</div>
       </div>
-      <div class="state-stat">
-        <div class="state-stat-value">14</div>
-        <div class="state-stat-label">Dev Phases Done</div>
+      <div class="stat-card">
+        <div class="stat-value">18</div>
+        <div class="stat-label">Months Built</div>
       </div>
     </div>
     <div class="state-grid reveal-stagger">
       <div class="state-column">
         <div class="state-column-label done">
           <div class="state-dot green"></div>
-          Built and Functional
+          De-Risked &mdash; Built &amp; Functional
         </div>
         <ul class="state-list">
-          <li>Apartment hub — 3 areas, physics interaction, grid-snap placement</li>
-          <li>Dating loop — 7-day calendar, newspaper ads, 3-phase dates</li>
-          <li>7 date characters with preferences, reactions, dialogue</li>
-          <li>Entrance judgment — outfit, perfume, greeting, cleanliness</li>
-          <li>Drink making with physical pour and delivery to date</li>
-          <li>Record player — physical vinyl workflow, album art</li>
-          <li>Book collection puzzle with paired-item snap</li>
-          <li>Physical watering with 2D cross-section and weather drying</li>
-          <li>Flower trimming — virtual cutting, scoring, living plant persistence</li>
-          <li>MoodMachine — weather, time, music, plants, air quality</li>
+          <li>Full dating loop: newspaper &rarr; prep &rarr; 3-phase date &rarr; flower &rarr; sleep</li>
+          <li>Physics interaction: pick up, carry, place, pour, water, spray, snap</li>
+          <li>Drink-making with physical pour, magnetic snap, delivery</li>
+          <li>Record player: extract vinyl, carry, snap, play, album art</li>
+          <li>Book collection, paired-item puzzles, 2D watering simulation</li>
+          <li>MoodMachine: weather, time, music, plants, air quality</li>
+          <li>Flower trimming: virtual cutting, scoring, fridge bouquet persistence</li>
           <li>Keyword highlighting across all UI</li>
-          <li>Phase 3 scoring with multiplier popups</li>
-          <li>PSX rendering — vertex snap, affine, dithering, per-object overrides</li>
-          <li>Accessibility — 15 settings, 5 categories, text theme</li>
-          <li>Main menu, tutorial, name entry, outfit selection</li>
-          <li>Save system, calendar, item pairing, visibility indicators</li>
+          <li>7 date characters with preferences, reactions, dialogue</li>
+          <li>Entrance judgment: outfit, perfume, greeting, cleanliness</li>
+          <li>PSX rendering: vertex snap, affine warp, dithering, volumetrics</li>
+          <li>Accessibility suite: 15 settings, 5 categories</li>
+          <li>Save system, calendar, main menu, tutorial, name entry</li>
           <li>Playtest feedback with Discord webhook integration</li>
         </ul>
       </div>
       <div class="state-column">
         <div class="state-column-label wip">
           <div class="state-dot amber"></div>
-          In Development
+          Investment Funds &mdash; Content &amp; Polish
         </div>
         <ul class="state-list">
-          <li>Nema character — phase models exist, completing behaviors</li>
-          <li>Phase 3 conversation and reaction polish</li>
-          <li>Date disappearance mechanic</li>
-          <li>Souvenir accumulation</li>
-          <li>Couch win scene</li>
-          <li>Player knowledge / dating journal</li>
-          <li>Narrative content — Nema bible, mess narratives</li>
+          <li>Scripted narrative arc for 3&ndash;4 characters (vertical slice)</li>
+          <li>Full 7-character cast (21 dates) with art + audio</li>
+          <li>Horror payload: disappearances, souvenir accumulation</li>
+          <li>Art asset scaling from blockout to final quality</li>
+          <li>Original soundtrack (vinyl tracks for record player)</li>
+          <li>Ambient sound design and SFX</li>
+          <li>Convention demo build (7-minute curated slice)</li>
+          <li>Localization and platform builds</li>
         </ul>
-      </div>
-      <div class="state-column">
-        <div class="state-column-label ahead">
-          <div class="state-dot grey"></div>
-          Vertical Slice Remaining
+        <div class="biz-note" style="margin-top: 20px; border: none; background: rgba(176,64,80,0.06); padding: 16px 18px;">
+          <p style="font-family: var(--font-serif); font-style: italic; font-size: 13px;">The core loop works. The technology is proven. The remaining work is production &mdash; not R&amp;D.</p>
         </div>
-        <ul class="state-list">
-          <li>Full 7-day scripted narrative arc</li>
-          <li>Horror payload — souvenirs, disappearances, dread</li>
-          <li>Convention demo mode — 7-minute curated slice</li>
-          <li>Photo intro sequence</li>
-          <li>Art and audio asset integration pass</li>
-        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     TEAM AND TIMELINE
+     09 — THE TEAM
+     ═══════════════════════════════════════════════ -->
+<section id="team">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">09 &mdash; The Team</span>
+      <h2 class="section-title">Small team. Big systems.<br>Every one built in-house.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <span class="section-label" style="margin-bottom: 16px;">Founders</span>
+    </div>
+    <div class="team-grid reveal-stagger">
+      <div class="team-card">
+        <div class="team-name">Lancy Zhao</div>
+        <span class="team-role">Artist &bull; Co-Creative Director</span>
+        <p>Responsible for the game's visual identity, PSX aesthetic pipeline, character and environment design, and UI art direction. Drives the tone and look that makes every surface in the apartment a deliberate choice.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Marty Scott</div>
+        <span class="team-role">Programmer &bull; Co-Creative Director</span>
+        <p>Architect of 30+ game systems, custom PSX rendering pipeline, and all technical infrastructure. 20,000+ lines of production code. Built every mechanic from drink pouring to flower trimming.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 28px;">
+      <span class="section-label" style="margin-bottom: 16px;">Scaling With Investment</span>
+    </div>
+    <div class="audience-grid reveal-stagger" style="margin-bottom: 28px;">
+      <div class="audience-card">
+        <span class="audience-tag">Hiring</span>
+        <p><strong style="color: var(--text);">3D Artist / Animator / Modeler</strong><br>Character models, environment assets, and animation for 7 date characters across 21 encounters.</p>
+      </div>
+      <div class="audience-card">
+        <span class="audience-tag">Hiring</span>
+        <p><strong style="color: var(--text);">Programmer / QA / Tester</strong><br>Gameplay implementation, automated testing, bug triage, and platform builds.</p>
+      </div>
+    </div>
+    <div class="reveal concept-body">
+      <p>Shared creative vision. 18 months of pre-investment development across 30+ systems. The codebase is modular, documented, and data-driven (ScriptableObject architecture) &mdash; built to onboard new team members quickly. Engine: Unity 6 with URP.</p>
+    </div>
+
+    <!-- Staffing Chart -->
+    <div class="reveal" style="margin-top: 40px;">
+      <span class="section-label" style="margin-bottom: 20px;">Team Allocation &mdash; Jun 2026 &ndash; Oct 2027</span>
+      <div class="gantt">
+        <!-- Month headers -->
+        <div class="gantt-header">
+          <div class="gantt-label-col"></div>
+          <div class="gantt-months" style="grid-template-columns: repeat(17, 1fr);">
+            <span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span>
+          </div>
+        </div>
+        <!-- Year labels -->
+        <div class="gantt-milestones">
+          <div class="gantt-label-col"></div>
+          <div class="gantt-months" style="grid-template-columns: repeat(17, 1fr); margin-bottom: 4px;">
+            <div style="grid-column: 1 / 8; text-align: center; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; color: var(--text-muted);">2026</div>
+            <div style="grid-column: 8 / 18; text-align: center; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; color: var(--text-muted);">2027</div>
+          </div>
+        </div>
+        <!-- Milestone phases -->
+        <div class="gantt-milestones">
+          <div class="gantt-label-col"></div>
+          <div class="gantt-months gantt-milestone-row" style="grid-template-columns: repeat(17, 1fr);">
+            <div class="gantt-phase gantt-phase-vs" style="grid-column: 1 / 5;">Vertical Slice</div>
+            <div class="gantt-phase gantt-phase-demo" style="grid-column: 5 / 8;">Demo</div>
+            <div class="gantt-phase gantt-phase-content" style="grid-column: 8 / 14;">Content Complete</div>
+            <div class="gantt-phase" style="grid-column: 14 / 17; background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.25);">Polish</div>
+            <div class="gantt-phase" style="grid-column: 17 / 18; background: rgba(176,64,80,0.18); color: var(--pink); border: 1px solid rgba(212,119,138,0.25);">Ship</div>
+          </div>
+        </div>
+        <!-- Team rows -->
+        <div class="gantt-row">
+          <div class="gantt-label-col"><span class="gantt-name">Lancy Zhao</span><span class="gantt-role">Art &bull; Co-CD</span></div>
+          <div class="gantt-months" style="grid-template-columns: repeat(17, 1fr);"><div class="gantt-bar gantt-bar-founder" style="grid-column: 1 / 18;"></div></div>
+        </div>
+        <div class="gantt-row">
+          <div class="gantt-label-col"><span class="gantt-name">Marty Scott</span><span class="gantt-role">Code &bull; Co-CD</span></div>
+          <div class="gantt-months" style="grid-template-columns: repeat(17, 1fr);"><div class="gantt-bar gantt-bar-founder" style="grid-column: 1 / 18;"></div></div>
+        </div>
+        <div class="gantt-row">
+          <div class="gantt-label-col"><span class="gantt-name">3D Artist</span><span class="gantt-role">Models &bull; Anim</span></div>
+          <div class="gantt-months" style="grid-template-columns: repeat(17, 1fr);"><div class="gantt-bar gantt-bar-hire" style="grid-column: 4 / 16;"></div></div>
+        </div>
+        <div class="gantt-row">
+          <div class="gantt-label-col"><span class="gantt-name">Programmer</span><span class="gantt-role">QA &bull; Builds</span></div>
+          <div class="gantt-months" style="grid-template-columns: repeat(17, 1fr);"><div class="gantt-bar gantt-bar-hire" style="grid-column: 4 / 16;"></div></div>
+        </div>
+        <!-- Bottom total -->
+        <div class="gantt-footer">
+          <div class="gantt-label-col"><span class="gantt-total">Founders: 17 mo &bull; Hires: 12 mo</span></div>
+          <div class="gantt-months"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     10 — TIMELINE
      ═══════════════════════════════════════════════ -->
 <section id="timeline">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">08 — Team and Timeline</span>
-      <h2 class="section-title">Two people. One apartment.<br>Every system built in-house.</h2>
+      <span class="section-label">10 &mdash; Timeline</span>
+      <h2 class="section-title">Vertical slice in 4 months.<br>Halloween 2027 release.</h2>
       <div class="section-divider"></div>
     </div>
-    <div class="reveal concept-body" style="margin-bottom: 40px;">
-      <p>Raspberry Rum is a two-person studio. One programmer, one artist, shared creative direction. 30+ systems designed and built collaboratively. Engine: Unity 6 with URP.</p>
-    </div>
     <div class="reveal">
-      <div class="milestone-table-wrapper">
-        <table class="milestone-table">
+      <div class="table-wrapper">
+        <table class="data-table">
           <thead>
             <tr>
               <th>Milestone</th>
@@ -1486,7 +1900,7 @@ footer {
             <tr>
               <td class="td-name">Vertical Slice</td>
               <td><span class="milestone-badge">Q3 2026</span></td>
-              <td>Full loop, 3–4 characters, horror layer, 3 flowers each</td>
+              <td>Full loop, 3&ndash;4 polished characters, horror layer</td>
             </tr>
             <tr>
               <td class="td-name">Playable Demo</td>
@@ -1506,7 +1920,235 @@ footer {
             <tr>
               <td class="td-name">Release</td>
               <td><span class="milestone-badge">Oct 2027</span></td>
-              <td>Halloween launch window — Steam (PC), itch.io</td>
+              <td>Halloween launch &mdash; Steam (PC/Mac), itch.io</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 24px;">
+      <div class="biz-note">
+        <p><strong style="color: var(--text);">Halloween 2027</strong> is strategic: the horror discovery layer benefits from spooky-season content creator attention, Steam Halloween Sale visibility, and the cultural moment when players actively seek games that surprise them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     11 — REVENUE & RETURN
+     ═══════════════════════════════════════════════ -->
+<section id="revenue">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">11 &mdash; Revenue &amp; Return</span>
+      <h2 class="section-title">The math behind<br>the apartment.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="biz-grid reveal-stagger">
+      <div class="biz-stat">
+        <div class="biz-stat-value">$15&ndash;20</div>
+        <div class="biz-stat-label">Price Point</div>
+      </div>
+      <div class="biz-stat">
+        <div class="biz-stat-value">4&ndash;6 hrs</div>
+        <div class="biz-stat-label">Core Experience</div>
+      </div>
+      <div class="biz-stat">
+        <div class="biz-stat-value">Steam + itch</div>
+        <div class="biz-stat-label">Distribution</div>
+      </div>
+    </div>
+
+    <!-- Revenue projections -->
+    <div class="reveal" style="margin-bottom: 28px;">
+      <span class="section-label" style="margin-bottom: 20px;">PC Revenue Projections &mdash; Year 1</span>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th style="text-align:right;">Units</th>
+              <th style="text-align:right;">Gross</th>
+              <th style="text-align:right;">Net (after Steam 30%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">Conservative</td>
+              <td class="td-number">75,000</td>
+              <td class="td-number">$1.31M</td>
+              <td class="td-number">$919K</td>
+            </tr>
+            <tr>
+              <td class="td-name">Base</td>
+              <td class="td-number td-accent">150,000</td>
+              <td class="td-number td-accent">$2.63M</td>
+              <td class="td-number td-accent">$1.84M</td>
+            </tr>
+            <tr>
+              <td class="td-name">Optimistic</td>
+              <td class="td-number">300,000</td>
+              <td class="td-number">$5.25M</td>
+              <td class="td-number">$3.68M</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reveal concept-body" style="margin-bottom: 28px;">
+      <p><strong style="color: var(--text);">Base case justification:</strong> Top cozy indie releases averaged well over 500K copies. Spent Blooms occupies an uncontested intersection of three growing audiences. With WINGS' go-to-market support, influencer seeding, and the organic viral potential of the horror discovery layer, 150K copies in year 1 is a grounded target.</p>
+    </div>
+
+    <!-- WINGS return -->
+    <div class="reveal" style="margin-bottom: 28px;">
+      <span class="section-label" style="margin-bottom: 20px;">WINGS Return on $500K Investment</span>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; font-family: var(--font-mono); letter-spacing: 0.05em;">WINGS 60% / Dev 40% until recoup &rarr; then WINGS 25% / Dev 75%</p>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th style="text-align:right;">WINGS Revenue</th>
+              <th style="text-align:right;">WINGS ROI</th>
+              <th style="text-align:right;">Developer Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">Conservative (75K)</td>
+              <td class="td-number">$521K</td>
+              <td class="td-number">1.0x</td>
+              <td class="td-number">$398K</td>
+            </tr>
+            <tr>
+              <td class="td-name">Base (150K)</td>
+              <td class="td-number td-accent">$751K</td>
+              <td class="td-number td-accent">1.5x</td>
+              <td class="td-number td-accent">$1.09M</td>
+            </tr>
+            <tr>
+              <td class="td-name">Optimistic (300K)</td>
+              <td class="td-number">$1.21M</td>
+              <td class="td-number">2.4x</td>
+              <td class="td-number">$2.46M</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Long tail -->
+    <div class="reveal" style="margin-bottom: 28px;">
+      <span class="section-label" style="margin-bottom: 20px;">Long-Tail &amp; Expansion Revenue</span>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th style="text-align:right;">Est. Net Revenue</th>
+              <th style="text-align:right;">WINGS Share (25%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2 DLC date packs ($6&ndash;8, 30% attach)</td>
+              <td class="td-number">$200&ndash;400K</td>
+              <td class="td-number">$50&ndash;100K</td>
+            </tr>
+            <tr>
+              <td>Console ports (Switch, PlayStation)</td>
+              <td class="td-number">30&ndash;50% of PC</td>
+              <td class="td-number">25% of net</td>
+            </tr>
+            <tr>
+              <td>Bundles, sales, localized editions</td>
+              <td class="td-number">Ongoing</td>
+              <td class="td-number">25% of net</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="biz-note" style="margin-bottom: 28px;">
+        <p><strong style="color: var(--text);">Path to 3x:</strong> Base case PC launch puts WINGS at 1.5x. Add DLC and console ports matching half of PC revenue, and the base case reaches 2x+. The optimistic scenario with expansion revenue exceeds 3x. Cozy games sell for years &mdash; lifetime returns extend well beyond the launch window.</p>
+      </div>
+    </div>
+
+    <!-- Two marketing cycles -->
+    <div class="reveal">
+      <span class="section-label" style="margin-bottom: 20px;">Two Marketing Cycles &mdash; One Investment</span>
+    </div>
+    <div class="cycle-grid reveal-stagger">
+      <div class="cycle-card">
+        <span class="cycle-number">Cycle 1 &mdash; Launch</span>
+        <div class="cycle-title">The Cozy Apartment Dating Sim</div>
+        <p>Market the cozy apartment dating sim &mdash; the warmth, ritual, and charm. Lead with preparation and romance. The horror is there, but it's not the headline.</p>
+      </div>
+      <div class="cycle-card cycle-discovery">
+        <span class="cycle-number">Cycle 2 &mdash; Discovery</span>
+        <div class="cycle-title">"Wait, where did they go?"</div>
+        <p>Content creators hit the disappearances and react. The moment a favourite date stops showing up drives a second wave of attention. Organic, emotional marketing &mdash; the same pattern that turned Doki Doki Literature Club into an 11M-download cultural event.</p>
+      </div>
+    </div>
+    <div class="reveal concept-body">
+      <p>One content investment. Two distinct marketing waves. WINGS' influencer network can strategically seed both cycles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     12 — RISKS & MITIGATION
+     ═══════════════════════════════════════════════ -->
+<section id="risks">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">12 &mdash; Risks &amp; Mitigation</span>
+      <h2 class="section-title">What could go wrong.<br>How we handle it.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Risk</th>
+              <th style="width: 70px; text-align:center;">Likelihood</th>
+              <th>Mitigation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">Small team &mdash; bus factor</td>
+              <td style="text-align:center;">Med</td>
+              <td>Modular codebase (8/10 audit), ScriptableObject architecture &mdash; content scales with new hires without code changes</td>
+            </tr>
+            <tr>
+              <td class="td-name">Content scope &mdash; 21 encounters</td>
+              <td style="text-align:center;">Med</td>
+              <td>Vertical slice scopes to 3&ndash;4 characters first. Full cast only after core arc validates in playtesting.</td>
+            </tr>
+            <tr>
+              <td class="td-name">Tone balance &mdash; cozy vs. horror</td>
+              <td style="text-align:center;">Med</td>
+              <td>60/25/15 ratio is structural. Horror is woven in but never graphic &mdash; dread comes from implication, not shock. Playtesting validates.</td>
+            </tr>
+            <tr>
+              <td class="td-name">PSX aesthetic limits appeal</td>
+              <td style="text-align:center;">Low</td>
+              <td>PSX revival at peak visibility. Proven differentiator (Buckshot Roulette, Iron Lung, Sorry We're Closed).</td>
+            </tr>
+            <tr>
+              <td class="td-name">Timeline &mdash; 18 months</td>
+              <td style="text-align:center;">Med</td>
+              <td>Core systems built. Remaining work is content. Investment funds team growth to accelerate production.</td>
+            </tr>
+            <tr>
+              <td class="td-name">Cozy market saturation</td>
+              <td style="text-align:center;">Low</td>
+              <td>No title occupies this niche. The horror layer and physical mechanics are the differentiator.</td>
             </tr>
           </tbody>
         </table>
@@ -1516,32 +2158,128 @@ footer {
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     BUSINESS MODEL
+     13 — THE ASK
      ═══════════════════════════════════════════════ -->
-<section id="business">
+<section id="ask">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">09 — Business Model</span>
-      <h2 class="section-title">Premium. Finite. Intentional.</h2>
+      <span class="section-label">13 &mdash; The Ask</span>
+      <h2 class="section-title">What we need.<br>What it buys.</h2>
       <div class="section-divider"></div>
     </div>
-    <div class="biz-grid reveal-stagger">
-      <div class="biz-stat">
-        <div class="biz-stat-value">$15–20</div>
-        <div class="biz-stat-label">Price Point</div>
-      </div>
-      <div class="biz-stat">
-        <div class="biz-stat-value">4–6 hrs</div>
-        <div class="biz-stat-label">Core Experience</div>
-      </div>
-      <div class="biz-stat">
-        <div class="biz-stat-value">Steam + itch</div>
-        <div class="biz-stat-label">Distribution</div>
+
+    <div class="reveal">
+      <div class="ask-hero">
+        <div class="ask-amount" id="ask-total">$500,000</div>
+        <div class="ask-model">WINGS Self-Publish Model</div>
+        <div class="slider-wrap">
+          <input type="range" id="ask-slider" min="150" max="500" value="500" step="10">
+          <div class="slider-labels">
+            <span>$150K</span>
+            <span>$500K</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="biz-note reveal">
-      <p>One-time premium purchase. The game never forces the horror on the player — stains, sad notes, relics of Nema's past, and the strange third flower from each date are all there, but only players who look closely will piece it together. A first playthrough where you ignore the mess is a cozy apartment sim. A second where you read everything is a different game entirely. Replayability is built into the observation layer, not the content volume.</p>
-      <p style="margin-top: 14px;"><strong style="color: var(--text);">DLC potential:</strong> Date packs — 3 new characters per pack with new furniture, items, and seasonal events. Each pack adds 9 new dates and fresh content to discover. The apartment grows. The souvenir collection grows. PC (Windows, Mac) at launch; console ports considered post-release.</p>
+
+    <div class="reveal" style="margin-bottom: 28px;">
+      <span class="section-label" style="margin-bottom: 20px;">Budget Allocation</span>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th style="text-align:center;">Share</th>
+              <th style="text-align:right;">Amount</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">Advertisement &amp; Marketing</td>
+              <td class="td-number">50%</td>
+              <td class="td-number" id="amt-marketing">$250K</td>
+              <td>Trailers, influencer campaigns, paid ads, content creation, Steam page, PR, convention booths, community building</td>
+            </tr>
+            <tr>
+              <td class="td-name">Team</td>
+              <td class="td-number">25%</td>
+              <td class="td-number" id="amt-team">$125K</td>
+              <td>All 4 members (founders + 2 new hires) at full-time capacity through release</td>
+            </tr>
+            <tr>
+              <td class="td-name">Reserve</td>
+              <td class="td-number">20%</td>
+              <td class="td-number" id="amt-reserve">$100K</td>
+              <td>Contingency, scope flexibility, post-launch support, platform porting</td>
+            </tr>
+            <tr>
+              <td class="td-name">Production Assets</td>
+              <td class="td-number">5%</td>
+              <td class="td-number" id="amt-production">$25K</td>
+              <td>Licensed assets, outsourced specialties, tools and software</td>
+            </tr>
+            <tr style="background: var(--accent-glow-s) !important;">
+              <td class="td-name" style="color: var(--accent);"><strong>Total</strong></td>
+              <td class="td-number" style="color: var(--accent);"><strong>100%</strong></td>
+              <td class="td-number" style="color: var(--accent);"><strong id="amt-total">$500K</strong></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- What we need from WINGS -->
+    <div class="reveal">
+      <span class="section-label" style="margin-bottom: 20px;">What We Need From WINGS &mdash; Beyond Funding</span>
+    </div>
+    <div class="reveal concept-body" style="margin-bottom: 20px;">
+      <p>Rum Rum Raspberry builds games. We need a partner who builds audiences.</p>
+    </div>
+    <ul class="usp-list reveal-stagger" style="margin-bottom: 36px;">
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Go-to-market strategy</strong>
+          <span>Full GTM plan: marketing beats, community tone, release timing, and the dual-cycle marketing approach.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Influencer campaigns</strong>
+          <span>The horror discovery layer is built for reaction content. WINGS' influencer network seeds the "wait, is this game actually about..." conversation at exactly the right moment.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Convention support</strong>
+          <span>Presence at Gamescom, GDC, Indie Arena Booth, regional showcases. Spent Blooms' tactile gameplay demos exceptionally well in person.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Business development</strong>
+          <span>Console port partnerships, bundle deals, platform featuring. The WINGS portfolio already includes Sony Indie Fund and Xbox Game Pass titles.</span>
+        </div>
+      </li>
+      <li class="usp-item">
+        <div class="usp-marker"></div>
+        <div class="usp-text">
+          <strong>Steam page optimization</strong>
+          <span>Store presence, tag strategy, and wishlist conversion &mdash; platform-specific expertise a small studio doesn't have.</span>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Why WINGS -->
+    <div class="reveal">
+      <div class="biz-note">
+        <p><strong style="color: var(--text);">Why WINGS:</strong> Spent Blooms fits the WINGS portfolio &mdash; a mechanically ambitious, tonally distinctive indie game with a clear commercial hook, built by a small team that has proven it can ship systems-level code and now needs marketing to reach its audience. The game is built. The loop works. The investment funds the road from vertical slice to Halloween 2027 release.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1551,24 +2289,22 @@ footer {
      ═══════════════════════════════════════════════ -->
 <footer>
   <div class="container">
-    <span class="footer-iris">IRIS</span>
-    <p class="footer-text">Raspberry Rum &nbsp;—&nbsp; Two-Person Studio &nbsp;—&nbsp; Unity 6 URP &nbsp;—&nbsp; 2026</p>
+    <span class="footer-title">SPENT BLOOMS</span>
+    <p class="footer-text">Rum Rum Raspberry &nbsp;&mdash;&nbsp; Lancy Zhao &amp; Marty Scott &nbsp;&mdash;&nbsp; Unity 6 URP &nbsp;&mdash;&nbsp; 2026</p>
   </div>
 </footer>
 
 <!-- ═══════════════════════════════════════════════
-     JAVASCRIPT — IntersectionObserver scroll reveal
+     JAVASCRIPT — Scroll reveal
      ═══════════════════════════════════════════════ -->
 <script>
 (function () {
   'use strict';
 
-  // Scroll reveal via IntersectionObserver
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        // Don't unobserve stagger parents — children need the class to remain
       }
     });
   }, {
@@ -1576,12 +2312,37 @@ footer {
     rootMargin: '0px 0px -40px 0px'
   });
 
-  // Observe all .reveal and .reveal-stagger elements
   document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
     observer.observe(el);
   });
 
-  // Smooth anchor scroll for any internal links (future-proofing)
+  // Interactive budget slider
+  var slider = document.getElementById('ask-slider');
+  var totalEl = document.getElementById('ask-total');
+  var amtMarketing = document.getElementById('amt-marketing');
+  var amtTeam = document.getElementById('amt-team');
+  var amtReserve = document.getElementById('amt-reserve');
+  var amtProduction = document.getElementById('amt-production');
+
+  function formatK(v) {
+    return '$' + Math.round(v) + 'K';
+  }
+
+  function updateBudget() {
+    var total = parseInt(slider.value, 10);
+    var pct = (total - 150) / (500 - 150) * 100;
+    slider.style.setProperty('--fill', pct + '%');
+    totalEl.textContent = '$' + (total * 1000).toLocaleString('en-US');
+    amtMarketing.textContent = formatK(total * 0.50);
+    amtTeam.textContent = formatK(total * 0.25);
+    amtReserve.textContent = formatK(total * 0.20);
+    amtProduction.textContent = formatK(total * 0.05);
+    document.getElementById('amt-total').textContent = formatK(total);
+  }
+
+  slider.addEventListener('input', updateBudget);
+  updateBudget();
+
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       var target = document.querySelector(this.getAttribute('href'));

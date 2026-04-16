@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Mess_Cat_Hair_Clump
   m_EditorClassIdentifier: Assembly-CSharp::MessBlueprint
   messName: Cat Hair Clump
-  description: Nema doesn't own a cat. Or does she?
+  description: cat hair?
   category: 1
   messType: 1
   spillDefinition: {fileID: 0}
   objectPrefab: {fileID: 0}
   objectScale: {x: 0.04, y: 0.02, z: 0.04}
   objectColor: {r: 0.76729554, g: 0.39899367, b: 0, a: 1}
-  requireDateSuccess: 0
+  requireDateSuccess: 1
   requireDateFailure: 0
   minAffection: 0
   maxAffection: 100
   requireReactionTag: 
   requireBadFlowerTrim: 0
   requireGoodFlowerTrim: 0
-  minDay: 0
+  minDay: 1
   maxDay: 50
   spawnPosition: {x: 1.0689088, y: 0.30638155, z: -0.33377767}
   spawnRotation: {x: 0, y: 0, z: 0}

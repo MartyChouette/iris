@@ -104,10 +104,10 @@ public class ObjectGrabber : MonoBehaviour
 
     [Header("Grid Snap")]
     [Tooltip("Grid cell size in world units. Placement is always grid-snapped — no toggle.")]
-    [SerializeField] private float gridSize = 0.03f;
+    [SerializeField] private float gridSize = 0.06f;
 
     [Tooltip("Multiplier for wall grid size. Walls feel better with a coarser grid (2-3x). 1 = same as tables.")]
-    [SerializeField] private float _wallGridMultiplier = 2f;
+    [SerializeField] private float _wallGridMultiplier = 1f;
 
     /// <summary>Grid size adjusted for wall surfaces.</summary>
     private float GetGridSize(PlacementSurface surface)
@@ -127,6 +127,16 @@ public class ObjectGrabber : MonoBehaviour
     [Header("Scroll Behavior")]
     [Tooltip("Degrees rotated per scroll tick around Y axis.")]
     [SerializeField] private float scrollRotateStep = 45f;
+
+    // Pre-allocated raycast buffers (avoid per-frame allocation from RaycastAll)
+    private static readonly RaycastHit[] s_surfaceHitBuffer = new RaycastHit[16];
+    private static readonly RaycastHit[] s_deliveryHitBuffer = new RaycastHit[8];
+    private static readonly RaycastHit[] s_pairHitBuffer = new RaycastHit[8];
+    private static readonly HitDistComparer s_surfaceHitComparer = new();
+    private class HitDistComparer : System.Collections.Generic.IComparer<RaycastHit>
+    {
+        public int Compare(RaycastHit a, RaycastHit b) => a.distance.CompareTo(b.distance);
+    }
 
     [Header("Raycast")]
     [Tooltip("Layer mask for placeable objects.")]
@@ -204,6 +214,7 @@ public class ObjectGrabber : MonoBehaviour
     private PlacementSurface _lastValidSurface;
     private float _wallRotation;
     private bool _isOnWall;
+    private bool _isPourTilted;
 
     // Double-click detection for plate unstacking
     private float _lastClickTime;
@@ -420,18 +431,23 @@ public class ObjectGrabber : MonoBehaviour
         // No placeable hit — check for cubby/drawer door click
         if (placeable == null)
         {
-            var clickedDrawer = hit.collider.GetComponent<DrawerController>();
-            if (clickedDrawer == null)
-                clickedDrawer = hit.collider.GetComponentInParent<DrawerController>();
-
-            if (clickedDrawer != null)
+            // Cabinets/cubbies/drawers are blocked during all date phases
+            bool dateActiveForDrawer = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive;
+            if (!dateActiveForDrawer)
             {
-                if (clickedDrawer.CurrentState == DrawerController.State.Closed)
-                    clickedDrawer.Open();
-                else if (clickedDrawer.CurrentState == DrawerController.State.Open)
-                    clickedDrawer.Close();
-                ConsumeClick();
-                return;
+                var clickedDrawer = hit.collider.GetComponent<DrawerController>();
+                if (clickedDrawer == null)
+                    clickedDrawer = hit.collider.GetComponentInParent<DrawerController>();
+
+                if (clickedDrawer != null)
+                {
+                    if (clickedDrawer.CurrentState == DrawerController.State.Closed)
+                        clickedDrawer.Open();
+                    else if (clickedDrawer.CurrentState == DrawerController.State.Open)
+                        clickedDrawer.Close();
+                    ConsumeClick();
+                    return;
+                }
             }
 
             // Check for Nema click — open personality/wellbeing panel (non-date only)
@@ -459,19 +475,24 @@ public class ObjectGrabber : MonoBehaviour
                 return;
             }
 
-            // Check for turntable button click (play/pause)
-            var turntableBtn = hit.collider.GetComponent<TurntableButton>();
-            if (turntableBtn == null)
-                turntableBtn = hit.collider.GetComponentInParent<TurntableButton>();
-            if (turntableBtn != null)
+            // Check for turntable button click (play/pause) — blocked during dates
+            if (DateSessionManager.Instance == null || !DateSessionManager.Instance.IsDateActive)
             {
-                turntableBtn.Press();
-                ConsumeClick();
-                return;
+                var turntableBtn = hit.collider.GetComponent<TurntableButton>();
+                if (turntableBtn == null)
+                    turntableBtn = hit.collider.GetComponentInParent<TurntableButton>();
+                if (turntableBtn != null)
+                {
+                    turntableBtn.Press();
+                    ConsumeClick();
+                    return;
+                }
             }
 
-            // Click on album sleeve — extract vinyl if hovered/peeking
-            var clickedSleeve = hit.collider.GetComponent<AlbumSleeve>();
+            // Click on album sleeve — extract vinyl if hovered/peeking (blocked during dates)
+            var clickedSleeve = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive
+                ? null
+                : hit.collider.GetComponent<AlbumSleeve>();
             if (clickedSleeve == null)
                 clickedSleeve = hit.collider.GetComponentInParent<AlbumSleeve>();
             if (clickedSleeve != null && clickedSleeve.IsHovered)
@@ -500,21 +521,39 @@ public class ObjectGrabber : MonoBehaviour
                 return;
             }
 
-            // Click on turntable while vinyl is loaded — eject to hand
+            // Click on vinyl sitting on platter:
+            //   If playing → stop (pause + lift needle)
+            //   If stopped → pick up into hand
+            var clickedVinyl = hit.collider.GetComponent<VinylDisc>();
+            if (clickedVinyl != null && RecordSlot.Instance != null && RecordSlot.Instance.IsLoaded)
+            {
+                if (RecordSlot.Instance.IsPlaying)
+                {
+                    RecordSlot.Instance.Pause();
+                }
+                else
+                {
+                    var ejected = RecordSlot.Instance.EjectVinyl();
+                    if (ejected != null)
+                    {
+                        _held = ejected;
+                        _pickupTimer = PickupFeelDuration;
+                        InitGrab();
+                    }
+                }
+                ConsumeClick();
+                return;
+            }
+
+            // Click on turntable body while vinyl is loaded — toggle play/pause
             var clickedSlot = hit.collider.GetComponent<RecordSlot>();
             if (clickedSlot == null)
                 clickedSlot = hit.collider.GetComponentInParent<RecordSlot>();
             if (clickedSlot != null && clickedSlot.IsLoaded)
             {
-                var ejected = clickedSlot.EjectVinyl();
-                if (ejected != null)
-                {
-                    ConsumeClick();
-                    _held = ejected;
-                    _pickupTimer = PickupFeelDuration;
-                    InitGrab();
-                    return;
-                }
+                clickedSlot.TogglePlayPause();
+                ConsumeClick();
+                return;
             }
 
             return;
@@ -527,19 +566,24 @@ public class ObjectGrabber : MonoBehaviour
         if (placeable.GetComponent<AlbumSleeve>() != null
             || placeable.GetComponentInParent<AlbumSleeve>() != null)
         {
-            // But if the click hit the peeking vinyl, extract it
-            var vinylOnSleeve = placeable.GetComponent<VinylDisc>();
-            if (vinylOnSleeve == null) vinylOnSleeve = placeable.GetComponentInChildren<VinylDisc>();
-            var parentSleeve = vinylOnSleeve != null ? vinylOnSleeve.HomeSleeve : null;
-            if (parentSleeve != null && parentSleeve.IsHovered)
+            // During dates, don't allow vinyl extraction at all
+            bool dateActive = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive;
+            if (!dateActive)
             {
-                var vinylPlaceable = parentSleeve.ExtractVinyl();
-                if (vinylPlaceable != null)
+                // But if the click hit the peeking vinyl, extract it
+                var vinylOnSleeve = placeable.GetComponent<VinylDisc>();
+                if (vinylOnSleeve == null) vinylOnSleeve = placeable.GetComponentInChildren<VinylDisc>();
+                var parentSleeve = vinylOnSleeve != null ? vinylOnSleeve.HomeSleeve : null;
+                if (parentSleeve != null && parentSleeve.IsHovered)
                 {
-                    ConsumeClick();
-                    _held = vinylPlaceable;
-                    _pickupTimer = PickupFeelDuration;
-                    InitGrab();
+                    var vinylPlaceable = parentSleeve.ExtractVinyl();
+                    if (vinylPlaceable != null)
+                    {
+                        ConsumeClick();
+                        _held = vinylPlaceable;
+                        _pickupTimer = PickupFeelDuration;
+                        InitGrab();
+                    }
                 }
             }
             return; // never grab the sleeve itself
@@ -549,8 +593,9 @@ public class ObjectGrabber : MonoBehaviour
         var vinylDisc = placeable.GetComponent<VinylDisc>();
         if (vinylDisc != null)
         {
+            bool dateActive = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive;
             var sleeve = vinylDisc.HomeSleeve;
-            if (sleeve != null && sleeve.IsHovered)
+            if (!dateActive && sleeve != null && sleeve.IsHovered)
             {
                 var vinylPlaceable = sleeve.ExtractVinyl();
                 if (vinylPlaceable != null)
@@ -587,6 +632,21 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
+        // During date phases (1-3), block general item pickup.
+        // Only bottles (Phase 2 drink-making) and drink glasses (delivery) are allowed.
+        // Other items can be inspected (click → date reacts) via DateInspectSystem.
+        if (DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive)
+        {
+            bool isBottle = placeable.GetComponent<BottleItem>() != null;
+            bool isDrinkGlass = placeable.GetComponent<DrinkGlass>() != null;
+            if (!isBottle && !isDrinkGlass)
+            {
+                if (DateInspectSystem.Instance != null && DateInspectSystem.Instance.TryInspect())
+                    ConsumeClick();
+                return;
+            }
+        }
+
         ConsumeClick();
         _held = placeable;
         _pickupTimer = PickupFeelDuration;
@@ -603,7 +663,11 @@ public class ObjectGrabber : MonoBehaviour
 
         // Flash partner highlight for pairable items (shoes)
         var pairable = placeable.GetComponent<PairableItem>();
-        if (pairable != null) pairable.OnPickedUp();
+        if (pairable != null)
+        {
+            InteractableHighlight.SuppressVisuals = false;
+            pairable.OnPickedUp();
+        }
 
         // Cache collider bounds BEFORE disabling — used for shadow size + surface offset
         var pickupCol = placeable.GetComponent<Collider>();
@@ -645,14 +709,15 @@ public class ObjectGrabber : MonoBehaviour
 
         placeable.OnPickedUp();
 
-        // When picking up the watering can, blink all plants 3 times so
-        // the player knows where to water.
+        // When picking up the watering can, highlight all plants so
+        // the player knows where to water (same steady highlight as shoes).
         if (placeable.GetComponent<WateringCan>() != null)
-            _plantBlinkRoutine = StartCoroutine(BlinkPlantHighlights(3));
+            SetPlantHighlights(true);
 
         // When picking up a vinyl record, highlight the turntable until placed
         if (placeable.GetComponent<VinylDisc>() != null && RecordSlot.Instance != null)
         {
+            InteractableHighlight.SuppressVisuals = false;
             var slotHL = RecordSlot.Instance.GetComponent<InteractableHighlight>();
             if (slotHL == null) slotHL = RecordSlot.Instance.gameObject.AddComponent<InteractableHighlight>();
             slotHL.SetHighlighted(true);
@@ -689,30 +754,31 @@ public class ObjectGrabber : MonoBehaviour
     {
         if (_held == null) return;
 
-        // ── Watering can near plant ──
+        // ── Watering can ──
+        // LMB always tries to water the nearest plant. The only way to put
+        // the can down is RMB (handled in UpdateWateringCanSnap). This
+        // prevents accidentally placing the can when trying to water.
         if (_held.GetComponent<WateringCan>() != null)
         {
             var wm = WateringManager.Instance;
 
-            if (_nearestWaterablePlant != null && wm != null)
-            {
-                // Not yet pouring this plant → start session
-                if (wm.CurrentState != WateringManager.State.Pouring
-                    || wm.ActivePlant != _nearestWaterablePlant)
-                {
-                    wm.StartWatering(_nearestWaterablePlant);
-                    ConsumeClick();
-                    return;
-                }
+            // Only start watering if the can is snapped to a plant (within snap radius)
+            WaterablePlant clickPlant = _nearestWaterablePlant;
 
-                // Already pouring this plant → click does nothing (hold to pour)
+            if (clickPlant != null && wm != null)
+            {
+                if (wm.CurrentState != WateringManager.State.Pouring
+                    || wm.ActivePlant != clickPlant)
+                {
+                    wm.StartWatering(clickPlant);
+                }
                 ConsumeClick();
                 return;
             }
 
-            // Not near any plant → end watering and place the can down
-            if (wm != null && wm.CurrentState == WateringManager.State.Pouring)
-                wm.EndWatering();
+            // No plants in scene at all — consume click anyway, don't place
+            ConsumeClick();
+            return;
         }
 
         // ── Bottle near glass → start pouring instead of placing ──
@@ -746,6 +812,17 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
+        // ── Bottle return-to-home during drink phase ──
+        // Clicking away from a glass sends the bottle back to its starting spot
+        // (like records returning to their sleeve).
+        if (isDrinkPhase && heldBottle != null && heldBottle.HasHome)
+        {
+            heldBottle.ReturnHome();
+            ClearHeld();
+            ConsumeClick();
+            return;
+        }
+
         // ── Deliver finished drink to date character ──
         if (_held.GetComponent<DrinkGlass>() != null
             && DrinkPourManager.Instance != null
@@ -767,11 +844,11 @@ public class ObjectGrabber : MonoBehaviour
 
             // Fallback: raycast through all objects to find the date character
             Ray deliverRay = cam.ScreenPointToRay(IrisInput.CursorPosition);
-            var hits = Physics.RaycastAll(deliverRay, 100f);
-            for (int i = 0; i < hits.Length; i++)
+            int deliveryHitCount = Physics.RaycastNonAlloc(deliverRay, s_deliveryHitBuffer, 100f);
+            for (int i = 0; i < deliveryHitCount; i++)
             {
-                var dateChar = hits[i].collider.GetComponent<DateCharacterController>();
-                if (dateChar == null) dateChar = hits[i].collider.GetComponentInParent<DateCharacterController>();
+                var dateChar = s_deliveryHitBuffer[i].collider.GetComponent<DateCharacterController>();
+                if (dateChar == null) dateChar = s_deliveryHitBuffer[i].collider.GetComponentInParent<DateCharacterController>();
                 if (dateChar != null)
                 {
                     DrinkPourManager.Instance.DeliverToDate();
@@ -812,22 +889,13 @@ public class ObjectGrabber : MonoBehaviour
                 return;
             }
 
-            // Try returning to home sleeve
-            if (heldVinyl.HomeSleeve != null && heldVinyl.HomeSleeve.WaitingForReturn)
+            // Anywhere else — return to home sleeve
+            if (heldVinyl.HomeSleeve != null)
             {
-                Ray returnRay = cam.ScreenPointToRay(IrisInput.CursorPosition);
-                if (Physics.Raycast(returnRay, out RaycastHit sleeveHit, 100f))
-                {
-                    var sleeve = sleeveHit.collider.GetComponent<AlbumSleeve>();
-                    if (sleeve == null) sleeve = sleeveHit.collider.GetComponentInParent<AlbumSleeve>();
-                    if (sleeve != null && sleeve == heldVinyl.HomeSleeve)
-                    {
-                        sleeve.ReturnVinyl(heldVinyl);
-                        ClearHeld();
-                        ConsumeClick();
-                        return;
-                    }
-                }
+                heldVinyl.HomeSleeve.ReturnVinyl(heldVinyl);
+                ClearHeld();
+                ConsumeClick();
+                return;
             }
         }
 
@@ -986,6 +1054,21 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
+        // Fridge shelves blocked when doors are closed
+        if (FridgeController.Instance != null && FridgeController.Instance.IsShelfAndClosed(_currentSurface))
+        {
+            Debug.Log($"[ObjectGrabber] BLOCKED: fridge shelf '{_currentSurface.name}' — doors are closed");
+            return;
+        }
+
+        // Cubby interiors blocked when drawer/door is closed
+        var placeCubby = DrawerController.FindByInteriorSurface(_currentSurface);
+        if (placeCubby != null && placeCubby.IsInteriorAndClosed(_currentSurface))
+        {
+            Debug.Log($"[ObjectGrabber] BLOCKED: cubby '{_currentSurface.name}' — door is closed");
+            return;
+        }
+
         // Trash only on floor or trash cans
         if (_held.Category == ItemCategory.Trash)
         {
@@ -1014,8 +1097,10 @@ public class ObjectGrabber : MonoBehaviour
         }
         else
         {
-            rot = _held.transform.rotation;
+            // Strip any pour tilt — place items upright
+            rot = _isPourTilted ? Quaternion.identity : _held.transform.rotation;
         }
+        _isPourTilted = false;
 
         // Home snap: if placing very close to the item's home position, use exact home pos/rot.
         // Use a tight radius so wall items can be placed freely on the wall without
@@ -1030,15 +1115,16 @@ public class ObjectGrabber : MonoBehaviour
         // above a barrier volume (counter body, furniture interior, etc.).
         // Sphere check catches items placed inside barriers, downward ray catches
         // barriers beneath the surface that the sphere can't reach.
-        if (_barrierLayer != 0)
+        if (_barrierLayer != 0 && !_currentSurface.IsVertical)
         {
+            // Skip barrier checks entirely for wall surfaces — the wall itself
+            // is on the barrier layer, so both the sphere and downward ray
+            // would always hit it and block every placement.
             bool blocked = Physics.CheckSphere(pos, 0.08f, _barrierLayer);
-            if (!blocked && !_currentSurface.IsVertical)
+            if (!blocked)
             {
                 // Probe downward from placement pos — catches barriers inside
                 // counter/table bodies that sit just below the surface.
-                // Skip for vertical (wall) surfaces — the wall itself is on the
-                // barrier layer and the probe would always hit it.
                 blocked = Physics.Raycast(pos, Vector3.down, 0.15f, _barrierLayer);
             }
             if (blocked)
@@ -1157,10 +1243,10 @@ public class ObjectGrabber : MonoBehaviour
 
     [Header("Watering Can Snap")]
     [Tooltip("World-space radius at which the watering can snaps toward a plant.")]
-    [SerializeField] private float _wateringSnapRadius = 1.0f;
+    [SerializeField] private float _wateringSnapRadius = 1.5f;
 
     [Tooltip("How strongly the can is pulled toward the plant pour position.")]
-    [SerializeField, Range(0f, 1f)] private float _wateringSnapStrength = 0.75f;
+    [SerializeField, Range(0f, 1f)] private float _wateringSnapStrength = 0.9f;
 
     private bool TryPairWithClicked()
     {
@@ -1174,7 +1260,7 @@ public class ObjectGrabber : MonoBehaviour
         Vector2 screenPos = IrisInput.CursorPosition;
         Ray ray = cam.ScreenPointToRay(screenPos);
 
-        // Use SphereCast for forgiving click area, fall back to RaycastAll
+        // Use SphereCast for forgiving click area, fall back to RaycastNonAlloc
         PairableItem clickedPairable = FindComponentAlongRay<PairableItem>(ray, placeableLayer);
 
         // If precise click missed, accept the snap target we're already locked onto
@@ -1372,11 +1458,30 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
+        // While actively pouring (LMB held), lock to the current glass
+        // even if the cursor drifts away — same feel as watering can.
+        bool wasPouring = DrinkPourManager.Instance != null
+            && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Pouring;
+        var mouse = UnityEngine.InputSystem.Mouse.current;
+        bool lmbHeld = mouse != null && mouse.leftButton.isPressed;
+
+        // RMB while pouring → disengage immediately
+        if (wasPouring && mouse != null && mouse.rightButton.wasPressedThisFrame)
+        {
+            DrinkPourManager.Instance.StopPouring();
+            return;
+        }
+
+        if (bestGlass == null && wasPouring && lmbHeld)
+        {
+            bestGlass = DrinkPourManager.Instance.ActiveGlass;
+            if (bestGlass != null)
+                bestDist = 0f;
+        }
+
         if (bestGlass == null)
         {
-            // Moved away — stop pouring if active
-            if (DrinkPourManager.Instance != null
-                && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Pouring)
+            if (wasPouring)
                 DrinkPourManager.Instance.StopPouring();
             return;
         }
@@ -1409,6 +1514,17 @@ public class ObjectGrabber : MonoBehaviour
                                * Quaternion.Euler(tiltAngle, 0f, 0f);
             _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation, tiltRot,
                                                          Time.deltaTime * 8f);
+            _isPourTilted = true;
+        }
+        else if (_held != null && _isPourTilted)
+        {
+            _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation,
+                Quaternion.identity, Time.deltaTime * 8f);
+            if (Quaternion.Angle(_held.transform.rotation, Quaternion.identity) < 1f)
+            {
+                _held.transform.rotation = Quaternion.identity;
+                _isPourTilted = false;
+            }
         }
     }
 
@@ -1419,8 +1535,37 @@ public class ObjectGrabber : MonoBehaviour
         if (_held.GetComponent<WateringCan>() == null) return;
 
         // If we WERE watering but moved away, end the session + dismiss UI
-        bool wasWatering = WateringManager.Instance != null
-            && WateringManager.Instance.CurrentState == WateringManager.State.Pouring;
+        var wm = WateringManager.Instance;
+        bool wasWatering = wm != null
+            && wm.CurrentState == WateringManager.State.Pouring;
+
+        // RMB while holding watering can → put it down (or stop watering)
+        var mouse = UnityEngine.InputSystem.Mouse.current;
+        if (mouse != null && mouse.rightButton.wasPressedThisFrame)
+        {
+            if (wasWatering)
+                wm.EndWatering();
+
+            // Place the can on the nearest surface
+            var nearest = FindNearestSurfaceForHeld(_heldRb != null ? _heldRb.position : _held.transform.position);
+            if (nearest != null)
+            {
+                var hitResult = nearest.ProjectOntoSurface(_held.transform.position, cam != null ? cam.transform.position : (Vector3?)null);
+                float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
+                Vector3 pos = hitResult.worldPosition + hitResult.surfaceNormal * halfExtent;
+                _held.OnPlaced(nearest, false, pos, Quaternion.identity);
+            }
+            else
+            {
+                _held.OnDropped();
+            }
+            _isPourTilted = false;
+            ClearHeld();
+            return;
+        }
+
+        // LMB released → stop locking to plant, cursor movement can disengage
+        bool lmbHeld = mouse != null && mouse.leftButton.isPressed;
 
         // Find nearest WaterablePlant
         WaterablePlant bestPlant = null;
@@ -1437,11 +1582,19 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
+        // While actively pouring AND LMB held, lock to the current plant
+        // even if the cursor drifts away from snap radius.
+        if (bestPlant == null && wasWatering && lmbHeld)
+        {
+            bestPlant = wm.ActivePlant;
+            if (bestPlant != null)
+                bestDist = 0f; // force full snap strength
+        }
+
         if (bestPlant == null)
         {
-            // Moved away from all plants — end any active watering session
             if (wasWatering)
-                WateringManager.Instance.EndWatering();
+                wm.EndWatering();
             return;
         }
 
@@ -1486,12 +1639,24 @@ public class ObjectGrabber : MonoBehaviour
                                * Quaternion.Euler(tiltAngle, 0f, 0f);
             _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation, tiltRot,
                                                          Time.deltaTime * 8f);
+            _isPourTilted = true;
+        }
+        else if (_held != null && _isPourTilted)
+        {
+            // Restore upright when leaving pour range
+            _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation,
+                Quaternion.identity, Time.deltaTime * 8f);
+            if (Quaternion.Angle(_held.transform.rotation, Quaternion.identity) < 1f)
+            {
+                _held.transform.rotation = Quaternion.identity;
+                _isPourTilted = false;
+            }
         }
     }
 
     /// <summary>
     /// Forgiving component search along a ray. Tries SphereCast first (wider hit area),
-    /// then falls back to RaycastAll for objects the sphere might miss.
+    /// then falls back to RaycastNonAlloc for objects the sphere might miss.
     /// </summary>
     private static T FindComponentAlongRay<T>(Ray ray, LayerMask layer) where T : Component
     {
@@ -1503,17 +1668,17 @@ public class ObjectGrabber : MonoBehaviour
             if (comp != null) return comp;
         }
 
-        // 2. RaycastAll — check all hits along the exact ray
-        var hits = Physics.RaycastAll(ray, 100f, layer);
+        // 2. RaycastNonAlloc — check all hits along the exact ray
+        int pairHitCount = Physics.RaycastNonAlloc(ray, s_pairHitBuffer, 100f, layer);
         float bestDist = float.MaxValue;
         T best = null;
-        for (int i = 0; i < hits.Length; i++)
+        for (int i = 0; i < pairHitCount; i++)
         {
-            var comp = hits[i].collider.GetComponent<T>();
-            if (comp == null) comp = hits[i].collider.GetComponentInParent<T>();
-            if (comp != null && hits[i].distance < bestDist)
+            var comp = s_pairHitBuffer[i].collider.GetComponent<T>();
+            if (comp == null) comp = s_pairHitBuffer[i].collider.GetComponentInParent<T>();
+            if (comp != null && s_pairHitBuffer[i].distance < bestDist)
             {
-                bestDist = hits[i].distance;
+                bestDist = s_pairHitBuffer[i].distance;
                 best = comp;
             }
         }
@@ -1656,6 +1821,7 @@ public class ObjectGrabber : MonoBehaviour
         {
             var slotHL = RecordSlot.Instance.GetComponent<InteractableHighlight>();
             if (slotHL != null) slotHL.SetHighlighted(false);
+            InteractableHighlight.SuppressVisuals = true;
         }
 
         // Safety: unlock cursor in case an interaction lock was active
@@ -1684,56 +1850,26 @@ public class ObjectGrabber : MonoBehaviour
     }
 
 
-    private Coroutine _plantBlinkRoutine;
-
-    private System.Collections.IEnumerator BlinkPlantHighlights(int blinks)
+    /// <summary>Turn plant highlights on or off (steady, same style as shoe partner highlight).</summary>
+    private void SetPlantHighlights(bool on)
     {
-        var plants = WaterablePlant.All;
-        // Ensure each plant has an InteractableHighlight
-        for (int i = 0; i < plants.Count; i++)
-        {
-            if (plants[i] == null) continue;
-            if (plants[i].GetComponent<InteractableHighlight>() == null)
-                plants[i].gameObject.AddComponent<InteractableHighlight>();
-        }
+        // Unsuppress so the highlight shader actually renders
+        InteractableHighlight.SuppressVisuals = !on;
 
-        for (int b = 0; b < blinks; b++)
-        {
-            // On
-            for (int i = 0; i < plants.Count; i++)
-            {
-                if (plants[i] == null) continue;
-                var hl = plants[i].GetComponent<InteractableHighlight>();
-                if (hl != null) hl.SetHighlighted(true);
-            }
-            yield return new WaitForSeconds(0.25f);
-
-            // Off
-            for (int i = 0; i < plants.Count; i++)
-            {
-                if (plants[i] == null) continue;
-                var hl = plants[i].GetComponent<InteractableHighlight>();
-                if (hl != null) hl.SetHighlighted(false);
-            }
-            yield return new WaitForSeconds(0.2f);
-        }
-        _plantBlinkRoutine = null;
-    }
-
-    private void ClearPlantHighlights()
-    {
-        if (_plantBlinkRoutine != null)
-        {
-            StopCoroutine(_plantBlinkRoutine);
-            _plantBlinkRoutine = null;
-        }
         var plants = WaterablePlant.All;
         for (int i = 0; i < plants.Count; i++)
         {
             if (plants[i] == null) continue;
             var hl = plants[i].GetComponent<InteractableHighlight>();
-            if (hl != null) hl.SetHighlighted(false);
+            if (hl == null && on)
+                hl = plants[i].gameObject.AddComponent<InteractableHighlight>();
+            if (hl != null) hl.SetHighlighted(on);
         }
+    }
+
+    private void ClearPlantHighlights()
+    {
+        SetPlantHighlights(false);
     }
 
     // ── Grab target (surface raycast with depth-plane fallback) ──────
@@ -1745,33 +1881,35 @@ public class ObjectGrabber : MonoBehaviour
 
         bool foundSurface = false;
 
-        // RaycastAll so the ray can pass through nearer surfaces to reach
+        // RaycastNonAlloc so the ray can pass through nearer surfaces to reach
         // ones further away (e.g. coffee table in living room from kitchen camera).
-        var hits = Physics.RaycastAll(ray, 100f, surfaceLayer);
-        if (hits.Length == 0 && _held != null)
+        int hitCount = Physics.RaycastNonAlloc(ray, s_surfaceHitBuffer, 100f, surfaceLayer);
+        if (hitCount == 0 && _held != null)
             Debug.Log($"[UpdateGrabTarget] No surface hits at all. surfaceLayer={surfaceLayer.value}");
-        if (hits.Length > 0)
+        if (hitCount > 0)
         {
             // Sort nearest-first so we try the camera-closest surface first
-            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            System.Array.Sort(s_surfaceHitBuffer, 0, hitCount, s_surfaceHitComparer);
 
             int occlusionMask = _wallLayer | _barrierLayer;
             Vector3 camPos = cam.transform.position;
 
-            for (int h = 0; h < hits.Length; h++)
+            for (int h = 0; h < hitCount; h++)
             {
-                var surface = hits[h].collider.GetComponentInParent<PlacementSurface>();
+                var surface = s_surfaceHitBuffer[h].collider.GetComponentInParent<PlacementSurface>();
                 bool surfaceValid = surface != null
                     && (!surface.IsVertical || _held.CanWallMount)
-                    && (surface.IsVertical || !_held.WallOnly);
+                    && (surface.IsVertical || !_held.WallOnly)
+                    && (FridgeController.Instance == null || !FridgeController.Instance.IsShelfAndClosed(surface))
+                    && !IsCubbyAndClosed(surface);
                 if (!surfaceValid)
                 {
-                    Debug.Log($"[UpdateGrabTarget] Skipped {hits[h].collider.name}: surface={surface?.name}, isVertical={surface?.IsVertical}, canWallMount={_held?.CanWallMount}, wallOnly={_held?.WallOnly}");
+                    Debug.Log($"[UpdateGrabTarget] Skipped {s_surfaceHitBuffer[h].collider.name}: surface={surface?.name}, isVertical={surface?.IsVertical}, canWallMount={_held?.CanWallMount}, wallOnly={_held?.WallOnly}");
                     continue;
                 }
 
                 // Project onto the actual surface face to get the real placement point
-                var hitResult = surface.ProjectOntoSurface(hits[h].point, camPos);
+                var hitResult = surface.ProjectOntoSurface(s_surfaceHitBuffer[h].point, camPos);
                 Vector3 projectedPos = hitResult.worldPosition;
 
                 // Occlusion check: reject surfaces whose placement point is
@@ -2305,14 +2443,24 @@ public class ObjectGrabber : MonoBehaviour
             canPlace = _currentSurface.IsFloor || isTrashCan;
         }
 
-        // Barrier: blocked if placement sits over barrier geometry
-        if (canPlace && _barrierLayer != 0)
+        // Barrier: blocked if placement sits over barrier geometry.
+        // Skip for wall surfaces — the wall itself is on the barrier layer.
+        if (canPlace && _barrierLayer != 0 && !_currentSurface.IsVertical)
         {
             bool overBarrier = Physics.CheckSphere(placePos, 0.08f, _barrierLayer);
-            if (!overBarrier && !_currentSurface.IsVertical)
+            if (!overBarrier)
                 overBarrier = Physics.Raycast(placePos, Vector3.down, 0.15f, _barrierLayer);
             if (overBarrier) canPlace = false;
         }
+
+        // Fridge shelves blocked when doors are closed
+        if (canPlace && FridgeController.Instance != null
+            && FridgeController.Instance.IsShelfAndClosed(_currentSurface))
+            canPlace = false;
+
+        // Cubby interiors blocked when door is closed
+        if (canPlace && IsCubbyAndClosed(_currentSurface))
+            canPlace = false;
 
         // Occupancy: blocked unless the occupant is a valid pair partner of the held item.
         if (canPlace)
@@ -2350,6 +2498,24 @@ public class ObjectGrabber : MonoBehaviour
 
         if (!enabled && _held != null)
         {
+            // Vinyl records always return to their sleeve on force-drop
+            var forceVinyl = _held.GetComponent<VinylDisc>();
+            if (forceVinyl != null && forceVinyl.HomeSleeve != null)
+            {
+                forceVinyl.HomeSleeve.ReturnVinyl(forceVinyl);
+                ClearHeld();
+                return;
+            }
+
+            // Bottles return home during drink phase on force-drop
+            var forceBottle = _held.GetComponent<BottleItem>();
+            if (forceBottle != null && forceBottle.HasHome)
+            {
+                forceBottle.ReturnHome();
+                ClearHeld();
+                return;
+            }
+
             // Restore rotation constraints before configuring rigidbody
             _heldRb.constraints = _originalConstraints;
 
@@ -2397,6 +2563,12 @@ public class ObjectGrabber : MonoBehaviour
 
             ClearHeld();
         }
+    }
+
+    private static bool IsCubbyAndClosed(PlacementSurface surface)
+    {
+        var cubby = DrawerController.FindByInteriorSurface(surface);
+        return cubby != null && cubby.IsInteriorAndClosed(surface);
     }
 
     private PlacementSurface FindNearestSurfaceForHeld(Vector3 worldPos)

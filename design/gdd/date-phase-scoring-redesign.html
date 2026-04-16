@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Phase Scoring Redesign — Spent Blooms</title>
+<style>
+  :root {
+    --bg: #1a1a2e;
+    --card: #16213e;
+    --card-hover: #1a2745;
+    --accent: #e94560;
+    --accent-soft: #e9456033;
+    --green: #4ecca3;
+    --yellow: #f5c542;
+    --muted: #8892a8;
+    --text: #eaeaea;
+    --text-dim: #a0a8b8;
+    --border: #2a3a5c;
+    --like: #ff6b9d;
+    --dislike: #8888a0;
+    --neutral: #c8c8d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+
+  .subtitle span {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+  }
+
+  /* ── Tabs ── */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .tab-btn {
+    padding: 0.6rem 1.4rem;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .tab-content { display: none; padding-top: 1.5rem; }
+  .tab-content.active { display: block; }
+
+  /* ── Sections ── */
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  section:hover { background: var(--card-hover); }
+
+  section h2 {
+    font-size: 1.1rem;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  section h3 {
+    font-size: 0.95rem;
+    color: var(--yellow);
+    margin: 1rem 0 0.5rem;
+  }
+
+  p, li { color: var(--text-dim); font-size: 0.9rem; }
+  p { margin-bottom: 0.5rem; }
+  ul, ol { padding-left: 1.25rem; margin-bottom: 0.5rem; }
+  li { margin-bottom: 0.35rem; }
+  li strong { color: var(--text); }
+
+  code {
+    background: #0f3460;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    color: var(--yellow);
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .tag-exists { background: #4ecca333; color: var(--green); }
+  .tag-new { background: #e9456033; color: var(--accent); }
+  .tag-change { background: #f5c54233; color: var(--yellow); }
+
+  /* ── Phase Flow Diagram ── */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 1rem 0;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 180px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .flow-step:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .flow-step.active-step {
+    border-color: var(--accent);
+    box-shadow: 0 0 16px var(--accent-soft);
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--muted);
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+    user-select: none;
+  }
+
+  .flow-step .step-num {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .flow-step .step-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0.25rem 0;
+  }
+
+  .flow-step .step-desc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin: 1rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg);
+    border-radius: 6px;
+    border-left: 3px solid var(--border);
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -1.85rem;
+    top: 1rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .tl-item.tl-like { border-left-color: var(--like); }
+  .tl-item.tl-like::before { background: var(--like); }
+  .tl-item.tl-dislike { border-left-color: var(--dislike); }
+  .tl-item.tl-dislike::before { background: var(--dislike); }
+  .tl-item.tl-action { border-left-color: var(--green); }
+  .tl-item.tl-action::before { background: var(--green); }
+  .tl-item.tl-wait { border-left-color: var(--yellow); }
+  .tl-item.tl-wait::before { background: var(--yellow); }
+
+  .tl-item .tl-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .tl-item .tl-detail {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  td { color: var(--text-dim); }
+  tr:hover td { color: var(--text); }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; padding-left: 0; }
+
+  .checklist li {
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    transition: background 0.15s;
+  }
+
+  .checklist li:hover { background: var(--bg); }
+
+  .checklist li .check {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    font-size: 0.7rem;
+    color: transparent;
+  }
+
+  .checklist li.checked .check {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--bg);
+  }
+
+  .checklist li.checked {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--muted);
+  }
+
+  /* ── Flower Preview ── */
+  .flower-demo {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--bg);
+    border-radius: 8px;
+    margin: 1rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .flower-stem {
+    width: 4px;
+    background: #3a7d44;
+    margin: 0 auto;
+    border-radius: 2px;
+    transition: height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .flower-head {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: -4px auto 0;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .flower-pot {
+    width: 50px;
+    height: 25px;
+    background: #8B4513;
+    margin: 0 auto;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .flower-pot-rim {
+    width: 60px;
+    height: 8px;
+    background: #A0522D;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+
+  .flower-popup {
+    position: absolute;
+    font-weight: 700;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .demo-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .demo-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+
+  .demo-btn:hover { border-color: var(--accent); }
+  .demo-btn.like-btn:hover { border-color: var(--like); color: var(--like); }
+  .demo-btn.dislike-btn:hover { border-color: var(--dislike); color: var(--dislike); }
+  .demo-btn.neutral-btn:hover { border-color: var(--neutral); color: var(--neutral); }
+
+  /* ── Collapsible ── */
+  .collapsible-header {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .collapsible-header::before {
+    content: '>';
+    display: inline-block;
+    transition: transform 0.2s;
+    font-family: monospace;
+    color: var(--muted);
+  }
+
+  .collapsible-header.open::before { transform: rotate(90deg); }
+  .collapsible-body { display: none; margin-top: 0.75rem; }
+  .collapsible-body.open { display: block; }
+
+  /* ── Status badge ── */
+  .status-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .badge-draft { background: #f5c54233; color: var(--yellow); }
+  .badge-dep { background: #4ecca322; color: var(--green); }
+
+  .progress-bar {
+    flex: 1;
+    min-width: 200px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 3px;
+    transition: width 0.5s;
+  }
+
+  .progress-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<h1>Date Phase Scoring Redesign</h1>
+<div class="subtitle">
+  Spent Blooms &mdash; Design Document
+  <span>Draft</span>
+</div>
+
+<div class="status-bar">
+  <div class="status-badge badge-draft">Draft</div>
+  <div class="status-badge badge-dep">7 systems</div>
+  <div class="progress-label" id="progressLabel">0 / 12 criteria met</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+
+<!-- ── Tab Bar ── -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="overview">Overview</button>
+  <button class="tab-btn" data-tab="phases">Phase Details</button>
+  <button class="tab-btn" data-tab="flow">Flow &amp; Timing</button>
+  <button class="tab-btn" data-tab="formulas">Formulas</button>
+  <button class="tab-btn" data-tab="edges">Edge Cases</button>
+  <button class="tab-btn" data-tab="deps">Dependencies</button>
+  <button class="tab-btn" data-tab="tuning">Tuning Knobs</button>
+  <button class="tab-btn" data-tab="criteria">Acceptance</button>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- OVERVIEW -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-overview">
+
+  <section>
+    <h2>Overview</h2>
+    <p>Redesign the date scoring presentation so each phase has a deliberate, player-felt reveal of points, multipliers, and flower growth. Phase 1 judgments play one-at-a-time with flower feedback per beat. Phase 2 makes the drink tasting a dramatic centerpiece moment. Phase 3 switches from automatic room scanning to player-driven item clicking. All phases end with a "Continue" button so the player controls pacing.</p>
+  </section>
+
+  <section>
+    <h2>Player Fantasy</h2>
+    <p>Every judgment feels like a mini-verdict &mdash; the flower is the emotional barometer you're watching while the date reacts. You feel the tension of each reveal, the satisfaction of a good pick, and the dread of a bad one. In Phase 3, you're a curator showing off your apartment, choosing what to highlight and in what order.</p>
+  </section>
+
+  <!-- Interactive Phase Flow -->
+  <section>
+    <h2>Phase Flow</h2>
+    <p style="margin-bottom:1rem; color:var(--muted); font-size:0.85rem;">Click a phase to see details</p>
+    <div class="flow">
+      <div class="flow-step active-step" data-phase="1" onclick="selectPhase(1)">
+        <div class="step-num">Phase 1</div>
+        <div class="step-title">Impressions</div>
+        <div class="step-desc">Music, perfume, outfit, cleanliness &mdash; one at a time</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" data-phase="2" onclick="selectPhase(2)">
+        <div class="step-num">Phase 2</div>
+        <div class="step-title">Drinks</div>
+        <div class="step-desc">Dramatic tasting moment &mdash; big verdict</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" data-phase="3" onclick="selectPhase(3)">
+        <div class="step-num">Phase 3</div>
+        <div class="step-title">Warming Up</div>
+        <div class="step-desc">Player clicks items &mdash; curate the tour</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" data-phase="4" onclick="selectPhase(4)">
+        <div class="step-num">End</div>
+        <div class="step-title">Verdict</div>
+        <div class="step-desc">Flower gift or farewell</div>
+      </div>
+    </div>
+    <div id="phaseDetail" style="margin-top:0.5rem;">
+      <div class="tl-item tl-action">
+        <div class="tl-label">Phase 1 &mdash; Sequential entrance judgments</div>
+        <div class="tl-detail">Date evaluates 4 things one-at-a-time. Flower reacts to each. Player clicks "Continue" when ready.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flower Demo -->
+  <section>
+    <h2>Flower Behavior Preview</h2>
+    <p style="margin-bottom:0.5rem;">Click the buttons to simulate reactions on the affection flower.</p>
+    <div class="flower-demo" id="flowerDemo">
+      <div class="flower-head" id="flowerHead" style="width:30px;height:30px;background:#78a85a;"></div>
+      <div class="flower-stem" id="flowerStem" style="height:60px;"></div>
+      <div class="flower-pot-rim"></div>
+      <div class="flower-pot"></div>
+    </div>
+    <div class="demo-controls">
+      <button class="demo-btn like-btn" onclick="demoReaction('like')">Like &hearts;</button>
+      <button class="demo-btn neutral-btn" onclick="demoReaction('neutral')">Neutral &mdash;</button>
+      <button class="demo-btn dislike-btn" onclick="demoReaction('dislike')">Dislike &frown;</button>
+      <button class="demo-btn" onclick="demoReset()">Reset</button>
+    </div>
+    <div style="text-align:center;margin-top:0.5rem;color:var(--muted);font-size:0.85rem;">
+      Affection: <strong id="demoAffection" style="color:var(--text);">50</strong> / 100
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- PHASE DETAILS -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-phases">
+
+  <section>
+    <h2>Phase 1 &mdash; Impressions (Sequential Reveal)</h2>
+    <h3>Current Behavior <span class="tag tag-exists">exists</span></h3>
+    <p><code>EntranceJudgmentSequence.RunJudgments()</code> evaluates music, perfume, outfit, and cleanliness one-at-a-time with 3.2s gaps. Each fires <code>ApplyReaction()</code> which updates the flower via <code>OnAffectionChanged</code>.</p>
+
+    <h3>Changes <span class="tag tag-change">modify</span></h3>
+    <ol>
+      <li><strong>Flower beat per judgment</strong> &mdash; After each reaction bubble, hold ~0.8s so the player watches the flower pulse (Like) or wilt (Dislike). Add a UI flash on the flower area to direct attention.</li>
+      <li><strong>Multiplier popups on flower</strong> &mdash; <code>AffectionBar.ShowPopup()</code> already fires per judgment. Add the multiplier suffix when applicable (e.g. <code>"Your Music &hearts; &times;2"</code>). <code>ShowJudgmentJuice()</code> needs the multiplier from <code>GetTagEffectMultiplier</code>.</li>
+      <li><strong>No auto-advance</strong> &mdash; After all 4 judgments, show "Continue" button instead of immediately starting Phase 2.</li>
+    </ol>
+
+    <h3>Unchanged</h3>
+    <p>Judgment order (music &rarr; perfume &rarr; outfit &rarr; cleanliness), evaluation logic, personality pre-comments, SFX, reaction particles.</p>
+  </section>
+
+  <section>
+    <h2>Phase 2 &mdash; Drinks (Big Moment)</h2>
+    <h3>Current Behavior <span class="tag tag-exists">exists</span></h3>
+    <p><code>ReceiveDrink(recipe, score)</code> calls <code>ApplyReaction()</code> once and immediately starts the Phase 3 transition.</p>
+
+    <h3>Changes <span class="tag tag-change">modify</span></h3>
+    <ol>
+      <li><strong>Tasting beat</strong> &mdash; After delivery, insert a dramatic sequence:
+        <div class="timeline" style="margin-top:0.5rem;">
+          <div class="tl-item tl-action"><span class="tl-label">Pick up drink</span><span class="tl-detail"> ~0.5s</span></div>
+          <div class="tl-item tl-wait"><span class="tl-label">Suspenseful sip / thinking face</span><span class="tl-detail"> ~1.5s</span></div>
+          <div class="tl-item tl-like"><span class="tl-label">Verdict reaction</span><span class="tl-detail"> Big bubble + particles + SFX</span></div>
+          <div class="tl-item tl-action"><span class="tl-label">Flower + popup</span><span class="tl-detail"> Score contribution shown, multiplier if applicable</span></div>
+        </div>
+      </li>
+      <li><strong>Score granularity (optional)</strong> &mdash; Show raw score as flavor text on popup (e.g. <code>"Great mix! +8 &hearts;"</code>). Tuning knob &mdash; can revert to simple reaction.</li>
+      <li><strong>No auto-advance</strong> &mdash; Show "Continue" button after drink verdict.</li>
+    </ol>
+
+    <h3>Unchanged</h3>
+    <p><code>DrinkPourManager</code> flow, <code>ReactionEvaluator.EvaluateDrink()</code> logic, pour mechanics, bottle handling.</p>
+  </section>
+
+  <section>
+    <h2>Phase 3 &mdash; Warming Up (Player-Driven)</h2>
+    <h3>Current Behavior <span class="tag tag-exists">exists</span></h3>
+    <p><code>RevealAllReactions()</code> auto-scans all active ReactableTags, sorts by multiplier, plays them as a wave with 0.6s stagger. Player is passive.</p>
+
+    <h3>Changes <span class="tag tag-new">new mechanic</span></h3>
+    <ol>
+      <li><strong>Player clicks items</strong> &mdash; Use the existing <code>DateInspectSystem</code>. Each click on a ReactableTag item:
+        <ul>
+          <li>Wiggle animation <span class="tag tag-exists">exists</span></li>
+          <li>Labeled reaction bubble + icon <span class="tag tag-exists">exists</span></li>
+          <li>Points + multiplier popup on flower <span class="tag tag-exists">exists</span></li>
+          <li>World-space multiplier popup <span class="tag tag-new">new</span></li>
+          <li>Flower grows/shrinks <span class="tag tag-exists">exists</span></li>
+        </ul>
+      </li>
+      <li><strong>Multiplier popup on inspect</strong> &mdash; <code>TryInspect()</code> currently does NOT spawn <code>SpawnMultiplierPopup()</code>. Add it when multiplier &gt; 1.</li>
+      <li><strong>"Continue" button visible from start</strong> &mdash; Player clicks when done exploring.</li>
+      <li><strong>Remaining items sweep</strong> &mdash; On "Continue", un-inspected active ReactableTags get the existing wave treatment (particles, highlights, multiplier popups, 0.6s stagger).</li>
+      <li><strong>Disable auto-scan</strong> &mdash; <code>RevealAllReactions()</code> only runs for un-inspected remainder.</li>
+    </ol>
+
+    <h3>Unchanged</h3>
+    <p>ReactableTag system, DateInspectSystem hover tooltips, ReactionEvaluator logic, multiplier calculation, highlight system.</p>
+  </section>
+
+  <section>
+    <h2>Continue Button (All Phases) <span class="tag tag-new">new</span></h2>
+    <p>Simple UI button, screen space, bottom-center or bottom-right.</p>
+    <table>
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Label</td><td><code>"Continue &rarr;"</code></td></tr>
+      <tr><td>Quality</td><td>Playtest placeholder &mdash; no final art</td></tr>
+      <tr><td>Phase 1</td><td>Shown after all 4 entrance judgments</td></tr>
+      <tr><td>Phase 2</td><td>Shown after drink verdict animation</td></tr>
+      <tr><td>Phase 3</td><td>Shown immediately (player controls pace)</td></tr>
+      <tr><td>On click</td><td>Triggers phase transition (Phase 3: sweep first)</td></tr>
+      <tr><td>During sweep</td><td>Hidden; sweep plays to completion</td></tr>
+    </table>
+  </section>
+
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- FLOW & TIMING -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-flow">
+
+  <section>
+    <h2>Phase 1 Timeline</h2>
+    <div class="timeline">
+      <div class="tl-item tl-action"><span class="tl-label">Date arrives at entrance</span><span class="tl-detail">Fade in, camera snap to Arrival frame</span></div>
+      <div class="tl-item tl-wait"><span class="tl-label">Pre-judgment pause</span><span class="tl-detail">1.0s &mdash; date settles in</span></div>
+      <div class="tl-item tl-like"><span class="tl-label">Music judgment</span><span class="tl-detail">Personality comment &rarr; reaction bubble &rarr; flower pulse/wilt &rarr; popup</span></div>
+      <div class="tl-item tl-wait"><span class="tl-label">Inter-judgment gap</span><span class="tl-detail">3.2s (includes ~0.8s flower beat)</span></div>
+      <div class="tl-item tl-like"><span class="tl-label">Perfume judgment</span><span class="tl-detail">Same sequence + smell check</span></div>
+      <div class="tl-item tl-wait"><span class="tl-label">Inter-judgment gap</span><span class="tl-detail">3.2s</span></div>
+      <div class="tl-item tl-like"><span class="tl-label">Outfit judgment</span><span class="tl-detail">Same sequence</span></div>
+      <div class="tl-item tl-wait"><span class="tl-label">Inter-judgment gap</span><span class="tl-detail">3.2s</span></div>
+      <div class="tl-item tl-like"><span class="tl-label">Cleanliness judgment</span><span class="tl-detail">Same sequence + area callout if dirty</span></div>
+      <div class="tl-item tl-action"><span class="tl-label">"Continue &rarr;" button appears</span><span class="tl-detail">0.5s delay after last judgment</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Phase 2 Timeline</h2>
+    <div class="timeline">
+      <div class="tl-item tl-action"><span class="tl-label">Fade in &rarr; camera glides to kitchen</span><span class="tl-detail">1.6s lerp</span></div>
+      <div class="tl-item tl-wait"><span class="tl-label">Player makes drink</span><span class="tl-detail">Open fridge, grab bottles, pour ingredients, finish drink</span></div>
+      <div class="tl-item tl-action"><span class="tl-label">Player delivers drink</span><span class="tl-detail">Click near date character with glass</span></div>
+      <div class="tl-item tl-wait"><span class="tl-label">Pick up beat</span><span class="tl-detail">~0.5s</span></div>
+      <div class="tl-item tl-wait"><span class="tl-label">Tasting suspense</span><span class="tl-detail">~1.5s &mdash; thinking face bubble</span></div>
+      <div class="tl-item tl-like"><span class="tl-label">Drink verdict</span><span class="tl-detail">Big reaction bubble + particles + SFX + flower + popup</span></div>
+      <div class="tl-item tl-action"><span class="tl-label">"Continue &rarr;" button appears</span><span class="tl-detail">0.5s delay after verdict</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Phase 3 Timeline</h2>
+    <div class="timeline">
+      <div class="tl-item tl-action"><span class="tl-label">Fade in &rarr; camera glides to couch</span><span class="tl-detail">1.6s lerp</span></div>
+      <div class="tl-item tl-action"><span class="tl-label">"Continue &rarr;" button visible immediately</span><span class="tl-detail">Player controls pacing from here</span></div>
+      <div class="tl-item tl-like"><span class="tl-label">Player clicks item #1</span><span class="tl-detail">Wiggle &rarr; reaction &rarr; flower &rarr; popup &rarr; multiplier</span></div>
+      <div class="tl-item tl-like"><span class="tl-label">Player clicks item #2, #3...</span><span class="tl-detail">Same loop, any order</span></div>
+      <div class="tl-item tl-action"><span class="tl-label">Player clicks "Continue"</span><span class="tl-detail">Button hides</span></div>
+      <div class="tl-item tl-dislike"><span class="tl-label">Remaining items sweep</span><span class="tl-detail">Un-inspected tags play wave (0.6s stagger each)</span></div>
+      <div class="tl-item tl-action"><span class="tl-label">Date ending sequence</span><span class="tl-detail">Final score check &rarr; flower gift or farewell</span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- FORMULAS -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-formulas">
+  <section>
+    <h2>Formulas</h2>
+    <p>No new formulas. All scoring math stays the same.</p>
+
+    <h3>Affection Delta</h3>
+    <p><code>delta = reactionValue &times; multiplier &times; moodModifier</code></p>
+    <table>
+      <tr><th>Variable</th><th>Values</th><th>Source</th></tr>
+      <tr><td><code>reactionValue</code></td><td>Like = +5, Neutral = +0.5, Dislike = -4</td><td>DateSessionManager config</td></tr>
+      <tr><td><code>multiplier</code></td><td>1&times; &ndash; 5&times;</td><td><code>GetTagEffectMultiplier(tag)</code></td></tr>
+      <tr><td><code>moodModifier</code></td><td>Match = 1.5&times;, Mismatch = 0.5&times;</td><td>DateSessionManager config</td></tr>
+    </table>
+
+    <h3>Example: Player has matching mood + 3&times; vinyl playing</h3>
+    <p><code>+5 &times; 3 &times; 1.5 = +22.5 affection</code></p>
+
+    <h3>Thresholds</h3>
+    <table>
+      <tr><th>Check</th><th>Threshold</th><th>When</th></tr>
+      <tr><td>Arrival fail</td><td>&lt; 25</td><td>After Phase 1</td></tr>
+      <tr><td>Drinks fail</td><td>&lt; 20</td><td>After Phase 2</td></tr>
+      <tr><td>Reveal fail</td><td>&lt; 30</td><td>After Phase 3</td></tr>
+      <tr><td>Bail-out</td><td>&lt; 10</td><td>Any time (immediate)</td></tr>
+      <tr><td>Flower gift</td><td>&ge; 90</td><td>End of date</td></tr>
+    </table>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- EDGE CASES -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-edges">
+  <section>
+    <h2>Edge Cases</h2>
+    <table>
+      <tr><th>Scenario</th><th>Behavior</th></tr>
+      <tr><td>Player clicks "Continue" in Phase 3 without inspecting anything</td><td>Full wave sweep plays for all items (identical to current auto-scan)</td></tr>
+      <tr><td>Player inspects every item before clicking "Continue"</td><td>Sweep finds nothing, proceeds directly to date ending</td></tr>
+      <tr><td>Bail-out threshold hit mid-Phase 1 judgment</td><td><code>CheckBailOut()</code> fires <code>FailDate()</code> immediately, overrides sequence</td></tr>
+      <tr><td>Player delivers drink before pouring ingredients</td><td>Not possible &mdash; glass requires ingredients first</td></tr>
+      <tr><td>No active ReactableTags in Phase 3</td><td>"Continue" button still shown; sweep is empty; proceed to ending</td></tr>
+      <tr><td>Player clicks "Continue" during sweep animation</td><td>Button is hidden once clicked; sweep plays to completion</td></tr>
+      <tr><td>DateInspectSystem click during Phase 1 or 2</td><td>Blocked &mdash; restrict to Reveal phase only during dates</td></tr>
+    </table>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- DEPENDENCIES -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-deps">
+  <section>
+    <h2>Dependencies</h2>
+    <table>
+      <tr><th>System</th><th>Role</th><th>Changes</th></tr>
+      <tr>
+        <td><code>DateSessionManager</code></td>
+        <td>Orchestrator</td>
+        <td><span class="tag tag-change">modify</span> Add continue-button logic, modify phase transition triggers, add remaining-items sweep</td>
+      </tr>
+      <tr>
+        <td><code>EntranceJudgmentSequence</code></td>
+        <td>Phase 1 scoring</td>
+        <td><span class="tag tag-change">modify</span> Add multiplier suffix to popups, signal completion for continue button</td>
+      </tr>
+      <tr>
+        <td><code>DateInspectSystem</code></td>
+        <td>Phase 3 clicking</td>
+        <td><span class="tag tag-change">modify</span> Add world-space multiplier popup, restrict to Phase 3 during dates</td>
+      </tr>
+      <tr>
+        <td><code>AffectionBar</code></td>
+        <td>Flower + popups</td>
+        <td><span class="tag tag-exists">no changes</span></td>
+      </tr>
+      <tr>
+        <td><code>ReactableTag</code></td>
+        <td>Item tagging</td>
+        <td><span class="tag tag-exists">no changes</span></td>
+      </tr>
+      <tr>
+        <td><code>DrinkPourManager</code></td>
+        <td>Drink delivery</td>
+        <td><span class="tag tag-exists">no changes</span></td>
+      </tr>
+      <tr>
+        <td><code>SpawnMultiplierPopup</code></td>
+        <td>World-space &times;N text</td>
+        <td><span class="tag tag-change">modify</span> Call from DateInspectSystem path</td>
+      </tr>
+      <tr>
+        <td><code>PhaseContinueButton</code></td>
+        <td>UI button</td>
+        <td><span class="tag tag-new">new</span> New MonoBehaviour</td>
+      </tr>
+    </table>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- TUNING KNOBS -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-tuning">
+  <section>
+    <h2>Tuning Knobs</h2>
+    <table>
+      <tr><th>Knob</th><th>Location</th><th>Default</th><th>Range</th><th>Purpose</th></tr>
+      <tr>
+        <td><code>_interJudgmentPause</code></td>
+        <td>EntranceJudgmentSequence</td>
+        <td>3.2s</td>
+        <td>1.5 &ndash; 6.0s</td>
+        <td>Gap between Phase 1 judgments</td>
+      </tr>
+      <tr>
+        <td><code>_drinkTastingHold</code></td>
+        <td>DateSessionManager <span class="tag tag-new">new</span></td>
+        <td>1.5s</td>
+        <td>0.5 &ndash; 4.0s</td>
+        <td>Suspense pause before drink verdict</td>
+      </tr>
+      <tr>
+        <td><code>_sweepStagger</code></td>
+        <td>DateSessionManager</td>
+        <td>0.6s</td>
+        <td>0.2 &ndash; 2.0s</td>
+        <td>Delay between items in remaining-items wave</td>
+      </tr>
+      <tr>
+        <td><code>_continueButtonDelay</code></td>
+        <td>PhaseContinueButton <span class="tag tag-new">new</span></td>
+        <td>0.5s</td>
+        <td>0 &ndash; 2.0s</td>
+        <td>Delay before button appears after scoring ends</td>
+      </tr>
+      <tr>
+        <td><code>_phase3SweepEnabled</code></td>
+        <td>DateSessionManager <span class="tag tag-new">new</span></td>
+        <td>true</td>
+        <td>bool</td>
+        <td>Toggle remaining-items sweep on/off</td>
+      </tr>
+      <tr>
+        <td><code>_showDrinkScoreNumber</code></td>
+        <td>DateSessionManager <span class="tag tag-new">new</span></td>
+        <td>false</td>
+        <td>bool</td>
+        <td>Show raw drink score vs simple reaction</td>
+      </tr>
+    </table>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- ACCEPTANCE CRITERIA -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-criteria">
+  <section>
+    <h2>Acceptance Criteria</h2>
+    <ul class="checklist" id="checklist">
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 1: Each of the 4 entrance judgments shows reaction + flower pulse/wilt + popup one at a time</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 1: Multiplier suffix appears on popup when item has multiplier &gt; 1</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 1: "Continue" button appears after all 4 judgments, does NOT auto-advance</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 2: Drink delivery triggers dramatic pause &rarr; reaction &rarr; flower &rarr; popup sequence</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 2: "Continue" button appears after drink verdict, does NOT auto-advance</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 3: Player clicks ReactableTag items to show them to the date (no auto-scan)</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 3: Each click produces wiggle + reaction + flower + popup + multiplier popup</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 3: "Continue" button is visible from Phase 3 start</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 3: Clicking "Continue" sweeps remaining un-inspected items as a wave</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Phase 3: If all items inspected, sweep is empty and date proceeds to ending</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Bail-out threshold still works mid-phase (date fails immediately)</span></li>
+      <li onclick="toggleCheck(this)"><span class="check">&#10003;</span><span>Flower grows/shrinks visibly in response to each individual judgment</span></li>
+    </ul>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- SCRIPTS -->
+<!-- ════════════════════════════════════════════════ -->
+<script>
+// ── Tabs ──
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ── Phase flow selector ──
+const phaseDetails = {
+  1: { cls: 'tl-action', label: 'Phase 1 — Sequential entrance judgments', detail: 'Date evaluates 4 things one-at-a-time (music, perfume, outfit, cleanliness). Flower reacts to each. Player clicks "Continue" when ready.' },
+  2: { cls: 'tl-wait', label: 'Phase 2 — Dramatic drink tasting', detail: 'Player delivers drink. Dramatic sip pause → big verdict reaction → flower grows/shrinks. Player clicks "Continue" when ready.' },
+  3: { cls: 'tl-like', label: 'Phase 3 — Player-driven item showcase', detail: 'Player clicks items around the room to show the date. Each click triggers reaction + flower + points. "Continue" sweeps remaining items as a wave.' },
+  4: { cls: 'tl-action', label: 'End — Final verdict', detail: 'Score checked against thresholds. If affection ≥ 90, date gives a flower (Zelda-style presentation). Otherwise, farewell dialogue.' }
+};
+
+function selectPhase(n) {
+  document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active-step'));
+  document.querySelector(`.flow-step[data-phase="${n}"]`).classList.add('active-step');
+  const d = phaseDetails[n];
+  document.getElementById('phaseDetail').innerHTML =
+    `<div class="tl-item ${d.cls}"><div class="tl-label">${d.label}</div><div class="tl-detail">${d.detail}</div></div>`;
+}
+
+// ── Flower demo ──
+let demoAff = 50;
+
+function demoReaction(type) {
+  const stem = document.getElementById('flowerStem');
+  const head = document.getElementById('flowerHead');
+  const label = document.getElementById('demoAffection');
+
+  if (type === 'like') demoAff = Math.min(100, demoAff + 5);
+  else if (type === 'dislike') demoAff = Math.max(0, demoAff - 4);
+  else demoAff = Math.min(100, demoAff + 0.5);
+
+  const t = demoAff / 100;
+  const stemH = 30 + t * 90;
+  const headSize = 14 + t * 46;
+
+  // Interpolate green (bud) → pink (bloom)
+  const r = Math.round(120 + t * 135);
+  const g = Math.round(168 - t * 60);
+  const b = Math.round(90 + t * 70);
+
+  stem.style.height = stemH + 'px';
+  head.style.width = headSize + 'px';
+  head.style.height = headSize + 'px';
+  head.style.background = `rgb(${r},${g},${b})`;
+  label.textContent = Math.round(demoAff * 10) / 10;
+
+  // Pulse animation
+  if (type === 'like') {
+    head.style.transform = 'scale(1.4)';
+    setTimeout(() => head.style.transform = 'scale(1)', 300);
+  } else if (type === 'dislike') {
+    head.style.transform = 'scale(0.85) rotate(-15deg)';
+    setTimeout(() => head.style.transform = 'scale(1) rotate(0)', 400);
+  }
+
+  // Spawn floating popup
+  spawnPopup(type);
+}
+
+function spawnPopup(type) {
+  const demo = document.getElementById('flowerDemo');
+  const head = document.getElementById('flowerHead');
+  const popup = document.createElement('div');
+  popup.className = 'flower-popup';
+
+  const texts = {
+    like: ['+5 ♥', 'Loves it! ♥', '♥ ×2'],
+    dislike: ['-4 ☹', 'Not a fan ☹', '☹'],
+    neutral: ['+0.5', 'Hmm, okay', '—']
+  };
+  const colors = { like: 'var(--like)', dislike: 'var(--dislike)', neutral: 'var(--neutral)' };
+  const arr = texts[type];
+
+  popup.textContent = arr[Math.floor(Math.random() * arr.length)];
+  popup.style.color = colors[type];
+  popup.style.left = '50%';
+  popup.style.transform = 'translateX(-50%)';
+  popup.style.top = (head.offsetTop - 20) + 'px';
+  demo.appendChild(popup);
+
+  let elapsed = 0;
+  const duration = 1500;
+  const startTop = head.offsetTop - 20;
+
+  function animate() {
+    elapsed += 16;
+    const t = Math.min(elapsed / duration, 1);
+    popup.style.top = (startTop - t * 50) + 'px';
+    popup.style.opacity = t < 0.1 ? t * 10 : t > 0.7 ? (1 - t) / 0.3 : 1;
+    const s = t < 0.15 ? 0.5 + t / 0.15 * 0.6 : t < 0.25 ? 1.1 - (t - 0.15) / 0.1 * 0.1 : 1;
+    popup.style.transform = `translateX(-50%) scale(${s})`;
+    if (t < 1) requestAnimationFrame(animate);
+    else popup.remove();
+  }
+  requestAnimationFrame(animate);
+}
+
+function demoReset() {
+  demoAff = 50;
+  const stem = document.getElementById('flowerStem');
+  const head = document.getElementById('flowerHead');
+  stem.style.height = '60px';
+  head.style.width = '30px';
+  head.style.height = '30px';
+  head.style.background = '#78a85a';
+  head.style.transform = 'scale(1)';
+  document.getElementById('demoAffection').textContent = '50';
+}
+
+// ── Checklist ──
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  updateProgress();
+}
+
+function updateProgress() {
+  const items = document.querySelectorAll('#checklist li');
+  const checked = document.querySelectorAll('#checklist li.checked').length;
+  const total = items.length;
+  const pct = Math.round(checked / total * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${checked} / ${total} criteria met`;
+}
+</script>
+
+</body>
+</html>

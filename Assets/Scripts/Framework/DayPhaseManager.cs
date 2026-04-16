@@ -41,6 +41,9 @@ public class DayPhaseManager : MonoBehaviour
 
     public static DayPhaseManager Instance { get; private set; }
 
+    /// <summary>True when FlowerTrimmingTransition owns the dream sequence. GameClock.SleepSequence skips its dream.</summary>
+    public static bool SuppressSleepDream { get; private set; }
+
     [Header("Current Phase")]
     [SerializeField] private DayPhase _currentPhase = DayPhase.Exploration;
 
@@ -545,6 +548,13 @@ public class DayPhaseManager : MonoBehaviour
 
     private IEnumerator MorningTransition()
     {
+        // Cinematic day intro — track shot + DAY N title + Paris description
+        if (DayIntroSequence.Instance != null)
+        {
+            int day = GameClock.Instance != null ? GameClock.Instance.CurrentDay : 1;
+            yield return DayIntroSequence.Instance.Play(day);
+        }
+
         if (nextDaySFX != null && AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(nextDaySFX);
 
@@ -656,14 +666,7 @@ public class DayPhaseManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(_fadeDuration);
 
-        // 12. Epic phase title drop over the live scene
-        string dayLabel = GameClock.Instance != null
-            ? $"Day {GameClock.Instance.CurrentDay}"
-            : "Exploration";
-        if (PhaseTitleDrop.Instance != null)
-            yield return PhaseTitleDrop.Instance.Show(dayLabel);
-
-        // 13. Flash visibility eyes on all items so the player sees what the date can notice
+        // 12. Flash visibility eyes on all items so the player sees what the date can notice
         VisibilityEyeIndicator.Instance?.FlashAllItems();
 
         // 14. Start preparation countdown
@@ -688,7 +691,18 @@ public class DayPhaseManager : MonoBehaviour
             yield break;
         }
 
+        // 1b. Wait a frame for all singletons to finish initializing after scene load
+        yield return null;
+
+        // 1c. Cinematic day intro (track shot + DAY N + Paris description)
+        if (DayIntroSequence.Instance != null)
+        {
+            int day = GameClock.Instance != null ? GameClock.Instance.CurrentDay : 1;
+            yield return DayIntroSequence.Instance.Play(day);
+        }
+
         // 2. Set up browse camera (skip newspaper read camera entirely)
+        //    Screen is still opaque white from DayIntroSequence.
         if (_readCamera != null)
             _readCamera.Priority = PriorityInactive;
         if (ApartmentManager.Instance != null)
@@ -854,14 +868,20 @@ public class DayPhaseManager : MonoBehaviour
 
     private IEnumerator DemoCleanupTransition()
     {
+        // 0. Wait a frame for all singletons to finish initializing after scene load
+        yield return null;
+
+        // 1. Cinematic day intro — track shot + DAY N + Paris description
+        if (DayIntroSequence.Instance != null)
+        {
+            int day = GameClock.Instance != null ? GameClock.Instance.CurrentDay : 1;
+            yield return DayIntroSequence.Instance.Play(day);
+        }
+
         // Set phase to Exploration but skip newspaper and prep timer entirely
         _currentPhase = DayPhase.Exploration;
         Debug.Log("[DayPhaseManager] Phase → Exploration (demo cleanup)");
         DismissAllStationUI();
-
-        // 1. Fade to black (we're coming from sleep which already faded out, but be safe)
-        if (ScreenFade.Instance != null)
-            yield return ScreenFade.Instance.FadeOut(_fadeDuration);
 
         // 2. Set up browse camera (skip newspaper read camera)
         if (_readCamera != null)
@@ -910,8 +930,17 @@ public class DayPhaseManager : MonoBehaviour
 
         OnPhaseChanged?.Invoke((int)DayPhase.Exploration);
 
-        // 10. Poll for all messes resolved, then show end screen
-        StartCoroutine(PollDemoCleanupComplete());
+        // 10. Auto-schedule the Paris date for day 2+ and start prep timer
+        var tutorialDate = DayManager.Instance != null && DayManager.Instance.Pool != null
+            ? DayManager.Instance.Pool.tutorialDate
+            : null;
+        if (tutorialDate != null)
+        {
+            DateSessionManager.Instance?.ScheduleDate(tutorialDate);
+            PhoneController.Instance?.SetPendingDate(tutorialDate);
+        }
+
+        StartPrepTimer();
     }
 
     private IEnumerator PollDemoCleanupComplete()
@@ -943,9 +972,13 @@ public class DayPhaseManager : MonoBehaviour
 
     private IEnumerator FlowerTrimmingTransition()
     {
+        // Claim dream ownership so GameClock.SleepSequence skips its own
+        SuppressSleepDream = true;
+
         if (!DateSessionManager.PendingFlowerTrim)
         {
             Debug.LogWarning("[DayPhaseManager] FlowerTrimming phase but no pending trim. Skipping to Evening.");
+            SuppressSleepDream = false;
             SetPhase(DayPhase.Evening);
             yield break;
         }
@@ -986,24 +1019,43 @@ public class DayPhaseManager : MonoBehaviour
         while (!bridge.IsSceneReady)
             yield return null;
 
-        // 5. Hold title so the player can read it (3 seconds total)
+        // 5. Set sky to night before revealing the flower scene
+        if (NatureBoxController.Instance != null)
+            NatureBoxController.Instance.SetManualTime(0.05f); // deep night
+
+        // 6. Hold title so the player can read it (3 seconds total)
         yield return new WaitForSeconds(3.0f);
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.HidePhaseTitle();
 
-        // 6. Brief pause after title fades before revealing the scene
+        // 7. Brief pause after title fades before revealing the scene
         yield return new WaitForSeconds(0.3f);
 
-        // 7. Fade in — the flower scene's own Camera is now active (apartment camera disabled)
+        // 8. Fade in — the flower scene's own Camera is now active (apartment camera disabled)
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(_fadeDuration * 2f);
 
-        // 7b. Fade music back up now that the scene is visible
+        // 8b. Fade music back up now that the scene is visible
         AudioManager.Instance?.UnduckMusic(1.5f);
 
-        // 8. Wait for the player to finish trimming
+        // 9. Slowly transition sky from night to morning while player trims
+        float nightToMorningDuration = 60f; // seconds of real time for full transition
+        float skyTime = 0.05f; // start: deep night
+        float skyTarget = 0.30f; // end: early morning
+        float skyElapsed = 0f;
+
         while (!trimmingComplete)
+        {
+            // Lerp sky toward morning
+            if (skyElapsed < nightToMorningDuration)
+            {
+                skyElapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(skyElapsed / nightToMorningDuration);
+                float sky = Mathf.Lerp(skyTime, skyTarget, t);
+                NatureBoxController.Instance?.SetManualTime(sky);
+            }
             yield return null;
+        }
 
         // 9. Fade music down before leaving flower scene
         AudioManager.Instance?.DuckMusic(0f, 0.8f);
@@ -1036,9 +1088,11 @@ public class DayPhaseManager : MonoBehaviour
         yield return null;
         yield return new WaitForSeconds(0.2f);
 
-        // 9. Restore apartment camera while screen is fully black
+        // 9. Restore apartment camera and sky to daytime while screen is fully black
         if (bridge != null)
             bridge.RestoreApartmentCamera();
+        if (NatureBoxController.Instance != null)
+            NatureBoxController.Instance.ResumeGameClock();
 
         // 10. Clean up state while still black (skip GoToBed to avoid redundant fades)
         _currentPhase = DayPhase.Evening;
@@ -1055,34 +1109,60 @@ public class DayPhaseManager : MonoBehaviour
         RecordSlot.Instance?.Stop();
         DateEndScreen.Instance?.Dismiss();
 
-        // 11. Dream interstitial — psychedelic overlay (click to continue)
-        if (DreamScreen.Instance != null)
-            yield return DreamScreen.Instance.Play();
-        else
+        // 11. Continue button after flower trimming — player clicks to proceed to dream/sleep
+        if (PhaseContinueButton.Instance != null)
         {
-            // Fallback text if DreamScreen not available
-            if (ScreenFade.Instance != null)
-                ScreenFade.Instance.ShowPhaseTitle("Nema drifts to sleep...");
-            yield return new WaitForSecondsRealtime(3f);
-            if (ScreenFade.Instance != null)
-                ScreenFade.Instance.HidePhaseTitle();
+            bool clicked = false;
+            PhaseContinueButton.Instance.Show(() => clicked = true);
+            while (!clicked) yield return null;
         }
 
-        // 12. Auto-save + advance day (still black — no flicker)
+        // 11b. "Bedtime" title card on the white screen
+        if (ScreenFade.Instance != null)
+        {
+            ScreenFade.Instance.ShowPhaseTitle("Bedtime");
+            yield return new WaitForSecondsRealtime(2f);
+            ScreenFade.Instance.HidePhaseTitle();
+            yield return new WaitForSecondsRealtime(0.3f);
+        }
+
+        // 12. Dream interstitial — psychedelic overlay (auto-timed, no click)
+        //     Dream is at sortOrder 105, ScreenFade at 100. We need ScreenFade
+        //     opaque BEFORE the dream fades out, so the player sees dream → white
+        //     (not dream → apartment flash → white).
+        if (DreamScreen.Instance != null)
+        {
+            DreamScreen.Instance.ShowAndHold();
+            yield return new WaitForSecondsRealtime(4f);
+
+            // Bring ScreenFade to opaque white while dream is still covering everything
+            if (ScreenFade.Instance != null)
+                ScreenFade.Instance.FadeOut(0f); // instant — dream hides it
+
+            // Now fade the dream out — reveals white ScreenFade, not the apartment
+            yield return DreamScreen.Instance.HideAndFadeOut();
+        }
+        else
+        {
+            if (ScreenFade.Instance != null)
+            {
+                ScreenFade.Instance.ShowPhaseTitle("Nema drifts to sleep...");
+                yield return new WaitForSecondsRealtime(3f);
+                ScreenFade.Instance.HidePhaseTitle();
+                yield return ScreenFade.Instance.FadeOut(0f);
+            }
+        }
+
+        // 12. Auto-save + advance day (screen is now opaque white)
         AutoSaveController.Instance?.PerformSave("end_of_day");
 
         if (GameClock.Instance != null)
-        {
-            // Advance day directly without SleepSequence's redundant fades
             GameClock.Instance.AdvanceDayDirect();
-        }
         else
-        {
             Debug.LogWarning("[DayPhaseManager] No GameClock — cannot advance day after flower trimming.");
-        }
 
-        // 13. EnterMorning will be called by DayManager.OnNewNewspaper
-        //     It handles its own fade-in, so screen stays black until then.
+        // 13. EnterMorning is called by DayManager.OnNewNewspaper (fired from AdvanceDayDirect above).
+        //     DayIntroSequence handles the "DAY N" title + track shot + fade-in.
     }
 
     // ═══════════════════════════════════════════════════════════════

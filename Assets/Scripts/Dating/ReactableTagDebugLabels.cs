@@ -75,9 +75,12 @@ public class ReactableTagDebugLabels : MonoBehaviour
         _labelGOs.Clear();
     }
 
+    private Camera _cachedCam;
+
     private void UpdateLabels()
     {
-        var cam = UnityEngine.Camera.main;
+        if (_cachedCam == null) _cachedCam = Camera.main;
+        var cam = _cachedCam;
         if (cam == null) return;
 
         for (int i = _labelGOs.Count - 1; i >= 0; i--)

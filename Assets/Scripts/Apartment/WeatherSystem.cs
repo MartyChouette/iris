@@ -36,8 +36,8 @@ public class WeatherSystem : MonoBehaviour
 
     [Header("Rain Intensity")]
     [SerializeField] private float _clearRain = 0f;
-    [SerializeField] private float _overcastRain = 0f;
-    [SerializeField] private float _rainyRain = 0.6f;
+    [SerializeField] private float _overcastRain = 0.2f;
+    [SerializeField] private float _rainyRain = 1f;
     [SerializeField] private float _stormyRain = 1f;
 
     [Header("Schedule")]

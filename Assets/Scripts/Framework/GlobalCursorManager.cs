@@ -113,6 +113,14 @@ public class GlobalCursorManager : MonoBehaviour
     // Raycast against everything except UI (layer 5) and Ignore Raycast (layer 2)
     private const int RaycastMask = ~((1 << 5) | (1 << 2));
 
+    // Pre-allocated raycast buffer (avoids per-frame allocation from RaycastAll)
+    private static readonly RaycastHit[] s_cursorHitBuffer = new RaycastHit[16];
+    private static readonly HitDistanceComparer s_hitComparer = new();
+    private class HitDistanceComparer : System.Collections.Generic.IComparer<RaycastHit>
+    {
+        public int Compare(RaycastHit a, RaycastHit b) => a.distance.CompareTo(b.distance);
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoSpawn()
     {
@@ -433,14 +441,14 @@ public class GlobalCursorManager : MonoBehaviour
 
         CursorType desired = CursorType.Default;
 
-        // RaycastAll so we can see through PlacementSurface triggers to the items behind them.
+        // RaycastNonAlloc so we can see through PlacementSurface triggers to the items behind them.
         // Sort by distance so the nearest interactable wins (prevents stain behind plant confusion).
-        var hits = Physics.RaycastAll(ray, 100f, RaycastMask);
-        if (hits.Length > 1)
-            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-        for (int i = 0; i < hits.Length; i++)
+        int hitCount = Physics.RaycastNonAlloc(ray, s_cursorHitBuffer, 100f, RaycastMask);
+        if (hitCount > 1)
+            System.Array.Sort(s_cursorHitBuffer, 0, hitCount, s_hitComparer);
+        for (int i = 0; i < hitCount; i++)
         {
-            var go = hits[i].collider.gameObject;
+            var go = s_cursorHitBuffer[i].collider.gameObject;
             var type = ClassifyHit(go);
             if (type != CursorType.Default)
             {

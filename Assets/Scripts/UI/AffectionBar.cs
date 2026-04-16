@@ -255,9 +255,14 @@ public class AffectionBar : MonoBehaviour
         tmp.fontStyle = FontStyles.Bold;
         tmp.alignment = TextAlignmentOptions.Left;
         tmp.color = positive
-            ? new Color(1f, 0.45f, 0.6f, 1f)   // pink for likes
-            : new Color(0.5f, 0.45f, 0.55f, 1f); // grey-purple for dislikes
+            ? new Color(1f, 0.4f, 0.55f, 1f)   // warm pink for likes
+            : new Color(0.55f, 0.5f, 0.6f, 1f); // muted lavender for dislikes
         tmp.raycastTarget = false;
+
+        // Use the project's primary font if available
+        var theme = IrisTextTheme.Active;
+        if (theme != null && theme.primaryFont != null)
+            tmp.font = theme.primaryFont;
 
         // Float up and fade out over 1.5 seconds
         float duration = 1.5f;

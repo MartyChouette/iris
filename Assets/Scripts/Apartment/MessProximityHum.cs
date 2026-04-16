@@ -33,6 +33,7 @@ public class MessProximityHum : MonoBehaviour
     private float _volumeVelocity;
     private Camera _cam;
     private float _camRefreshTimer;
+    private int _proxScanFrame;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoSpawn()
@@ -99,6 +100,10 @@ public class MessProximityHum : MonoBehaviour
             cursorWorld = hit.point;
         else
             return; // cursor not over anything
+
+        // Throttle proximity scan — every 4th frame is enough for audio fade
+        _proxScanFrame++;
+        if (_proxScanFrame % 4 != 0) { _source.volume = _currentVolume; return; }
 
         // Find closest messy item — trash, or anything misplaced from its home zone
         float closestDist = float.MaxValue;

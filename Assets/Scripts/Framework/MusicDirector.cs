@@ -14,10 +14,16 @@ public class MusicDirector : MonoBehaviour
     public static MusicDirector Instance { get; private set; }
 
     [Header("Menu Music")]
-    [Tooltip("Song that plays on the main menu and through loading. Assign via inspector.")]
+    [Tooltip("Default menu song (used as fallback). Set at runtime by mood selection.")]
     [SerializeField] private AudioClip _menuSong;
 
-    // _menuSongPath removed — music moved out of Resources. Assign _menuSong directly.
+    [Header("Mood Songs")]
+    [Tooltip("Cozy mood menu song.")]
+    [SerializeField] private AudioClip _cozySong;
+    [Tooltip("Sad mood menu song (the original default).")]
+    [SerializeField] private AudioClip _sadSong;
+    [Tooltip("Creepy mood menu song.")]
+    [SerializeField] private AudioClip _creepySong;
 
     [Tooltip("Volume for menu song (before master/music multipliers).")]
     [SerializeField] private float _menuSongVolume = 0.5f;
@@ -29,10 +35,12 @@ public class MusicDirector : MonoBehaviour
     private bool _isCrossFading;
     private Coroutine _crossFadeRoutine;
 
-    /// <summary>Auto-spawn if no MusicDirector exists in the scene.</summary>
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    /// <summary>Auto-spawn only if no MusicDirector exists in the scene.</summary>
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoCreate()
     {
+        // Scene-placed MusicDirector (with clips assigned) gets priority.
+        // Only auto-spawn if the scene doesn't have one.
         if (Instance != null) return;
         var go = new GameObject("[MusicDirector]");
         go.AddComponent<MusicDirector>();
@@ -58,6 +66,26 @@ public class MusicDirector : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+    }
+
+    /// <summary>Select a mood and switch the menu song. Starts playing immediately.</summary>
+    public void SetMood(string mood)
+    {
+        AudioClip clip = mood switch
+        {
+            "Cozy"   => _cozySong,
+            "Sad"    => _sadSong,
+            "Creepy" => _creepySong,
+            _        => _sadSong
+        };
+        if (clip != null) _menuSong = clip;
+        // Force restart with the new clip
+        if (AudioManager.Instance != null)
+        {
+            var src = AudioManager.Instance.musicSource;
+            if (src != null) src.Stop();
+        }
+        PlayMenuSong();
     }
 
     /// <summary>

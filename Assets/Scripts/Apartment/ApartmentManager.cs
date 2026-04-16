@@ -416,8 +416,13 @@ public class ApartmentManager : MonoBehaviour
 
     private float _edgePanHoldTimer;
 
+    /// <summary>When true, all camera panning (WASD, edge scroll, MMB drag) is suppressed.</summary>
+    public bool SuppressPan { get; set; }
+
     private void HandleBrowsingInput()
     {
+        if (SuppressPan) return;
+
         // WASD / arrow keys pan the camera (replaces area cycling)
         float h = 0f, v = 0f;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))  h -= 1f;
@@ -447,7 +452,7 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     private void HandleEdgeScrollPan()
     {
-        if (!_edgePanEnabled) return;
+        if (!_edgePanEnabled || SuppressPan) return;
 
         // Don't edge-pan during the pour drag (watering / drink making) —
         // the pour mechanic deliberately pulls the cursor toward the bottom
@@ -565,6 +570,7 @@ public class ApartmentManager : MonoBehaviour
 
     private void HandlePanInput()
     {
+        if (SuppressPan) return;
         if (IrisInput.Instance == null || !IrisInput.Instance.PanButton.IsPressed()) return;
 
         Vector2 delta = IrisInput.Instance.PanDelta.ReadValue<Vector2>();

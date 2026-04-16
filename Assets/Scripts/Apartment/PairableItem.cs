@@ -278,6 +278,10 @@ public class PairableItem : MonoBehaviour
         ClearHighlight(gameObject);
         ClearHighlight(held.gameObject);
 
+        // Remove pixel snap + affine warp from paired items — they've "connected"
+        DisablePSXEffects(gameObject);
+        DisablePSXEffects(held.gameObject);
+
         // Play snap sound
         if (_snapSound != null)
             AudioManager.Instance?.PlaySFX(_snapSound);
@@ -472,6 +476,15 @@ public class PairableItem : MonoBehaviour
             if (!found) break;
         }
         return current;
+    }
+
+    /// <summary>Disable pixel snap + affine warp on a paired item.</summary>
+    private static void DisablePSXEffects(GameObject go)
+    {
+        var psx = go.GetComponent<PSXObjectSettings>();
+        if (psx == null) psx = go.AddComponent<PSXObjectSettings>();
+        psx.SnapResolution = 0f;
+        psx.AffineIntensity = 0f;
     }
 
     /// <summary>Turn off InteractableHighlight on a GameObject (both highlighted and interact-highlighted).</summary>
