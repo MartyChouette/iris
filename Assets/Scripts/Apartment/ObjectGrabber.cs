@@ -174,6 +174,9 @@ public class ObjectGrabber : MonoBehaviour
 
     private static ObjectGrabber s_instance;
 
+    /// <summary>The active ObjectGrabber in the scene, or null.</summary>
+    public static ObjectGrabber Instance => s_instance;
+
     /// <summary>True when any ObjectGrabber is holding an object. Check this to block other interactions.</summary>
     public static bool IsHoldingObject => s_instance != null && s_instance._held != null;
 
@@ -489,22 +492,24 @@ public class ObjectGrabber : MonoBehaviour
                 }
             }
 
-            // Click on album sleeve — extract vinyl if hovered/peeking (blocked during dates)
-            var clickedSleeve = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive
-                ? null
-                : hit.collider.GetComponent<AlbumSleeve>();
-            if (clickedSleeve == null)
-                clickedSleeve = hit.collider.GetComponentInParent<AlbumSleeve>();
-            if (clickedSleeve != null && clickedSleeve.IsHovered)
+            // Click on album sleeve — extract vinyl if hovered/peeking (fully blocked during dates)
+            bool dateActiveForSleeve = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive;
+            if (!dateActiveForSleeve)
             {
-                var vinylPlaceable = clickedSleeve.ExtractVinyl();
-                if (vinylPlaceable != null)
+                var clickedSleeve = hit.collider.GetComponent<AlbumSleeve>();
+                if (clickedSleeve == null)
+                    clickedSleeve = hit.collider.GetComponentInParent<AlbumSleeve>();
+                if (clickedSleeve != null && clickedSleeve.IsHovered)
                 {
-                    ConsumeClick();
-                    _held = vinylPlaceable;
-                    _pickupTimer = PickupFeelDuration;
-                    InitGrab();
-                    return;
+                    var vinylPlaceable = clickedSleeve.ExtractVinyl();
+                    if (vinylPlaceable != null)
+                    {
+                        ConsumeClick();
+                        _held = vinylPlaceable;
+                        _pickupTimer = PickupFeelDuration;
+                        InitGrab();
+                        return;
+                    }
                 }
             }
 

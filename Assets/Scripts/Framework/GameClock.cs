@@ -168,6 +168,8 @@ public class GameClock : MonoBehaviour
     public void GoToBed()
     {
         if (_isSleeping) return;
+        // Set flag synchronously to prevent double-call in the same frame
+        _isSleeping = true;
         StartCoroutine(SleepSequence());
     }
 
@@ -198,6 +200,7 @@ public class GameClock : MonoBehaviour
     public void ForceNewDay()
     {
         if (_isSleeping) return;
+        _isSleeping = true;
         StartCoroutine(SleepSequence());
     }
 

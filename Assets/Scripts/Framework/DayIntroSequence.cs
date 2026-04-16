@@ -20,6 +20,12 @@ public class DayIntroSequence : MonoBehaviour
 {
     public static DayIntroSequence Instance { get; private set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        Instance = null;
+    }
+
     [Header("Track Shot")]
     [Tooltip("Waypoints the camera travels through (position + rotation). First = start, last = end before turnaround.")]
     [SerializeField] private Transform[] _waypoints;
@@ -73,7 +79,7 @@ public class DayIntroSequence : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(this); return; }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
 
@@ -95,6 +101,16 @@ public class DayIntroSequence : MonoBehaviour
         {
             Debug.LogWarning("[DayIntroSequence] Not enough waypoints — skipping intro.");
             yield break;
+        }
+
+        // Validate: any null entry would crash the path interpolation
+        for (int i = 0; i < _waypoints.Length; i++)
+        {
+            if (_waypoints[i] == null)
+            {
+                Debug.LogError($"[DayIntroSequence] Waypoint {i} is null — skipping intro.");
+                yield break;
+            }
         }
 
         BuildUI();
@@ -220,10 +236,10 @@ public class DayIntroSequence : MonoBehaviour
 
         float titleAppearTime = trackDuration * 0.2f;
         float titleDisappearTime = trackDuration * 0.8f;
-        bool titleShowing = false;
 
         _titleText.text = $"DAY {dayNumber}";
         _titleText.gameObject.SetActive(true);
+        _overlayCG.alpha = 0f;
 
         float elapsed = 0f;
         while (elapsed < trackDuration)
@@ -232,17 +248,29 @@ public class DayIntroSequence : MonoBehaviour
             float dist = Mathf.Clamp(elapsed * _trackSpeed, 0f, _totalArcLength);
             SetCameraFromDistance(dist);
 
-            // Title fade in/out
-            if (elapsed >= titleAppearTime && !titleShowing)
+            // Compute title alpha inline — no race-prone fire-and-forget coroutines.
+            float alpha;
+            if (elapsed < titleAppearTime)
             {
-                titleShowing = true;
-                StartCoroutine(FadeCanvasGroup(_overlayCG, 0f, 1f, _titleFadeDuration));
+                alpha = 0f;
             }
-            if (elapsed >= titleDisappearTime && titleShowing)
+            else if (elapsed < titleAppearTime + _titleFadeDuration)
             {
-                titleShowing = false;
-                StartCoroutine(FadeCanvasGroup(_overlayCG, 1f, 0f, _titleFadeDuration));
+                alpha = Mathf.Clamp01((elapsed - titleAppearTime) / _titleFadeDuration);
             }
+            else if (elapsed < titleDisappearTime)
+            {
+                alpha = 1f;
+            }
+            else if (elapsed < titleDisappearTime + _titleFadeDuration)
+            {
+                alpha = 1f - Mathf.Clamp01((elapsed - titleDisappearTime) / _titleFadeDuration);
+            }
+            else
+            {
+                alpha = 0f;
+            }
+            _overlayCG.alpha = alpha;
 
             yield return null;
         }

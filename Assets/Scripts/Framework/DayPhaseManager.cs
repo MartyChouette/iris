@@ -44,6 +44,12 @@ public class DayPhaseManager : MonoBehaviour
     /// <summary>True when FlowerTrimmingTransition owns the dream sequence. GameClock.SleepSequence skips its dream.</summary>
     public static bool SuppressSleepDream { get; private set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        SuppressSleepDream = false;
+    }
+
     [Header("Current Phase")]
     [SerializeField] private DayPhase _currentPhase = DayPhase.Exploration;
 
@@ -943,29 +949,6 @@ public class DayPhaseManager : MonoBehaviour
         StartPrepTimer();
     }
 
-    private IEnumerator PollDemoCleanupComplete()
-    {
-        // Wait at least a few seconds before checking (let messes spawn)
-        yield return new WaitForSeconds(3f);
-
-        while (true)
-        {
-            bool stainsClean = CleaningManager.Instance == null || CleaningManager.Instance.AllClean;
-            bool objectsClean = AuthoredMessSpawner.Instance == null
-                             || AuthoredMessSpawner.Instance.ActiveMessObjectCount == 0;
-
-            if (stainsClean && objectsClean)
-            {
-                Debug.Log("[DayPhaseManager] Demo cleanup complete — all messes resolved!");
-                yield return new WaitForSeconds(1.5f); // brief pause before end screen
-                OnCalendarComplete();
-                yield break;
-            }
-
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
     // ═══════════════════════════════════════════════════════════════
     // FLOWER TRIMMING TRANSITION
     // ═══════════════════════════════════════════════════════════════
@@ -994,7 +977,7 @@ public class DayPhaseManager : MonoBehaviour
 
         // 0. Force-drop any held item and disable grabber — prevents soft-lock
         //    if the player is holding something when the scene transitions.
-        var grabber = Object.FindAnyObjectByType<ObjectGrabber>();
+        var grabber = ObjectGrabber.Instance;
         if (grabber != null) grabber.SetEnabled(false);
 
         // Also end any active watering session
@@ -1015,9 +998,21 @@ public class DayPhaseManager : MonoBehaviour
             trimmingComplete = true;
         });
 
-        // 4. Wait for the flower scene to finish loading
+        // 4. Wait for the flower scene to finish loading (with timeout safety)
+        float loadTimeout = 15f;
+        float loadStart = Time.realtimeSinceStartup;
         while (!bridge.IsSceneReady)
+        {
+            if (Time.realtimeSinceStartup - loadStart > loadTimeout)
+            {
+                Debug.LogError("[DayPhaseManager] Flower scene load timed out after 15s. Aborting to Evening.");
+                SuppressSleepDream = false;
+                DateSessionManager.PendingFlowerTrim = false;
+                SetPhase(DayPhase.Evening);
+                yield break;
+            }
             yield return null;
+        }
 
         // 5. Set sky to night before revealing the flower scene
         if (NatureBoxController.Instance != null)
@@ -1065,22 +1060,36 @@ public class DayPhaseManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(_fadeDuration);
 
-        // 8b. Wait for flower scene to fully unload before showing apartment
+        // 8b. Wait for flower scene to fully unload before showing apartment (with timeout)
+        float unloadTimeout = 10f;
+        float unloadStart = Time.realtimeSinceStartup;
         while (bridge != null && bridge.IsSceneReady)
+        {
+            if (Time.realtimeSinceStartup - unloadStart > unloadTimeout)
+            {
+                Debug.LogError("[DayPhaseManager] Flower scene unload timed out after 10s. Continuing anyway.");
+                break;
+            }
             yield return null;
+        }
 
         // Clean up any stray trimming debris that fell into the apartment
         // during scene unload (they're at flower-scene scale = giant).
+        // Safety: only touch things that are clearly NOT legitimate apartment objects —
+        //   • no PlaceableObject AND no InteractableHighlight AND no DateCharacterController
+        //   • at flower-scene scale (>3x — apartment objects are usually ~1x)
+        //   • parented to scene root (apartment objects are always nested)
         foreach (var debris in Object.FindObjectsByType<Rigidbody>(FindObjectsSortMode.None))
         {
             if (debris == null) continue;
-            // Trimming debris has no PlaceableObject — it's raw physics chunks
-            if (debris.GetComponent<PlaceableObject>() == null
-                && debris.gameObject.scene == gameObject.scene
-                && debris.transform.lossyScale.x > 1f)
-            {
-                Object.Destroy(debris.gameObject);
-            }
+            if (debris.gameObject.scene != gameObject.scene) continue;
+            if (debris.transform.parent != null) continue; // apartment objects are nested
+            if (debris.transform.lossyScale.x < 3f) continue; // must be giant
+            if (debris.GetComponent<PlaceableObject>() != null) continue;
+            if (debris.GetComponent<InteractableHighlight>() != null) continue;
+            if (debris.GetComponent<DateCharacterController>() != null) continue;
+
+            Object.Destroy(debris.gameObject);
         }
 
         // Extra frames for cleanup + physics settle
@@ -1155,6 +1164,9 @@ public class DayPhaseManager : MonoBehaviour
 
         // 12. Auto-save + advance day (screen is now opaque white)
         AutoSaveController.Instance?.PerformSave("end_of_day");
+
+        // Release dream ownership — future days can play their own dreams normally
+        SuppressSleepDream = false;
 
         if (GameClock.Instance != null)
             GameClock.Instance.AdvanceDayDirect();
@@ -1236,6 +1248,10 @@ public class DayPhaseManager : MonoBehaviour
     /// Force-close all station UIs and HUDs. Called on every phase transition
     /// so no stale UI persists across phases or into the next day.
     /// </summary>
+    // Cached references to scene-scoped UI — found once, reused on every phase transition
+    private ApartmentCalendar _cachedCalendar;
+    private PauseMenuController _cachedPauseMenu;
+
     private void DismissAllStationUI()
     {
         WateringManager.Instance?.ForceIdle();
@@ -1243,10 +1259,12 @@ public class DayPhaseManager : MonoBehaviour
         DrinkPourManager.Instance?.ForceIdle();
         FridgeController.Instance?.CloseDoor();
 
-        var calendar = Object.FindAnyObjectByType<ApartmentCalendar>();
-        if (calendar != null) calendar.CloseCalendar();
+        if (_cachedCalendar == null)
+            _cachedCalendar = Object.FindAnyObjectByType<ApartmentCalendar>();
+        if (_cachedCalendar != null) _cachedCalendar.CloseCalendar();
 
-        var pause = Object.FindAnyObjectByType<PauseMenuController>();
-        if (pause != null) pause.ClosePauseMenu();
+        if (_cachedPauseMenu == null)
+            _cachedPauseMenu = Object.FindAnyObjectByType<PauseMenuController>();
+        if (_cachedPauseMenu != null) _cachedPauseMenu.ClosePauseMenu();
     }
 }

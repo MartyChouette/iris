@@ -22,6 +22,47 @@ public class DateSessionManager : MonoBehaviour
     private static readonly WaitForSeconds s_wait25 = new WaitForSeconds(2.5f);
     private static readonly WaitForSeconds s_wait3  = new WaitForSeconds(3f);
     private static readonly WaitForSeconds s_wait35 = new WaitForSeconds(3.5f);
+    private static readonly WaitForSeconds s_waitRevealStep = new WaitForSeconds(0.6f);
+
+    // Lazily-cached instance-scoped WaitForSeconds for inspector-driven durations
+    private WaitForSeconds _waitPhaseTitle;
+    private float _waitPhaseTitleCachedValue = -1f;
+    private WaitForSeconds _waitDrinkTasting;
+    private float _waitDrinkTastingCachedValue = -1f;
+
+    private WaitForSeconds CachePhaseTitleWait()
+    {
+        if (_waitPhaseTitle == null || _waitPhaseTitleCachedValue != phaseTitleHold)
+        {
+            _waitPhaseTitle = new WaitForSeconds(phaseTitleHold);
+            _waitPhaseTitleCachedValue = phaseTitleHold;
+        }
+        return _waitPhaseTitle;
+    }
+
+    private WaitForSeconds CacheDrinkTastingWait()
+    {
+        if (_waitDrinkTasting == null || _waitDrinkTastingCachedValue != _drinkTastingHold)
+        {
+            _waitDrinkTasting = new WaitForSeconds(_drinkTastingHold);
+            _waitDrinkTastingCachedValue = _drinkTastingHold;
+        }
+        return _waitDrinkTasting;
+    }
+
+    // Cached shader lookups (avoid per-call Shader.Find which scans all loaded shaders)
+    private static Shader s_overlaySpriteShader;
+    private static Shader s_particleShader;
+    private static bool s_shadersInitialized;
+
+    private static void InitCachedShaders()
+    {
+        if (s_shadersInitialized) return;
+        s_overlaySpriteShader = Shader.Find("Iris/OverlaySprite");
+        s_particleShader = Shader.Find("Particles/Standard Unlit")
+                        ?? Shader.Find("Universal Render Pipeline/Particles/Unlit");
+        s_shadersInitialized = true;
+    }
 
     public enum SessionState { Idle, WaitingForArrival, DateInProgress, DateEnding }
 
@@ -201,6 +242,12 @@ public class DateSessionManager : MonoBehaviour
     /// <summary>True when a successful date should trigger flower trimming before evening.</summary>
     public static bool PendingFlowerTrim { get; set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        PendingFlowerTrim = false;
+    }
+
     /// <summary>Fired for each reaction (HUD display).</summary>
     public event System.Action<AccumulatedReaction> OnRevealReaction;
 
@@ -367,7 +414,7 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.ShowPhaseTitle("Impressions");
 
-        yield return new WaitForSeconds(phaseTitleHold);
+        yield return CachePhaseTitleWait();
 
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.HidePhaseTitle();
@@ -454,7 +501,7 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.ShowPhaseTitle("Drinks");
 
-        yield return new WaitForSeconds(phaseTitleHold);
+        yield return CachePhaseTitleWait();
 
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.HidePhaseTitle();
@@ -535,7 +582,7 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.ShowPhaseTitle("Warming Up");
 
-        yield return new WaitForSeconds(phaseTitleHold);
+        yield return CachePhaseTitleWait();
 
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.HidePhaseTitle();
@@ -627,7 +674,7 @@ public class DateSessionManager : MonoBehaviour
             if (_state != SessionState.DateInProgress) yield break;
         }
 
-        StartCoroutine(RunEndSequence());
+        yield return StartCoroutine(RunEndSequence());
     }
 
     /// <summary>
@@ -766,7 +813,7 @@ public class DateSessionManager : MonoBehaviour
             if (multiplier > 1)
                 SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
 
-            yield return new WaitForSeconds(0.6f);
+            yield return s_waitRevealStep;
         }
 
         // Clear the last item's highlight.
@@ -805,14 +852,26 @@ public class DateSessionManager : MonoBehaviour
     /// </summary>
     // ── Phase 2 highlight pulse ──────────────────────────────────
 
+    // Shared MaterialPropertyBlock for pulse (no material instancing, no leaks)
+    private static readonly int s_colorPropertyId = Shader.PropertyToID("_Color");
+    private static readonly int s_baseColorPropertyId = Shader.PropertyToID("_BaseColor");
+    private MaterialPropertyBlock _pulseMPB;
+
     private void StartPhase2Pulse()
     {
         if (_phase2PulseCoroutine != null) StopCoroutine(_phase2PulseCoroutine);
 
-        if (_fridgeHighlightRenderer != null)
-            _fridgeOrigColor = _fridgeHighlightRenderer.material.color;
-        if (_drinkStationHighlightRenderer != null)
-            _drinkOrigColor = _drinkStationHighlightRenderer.material.color;
+        if (_pulseMPB == null) _pulseMPB = new MaterialPropertyBlock();
+
+        // Read original colors from sharedMaterial (no instancing)
+        if (_fridgeHighlightRenderer != null && _fridgeHighlightRenderer.sharedMaterial != null)
+            _fridgeOrigColor = _fridgeHighlightRenderer.sharedMaterial.HasProperty(s_baseColorPropertyId)
+                ? _fridgeHighlightRenderer.sharedMaterial.GetColor(s_baseColorPropertyId)
+                : _fridgeHighlightRenderer.sharedMaterial.color;
+        if (_drinkStationHighlightRenderer != null && _drinkStationHighlightRenderer.sharedMaterial != null)
+            _drinkOrigColor = _drinkStationHighlightRenderer.sharedMaterial.HasProperty(s_baseColorPropertyId)
+                ? _drinkStationHighlightRenderer.sharedMaterial.GetColor(s_baseColorPropertyId)
+                : _drinkStationHighlightRenderer.sharedMaterial.color;
 
         _phase2PulseCoroutine = StartCoroutine(Phase2PulseLoop());
     }
@@ -825,10 +884,11 @@ public class DateSessionManager : MonoBehaviour
             _phase2PulseCoroutine = null;
         }
 
+        // Clear MPB to restore original shared material color
         if (_fridgeHighlightRenderer != null)
-            _fridgeHighlightRenderer.material.color = _fridgeOrigColor;
+            _fridgeHighlightRenderer.SetPropertyBlock(null);
         if (_drinkStationHighlightRenderer != null)
-            _drinkStationHighlightRenderer.material.color = _drinkOrigColor;
+            _drinkStationHighlightRenderer.SetPropertyBlock(null);
     }
 
     private void HighlightDrinkGlasses(bool on)
@@ -855,12 +915,22 @@ public class DateSessionManager : MonoBehaviour
             float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * _phase2PulseSpeed * Mathf.PI * 2f);
 
             if (_fridgeHighlightRenderer != null)
-                _fridgeHighlightRenderer.material.color = Color.Lerp(_fridgeOrigColor, _phase2PulseColor, pulse);
+                ApplyPulseColor(_fridgeHighlightRenderer, _fridgeOrigColor, pulse);
             if (_drinkStationHighlightRenderer != null)
-                _drinkStationHighlightRenderer.material.color = Color.Lerp(_drinkOrigColor, _phase2PulseColor, pulse);
+                ApplyPulseColor(_drinkStationHighlightRenderer, _drinkOrigColor, pulse);
 
             yield return null;
         }
+    }
+
+    private void ApplyPulseColor(Renderer r, Color baseColor, float pulse)
+    {
+        Color target = Color.Lerp(baseColor, _phase2PulseColor, pulse);
+        r.GetPropertyBlock(_pulseMPB);
+        // Set both URP (_BaseColor) and built-in (_Color) so it works regardless of shader
+        _pulseMPB.SetColor(s_colorPropertyId, target);
+        _pulseMPB.SetColor(s_baseColorPropertyId, target);
+        r.SetPropertyBlock(_pulseMPB);
     }
 
     // ── Helpers ────────────────────────────────────────────────────
@@ -931,7 +1001,8 @@ public class DateSessionManager : MonoBehaviour
             // so the glyphs still render. If the overlay shader isn't found
             // in the build, fall back to the default and bump the queue so
             // at least render ordering helps.
-            var overlayShader = Shader.Find("Iris/OverlaySprite");
+            InitCachedShaders();
+            var overlayShader = s_overlaySpriteShader;
             if (overlayShader != null && tm.font != null && tm.font.material != null)
             {
                 var overlayMat = new Material(overlayShader);
@@ -942,7 +1013,11 @@ public class DateSessionManager : MonoBehaviour
             }
             else if (mr.sharedMaterial != null)
             {
-                mr.sharedMaterial.renderQueue = 4500;
+                // IMPORTANT: instance the material so we don't mutate the shared
+                // font material globally (which affects every TextMesh using it).
+                var fallbackMat = new Material(mr.sharedMaterial);
+                fallbackMat.renderQueue = 4500;
+                mr.sharedMaterial = fallbackMat;
             }
             mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             mr.receiveShadows = false;
@@ -961,6 +1036,9 @@ public class DateSessionManager : MonoBehaviour
         var mr = t.GetComponent<MeshRenderer>();
         Color baseColor = tm != null ? tm.color : Color.white;
 
+        // Cache Camera.main once — it's an O(n) scan internally
+        var cam = Camera.main;
+
         float elapsed = 0f;
         while (elapsed < duration && t != null)
         {
@@ -970,8 +1048,8 @@ public class DateSessionManager : MonoBehaviour
             // Rise smoothly
             t.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0f, 1f, u));
 
-            // Always face the camera (billboard)
-            var cam = Camera.main;
+            // Always face the camera (billboard) — re-fetch if null in case it became valid
+            if (cam == null) cam = Camera.main;
             if (cam != null)
                 t.rotation = Quaternion.LookRotation(t.position - cam.transform.position, Vector3.up);
 
@@ -1148,8 +1226,8 @@ public class DateSessionManager : MonoBehaviour
 
         // Material
         var renderer = go.GetComponent<ParticleSystemRenderer>();
-        var shader = Shader.Find("Particles/Standard Unlit")
-                  ?? Shader.Find("Universal Render Pipeline/Particles/Unlit");
+        InitCachedShaders();
+        var shader = s_particleShader;
         if (shader != null)
         {
             var mat = new Material(shader);
@@ -1230,11 +1308,18 @@ public class DateSessionManager : MonoBehaviour
 
         // 1. Suspense — thinking face
         reactionUI?.ShowText("Hmm...", _drinkTastingHold);
-        yield return new WaitForSeconds(_drinkTastingHold);
+        yield return CacheDrinkTastingWait();
 
         // 2. Verdict reaction
         reactionUI?.ShowLabeledReaction(reactionType, drinkName);
         ApplyReaction(reactionType, magnitude);
+
+        // Guard: ApplyReaction's CheckBailOut may have fired FailDate synchronously
+        if (_state != SessionState.DateInProgress)
+        {
+            _drinkVerdictRunning = false;
+            yield break;
+        }
 
         // 3. Flower popup + particles
         if (reactionType != ReactionType.Neutral)
@@ -1248,6 +1333,13 @@ public class DateSessionManager : MonoBehaviour
 
         // Hold for flower animation
         yield return s_wait1;
+
+        // Guard again — state may have changed during the hold
+        if (_state != SessionState.DateInProgress)
+        {
+            _drinkVerdictRunning = false;
+            yield break;
+        }
 
 #if UNITY_EDITOR
         Debug.Log($"[DateSessionManager] Drink verdict: {drinkName} (score={score}) \u2192 {reactionType}");
@@ -1547,8 +1639,20 @@ public class DateSessionManager : MonoBehaviour
                 DateEndScreen.Instance.OnDismissed -= OnEndScreenDismissed;
             }
 
+            // Wait with safety timeout — if the end screen is destroyed without firing the event,
+            // we shouldn't hang forever.
+            float endScreenTimeout = 120f;
+            float endScreenStart = Time.realtimeSinceStartup;
             while (!dismissed)
+            {
+                if (DateEndScreen.Instance == null ||
+                    Time.realtimeSinceStartup - endScreenStart > endScreenTimeout)
+                {
+                    Debug.LogWarning("[DateSessionManager] DateEndScreen dismissal timed out or instance lost — proceeding.");
+                    break;
+                }
                 yield return null;
+            }
         }
 
         // 4. Now fire event → DayPhaseManager routes to FlowerTrimming (if pending) or Evening

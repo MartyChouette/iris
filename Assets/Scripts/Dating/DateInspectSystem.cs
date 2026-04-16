@@ -37,6 +37,12 @@ public class DateInspectSystem : MonoBehaviour
     private static readonly Color s_neutralColor = new Color(0.8f, 0.8f, 0.78f);
     private static readonly Color s_dislikeColor = new Color(0.55f, 0.5f, 0.6f);
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        Instance = null;
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoSpawn()
     {
@@ -72,9 +78,16 @@ public class DateInspectSystem : MonoBehaviour
         HideTooltip();
     }
 
+    private int _camLookupFrame = -1;
+
     private void Update()
     {
-        if (_cam == null) _cam = Camera.main;
+        // Throttle Camera.main lookups — it's O(n) and calling every frame while null is wasteful
+        if (_cam == null && Time.frameCount - _camLookupFrame > 30)
+        {
+            _cam = Camera.main;
+            _camLookupFrame = Time.frameCount;
+        }
 
         // Only active during dates
         if (DateSessionManager.Instance == null || !DateSessionManager.Instance.IsDateActive)
