@@ -88,7 +88,14 @@ public class PairableItem : MonoBehaviour
         // they belong with a partner. Removed in SnapPair when they connect.
         // Deferred to Start so PlaceableObject.Awake has created _instanceMat.
         if (!_isPaired && _placeable != null)
+        {
             _placeable.SetGlitched(true);
+            Debug.Log($"[PairableItem] Start: applied glitch to '{name}'");
+        }
+        else
+        {
+            Debug.LogWarning($"[PairableItem] Start: skipped glitch on '{name}' — _isPaired={_isPaired}, _placeable={(_placeable != null ? "ok" : "NULL")}");
+        }
     }
 
     private void Update()
@@ -278,9 +285,13 @@ public class PairableItem : MonoBehaviour
         ClearHighlight(gameObject);
         ClearHighlight(held.gameObject);
 
-        // Remove pixel snap + affine warp from paired items — they've "connected"
-        DisablePSXEffects(gameObject);
-        DisablePSXEffects(held.gameObject);
+        // Remove pixel snap + affine warp from the ENTIRE stack — walk all
+        // PairableItems in the hierarchy so a 3rd plate joining a 2-stack
+        // also clears the root and any previous children.
+        var stackRoot = FindStackRoot(transform);
+        var allInStack = stackRoot.GetComponentsInChildren<PairableItem>(true);
+        for (int i = 0; i < allInStack.Length; i++)
+            DisablePSXEffects(allInStack[i].gameObject);
 
         // Play snap sound
         if (_snapSound != null)
@@ -333,35 +344,35 @@ public class PairableItem : MonoBehaviour
             // SideBySide — parent to the stack ROOT so items fan out from center.
             // Pick the side (+ or - offset) closest to where the held item is,
             // falling back to whichever side is still free.
-            Transform root = FindStackRoot(transform);
+            Transform sbsRoot = FindStackRoot(transform);
 
             // For book collections: straighten root to upright so all books
             // face the same direction when snapped together.
-            if (root.GetComponent<BookCollectionItem>() != null)
+            if (sbsRoot.GetComponent<BookCollectionItem>() != null)
             {
-                Vector3 rootEuler = root.eulerAngles;
-                root.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
+                Vector3 rootEuler = sbsRoot.eulerAngles;
+                sbsRoot.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
             }
 
             // For shoes: straighten root so both shoes sit flat and face forward.
             // Keeps Y rotation (facing direction) but levels out any tilt.
-            if (_pairMode == PairMode.SpecificPartner && root.GetComponent<BookCollectionItem>() == null)
+            if (_pairMode == PairMode.SpecificPartner && sbsRoot.GetComponent<BookCollectionItem>() == null)
             {
-                Vector3 rootEuler = root.eulerAngles;
-                root.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
+                Vector3 rootEuler = sbsRoot.eulerAngles;
+                sbsRoot.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
             }
 
-            Vector3 localPos = GetSideBySideLocalOffset(root, held);
+            Vector3 localPos = GetSideBySideLocalOffset(sbsRoot, held);
 
             // Calculate world-space target position so both items sit at the
             // same ground level — prevents one shoe floating above the other.
-            Vector3 worldSnapPos = root.TransformPoint(localPos);
-            worldSnapPos.y = root.position.y; // match root's Y exactly
+            Vector3 worldSnapPos = sbsRoot.TransformPoint(localPos);
+            worldSnapPos.y = sbsRoot.position.y; // match root's Y exactly
 
             // Preserve world scale — parent may have different scale that deforms the child
             Vector3 heldWorldScale = held.transform.lossyScale;
-            held.transform.SetParent(root, true);
-            Vector3 parentScale = root.lossyScale;
+            held.transform.SetParent(sbsRoot, true);
+            Vector3 parentScale = sbsRoot.lossyScale;
             held.transform.localScale = new Vector3(
                 parentScale.x != 0f ? heldWorldScale.x / parentScale.x : 1f,
                 parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
@@ -383,10 +394,10 @@ public class PairableItem : MonoBehaviour
         Debug.Log($"[PairableItem] {held.name} snapped to {stackTop.name} (stack depth)");
 
         // Notify any BookCollectionItem on the stack root
-        Transform stackRoot = transform;
-        while (stackRoot.parent != null && stackRoot.parent.GetComponent<PairableItem>() != null)
-            stackRoot = stackRoot.parent;
-        var collection = stackRoot.GetComponent<BookCollectionItem>();
+        Transform bookRoot = transform;
+        while (bookRoot.parent != null && bookRoot.parent.GetComponent<PairableItem>() != null)
+            bookRoot = bookRoot.parent;
+        var collection = bookRoot.GetComponent<BookCollectionItem>();
         if (collection != null)
             collection.OnBookSnapped();
     }
@@ -478,13 +489,28 @@ public class PairableItem : MonoBehaviour
         return current;
     }
 
-    /// <summary>Disable pixel snap + affine warp on a paired item.</summary>
+    /// <summary>
+    /// Fully remove all PSX lo-fi effects from a paired item:
+    ///   1. Clear + destroy PSXObjectSettings (so global PSX pass can't re-apply)
+    ///   2. Restore the original hi-fi shader via SetGlitched(false)
+    /// After this, the item renders at full quality.
+    /// </summary>
     private static void DisablePSXEffects(GameObject go)
     {
+        // Set PSXObjectSettings to explicitly zero out vertex snap + affine warp.
+        // This overrides the global PSXRenderController values via MaterialPropertyBlock,
+        // making this specific object render at full quality while the rest of the
+        // scene stays lo-fi.
         var psx = go.GetComponent<PSXObjectSettings>();
         if (psx == null) psx = go.AddComponent<PSXObjectSettings>();
         psx.SnapResolution = 0f;
         psx.AffineIntensity = 0f;
+        psx.ShadowDither = 0f;
+
+        // Restore the original shader (undo the glitch shader swap from PairableItem.Start)
+        var placeable = go.GetComponent<PlaceableObject>();
+        if (placeable != null)
+            placeable.SetGlitched(false);
     }
 
     /// <summary>Turn off InteractableHighlight on a GameObject (both highlighted and interact-highlighted).</summary>

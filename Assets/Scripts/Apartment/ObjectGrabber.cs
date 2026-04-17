@@ -1004,6 +1004,29 @@ public class ObjectGrabber : MonoBehaviour
                 }
             }
 
+            // Block closed fridge shelves + closed cubbies from accepting
+            // home-zone deposits too (bottles-in-fridge, books-in-cubby).
+            if (zone != null && FridgeController.Instance != null)
+            {
+                var zoneSurface = zone.GetComponent<PlacementSurface>()
+                    ?? zone.GetComponentInParent<PlacementSurface>();
+                if (zoneSurface != null && FridgeController.Instance.IsShelfAndClosed(zoneSurface))
+                {
+                    Debug.Log($"[ObjectGrabber] BLOCKED: home-zone deposit on closed fridge shelf '{zone.ZoneName}'");
+                    zone = null;
+                }
+            }
+            if (zone != null)
+            {
+                var zoneSurface = zone.GetComponent<PlacementSurface>()
+                    ?? zone.GetComponentInParent<PlacementSurface>();
+                if (zoneSurface != null && IsCubbyAndClosed(zoneSurface))
+                {
+                    Debug.Log($"[ObjectGrabber] BLOCKED: home-zone deposit in closed cubby '{zone.ZoneName}'");
+                    zone = null;
+                }
+            }
+
             if (zone != null)
             {
                 bool matchesHome = (!string.IsNullOrEmpty(_held.HomeZoneName) && zone.ZoneName == _held.HomeZoneName)

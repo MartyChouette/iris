@@ -227,9 +227,9 @@ public class MainMenuManager : MonoBehaviour
         if (config == null) return;
         _selectedConfig = config;
 
-        // Update game panel labels
-        if (_modeNameLabel != null) _modeNameLabel.text = config.modeName;
-        if (_modeDescLabel != null) _modeDescLabel.text = config.modeDescription;
+        // Mode name/description hidden — these labels are no longer shown to the player
+        if (_modeNameLabel != null) _modeNameLabel.gameObject.SetActive(false);
+        if (_modeDescLabel != null) _modeDescLabel.gameObject.SetActive(false);
 
         // Continue button — visible only if a matching save exists
         int continueSlot = FindMostRecentSlot(config.modeName);

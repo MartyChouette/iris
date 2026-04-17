@@ -147,15 +147,9 @@ public class GameClock : MonoBehaviour
 
         OnHourChanged?.Invoke(_currentHour);
 
-        // Don't force bedtime during flower trimming — that path has its own
-        // dream screen + day advance in FlowerTrimmingTransition.
-        bool inFlowerTrim = DayPhaseManager.Instance != null
-            && DayPhaseManager.Instance.CurrentPhase == DayPhaseManager.DayPhase.FlowerTrimming;
-        if (_currentHour >= bedtimeHour && !inFlowerTrim)
-        {
-            OnForcedBedtime?.Invoke();
-            GoToBed();
-        }
+        // Auto-sleep disabled: the day advances only on explicit player action
+        // (Go to Bed button) or via the flower trimming success path. The clock
+        // still ticks for time-of-day mood, but never forces sleep.
     }
 
     // ──────────────────────────────────────────────────────────────

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPENT BLOOMS — Gemini Pitch (Technical)</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --text: #00ff41;
+            --accent: #00ff41;
+            --accent-dim: #003300;
+            --code-bg: #111;
+            --border: #00ff4133;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-mono);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+        }
+
+        #main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        #sidebar {
+            width: 350px;
+            border-left: 1px solid var(--border);
+            background: #080808;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            font-size: 0.75rem;
+            color: #008f11;
+        }
+
+        #log-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #log-stream {
+            flex: 1;
+            overflow-y: hidden;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .log-entry { margin-bottom: 4px; }
+        .log-entry::before { content: "> "; }
+        .log-entry.info { color: #00ff41; }
+        .log-entry.warn { color: #ffcc00; }
+        .log-entry.error { color: #ff0000; }
+
+        #viewport {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .slide.active {
+            display: block;
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.98; }
+            100% { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            background: var(--accent-dim);
+            padding: 5px 15px;
+            display: inline-block;
+        }
+
+        .data-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .code {
+            color: #88ff88;
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .stat-item {
+            border: 1px solid var(--border);
+            padding: 10px;
+        }
+
+        .stat-label { font-size: 0.7rem; color: #008f11; text-transform: uppercase; }
+        .stat-value { font-size: 1.2rem; font-weight: bold; }
+
+        #nav {
+            margin-top: auto;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        #progress {
+            flex: 1;
+            height: 10px;
+            border: 1px solid var(--border);
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            pointer-events: none;
+            animation: scanline 4s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="scanline"></div>
+
+    <div id="main-content">
+        <div id="viewport">
+            <!-- Slides -->
+        </div>
+
+        <div id="nav">
+            <button onclick="prev()">PREV</button>
+            <div id="progress"><div id="progress-bar"></div></div>
+            <button onclick="next()">NEXT</button>
+        </div>
+    </div>
+
+    <div id="sidebar">
+        <div id="log-header">System Audit Log</div>
+        <div id="log-stream"></div>
+    </div>
+
+    <script>
+        const content = [
+            {
+                title: 'INIT :: SPENT_BLOOMS',
+                code: 'struct Project {\n  string name = "Spent Blooms";\n  string genre = "Cozy/Horror/Simulation";\n  float completion = 0.82f;\n}',
+                stats: [
+                    { l: 'Engine', v: 'Unity 6 (URP)' },
+                    { l: 'Lines of Code', v: '20,412' }
+                ],
+                log: ['Kernel initialized', 'Loading pitch_deck.dat', 'Spent Blooms system online']
+            },
+            {
+                title: 'CORE :: MECHANICS',
+                code: 'class ApartmentSimulation {\n  void UpdateMood(float noise) {\n    this.mood = MoodMachine.Compute(weather, music, plantHealth);\n  }\n}',
+                stats: [
+                    { l: 'Systems', v: '32 Interlocking' },
+                    { l: 'Physics', v: 'Spring-Damper' }
+                ],
+                log: ['MoodMachine module active', 'Physics solver: 120Hz', 'Input handling re-routed']
+            },
+            {
+                title: 'AUDIT :: MARKET_DATA',
+                code: 'Market.Cozy = Category.Find("Steam").GrowthRate(0.40f);\nMarket.Comps = ["Unpacking", "Spiritfarer", "Coffee Talk"];',
+                stats: [
+                    { l: 'Growth', v: '+40% YoY' },
+                    { l: 'Target', v: '150k Units' }
+                ],
+                log: ['Analyzing Steam API trends', 'Cross-referencing demographic data', 'Market opportunity identified']
+            },
+            {
+                title: 'PROCESS :: LOOP',
+                code: 'while (isPlaying) {\n  Morning.SelectDate();\n  Afternoon.PrepareApartment();\n  Evening.ExecuteDate();\n  Night.TrimFlower();\n}',
+                stats: [
+                    { l: 'Loop Cycles', v: '7 Days' },
+                    { l: 'Complexity', v: 'High' }
+                ],
+                log: ['Loop validation: PASS', 'State machine transition ready', 'Data persistence: OK']
+            },
+            {
+                title: 'WARNING :: HORROR_LAYER',
+                code: '// DEPRECATED: Standard Affection Logic\nif (dateCount == 3) {\n  this.flower = Flower.Corrupt();\n  this.isVanished = true;\n}',
+                stats: [
+                    { l: 'Subversion', v: '99.9%' },
+                    { l: 'Anomalies', v: 'Detected' }
+                ],
+                log: ['[WARN] Unrecognized asset type: ThirdFlower', '[WARN] Character entity missing: Sterling', '[ERROR] Memory leak in Souvenir system']
+            },
+            {
+                title: 'EXEC :: THE_ASK',
+                code: 'Request.Fund($500,000);\nAllocation.Marketing = 0.50f;\nAllocation.Team = 0.25f;',
+                stats: [
+                    { l: 'Recoup', v: '1.5x (Base)' },
+                    { l: 'Timeline', v: '18 Months' }
+                ],
+                log: ['Financial projection verified', 'Marketing GTM plan active', 'Awaiting investor handshake']
+            }
+        ];
+
+        let current = 0;
+        const viewport = document.getElementById('viewport');
+        const logStream = document.getElementById('log-stream');
+        const progressBar = document.getElementById('progress-bar');
+
+        function init() {
+            content.forEach((s, i) => {
+                const slide = document.createElement('div');
+                slide.className = `slide ${i === 0 ? 'active' : ''}`;
+                
+                let html = `<h1>${s.title}</h1>`;
+                html += `<div class="data-block"><div class="code">${s.code}</div></div>`;
+                
+                html += `<div class="stat-grid">`;
+                s.stats.forEach(st => {
+                    html += `<div class="stat-item"><div class="stat-label">${st.l}</div><div class="stat-value">${st.v}</div></div>`;
+                });
+                html += `</div>`;
+
+                slide.innerHTML = html;
+                viewport.appendChild(slide);
+            });
+            update();
+        }
+
+        function addLog(msg, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            logStream.prepend(entry);
+        }
+
+        function update() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === current));
+            
+            progressBar.style.width = `${(current / (content.length - 1)) * 100}%`;
+            
+            const s = content[current];
+            s.log.forEach(l => addLog(l, s.title.includes('WARNING') ? 'warn' : 'info'));
+        }
+
+        function next() {
+            if (current < content.length - 1) {
+                current++;
+                update();
+            }
+        }
+
+        function prev() {
+            if (current > 0) {
+                current--;
+                update();
+            }
+        }
+
+        window.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') next();
+            if (e.key === 'ArrowLeft') prev();
+        });
+
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPENT BLOOMS — Gemini Pitch (Corrupted)</title>
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --text: #e8e0d4;
+            --accent: #b04050;
+            --glitch-opacity: 0;
+            --distortion: 0px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Georgia, serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 1s;
+        }
+
+        #viewport {
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        p {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        /* Glitch Effects */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: var(--glitch-opacity);
+        }
+
+        .glitch-text::before {
+            color: #0ff;
+            left: calc(var(--distortion) * -1);
+            text-shadow: 2px 0 #0ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            color: #f0f;
+            left: var(--distortion);
+            text-shadow: -2px 0 #f0f;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            20% { clip: rect(62px, 9999px, 42px, 0); }
+            40% { clip: rect(16px, 9999px, 78px, 0); }
+            60% { clip: rect(58px, 9999px, 13px, 0); }
+            80% { clip: rect(73px, 9999px, 86px, 0); }
+            100% { clip: rect(9px, 9999px, 5px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            20% { clip: rect(2px, 9999px, 15px, 0); }
+            40% { clip: rect(72px, 9999px, 35px, 0); }
+            60% { clip: rect(10px, 9999px, 55px, 0); }
+            80% { clip: rect(43px, 9999px, 9px, 0); }
+            100% { clip: rect(81px, 9999px, 77px, 0); }
+        }
+
+        #nav {
+            position: fixed;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+            font-family: monospace;
+            letter-spacing: 5px;
+            cursor: pointer;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+
+        .horror-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(176, 64, 80, 0.05);
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/White_noise_512x512.png');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 101;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+    <div class="horror-overlay" id="horror-overlay"></div>
+
+    <div id="viewport">
+        <!-- Slides -->
+    </div>
+
+    <div id="nav" onclick="next()">PROCEED ></div>
+
+    <script>
+        const content = [
+            { t: 'SPENT BLOOMS', p: 'A cozy apartment sim about dating strangers.' },
+            { t: 'PREPARATION', p: 'Clean the apartment. Pour the drinks. Set the mood.' },
+            { t: 'THE DATE', p: 'They arrive. They notice everything. They leave a flower.' },
+            { t: 'THE BOUQUET', p: 'A growing record of every date you\'ve had.' },
+            { t: 'THE THIRD DATE', p: 'The first two were perfect. The third one is... different.', isHorror: true },
+            { t: 'W̷H̷E̷R̷E̷ ̷A̷R̷E̷ ̷T̷H̷E̷Y̷?', p: 'They stop calling. The newspaper is empty. A souvenir remains.', isHorror: true },
+            { t: 'T̷H̷E̷ ̷A̷S̷K̷', p: '$500,000 to finish the bouquet.', isHorror: true }
+        ];
+
+        let current = 0;
+        const viewport = document.getElementById('viewport');
+        const horrorOverlay = document.getElementById('horror-overlay');
+
+        function init() {
+            content.forEach((s, i) => {
+                const slide = document.createElement('div');
+                slide.className = `slide ${i === 0 ? 'active' : ''}`;
+                
+                slide.innerHTML = `
+                    <h1 class="glitch-text" data-text="${s.t}">${s.t}</h1>
+                    <p class="glitch-text" data-text="${s.p}">${s.p}</p>
+                `;
+                viewport.appendChild(slide);
+            });
+        }
+
+        function next() {
+            if (current < content.length - 1) {
+                current++;
+                update();
+            } else {
+                // Final collapse
+                document.body.style.background = '#000';
+                viewport.style.opacity = '0';
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        }
+
+        function update() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === current));
+            
+            const s = content[current];
+            const corruption = current / (content.length - 1);
+            
+            document.documentElement.style.setProperty('--glitch-opacity', corruption * 0.8);
+            document.documentElement.style.setProperty('--distortion', `${corruption * 10}px`);
+            
+            if (s.isHorror) {
+                horrorOverlay.style.display = 'block';
+                document.body.style.background = '#050000';
+                if (current === content.length - 1) {
+                    document.body.style.filter = 'invert(1)';
+                }
+            }
+
+            // Scramble text randomly
+            if (corruption > 0.5) {
+                scrambleText();
+            }
+        }
+
+        function scrambleText() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+            const elements = document.querySelectorAll('.active .glitch-text');
+            elements.forEach(el => {
+                const original = el.getAttribute('data-text');
+                let scrambled = "";
+                for (let i = 0; i < original.length; i++) {
+                    if (Math.random() < 0.1) {
+                        scrambled += chars[Math.floor(Math.random() * chars.length)];
+                    } else {
+                        scrambled += original[i];
+                    }
+                }
+                el.innerText = scrambled;
+            });
+        }
+
+        window.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') next();
+        });
+
+        init();
+    </script>
+</body>
+</html>

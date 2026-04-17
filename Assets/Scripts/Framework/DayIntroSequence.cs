@@ -70,8 +70,6 @@ public class DayIntroSequence : MonoBehaviour
     private TextMeshProUGUI _descText;
 
     private const string ParisDescription =
-        "A cozy apartment sim where you date strangers, tend your space, " +
-        "and slowly realize some of them never leave\n\n" +
         "F, 25, $2,000/mo. Seeking a lover to give me reasons to live, " +
         "or move to Paris with and co-parent a cat.";
 
@@ -115,7 +113,12 @@ public class DayIntroSequence : MonoBehaviour
 
         BuildUI();
 
-        // Switch brain to perspective while screen is still opaque white.
+        // Force ScreenFade to fully opaque white BEFORE we touch cameras,
+        // so any Cinemachine ortho→perspective transition happens invisibly.
+        if (ScreenFade.Instance != null)
+            ScreenFade.Instance.FadeOut(0f); // instant hard cut to white
+
+        // Switch brain to perspective while screen is opaque white.
         // The browse camera is ortho — suppress it so the perspective intro cam wins.
         CameraTestController.Instance?.SuspendPreset();
         if (ApartmentManager.Instance != null)
@@ -123,8 +126,32 @@ public class DayIntroSequence : MonoBehaviour
 
         CreateIntroCamera();
 
-        // Let one frame pass so Cinemachine picks up the new camera + perspective mode
+        // Force a Cinemachine hard cut so the brain doesn't try to blend
+        // ortho→perspective (which is visually janky and takes time).
+        var brain = Camera.main != null ? Camera.main.GetComponent<Unity.Cinemachine.CinemachineBrain>() : null;
+        Unity.Cinemachine.CinemachineBlendDefinition savedBlend = default;
+        if (brain != null)
+        {
+            savedBlend = brain.DefaultBlend;
+            brain.DefaultBlend = new Unity.Cinemachine.CinemachineBlendDefinition(
+                Unity.Cinemachine.CinemachineBlendDefinition.Styles.Cut, 0f);
+        }
+
+        // Several frames for Cinemachine + CinemachineBrain to fully settle on the new cam
         yield return null;
+        yield return null;
+        yield return null;
+
+        // Snap camera to the first waypoint explicitly so the fade-in shows the intended start pose
+        if (_introCamera != null && _waypoints.Length > 0)
+        {
+            _introCamera.transform.position = _waypoints[0].position;
+            _introCamera.transform.rotation = _waypoints[0].rotation;
+        }
+
+        // Restore original blend style for subsequent camera changes in this sequence
+        if (brain != null)
+            brain.DefaultBlend = savedBlend;
 
         // ── 1. Fade in from white — track shot begins ──
         if (ScreenFade.Instance != null)

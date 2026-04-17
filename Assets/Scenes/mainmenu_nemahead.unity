@@ -1966,7 +1966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: 340}
+  m_AnchoredPosition: {x: -234.04617, y: 567.04877}
   m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &865240860
@@ -2006,7 +2006,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Iris
+  m_text: Spent Blooms
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1461f9c3625452f4fa71aaacea73e85f, type: 2}
   m_sharedMaterial: {fileID: 6835897342130650632, guid: 1461f9c3625452f4fa71aaacea73e85f, type: 2}
@@ -2072,7 +2072,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 393.07578, y: 0, z: -967.3143, w: -650.9517}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

@@ -247,7 +247,11 @@ public class PlaceableObject : MonoBehaviour
 
     private void ApplyGlitch()
     {
-        if (_instanceMat == null) return;
+        if (_instanceMat == null)
+        {
+            Debug.LogWarning($"[PlaceableObject] ApplyGlitch skipped on '{name}' — no _instanceMat");
+            return;
+        }
         if (_isGlitched) return;
 
         if (!s_glitchShaderCached)
@@ -255,20 +259,38 @@ public class PlaceableObject : MonoBehaviour
             s_glitchShaderCached = true;
             s_glitchShader = Shader.Find("Iris/PSXLitGlitch");
         }
-        if (s_glitchShader == null) return;
+        if (s_glitchShader == null)
+        {
+            Debug.LogWarning($"[PlaceableObject] ApplyGlitch skipped on '{name}' — Iris/PSXLitGlitch shader not found");
+            return;
+        }
 
         _originalShader = _instanceMat.shader;
         _instanceMat.shader = s_glitchShader;
-        // Match the books and procedural trash — the PSX vertex-snap / affine /
-        // dither effects do the visual work; full glitch intensity is way too noisy.
         _instanceMat.SetFloat("_GlitchIntensity", 0f);
         _isGlitched = true;
+        Debug.Log($"[PlaceableObject] ApplyGlitch on '{name}': {_originalShader.name} → {s_glitchShader.name}");
     }
 
     private void RemoveGlitch()
     {
-        if (!_isGlitched || _instanceMat == null || _originalShader == null) return;
+        if (!_isGlitched)
+        {
+            Debug.LogWarning($"[PlaceableObject] RemoveGlitch skipped on '{name}' — not glitched");
+            return;
+        }
+        if (_instanceMat == null)
+        {
+            Debug.LogWarning($"[PlaceableObject] RemoveGlitch skipped on '{name}' — no _instanceMat");
+            return;
+        }
+        if (_originalShader == null)
+        {
+            Debug.LogWarning($"[PlaceableObject] RemoveGlitch skipped on '{name}' — no _originalShader");
+            return;
+        }
 
+        Debug.Log($"[PlaceableObject] RemoveGlitch on '{name}': {_instanceMat.shader.name} → {_originalShader.name}");
         _instanceMat.shader = _originalShader;
         _isGlitched = false;
     }
@@ -408,6 +430,12 @@ public class PlaceableObject : MonoBehaviour
 
         if (_startDishelved)
             Dishevel();
+
+        // Trash items always get the PSX glitch shader as a "needs attention"
+        // hint until they're thrown away. Spawned messes already set this via
+        // AuthoredMessSpawner; this covers scene-placed trash too.
+        if (_itemCategory == ItemCategory.Trash)
+            ApplyGlitch();
 
         // Subscribe to day-start for smell aging
         if (GameClock.Instance != null)
@@ -1191,11 +1219,17 @@ public class PlaceableObject : MonoBehaviour
         else
         {
             // Restore original shader + queue on each tracked renderer.
+            // If the item was un-glitched while held (e.g. paired via SnapPair),
+            // use the pre-glitch original shader instead of the saved glitch shader.
+            Shader restoreShader = null;
+            if (!_isGlitched && _originalShader != null)
+                restoreShader = _originalShader;
+
             for (int i = 0; i < _renderOnTopStates.Count; i++)
             {
                 var s = _renderOnTopStates[i];
                 if (s.instanceMat == null || s.renderer == null) continue;
-                if (s.savedShader != null) s.instanceMat.shader = s.savedShader;
+                s.instanceMat.shader = restoreShader ?? s.savedShader ?? s.instanceMat.shader;
                 s.instanceMat.renderQueue = s.savedQueue;
             }
             _renderOnTopStates.Clear();

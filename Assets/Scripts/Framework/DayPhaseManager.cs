@@ -732,27 +732,16 @@ public class DayPhaseManager : MonoBehaviour
         if (_apartmentUI != null) _apartmentUI.SetActive(true);
         MusicDirector.Instance?.FadeOutMenuMusic();
 
-        // 4. Fade in from black so the apartment is visible behind the card
+        // 4. Fade in from white straight into the apartment (info card removed —
+        //    the dating profile already appeared over white during DayIntroSequence).
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(_fadeDuration);
 
-        // 5. Build and show the info card overlay
-        bool cardDismissed = false;
-        var cardRoot = BuildDemoInfoCard(tutorialDate, () => cardDismissed = true);
-
-        // 6. Wait for player to dismiss the card
-        while (!cardDismissed)
-            yield return null;
-
-        // 7. Clean up the card
-        if (cardRoot != null)
-            Destroy(cardRoot);
-
-        // 8. Auto-schedule the tutorial date
+        // 5. Auto-schedule the tutorial date
         DateSessionManager.Instance?.ScheduleDate(tutorialDate);
         PhoneController.Instance?.SetPendingDate(tutorialDate);
 
-        // 9. Spawn day 1 messes + start exploration (with prep timer)
+        // 6. Spawn day 1 messes + start exploration (with prep timer)
         _currentPhase = DayPhase.Exploration;
         Debug.Log("[DayPhaseManager] Phase → Exploration (demo day 1)");
         DismissAllStationUI();

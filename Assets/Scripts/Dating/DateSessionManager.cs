@@ -127,7 +127,7 @@ public class DateSessionManager : MonoBehaviour
     [SerializeField] private float _bailOutThreshold = 10f;
 
     [Tooltip("Minimum affection required for the date to give you a flower (and trigger flower trimming).")]
-    [SerializeField] private float _flowerAffectionThreshold = 90f;
+    [SerializeField] private float _flowerAffectionThreshold = 30f;
 
     [Header("Ambient Check")]
     [Tooltip("Seconds between ambient mood evaluations.")]
@@ -469,8 +469,8 @@ public class DateSessionManager : MonoBehaviour
             yield return _entranceJudgments.RunJudgments(reactionUI, _currentDate);
         }
 
-        // Fail check after entrance
-        if (CheckPhaseFailAndExit(_arrivalFailThreshold)) yield break;
+        // No mid-date fails: the date always plays through all 3 phases.
+        // Low affection just means no flower at the end.
 
         // Wait for player to acknowledge Phase 1 results
         if (PhaseContinueButton.Instance != null)
@@ -1270,22 +1270,8 @@ public class DateSessionManager : MonoBehaviour
         Debug.Log($"[DateSessionManager] Reaction: {type} (delta={delta:+0.0;-0.0}) → Affection: {_affection:F1}");
 #endif
 
-        // Continuous bail-out: if affection drops too low at any point, date fails immediately
-        CheckBailOut();
-    }
-
-    /// <summary>If affection is below the bail-out threshold, the date fails immediately.</summary>
-    private void CheckBailOut()
-    {
-        if (_bailOutThreshold <= 0f) return;
-        if (_state != SessionState.DateInProgress) return;
-        if (_affection < _bailOutThreshold)
-        {
-#if UNITY_EDITOR
-            Debug.Log($"[DateSessionManager] Affection {_affection:F1} below bail-out threshold {_bailOutThreshold} — date fails!");
-#endif
-            FailDate();
-        }
+        // No bail-out — the date always plays through all phases.
+        // Low affection just means no flower gift at the end.
     }
 
     /// <summary>Called when a drink is delivered to the coffee table.</summary>
@@ -1345,12 +1331,7 @@ public class DateSessionManager : MonoBehaviour
         Debug.Log($"[DateSessionManager] Drink verdict: {drinkName} (score={score}) \u2192 {reactionType}");
 #endif
 
-        // 4. Fail check after drink
-        if (CheckPhaseFailAndExit(_bgJudgingFailThreshold))
-        {
-            _drinkVerdictRunning = false;
-            yield break;
-        }
+        // No mid-date fails — date continues through all phases regardless of affection.
 
         // 5. Wait for player to acknowledge
         if (PhaseContinueButton.Instance != null)
@@ -1374,7 +1355,7 @@ public class DateSessionManager : MonoBehaviour
     // End of Date
     // ──────────────────────────────────────────────────────────────
 
-    /// <summary>Public safety fallback (e.g. GameClock bed time). Routes to fail or succeed based on affection.</summary>
+    /// <summary>Public safety fallback (only called from flower-trim cleanup now). Always routes to SucceedDate — flower threshold decides the outcome.</summary>
     public void EndDate()
     {
         if (_state == SessionState.Idle || _state == SessionState.DateEnding) return;
@@ -1382,10 +1363,7 @@ public class DateSessionManager : MonoBehaviour
         // Release date camera framing back to normal browsing
         ReleasePhaseCamera();
 
-        if (_affection < _revealFailThreshold)
-            FailDate();
-        else
-            SucceedDate();
+        SucceedDate();
     }
 
     // ──────────────────────────────────────────────────────────────
@@ -1494,57 +1472,31 @@ public class DateSessionManager : MonoBehaviour
         _                           => default,
     };
 
-    /// <summary>Returns true (and triggers failure) if affection is below threshold.</summary>
-    private bool CheckPhaseFailAndExit(float threshold)
-    {
-        if (_affection < threshold)
-        {
-#if UNITY_EDITOR
-            Debug.Log($"[DateSessionManager] Affection {_affection:F1} < {threshold} — date failed!");
-#endif
-            FailDate();
-            return true;
-        }
-        return false;
-    }
-
     private IEnumerator RunEndSequence()
     {
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
 
         yield return s_wait1;
 
-        if (_affection >= _revealFailThreshold)
+        // The date always completes — affection only determines the farewell
+        // dialogue and whether a flower is given. There is no "fail" exit path.
+        if (reactionUI != null)
         {
-            if (reactionUI != null)
+            if (_affection >= _flowerAffectionThreshold)
             {
                 reactionUI.ShowText("I had a wonderful time...", 3f);
                 yield return s_wait35;
-
-                if (_affection >= _flowerAffectionThreshold)
-                {
-                    reactionUI.ShowText("Here... I brought you something.", 3f);
-                    yield return s_wait35;
-                }
-                else
-                {
-                    reactionUI.ShowText("See you around.", 2.5f);
-                    yield return s_wait3;
-                }
-            }
-            SucceedDate();
-        }
-        else
-        {
-            if (reactionUI != null)
-            {
-                reactionUI.ShowText("I think I should go...", 3f);
+                reactionUI.ShowText("Here... I brought you something.", 3f);
                 yield return s_wait35;
-                reactionUI.ShowText("Goodnight.", 2.5f);
-                yield return s_wait3;
             }
-            FailDate();
+            else
+            {
+                reactionUI.ShowText("Well... goodnight.", 3f);
+                yield return s_wait35;
+            }
         }
+
+        SucceedDate();
     }
 
     private void FailDate()

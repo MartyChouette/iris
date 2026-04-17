@@ -15979,3 +15979,326 @@ production/session-logs/session-log.md
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260416_134051
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+---
+
+## Session End: 20260416_141704
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_142521
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GameClock.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_142656
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GameClock.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_145020
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/GameClock.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_145205
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_145306
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_145346
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_145559
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_151046
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_151218
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+6affbe8 fix: resolve FlowerEvaluation type error and complete audit pass fixes
+7b74a25 second audit pass: more critical/high fixes across apartment/mechanics/framework
+0ceb4c4 audit pass: fix critical races, leaks, and soft-locks
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_213356
+### Commits
+09bf1eb third audit pass: critical/high fixes across UI, dating, framework, apartment
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_220603
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_221041
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_221054
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_221439
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_221807
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_222038
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_222249
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_222406
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_222518
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+docs/PITCH_DECK_MASTER.html
+production/session-logs/session-log.md
+---
+
