@@ -560,6 +560,25 @@ public class DateSessionManager : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("[DateSessionManager] Phase 2: Kitchen — player makes drink, NPC watches.");
 #endif
+
+        // Show "Serve" button — player clicks when they're done mixing.
+        // This replaces the old pick-up-glass + walk-to-date delivery flow.
+        if (PhaseContinueButton.Instance != null)
+        {
+            bool served = false;
+            PhaseContinueButton.Instance.Show(() =>
+            {
+                // Auto-serve the drink via DrinkPourManager
+                if (DrinkPourManager.Instance != null
+                    && DrinkPourManager.Instance.CurrentState != DrinkPourManager.State.Idle)
+                {
+                    DrinkPourManager.Instance.ServeDrink();
+                }
+                served = true;
+            }, "Serve \u2192");
+            yield return new WaitUntil(() => served || _state != SessionState.DateInProgress);
+            if (_state != SessionState.DateInProgress) yield break;
+        }
     }
 
     private IEnumerator TransitionToPhase3()

@@ -262,14 +262,11 @@ public class MainMenuManager : MonoBehaviour
         ItemStateRegistry.Clear();
         PlayerData.PlayerName = "Nema";
 
-        // Show consent screen, then tutorial, then load
-        PlaytestConsentScreen.ShowIfNeeded(() =>
-        {
-            if (_tutorialCard != null)
-                _tutorialCard.Show(() => LoadApartment());
-            else
-                LoadApartment();
-        });
+        // Telemetry always on — no consent screen
+        if (_tutorialCard != null)
+            _tutorialCard.Show(() => LoadApartment());
+        else
+            LoadApartment();
     }
 
     public void OnContinue()
@@ -281,7 +278,7 @@ public class MainMenuManager : MonoBehaviour
 
         ActiveConfig = _selectedConfig;
         SaveManager.ActiveSlot = slot;
-        PlaytestConsentScreen.ShowIfNeeded(() => LoadApartment());
+        LoadApartment();
     }
 
     public void OnLoadSave()
@@ -359,7 +356,7 @@ public class MainMenuManager : MonoBehaviour
 
         ActiveConfig = _selectedConfig;
         SaveManager.ActiveSlot = slot;
-        PlaytestConsentScreen.ShowIfNeeded(() => LoadApartment());
+        LoadApartment();
     }
 
     public void OnSaveSlotBack()

@@ -16302,3 +16302,95 @@ docs/PITCH_DECK_MASTER.html
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260416_224818
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+---
+
+## Session End: 20260416_225041
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+### Uncommitted Changes
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_230307
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_230523
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_231622
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260416_235517
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_001706
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_003326
+### Commits
+34993ae date flow overhaul, PSX pairing fix, menu/intro polish
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayIntroSequence.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+

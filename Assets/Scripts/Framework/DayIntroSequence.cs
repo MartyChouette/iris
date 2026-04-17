@@ -26,6 +26,10 @@ public class DayIntroSequence : MonoBehaviour
         Instance = null;
     }
 
+    [Header("Enable")]
+    [Tooltip("Uncheck to skip the fly-through intro on every day start.")]
+    [SerializeField] private bool _enabled = true;
+
     [Header("Track Shot")]
     [Tooltip("Waypoints the camera travels through (position + rotation). First = start, last = end before turnaround.")]
     [SerializeField] private Transform[] _waypoints;
@@ -95,6 +99,11 @@ public class DayIntroSequence : MonoBehaviour
     /// </summary>
     public IEnumerator Play(int dayNumber)
     {
+        if (!_enabled)
+        {
+            yield break;
+        }
+
         if (_waypoints == null || _waypoints.Length < 2)
         {
             Debug.LogWarning("[DayIntroSequence] Not enough waypoints — skipping intro.");

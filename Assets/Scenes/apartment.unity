@@ -36706,6 +36706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfbb5e3eb306dcf4aa9bfd71dbc80bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayIntroSequence
+  _enabled: 0
   _waypoints:
   - {fileID: 50790703}
   - {fileID: 464823758}

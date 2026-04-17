@@ -36,6 +36,7 @@ public class PhaseContinueButton : MonoBehaviour
     private Canvas _canvas;
     private CanvasGroup _canvasGroup;
     private Button _button;
+    private TextMeshProUGUI _labelTMP;
     private System.Action _onClick;
     private Coroutine _fadeCoroutine;
 
@@ -58,9 +59,18 @@ public class PhaseContinueButton : MonoBehaviour
 
     // ── Public API ──────────────────────────────────────────────────
 
-    /// <summary>Show the button. Calls <paramref name="onClicked"/> once when pressed.</summary>
+    /// <summary>Show the button with custom label text. Calls <paramref name="onClicked"/> once when pressed.</summary>
+    public void Show(System.Action onClicked, string label)
+    {
+        if (_labelTMP != null) _labelTMP.text = label;
+        Show(onClicked);
+    }
+
+    /// <summary>Show the button with default "Continue →" text. Calls <paramref name="onClicked"/> once when pressed.</summary>
     public void Show(System.Action onClicked)
     {
+        if (_labelTMP != null && _labelTMP.text != "Continue \u2192")
+            _labelTMP.text = "Continue \u2192"; // reset to default if it was changed
         _onClick = onClicked;
         _canvas.gameObject.SetActive(true);
         _canvasGroup.interactable = true;
@@ -142,7 +152,8 @@ public class PhaseContinueButton : MonoBehaviour
         labelRT.offsetMin = Vector2.zero;
         labelRT.offsetMax = Vector2.zero;
 
-        var tmp = labelGO.AddComponent<TextMeshProUGUI>();
+        _labelTMP = labelGO.AddComponent<TextMeshProUGUI>();
+        var tmp = _labelTMP;
         tmp.text = "Continue \u2192";
         tmp.fontSize = 24f;
         tmp.color = Color.white;

@@ -180,6 +180,39 @@ public class DrinkPourManager : MonoBehaviour
         Debug.Log($"[DrinkPourManager] Garnish added: {garnish.garnishName}");
     }
 
+    /// <summary>
+    /// One-step serve: finish the drink, score it, and hand it to the date
+    /// without the player needing to pick up the glass and walk it over.
+    /// Called by the "Serve" button.
+    /// </summary>
+    public void ServeDrink()
+    {
+        if (_activeGlass == null || CurrentState == State.Idle) return;
+
+        // Finish + score
+        _glassHighlightActive = false;
+        if (_activeGlass != null)
+        {
+            var hl = _activeGlass.GetComponent<InteractableHighlight>();
+            if (hl != null) hl.SetHighlighted(false);
+        }
+        PickupDescriptionHUD.Instance?.Hide();
+        CalculateScore();
+
+        // Hand off to DateSessionManager — triggers reaction + phase 3
+        DateSessionManager.Instance?.ReceiveDrink(_activeRecipe, _lastScore);
+
+        // Destroy the glass
+        if (_activeGlass != null)
+            Destroy(_activeGlass.gameObject);
+
+        DrinkCutawayUI.Instance?.Hide();
+        _activeGlass = null;
+        _activeRecipe = null;
+        _pouringIngredient = null;
+        CurrentState = State.Idle;
+    }
+
     /// <summary>Force back to idle (phase transitions).</summary>
     public void ForceIdle()
     {

@@ -779,14 +779,11 @@ public class ObjectGrabber : MonoBehaviour
         if (_held == null) return;
 
         // ── Watering can ──
-        // LMB always tries to water the nearest plant. The only way to put
-        // the can down is RMB (handled in UpdateWateringCanSnap). This
-        // prevents accidentally placing the can when trying to water.
+        // Near a plant: LMB starts watering. Away from plants: LMB places
+        // the can on the surface like any other item.
         if (_held.GetComponent<WateringCan>() != null)
         {
             var wm = WateringManager.Instance;
-
-            // Only start watering if the can is snapped to a plant (within snap radius)
             WaterablePlant clickPlant = _nearestWaterablePlant;
 
             if (clickPlant != null && wm != null)
@@ -800,9 +797,7 @@ public class ObjectGrabber : MonoBehaviour
                 return;
             }
 
-            // No plants in scene at all — consume click anyway, don't place
-            ConsumeClick();
-            return;
+            // Not near a plant — fall through to normal surface placement below
         }
 
         // ── Bottle near glass → start pouring instead of placing ──
@@ -1923,6 +1918,12 @@ public class ObjectGrabber : MonoBehaviour
 
     private void UpdateGrabTarget()
     {
+        // Freeze the grab target while actively watering — the can stays locked
+        // at the plant's pour position and shouldn't follow the cursor.
+        if (WateringManager.Instance != null
+            && WateringManager.Instance.CurrentState == WateringManager.State.Pouring)
+            return;
+
         Vector2 screenPos = IrisInput.CursorPosition;
         Ray ray = cam.ScreenPointToRay(screenPos);
 
