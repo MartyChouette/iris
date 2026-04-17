@@ -516,6 +516,9 @@ public class DateSessionManager : MonoBehaviour
         // Highlight drink glasses so the player knows where to pour
         HighlightDrinkGlasses(true);
 
+        // Switch fridge bottles to counter home so they land on the counter, not back in the fridge
+        SetBottleHomes(useCounter: true);
+
         // Switch to kitchen model (or warp legacy character)
         if (_activeSceneModels != null && _activeSceneModels.kitchenModel != null)
         {
@@ -585,6 +588,9 @@ public class DateSessionManager : MonoBehaviour
     {
         StopPhase2Pulse();
         HighlightDrinkGlasses(false);
+
+        // Restore fridge bottles to their original home (fridge shelf)
+        SetBottleHomes(useCounter: false);
 
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
 
@@ -925,6 +931,20 @@ public class DateSessionManager : MonoBehaviour
         }
 
         if (!on) InteractableHighlight.SuppressVisuals = true;
+    }
+
+    /// <summary>Switch all BottleItem homes between counter (Phase 2) and original (fridge).</summary>
+    private static void SetBottleHomes(bool useCounter)
+    {
+        var bottles = Object.FindObjectsByType<BottleItem>(FindObjectsSortMode.None);
+        for (int i = 0; i < bottles.Length; i++)
+        {
+            if (bottles[i] == null) continue;
+            if (useCounter)
+                bottles[i].UseCounterHome();
+            else
+                bottles[i].UseOriginalHome();
+        }
     }
 
     private IEnumerator Phase2PulseLoop()

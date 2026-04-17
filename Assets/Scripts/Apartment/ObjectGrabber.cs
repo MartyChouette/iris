@@ -831,9 +831,7 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // ── Bottle return-to-home during drink phase ──
-        // Clicking away from a glass sends the bottle back to its starting spot
-        // (like records returning to their sleeve).
+        // ── Bottle during drink phase — always return to home ──
         if (isDrinkPhase && heldBottle != null && heldBottle.HasHome)
         {
             heldBottle.ReturnHome();
@@ -1507,10 +1505,16 @@ public class ObjectGrabber : MonoBehaviour
         var mouse = UnityEngine.InputSystem.Mouse.current;
         bool lmbHeld = mouse != null && mouse.leftButton.isPressed;
 
-        // RMB while pouring → disengage immediately
+        // RMB while pouring → stop pouring and return bottle to home
         if (wasPouring && mouse != null && mouse.rightButton.wasPressedThisFrame)
         {
             DrinkPourManager.Instance.StopPouring();
+            var heldBottle = _held != null ? _held.GetComponent<BottleItem>() : null;
+            if (heldBottle != null && heldBottle.HasHome)
+            {
+                heldBottle.ReturnHome();
+                ClearHeld();
+            }
             return;
         }
 
