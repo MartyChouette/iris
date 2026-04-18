@@ -66,12 +66,21 @@ public class DreamScreen : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         BuildUI();
         _canvasRoot.SetActive(false);
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         if (_gradientTex != null) Destroy(_gradientTex);
         if (Instance == this) Instance = null;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+    {
+        StopAllCoroutines();
+        if (_canvasRoot != null) _canvasRoot.SetActive(false);
+        if (_canvasGroup != null) _canvasGroup.alpha = 0f;
     }
 
     private int _updateFrame;

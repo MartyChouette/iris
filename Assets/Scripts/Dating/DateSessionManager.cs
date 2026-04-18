@@ -188,9 +188,9 @@ public class DateSessionManager : MonoBehaviour
 
     [Header("Phase Cameras")]
     [Tooltip("Camera framing snapped to during each date phase. Capture from the Scene View via the inspector buttons.")]
-    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival" };
-    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging" };
-    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal" };
+    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival", nearClip = -9f, farClip = 1000f };
+    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging", nearClip = -9f, farClip = 1000f };
+    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal", nearClip = -9f, farClip = 1000f };
 
     [Tooltip("Default seconds the camera takes to glide into a phase frame when LerpPhaseCamera is used.")]
     [SerializeField] private float _phaseCameraLerpDuration = 1.6f;
@@ -202,6 +202,10 @@ public class DateSessionManager : MonoBehaviour
         public Vector3 position;
         public Vector3 rotation;
         public float fov;
+        [Tooltip("Near clip plane. Push forward to clip through walls/geometry in front of the camera.")]
+        public float nearClip;
+        [Tooltip("Far clip plane. Pull back to hide distant geometry.")]
+        public float farClip;
         public bool captured;
     }
 
@@ -1538,7 +1542,9 @@ public class DateSessionManager : MonoBehaviour
         ApartmentManager.Instance.SetPresetBase(
             frame.position,
             Quaternion.Euler(frame.rotation),
-            frame.fov);
+            frame.fov,
+            frame.nearClip,
+            frame.farClip);
     }
 
     /// <summary>
@@ -1590,10 +1596,14 @@ public class DateSessionManager : MonoBehaviour
         Vector3 endPos = frame.position;
         Quaternion endRot = Quaternion.Euler(frame.rotation);
         float endFov = frame.fov;
+        float startNear = cam.nearClipPlane;
+        float startFar = cam.farClipPlane;
+        float endNear = frame.nearClip;
+        float endFar = frame.farClip;
 
         if (duration <= 0f)
         {
-            am.SetPresetBase(endPos, endRot, endFov);
+            am.SetPresetBase(endPos, endRot, endFov, endNear, endFar);
             _phaseCameraLerp = null;
             yield break;
         }
@@ -1607,12 +1617,14 @@ public class DateSessionManager : MonoBehaviour
             am.SetPresetBase(
                 Vector3.Lerp(startPos, endPos, t),
                 Quaternion.Slerp(startRot, endRot, t),
-                Mathf.Lerp(startFov, endFov, t));
+                Mathf.Lerp(startFov, endFov, t),
+                Mathf.Lerp(startNear, endNear, t),
+                Mathf.Lerp(startFar, endFar, t));
 
             yield return null;
         }
 
-        am.SetPresetBase(endPos, endRot, endFov);
+        am.SetPresetBase(endPos, endRot, endFov, endNear, endFar);
         _phaseCameraLerp = null;
     }
 

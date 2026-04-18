@@ -16714,3 +16714,171 @@ Assets/Scripts/UI/PotCrossSectionUI.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260418_111325
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+---
+
+## Session End: 20260418_115141
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_121146
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_124848
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_125206
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_130539
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_133657
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/Scripts/UI/NemaProfilePanel.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Scripts/UI/PhaseLabel.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PourCursorOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_134204
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/Scripts/UI/NemaProfilePanel.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Scripts/UI/PhaseLabel.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PourCursorOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_140554
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/Scripts/UI/NemaProfilePanel.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Scripts/UI/PhaseLabel.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PourCursorOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_141204
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/Scripts/UI/NemaProfilePanel.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Scripts/UI/PhaseLabel.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PourCursorOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_141402
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/Scripts/UI/NemaProfilePanel.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Scripts/UI/PhaseLabel.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PourCursorOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_141736
+### Commits
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/UI/DreamScreen.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/Scripts/UI/NemaProfilePanel.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Scripts/UI/PhaseLabel.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PourCursorOverlay.cs
+production/session-logs/session-log.md
+---
+

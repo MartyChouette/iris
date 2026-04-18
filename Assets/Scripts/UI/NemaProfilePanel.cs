@@ -55,6 +55,7 @@ public class NemaProfilePanel : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         BuildUI();
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
@@ -62,6 +63,12 @@ public class NemaProfilePanel : MonoBehaviour
         if (Instance == this) Instance = null;
         if (_spiderTex != null) Destroy(_spiderTex);
         if (_flowerTex != null) Destroy(_flowerTex);
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+    {
+        Close();
     }
 
     public void Open()

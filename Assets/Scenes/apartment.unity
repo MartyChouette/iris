@@ -6139,9 +6139,24 @@ MonoBehaviour:
   _lookBlendSpeed: 3
   _maxLookAngle: 90
   _headBone: {fileID: 1434137634}
+  _lookAtHeldItem: 1
+  _lookAtHoveredItem: 1
+  _lookAtCursor: 1
+  _cursorOnlyWhileHolding: 0
+  _lookAtCamera: 1
+  _lookAtRandomObjects: 1
+  _ikBodyWeight: 0.3
+  _ikHeadWeight: 0.6
+  _ikEyesWeight: 0.8
+  _ikClampWeight: 0.5
   _boredDelay: 6
   _boredGlanceDuration: 2.5
   _glanceChance: 0.7
+  _idleCycleInterval: 4
+  _idleCycleVariance: 1.5
+  _idleCameraChance: 0.3
+  _idleCursorChance: 0.3
+  _idleObjectChance: 0.3
 --- !u!4 &332461155
 Transform:
   m_ObjectHideFlags: 0
@@ -13270,21 +13285,27 @@ MonoBehaviour:
   _entranceJudgments: {fileID: 666569914}
   _arrivalCamera:
     label: Arrival
-    position: {x: -1.2218039, y: 1.5199642, z: -4.4111}
-    rotation: {x: 6.400433, y: 276.06787, z: 356.97644}
+    position: {x: -3.972124, y: 1.2097071, z: -4.118736}
+    rotation: {x: 6.4004345, y: 276.06787, z: 356.97644}
     fov: 0.45891097
+    nearClip: 1
+    farClip: 1000
     captured: 1
   _kitchenCamera:
     label: Kitchen / BackgroundJudging
-    position: {x: 1.6474166, y: 1.0152187, z: -1.7163231}
-    rotation: {x: 22.762754, y: 128.9709, z: 356.74097}
+    position: {x: 1.5693622, y: 1.2934294, z: -1.1232934}
+    rotation: {x: 22.762753, y: 128.9709, z: 356.74097}
     fov: 0.71267474
+    nearClip: 1
+    farClip: 1000
     captured: 1
   _couchCamera:
     label: Couch / Reveal
-    position: {x: -0.9073912, y: 1.483084, z: 0.6630544}
-    rotation: {x: 11.549798, y: 104.98126, z: 356.93317}
+    position: {x: -2.3411157, y: 1.6413901, z: 1.6090393}
+    rotation: {x: 11.5498, y: 104.98127, z: 356.93317}
     fov: 1.5267912
+    nearClip: -9
+    farClip: 1000
     captured: 1
   _phaseCameraLerpDuration: 1.6
   _fridgeHighlightRenderer: {fileID: 0}

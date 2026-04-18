@@ -73,11 +73,19 @@ public class PhaseTitleDrop : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         BuildUI();
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+    {
+        if (_activeRoutine != null) { StopCoroutine(_activeRoutine); _activeRoutine = null; }
+        if (_group != null) _group.alpha = 0f;
     }
 
     private void BuildUI()

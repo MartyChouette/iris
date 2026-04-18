@@ -50,11 +50,18 @@ public class PhaseContinueButton : MonoBehaviour
         Instance = this;
         BuildUI();
         _canvas.gameObject.SetActive(false);
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+    {
+        Hide();
     }
 
     // ── Public API ──────────────────────────────────────────────────

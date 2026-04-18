@@ -189,7 +189,9 @@ public class ScreenFade : MonoBehaviour
         if (_canvasGroup == null) yield break;
 
         IsFading = true;
-        _canvasGroup.blocksRaycasts = true;
+        // Only block raycasts when fading OUT (going dark). Fade-ins should
+        // let clicks through so buttons are responsive immediately.
+        _canvasGroup.blocksRaycasts = blockWhenDone;
 
         // Hard cut — instant transition
         if (duration <= 0f)

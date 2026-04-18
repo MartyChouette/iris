@@ -15,7 +15,9 @@ public class DateSessionManagerEditor : Editor
         EditorGUILayout.HelpBox(
             "Position the Scene View camera to frame Nema + the date character, " +
             "then click a button to capture the framing for that phase. " +
-            "The captured pos/rot/fov is pushed into ApartmentManager during phase transitions.",
+            "The captured pos/rot/fov is pushed into ApartmentManager during phase transitions.\n\n" +
+            "Near/Far clip: push Near forward to clip through walls in front of the camera. " +
+            "Default is -9 (no clipping). Resets to default when the phase camera is released.",
             MessageType.Info);
 
         DrawCaptureRow(mgr, "Arrival",  ref mgr.EditorGetArrivalCamera());
@@ -23,6 +25,7 @@ public class DateSessionManagerEditor : Editor
         DrawCaptureRow(mgr, "Couch",    ref mgr.EditorGetCouchCamera());
 
         EditorGUILayout.Space(5);
+        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Clear All Captures", GUILayout.Height(24)))
         {
             Undo.RecordObject(mgr, "Clear Phase Cameras");
@@ -31,6 +34,9 @@ public class DateSessionManagerEditor : Editor
             mgr.EditorGetCouchCamera().captured = false;
             EditorUtility.SetDirty(mgr);
         }
+        if (GUILayout.Button("Reset Scene View Clip", GUILayout.Height(24)))
+            RestoreSceneViewClip();
+        EditorGUILayout.EndHorizontal();
     }
 
     private void DrawCaptureRow(DateSessionManager mgr, string label, ref DateSessionManager.PhaseCameraFrame frame)
@@ -60,6 +66,11 @@ public class DateSessionManagerEditor : Editor
                 frame.position = sv.camera.transform.position;
                 frame.rotation = sv.camera.transform.eulerAngles;
                 frame.fov = sv.camera.orthographicSize;
+                if (!frame.captured)
+                {
+                    frame.nearClip = -9f;
+                    frame.farClip = 1000f;
+                }
                 frame.captured = true;
                 EditorUtility.SetDirty(mgr);
                 Debug.Log($"[DateSessionManager] Captured {label}: pos={frame.position}, rot={frame.rotation}, orthoSize={frame.fov:F2}");
@@ -73,19 +84,56 @@ public class DateSessionManagerEditor : Editor
         if (GUILayout.Button("Preview", GUILayout.Width(60), GUILayout.Height(22)))
         {
             if (frame.captured)
-            {
-                var sv = SceneView.lastActiveSceneView;
-                if (sv != null)
-                {
-                    sv.orthographic = true;
-                    sv.pivot = frame.position + Quaternion.Euler(frame.rotation) * Vector3.forward * sv.cameraDistance;
-                    sv.rotation = Quaternion.Euler(frame.rotation);
-                    sv.size = frame.fov;
-                    sv.Repaint();
-                }
-            }
+                PreviewFrame(frame);
         }
 
         EditorGUILayout.EndHorizontal();
+
+        // Clip distance fields (only show when captured)
+        if (frame.captured)
+        {
+            EditorGUI.indentLevel++;
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Near Clip", GUILayout.Width(65));
+            float newNear = EditorGUILayout.FloatField(frame.nearClip, GUILayout.Width(60));
+            EditorGUILayout.LabelField("Far Clip", GUILayout.Width(55));
+            float newFar = EditorGUILayout.FloatField(frame.farClip, GUILayout.Width(60));
+            EditorGUILayout.EndHorizontal();
+
+            if (newNear != frame.nearClip || newFar != frame.farClip)
+            {
+                Undo.RecordObject(mgr, $"Adjust {label} Clip");
+                frame.nearClip = newNear;
+                frame.farClip = newFar;
+                EditorUtility.SetDirty(mgr);
+            }
+            EditorGUI.indentLevel--;
+        }
+    }
+
+    private static void PreviewFrame(DateSessionManager.PhaseCameraFrame frame)
+    {
+        var sv = SceneView.lastActiveSceneView;
+        if (sv == null) return;
+
+        // Position + rotation + size only — don't touch clip planes
+        sv.orthographic = true;
+        sv.pivot = frame.position + Quaternion.Euler(frame.rotation) * Vector3.forward * sv.cameraDistance;
+        sv.rotation = Quaternion.Euler(frame.rotation);
+        sv.size = frame.fov;
+        sv.Repaint();
+    }
+
+    /// <summary>Restore Scene View to dynamic clipping (fixes grey screen).</summary>
+    private static void RestoreSceneViewClip()
+    {
+        var sv = SceneView.lastActiveSceneView;
+        if (sv == null) return;
+
+        var settings = sv.cameraSettings;
+        settings.dynamicClip = true;
+        sv.cameraSettings = settings;
+        sv.Repaint();
+        Debug.Log("[DateSessionManager] Scene View clip restored to dynamic.");
     }
 }

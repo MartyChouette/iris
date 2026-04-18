@@ -27,11 +27,20 @@ public class HotkeyHints : MonoBehaviour
         }
         s_instance = this;
         BuildUI();
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         if (s_instance == this) s_instance = null;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+    {
+        // Only show hints in the apartment scene, not the main menu
+        var root = transform.GetChild(0);
+        if (root != null) root.gameObject.SetActive(s.buildIndex != 0);
     }
 
     private void BuildUI()

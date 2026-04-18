@@ -164,6 +164,14 @@ public class FridgeController : MonoBehaviour
         bool hitLeft = _doorPivotL != null && fridgeHit.collider.transform.IsChildOf(_doorPivotL);
         bool hitRight = _doorPivotR != null && fridgeHit.collider.transform.IsChildOf(_doorPivotR);
 
+        // Ignore clicks on drawers — FridgeDrawer handles those
+        if (!hitLeft && !hitRight)
+        {
+            var drawer = fridgeHit.collider.GetComponent<FridgeDrawer>();
+            if (drawer == null) drawer = fridgeHit.collider.GetComponentInParent<FridgeDrawer>();
+            if (drawer != null) return;
+        }
+
         // "Both together" mode or clicked the body → treat as both
         if (_openBothTogether || (!hitLeft && !hitRight))
         {

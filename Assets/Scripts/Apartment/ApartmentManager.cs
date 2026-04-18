@@ -758,11 +758,21 @@ public class ApartmentManager : MonoBehaviour
     /// Called by CameraTestController to set the parallax base from a preset.
     /// ApartmentManager applies mouse parallax on top of these values.
     /// </summary>
+    private float _presetNearClip = -9f;
+    private float _presetFarClip = 1000f;
+
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
+    {
+        SetPresetBase(pos, rot, fov, -9f, 1000f);
+    }
+
+    public void SetPresetBase(Vector3 pos, Quaternion rot, float fov, float nearClip, float farClip)
     {
         _basePosition = pos;
         _baseRotation = rot;
         _baseFOV = fov;
+        _presetNearClip = nearClip;
+        _presetFarClip = farClip;
         _presetOverrideActive = true;
     }
 
@@ -854,7 +864,9 @@ public class ApartmentManager : MonoBehaviour
                     lens.FieldOfView = _currentZoom;
             }
 
-            lens.NearClipPlane = -9f;
+            lens.NearClipPlane = _presetOverrideActive ? _presetNearClip : -9f;
+            if (_presetOverrideActive)
+                lens.FarClipPlane = _presetFarClip;
             browseCamera.Lens = lens;
         }
     }
