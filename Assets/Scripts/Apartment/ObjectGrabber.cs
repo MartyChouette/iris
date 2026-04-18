@@ -1602,13 +1602,11 @@ public class ObjectGrabber : MonoBehaviour
         // skip the plant search entirely — locked to this plant, no switching.
         WaterablePlant bestPlant = null;
         float bestDist = _wateringSnapRadius;
-        bool lmbLocked = false;
 
         if (lmbHeld && _wateringUIEngagedPlant != null)
         {
             bestPlant = _wateringUIEngagedPlant;
             bestDist = 0f;
-            lmbLocked = true;
             // Freeze grab target at the plant so cursor can't drag the can elsewhere
             _grabTarget = bestPlant.transform.position + Vector3.up * 0.3f;
         }

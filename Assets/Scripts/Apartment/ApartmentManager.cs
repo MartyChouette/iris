@@ -780,17 +780,12 @@ public class ApartmentManager : MonoBehaviour
         _baseRotation = rot;
         _baseFOV = fov;
         _presetNearClip = nearClip;
-        // Guard against zero/uninitialized clip values from old serialized data
         _presetFarClip = farClip > 0.1f ? farClip : 1000f;
         _presetPerspective = perspective;
-        _presetPerspectiveFOV = Mathf.Max(perspectiveFOV, 1f); // guard against 0 FOV crash
+        _presetPerspectiveFOV = Mathf.Max(perspectiveFOV, 1f);
         _presetOverrideActive = true;
-
-        // Only switch projection mode when it actually changes
-        bool currentlyOrtho = browseCamera != null
-            && browseCamera.Lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
-        if (perspective == currentlyOrtho) // mismatch → need to switch
-            ApplyBrainOrthoMode(!perspective);
+        // Projection switching is handled lazily in ApplyParallax — no
+        // immediate switch here to avoid crashing during lerp coroutines.
     }
 
     /// <summary>Called by CameraTestController when preset is cleared.</summary>
@@ -874,7 +869,17 @@ public class ApartmentManager : MonoBehaviour
             var lens = browseCamera.Lens;
             bool lensOrtho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
 
-            // Preset can override projection mode
+            // Sync projection mode if preset demands a change
+            if (_presetOverrideActive)
+            {
+                bool wantOrtho = !_presetPerspective;
+                if (lensOrtho != wantOrtho)
+                    ApplyBrainOrthoMode(wantOrtho);
+                lensOrtho = wantOrtho; // refresh after switch
+                lens = browseCamera.Lens; // re-read after mode change
+            }
+
+            // Preset can override FOV
             if (_presetOverrideActive && _presetPerspective)
             {
                 lens.FieldOfView = Mathf.Max(_presetPerspectiveFOV, 1f);
