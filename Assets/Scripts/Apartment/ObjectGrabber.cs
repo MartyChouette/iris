@@ -747,14 +747,6 @@ public class ObjectGrabber : MonoBehaviour
             slotHL.SetHighlighted(true);
         }
 
-        // Keep interactable highlight while held
-        var heldHL = placeable.GetComponent<InteractableHighlight>();
-        if (heldHL != null)
-        {
-            heldHL.SetHighlighted(true);
-            heldHL.SetInteractHighlighted(true);
-        }
-
         // Book hidden item check
         var bookItem = placeable.GetComponent<BookItem>();
         if (bookItem != null) bookItem.OnBookPickedUp();
@@ -1848,7 +1840,7 @@ public class ObjectGrabber : MonoBehaviour
             var pairable = _held.GetComponent<PairableItem>();
             if (pairable != null) pairable.OnPutDown();
 
-            // Turn off held highlight
+            // Clear any lingering highlight
             var hl = _held.GetComponent<InteractableHighlight>();
             if (hl != null)
             {

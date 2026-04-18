@@ -275,17 +275,38 @@ public class IrisInput : MonoBehaviour
     // Device Auto-Detection
     // ─────────────────────────────────────────────────────────────
 
+    // Prevent scheme flickering when both gamepad and mouse/keyboard are connected.
+    // Require a cooldown between switches and a deadzone for analog stick input.
+    private float _lastSchemeSwitchTime;
+    private const float SchemeSwitchCooldown = 0.4f; // seconds before allowing another switch
+    private const float GamepadStickDeadzone = 0.3f; // ignore stick drift below this threshold
+
     private void OnActionChange(object obj, InputActionChange change)
     {
         if (change != InputActionChange.ActionPerformed) return;
         if (obj is not InputAction action) return;
 
-        var device = action.activeControl?.device;
+        var control = action.activeControl;
+        if (control == null) return;
+        var device = control.device;
         if (device == null) return;
 
         ActiveControlScheme newScheme;
         if (device is Gamepad)
+        {
+            // Ignore stick drift — only accept intentional gamepad input.
+            // Buttons always count, but stick axes must exceed the deadzone.
+            if (control is UnityEngine.InputSystem.Controls.StickControl stick)
+            {
+                if (stick.ReadValue().magnitude < GamepadStickDeadzone) return;
+            }
+            else if (control is UnityEngine.InputSystem.Controls.AxisControl axis
+                     && control.parent is UnityEngine.InputSystem.Controls.StickControl)
+            {
+                if (Mathf.Abs(axis.ReadValue()) < GamepadStickDeadzone) return;
+            }
             newScheme = ActiveControlScheme.Gamepad;
+        }
         else if (device is Touchscreen)
             newScheme = ActiveControlScheme.Touch;
         else
@@ -293,6 +314,10 @@ public class IrisInput : MonoBehaviour
 
         if (newScheme != Scheme)
         {
+            // Cooldown prevents rapid flickering between schemes
+            if (Time.unscaledTime - _lastSchemeSwitchTime < SchemeSwitchCooldown) return;
+            _lastSchemeSwitchTime = Time.unscaledTime;
+
             Scheme = newScheme;
             OnSchemeChanged?.Invoke(newScheme);
             Debug.Log($"[IrisInput] Control scheme changed: {newScheme}");

@@ -386,6 +386,14 @@ public class GlobalCursorManager : MonoBehaviour
             }
         }
 
+        // Hide cursor entirely while sponge visual is active — must be checked
+        // FIRST so nothing below can re-show or SetCursor over it.
+        if (s_hideCursorForSponge)
+        {
+            Cursor.visible = false;
+            return;
+        }
+
         // Force cursor visible when paused — menus need the cursor
         if ((SimplePauseMenu.Instance != null && SimplePauseMenu.Instance.IsPaused)
             || Time.timeScale == 0f)
@@ -415,13 +423,6 @@ public class GlobalCursorManager : MonoBehaviour
             Cursor.visible = true;
             _displayedType = CursorType.Default;
             _lastStep = -1;
-        }
-
-        // Hide cursor entirely while sponge visual is active (3D sponge replaces cursor)
-        if (s_hideCursorForSponge)
-        {
-            if (Cursor.visible) Cursor.visible = false;
-            return;
         }
 
         // Cursor lock — active interaction holds the cursor type steady
