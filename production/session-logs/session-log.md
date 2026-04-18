@@ -17006,3 +17006,77 @@ Assets/Scripts/Framework/GlobalCursorManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260418_162420
+### Commits
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+---
+
+## Session End: 20260418_163323
+### Commits
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_164832
+### Commits
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_165009
+### Commits
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_165358
+### Commits
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_165640
+### Commits
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
