@@ -417,28 +417,29 @@ public class DateSessionManager : MonoBehaviour
 
     private IEnumerator ArrivalTransition()
     {
-        // Fade to black
+        // Fade out
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
 
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.ShowPhaseTitle("Impressions");
-
-        yield return CachePhaseTitleWait();
-
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.HidePhaseTitle();
-
-        // Time-jump to sunset so the date always arrives at golden hour,
-        // even if the player called early via the phone.
-        const float sunsetHour = 18f;
-        if (GameClock.Instance != null && GameClock.Instance.CurrentHour < sunsetHour)
-            GameClock.Instance.RestoreFromSave(GameClock.Instance.CurrentDay, sunsetHour);
-
-        // Set up session while screen is black — wrapped so a crash here
-        // can't leave the screen permanently faded out.
+        // Everything between FadeOut and FadeIn is wrapped so a crash
+        // at ANY point can't leave the screen stuck white.
         try
         {
+            ScreenFade.Instance?.ShowPhaseTitle("Impressions");
+        }
+        catch (System.Exception e) { Debug.LogError($"[DateSessionManager] Phase title failed: {e}"); }
+
+        // Use realtime wait so timeScale=0 can't hang this
+        yield return new WaitForSecondsRealtime(phaseTitleHold);
+
+        try
+        {
+            ScreenFade.Instance?.HidePhaseTitle();
+
+            const float sunsetHour = 18f;
+            if (GameClock.Instance != null && GameClock.Instance.CurrentHour < sunsetHour)
+                GameClock.Instance.RestoreFromSave(GameClock.Instance.CurrentDay, sunsetHour);
+
             _state = SessionState.DateInProgress;
             _datePhase = DatePhase.Arrival;
             NemaController.Instance?.MoveToDatePhase(DatePhase.Arrival);
@@ -462,7 +463,7 @@ public class DateSessionManager : MonoBehaviour
             Debug.LogError($"[DateSessionManager] ArrivalTransition setup failed: {e}");
         }
 
-        // Fade in to reveal NPC at entrance — always runs even if setup threw
+        // Fade in ALWAYS runs
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 
@@ -513,18 +514,14 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
 
-        // Phase title
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.ShowPhaseTitle("Drinks");
+        try { ScreenFade.Instance?.ShowPhaseTitle("Drinks"); }
+        catch (System.Exception e) { Debug.LogError($"[DateSessionManager] Phase title failed: {e}"); }
 
-        yield return CachePhaseTitleWait();
+        yield return new WaitForSecondsRealtime(phaseTitleHold);
 
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.HidePhaseTitle();
-
-        // Setup while screen is white — wrapped so a crash can't leave screen stuck
         try
         {
+            ScreenFade.Instance?.HidePhaseTitle();
             _datePhase = DatePhase.BackgroundJudging;
             NemaController.Instance?.MoveToDatePhase(DatePhase.BackgroundJudging);
             _moodCheckTimer = 0f;
@@ -621,18 +618,14 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
 
-        // Phase title
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.ShowPhaseTitle("Warming Up");
+        try { ScreenFade.Instance?.ShowPhaseTitle("Warming Up"); }
+        catch (System.Exception e) { Debug.LogError($"[DateSessionManager] Phase title failed: {e}"); }
 
-        yield return CachePhaseTitleWait();
+        yield return new WaitForSecondsRealtime(phaseTitleHold);
 
-        if (ScreenFade.Instance != null)
-            ScreenFade.Instance.HidePhaseTitle();
-
-        // Setup while screen is white — wrapped so a crash can't leave screen stuck
         try
         {
+            ScreenFade.Instance?.HidePhaseTitle();
             _datePhase = DatePhase.Reveal;
             NemaController.Instance?.MoveToDatePhase(DatePhase.Reveal);
 
