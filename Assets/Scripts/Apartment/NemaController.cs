@@ -86,6 +86,9 @@ public class NemaController : MonoBehaviour
     [Tooltip("Head bone for manual look-at rotation (used when Animator IK is not available).")]
     [SerializeField] private Transform _headBone;
 
+    [Tooltip("Layer mask for cursor-to-world raycast (look-at target). Exclude UI and IgnoreRaycast.")]
+    [SerializeField] private LayerMask _lookAtRaycastMask = ~((1 << 2) | (1 << 5)); // exclude IgnoreRaycast + UI
+
     [Header("Look-At — Toggles")]
     [Tooltip("Look at whatever the player is carrying.")]
     [SerializeField] private bool _lookAtHeldItem = true;
@@ -368,7 +371,7 @@ public class NemaController : MonoBehaviour
         if (_cachedCamera == null) return false;
 
         Ray ray = _cachedCamera.ScreenPointToRay(IrisInput.CursorPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, _lookAtRaycastMask))
         {
             worldPos = hit.point;
             return true;

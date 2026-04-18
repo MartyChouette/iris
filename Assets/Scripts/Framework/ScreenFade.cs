@@ -65,6 +65,8 @@ public class ScreenFade : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (_activeFadeCoroutine != null)
+            StopCoroutine(_activeFadeCoroutine);
         if (Instance == this) Instance = null;
     }
 

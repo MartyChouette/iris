@@ -170,6 +170,8 @@ public class ApartmentManager : MonoBehaviour
     // Hover highlight tracking
     private InteractableHighlight _hoveredHighlight;
     private readonly HashSet<GameObject> _plantHighlightSet = new();
+    private PlaceableObject _cachedHeldForWateringCheck;
+    private bool _cachedIsWateringCan;
 
     /// <summary>The InteractableHighlight currently under the cursor, or null.</summary>
     public InteractableHighlight HoveredHighlight => _hoveredHighlight;
@@ -958,8 +960,14 @@ public class ApartmentManager : MonoBehaviour
         // ── Find nearest InteractableHighlight to the cursor ray ──
         // Scans all registered highlights (placeables, plants, etc.).
         // When holding a watering can, only plants are valid hover targets.
-        bool wateringCanHeld = ObjectGrabber.HeldObject != null
-            && ObjectGrabber.HeldObject.GetComponent<WateringCan>() != null;
+        // Cache the GetComponent result — only recheck when held object changes.
+        var heldObj = ObjectGrabber.HeldObject;
+        if (heldObj != _cachedHeldForWateringCheck)
+        {
+            _cachedHeldForWateringCheck = heldObj;
+            _cachedIsWateringCan = heldObj != null && heldObj.GetComponent<WateringCan>() != null;
+        }
+        bool wateringCanHeld = _cachedIsWateringCan;
 
         // Pre-build a quick set of plant GameObjects to avoid GetComponent per highlight per frame
         _plantHighlightSet.Clear();

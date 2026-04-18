@@ -657,18 +657,25 @@ public class DayPhaseManager : MonoBehaviour
             _newspaperHUD.SetActive(false);
 
         // 9. Spawn authored messes (stains + objects) + misplace entrance items
-        if (_authoredMessSpawner != null)
-            _authoredMessSpawner.SpawnDailyMess();
-        if (_entranceMessSpawner != null)
-            _entranceMessSpawner.SpawnDailyMess();
+        try
+        {
+            if (_authoredMessSpawner != null)
+                _authoredMessSpawner.SpawnDailyMess();
+            if (_entranceMessSpawner != null)
+                _entranceMessSpawner.SpawnDailyMess();
 
-        // 10. Swap to exploration ambience (or let MoodMachine take over if null)
-        if (_explorationAmbienceClip != null && AudioManager.Instance != null)
-            AudioManager.Instance.PlayAmbience(_explorationAmbienceClip, 0.5f);
+            // 10. Swap to exploration ambience (or let MoodMachine take over if null)
+            if (_explorationAmbienceClip != null && AudioManager.Instance != null)
+                AudioManager.Instance.PlayAmbience(_explorationAmbienceClip, 0.5f);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[DayPhaseManager] ExplorationTransition setup failed: {e}");
+        }
 
         // ── Reveal ───────────────────────────────────────────────────
 
-        // 11. Fade in from black (ortho browse camera is now active)
+        // 11. Fade in (always runs even if spawning threw)
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(_fadeDuration);
 

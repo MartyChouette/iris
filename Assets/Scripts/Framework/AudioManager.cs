@@ -90,6 +90,7 @@ public class AudioManager : MonoBehaviour
     private void OnDestroy()
     {
         AccessibilitySettings.OnSettingsChanged -= ApplyVolumeSettings;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneCheck;
         if (_nonMusicFadeRoutine != null) StopCoroutine(_nonMusicFadeRoutine);
         if (_sfxCutoffRoutine != null) StopCoroutine(_sfxCutoffRoutine);
         if (_musicFadeCoroutine != null) StopCoroutine(_musicFadeCoroutine);

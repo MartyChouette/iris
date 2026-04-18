@@ -325,9 +325,11 @@ public class DateSessionManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Unsubscribe from character events if still alive
         if (_dateCharacter != null)
             _dateCharacter.OnReaction -= HandleCharacterReaction;
+
+        StopPhase2Pulse();
+        StopPhaseCameraLerp();
 
         if (Instance == this) Instance = null;
     }
@@ -520,45 +522,47 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.HidePhaseTitle();
 
-        _datePhase = DatePhase.BackgroundJudging;
-        NemaController.Instance?.MoveToDatePhase(DatePhase.BackgroundJudging);
-        _moodCheckTimer = 0f;
-
-        // Start pulsing fridge + drink station
-        StartPhase2Pulse();
-
-        // Highlight drink glasses so the player knows where to pour
-        HighlightDrinkGlasses(true);
-
-        // Switch fridge bottles to counter home so they land on the counter, not back in the fridge
-        SetBottleHomes(useCounter: true);
-
-        // Switch to kitchen model (or warp legacy character)
-        if (_activeSceneModels != null && _activeSceneModels.kitchenModel != null)
+        // Setup while screen is white — wrapped so a crash can't leave screen stuck
+        try
         {
-            if (_dateCharacter != null)
-                _dateCharacter.OnReaction -= HandleCharacterReaction;
-            _activeSceneModels.ShowOnly(_activeSceneModels.kitchenModel);
-            _dateCharacterGO = _activeSceneModels.kitchenModel;
-            EnsureDateComponents(_dateCharacterGO);
-            _dateCharacter.SetSitting();
-            _dateCharacter.OnReaction += HandleCharacterReaction;
-        }
-        else
-        {
-            Vector3 kitchenPos = kitchenStandPoint != null ? kitchenStandPoint.position
-                : new Vector3(-4f, 0f, -4.5f);
-            if (_dateCharacter != null)
+            _datePhase = DatePhase.BackgroundJudging;
+            NemaController.Instance?.MoveToDatePhase(DatePhase.BackgroundJudging);
+            _moodCheckTimer = 0f;
+
+            StartPhase2Pulse();
+            HighlightDrinkGlasses(true);
+            SetBottleHomes(useCounter: true);
+
+            if (_activeSceneModels != null && _activeSceneModels.kitchenModel != null)
             {
-                _dateCharacter.WarpTo(kitchenPos);
+                if (_dateCharacter != null)
+                    _dateCharacter.OnReaction -= HandleCharacterReaction;
+                _activeSceneModels.ShowOnly(_activeSceneModels.kitchenModel);
+                _dateCharacterGO = _activeSceneModels.kitchenModel;
+                EnsureDateComponents(_dateCharacterGO);
                 _dateCharacter.SetSitting();
+                _dateCharacter.OnReaction += HandleCharacterReaction;
             }
+            else
+            {
+                Vector3 kitchenPos = kitchenStandPoint != null ? kitchenStandPoint.position
+                    : new Vector3(-4f, 0f, -4.5f);
+                if (_dateCharacter != null)
+                {
+                    _dateCharacter.WarpTo(kitchenPos);
+                    _dateCharacter.SetSitting();
+                }
+            }
+
+            if (phaseTransitionSFX != null && AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFX(phaseTransitionSFX);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[DateSessionManager] TransitionToPhase2 setup failed: {e}");
         }
 
-        if (phaseTransitionSFX != null && AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(phaseTransitionSFX);
-
-        // Fade in — camera is still on the prior (Arrival) framing.
+        // Fade in always runs even if setup threw
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 
@@ -626,34 +630,41 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.HidePhaseTitle();
 
-        _datePhase = DatePhase.Reveal;
-        NemaController.Instance?.MoveToDatePhase(DatePhase.Reveal);
+        // Setup while screen is white — wrapped so a crash can't leave screen stuck
+        try
+        {
+            _datePhase = DatePhase.Reveal;
+            NemaController.Instance?.MoveToDatePhase(DatePhase.Reveal);
 
-        // Switch to couch model (or warp legacy character)
-        if (_activeSceneModels != null && _activeSceneModels.couchModel != null)
-        {
-            if (_dateCharacter != null)
-                _dateCharacter.OnReaction -= HandleCharacterReaction;
-            _activeSceneModels.ShowOnly(_activeSceneModels.couchModel);
-            _dateCharacterGO = _activeSceneModels.couchModel;
-            EnsureDateComponents(_dateCharacterGO);
-            _dateCharacter.SetSitting();
-            _dateCharacter.OnReaction += HandleCharacterReaction;
-        }
-        else
-        {
-            Vector3 couchPos = couchSeatTarget != null ? couchSeatTarget.position : Vector3.zero;
-            if (_dateCharacter != null)
+            if (_activeSceneModels != null && _activeSceneModels.couchModel != null)
             {
-                _dateCharacter.WarpTo(couchPos);
+                if (_dateCharacter != null)
+                    _dateCharacter.OnReaction -= HandleCharacterReaction;
+                _activeSceneModels.ShowOnly(_activeSceneModels.couchModel);
+                _dateCharacterGO = _activeSceneModels.couchModel;
+                EnsureDateComponents(_dateCharacterGO);
                 _dateCharacter.SetSitting();
+                _dateCharacter.OnReaction += HandleCharacterReaction;
             }
+            else
+            {
+                Vector3 couchPos = couchSeatTarget != null ? couchSeatTarget.position : Vector3.zero;
+                if (_dateCharacter != null)
+                {
+                    _dateCharacter.WarpTo(couchPos);
+                    _dateCharacter.SetSitting();
+                }
+            }
+
+            if (phaseTransitionSFX != null && AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFX(phaseTransitionSFX);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[DateSessionManager] TransitionToPhase3 setup failed: {e}");
         }
 
-        if (phaseTransitionSFX != null && AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(phaseTransitionSFX);
-
-        // Fade in — camera is still on the prior (Kitchen) framing.
+        // Fade in always runs even if setup threw
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 
