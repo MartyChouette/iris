@@ -203,7 +203,8 @@ public class ScreenFade : MonoBehaviour
         }
 
         float elapsed = 0f;
-        while (elapsed < duration)
+        float maxDuration = duration + 5f; // safety cap — never hang longer than 5s past expected
+        while (elapsed < duration && elapsed < maxDuration)
         {
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / duration);

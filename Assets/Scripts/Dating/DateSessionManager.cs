@@ -433,28 +433,34 @@ public class DateSessionManager : MonoBehaviour
         if (GameClock.Instance != null && GameClock.Instance.CurrentHour < sunsetHour)
             GameClock.Instance.RestoreFromSave(GameClock.Instance.CurrentDay, sunsetHour);
 
-        // Set up session while screen is black
-        _state = SessionState.DateInProgress;
-        _datePhase = DatePhase.Arrival;
-        NemaController.Instance?.MoveToDatePhase(DatePhase.Arrival);
-        _affection = startingAffection;
-        DateInspectSystem.Instance?.ResetForNewDate();
-        _moodCheckTimer = 0f;
-        _accumulatedReactions.Clear();
+        // Set up session while screen is black — wrapped so a crash here
+        // can't leave the screen permanently faded out.
+        try
+        {
+            _state = SessionState.DateInProgress;
+            _datePhase = DatePhase.Arrival;
+            NemaController.Instance?.MoveToDatePhase(DatePhase.Arrival);
+            _affection = startingAffection;
+            DateInspectSystem.Instance?.ResetForNewDate();
+            _moodCheckTimer = 0f;
+            _accumulatedReactions.Clear();
 
-        // Spawn NPC at judgment point (teleported, no walking)
-        SpawnDateCharacter();
+            SpawnDateCharacter();
 
-        if (dateArrivedSFX != null && AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(dateArrivedSFX);
+            if (dateArrivedSFX != null && AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFX(dateArrivedSFX);
 
-        OnDateSessionStarted?.Invoke(_currentDate);
-        OnAffectionChanged?.Invoke(_affection);
+            OnDateSessionStarted?.Invoke(_currentDate);
+            OnAffectionChanged?.Invoke(_affection);
 
-        // Frame camera on entrance while still black
-        ApplyPhaseCamera(DatePhase.Arrival);
+            ApplyPhaseCamera(DatePhase.Arrival);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[DateSessionManager] ArrivalTransition setup failed: {e}");
+        }
 
-        // Fade in to reveal NPC at entrance
+        // Fade in to reveal NPC at entrance — always runs even if setup threw
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 

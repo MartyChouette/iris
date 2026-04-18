@@ -3946,7 +3946,7 @@ public static class ApartmentSceneBuilder
         rt.offsetMin = Vector2.zero;
         rt.offsetMax = Vector2.zero;
         var img = blackPanel.AddComponent<UnityEngine.UI.Image>();
-        img.color = Color.white;
+        img.color = Color.black;
         img.raycastTarget = true;
 
         var cg = go.AddComponent<CanvasGroup>();
