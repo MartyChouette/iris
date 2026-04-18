@@ -781,16 +781,32 @@ public class ApartmentManager : MonoBehaviour
         _baseFOV = fov;
         _presetNearClip = nearClip;
         _presetFarClip = farClip > 0.1f ? farClip : 1000f;
-        _presetPerspective = perspective;
         _presetPerspectiveFOV = Mathf.Max(perspectiveFOV, 1f);
         _presetOverrideActive = true;
-        // Projection switching is handled lazily in ApplyParallax — no
-        // immediate switch here to avoid crashing during lerp coroutines.
+
+        // Only switch projection mode when it actually changes
+        if (perspective != _presetPerspective)
+        {
+            _presetPerspective = perspective;
+            try { ApplyBrainOrthoMode(!perspective); }
+            catch (System.Exception e) { Debug.LogError($"[ApartmentManager] Projection switch failed: {e.Message}"); }
+        }
+        else
+        {
+            _presetPerspective = perspective;
+        }
     }
 
     /// <summary>Called by CameraTestController when preset is cleared.</summary>
     public void ClearPresetBase()
     {
+        // Restore ortho if the preset was using perspective
+        if (_presetOverrideActive && _presetPerspective)
+        {
+            try { ApplyBrainOrthoMode(true); }
+            catch (System.Exception e) { Debug.LogError($"[ApartmentManager] Ortho restore failed: {e.Message}"); }
+        }
+
         _presetOverrideActive = false;
         _presetNearClip = -9f;
         _presetFarClip = 1000f;
@@ -869,7 +885,11 @@ public class ApartmentManager : MonoBehaviour
             bool lensOrtho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
 
             // Base lens: preset owns it when active, otherwise use area FOV
-            if (!_presetOverrideActive)
+            if (_presetOverrideActive && _presetPerspective)
+            {
+                lens.FieldOfView = Mathf.Max(_presetPerspectiveFOV, 1f);
+            }
+            else if (!_presetOverrideActive)
             {
                 lens.FieldOfView = _baseFOV;
             }
