@@ -265,7 +265,9 @@ public class PlaceableObject : MonoBehaviour
             return;
         }
 
-        _originalShader = _instanceMat.shader;
+        // Only capture original if not already saved (Awake captures it early)
+        if (_originalShader == null)
+            _originalShader = _instanceMat.shader;
         _instanceMat.shader = s_glitchShader;
         _instanceMat.SetFloat("_GlitchIntensity", 0f);
         _isGlitched = true;
@@ -395,6 +397,16 @@ public class PlaceableObject : MonoBehaviour
             _instanceMat = new Material(_renderer.sharedMaterial);
             _renderer.material = _instanceMat;
             _originalColor = _instanceMat.color;
+
+            // Capture the original shader NOW before anything applies glitch.
+            // If the material was already authored with PSXLitGlitch, fall back
+            // to PSXLit so RemoveGlitch has a clean shader to restore to.
+            _originalShader = _instanceMat.shader;
+            if (_originalShader != null && _originalShader.name == "Iris/PSXLitGlitch")
+            {
+                var psxLit = Shader.Find("Iris/PSXLit");
+                if (psxLit != null) _originalShader = psxLit;
+            }
         }
 
         _lastValidPosition = transform.position;

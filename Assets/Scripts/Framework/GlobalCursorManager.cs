@@ -75,6 +75,8 @@ public class GlobalCursorManager : MonoBehaviour
     public static bool IsCursorLocked => s_lockedCursor.HasValue;
 
     /// <summary>Lock cursor to a specific context while an interaction is active.</summary>
+    private static bool s_hideCursorForSponge;
+    public static void HideCursorForSponge(bool hide) => s_hideCursorForSponge = hide;
     public static void LockCursorToSponge()   => s_lockedCursor = CursorType.Sponge;
     public static void LockCursorToWatering() => s_lockedCursor = CursorType.Watering;
     public static void LockCursorToSwatter()  => s_lockedCursor = CursorType.Swatter;
@@ -415,10 +417,10 @@ public class GlobalCursorManager : MonoBehaviour
             _lastStep = -1;
         }
 
-        // Hide cursor while actively scrubbing (3D sponge is visible instead)
-        if (CleaningManager.Instance != null && CleaningManager.Instance.IsScrubbing)
+        // Hide cursor entirely while sponge visual is active (3D sponge replaces cursor)
+        if (s_hideCursorForSponge)
         {
-            ApplyCursor(CursorType.Default);
+            if (Cursor.visible) Cursor.visible = false;
             return;
         }
 

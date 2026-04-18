@@ -93,6 +93,7 @@ public class WipeController : MonoBehaviour
             if (!_cursorHidden)
             {
                 Cursor.visible = false;
+                GlobalCursorManager.HideCursorForSponge(true);
                 _cursorHidden = true;
             }
 
@@ -112,6 +113,7 @@ public class WipeController : MonoBehaviour
             if (_cursorHidden)
             {
                 Cursor.visible = true;
+                GlobalCursorManager.HideCursorForSponge(false);
                 _cursorHidden = false;
             }
         }

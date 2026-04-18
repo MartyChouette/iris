@@ -16907,3 +16907,102 @@ Assets/Scripts/UI/PourCursorOverlay.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260418_141943
+### Commits
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+---
+
+## Session End: 20260418_143802
+### Commits
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_144823
+### Commits
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_154450
+### Commits
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_154842
+### Commits
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_155443
+### Commits
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_161320
+### Commits
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+production/session-logs/session-log.md
+---
+

@@ -760,26 +760,48 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     private float _presetNearClip = -9f;
     private float _presetFarClip = 1000f;
+    private bool _presetPerspective;
+    private float _presetPerspectiveFOV = 60f;
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
     {
-        SetPresetBase(pos, rot, fov, -9f, 1000f);
+        SetPresetBase(pos, rot, fov, -9f, 1000f, false, 60f);
     }
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov, float nearClip, float farClip)
+    {
+        SetPresetBase(pos, rot, fov, nearClip, farClip, false, 60f);
+    }
+
+    public void SetPresetBase(Vector3 pos, Quaternion rot, float fov, float nearClip, float farClip,
+        bool perspective, float perspectiveFOV)
     {
         _basePosition = pos;
         _baseRotation = rot;
         _baseFOV = fov;
         _presetNearClip = nearClip;
         _presetFarClip = farClip;
+        _presetPerspective = perspective;
+        _presetPerspectiveFOV = Mathf.Max(perspectiveFOV, 1f); // guard against 0 FOV crash
         _presetOverrideActive = true;
+
+        // Only switch projection mode when it actually changes
+        bool currentlyOrtho = browseCamera != null
+            && browseCamera.Lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
+        if (perspective == currentlyOrtho) // mismatch → need to switch
+            ApplyBrainOrthoMode(!perspective);
     }
 
     /// <summary>Called by CameraTestController when preset is cleared.</summary>
     public void ClearPresetBase()
     {
+        // Restore ortho if the preset was using perspective
+        if (_presetOverrideActive && _presetPerspective)
+            ApplyBrainOrthoMode(true);
+
         _presetOverrideActive = false;
+        _presetPerspective = false;
+
         // Snap back to current area (reads from defaultPreset if set)
         if (areas != null && areas.Length > 0)
         {
@@ -851,9 +873,15 @@ public class ApartmentManager : MonoBehaviour
             var lens = browseCamera.Lens;
             bool lensOrtho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
 
-            // Base lens: preset owns it when active, otherwise use area FOV
-            if (!_presetOverrideActive)
+            // Preset can override projection mode
+            if (_presetOverrideActive && _presetPerspective)
+            {
+                lens.FieldOfView = Mathf.Max(_presetPerspectiveFOV, 1f);
+            }
+            else if (!_presetOverrideActive)
+            {
                 lens.FieldOfView = _baseFOV;
+            }
 
             // Layer zoom on top (works with both preset and default lens)
             if (_currentZoom >= 0f)

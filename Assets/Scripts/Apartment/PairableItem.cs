@@ -346,26 +346,14 @@ public class PairableItem : MonoBehaviour
             // falling back to whichever side is still free.
             Transform sbsRoot = FindStackRoot(transform);
 
-            // For book collections: straighten root to upright so all books
-            // face the same direction when snapped together.
-            if (sbsRoot.GetComponent<BookCollectionItem>() != null)
-            {
-                Vector3 rootEuler = sbsRoot.eulerAngles;
-                sbsRoot.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
-            }
-
-            // For shoes: straighten root so both shoes sit flat and face forward.
-            // Keeps Y rotation (facing direction) but levels out any tilt.
-            if (_pairMode == PairMode.SpecificPartner && sbsRoot.GetComponent<BookCollectionItem>() == null)
-            {
-                Vector3 rootEuler = sbsRoot.eulerAngles;
-                sbsRoot.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
-            }
+            // Straighten root to upright so all items face the same direction.
+            Vector3 rootEuler = sbsRoot.eulerAngles;
+            sbsRoot.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
 
             Vector3 localPos = GetSideBySideLocalOffset(sbsRoot, held);
 
             // Calculate world-space target position so both items sit at the
-            // same ground level — prevents one shoe floating above the other.
+            // same ground level — prevents one floating above the other.
             Vector3 worldSnapPos = sbsRoot.TransformPoint(localPos);
             worldSnapPos.y = sbsRoot.position.y; // match root's Y exactly
 
@@ -378,8 +366,6 @@ public class PairableItem : MonoBehaviour
                 parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
                 parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
 
-            // Set position in world space then convert back to local, so the
-            // Y stays aligned regardless of parent rotation or pivot offset.
             held.transform.position = worldSnapPos;
             held.transform.localRotation = Quaternion.identity;
         }

@@ -188,9 +188,9 @@ public class DateSessionManager : MonoBehaviour
 
     [Header("Phase Cameras")]
     [Tooltip("Camera framing snapped to during each date phase. Capture from the Scene View via the inspector buttons.")]
-    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival", nearClip = -9f, farClip = 1000f };
-    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging", nearClip = -9f, farClip = 1000f };
-    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal", nearClip = -9f, farClip = 1000f };
+    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f };
+    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f };
+    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f };
 
     [Tooltip("Default seconds the camera takes to glide into a phase frame when LerpPhaseCamera is used.")]
     [SerializeField] private float _phaseCameraLerpDuration = 1.6f;
@@ -206,6 +206,10 @@ public class DateSessionManager : MonoBehaviour
         public float nearClip;
         [Tooltip("Far clip plane. Pull back to hide distant geometry.")]
         public float farClip;
+        [Tooltip("Use perspective projection instead of orthographic for this phase.")]
+        public bool perspective;
+        [Tooltip("Field of view in degrees (only used in perspective mode).")]
+        public float perspectiveFOV;
         public bool captured;
     }
 
@@ -1544,7 +1548,9 @@ public class DateSessionManager : MonoBehaviour
             Quaternion.Euler(frame.rotation),
             frame.fov,
             frame.nearClip,
-            frame.farClip);
+            frame.farClip,
+            frame.perspective,
+            frame.perspectiveFOV);
     }
 
     /// <summary>
@@ -1601,12 +1607,19 @@ public class DateSessionManager : MonoBehaviour
         float endNear = frame.nearClip;
         float endFar = frame.farClip;
 
+        // Projection mode applies immediately (no lerp — instant cut)
+        bool usePerspective = frame.perspective;
+        float endPFOV = frame.perspectiveFOV;
+
         if (duration <= 0f)
         {
-            am.SetPresetBase(endPos, endRot, endFov, endNear, endFar);
+            am.SetPresetBase(endPos, endRot, endFov, endNear, endFar, usePerspective, endPFOV);
             _phaseCameraLerp = null;
             yield break;
         }
+
+        // Apply projection mode at start of lerp so FOV interpolation is coherent
+        float startPFOV = cam.fieldOfView;
 
         float elapsed = 0f;
         while (elapsed < duration)
@@ -1619,12 +1632,14 @@ public class DateSessionManager : MonoBehaviour
                 Quaternion.Slerp(startRot, endRot, t),
                 Mathf.Lerp(startFov, endFov, t),
                 Mathf.Lerp(startNear, endNear, t),
-                Mathf.Lerp(startFar, endFar, t));
+                Mathf.Lerp(startFar, endFar, t),
+                usePerspective,
+                Mathf.Lerp(startPFOV, endPFOV, t));
 
             yield return null;
         }
 
-        am.SetPresetBase(endPos, endRot, endFov, endNear, endFar);
+        am.SetPresetBase(endPos, endRot, endFov, endNear, endFar, usePerspective, endPFOV);
         _phaseCameraLerp = null;
     }
 

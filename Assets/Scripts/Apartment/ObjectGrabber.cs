@@ -1598,27 +1598,33 @@ public class ObjectGrabber : MonoBehaviour
 
         bool lmbHeld = mouse != null && mouse.leftButton.isPressed;
 
-        // Find nearest WaterablePlant
+        // LMB LOCK: while holding LMB and we have an engaged plant,
+        // skip the plant search entirely — locked to this plant, no switching.
         WaterablePlant bestPlant = null;
         float bestDist = _wateringSnapRadius;
+        bool lmbLocked = false;
 
-        foreach (var plant in WaterablePlant.All)
-        {
-            if (plant == null) continue;
-            float dist = Vector3.Distance(plant.transform.position, _grabTarget);
-            if (dist < bestDist)
-            {
-                bestDist = dist;
-                bestPlant = plant;
-            }
-        }
-
-        // LMB LOCK: while holding LMB and we have an engaged plant,
-        // force the can to stay locked — player can't disengage mid-pour
-        if (lmbHeld && bestPlant == null && _wateringUIEngagedPlant != null)
+        if (lmbHeld && _wateringUIEngagedPlant != null)
         {
             bestPlant = _wateringUIEngagedPlant;
-            bestDist = 0f; // fully locked
+            bestDist = 0f;
+            lmbLocked = true;
+            // Freeze grab target at the plant so cursor can't drag the can elsewhere
+            _grabTarget = bestPlant.transform.position + Vector3.up * 0.3f;
+        }
+        else
+        {
+            // Find nearest WaterablePlant
+            foreach (var plant in WaterablePlant.All)
+            {
+                if (plant == null) continue;
+                float dist = Vector3.Distance(plant.transform.position, _grabTarget);
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    bestPlant = plant;
+                }
+            }
         }
 
         // No plant in range (and LMB not locking us) → disengage

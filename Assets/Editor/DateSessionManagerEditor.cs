@@ -107,6 +107,24 @@ public class DateSessionManagerEditor : Editor
                 frame.farClip = newFar;
                 EditorUtility.SetDirty(mgr);
             }
+
+            // Projection mode
+            EditorGUILayout.BeginHorizontal();
+            bool newPersp = EditorGUILayout.Toggle("Perspective", frame.perspective, GUILayout.Width(150));
+            GUI.enabled = newPersp;
+            float newPFOV = EditorGUILayout.Slider(frame.perspectiveFOV, 10f, 120f);
+            EditorGUILayout.LabelField("FOV", GUILayout.Width(30));
+            GUI.enabled = true;
+            EditorGUILayout.EndHorizontal();
+
+            if (newPersp != frame.perspective || newPFOV != frame.perspectiveFOV)
+            {
+                Undo.RecordObject(mgr, $"Adjust {label} Lens");
+                frame.perspective = newPersp;
+                frame.perspectiveFOV = newPFOV;
+                EditorUtility.SetDirty(mgr);
+            }
+
             EditorGUI.indentLevel--;
         }
     }
@@ -116,11 +134,11 @@ public class DateSessionManagerEditor : Editor
         var sv = SceneView.lastActiveSceneView;
         if (sv == null) return;
 
-        // Position + rotation + size only — don't touch clip planes
-        sv.orthographic = true;
+        // Position + rotation + size — match projection mode
+        sv.orthographic = !frame.perspective;
         sv.pivot = frame.position + Quaternion.Euler(frame.rotation) * Vector3.forward * sv.cameraDistance;
         sv.rotation = Quaternion.Euler(frame.rotation);
-        sv.size = frame.fov;
+        sv.size = frame.perspective ? frame.perspectiveFOV * 0.1f : frame.fov;
         sv.Repaint();
     }
 
