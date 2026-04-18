@@ -38,6 +38,12 @@ public class ScreenFade : MonoBehaviour
     // Track the active fade coroutine so we can stop it before starting a new one
     private Coroutine _activeFadeCoroutine;
 
+    // Safety net: if the screen stays fully opaque for this many seconds
+    // with no active fade coroutine, force-clear it. Catches ALL cases where
+    // a coroutine dies between FadeOut and FadeIn.
+    private const float StuckFadeTimeout = 8f;
+    private float _opaqueTimer;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -60,6 +66,29 @@ public class ScreenFade : MonoBehaviour
         {
             _canvasGroup.alpha = 0f;
             _canvasGroup.blocksRaycasts = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (_canvasGroup == null) return;
+
+        // Safety net: if screen is fully opaque and no fade is running,
+        // something crashed between FadeOut and FadeIn. Auto-recover.
+        if (_canvasGroup.alpha >= 0.99f && !IsFading)
+        {
+            _opaqueTimer += Time.unscaledDeltaTime;
+            if (_opaqueTimer > StuckFadeTimeout)
+            {
+                Debug.LogWarning("[ScreenFade] Stuck opaque — auto-clearing fade.");
+                _canvasGroup.alpha = 0f;
+                _canvasGroup.blocksRaycasts = false;
+                _opaqueTimer = 0f;
+            }
+        }
+        else
+        {
+            _opaqueTimer = 0f;
         }
     }
 
