@@ -215,7 +215,7 @@ public class GlobalCursorManager : MonoBehaviour
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
-    private void OnSceneLoaded(Scene s, LoadSceneMode m) { _cachedCamera = null; _cameraRefetchTimer = 0f; s_lockedCursor = null; }
+    private void OnSceneLoaded(Scene s, LoadSceneMode m) { _cachedCamera = null; _cameraRefetchTimer = 0f; s_lockedCursor = null; s_hideCursorForSponge = false; }
 
     // ══════════════════════════════════════════════════════════════
     // Texture loading

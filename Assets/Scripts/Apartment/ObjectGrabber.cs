@@ -1571,7 +1571,7 @@ public class ObjectGrabber : MonoBehaviour
         var mouse = UnityEngine.InputSystem.Mouse.current;
         if (mouse != null && mouse.rightButton.wasPressedThisFrame)
         {
-            if (wasWatering)
+            if (wasWatering && wm != null)
                 wm.EndWatering();
 
             // Dismiss cutaway UI
@@ -1603,7 +1603,8 @@ public class ObjectGrabber : MonoBehaviour
         WaterablePlant bestPlant = null;
         float bestDist = _wateringSnapRadius;
 
-        if (lmbHeld && _wateringUIEngagedPlant != null)
+        if (lmbHeld && _wateringUIEngagedPlant != null
+            && _wateringUIEngagedPlant.gameObject != null) // guard against destroyed plant
         {
             bestPlant = _wateringUIEngagedPlant;
             bestDist = 0f;
@@ -1628,7 +1629,7 @@ public class ObjectGrabber : MonoBehaviour
         // No plant in range (and LMB not locking us) → disengage
         if (bestPlant == null)
         {
-            if (wasWatering)
+            if (wasWatering && wm != null)
                 wm.EndWatering();
 
             // Dismiss cutaway UI when leaving snap range

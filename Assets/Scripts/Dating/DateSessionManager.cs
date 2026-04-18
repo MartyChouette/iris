@@ -1610,12 +1610,13 @@ public class DateSessionManager : MonoBehaviour
         float endFov = frame.fov;
         float startNear = cam.nearClipPlane;
         float startFar = cam.farClipPlane;
-        float endNear = frame.nearClip;
-        float endFar = frame.farClip;
+        // Guard zero values from old serialized data (fields didn't exist before)
+        float endNear = frame.nearClip != 0f ? frame.nearClip : -9f;
+        float endFar = frame.farClip > 0.1f ? frame.farClip : 1000f;
 
         // Projection mode applies immediately (no lerp — instant cut)
         bool usePerspective = frame.perspective;
-        float endPFOV = frame.perspectiveFOV;
+        float endPFOV = Mathf.Max(frame.perspectiveFOV, 1f);
 
         if (duration <= 0f)
         {

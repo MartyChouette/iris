@@ -125,9 +125,6 @@ public class NemaController : MonoBehaviour
     [Tooltip("How long Nema looks at a random object before picking another or returning to idle.")]
     [SerializeField] private float _boredGlanceDuration = 2.5f;
 
-    [Tooltip("Chance (0-1) of glancing at a random object vs just shifting pose.")]
-    [SerializeField, Range(0f, 1f)] private float _glanceChance = 0.7f;
-
     [Tooltip("When idle, how often (seconds) Nema picks a new idle target (camera, cursor, random object).")]
     [SerializeField] private float _idleCycleInterval = 4f;
 

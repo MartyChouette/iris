@@ -792,6 +792,10 @@ public class ApartmentManager : MonoBehaviour
     public void ClearPresetBase()
     {
         _presetOverrideActive = false;
+        _presetNearClip = -9f;
+        _presetFarClip = 1000f;
+        _presetPerspective = false;
+        _presetPerspectiveFOV = 60f;
 
         // Snap back to current area (reads from defaultPreset if set)
         if (areas != null && areas.Length > 0)
