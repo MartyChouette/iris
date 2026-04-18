@@ -1,3 +1,28 @@
+## Session: 20260418 — Watering UX, Nema look-at, scene cleanup, debug tools
+
+### Summary
+Watering can shows cutaway UI on snap engagement with plant reveal shader. Nema gets configurable look-at system (camera, cursor, random objects with Inspector toggles). All DontDestroyOnLoad UIs cleaned up on scene change. Phase Jumper editor window. Per-phase camera clip planes. Menu double-click fix. Fridge drawer click isolation.
+
+### Changes
+- **Watering UI on snap**: Cutaway UI appears when can magnetizes to plant, not just on LMB click
+- **LMB lock**: Can stays engaged to plant while holding LMB, can't disengage mid-pour
+- **PlantRevealUI shader**: Bottom-to-top grow reveal with green edge glow on pot cross-section
+- **PotCrossSectionUI animation**: Animated fade in/out via CanvasGroup + reveal shader + scale overshoot
+- **Watering can highlight filter**: Only plants highlight while holding can, other items ignored
+- **Nema look-at overhaul**: Toggles for held item, hover, cursor, camera, random objects. IK weight sliders. Idle cycling with weighted random between camera/cursor/objects
+- **Scene cleanup**: 7 DontDestroyOnLoad UIs (PhaseContinueButton, PhaseLabel, HotkeyHints, PhaseTitleDrop, NemaProfilePanel, DreamScreen, PourCursorOverlay) now hide on scene load
+- **ScreenFade**: Don't block raycasts during fade-in — fixes menu buttons requiring double-click
+- **Phase Jumper**: Editor window (Iris > Phase Jumper) for one-click jumping between all game phases at runtime
+- **Per-phase camera clip planes**: Near/far clip per date phase for clipping through walls to frame shots
+- **Fridge drawer isolation**: Clicking drawers no longer triggers door toggle
+- **Audit fixes**: Shader clipping, hover perf (HashSet), NemaController idle mode revalidation, PotCrossSectionUI Show() state ordering, UpdateScrollInput null guard
+
+### Commits
+- `4e46663` watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+- `df03c8c` phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+
+---
+
 ## Session: 20260413 — Massive drink system rework, UI fixes, polish pass
 
 ### Summary
