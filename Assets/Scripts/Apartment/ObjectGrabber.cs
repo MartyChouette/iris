@@ -363,10 +363,7 @@ public class ObjectGrabber : MonoBehaviour
                 _lastHoveredSleeve.SetHovered(false);
 
             if (hovered != null)
-            {
                 hovered.SetHovered(true);
-                PickupDescriptionHUD.Instance?.Show(hovered.GetTooltipText());
-            }
 
             _lastHoveredSleeve = hovered;
         }
