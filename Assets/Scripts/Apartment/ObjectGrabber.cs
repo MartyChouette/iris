@@ -975,27 +975,9 @@ public class ObjectGrabber : MonoBehaviour
             DropZone zone = _currentSurface.GetComponent<DropZone>();
             bool zoneIsDirect = zone != null; // true = zone is on this surface, not found via proximity
 
-            // Proximity fallback for non-destroy zones only (shoe rack, etc.).
-            // Destroy zones (sink, trash can) must be placed directly on a
-            // surface to match — otherwise adjacent surfaces steal deposits.
-            if (zone == null)
-            {
-                float bestDist = float.MaxValue;
-                var allZones = DropZone.All;
-                for (int i = 0; i < allZones.Count; i++)
-                {
-                    var z = allZones[i];
-                    if (z == null) continue;
-                    if (z.DestroyOnDeposit) continue; // skip sink/trash — direct match only
-
-                    float dist = Vector3.Distance(z.transform.position, _grabTarget);
-                    if (dist < 2f && dist < bestDist)
-                    {
-                        bestDist = dist;
-                        zone = z;
-                    }
-                }
-            }
+            // No proximity fallback — items must be placed directly on a DropZone's
+            // surface to match. The player should bring the item to the blinking
+            // area and place it there, not have it snatched from nearby surfaces.
 
             // Block closed fridge shelves + closed cubbies from accepting
             // home-zone deposits too (bottles-in-fridge, books-in-cubby).
@@ -1461,6 +1443,7 @@ public class ObjectGrabber : MonoBehaviour
     // ── Watering can magnetic snap + pour trigger ────────────────────
 
     private WaterablePlant _nearestWaterablePlant;
+    private WaterablePlant _wateringUIEngagedPlant; // which plant the cutaway UI is currently showing for
 
     /// <summary>
     /// When holding a watering can near a plant, pull toward pour position.
@@ -1580,7 +1563,6 @@ public class ObjectGrabber : MonoBehaviour
         if (_held == null) return;
         if (_held.GetComponent<WateringCan>() == null) return;
 
-        // If we WERE watering but moved away, end the session + dismiss UI
         var wm = WateringManager.Instance;
         bool wasWatering = wm != null
             && wm.CurrentState == WateringManager.State.Pouring;
@@ -1591,6 +1573,10 @@ public class ObjectGrabber : MonoBehaviour
         {
             if (wasWatering)
                 wm.EndWatering();
+
+            // Dismiss cutaway UI
+            _wateringUIEngagedPlant = null;
+            PotCrossSectionUI.Instance?.Hide();
 
             // Place the can on the nearest surface
             var nearest = FindNearestSurfaceForHeld(_heldRb != null ? _heldRb.position : _held.transform.position);
@@ -1610,7 +1596,6 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
-        // LMB released → stop locking to plant, cursor movement can disengage
         bool lmbHeld = mouse != null && mouse.leftButton.isPressed;
 
         // Find nearest WaterablePlant
@@ -1628,23 +1613,38 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // While actively pouring AND LMB held, lock to the current plant
-        // even if the cursor drifts away from snap radius.
-        if (bestPlant == null && wasWatering && lmbHeld)
+        // LMB LOCK: while holding LMB and we have an engaged plant,
+        // force the can to stay locked — player can't disengage mid-pour
+        if (lmbHeld && bestPlant == null && _wateringUIEngagedPlant != null)
         {
-            bestPlant = wm.ActivePlant;
-            if (bestPlant != null)
-                bestDist = 0f; // force full snap strength
+            bestPlant = _wateringUIEngagedPlant;
+            bestDist = 0f; // fully locked
         }
 
+        // No plant in range (and LMB not locking us) → disengage
         if (bestPlant == null)
         {
             if (wasWatering)
                 wm.EndWatering();
+
+            // Dismiss cutaway UI when leaving snap range
+            if (_wateringUIEngagedPlant != null)
+            {
+                PotCrossSectionUI.Instance?.Hide();
+                _wateringUIEngagedPlant = null;
+            }
             return;
         }
 
         _nearestWaterablePlant = bestPlant;
+
+        // Show cutaway UI the moment we snap-engage with a plant
+        if (bestPlant != _wateringUIEngagedPlant)
+        {
+            _wateringUIEngagedPlant = bestPlant;
+            if (PotCrossSectionUI.Instance != null && bestPlant.definition != null)
+                PotCrossSectionUI.Instance.Show(bestPlant.definition, bestPlant.WaterLevel);
+        }
 
         // Snap the can to orbit the plant rim. Mouse left/right rotates
         // the can around the pot. Hard lock when close — the can clicks
@@ -1858,6 +1858,14 @@ public class ObjectGrabber : MonoBehaviour
         _lastValidSurface = null;
         _isOnWall = false;
         _pairSnapTarget = null;
+
+        // Dismiss watering cutaway UI if it was showing
+        if (_wateringUIEngagedPlant != null)
+        {
+            PotCrossSectionUI.Instance?.Hide();
+            _wateringUIEngagedPlant = null;
+        }
+
         ShowShadow(false);
         DestroyGhostPreview();
         ClearPlantHighlights();
@@ -1922,12 +1930,6 @@ public class ObjectGrabber : MonoBehaviour
 
     private void UpdateGrabTarget()
     {
-        // Freeze the grab target while actively watering — the can stays locked
-        // at the plant's pour position and shouldn't follow the cursor.
-        if (WateringManager.Instance != null
-            && WateringManager.Instance.CurrentState == WateringManager.State.Pouring)
-            return;
-
         Vector2 screenPos = IrisInput.CursorPosition;
         Ray ray = cam.ScreenPointToRay(screenPos);
 
@@ -2115,6 +2117,8 @@ public class ObjectGrabber : MonoBehaviour
 
     private void UpdateScrollInput()
     {
+        if (_held == null) return;
+
         var mouse = UnityEngine.InputSystem.Mouse.current;
 
         // RMB = roll around Z

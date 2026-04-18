@@ -933,6 +933,56 @@ public class DateSessionManager : MonoBehaviour
         if (!on) InteractableHighlight.SuppressVisuals = true;
     }
 
+    // ── Drink verdict cinematic: apartment show/hide ─────────────────
+
+    /// <summary>
+    /// Disable all Renderers in the apartment scene EXCEPT the date character,
+    /// Nema, and the NatureBox skybox. Returns the list of disabled renderers
+    /// so they can be re-enabled later.
+    /// </summary>
+    private List<Renderer> DisableApartmentRenderers()
+    {
+        var hidden = new List<Renderer>(128);
+        var apartmentScene = gameObject.scene;
+
+        // Collect GOs to preserve
+        var preserve = new HashSet<GameObject>();
+        if (_dateCharacterGO != null)
+            foreach (var r in _dateCharacterGO.GetComponentsInChildren<Renderer>(true))
+                preserve.Add(r.gameObject);
+        if (NemaController.Instance != null)
+            foreach (var r in NemaController.Instance.GetComponentsInChildren<Renderer>(true))
+                preserve.Add(r.gameObject);
+        // NatureBoxController lives on the skybox cube — preserve it
+        if (NatureBoxController.Instance != null)
+            foreach (var r in NatureBoxController.Instance.GetComponentsInChildren<Renderer>(true))
+                preserve.Add(r.gameObject);
+
+        foreach (var r in Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None))
+        {
+            if (r == null || !r.enabled) continue;
+            if (r.gameObject.scene != apartmentScene) continue;
+            if (preserve.Contains(r.gameObject)) continue;
+
+            r.enabled = false;
+            hidden.Add(r);
+        }
+
+        return hidden;
+    }
+
+    /// <summary>Re-enable all renderers that were hidden by DisableApartmentRenderers.</summary>
+    private static void RestoreApartmentRenderers(List<Renderer> hidden)
+    {
+        if (hidden == null) return;
+        for (int i = 0; i < hidden.Count; i++)
+        {
+            if (hidden[i] != null)
+                hidden[i].enabled = true;
+        }
+        hidden.Clear();
+    }
+
     /// <summary>Switch all BottleItem homes between counter (Phase 2) and original (fridge).</summary>
     private static void SetBottleHomes(bool useCounter)
     {
@@ -1321,6 +1371,16 @@ public class DateSessionManager : MonoBehaviour
         StartCoroutine(DrinkVerdictSequence(recipe, score));
     }
 
+    [Header("Drink Verdict Cinematic")]
+    [Tooltip("How long the camera takes to zoom toward the date character.")]
+    [SerializeField] private float _verdictZoomDuration = 2.0f;
+
+    [Tooltip("How close to the date character the camera pushes (world units from character center).")]
+    [SerializeField] private float _verdictZoomDistance = 1.5f;
+
+    [Tooltip("FOV/ortho size for the verdict close-up.")]
+    [SerializeField] private float _verdictZoomFOV = 3.0f;
+
     /// <summary>Dramatic drink tasting beat → verdict → continue button → Phase 3.</summary>
     private IEnumerator DrinkVerdictSequence(DrinkRecipeDefinition recipe, int score)
     {
@@ -1331,22 +1391,64 @@ public class DateSessionManager : MonoBehaviour
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
         string drinkName = recipe != null ? recipe.drinkName : "Drink";
 
-        // 1. Suspense — thinking face
+        // ── Cinematic: fade to white, strip apartment, reveal characters in nature ──
+
+        // 1. Fade to white
+        if (ScreenFade.Instance != null)
+            yield return ScreenFade.Instance.FadeOut(0.5f);
+
+        // 2. Disable apartment renderers (keep date, Nema, NatureBox, UI)
+        var hiddenRenderers = DisableApartmentRenderers();
+
+        // 3. Push camera toward the date character
+        Vector3 zoomTarget = _dateCharacterGO != null
+            ? _dateCharacterGO.transform.position + Vector3.up * 0.8f
+            : Vector3.zero;
+        var am = ApartmentManager.Instance;
+        var mainCam = Camera.main;
+        Vector3 camStartPos = mainCam != null ? mainCam.transform.position : Vector3.zero;
+        Quaternion camStartRot = mainCam != null ? mainCam.transform.rotation : Quaternion.identity;
+        float camStartFOV = am != null ? am.CurrentOrthoSize : 5f;
+
+        // Compute a close-up position looking at the date character
+        Vector3 camDir = (camStartPos - zoomTarget).normalized;
+        Vector3 camEndPos = zoomTarget + camDir * _verdictZoomDistance;
+
+        // 4. Fade from white → characters floating in the sky
+        if (ScreenFade.Instance != null)
+            yield return ScreenFade.Instance.FadeIn(0.5f);
+
+        // 5. Smoothly zoom camera toward the date
+        float zoomElapsed = 0f;
+        while (zoomElapsed < _verdictZoomDuration)
+        {
+            zoomElapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, zoomElapsed / _verdictZoomDuration);
+
+            Vector3 pos = Vector3.Lerp(camStartPos, camEndPos, t);
+            float fov = Mathf.Lerp(camStartFOV, _verdictZoomFOV, t);
+            am?.SetPresetBase(pos, camStartRot, fov);
+
+            yield return null;
+        }
+
+        // 6. Suspense — thinking face
         reactionUI?.ShowText("Hmm...", _drinkTastingHold);
         yield return CacheDrinkTastingWait();
 
-        // 2. Verdict reaction
+        // 7. Verdict reaction
         reactionUI?.ShowLabeledReaction(reactionType, drinkName);
         ApplyReaction(reactionType, magnitude);
 
-        // Guard: ApplyReaction's CheckBailOut may have fired FailDate synchronously
         if (_state != SessionState.DateInProgress)
         {
+            RestoreApartmentRenderers(hiddenRenderers);
+            am?.ClearPresetBase();
             _drinkVerdictRunning = false;
             yield break;
         }
 
-        // 3. Flower popup + particles
+        // 8. Flower popup + particles
         if (reactionType != ReactionType.Neutral)
         {
             string sym = reactionType == ReactionType.Like ? " \u2665" : " \u2639";
@@ -1356,12 +1458,13 @@ public class DateSessionManager : MonoBehaviour
                 SpawnReactionParticles(_dateCharacterGO.transform.position + Vector3.up * 0.5f, reactionType);
         }
 
-        // Hold for flower animation
-        yield return s_wait1;
+        // Hold for flower animation + let the moment breathe
+        yield return s_wait2;
 
-        // Guard again — state may have changed during the hold
         if (_state != SessionState.DateInProgress)
         {
+            RestoreApartmentRenderers(hiddenRenderers);
+            am?.ClearPresetBase();
             _drinkVerdictRunning = false;
             yield break;
         }
@@ -1370,9 +1473,7 @@ public class DateSessionManager : MonoBehaviour
         Debug.Log($"[DateSessionManager] Drink verdict: {drinkName} (score={score}) \u2192 {reactionType}");
 #endif
 
-        // No mid-date fails — date continues through all phases regardless of affection.
-
-        // 5. Wait for player to acknowledge
+        // 9. Wait for player to acknowledge (still in the cinematic close-up)
         if (PhaseContinueButton.Instance != null)
         {
             bool clicked = false;
@@ -1380,10 +1481,22 @@ public class DateSessionManager : MonoBehaviour
             yield return new WaitUntil(() => clicked || _state != SessionState.DateInProgress);
             if (_state != SessionState.DateInProgress)
             {
+                RestoreApartmentRenderers(hiddenRenderers);
+                am?.ClearPresetBase();
                 _drinkVerdictRunning = false;
                 yield break;
             }
         }
+
+        // 10. Fade to white, restore apartment, release camera
+        if (ScreenFade.Instance != null)
+            yield return ScreenFade.Instance.FadeOut(0.5f);
+
+        RestoreApartmentRenderers(hiddenRenderers);
+        am?.ClearPresetBase();
+
+        if (ScreenFade.Instance != null)
+            yield return ScreenFade.Instance.FadeIn(0.3f);
 
         // 6. Transition to Phase 3
         yield return TransitionToPhase3();

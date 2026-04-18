@@ -86,7 +86,39 @@ public class NemaController : MonoBehaviour
     [Tooltip("Head bone for manual look-at rotation (used when Animator IK is not available).")]
     [SerializeField] private Transform _headBone;
 
-    [Header("Bored Behavior")]
+    [Header("Look-At — Toggles")]
+    [Tooltip("Look at whatever the player is carrying.")]
+    [SerializeField] private bool _lookAtHeldItem = true;
+
+    [Tooltip("Look at whatever the player is hovering.")]
+    [SerializeField] private bool _lookAtHoveredItem = true;
+
+    [Tooltip("Track the cursor's world position on surfaces.")]
+    [SerializeField] private bool _lookAtCursor = true;
+
+    [Tooltip("Only track cursor while the player is holding something.")]
+    [SerializeField] private bool _cursorOnlyWhileHolding = false;
+
+    [Tooltip("Look directly at the camera (the player).")]
+    [SerializeField] private bool _lookAtCamera = true;
+
+    [Tooltip("Glance at random objects in the room when idle.")]
+    [SerializeField] private bool _lookAtRandomObjects = true;
+
+    [Header("Look-At — Weights")]
+    [Tooltip("IK body weight (how much the torso turns). 0 = head only, 1 = full body turn.")]
+    [SerializeField, Range(0f, 1f)] private float _ikBodyWeight = 0.3f;
+
+    [Tooltip("IK head weight.")]
+    [SerializeField, Range(0f, 1f)] private float _ikHeadWeight = 0.6f;
+
+    [Tooltip("IK eyes weight.")]
+    [SerializeField, Range(0f, 1f)] private float _ikEyesWeight = 0.8f;
+
+    [Tooltip("IK clamp weight (limits extreme head angles).")]
+    [SerializeField, Range(0f, 1f)] private float _ikClampWeight = 0.5f;
+
+    [Header("Idle Behavior")]
     [Tooltip("Seconds of no player interaction before Nema gets bored and glances around.")]
     [SerializeField] private float _boredDelay = 6f;
 
@@ -95,6 +127,21 @@ public class NemaController : MonoBehaviour
 
     [Tooltip("Chance (0-1) of glancing at a random object vs just shifting pose.")]
     [SerializeField, Range(0f, 1f)] private float _glanceChance = 0.7f;
+
+    [Tooltip("When idle, how often (seconds) Nema picks a new idle target (camera, cursor, random object).")]
+    [SerializeField] private float _idleCycleInterval = 4f;
+
+    [Tooltip("Random ± variance on idle cycle interval.")]
+    [SerializeField] private float _idleCycleVariance = 1.5f;
+
+    [Tooltip("Chance of looking at the camera during idle cycle (vs cursor or random object).")]
+    [SerializeField, Range(0f, 1f)] private float _idleCameraChance = 0.3f;
+
+    [Tooltip("Chance of tracking cursor during idle cycle.")]
+    [SerializeField, Range(0f, 1f)] private float _idleCursorChance = 0.3f;
+
+    [Tooltip("Chance of looking at a random object during idle cycle (remainder = stare forward).")]
+    [SerializeField, Range(0f, 1f)] private float _idleObjectChance = 0.3f;
 
     // Body-turn system removed: per-location models have their own idle
     // animations driving full-body orientation; turning the body here would
@@ -111,11 +158,15 @@ public class NemaController : MonoBehaviour
     private float _targetLookWeight;
     private bool _hasLookTarget;
 
-    // Bored timer
+    // Bored / idle cycle
     private float _interactionTimer; // time since last player interaction
     private float _boredGlanceTimer;
     private bool _isBored;
     private Transform _boredTarget;
+
+    private enum IdleMode { None, Camera, Cursor, RandomObject }
+    private IdleMode _currentIdleMode = IdleMode.None;
+    private float _idleCycleTimer;
 
 
     // Animator hashes
@@ -235,8 +286,7 @@ public class NemaController : MonoBehaviour
         if (_hasLookTarget && _lookWeight > 0.01f)
         {
             _animator.SetLookAtPosition(_lookTarget);
-            _animator.SetLookAtWeight(_lookWeight, 0.3f, 0.6f, 0.8f, 0.5f);
-            // body weight, head weight, eyes weight, clamp weight
+            _animator.SetLookAtWeight(_lookWeight, _ikBodyWeight, _ikHeadWeight, _ikEyesWeight, _ikClampWeight);
         }
         else
         {
@@ -248,17 +298,20 @@ public class NemaController : MonoBehaviour
 
     private void UpdateLookTarget()
     {
-        // Priority 1: Player is holding something — look at it
-        if (ObjectGrabber.IsHoldingObject && ObjectGrabber.HeldObject != null)
+        bool isHolding = ObjectGrabber.IsHoldingObject && ObjectGrabber.HeldObject != null;
+
+        // Priority 1: Look at held item
+        if (_lookAtHeldItem && isHolding)
         {
             SetLookTarget(ObjectGrabber.HeldObject.transform.position);
-            _interactionTimer = 0f; // reset bored timer
+            _interactionTimer = 0f;
             _isBored = false;
+            _currentIdleMode = IdleMode.None;
             return;
         }
 
-        // Priority 2: Player is hovering something (check ApartmentManager highlight)
-        if (ApartmentManager.Instance != null)
+        // Priority 2: Look at hovered item
+        if (_lookAtHoveredItem && ApartmentManager.Instance != null)
         {
             var hovered = ApartmentManager.Instance.HoveredHighlight;
             if (hovered != null)
@@ -266,19 +319,64 @@ public class NemaController : MonoBehaviour
                 SetLookTarget(hovered.transform.position);
                 _interactionTimer = 0f;
                 _isBored = false;
+                _currentIdleMode = IdleMode.None;
                 return;
             }
         }
 
-        // Priority 3: Bored — look at random thing
-        if (_isBored && _boredTarget != null)
+        // Revalidate: if current idle mode's toggle was disabled, repick
+        if ((_currentIdleMode == IdleMode.Cursor && (!_lookAtCursor || (_cursorOnlyWhileHolding && !isHolding)))
+            || (_currentIdleMode == IdleMode.Camera && !_lookAtCamera)
+            || (_currentIdleMode == IdleMode.RandomObject && !_lookAtRandomObjects))
+        {
+            PickIdleMode();
+        }
+
+        // Priority 3: Cursor tracking (always, or only while holding)
+        if (_lookAtCursor && (!_cursorOnlyWhileHolding || isHolding)
+            && _currentIdleMode == IdleMode.Cursor && TryCursorWorldPosition(out Vector3 cursorPos))
+        {
+            SetLookTarget(cursorPos);
+            return;
+        }
+
+        // Priority 4: Camera
+        if (_lookAtCamera && _currentIdleMode == IdleMode.Camera)
+        {
+            if (_cachedCamera == null) _cachedCamera = Camera.main;
+            if (_cachedCamera != null)
+            {
+                SetLookTarget(_cachedCamera.transform.position);
+                return;
+            }
+        }
+
+        // Priority 5: Random object (bored glance)
+        if (_lookAtRandomObjects && _currentIdleMode == IdleMode.RandomObject
+            && _isBored && _boredTarget != null)
         {
             SetLookTarget(_boredTarget.position);
             return;
         }
 
-        // Nothing interesting — clear look target
+        // No active idle mode picked yet or current mode can't resolve — clear
         ClearLookTarget();
+    }
+
+    /// <summary>Raycast the cursor into the scene to get a world-space look point.</summary>
+    private bool TryCursorWorldPosition(out Vector3 worldPos)
+    {
+        worldPos = Vector3.zero;
+        if (_cachedCamera == null) _cachedCamera = Camera.main;
+        if (_cachedCamera == null) return false;
+
+        Ray ray = _cachedCamera.ScreenPointToRay(IrisInput.CursorPosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        {
+            worldPos = hit.point;
+            return true;
+        }
+        return false;
     }
 
     private void SetLookTarget(Vector3 worldPos)
@@ -313,25 +411,82 @@ public class NemaController : MonoBehaviour
 
     private void UpdateBoredTimer()
     {
-        if (_isBored)
+        // While the player is actively interacting, reset timers
+        bool interacting = (ObjectGrabber.IsHoldingObject && ObjectGrabber.HeldObject != null)
+            || (ApartmentManager.Instance != null && ApartmentManager.Instance.HoveredHighlight != null);
+
+        if (interacting)
         {
-            _boredGlanceTimer -= Time.deltaTime;
-            if (_boredGlanceTimer <= 0f)
-            {
-                // Done glancing — either pick a new target or stop being bored
-                if (Random.value < _glanceChance)
-                    StartBoredGlance();
-                else
-                    _isBored = false;
-            }
+            _interactionTimer = 0f;
+            _isBored = false;
+            _currentIdleMode = IdleMode.None;
+            _idleCycleTimer = 0f;
             return;
         }
 
+        // Count up to bored threshold
         _interactionTimer += Time.deltaTime;
-        if (_interactionTimer >= _boredDelay)
+        if (_interactionTimer < _boredDelay)
         {
+            // Not bored yet — default idle mode
+            if (_currentIdleMode == IdleMode.None)
+                PickIdleMode();
+            return;
+        }
+
+        // Bored — cycle through idle targets on a timer
+        _idleCycleTimer -= Time.deltaTime;
+        if (_idleCycleTimer <= 0f)
+        {
+            PickIdleMode();
+            _idleCycleTimer = _idleCycleInterval + Random.Range(-_idleCycleVariance, _idleCycleVariance);
+        }
+
+        // If current mode is random object, tick the glance timer
+        if (_currentIdleMode == IdleMode.RandomObject && _isBored)
+        {
+            _boredGlanceTimer -= Time.deltaTime;
+            if (_boredGlanceTimer <= 0f)
+                PickIdleMode(); // cycle to next
+        }
+    }
+
+    /// <summary>Roll dice to pick what Nema looks at during idle.</summary>
+    private void PickIdleMode()
+    {
+        // Build a weighted roll from enabled options
+        float roll = Random.value;
+        float camWeight = _lookAtCamera ? _idleCameraChance : 0f;
+        float curWeight = _lookAtCursor && (!_cursorOnlyWhileHolding || ObjectGrabber.IsHoldingObject) ? _idleCursorChance : 0f;
+        float objWeight = _lookAtRandomObjects ? _idleObjectChance : 0f;
+        float total = camWeight + curWeight + objWeight;
+
+        if (total <= 0f)
+        {
+            _currentIdleMode = IdleMode.None;
+            _isBored = false;
+            return;
+        }
+
+        // Normalize and pick
+        roll *= total;
+        if (roll < camWeight)
+        {
+            _currentIdleMode = IdleMode.Camera;
+            _isBored = false;
+        }
+        else if (roll < camWeight + curWeight)
+        {
+            _currentIdleMode = IdleMode.Cursor;
+            _isBored = false;
+        }
+        else
+        {
+            _currentIdleMode = IdleMode.RandomObject;
             StartBoredGlance();
         }
+
+        _idleCycleTimer = _idleCycleInterval + Random.Range(-_idleCycleVariance, _idleCycleVariance);
     }
 
     private void StartBoredGlance()

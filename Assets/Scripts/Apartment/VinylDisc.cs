@@ -52,6 +52,9 @@ public class VinylDisc : MonoBehaviour
     {
         transform.SetParent(null, true);
 
+        // Show the disc — it was hidden while in the sleeve
+        SetRenderersVisible(true);
+
         // Ensure Rigidbody exists (might not if vinyl was a static child)
         var rb = GetComponent<Rigidbody>();
         if (rb == null) rb = gameObject.AddComponent<Rigidbody>();
@@ -107,5 +110,21 @@ public class VinylDisc : MonoBehaviour
 
         foreach (var col in GetComponents<Collider>())
             col.enabled = false;
+
+        // Hide the disc while tucked inside the sleeve
+        SetRenderersVisible(false);
+    }
+
+    private void SetRenderersVisible(bool visible)
+    {
+        foreach (var r in GetComponentsInChildren<Renderer>(true))
+            r.enabled = visible;
+    }
+
+    private void Start()
+    {
+        // Start hidden if parented to a sleeve (in-sleeve state at scene load)
+        if (HomeSleeve != null && transform.parent != null)
+            SetRenderersVisible(false);
     }
 }

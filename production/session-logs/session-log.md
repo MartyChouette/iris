@@ -16460,3 +16460,257 @@ Assets/Scripts/Dating/DateSessionManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260417_114800
+### Commits
+7ef2dc9 bottle home switching, RMB pour exit, fridge bottle counter homes
+85465f4 Phase 2 Serve button, watering fixes, placement fix, menu cleanup
+---
+
+## Session End: 20260417_130136
+### Commits
+7ef2dc9 bottle home switching, RMB pour exit, fridge bottle counter homes
+85465f4 Phase 2 Serve button, watering fixes, placement fix, menu cleanup
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_150715
+### Commits
+7ef2dc9 bottle home switching, RMB pour exit, fridge bottle counter homes
+85465f4 Phase 2 Serve button, watering fixes, placement fix, menu cleanup
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_150728
+### Commits
+7ef2dc9 bottle home switching, RMB pour exit, fridge bottle counter homes
+85465f4 Phase 2 Serve button, watering fixes, placement fix, menu cleanup
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_150838
+### Commits
+7ef2dc9 bottle home switching, RMB pour exit, fridge bottle counter homes
+85465f4 Phase 2 Serve button, watering fixes, placement fix, menu cleanup
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_183629
+### Commits
+7ef2dc9 bottle home switching, RMB pour exit, fridge bottle counter homes
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_184228
+### Commits
+7ef2dc9 bottle home switching, RMB pour exit, fridge bottle counter homes
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_202929
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_203450
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_204957
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260417_205224
+### Uncommitted Changes
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_102228
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_103619
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_103949
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_104220
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_104558
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_104628
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_104929
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_105414
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_105822
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_110847
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Cleaning/WipeController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PotCrossSectionUI.cs
+production/session-logs/session-log.md
+---
+

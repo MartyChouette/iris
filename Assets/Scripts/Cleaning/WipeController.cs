@@ -61,12 +61,6 @@ public class WipeController : MonoBehaviour
         _mouseClick.Enable();
     }
 
-    private void OnDisable()
-    {
-        _mousePosition?.Disable();
-        _mouseClick?.Disable();
-    }
-
     private void OnDestroy()
     {
         _mousePosition?.Dispose();
@@ -74,6 +68,8 @@ public class WipeController : MonoBehaviour
         _mousePosition = null;
         _mouseClick = null;
     }
+
+    private bool _cursorHidden;
 
     private void Update()
     {
@@ -93,6 +89,13 @@ public class WipeController : MonoBehaviour
                     spongeVisual.gameObject.SetActive(true);
             }
 
+            // Hide system cursor while over the spill — the sponge visual IS the cursor
+            if (!_cursorHidden)
+            {
+                Cursor.visible = false;
+                _cursorHidden = true;
+            }
+
             // Wipe while mouse is held
             if (_mouseClick.IsPressed())
             {
@@ -104,6 +107,26 @@ public class WipeController : MonoBehaviour
         {
             if (spongeVisual != null && spongeVisual.gameObject.activeSelf)
                 spongeVisual.gameObject.SetActive(false);
+
+            // Restore cursor when not over the spill
+            if (_cursorHidden)
+            {
+                Cursor.visible = true;
+                _cursorHidden = false;
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        _mousePosition?.Disable();
+        _mouseClick?.Disable();
+
+        // Always restore cursor when the wipe controller is disabled
+        if (_cursorHidden)
+        {
+            Cursor.visible = true;
+            _cursorHidden = false;
         }
     }
 

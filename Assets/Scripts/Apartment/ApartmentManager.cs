@@ -125,6 +125,9 @@ public class ApartmentManager : MonoBehaviour
     public bool IsTransitioning => _isTransitioning;
     public int CurrentAreaIndex => _currentAreaIndex;
 
+    /// <summary>Current ortho size of the browse camera (for cinematic zoom calculations).</summary>
+    public float CurrentOrthoSize => browseCamera != null ? browseCamera.Lens.OrthographicSize : 5f;
+
     /// <summary>Fired when the player switches apartment areas. Arg = new area index.</summary>
     public event System.Action<int> OnAreaChanged;
 
@@ -166,6 +169,7 @@ public class ApartmentManager : MonoBehaviour
 
     // Hover highlight tracking
     private InteractableHighlight _hoveredHighlight;
+    private readonly HashSet<GameObject> _plantHighlightSet = new();
 
     /// <summary>The InteractableHighlight currently under the cursor, or null.</summary>
     public InteractableHighlight HoveredHighlight => _hoveredHighlight;
@@ -902,6 +906,19 @@ public class ApartmentManager : MonoBehaviour
 
         // ── Find nearest InteractableHighlight to the cursor ray ──
         // Scans all registered highlights (placeables, plants, etc.).
+        // When holding a watering can, only plants are valid hover targets.
+        bool wateringCanHeld = ObjectGrabber.HeldObject != null
+            && ObjectGrabber.HeldObject.GetComponent<WateringCan>() != null;
+
+        // Pre-build a quick set of plant GameObjects to avoid GetComponent per highlight per frame
+        _plantHighlightSet.Clear();
+        if (wateringCanHeld)
+        {
+            var plants = WaterablePlant.All;
+            for (int i = 0; i < plants.Count; i++)
+                if (plants[i] != null) _plantHighlightSet.Add(plants[i].gameObject);
+        }
+
         InteractableHighlight hit = null;
         {
             float bestAngle = HoverAngle;
@@ -910,6 +927,10 @@ public class ApartmentManager : MonoBehaviour
             {
                 var hl = allHighlights[i];
                 if (hl == null) continue;
+
+                // Watering can only interacts with plants — skip everything else
+                if (wateringCanHeld && !_plantHighlightSet.Contains(hl.gameObject))
+                    continue;
 
                 float angle = AngleToRay(ray, hl.transform.position);
                 if (angle < bestAngle)

@@ -6,6 +6,10 @@ using TMPro;
 /// Large 2D overlay showing a pot cross-section during the watering pour.
 /// Displays the pot shape silhouette, rising water, bubbly soil layer,
 /// target line, and overflow effects. Built procedurally — no prefab needed.
+///
+/// The UI appears when the watering can snaps to a plant (magnetic engagement)
+/// and fades out when the can disengages. A bottom-to-top reveal shader gives
+/// a "plant growing" transition.
 /// </summary>
 public class PotCrossSectionUI : MonoBehaviour
 {
@@ -31,9 +35,20 @@ public class PotCrossSectionUI : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private float _lerpSpeed = 6f;
 
+    [Tooltip("How fast the reveal/hide animation plays (seconds).")]
+    [SerializeField] private float _revealDuration = 0.4f;
+
+    [Tooltip("How fast the hide animation plays (seconds).")]
+    [SerializeField] private float _hideDuration = 0.25f;
+
+    [Tooltip("Scale overshoot on reveal (1.0 = no overshoot, 1.15 = 15% bounce).")]
+    [SerializeField] private float _scaleOvershoot = 1.08f;
+
     private GameObject _canvasRoot;
+    private CanvasGroup _canvasGroup;
     private Image _bgDim;
     private RectTransform _potRT;
+    private Image _potImage;
     private Image _waterImage;
     private RectTransform _waterRT;
     private Image _foamImage;
@@ -51,6 +66,13 @@ public class PotCrossSectionUI : MonoBehaviour
     private bool _isShowing;
     private PlantDefinition.PotShape _currentShape;
 
+    // ── Reveal animation state ──
+    private enum RevealState { Hidden, Revealing, Shown, Hiding }
+    private RevealState _revealState = RevealState.Hidden;
+    private float _revealT; // 0 = hidden, 1 = fully revealed
+    private Material _revealMat; // runtime instance of PlantRevealUI shader
+    private static readonly int RevealProgressID = Shader.PropertyToID("_RevealProgress");
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoSpawn()
     {
@@ -66,31 +88,40 @@ public class PotCrossSectionUI : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         BuildUI();
         _canvasRoot.SetActive(false);
+
+        // Hide on any scene change so the UI doesn't persist to the main menu
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (_revealMat != null) Destroy(_revealMat);
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+    {
+        Hide();
     }
 
     private PlantDefinition _activeDef;
 
     private void Update()
     {
-        if (!_isShowing) return;
+        if (_revealState == RevealState.Hidden) return;
 
-        // Auto-dismiss if watering can moved away from plant
-        if (WateringManager.Instance != null
-            && WateringManager.Instance.CurrentState != WateringManager.State.Pouring)
-        {
-            Hide();
-            return;
-        }
+        // Animate reveal/hide
+        UpdateRevealAnimation();
     }
 
     /// <summary>Show the pot cross-section for a specific plant.</summary>
     public void Show(PlantDefinition def, float startWaterLevel)
     {
+        // Already showing for the same plant — don't restart animation
+        if (_isShowing && _activeDef == def && _revealState != RevealState.Hiding)
+            return;
+
         _isShowing = true;
         _activeDef = def;
         _currentShape = def != null ? def.potShape : PlantDefinition.PotShape.TallCylinder;
@@ -117,7 +148,13 @@ public class PotCrossSectionUI : MonoBehaviour
             _statusText.text = "Hold to pour...";
 
         SetOverflowing(false);
+
+        // Start reveal animation — if interrupting a hide, keep current
+        // progress for smooth reversal instead of snapping to zero
         _canvasRoot.SetActive(true);
+        if (_revealState == RevealState.Hidden) _revealT = 0f;
+        _revealState = RevealState.Revealing;
+        ApplyRevealVisuals(_revealT);
     }
 
     /// <summary>Update water and soil bubble levels each frame during pour.</summary>
@@ -144,12 +181,99 @@ public class PotCrossSectionUI : MonoBehaviour
         if (_statusText != null) _statusText.text = text;
     }
 
-    /// <summary>Hide the overlay.</summary>
+    /// <summary>Hide the overlay with a fade-out animation.</summary>
     public void Hide()
     {
+        if (!_isShowing && _revealState == RevealState.Hidden) return;
+
         _isShowing = false;
-        if (_canvasRoot != null)
-            _canvasRoot.SetActive(false);
+        _activeDef = null;
+
+        if (_revealState == RevealState.Hidden)
+        {
+            // Already hidden, just make sure
+            if (_canvasRoot != null) _canvasRoot.SetActive(false);
+            return;
+        }
+
+        // Start hide animation (reverse reveal)
+        _revealState = RevealState.Hiding;
+    }
+
+    /// <summary>True if the UI is currently visible or animating in.</summary>
+    public bool IsVisible => _isShowing || _revealState == RevealState.Revealing || _revealState == RevealState.Shown;
+
+    // ── Reveal animation ────────────────────────────────────────────
+
+    private void UpdateRevealAnimation()
+    {
+        switch (_revealState)
+        {
+            case RevealState.Revealing:
+                _revealT += Time.deltaTime / Mathf.Max(_revealDuration, 0.01f);
+                if (_revealT >= 1f)
+                {
+                    _revealT = 1f;
+                    _revealState = RevealState.Shown;
+                }
+                ApplyRevealVisuals(_revealT);
+                break;
+
+            case RevealState.Hiding:
+                _revealT -= Time.deltaTime / Mathf.Max(_hideDuration, 0.01f);
+                if (_revealT <= 0f)
+                {
+                    _revealT = 0f;
+                    _revealState = RevealState.Hidden;
+                    if (_canvasRoot != null) _canvasRoot.SetActive(false);
+                }
+                ApplyRevealVisuals(_revealT);
+                break;
+
+            case RevealState.Shown:
+                // Fully visible, nothing to animate
+                break;
+        }
+    }
+
+    private void ApplyRevealVisuals(float t)
+    {
+        // Smooth ease-out for reveal, ease-in for hide
+        float eased = 1f - (1f - t) * (1f - t); // quadratic ease-out
+
+        // Canvas group alpha (overall fade)
+        if (_canvasGroup != null)
+            _canvasGroup.alpha = Mathf.Clamp01(eased);
+
+        // Pot scale — grows from bottom (pivot is at 0.5, 0)
+        if (_potRT != null)
+        {
+            // Overshoot on scale Y: slightly beyond 1.0 then settle
+            float scaleY;
+            if (t < 1f)
+            {
+                // Elastic overshoot: ramp past 1.0 then settle
+                float overshoot = 1f + (_scaleOvershoot - 1f) * Mathf.Sin(eased * Mathf.PI);
+                scaleY = eased * overshoot;
+            }
+            else
+            {
+                scaleY = 1f;
+            }
+            _potRT.localScale = new Vector3(1f, Mathf.Clamp(scaleY, 0f, _scaleOvershoot + 0.1f), 1f);
+        }
+
+        // Reveal shader progress on pot background
+        if (_revealMat != null)
+            _revealMat.SetFloat(RevealProgressID, eased);
+
+        // Bg dim follows alpha
+        if (_bgDim != null)
+        {
+            var c = _bgDimColor;
+            c.a = _bgDimColor.a * Mathf.Clamp01(eased);
+            _bgDim.color = c;
+        }
     }
 
     // ── Internal ────────────────────────────────────────────────────
@@ -254,6 +378,12 @@ public class PotCrossSectionUI : MonoBehaviour
 
         _canvasRoot.AddComponent<GraphicRaycaster>();
 
+        // CanvasGroup for overall alpha fade
+        _canvasGroup = _canvasRoot.AddComponent<CanvasGroup>();
+        _canvasGroup.alpha = 0f;
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.interactable = false;
+
         // Background dim
         var dimGO = CreateUIElement("BgDim", _canvasRoot.transform);
         var dimRT = dimGO.GetComponent<RectTransform>();
@@ -265,17 +395,23 @@ public class PotCrossSectionUI : MonoBehaviour
         _bgDim.color = _bgDimColor;
         _bgDim.raycastTarget = false;
 
-        // Pot container (centered)
+        // Pot container (centered, pivot at bottom for grow-up animation)
         var potGO = CreateUIElement("Pot", _canvasRoot.transform);
         _potRT = potGO.GetComponent<RectTransform>();
         _potRT.anchorMin = new Vector2(0.5f, 0.5f);
         _potRT.anchorMax = new Vector2(0.5f, 0.5f);
-        _potRT.pivot = new Vector2(0.5f, 0.5f);
+        _potRT.pivot = new Vector2(0.5f, 0f); // bottom pivot for grow-up
         _potRT.sizeDelta = new Vector2(_potWidth, _potHeight);
-        _potRT.anchoredPosition = Vector2.zero;
-        var potImg = potGO.AddComponent<Image>();
-        potImg.color = _potColor;
-        potImg.raycastTarget = false;
+        _potRT.anchoredPosition = new Vector2(0f, -_potHeight * 0.5f); // offset so visual center stays mid-screen
+
+        // Create reveal shader material for pot background
+        _revealMat = CreateRevealMaterial();
+
+        _potImage = potGO.AddComponent<Image>();
+        _potImage.color = _potColor;
+        _potImage.raycastTarget = false;
+        if (_revealMat != null)
+            _potImage.material = _revealMat;
 
         // Water fill (bottom-up inside pot)
         var waterGO = CreateUIElement("Water", potGO.transform);
@@ -361,6 +497,19 @@ public class PotCrossSectionUI : MonoBehaviour
         _statusText.alignment = TextAlignmentOptions.Center;
         _statusText.color = new Color(1f, 1f, 1f, 0.7f);
         _statusText.raycastTarget = false;
+    }
+
+    private static Material CreateRevealMaterial()
+    {
+        var shader = Shader.Find("UI/PlantRevealUI");
+        if (shader == null)
+        {
+            Debug.LogWarning("[PotCrossSectionUI] PlantRevealUI shader not found — using default UI.");
+            return null;
+        }
+        var mat = new Material(shader);
+        mat.SetFloat(RevealProgressID, 0f);
+        return mat;
     }
 
     private static GameObject CreateUIElement(string name, Transform parent)

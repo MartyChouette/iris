@@ -3822,6 +3822,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &190518947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 190518949}
+  m_Layer: 0
+  m_Name: +++MANAGERS+++
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &190518949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190518947}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.17892, y: 0.02687, z: -6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 318072535}
+  - {fileID: 1628316424}
+  - {fileID: 666569917}
+  - {fileID: 241821718}
+  - {fileID: 1441537062}
+  - {fileID: 1445104228}
+  - {fileID: 1794186463}
+  - {fileID: 1803815536}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191755242
 GameObject:
   m_ObjectHideFlags: 0
@@ -4742,14 +4781,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241821714}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.17892, y: -0.02687, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 774415149}
   - {fileID: 945406885}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &251000566
 Material:
@@ -5888,13 +5927,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318072533}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.17892, y: -0.02687, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1265352009}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &318072536
 MonoBehaviour:
@@ -6743,7 +6782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 347036757}
   m_Layer: 0
-  m_Name: === DRINK DEMO ===
+  m_Name: === DRINK STATION ===
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13261,6 +13300,9 @@ MonoBehaviour:
   OnDateSessionEnded:
     m_PersistentCalls:
       m_Calls: []
+  _verdictZoomDuration: 2
+  _verdictZoomDistance: 1.5
+  _verdictZoomFOV: 3
 --- !u!114 &666569916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13287,15 +13329,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666569908}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.17892, y: -0.02687, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1217364753}
   - {fileID: 1227803254}
   - {fileID: 749190694}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &686466085
 GameObject:
@@ -17727,6 +17769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BottleItem
   _ingredient: {fileID: 11400000, guid: d1f13c9d80189f04ba012d5946fd309a, type: 2}
   _pourPoint: {fileID: 1216384689}
+  _counterHome: {fileID: 0}
 --- !u!23 &919954956
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18405,6 +18448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BottleItem
   _ingredient: {fileID: 11400000, guid: 3b552fb1cb948aa4ab0edb58c1711bf7, type: 2}
   _pourPoint: {fileID: 441176089}
+  _counterHome: {fileID: 0}
 --- !u!23 &932324427
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28920,8 +28964,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441537060}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.17892, y: -0.02687, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28929,7 +28973,7 @@ Transform:
   - {fileID: 2095978593}
   - {fileID: 1054733380}
   - {fileID: 476662109}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1444078813
 GameObject:
@@ -29061,14 +29105,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445104226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.17892, y: -0.02687, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1862141783}
   - {fileID: 57226952}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1448464384
 Material:
@@ -32998,13 +33042,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628316423}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.17892, y: -0.02687, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1201655662}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1628316425
 MonoBehaviour:
@@ -35125,6 +35169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BottleItem
   _ingredient: {fileID: 11400000, guid: c2a11516491bb594db0551704f538a93, type: 2}
   _pourPoint: {fileID: 2066467082}
+  _counterHome: {fileID: 0}
 --- !u!23 &1725130050
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36313,12 +36358,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794186461}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.42978, y: 0.45788, z: -0.00818}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.7491398, y: 0.43100998, z: 5.99182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1795656503
 GameObject:
@@ -36742,8 +36787,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803815534}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.53441, y: 0.72634, z: -0.79667}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.71333, y: 0.69947, z: 5.20333}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36764,7 +36809,7 @@ Transform:
   - {fileID: 2068944225}
   - {fileID: 1858919478}
   - {fileID: 1619009179}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190518949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1818898056
 MeshCollider:
@@ -36920,6 +36965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BottleItem
   _ingredient: {fileID: 11400000, guid: 6107f8d7addf45d478042f579cfada2d, type: 2}
   _pourPoint: {fileID: 757080663}
+  _counterHome: {fileID: 0}
 --- !u!23 &1822964637
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43923,6 +43969,8 @@ GameObject:
   - component: {fileID: 2297663741690999314}
   - component: {fileID: 6591715724913212350}
   - component: {fileID: 3947730027800702545}
+  - component: {fileID: 6591715724913212352}
+  - component: {fileID: 6591715724913212351}
   m_Layer: 25
   m_Name: fridge_inside_drawer
   m_TagString: Untagged
@@ -50272,6 +50320,48 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469754570857910463}
   m_Mesh: {fileID: -4113556426600552051, guid: 84bccfd21530794488851606b93f348a, type: 3}
+--- !u!114 &6591715724913212351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469754570857910463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
+  _slideDistance: 0.3
+  _tweenDuration: 0.4
+  _clickLayer:
+    serializedVersion: 2
+    m_Bits: 33554432
+  _mainCamera: {fileID: 726110192}
+  _requireFridgeOpen: 1
+  _openSFX: {fileID: 0}
+  _closeSFX: {fileID: 0}
+--- !u!65 &6591715724913212352
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469754570857910463}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0021477074, y: 0.017550638, z: 0.0091414545}
+  m_Center: {x: 0.0006954876, y: -0.0031058448, z: -0.0000015044203}
 --- !u!1 &6736070936335078367
 GameObject:
   m_ObjectHideFlags: 0
@@ -50475,13 +50565,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8009987137681024519}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.70710677}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -1.0129998, y: 2.3753877, z: 9.641002}
   m_LocalScale: {x: 1.3722056, y: 32.440464, z: 85.592636}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 737705925}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &6839081746203937014
 Transform:
   m_ObjectHideFlags: 0
@@ -50643,6 +50733,9 @@ GameObject:
   - component: {fileID: 8680648819279225589}
   - component: {fileID: 8397648176318828715}
   - component: {fileID: 2312966125935332577}
+  - component: {fileID: 8680648819279225591}
+  - component: {fileID: 8680648819279225590}
+  - component: {fileID: 8680648819279225592}
   m_Layer: 25
   m_Name: fridge_top_draw
   m_TagString: Untagged
@@ -51948,6 +52041,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 543450653128738519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8680648819279225590
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406990944773294331}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.009560309, y: 0.0070813033, z: 0.0048396564}
+  m_Center: {x: -0.042453963, y: -0.028599955, z: 0.016608799}
+--- !u!114 &8680648819279225591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406990944773294331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _highlightShader: {fileID: 0}
+  _outlineShader: {fileID: 0}
+  _overlayShader: {fileID: 0}
+  _interactShader: {fileID: 0}
+--- !u!114 &8680648819279225592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406990944773294331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
+  _slideDistance: 0.3
+  _tweenDuration: 0.4
+  _clickLayer:
+    serializedVersion: 2
+    m_Bits: 33554432
+  _mainCamera: {fileID: 726110192}
+  _requireFridgeOpen: 0
+  _openSFX: {fileID: 0}
+  _closeSFX: {fileID: 0}
 --- !u!1 &8700725329762857947
 GameObject:
   m_ObjectHideFlags: 0
@@ -52771,6 +52922,8 @@ SceneRoots:
   - {fileID: 726110193}
   - {fileID: 2035733432}
   - {fileID: 603292384}
+  - {fileID: 347036757}
+  - {fileID: 190518949}
   - {fileID: 1259265358}
   - {fileID: 793432656}
   - {fileID: 158204159}
@@ -52780,9 +52933,6 @@ SceneRoots:
   - {fileID: 1934607702}
   - {fileID: 543450653414306598}
   - {fileID: 470754210}
-  - {fileID: 318072535}
-  - {fileID: 1628316424}
-  - {fileID: 666569917}
   - {fileID: 927338153}
   - {fileID: 294380040}
   - {fileID: 1494097779}
@@ -52794,12 +52944,9 @@ SceneRoots:
   - {fileID: 340865044}
   - {fileID: 1438219216}
   - {fileID: 688060873}
-  - {fileID: 241821718}
   - {fileID: 513965289}
   - {fileID: 1271655109}
   - {fileID: 895732840}
-  - {fileID: 1441537062}
-  - {fileID: 1445104228}
   - {fileID: 1596364689}
   - {fileID: 729080434}
   - {fileID: 845707215}
@@ -52817,7 +52964,6 @@ SceneRoots:
   - {fileID: 1949121104}
   - {fileID: 43062314}
   - {fileID: 435676710}
-  - {fileID: 1794186463}
   - {fileID: 1145229480}
   - {fileID: 1679522724826450440}
   - {fileID: 332461155}
@@ -52847,5 +52993,3 @@ SceneRoots:
   - {fileID: 48523346}
   - {fileID: 263981528}
   - {fileID: 405613482}
-  - {fileID: 347036757}
-  - {fileID: 1803815536}
