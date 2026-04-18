@@ -791,12 +791,7 @@ public class ApartmentManager : MonoBehaviour
     /// <summary>Called by CameraTestController when preset is cleared.</summary>
     public void ClearPresetBase()
     {
-        // Restore ortho if the preset was using perspective
-        if (_presetOverrideActive && _presetPerspective)
-            ApplyBrainOrthoMode(true);
-
         _presetOverrideActive = false;
-        _presetPerspective = false;
 
         // Snap back to current area (reads from defaultPreset if set)
         if (areas != null && areas.Length > 0)
@@ -869,22 +864,8 @@ public class ApartmentManager : MonoBehaviour
             var lens = browseCamera.Lens;
             bool lensOrtho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
 
-            // Sync projection mode if preset demands a change
-            if (_presetOverrideActive)
-            {
-                bool wantOrtho = !_presetPerspective;
-                if (lensOrtho != wantOrtho)
-                    ApplyBrainOrthoMode(wantOrtho);
-                lensOrtho = wantOrtho; // refresh after switch
-                lens = browseCamera.Lens; // re-read after mode change
-            }
-
-            // Preset can override FOV
-            if (_presetOverrideActive && _presetPerspective)
-            {
-                lens.FieldOfView = Mathf.Max(_presetPerspectiveFOV, 1f);
-            }
-            else if (!_presetOverrideActive)
+            // Base lens: preset owns it when active, otherwise use area FOV
+            if (!_presetOverrideActive)
             {
                 lens.FieldOfView = _baseFOV;
             }
