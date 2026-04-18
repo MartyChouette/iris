@@ -781,7 +781,8 @@ public class ApartmentManager : MonoBehaviour
         _basePosition = pos;
         _baseRotation = rot;
         _baseFOV = fov;
-        _presetNearClip = nearClip;
+        // Guard zero clip values from uninitialized serialized data
+        _presetNearClip = (nearClip == 0f) ? (perspective ? 0.1f : -9f) : nearClip;
         _presetFarClip = farClip > 0.1f ? farClip : 1000f;
         _presetPerspectiveFOV = Mathf.Max(perspectiveFOV, 1f);
         _presetOverrideActive = true;
@@ -905,7 +906,12 @@ public class ApartmentManager : MonoBehaviour
                     lens.FieldOfView = _currentZoom;
             }
 
-            lens.NearClipPlane = _presetOverrideActive ? _presetNearClip : -9f;
+            // Guard near clip: 0 from uninitialized data breaks the camera.
+            // Default is -9 for ortho, 0.1 minimum for perspective.
+            float safeNear = _presetNearClip;
+            if (_presetOverrideActive && safeNear == 0f)
+                safeNear = _presetPerspective ? 0.1f : -9f;
+            lens.NearClipPlane = _presetOverrideActive ? safeNear : -9f;
             if (_presetOverrideActive && _presetFarClip > 0.1f)
                 lens.FarClipPlane = _presetFarClip;
             browseCamera.Lens = lens;
