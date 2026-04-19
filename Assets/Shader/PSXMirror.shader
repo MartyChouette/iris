@@ -102,6 +102,10 @@ Shader "Iris/PSXMirror"
                 // Project reflection texture via screen-space UVs
                 float2 screenUV = input.screenPos.xy / input.screenPos.w;
 
+                // Flip Y — reflection camera renders upside down relative to
+                // the main camera's projection in URP.
+                screenUV.y = 1.0 - screenUV.y;
+
                 // ── Barrel distortion (subtle CRT warp at edges) ──
                 float2 centered = screenUV - 0.5;
                 float r2 = dot(centered, centered);
