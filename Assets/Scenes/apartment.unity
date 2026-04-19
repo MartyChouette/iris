@@ -13518,6 +13518,8 @@ MonoBehaviour:
     farClip: 1000
     perspective: 1
     perspectiveFOV: 86
+    panLimit: 0.5
+    zoomStep: -1
     captured: 1
   _kitchenCamera:
     label: Kitchen / BackgroundJudging
@@ -13528,6 +13530,8 @@ MonoBehaviour:
     farClip: 1000
     perspective: 0
     perspectiveFOV: 60
+    panLimit: 0.5
+    zoomStep: -1
     captured: 1
   _couchCamera:
     label: Couch / Reveal
@@ -13538,6 +13542,8 @@ MonoBehaviour:
     farClip: 1000
     perspective: 0
     perspectiveFOV: 60
+    panLimit: 0.5
+    zoomStep: -1
     captured: 1
   _phaseCameraLerpDuration: 1.6
   _fridgeHighlightRenderer: {fileID: 0}
@@ -13553,9 +13559,20 @@ MonoBehaviour:
   OnDateSessionEnded:
     m_PersistentCalls:
       m_Calls: []
+  _enableArrivalSweep: 1
+  _sweepDistance: 1.2
+  _sweepHeadHeight: 0.85
+  _sweepWidth: 0.6
+  _sweepFOV: 2.5
+  _sweepDuration: 2.5
+  _sweepHold: 0.8
+  _sweepReturnDuration: 0.8
   _verdictZoomDuration: 2
   _verdictZoomDistance: 1.5
   _verdictZoomFOV: 3
+  _enableVerdictSwirl: 1
+  _swirlOrbits: 1.5
+  _swirlDuration: 2
 --- !u!114 &666569916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44291,6 +44308,7 @@ GameObject:
   - component: {fileID: 5185259265219704156}
   - component: {fileID: 7731097753550306740}
   - component: {fileID: 7731097753550306741}
+  - component: {fileID: 7731097753550306742}
   m_Layer: 15
   m_Name: round_arch_dinning_table
   m_TagString: Untagged
@@ -53258,13 +53276,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8009987137681024519}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -1.0129998, y: 2.3753877, z: 9.641002}
   m_LocalScale: {x: 1.3722056, y: 32.440464, z: 85.592636}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 737705925}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &6839081745123766607
 Transform:
   m_ObjectHideFlags: 0
@@ -53920,9 +53938,9 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -53946,6 +53964,27 @@ MonoBehaviour:
   surfaceLayerIndex: 22
   _isFloor: 0
   _effectMultiplier: 1
+--- !u!65 &7731097753550306742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982585969242357365}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 22
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.03, y: 0.03, z: 0.0001}
+  m_Center: {x: 0.000000037252903, y: 0, z: 0.002}
 --- !u!4 &7758307918097530549
 Transform:
   m_ObjectHideFlags: 0
