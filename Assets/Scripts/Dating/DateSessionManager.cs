@@ -1425,9 +1425,6 @@ public class DateSessionManager : MonoBehaviour
     [Tooltip("How close to the character's head the camera pushes (world units).")]
     [SerializeField] private float _sweepDistance = 1.2f;
 
-    [Tooltip("Height offset from character root to target (head level).")]
-    [SerializeField] private float _sweepHeadHeight = 0.85f;
-
     [Tooltip("How far the camera pans horizontally across the face (world units).")]
     [SerializeField] private float _sweepWidth = 0.6f;
 
@@ -1443,6 +1440,18 @@ public class DateSessionManager : MonoBehaviour
     [Tooltip("Duration of the pull-back to normal framing (seconds).")]
     [SerializeField] private float _sweepReturnDuration = 0.8f;
 
+    [Tooltip("Angle in degrees the camera approaches from (0 = right, 90 = behind, 180 = left, 270 = front).")]
+    [SerializeField] private float _sweepApproachAngle = 0f;
+
+    [Tooltip("Camera height offset from character at the start of the sweep.")]
+    [SerializeField] private float _sweepStartHeight = 0.85f;
+
+    [Tooltip("Camera height offset from character at the end of the sweep.")]
+    [SerializeField] private float _sweepEndHeight = 0.85f;
+
+    [Tooltip("Height on the character the camera looks at (0 = feet, 0.85 = head).")]
+    [SerializeField] private float _sweepLookAtHeight = 0.85f;
+
     [Header("Drink Verdict Cinematic")]
     [Tooltip("How long the camera takes to zoom toward the date character.")]
     [SerializeField] private float _verdictZoomDuration = 2.0f;
@@ -1456,11 +1465,23 @@ public class DateSessionManager : MonoBehaviour
     [Tooltip("Enable the orbit swirl around the date character during drink tasting.")]
     [SerializeField] private bool _enableVerdictSwirl = true;
 
-    [Tooltip("Number of full orbits around the character.")]
-    [SerializeField] private float _swirlOrbits = 1.5f;
+    [Tooltip("Angle in degrees where the orbit ends (e.g. start=0 end=540 = 1.5 orbits).")]
+    [SerializeField] private float _swirlEndAngle = 540f;
 
     [Tooltip("Duration of the swirl orbit (seconds).")]
     [SerializeField] private float _swirlDuration = 2.0f;
+
+    [Tooltip("Starting angle of the orbit in degrees (0 = right, 90 = forward, etc.).")]
+    [SerializeField] private float _swirlStartAngle = 0f;
+
+    [Tooltip("Vertical offset from the character at the start of the swirl (world units).")]
+    [SerializeField] private float _swirlStartHeight = 2.0f;
+
+    [Tooltip("Vertical offset from the character at the end of the swirl (world units).")]
+    [SerializeField] private float _swirlEndHeight = 0.8f;
+
+    [Tooltip("Height offset on the character that the camera looks at during the swirl (0 = feet, 0.8 = chest, 1.5 = head).")]
+    [SerializeField] private float _swirlLookAtHeight = 0.8f;
 
     // ──────────────────────────────────────────────────────────────
     // Arrival Face Sweep
@@ -1477,24 +1498,29 @@ public class DateSessionManager : MonoBehaviour
         var mainCam = Camera.main;
         if (am == null || mainCam == null || _dateCharacterGO == null) yield break;
 
-        // Save starting camera state to return to
-        Vector3 restorePos = mainCam.transform.position;
-        Quaternion restoreRot = mainCam.transform.rotation;
-        float restoreFOV = am.CurrentOrthoSize;
+        // Save starting camera state (parallax-free base) to return to
+        Vector3 restorePos = am.CurrentBasePosition;
+        Quaternion restoreRot = am.CurrentBaseRotation;
+        float restoreFOV = am.CurrentBaseFOV;
 
-        // Target: character's head
-        Vector3 headPos = _dateCharacterGO.transform.position + Vector3.up * _sweepHeadHeight;
+        Vector3 charRoot = _dateCharacterGO.transform.position;
+        Vector3 lookTarget = charRoot + Vector3.up * _sweepLookAtHeight;
 
-        // Camera direction from current view
-        Vector3 camDir = (restorePos - headPos).normalized;
-        Vector3 closePos = headPos + camDir * _sweepDistance;
+        // Camera approach direction from configurable angle
+        float approachRad = _sweepApproachAngle * Mathf.Deg2Rad;
+        Vector3 camDir = new Vector3(Mathf.Cos(approachRad), 0f, Mathf.Sin(approachRad));
 
-        // Sweep direction: perpendicular to camera direction, in world XZ plane
+        // Close position along approach direction
+        Vector3 closePos = charRoot + camDir * _sweepDistance;
+
+        // Sweep direction: perpendicular to approach, in world XZ plane
         Vector3 sweepDir = Vector3.Cross(camDir, Vector3.up).normalized;
 
         // Start and end positions for the horizontal pan
-        Vector3 sweepStart = closePos - sweepDir * (_sweepWidth * 0.5f);
-        Vector3 sweepEnd = closePos + sweepDir * (_sweepWidth * 0.5f);
+        Vector3 sweepStartXZ = closePos - sweepDir * (_sweepWidth * 0.5f);
+        Vector3 sweepEndXZ = closePos + sweepDir * (_sweepWidth * 0.5f);
+        Vector3 sweepStart = new Vector3(sweepStartXZ.x, charRoot.y + _sweepStartHeight, sweepStartXZ.z);
+        Vector3 sweepEnd = new Vector3(sweepEndXZ.x, charRoot.y + _sweepEndHeight, sweepEndXZ.z);
 
         // Show character name
         string charName = _currentDate != null ? _currentDate.characterName : "";
@@ -1502,46 +1528,69 @@ public class DateSessionManager : MonoBehaviour
             PhaseTitleDrop.Instance.Show(charName);
 
         // Phase 1: Push in from current position to sweep start
+        bool skipped = false;
         float pushDuration = 0.6f;
         float elapsed = 0f;
-        while (elapsed < pushDuration)
+        while (elapsed < pushDuration && !skipped)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.SmoothStep(0f, 1f, elapsed / pushDuration);
             Vector3 pos = Vector3.Lerp(restorePos, sweepStart, t);
             float fov = Mathf.Lerp(restoreFOV, _sweepFOV, t);
-            am.SetPresetBase(pos, restoreRot, fov);
+            Quaternion rot = Quaternion.Slerp(restoreRot,
+                Quaternion.LookRotation(lookTarget - sweepStart, Vector3.up), t);
+            am.SetPresetBase(pos, rot, fov);
             yield return null;
+            if (CinematicSkipRequested()) skipped = true;
         }
 
         // Phase 2: Sweep horizontally across the face
-        elapsed = 0f;
-        while (elapsed < _sweepDuration)
+        if (!skipped)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, elapsed / _sweepDuration);
-            Vector3 pos = Vector3.Lerp(sweepStart, sweepEnd, t);
-            am.SetPresetBase(pos, restoreRot, _sweepFOV);
-            yield return null;
+            elapsed = 0f;
+            while (elapsed < _sweepDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, elapsed / _sweepDuration);
+                Vector3 pos = Vector3.Lerp(sweepStart, sweepEnd, t);
+                Quaternion rot = Quaternion.LookRotation(lookTarget - pos, Vector3.up);
+                am.SetPresetBase(pos, rot, _sweepFOV);
+                yield return null;
+                if (CinematicSkipRequested()) { skipped = true; break; }
+            }
         }
 
-        // Phase 3: Hold on face
-        yield return new WaitForSeconds(_sweepHold);
+        // Phase 3: Hold on face (skip bypasses this)
+        if (!skipped)
+            yield return new WaitForSeconds(_sweepHold);
 
         // Phase 4: Pull back to original framing
-        elapsed = 0f;
-        while (elapsed < _sweepReturnDuration)
+        if (!skipped)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, elapsed / _sweepReturnDuration);
-            Vector3 pos = Vector3.Lerp(sweepEnd, restorePos, t);
-            float fov = Mathf.Lerp(_sweepFOV, restoreFOV, t);
-            am.SetPresetBase(pos, restoreRot, fov);
-            yield return null;
+            elapsed = 0f;
+            while (elapsed < _sweepReturnDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, elapsed / _sweepReturnDuration);
+                Vector3 pos = Vector3.Lerp(sweepEnd, restorePos, t);
+                float fov = Mathf.Lerp(_sweepFOV, restoreFOV, t);
+                Quaternion rot = Quaternion.Slerp(
+                    Quaternion.LookRotation(lookTarget - sweepEnd, Vector3.up),
+                    restoreRot, t);
+                am.SetPresetBase(pos, rot, fov);
+                yield return null;
+                if (CinematicSkipRequested()) break;
+            }
         }
 
-        // Snap back to phase camera
-        ApplyPhaseCamera(DatePhase.Arrival);
+        // Smooth glide back to phase camera (no hard snap)
+        LerpPhaseCamera(DatePhase.Arrival, 0.3f);
+    }
+
+    /// <summary>Returns true when the player wants to skip a cinematic animation (click or Space).</summary>
+    private static bool CinematicSkipRequested()
+    {
+        return Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return);
     }
 
     // ──────────────────────────────────────────────────────────────
@@ -1567,13 +1616,13 @@ public class DateSessionManager : MonoBehaviour
 
         // 3. Push camera toward the date character
         Vector3 zoomTarget = _dateCharacterGO != null
-            ? _dateCharacterGO.transform.position + Vector3.up * 0.8f
+            ? _dateCharacterGO.transform.position + Vector3.up * _swirlLookAtHeight
             : Vector3.zero;
         var am = ApartmentManager.Instance;
-        var mainCam = Camera.main;
-        Vector3 camStartPos = mainCam != null ? mainCam.transform.position : Vector3.zero;
-        Quaternion camStartRot = mainCam != null ? mainCam.transform.rotation : Quaternion.identity;
-        float camStartFOV = am != null ? am.CurrentOrthoSize : 5f;
+        // Use parallax-free base state to avoid double-counting parallax offset
+        Vector3 camStartPos = am != null ? am.CurrentBasePosition : Vector3.zero;
+        Quaternion camStartRot = am != null ? am.CurrentBaseRotation : Quaternion.identity;
+        float camStartFOV = am != null ? am.CurrentBaseFOV : 5f;
 
         // Compute a close-up position looking at the date character
         Vector3 camDir = (camStartPos - zoomTarget).normalized;
@@ -1583,14 +1632,25 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(0.5f);
 
-        // 5. Zoom in + optional orbit swirl around the date
+        // 5. Zoom in + optional orbit swirl around the date (skippable)
+        Vector3 finalCamPos;
+        Quaternion finalCamRot;
+
         if (_enableVerdictSwirl)
         {
             // Orbit swirl: camera spirals around the character while zooming in
             float swirlElapsed = 0f;
             float totalDuration = Mathf.Max(_verdictZoomDuration, _swirlDuration);
-            float startAngle = Mathf.Atan2(camDir.z, camDir.x);
-            float totalAngle = _swirlOrbits * Mathf.PI * 2f;
+            float startAngle = _swirlStartAngle * Mathf.Deg2Rad;
+            float endAngle = _swirlEndAngle * Mathf.Deg2Rad;
+            float totalAngle = endAngle - startAngle;
+            float startDist = Vector3.Distance(camStartPos, zoomTarget);
+
+            // Compute final position for skip
+            Vector3 endOrbitPos = zoomTarget + new Vector3(Mathf.Cos(endAngle), 0f, Mathf.Sin(endAngle)) * _verdictZoomDistance;
+            endOrbitPos.y = zoomTarget.y + _swirlEndHeight;
+            finalCamPos = endOrbitPos;
+            finalCamRot = Quaternion.LookRotation(zoomTarget - endOrbitPos, Vector3.up);
 
             while (swirlElapsed < totalDuration)
             {
@@ -1598,9 +1658,9 @@ public class DateSessionManager : MonoBehaviour
                 float t = Mathf.SmoothStep(0f, 1f, swirlElapsed / totalDuration);
 
                 // Spiral in: distance decreases, angle increases
-                float dist = Mathf.Lerp(Vector3.Distance(camStartPos, zoomTarget), _verdictZoomDistance, t);
+                float dist = Mathf.Lerp(startDist, _verdictZoomDistance, t);
                 float angle = startAngle + totalAngle * t;
-                float height = Mathf.Lerp(camStartPos.y, zoomTarget.y, t);
+                float height = Mathf.Lerp(zoomTarget.y + _swirlStartHeight, zoomTarget.y + _swirlEndHeight, t);
 
                 Vector3 orbitPos = zoomTarget + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist;
                 orbitPos.y = height;
@@ -1611,11 +1671,15 @@ public class DateSessionManager : MonoBehaviour
 
                 am?.SetPresetBase(orbitPos, lookRot, fov);
                 yield return null;
+                if (CinematicSkipRequested()) break;
             }
         }
         else
         {
             // Simple straight zoom (fallback)
+            finalCamPos = camEndPos;
+            finalCamRot = camStartRot;
+
             float zoomElapsed = 0f;
             while (zoomElapsed < _verdictZoomDuration)
             {
@@ -1627,8 +1691,12 @@ public class DateSessionManager : MonoBehaviour
                 am?.SetPresetBase(pos, camStartRot, fov);
 
                 yield return null;
+                if (CinematicSkipRequested()) break;
             }
         }
+
+        // Snap to final close-up (in case we skipped mid-animation)
+        am?.SetPresetBase(finalCamPos, finalCamRot, _verdictZoomFOV);
 
         // 6. Suspense — thinking face
         reactionUI?.ShowText("Hmm...", _drinkTastingHold);
@@ -1637,14 +1705,6 @@ public class DateSessionManager : MonoBehaviour
         // 7. Verdict reaction
         reactionUI?.ShowLabeledReaction(reactionType, drinkName);
         ApplyReaction(reactionType, magnitude);
-
-        if (_state != SessionState.DateInProgress)
-        {
-            RestoreApartmentRenderers(hiddenRenderers);
-            am?.ClearPresetBase();
-            _drinkVerdictRunning = false;
-            yield break;
-        }
 
         // 8. Flower popup + particles
         if (reactionType != ReactionType.Neutral)
@@ -1659,14 +1719,6 @@ public class DateSessionManager : MonoBehaviour
         // Hold for flower animation + let the moment breathe
         yield return s_wait2;
 
-        if (_state != SessionState.DateInProgress)
-        {
-            RestoreApartmentRenderers(hiddenRenderers);
-            am?.ClearPresetBase();
-            _drinkVerdictRunning = false;
-            yield break;
-        }
-
 #if UNITY_EDITOR
         Debug.Log($"[DateSessionManager] Drink verdict: {drinkName} (score={score}) \u2192 {reactionType}");
 #endif
@@ -1676,14 +1728,7 @@ public class DateSessionManager : MonoBehaviour
         {
             bool clicked = false;
             PhaseContinueButton.Instance.Show(() => clicked = true);
-            yield return new WaitUntil(() => clicked || _state != SessionState.DateInProgress);
-            if (_state != SessionState.DateInProgress)
-            {
-                RestoreApartmentRenderers(hiddenRenderers);
-                am?.ClearPresetBase();
-                _drinkVerdictRunning = false;
-                yield break;
-            }
+            yield return new WaitUntil(() => clicked);
         }
 
         // 10. Fade to white, restore apartment, release camera

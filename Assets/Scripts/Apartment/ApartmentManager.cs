@@ -128,6 +128,13 @@ public class ApartmentManager : MonoBehaviour
     /// <summary>Current ortho size of the browse camera (for cinematic zoom calculations).</summary>
     public float CurrentOrthoSize => browseCamera != null ? browseCamera.Lens.OrthographicSize : 5f;
 
+    /// <summary>Base camera position before parallax/pan offsets. Use this as the start point for cinematics.</summary>
+    public Vector3 CurrentBasePosition => _basePosition;
+    /// <summary>Base camera rotation before parallax. Use this as the start rotation for cinematics.</summary>
+    public Quaternion CurrentBaseRotation => _baseRotation;
+    /// <summary>Base FOV/ortho size before zoom layering.</summary>
+    public float CurrentBaseFOV => _baseFOV;
+
     /// <summary>Fired when the player switches apartment areas. Arg = new area index.</summary>
     public event System.Action<int> OnAreaChanged;
 

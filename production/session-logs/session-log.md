@@ -1,3 +1,32 @@
+## Session: 20260419 — Cinematic controls, preview tool parity, camera fixes
+
+### Summary
+Full parameter control for both date cinematics (face sweep + verdict swirl). Cinematic Preview editor tool updated to match. Camera jitter fix (parallax double-counting). Skip-to-end support for both cinematics.
+
+### Cinematic Controls
+- **Face sweep**: new `_sweepApproachAngle` (camera direction), `_sweepStartHeight`/`_sweepEndHeight` (vertical motion during pan), `_sweepLookAtHeight` (independent look-at target). Replaced `_sweepHeadHeight` which conflated camera position with look-at.
+- **Verdict swirl**: new `_swirlStartAngle`/`_swirlEndAngle` (direct degree control, replaces `_swirlOrbits`), `_swirlStartHeight`/`_swirlEndHeight` (vertical corkscrew), `_swirlLookAtHeight` (adjustable look-at point on character).
+- **Preview tool parity**: CinematicPreviewWindow updated with matching sliders for all new parameters. Both cinematics show grouped sections (Direction/Orbit, Height) with computed labels (orbit count, arc degrees). Copy Settings transfers all fields.
+- **Preview accuracy**: Scrub math uses identical SmoothStep + angle/height interpolation as runtime — what you see in Scene View is what you get in-game.
+
+### Camera Fixes
+- **Parallax double-counting fix**: Both cinematics now capture start position from `ApartmentManager.CurrentBasePosition` (parallax-free) instead of `Camera.main.transform.position` (includes parallax + pan offset). Prevents jitter during mouse movement.
+- **Face sweep exit**: `ApplyPhaseCamera` (instant snap) replaced with `LerpPhaseCamera(0.3f)` for smooth glide back to phase camera.
+- **ApartmentManager getters**: Added `CurrentBasePosition`, `CurrentBaseRotation`, `CurrentBaseFOV` public properties for cinematics to capture clean camera state.
+
+### Skip Cinematic
+- Click, Space, or Enter during camera animations skips to end state.
+- **Face sweep**: skip jumps to pull-back end, `LerpPhaseCamera` glides home.
+- **Verdict swirl**: skip snaps to final close-up, story beats (Hmm..., reaction, popup, continue button) still play normally.
+- Removed dead `_state != DateInProgress` guard blocks from verdict sequence — state can't change during the cinematic.
+
+### Files Changed
+- `Assets/Scripts/Dating/DateSessionManager.cs` — cinematic parameters, skip logic, parallax fix
+- `Assets/Editor/CinematicPreviewWindow.cs` — matching sliders, accurate scrub, copy settings
+- `Assets/Scripts/Apartment/ApartmentManager.cs` — base state getters
+
+---
+
 ## Session: 20260418 — Watering UX, Nema look-at, scene cleanup, debug tools
 
 ### Summary
@@ -18104,6 +18133,309 @@ d782d6a update session log for 20260418
 df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
 ### Uncommitted Changes
 Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_220525
+### Commits
+7a9d672 scene + log update
+e3c277f mirror: flip Y only — X reflection handled by reflection matrix
+64c86b3 mirror: flip both UV axes for correct reflection
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+---
+
+## Session End: 20260418_220751
+### Commits
+7a9d672 scene + log update
+e3c277f mirror: flip Y only — X reflection handled by reflection matrix
+64c86b3 mirror: flip both UV axes for correct reflection
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_221142
+### Commits
+7a9d672 scene + log update
+e3c277f mirror: flip Y only — X reflection handled by reflection matrix
+64c86b3 mirror: flip both UV axes for correct reflection
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_221218
+### Commits
+dc95c4d rename game title to Spent Blooms
+7a9d672 scene + log update
+e3c277f mirror: flip Y only — X reflection handled by reflection matrix
+64c86b3 mirror: flip both UV axes for correct reflection
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_221242
+### Commits
+c32fd91 rename company to Rum Rum Raspberry
+dc95c4d rename game title to Spent Blooms
+7a9d672 scene + log update
+e3c277f mirror: flip Y only — X reflection handled by reflection matrix
+64c86b3 mirror: flip both UV axes for correct reflection
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_141357
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_141618
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_142016
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_143107
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_145232
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_150630
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_154648
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_155156
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_160707
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_163752
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_173728
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_173910
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_173945
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_174251
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
 production/session-logs/session-log.md
 ---
 

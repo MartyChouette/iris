@@ -25,14 +25,21 @@ public class CinematicPreviewWindow : EditorWindow
 
     // ── Face sweep params (mirror DateSessionManager) ──
     private float _sweepDistance = 1.2f;
-    private float _sweepHeadHeight = 0.85f;
     private float _sweepWidth = 0.6f;
     private float _sweepFOV = 2.5f;
+    private float _sweepApproachAngle = 0f;
+    private float _sweepStartHeight = 0.85f;
+    private float _sweepEndHeight = 0.85f;
+    private float _sweepLookAtHeight = 0.85f;
 
     // ── Verdict swirl params ──
     private float _swirlDistance = 1.5f;
-    private float _swirlOrbits = 1.5f;
     private float _swirlFOV = 3.0f;
+    private float _swirlStartAngle = 0f;
+    private float _swirlEndAngle = 540f;
+    private float _swirlStartHeight = 2.0f;
+    private float _swirlEndHeight = 0.8f;
+    private float _swirlLookAtHeight = 0.8f;
 
     // ── State ──
     private Vector3 _characterPos;
@@ -98,16 +105,37 @@ public class CinematicPreviewWindow : EditorWindow
         {
             EditorGUILayout.LabelField("Face Sweep Settings", EditorStyles.boldLabel);
             _sweepDistance = EditorGUILayout.Slider("Distance", _sweepDistance, 0.3f, 5f);
-            _sweepHeadHeight = EditorGUILayout.Slider("Head Height", _sweepHeadHeight, 0f, 2.5f);
             _sweepWidth = EditorGUILayout.Slider("Sweep Width", _sweepWidth, 0.1f, 3f);
             _sweepFOV = EditorGUILayout.Slider("FOV / Ortho Size", _sweepFOV, 0.5f, 10f);
+
+            EditorGUILayout.Space(3);
+            EditorGUILayout.LabelField("Direction", EditorStyles.miniLabel);
+            _sweepApproachAngle = EditorGUILayout.Slider("Approach Angle (deg)", _sweepApproachAngle, -360f, 360f);
+
+            EditorGUILayout.Space(3);
+            EditorGUILayout.LabelField("Height", EditorStyles.miniLabel);
+            _sweepStartHeight = EditorGUILayout.Slider("Start Height", _sweepStartHeight, 0f, 3f);
+            _sweepEndHeight = EditorGUILayout.Slider("End Height", _sweepEndHeight, 0f, 3f);
+            _sweepLookAtHeight = EditorGUILayout.Slider("Look-At Height", _sweepLookAtHeight, 0f, 3f);
         }
         else
         {
             EditorGUILayout.LabelField("Verdict Swirl Settings", EditorStyles.boldLabel);
-            _swirlDistance = EditorGUILayout.Slider("Distance", _swirlDistance, 0.5f, 5f);
-            _swirlOrbits = EditorGUILayout.Slider("Orbits", _swirlOrbits, 0.5f, 5f);
+            _swirlDistance = EditorGUILayout.Slider("End Distance", _swirlDistance, 0.5f, 5f);
             _swirlFOV = EditorGUILayout.Slider("FOV / Ortho Size", _swirlFOV, 0.5f, 10f);
+
+            EditorGUILayout.Space(3);
+            EditorGUILayout.LabelField("Orbit", EditorStyles.miniLabel);
+            _swirlStartAngle = EditorGUILayout.Slider("Start Angle (deg)", _swirlStartAngle, -360f, 360f);
+            _swirlEndAngle = EditorGUILayout.Slider("End Angle (deg)", _swirlEndAngle, -720f, 1080f);
+            float orbits = (_swirlEndAngle - _swirlStartAngle) / 360f;
+            EditorGUILayout.LabelField($"  = {orbits:F2} orbits", EditorStyles.miniLabel);
+
+            EditorGUILayout.Space(3);
+            EditorGUILayout.LabelField("Height", EditorStyles.miniLabel);
+            _swirlStartHeight = EditorGUILayout.Slider("Start Height", _swirlStartHeight, -2f, 5f);
+            _swirlEndHeight = EditorGUILayout.Slider("End Height", _swirlEndHeight, -2f, 5f);
+            _swirlLookAtHeight = EditorGUILayout.Slider("Look-At Height", _swirlLookAtHeight, 0f, 3f);
         }
 
         EditorGUILayout.Space(10);
@@ -224,28 +252,36 @@ public class CinematicPreviewWindow : EditorWindow
 
     private void ApplyFaceSweepScrub(SceneView sv, Vector3 root)
     {
-        Vector3 headPos = root + Vector3.up * _sweepHeadHeight;
+        Vector3 lookTarget = root + Vector3.up * _sweepLookAtHeight;
 
-        // Camera direction: from current scene view or a default
-        Vector3 camDir = (sv.camera.transform.position - headPos).normalized;
-        if (camDir.sqrMagnitude < 0.01f) camDir = Vector3.back;
+        // Approach direction from configurable angle
+        float approachRad = _sweepApproachAngle * Mathf.Deg2Rad;
+        Vector3 camDir = new Vector3(Mathf.Cos(approachRad), 0f, Mathf.Sin(approachRad));
+        Vector3 closePos = root + camDir * _sweepDistance;
 
-        Vector3 closePos = headPos + camDir * _sweepDistance;
+        // Sweep direction: perpendicular to approach
         Vector3 sweepDir = Vector3.Cross(camDir, Vector3.up).normalized;
 
-        Vector3 sweepStart = closePos - sweepDir * (_sweepWidth * 0.5f);
-        Vector3 sweepEnd = closePos + sweepDir * (_sweepWidth * 0.5f);
+        Vector3 sweepStartXZ = closePos - sweepDir * (_sweepWidth * 0.5f);
+        Vector3 sweepEndXZ = closePos + sweepDir * (_sweepWidth * 0.5f);
+        Vector3 sweepStart = new Vector3(sweepStartXZ.x, root.y + _sweepStartHeight, sweepStartXZ.z);
+        Vector3 sweepEnd = new Vector3(sweepEndXZ.x, root.y + _sweepEndHeight, sweepEndXZ.z);
+
+        // Far position for push-in / pull-back
+        float midHeight = root.y + (_sweepStartHeight + _sweepEndHeight) * 0.5f;
+        Vector3 farPos = closePos + camDir * (_sweepDistance * 2f);
+        farPos.y = midHeight;
 
         // Map scrub 0-1 to: push-in (0-0.15), sweep (0.15-0.75), hold (0.75-0.85), pull-back (0.85-1)
         Vector3 pos;
         if (_scrubT < 0.15f)
         {
-            float t = _scrubT / 0.15f;
-            pos = Vector3.Lerp(closePos + camDir * 3f, sweepStart, t);
+            float t = Mathf.SmoothStep(0f, 1f, _scrubT / 0.15f);
+            pos = Vector3.Lerp(farPos, sweepStart, t);
         }
         else if (_scrubT < 0.75f)
         {
-            float t = (_scrubT - 0.15f) / 0.6f;
+            float t = Mathf.SmoothStep(0f, 1f, (_scrubT - 0.15f) / 0.6f);
             pos = Vector3.Lerp(sweepStart, sweepEnd, t);
         }
         else if (_scrubT < 0.85f)
@@ -254,33 +290,46 @@ public class CinematicPreviewWindow : EditorWindow
         }
         else
         {
-            float t = (_scrubT - 0.85f) / 0.15f;
-            pos = Vector3.Lerp(sweepEnd, closePos + camDir * 3f, t);
+            float t = Mathf.SmoothStep(0f, 1f, (_scrubT - 0.85f) / 0.15f);
+            pos = Vector3.Lerp(sweepEnd, farPos, t);
         }
 
-        sv.pivot = pos + sv.rotation * Vector3.forward * sv.cameraDistance;
-        sv.size = _sweepFOV;
+        Quaternion lookRot = Quaternion.LookRotation(lookTarget - pos, Vector3.up);
+        float fov = _scrubT < 0.15f
+            ? Mathf.Lerp(sv.size, _sweepFOV, _scrubT / 0.15f)
+            : _scrubT > 0.85f
+                ? Mathf.Lerp(_sweepFOV, sv.size, (_scrubT - 0.85f) / 0.15f)
+                : _sweepFOV;
+
+        sv.pivot = pos + lookRot * Vector3.forward * sv.cameraDistance;
+        sv.rotation = lookRot;
+        sv.size = fov;
         sv.Repaint();
     }
 
     private void ApplyVerdictSwirlScrub(SceneView sv, Vector3 root)
     {
-        Vector3 target = root + Vector3.up * 0.8f;
-        float startAngle = 0f;
-        float totalAngle = _swirlOrbits * Mathf.PI * 2f;
-        float angle = startAngle + totalAngle * _scrubT;
+        Vector3 target = root + Vector3.up * _swirlLookAtHeight;
+        float startAngle = _swirlStartAngle * Mathf.Deg2Rad;
+        float endAngle = _swirlEndAngle * Mathf.Deg2Rad;
+        float totalAngle = endAngle - startAngle;
+        float t = Mathf.SmoothStep(0f, 1f, _scrubT);
+        float angle = startAngle + totalAngle * t;
 
+        // Start distance: 3x end distance (matches runtime startDist)
         float startDist = _swirlDistance * 3f;
-        float dist = Mathf.Lerp(startDist, _swirlDistance, _scrubT);
+        float dist = Mathf.Lerp(startDist, _swirlDistance, t);
+        float height = Mathf.Lerp(target.y + _swirlStartHeight, target.y + _swirlEndHeight, t);
 
         Vector3 orbitPos = target + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist;
-        orbitPos.y = Mathf.Lerp(sv.camera.transform.position.y, target.y, _scrubT);
+        orbitPos.y = height;
 
         Quaternion lookRot = Quaternion.LookRotation(target - orbitPos, Vector3.up);
+        float fov = Mathf.Lerp(sv.size, _swirlFOV, t);
 
         sv.pivot = orbitPos + lookRot * Vector3.forward * sv.cameraDistance;
         sv.rotation = lookRot;
-        sv.size = Mathf.Lerp(sv.size, _swirlFOV, _scrubT);
+        sv.size = fov;
         sv.Repaint();
     }
 
@@ -299,15 +348,22 @@ public class CinematicPreviewWindow : EditorWindow
         if (_cinematic == CinematicType.FaceSweep)
         {
             so.FindProperty("_sweepDistance").floatValue = _sweepDistance;
-            so.FindProperty("_sweepHeadHeight").floatValue = _sweepHeadHeight;
             so.FindProperty("_sweepWidth").floatValue = _sweepWidth;
             so.FindProperty("_sweepFOV").floatValue = _sweepFOV;
+            so.FindProperty("_sweepApproachAngle").floatValue = _sweepApproachAngle;
+            so.FindProperty("_sweepStartHeight").floatValue = _sweepStartHeight;
+            so.FindProperty("_sweepEndHeight").floatValue = _sweepEndHeight;
+            so.FindProperty("_sweepLookAtHeight").floatValue = _sweepLookAtHeight;
         }
         else
         {
             so.FindProperty("_verdictZoomDistance").floatValue = _swirlDistance;
-            so.FindProperty("_swirlOrbits").floatValue = _swirlOrbits;
+            so.FindProperty("_swirlEndAngle").floatValue = _swirlEndAngle;
             so.FindProperty("_verdictZoomFOV").floatValue = _swirlFOV;
+            so.FindProperty("_swirlStartAngle").floatValue = _swirlStartAngle;
+            so.FindProperty("_swirlStartHeight").floatValue = _swirlStartHeight;
+            so.FindProperty("_swirlEndHeight").floatValue = _swirlEndHeight;
+            so.FindProperty("_swirlLookAtHeight").floatValue = _swirlLookAtHeight;
         }
 
         so.ApplyModifiedProperties();
