@@ -1071,7 +1071,7 @@ public class DayPhaseManager : MonoBehaviour
                 ScreenFade.Instance.ShowPhaseTitle("Nema drifts to sleep...");
                 yield return new WaitForSecondsRealtime(3f);
                 ScreenFade.Instance.HidePhaseTitle();
-                yield return ScreenFade.Instance.FadeOut(0f);
+                yield return ScreenFade.Instance.FadeOut(_fadeDuration);
             }
         }
 
