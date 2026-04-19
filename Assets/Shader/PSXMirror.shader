@@ -102,7 +102,9 @@ Shader "Iris/PSXMirror"
                 // Project reflection texture via screen-space UVs
                 float2 screenUV = input.screenPos.xy / input.screenPos.w;
 
-                // No manual UV flip — the reflection matrix handles mirroring
+                // Flip both axes — reflection matrix gives unmirrored view,
+                // we need the full mirror effect (horizontal + vertical flip)
+                screenUV = 1.0 - screenUV;
 
                 // ── Barrel distortion (subtle CRT warp at edges) ──
                 float2 centered = screenUV - 0.5;
