@@ -17883,3 +17883,227 @@ Assets/Scenes/apartment.unity
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260418_214911
+### Commits
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+---
+
+## Session End: 20260418_215059
+### Commits
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_215227
+### Commits
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_215434
+### Commits
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_215534
+### Commits
+64c86b3 mirror: flip both UV axes for correct reflection
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_215812
+### Commits
+e3c277f mirror: flip Y only — X reflection handled by reflection matrix
+64c86b3 mirror: flip both UV axes for correct reflection
+1fb2cc9 remove all manual UV flips from mirror — reflection matrix handles it
+5511855 fix mirror: flip X axis (horizontal) not Y, remove platform Y flip
+4323268 fix mirror UV flip: use UNITY_UV_STARTS_AT_TOP instead of unconditional flip
+05a5c87 scene + log update
+a437ea0 fix upside-down planar mirror reflection
+23fd507 fix CS1503: PhaseTitleDrop.Show already returns a Coroutine, don't double-wrap
+5cc6084 Cinematic Preview editor window (Iris > Cinematic Preview)
+aea1363 arrival face sweep cinematic + drink verdict orbit swirl
+b8022af smooth fade-out for sleep fallback (was instant hard cut)
+e6f79d2 per-phase zoom step override
+86ae690 block input during transitions, per-phase camera pan limits
+2b508b4 scene + log update
+e095a63 scene + session log update
+cb22e84 scene updates, art assets, remove wilted petals mess, update session log
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
