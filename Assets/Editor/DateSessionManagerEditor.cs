@@ -125,6 +125,19 @@ public class DateSessionManagerEditor : Editor
                 EditorUtility.SetDirty(mgr);
             }
 
+            // Pan limit
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Pan Limit", GUILayout.Width(65));
+            float newPan = EditorGUILayout.Slider(frame.panLimit, 0f, 5f);
+            EditorGUILayout.EndHorizontal();
+
+            if (newPan != frame.panLimit)
+            {
+                Undo.RecordObject(mgr, $"Adjust {label} Pan Limit");
+                frame.panLimit = newPan;
+                EditorUtility.SetDirty(mgr);
+            }
+
             EditorGUI.indentLevel--;
         }
     }

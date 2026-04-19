@@ -139,10 +139,14 @@ public class DayPhaseManager : MonoBehaviour
     public float PrepTimer => _prepTimer;
     public bool PrepTimerActive => _prepTimerActive;
 
-    /// <summary>True during Exploration, DateInProgress, or Evening — stations can accept input.</summary>
-    public bool IsInteractionPhase => _currentPhase == DayPhase.Exploration
+    /// <summary>True while a phase transition coroutine is running (fading, title cards, setup). Input is blocked.</summary>
+    public bool IsTransitioning { get; set; }
+
+    /// <summary>True during Exploration, DateInProgress, or Evening AND not mid-transition.</summary>
+    public bool IsInteractionPhase => !IsTransitioning
+                                   && (_currentPhase == DayPhase.Exploration
                                    || _currentPhase == DayPhase.DateInProgress
-                                   || _currentPhase == DayPhase.Evening;
+                                   || _currentPhase == DayPhase.Evening);
 
     /// <summary>True only during DateInProgress — drink making is allowed.</summary>
     public bool IsDrinkPhase => _currentPhase == DayPhase.DateInProgress;
@@ -400,7 +404,7 @@ public class DayPhaseManager : MonoBehaviour
         if (isDemo && day >= 2)
         {
             Debug.Log("[DayPhaseManager] Demo cleanup day — skipping newspaper.");
-            StartCoroutine(DemoCleanupTransition());
+            StartCoroutine(TransitionWrapper(DemoCleanupTransition()));
             return;
         }
 
@@ -408,7 +412,7 @@ public class DayPhaseManager : MonoBehaviour
         if (isDemo && day == 1)
         {
             Debug.Log("[DayPhaseManager] Demo day 1 — showing date info card instead of newspaper.");
-            StartCoroutine(DemoDay1Transition());
+            StartCoroutine(TransitionWrapper(DemoDay1Transition()));
             return;
         }
 
@@ -522,12 +526,12 @@ public class DayPhaseManager : MonoBehaviour
             case DayPhase.Morning:
                 RecordSlot.Instance?.Stop(); // full stop between days
                 AudioManager.Instance?.SetNonMusicMix(1f, 0.5f);
-                StartCoroutine(MorningTransition());
+                StartCoroutine(TransitionWrapper(MorningTransition()));
                 break;
             case DayPhase.Exploration:
                 AudioManager.Instance?.UnduckMusic(1f);
                 AudioManager.Instance?.SetNonMusicMix(1f, 0.5f);
-                StartCoroutine(ExplorationTransition());
+                StartCoroutine(TransitionWrapper(ExplorationTransition()));
                 break;
             case DayPhase.DateInProgress:
                 AudioManager.Instance?.DuckMusic(0.15f, 0.5f);
@@ -537,7 +541,7 @@ public class DayPhaseManager : MonoBehaviour
             case DayPhase.FlowerTrimming:
                 AudioManager.Instance?.DuckMusic(0.1f, 0.5f);
                 AudioManager.Instance?.SetNonMusicMix(0.85f, 0.5f); // match apartment levels
-                StartCoroutine(FlowerTrimmingTransition());
+                StartCoroutine(TransitionWrapper(FlowerTrimmingTransition()));
                 break;
             case DayPhase.Evening:
                 AudioManager.Instance?.UnduckMusic(1.5f);
@@ -546,6 +550,14 @@ public class DayPhaseManager : MonoBehaviour
         }
 
         OnPhaseChanged?.Invoke((int)phase);
+    }
+
+    /// <summary>Wrap a transition coroutine so IsTransitioning is true for its duration.</summary>
+    private IEnumerator TransitionWrapper(IEnumerator inner)
+    {
+        IsTransitioning = true;
+        yield return inner;
+        IsTransitioning = false;
     }
 
     // ═══════════════════════════════════════════════════════════════

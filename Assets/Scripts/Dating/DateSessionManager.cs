@@ -188,9 +188,9 @@ public class DateSessionManager : MonoBehaviour
 
     [Header("Phase Cameras")]
     [Tooltip("Camera framing snapped to during each date phase. Capture from the Scene View via the inspector buttons.")]
-    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f };
-    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f };
-    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f };
+    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f };
+    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f };
+    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f };
 
     [Tooltip("Default seconds the camera takes to glide into a phase frame when LerpPhaseCamera is used.")]
     [SerializeField] private float _phaseCameraLerpDuration = 1.6f;
@@ -210,6 +210,8 @@ public class DateSessionManager : MonoBehaviour
         public bool perspective;
         [Tooltip("Field of view in degrees (only used in perspective mode).")]
         public float perspectiveFOV;
+        [Tooltip("Maximum pan distance during this phase. 0 = locked in place, -1 = use default.")]
+        public float panLimit;
         public bool captured;
     }
 
@@ -408,12 +410,22 @@ public class DateSessionManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(ArrivalTransition());
+        StartCoroutine(DateTransitionWrapper(ArrivalTransition()));
     }
 
     // ──────────────────────────────────────────────────────────────
     // Phase Transitions (fade → teleport → fade)
     // ──────────────────────────────────────────────────────────────
+
+    /// <summary>Wrap date transitions so DayPhaseManager.IsTransitioning blocks input during fades.</summary>
+    private static IEnumerator DateTransitionWrapper(IEnumerator inner)
+    {
+        if (DayPhaseManager.Instance != null)
+            DayPhaseManager.Instance.IsTransitioning = true;
+        yield return inner;
+        if (DayPhaseManager.Instance != null)
+            DayPhaseManager.Instance.IsTransitioning = false;
+    }
 
     private IEnumerator ArrivalTransition()
     {
@@ -510,6 +522,9 @@ public class DateSessionManager : MonoBehaviour
         reactionUI?.ShowText(preLine, 2.0f);
         yield return s_wait25;
 
+        // Block input during transition
+        if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = true;
+
         // Fade out
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
@@ -563,6 +578,9 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 
+        // Unblock input now that transition is complete
+        if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = false;
+
         // Now glide the camera over to the kitchen while the player watches.
         LerpPhaseCamera(DatePhase.BackgroundJudging);
 
@@ -614,6 +632,9 @@ public class DateSessionManager : MonoBehaviour
         reactionUI?.ShowText(preLine, 2.0f);
         yield return s_wait25;
 
+        // Block input during transition
+        if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = true;
+
         // Fade out
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
@@ -660,6 +681,9 @@ public class DateSessionManager : MonoBehaviour
         // Fade in always runs even if setup threw
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
+
+        // Unblock input now that transition is complete
+        if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = false;
 
         // Glide camera over to the couch while the player watches.
         LerpPhaseCamera(DatePhase.Reveal);
@@ -1561,6 +1585,10 @@ public class DateSessionManager : MonoBehaviour
             frame.farClip,
             frame.perspective,
             frame.perspectiveFOV);
+
+        // Apply per-phase pan limit (0 = locked, small value = tight bounds)
+        float panLim = frame.panLimit == 0f ? 0.5f : frame.panLimit; // guard uninitialized 0
+        ApartmentManager.Instance.SetPresetPanLimit(panLim);
     }
 
     /// <summary>

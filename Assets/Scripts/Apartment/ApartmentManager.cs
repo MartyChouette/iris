@@ -622,8 +622,9 @@ public class ApartmentManager : MonoBehaviour
         }
         else
         {
-            // Circular clamp
-            float effectiveMaxPan = panMaxDistance * scale;
+            // Circular clamp — use tighter preset limit when active
+            float basePan = (_presetOverrideActive && _presetPanLimit >= 0f) ? _presetPanLimit : panMaxDistance;
+            float effectiveMaxPan = basePan * scale;
             if (adjusted.magnitude > effectiveMaxPan)
                 adjusted = adjusted.normalized * effectiveMaxPan;
             _panOffset = centerOffset + adjusted;
@@ -764,6 +765,10 @@ public class ApartmentManager : MonoBehaviour
     private float _presetFarClip = 1000f;
     private bool _presetPerspective;
     private float _presetPerspectiveFOV = 60f;
+    private float _presetPanLimit = -1f; // -1 = use default panMaxDistance
+
+    /// <summary>Override the pan distance limit while a preset is active. Set -1 to use default.</summary>
+    public void SetPresetPanLimit(float maxPan) => _presetPanLimit = maxPan;
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
     {
@@ -815,6 +820,7 @@ public class ApartmentManager : MonoBehaviour
         _presetFarClip = 1000f;
         _presetPerspective = false;
         _presetPerspectiveFOV = 60f;
+        _presetPanLimit = -1f;
 
         // Snap back to current area (reads from defaultPreset if set)
         if (areas != null && areas.Length > 0)
