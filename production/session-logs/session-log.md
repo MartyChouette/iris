@@ -39,6 +39,10 @@ Watering can shows cutaway UI on snap engagement with plant reveal shader. Nema 
 - `117f33d` restore perspective switching with try/catch safety
 - `5f1736a` stability + optimization audit pass
 - `82199f3` remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+- `c22ded5` remove album name popup on sleeve hover
+- `5fd357f` fix white screen hang: WaitForSeconds → WaitForSecondsRealtime
+- `30769bc` ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+- `c6ab5ea` guard nearClip=0 from serialized data — root cause of white screen
 
 ---
 
@@ -17266,6 +17270,172 @@ db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch
 d782d6a update session log for 20260418
 df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
 4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_180732
+### Commits
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+---
+
+## Session End: 20260418_180917
+### Commits
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_181533
+### Commits
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_181758
+### Commits
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_181838
+### Commits
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_182335
+### Commits
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
+4e46663 watering UI on snap, plant reveal shader, Nema look-at settings, highlight filter
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260418_193652
+### Commits
+c6ab5ea guard nearClip=0 from serialized data — root cause of white screen
+30769bc ScreenFade safety net: auto-clear if stuck opaque for 8 seconds
+5fd357f fix white screen hang: replace WaitForSeconds with WaitForSecondsRealtime
+c22ded5 remove album name popup on sleeve hover
+534ebb9 update session log and scene for 20260418
+82199f3 remove held item highlight, fix sponge cursor, gamepad scheme deadzone
+5f1736a stability + optimization audit pass
+117f33d restore perspective switching with try/catch safety
+d277d55 audit fixes: null guards, scene cleanup, dead code removal
+1f9c502 update session log
+4802f2b disable runtime projection switching — was crashing on apartment load
+b6bf4cb fix white screen: move projection switch to ApplyParallax, remove unused var
+95eeabf revert fade panel to white — intentional design choice
+cdc00c1 fix white screen: fade panel was white not black, guard transition crashes
+9fc8a91 guard zero far clip from uninitialized serialized phase camera data
+db52321 per-phase perspective/FOV, sponge cursor hide, watering lock fix, glitch shader fix
+d782d6a update session log for 20260418
+df03c8c phase jumper, UI scene cleanup, per-phase clip, menu fix, fridge drawer fix
 ### Uncommitted Changes
 Assets/Scenes/apartment.unity
 production/session-logs/session-log.md
