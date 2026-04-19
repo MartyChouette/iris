@@ -102,11 +102,8 @@ Shader "Iris/PSXMirror"
                 // Project reflection texture via screen-space UVs
                 float2 screenUV = input.screenPos.xy / input.screenPos.w;
 
-                // Platform-aware Y flip — some graphics APIs (D3D) have
-                // flipped UV origin vs others (OpenGL).
-                #if UNITY_UV_STARTS_AT_TOP
-                screenUV.y = 1.0 - screenUV.y;
-                #endif
+                // Mirror reflects horizontally — flip U so left/right are reversed
+                screenUV.x = 1.0 - screenUV.x;
 
                 // ── Barrel distortion (subtle CRT warp at edges) ──
                 float2 centered = screenUV - 0.5;
