@@ -188,9 +188,9 @@ public class DateSessionManager : MonoBehaviour
 
     [Header("Phase Cameras")]
     [Tooltip("Camera framing snapped to during each date phase. Capture from the Scene View via the inspector buttons.")]
-    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f };
-    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f };
-    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f };
+    [SerializeField] private PhaseCameraFrame _arrivalCamera = new() { label = "Arrival", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f, zoomStep = -1 };
+    [SerializeField] private PhaseCameraFrame _kitchenCamera = new() { label = "Kitchen / BackgroundJudging", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f, zoomStep = -1 };
+    [SerializeField] private PhaseCameraFrame _couchCamera   = new() { label = "Couch / Reveal", nearClip = -9f, farClip = 1000f, perspectiveFOV = 60f, panLimit = 0.5f, zoomStep = -1 };
 
     [Tooltip("Default seconds the camera takes to glide into a phase frame when LerpPhaseCamera is used.")]
     [SerializeField] private float _phaseCameraLerpDuration = 1.6f;
@@ -212,6 +212,8 @@ public class DateSessionManager : MonoBehaviour
         public float perspectiveFOV;
         [Tooltip("Maximum pan distance during this phase. 0 = locked in place, -1 = use default.")]
         public float panLimit;
+        [Tooltip("Which zoom step to force (0 = most zoomed out, -1 = don't override).")]
+        public int zoomStep;
         public bool captured;
     }
 
@@ -1589,6 +1591,9 @@ public class DateSessionManager : MonoBehaviour
         // Apply per-phase pan limit (0 = locked, small value = tight bounds)
         float panLim = frame.panLimit == 0f ? 0.5f : frame.panLimit; // guard uninitialized 0
         ApartmentManager.Instance.SetPresetPanLimit(panLim);
+
+        // Force zoom step if configured (-1 = don't override)
+        ApartmentManager.Instance.ForceZoomStep(frame.zoomStep);
     }
 
     /// <summary>

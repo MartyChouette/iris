@@ -138,6 +138,20 @@ public class DateSessionManagerEditor : Editor
                 EditorUtility.SetDirty(mgr);
             }
 
+            // Zoom step
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Zoom Step", GUILayout.Width(65));
+            int newZoom = EditorGUILayout.IntSlider(frame.zoomStep, -1, 4);
+            EditorGUILayout.LabelField("-1 = don't override", EditorStyles.miniLabel, GUILayout.Width(105));
+            EditorGUILayout.EndHorizontal();
+
+            if (newZoom != frame.zoomStep)
+            {
+                Undo.RecordObject(mgr, $"Adjust {label} Zoom Step");
+                frame.zoomStep = newZoom;
+                EditorUtility.SetDirty(mgr);
+            }
+
             EditorGUI.indentLevel--;
         }
     }

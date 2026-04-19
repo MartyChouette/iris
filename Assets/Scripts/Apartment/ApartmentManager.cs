@@ -536,6 +536,17 @@ public class ApartmentManager : MonoBehaviour
         _currentZoom = _targetZoom;
     }
 
+    /// <summary>Force a specific zoom step (0 = most zoomed out). Clamped to valid range. Pass -1 to skip.</summary>
+    public void ForceZoomStep(int step)
+    {
+        if (step < 0) return;
+        if (_zoomSteps == null || _zoomSteps.Length == 0) return;
+        _currentZoomStep = Mathf.Clamp(step, 0, _zoomSteps.Length - 1);
+        _targetZoom = _zoomSteps[_currentZoomStep];
+        ClampPanOffset();
+        UpdateZoomIndicator();
+    }
+
     private void HandleZoomInput()
     {
         if (browseCamera == null) return;
