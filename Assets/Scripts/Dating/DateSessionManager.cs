@@ -1499,7 +1499,7 @@ public class DateSessionManager : MonoBehaviour
         // Show character name
         string charName = _currentDate != null ? _currentDate.characterName : "";
         if (PhaseTitleDrop.Instance != null && !string.IsNullOrEmpty(charName))
-            StartCoroutine(PhaseTitleDrop.Instance.Show(charName));
+            PhaseTitleDrop.Instance.Show(charName);
 
         // Phase 1: Push in from current position to sweep start
         float pushDuration = 0.6f;
