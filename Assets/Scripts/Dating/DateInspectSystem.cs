@@ -147,10 +147,8 @@ public class DateInspectSystem : MonoBehaviour
 
         _hoveredTag = foundTag;
 
-        if (foundTag != null)
-            ShowTooltip(foundTag, screenPos);
-        else
-            HideTooltip();
+        // Hover tooltip disabled — reactions still fire on click
+        _hoveredTag = foundTag;
     }
 
     private static readonly HitDistComparer s_hitComparer = new();
@@ -178,6 +176,10 @@ public class DateInspectSystem : MonoBehaviour
         if (dsm.CurrentDatePhase != DateSessionManager.DatePhase.Reveal) return false;
 
         var tag = _hoveredTag;
+
+        // Each item only affects the score once per date
+        if (dsm.TryMarkScored(tag)) return false;
+
         var prefs = dsm.CurrentDate.preferences;
         var reaction = ReactionEvaluator.EvaluateReactable(tag, prefs);
         int multiplier = DateSessionManager.GetTagEffectMultiplier(tag);

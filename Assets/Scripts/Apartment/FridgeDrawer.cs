@@ -7,7 +7,12 @@ using UnityEngine;
 /// </summary>
 public class FridgeDrawer : MonoBehaviour
 {
-    [Tooltip("How far the drawer slides out on its local Z axis (world units).")]
+    public enum SlideAxis { ForwardZ, BackZ, RightX, LeftX, UpY, DownY }
+
+    [Tooltip("Which local axis the drawer slides along.")]
+    [SerializeField] private SlideAxis _slideAxis = SlideAxis.ForwardZ;
+
+    [Tooltip("How far the drawer slides out (world units).")]
     [SerializeField] private float _slideDistance = 0.3f;
 
     [Tooltip("Seconds for the open / close tween.")]
@@ -85,14 +90,21 @@ public class FridgeDrawer : MonoBehaviour
         else if (!opening && _closeSFX != null)
             AudioManager.Instance?.PlaySFX(_closeSFX);
 
+        Vector3 dir = _slideAxis switch
+        {
+            SlideAxis.ForwardZ => Vector3.forward,
+            SlideAxis.BackZ   => Vector3.back,
+            SlideAxis.RightX  => Vector3.right,
+            SlideAxis.LeftX   => Vector3.left,
+            SlideAxis.UpY     => Vector3.up,
+            SlideAxis.DownY   => Vector3.down,
+            _                 => Vector3.forward,
+        };
+
         Vector3 from = transform.localPosition;
         Vector3 to = opening
-            ? _closedLocalPos + transform.parent.InverseTransformDirection(transform.forward) * _slideDistance
+            ? _closedLocalPos + dir * _slideDistance
             : _closedLocalPos;
-
-        // Use local Z direction for the slide
-        if (opening)
-            to = _closedLocalPos + Vector3.forward * _slideDistance;
 
         float elapsed = 0f;
         while (elapsed < _tweenDuration)

@@ -18439,3 +18439,78 @@ Assets/Scripts/Dating/DateSessionManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260419_175938
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+---
+
+## Session End: 20260419_195149
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_201155
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_201252
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+Assets/Scripts/Dating/DateInspectSystem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_201707
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_201945
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_203259
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_203530
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260419_203810
+### Commits
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+

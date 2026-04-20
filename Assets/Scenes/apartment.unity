@@ -13693,12 +13693,12 @@ MonoBehaviour:
       m_Calls: []
   _enableArrivalSweep: 1
   _sweepDistance: 1.2
+  _sweepWidth: 0.6
   _sweepFOV: 1.72
   _sweepDuration: 2.5
   _sweepHold: 0.8
   _sweepReturnDuration: 0.8
-  _sweepStartAngle: -15
-  _sweepEndAngle: 180
+  _sweepApproachAngle: 0
   _sweepStartHeight: 0.33
   _sweepEndHeight: 3
   _sweepLookAtHeight: 2.3
@@ -16026,63 +16026,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788164268}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &790755245
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.751651
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -6.130485
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
-      propertyPath: m_Name
-      value: '[CinematicPreview] Paris'
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1cf307e66eb6b3b4c8f704e2df0a1abd, type: 3}
 --- !u!1 &793028991
 GameObject:
   m_ObjectHideFlags: 0
@@ -53331,6 +53274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
+  _slideAxis: 0
   _slideDistance: 0.3
   _tweenDuration: 0.4
   _clickLayer:
@@ -53381,7 +53325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
-  _slideDistance: 0.3
+  _slideAxis: 4
+  _slideDistance: 0.01
   _tweenDuration: 0.4
   _clickLayer:
     serializedVersion: 2
@@ -55778,6 +55723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
+  _slideAxis: 0
   _slideDistance: 0.3
   _tweenDuration: 0.4
   _clickLayer:
@@ -55843,7 +55789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
-  _slideDistance: 0.3
+  _slideAxis: 4
+  _slideDistance: 0.01
   _tweenDuration: 0.4
   _clickLayer:
     serializedVersion: 2
@@ -55953,6 +55900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
+  _slideAxis: 0
   _slideDistance: 0.3
   _tweenDuration: 0.4
   _clickLayer:
@@ -56927,4 +56875,3 @@ SceneRoots:
   - {fileID: 655491373}
   - {fileID: 427413295}
   - {fileID: 543450652145830559}
-  - {fileID: 790755245}

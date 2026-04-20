@@ -286,6 +286,7 @@ public class DateSessionManager : MonoBehaviour
     private float _arrivalTimer;
     private bool _arrivalTimerActive;
     private readonly List<AccumulatedReaction> _accumulatedReactions = new();
+    private readonly HashSet<ReactableTag> _scoredTags = new();
     private Coroutine _phase2PulseCoroutine;
     private Color _fridgeOrigColor;
     private Color _drinkOrigColor;
@@ -461,6 +462,7 @@ public class DateSessionManager : MonoBehaviour
             DateInspectSystem.Instance?.ResetForNewDate();
             _moodCheckTimer = 0f;
             _accumulatedReactions.Clear();
+            _scoredTags.Clear();
 
             SpawnDateCharacter();
 
@@ -800,6 +802,10 @@ public class DateSessionManager : MonoBehaviour
             if (skipInspected && inspectSystem != null && inspectSystem.IsInspected(tag))
                 continue;
 
+            // Skip items already scored earlier in this date (excursions, inspect clicks)
+            if (_scoredTags.Contains(tag))
+                continue;
+
             var reaction = ReactionEvaluator.EvaluateReactable(tag, prefs);
             if (reaction == ReactionType.Neutral) continue;
 
@@ -828,6 +834,9 @@ public class DateSessionManager : MonoBehaviour
             var tag = items[i].tag;
             var reaction = items[i].reaction;
             int multiplier = items[i].multiplier;
+
+            // Mark as scored (should already be filtered, but belt-and-suspenders)
+            _scoredTags.Add(tag);
 
             // Apply affection with the surface multiplier baked into magnitude.
             ApplyReaction(reaction, multiplier);
@@ -2121,8 +2130,18 @@ public class DateSessionManager : MonoBehaviour
             go.AddComponent<OccludedSilhouette>();
     }
 
+    /// <summary>Returns true if this tag has already been scored this date. Marks it as scored if not.</summary>
+    public bool TryMarkScored(ReactableTag tag)
+    {
+        if (tag == null) return false;
+        return !_scoredTags.Add(tag); // Add returns false if already present
+    }
+
     private void HandleCharacterReaction(ReactableTag tag, ReactionType type, string displayName)
     {
+        // Each item only affects the score once per date
+        if (tag != null && !_scoredTags.Add(tag)) return;
+
         ApplyReaction(type);
 
         // Pop item name above the flower gauge during live reactions
