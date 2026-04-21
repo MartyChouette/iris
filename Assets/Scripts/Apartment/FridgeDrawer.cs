@@ -45,6 +45,14 @@ public class FridgeDrawer : MonoBehaviour
     {
         if (_state == State.Tweening) return;
 
+        // Auto-close when fridge doors shut
+        if (_requireFridgeOpen && _state == State.Open
+            && FridgeController.Instance != null && !FridgeController.Instance.IsOpen)
+        {
+            StartCoroutine(Slide(false));
+            return;
+        }
+
         // Only operate when fridge is open (if this drawer is inside the fridge)
         if (_requireFridgeOpen && FridgeController.Instance != null && !FridgeController.Instance.IsOpen) return;
 

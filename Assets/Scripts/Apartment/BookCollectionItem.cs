@@ -19,9 +19,6 @@ public class BookCollectionItem : MonoBehaviour
     [Tooltip("Number of books needed to complete the collection.")]
     [SerializeField] private int _requiredCount = 3;
 
-    [Tooltip("This book's position in the collection sequence (1-based). Book 1, Book 2, Book 3.")]
-    [SerializeField] private int _orderIndex = 1;
-
     [Header("Reward")]
     [Tooltip("Prefab spawned when the collection is complete and in order.")]
     [SerializeField] private GameObject _rewardPrefab;
@@ -43,11 +40,6 @@ public class BookCollectionItem : MonoBehaviour
     [Tooltip("SFX when the collection completes (correct order).")]
     [SerializeField] private AudioClip _completionSFX;
 
-    [Tooltip("SFX when all books are connected but in wrong order.")]
-    [SerializeField] private AudioClip _wrongOrderSFX;
-
-    public int OrderIndex => _orderIndex;
-
     private bool _completed;
 
     /// <summary>Called by PairableItem.SnapPair when a book is added to the stack.</summary>
@@ -58,58 +50,9 @@ public class BookCollectionItem : MonoBehaviour
         int count = GetComponentsInChildren<BookCollectionItem>().Length;
         if (count < _requiredCount) return;
 
-        // All books present — check order
-        if (IsInCorrectOrder())
-        {
-            _completed = true;
-            StartCoroutine(CelebrationSequence());
-        }
-        else
-        {
-            // Wrong order — nudge the player
-            if (_wrongOrderSFX != null && AudioManager.Instance != null)
-                AudioManager.Instance.PlaySFX(_wrongOrderSFX);
-
-            CaptionDisplay.Show("The books aren't in the right order...", 3f);
-        }
-    }
-
-    /// <summary>
-    /// Check if books in the stack are in correct left-to-right sequential order.
-    /// Reads the local X positions to determine spatial order, then compares
-    /// against _orderIndex values.
-    /// </summary>
-    private bool IsInCorrectOrder()
-    {
-        var books = GetComponentsInChildren<BookCollectionItem>();
-        if (books.Length < _requiredCount) return false;
-
-        // Build list of (localX, orderIndex) — localX relative to root (this transform)
-        var ordered = new List<(float localX, int index)>();
-        for (int i = 0; i < books.Length; i++)
-        {
-            float localX;
-            if (books[i].transform == transform)
-                localX = 0f; // root is at center
-            else
-                localX = books[i].transform.localPosition.x;
-
-            ordered.Add((localX, books[i]._orderIndex));
-        }
-
-        // Sort by spatial position (left to right in local X)
-        ordered.Sort((a, b) => a.localX.CompareTo(b.localX));
-
-        // Check if order indices are sequential (ascending)
-        bool ascending = true;
-        bool descending = true;
-        for (int i = 1; i < ordered.Count; i++)
-        {
-            if (ordered[i].index <= ordered[i - 1].index) ascending = false;
-            if (ordered[i].index >= ordered[i - 1].index) descending = false;
-        }
-
-        return ascending || descending;
+        // All books present — complete regardless of order
+        _completed = true;
+        StartCoroutine(CelebrationSequence());
     }
 
     /// <summary>

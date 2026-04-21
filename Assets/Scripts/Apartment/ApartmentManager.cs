@@ -1021,6 +1021,10 @@ public class ApartmentManager : MonoBehaviour
                 if (wateringCanHeld && !_plantHighlightSet.Contains(hl.gameObject))
                     continue;
 
+                // Never highlight the currently held item
+                if (heldObj != null && hl.gameObject == heldObj.gameObject)
+                    continue;
+
                 float angle = AngleToRay(ray, hl.transform.position);
                 if (angle < bestAngle)
                 {
@@ -1042,12 +1046,8 @@ public class ApartmentManager : MonoBehaviour
 
             _hoveredHighlight = hit;
 
-            // Highlight new + its pair partner
-            if (_hoveredHighlight != null)
-            {
-                _hoveredHighlight.SetHighlighted(true);
-                SetPartnerHighlight(_hoveredHighlight, true);
-            }
+            // Hover highlight disabled — cursor change is sufficient feedback
+            // _hoveredHighlight is still tracked for cursor type detection
         }
     }
 

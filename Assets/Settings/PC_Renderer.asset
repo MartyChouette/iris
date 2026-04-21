@@ -45,7 +45,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
   - {fileID: -3224449619689437488}
-  m_RendererFeatureMap: ad6b866f10d7b46c33979994d961a2c5d086449e277440d3
+  - {fileID: 5742268844292691882}
+  m_RendererFeatureMap: ad6b866f10d7b46c33979994d961a2c5d086449e277440d3aad7db0c17a3b04f
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -74,6 +75,27 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 0
+--- !u!114 &5742268844292691882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403b64e3aa7aa384aacf6bf7ab574619, type: 3}
+  m_Name: DoubleExposureFeature
+  m_EditorClassIdentifier: Assembly-CSharp::DoubleExposureFeature
+  m_Active: 1
+  settings:
+    feedbackDecay: 0.241
+    blendIntensity: 0.485
+    blurRadius: 6
+    bloomThreshold: 0.471
+    bloomSoftness: 1
+    bufferDivisor: 4
+  _shader: {fileID: 4800000, guid: f641a616fb963784db965f01caa3b4f2, type: 3}
 --- !u!114 &7833122117494664109
 MonoBehaviour:
   m_ObjectHideFlags: 0

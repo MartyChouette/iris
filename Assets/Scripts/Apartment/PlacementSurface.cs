@@ -290,6 +290,35 @@ public class PlacementSurface : MonoBehaviour
     public float SurfaceY =>
         transform.TransformPoint(new Vector3(0f, localBounds.center.y + localBounds.extents.y, 0f)).y;
 
+    // ── Book edge detection ───────────────────────────────────────────
+
+    /// <summary>
+    /// Returns the local-space axis index of the longer tangent dimension.
+    /// This is the "shelf run" — its min/max are the left/right edges.
+    /// </summary>
+    public int GetLengthAxis()
+    {
+        GetTangentAxes(out int a, out int b, out _);
+        Vector3 size = localBounds.size;
+        return Mathf.Abs(size[a]) >= Mathf.Abs(size[b]) ? a : b;
+    }
+
+    /// <summary>
+    /// True if a world-space point is near the left or right edge of the
+    /// surface's length axis. edgeThreshold is in world-space meters.
+    /// </summary>
+    public bool IsNearLengthEdge(Vector3 worldPoint, float edgeThreshold)
+    {
+        if (IsVertical) return false;
+        Vector3 local = transform.InverseTransformPoint(worldPoint);
+        int axis = GetLengthAxis();
+        float min = localBounds.min[axis];
+        float max = localBounds.max[axis];
+        float scale = Mathf.Abs(transform.lossyScale[axis]);
+        float localThreshold = scale > 0.001f ? edgeThreshold / scale : edgeThreshold;
+        return local[axis] <= min + localThreshold || local[axis] >= max - localThreshold;
+    }
+
     // ── Static utility ─────────────────────────────────────────────────
 
     /// <summary>

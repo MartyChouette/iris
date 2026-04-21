@@ -18514,3 +18514,532 @@ Assets/Scripts/Dating/DateSessionManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260419_204226
+### Commits
+dcaf7f2 date scoring dedup, remove hover tooltip, fridge drawer axis selector, reactable tag audit
+be7b45f cinematic controls: full parameter parity, preview accuracy, skip support, camera jitter fix
+---
+
+## Session End: 20260420_160455
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_160956
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_161025
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_171412
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_172350
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_173953
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_174424
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_180033
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_183027
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_183455
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_184311
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_191326
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_192037
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_192523
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_195654
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_200157
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_200309
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_200533
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_200619
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_202136
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_202548
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_204151
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_204354
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_204452
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_204658
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_204901
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_204926
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_205134
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_210714
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_211048
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_211240
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_212533
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_212841
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_212853
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_212950
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_213046
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_213354
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_213650
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_214336
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/FridgeDrawer.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/SampleSceneProfile.asset
+production/session-logs/session-log.md
+---
+

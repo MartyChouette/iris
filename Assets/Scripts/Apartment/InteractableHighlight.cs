@@ -12,6 +12,7 @@ public enum HighlightStyle
     DashedOutline,  // Animated dashed/marching-ants outline
     DoubleOutline,  // Two-tone inner + outer outline
     FresnelOutline, // Outline that glows brighter at silhouette edges
+    CleanOutline,   // Clean silhouette — no vertex snap, no jitter, true geometry
 }
 
 /// <summary>
@@ -50,7 +51,7 @@ public class InteractableHighlight : MonoBehaviour
     }
 
     // ── Highlight style ───────────────
-    private static HighlightStyle s_currentStyle = HighlightStyle.Outline;
+    private static HighlightStyle s_currentStyle = HighlightStyle.CleanOutline;
 
     public static HighlightStyle CurrentStyle
     {
@@ -152,6 +153,7 @@ public class InteractableHighlight : MonoBehaviour
     private static Shader s_cachedDashShader;
     private static Shader s_cachedDoubleShader;
     private static Shader s_cachedFresnelShader;
+    private static Shader s_cachedCleanShader;
     private static Material s_sharedRimMat;
     private static Material s_sharedGazeMat;
     private static Material s_sharedDisplayMat;
@@ -236,6 +238,8 @@ public class InteractableHighlight : MonoBehaviour
             s_cachedDoubleShader = Shader.Find("Iris/HighlightDouble");
         if (s_cachedFresnelShader == null)
             s_cachedFresnelShader = Shader.Find("Iris/HighlightFresnel");
+        if (s_cachedCleanShader == null)
+            s_cachedCleanShader = Shader.Find("Iris/HighlightClean");
 
         EnsureSharedMaterials();
 
@@ -521,6 +525,8 @@ public class InteractableHighlight : MonoBehaviour
                 return MakeDoubleMat(color, s_tuneWidth * intensityScale * 2f, pulseSpeed, pulse);
             case HighlightStyle.FresnelOutline:
                 return MakeFresnelMat(color, s_tuneWidth * intensityScale * 2f, pulseSpeed, pulse);
+            case HighlightStyle.CleanOutline:
+                return MakeCleanMat(color, s_tuneWidth * intensityScale * 2f, pulseSpeed, pulse);
             case HighlightStyle.RimGlow:
             default:
                 return MakeRimGlowMat(color, alpha, pulseSpeed, pulse);
@@ -603,6 +609,18 @@ public class InteractableHighlight : MonoBehaviour
         mat.SetFloat("_OutlineWidth", Mathf.Clamp(width, 0.002f, 0.05f));
         mat.SetFloat("_FresnelPower", s_tuneRim);
         mat.SetFloat("_FresnelMin", 0.3f);
+        mat.SetFloat("_PulseSpeed", pulseSpeed);
+        mat.SetFloat("_PulseAmount", pulseAmount);
+        return mat;
+    }
+
+    private static Material MakeCleanMat(Color color, float width, float pulseSpeed, float pulseAmount)
+    {
+        var shader = s_cachedCleanShader;
+        if (shader == null) return null;
+        var mat = new Material(shader);
+        mat.SetColor("_OutlineColor", color);
+        mat.SetFloat("_OutlineWidth", Mathf.Clamp(width, 0.002f, 0.05f));
         mat.SetFloat("_PulseSpeed", pulseSpeed);
         mat.SetFloat("_PulseAmount", pulseAmount);
         return mat;

@@ -622,28 +622,6 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // Book collection: clicking a child book in a connected set detaches
-        // just that book (for reordering) instead of picking up the whole group.
-        var bookColl = placeable.GetComponent<BookCollectionItem>();
-        if (bookColl != null && placeable.GetComponentInParent<PairableItem>() != null)
-        {
-            // Check if this is a CHILD in a paired stack (not the root)
-            var parentPairable = placeable.transform.parent != null
-                ? placeable.transform.parent.GetComponent<PairableItem>()
-                : null;
-            if (parentPairable != null)
-            {
-                var detached = bookColl.DetachFromStack();
-                if (detached != null)
-                {
-                    ConsumeClick();
-                    _held = detached;
-                    _pickupTimer = PickupFeelDuration;
-                    InitGrab();
-                    return;
-                }
-            }
-        }
 
         // During date phases (1-3), block general item pickup.
         // Only bottles (Phase 2 drink-making) and drink glasses (delivery) are allowed.
@@ -673,6 +651,18 @@ public class ObjectGrabber : MonoBehaviour
     private void InitGrab()
     {
         var placeable = _held;
+
+        // Clear all highlight layers on the item being picked up
+        var heldHL = placeable.GetComponent<InteractableHighlight>();
+        if (heldHL != null)
+        {
+            heldHL.SetHighlighted(false);
+            heldHL.SetInteractHighlighted(false);
+            heldHL.SetGazeHighlighted(false);
+            heldHL.SetDisplayHighlighted(false);
+            heldHL.SetPrepLikedHighlighted(false);
+            heldHL.SetPrepDislikedHighlighted(false);
+        }
 
         // Flash partner highlight for pairable items (shoes)
         var pairable = placeable.GetComponent<PairableItem>();
@@ -744,9 +734,13 @@ public class ObjectGrabber : MonoBehaviour
             slotHL.SetHighlighted(true);
         }
 
-        // Book hidden item check
+        // Book: hidden item check + grab books above in stack
         var bookItem = placeable.GetComponent<BookItem>();
-        if (bookItem != null) bookItem.OnBookPickedUp();
+        if (bookItem != null)
+        {
+            bookItem.OnBookPickedUp();
+            bookItem.GrabBooksAbove();
+        }
 
         // Blanket fold + hidden item reveal
         var blanket = placeable.GetComponent<BlanketItem>();
@@ -1101,6 +1095,7 @@ public class ObjectGrabber : MonoBehaviour
         pos += hitResult.surfaceNormal * halfExtent;
 
         Quaternion rot;
+        bool bookIsFlat = false;
         if (_currentSurface.IsVertical)
         {
             rot = Quaternion.LookRotation(hitResult.surfaceNormal, Vector3.up)
@@ -1110,6 +1105,17 @@ public class ObjectGrabber : MonoBehaviour
         {
             // Strip any pour tilt — place items upright
             rot = _isPourTilted ? Quaternion.identity : _held.transform.rotation;
+
+            // Smart book placement: use held rotation, just handle stacking
+            var placeBook = _held.GetComponent<BookItem>();
+            if (placeBook != null && placeBook.UseSmartPlacement)
+            {
+                bookIsFlat = true;
+                rot = _held.transform.rotation;
+                float stackY = GetFlatBookStackTop(_currentSurface, pos);
+                if (stackY > pos.y)
+                    pos.y = stackY;
+            }
         }
         _isPourTilted = false;
 
@@ -1160,10 +1166,19 @@ public class ObjectGrabber : MonoBehaviour
         // resolved cell. Pairables stack via the click-on-partner path
         // (TryPairWithClicked above); plain placement here is never allowed to
         // overlap a sibling.
-        if (FindOccupant(pos) != null)
+        var occupant = FindOccupant(pos);
+        if (occupant != null)
         {
-            Debug.Log($"[ObjectGrabber] BLOCKED: cell occupied at {pos}");
-            return;
+            // Allow flat book stacking
+            var heldBook = _held.GetComponent<BookItem>();
+            var occBook = occupant.GetComponent<BookItem>();
+            bool canStack = heldBook != null && heldBook.UseSmartPlacement
+                && occBook != null && occBook.UseSmartPlacement && occBook.IsPlacedFlat;
+            if (!canStack)
+            {
+                Debug.Log($"[ObjectGrabber] BLOCKED: cell occupied at {pos}");
+                return;
+            }
         }
 
         // Restore constraints before placement configures the rigidbody
@@ -1172,9 +1187,14 @@ public class ObjectGrabber : MonoBehaviour
 
         _held.OnPlaced(_currentSurface, true, pos, rot);
 
-        // Book public/private toggle based on placement surface
+        // Book: place stacked books above, then toggle privacy
         var bookItem = _held.GetComponent<BookItem>();
-        if (bookItem != null) bookItem.OnBookPlaced(_currentSurface);
+        if (bookItem != null)
+        {
+            bookItem.OnBookPlaced(_currentSurface, bookIsFlat);
+            if (bookItem.HasStackedBooks)
+                bookItem.ReleaseBooksAbove(_currentSurface, pos, rot);
+        }
 
         // Cubby privacy: items placed on a closed cubby's interior surface become private.
         // Items placed anywhere else become public (clears stale privacy from previous location).
@@ -1844,6 +1864,11 @@ public class ObjectGrabber : MonoBehaviour
                 hl.SetHighlighted(false);
                 hl.SetInteractHighlighted(false);
             }
+
+            // Release any books stacked above on drop
+            var dropBook = _held.GetComponent<BookItem>();
+            if (dropBook != null && dropBook.HasStackedBooks)
+                dropBook.ReleaseBooksAbove(null, _held.transform.position, _held.transform.rotation);
         }
 
         _held = null;
@@ -2115,9 +2140,11 @@ public class ObjectGrabber : MonoBehaviour
 
         var mouse = UnityEngine.InputSystem.Mouse.current;
 
-        // RMB = roll around Z
+        // RMB = roll around Z (blocked for smart-placement books — only 2 poses allowed)
         bool rollPressed = mouse != null && mouse.rightButton.wasPressedThisFrame;
-        if (rollPressed && _held.AllowRoll)
+        var heldBookSP = _held.GetComponent<BookItem>();
+        bool isSmartBook = heldBookSP != null && heldBookSP.UseSmartPlacement;
+        if (rollPressed && _held.AllowRoll && !isSmartBook)
         {
             float angle = scrollRotateStep;
             _held.transform.Rotate(0f, 0f, angle, Space.Self);
@@ -2142,7 +2169,7 @@ public class ObjectGrabber : MonoBehaviour
         // Mouse Back (3) = flip around X (toggle upright/flat)
         bool flipPressed = Input.GetMouseButtonDown(3);
 
-        if (flipPressed && _held.AllowFlip)
+        if (flipPressed && _held.AllowFlip && !isSmartBook)
         {
             Vector3 euler = _held.transform.eulerAngles;
             float xAngle = Mathf.DeltaAngle(euler.x, 0f);
@@ -2163,6 +2190,91 @@ public class ObjectGrabber : MonoBehaviour
     {
         // Use cached extents (colliders are disabled while held)
         return Mathf.Abs(Vector3.Dot(_heldBoundsExtents, normal.normalized)) + PlacementSafetyMargin;
+    }
+
+    // ── Smart book placement ─────────────────────────────────────────
+
+    /// <summary>
+    /// For books with smart placement, determines upright vs flat orientation
+    /// and adjusts position for flat-book stacking. Returns false if not applicable.
+    /// </summary>
+    private bool TryComputeBookOrientation(
+        PlacementSurface surface, Vector3 snappedPos, Quaternion baseRot,
+        out Quaternion bookRot, out Vector3 adjustedPos, out bool isFlat)
+    {
+        bookRot = baseRot;
+        adjustedPos = snappedPos;
+        isFlat = false;
+
+        if (_held == null || surface == null || surface.IsVertical) return false;
+        var book = _held.GetComponent<BookItem>();
+        if (book == null || !book.UseSmartPlacement) return false;
+
+        float yaw = baseRot.eulerAngles.y;
+        bookRot = Quaternion.Euler(book.FlatOffset) * Quaternion.Euler(0f, yaw, 0f);
+        isFlat = true;
+
+        // Stack on top of existing flat books at this cell
+        float stackY = GetFlatBookStackTop(surface, snappedPos);
+        if (stackY > adjustedPos.y)
+            adjustedPos.y = stackY;
+
+        return true;
+    }
+
+    private bool HasAdjacentUprightBook(PlacementSurface surface, Vector3 worldPos)
+    {
+        float searchRadius = gridSize * 1.5f;
+        for (int i = 0; i < PlaceableObject.All.Count; i++)
+        {
+            var po = PlaceableObject.All[i];
+            if (po == null || po == _held) continue;
+            if (po.CurrentState == PlaceableObject.State.Held) continue;
+            if (po.LastPlacedSurface != surface) continue;
+
+            var otherBook = po.GetComponent<BookItem>();
+            if (otherBook == null || !otherBook.UseSmartPlacement) continue;
+            if (!otherBook.IsUpright) continue;
+
+            if (Vector3.Distance(worldPos, po.transform.position) < searchRadius)
+                return true;
+        }
+        return false;
+    }
+
+    private float GetFlatBookStackTop(PlacementSurface surface, Vector3 worldPos)
+    {
+        float topY = worldPos.y;
+        float cellRadius = gridSize * 0.5f;
+
+        for (int i = 0; i < PlaceableObject.All.Count; i++)
+        {
+            var po = PlaceableObject.All[i];
+            if (po == null || po == _held) continue;
+            if (po.CurrentState == PlaceableObject.State.Held) continue;
+            if (po.LastPlacedSurface != surface) continue;
+
+            var otherBook = po.GetComponent<BookItem>();
+            if (otherBook == null || !otherBook.UseSmartPlacement) continue;
+            if (!otherBook.IsPlacedFlat) continue;
+
+            float dx = Mathf.Abs(worldPos.x - po.transform.position.x);
+            float dz = Mathf.Abs(worldPos.z - po.transform.position.z);
+            if (dx > cellRadius || dz > cellRadius) continue;
+
+            var col = po.GetComponent<Collider>();
+            if (col != null)
+            {
+                float bookTop = col.bounds.max.y;
+                if (bookTop > topY)
+                    topY = bookTop;
+            }
+        }
+
+        if (topY > worldPos.y)
+            topY += _heldBoundsExtents.y;
+
+        return topY;
     }
 
     /// <summary>
@@ -2470,6 +2582,16 @@ public class ObjectGrabber : MonoBehaviour
               * Quaternion.AngleAxis(_wallRotation, Vector3.forward)
             : _held.transform.rotation;
 
+        // Smart book placement preview — match held rotation, handle stacking
+        var ghostBook = _held.GetComponent<BookItem>();
+        if (!_currentSurface.IsVertical && ghostBook != null && ghostBook.UseSmartPlacement)
+        {
+            placeRot = _held.transform.rotation;
+            float stackY = GetFlatBookStackTop(_currentSurface, placePos);
+            if (stackY > placePos.y)
+                placePos.y = stackY;
+        }
+
         // Mirror the home-snap override from Place() so ghost matches exactly
         if (_held.HasHome && Vector3.Distance(placePos, _held.HomePosition) < _held.HomeTolerance)
         {
@@ -2522,6 +2644,14 @@ public class ObjectGrabber : MonoBehaviour
                 var occPair = occupant.GetComponent<PairableItem>();
                 bool canStackHere = heldPair != null && occPair != null
                     && occPair.CanPairWith(heldPair);
+                // Allow flat book stacking in preview
+                if (!canStackHere)
+                {
+                    var heldBook = _held.GetComponent<BookItem>();
+                    var occBook = occupant.GetComponent<BookItem>();
+                    canStackHere = heldBook != null && heldBook.UseSmartPlacement
+                        && occBook != null && occBook.UseSmartPlacement && occBook.IsPlacedFlat;
+                }
                 if (!canStackHere) canPlace = false;
             }
         }

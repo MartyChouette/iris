@@ -1396,7 +1396,7 @@ MonoBehaviour:
   _doorPivotR: {fileID: 3544450267697097882}
   _hingePointL: {fileID: 1796030846}
   _hingePointR: {fileID: 273494464}
-  _openAngleL: -10
+  _openAngleL: 10
   _openAngleR: 10
   _tweenDuration: 0.6
   _openBothTogether: 1
@@ -4096,6 +4096,7 @@ GameObject:
   - component: {fileID: 206099559}
   - component: {fileID: 206099564}
   - component: {fileID: 206099565}
+  - component: {fileID: 206099566}
   m_Layer: 15
   m_Name: Single_Medium_Book The Dead Letter Love 3 of 3
   m_TagString: Untagged
@@ -4142,9 +4143,9 @@ MonoBehaviour:
   wallOnly: 0
   crookedAngleRange: 12
   _rotateAxis: {x: 0, y: 1, z: 0}
-  _allowYaw: 1
-  _allowFlip: 1
-  _allowRoll: 1
+  _allowYaw: 0
+  _allowFlip: 0
+  _allowRoll: 0
   _allowAutoStraighten: 1
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 1
@@ -4293,14 +4294,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BookCollectionItem
   _requiredCount: 3
-  _orderIndex: 1
   _rewardPrefab: {fileID: 919967253}
   _rewardCaption: Something fell out of the books...
   _celebrationDelay: 0.4
   _arcDuration: 0.7
   _arcHeight: 0.4
   _completionSFX: {fileID: 0}
-  _wrongOrderSFX: {fileID: 0}
+--- !u!114 &206099566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206099557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18a089d9c0fa5f418d13b0615055d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BookItem
+  _definition: {fileID: 0}
+  _useSmartPlacement: 1
+  _uprightOffset: {x: 90, y: 0, z: 0}
+  _flatOffset: {x: 90, y: 0, z: 0}
+  _hiddenItemPrefab: {fileID: 0}
+  _hiddenItemMinDay: 0
 --- !u!1 &208469183
 GameObject:
   m_ObjectHideFlags: 0
@@ -8001,7 +8018,7 @@ MonoBehaviour:
   _doorPivotL: {fileID: 7729171288449015294}
   _doorPivotR: {fileID: 2251124905847525957}
   _hingePointL: {fileID: 1852545639}
-  _hingePointR: {fileID: 1852545639}
+  _hingePointR: {fileID: 340343148}
   _openAngleL: -110
   _openAngleR: 110
   _tweenDuration: 0.6
@@ -9181,6 +9198,7 @@ GameObject:
   - component: {fileID: 478580142}
   - component: {fileID: 478580147}
   - component: {fileID: 478580148}
+  - component: {fileID: 478580149}
   m_Layer: 15
   m_Name: Single_Medium_Book The Dead Letter Love 2 of 3
   m_TagString: Untagged
@@ -9227,9 +9245,9 @@ MonoBehaviour:
   wallOnly: 0
   crookedAngleRange: 0
   _rotateAxis: {x: 0, y: 1, z: 0}
-  _allowYaw: 1
-  _allowFlip: 1
-  _allowRoll: 1
+  _allowYaw: 0
+  _allowFlip: 0
+  _allowRoll: 0
   _allowAutoStraighten: 1
   _disheveledRotation: {x: 0.25340444, y: 0.660141, z: -0.660141, w: 0.25340444}
   _startDishelved: 1
@@ -9378,14 +9396,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BookCollectionItem
   _requiredCount: 3
-  _orderIndex: 1
   _rewardPrefab: {fileID: 919967253}
   _rewardCaption: Something fell out of the books...
   _celebrationDelay: 0.4
   _arcDuration: 0.7
   _arcHeight: 0.4
   _completionSFX: {fileID: 0}
-  _wrongOrderSFX: {fileID: 0}
+--- !u!114 &478580149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478580140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18a089d9c0fa5f418d13b0615055d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BookItem
+  _definition: {fileID: 0}
+  _useSmartPlacement: 1
+  _uprightOffset: {x: 90, y: 0, z: 0}
+  _flatOffset: {x: 90, y: 0, z: 0}
+  _hiddenItemPrefab: {fileID: 0}
+  _hiddenItemMinDay: 0
 --- !u!1 &479891199
 GameObject:
   m_ObjectHideFlags: 0
@@ -44257,7 +44291,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9151970196485579308}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -44545,7 +44579,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377944756301454932}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -45574,7 +45608,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4441950184497267831}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -48513,7 +48547,7 @@ GameObject:
   - component: {fileID: 7991704402354374370}
   - component: {fileID: 7991704402354374374}
   m_Layer: 15
-  m_Name: Jar of Goodies
+  m_Name: Jar of Candy I love
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48534,7 +48568,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2292339034119131264}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -49295,7 +49329,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: -2.422, y: 1.623, z: 4.323}
-  m_LocalScale: {x: 8.687254, y: 8.687254, z: 8.687254}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450653414306598}
@@ -49715,6 +49749,7 @@ GameObject:
   - component: {fileID: 8226558599481057028}
   - component: {fileID: 8226558599481057030}
   - component: {fileID: 8226558599481057031}
+  - component: {fileID: 8226558599481057032}
   m_Layer: 15
   m_Name: Single_Medium_Book The Dead Letter Love 1 of 3
   m_TagString: Untagged
@@ -49969,7 +50004,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5589878413021733295}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -52591,7 +52626,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2919847045690635827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -54760,7 +54795,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: -2.785, y: 1.619, z: 4.301}
-  m_LocalScale: {x: 10.163895, y: 10.163895, z: 10.163895}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450653414306598}
@@ -55162,9 +55197,9 @@ MonoBehaviour:
   wallOnly: 0
   crookedAngleRange: 12
   _rotateAxis: {x: 0, y: 1, z: 0}
-  _allowYaw: 1
-  _allowFlip: 1
-  _allowRoll: 1
+  _allowYaw: 0
+  _allowFlip: 0
+  _allowRoll: 0
   _allowAutoStraighten: 1
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 1
@@ -55234,14 +55269,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BookCollectionItem
   _requiredCount: 3
-  _orderIndex: 1
   _rewardPrefab: {fileID: 919967253}
   _rewardCaption: Something fell out of the books...
   _celebrationDelay: 0.4
   _arcDuration: 0.7
   _arcHeight: 0.4
   _completionSFX: {fileID: 0}
-  _wrongOrderSFX: {fileID: 0}
+--- !u!114 &8226558599481057032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3297569424532663882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18a089d9c0fa5f418d13b0615055d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BookItem
+  _definition: {fileID: 0}
+  _useSmartPlacement: 1
+  _uprightOffset: {x: 90, y: 0, z: 0}
+  _flatOffset: {x: 90, y: 0, z: 0}
+  _hiddenItemPrefab: {fileID: 0}
+  _hiddenItemMinDay: 0
 --- !u!4 &8328179499197064555
 Transform:
   m_ObjectHideFlags: 0
@@ -56455,7 +56506,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0bcc9796a40e786428ff255a67b2f748, type: 2}
+  - {fileID: 2100000, guid: 6a2726af75f6f5f46a4c0bef588d184c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
