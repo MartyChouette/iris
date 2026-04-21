@@ -110,6 +110,7 @@ public class PSXRenderController : MonoBehaviour
     [Tooltip("Drag PSXLit shader here. Shader.Find does not work in builds.")]
     [SerializeField] private Shader _psxLitShaderRef;
     private Shader _psxLitShader;
+    public Shader PSXLitShader => _psxLitShader;
     private readonly Dictionary<Material, Shader> _originalShaders = new Dictionary<Material, Shader>();
     private Renderer[] _cachedRenderers;
     private static readonly HashSet<string> s_swappableShaders = new HashSet<string>
@@ -310,6 +311,22 @@ public class PSXRenderController : MonoBehaviour
             }
         }
 
+        // Vertex snapping only on special items (pairables + authored mess).
+        // Everything else gets snap disabled so furniture/environment stays clean.
+        foreach (var r in renderers)
+        {
+            if (r == null) continue;
+            var go = r.gameObject;
+            if (go.GetComponent<PairableItem>() != null) continue;
+            if (go.GetComponentInParent<PairableItem>() != null) continue;
+            var po = go.GetComponent<PlaceableObject>() ?? go.GetComponentInParent<PlaceableObject>();
+            if (po != null && po.Category == ItemCategory.Trash) continue;
+            if (go.GetComponent<PSXObjectSettings>() != null) continue;
+
+            var psx = go.AddComponent<PSXObjectSettings>();
+            psx.SnapResolution = 0f;
+        }
+
         if (swapped > 0)
             Debug.Log($"[PSXRenderController] Swapped {swapped} materials to PSXLit.");
     }
@@ -334,6 +351,19 @@ public class PSXRenderController : MonoBehaviour
                 {
                     _originalShaders[mat] = mat.shader;
                     mat.shader = _psxLitShader;
+                }
+            }
+
+            // Disable vertex snap on non-special objects
+            if (r.GetComponent<PairableItem>() == null
+                && r.GetComponentInParent<PairableItem>() == null
+                && r.GetComponent<PSXObjectSettings>() == null)
+            {
+                var po = r.GetComponent<PlaceableObject>() ?? r.GetComponentInParent<PlaceableObject>();
+                if (po == null || po.Category != ItemCategory.Trash)
+                {
+                    var psx = r.gameObject.AddComponent<PSXObjectSettings>();
+                    psx.SnapResolution = 0f;
                 }
             }
         }

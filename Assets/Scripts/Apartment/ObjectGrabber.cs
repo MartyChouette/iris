@@ -1106,15 +1106,25 @@ public class ObjectGrabber : MonoBehaviour
             // Strip any pour tilt — place items upright
             rot = _isPourTilted ? Quaternion.identity : _held.transform.rotation;
 
-            // Smart book placement: use held rotation, just handle stacking
+            // Smart book placement: flat everywhere, upright only at flagged edges
             var placeBook = _held.GetComponent<BookItem>();
             if (placeBook != null && placeBook.UseSmartPlacement)
             {
-                bookIsFlat = true;
-                rot = _held.transform.rotation;
-                float stackY = GetFlatBookStackTop(_currentSurface, pos);
-                if (stackY > pos.y)
-                    pos.y = stackY;
+                float yaw = rot.eulerAngles.y;
+                bool atEdge = _currentSurface.IsNearLengthEdge(pos, gridSize + 0.01f);
+
+                if (atEdge)
+                {
+                    rot = Quaternion.Euler(placeBook.UprightOffset) * Quaternion.Euler(0f, yaw, 0f);
+                }
+                else
+                {
+                    rot = Quaternion.Euler(placeBook.FlatOffset) * Quaternion.Euler(0f, yaw, 0f);
+                    bookIsFlat = true;
+                    float stackY = GetFlatBookStackTop(_currentSurface, pos);
+                    if (stackY > pos.y)
+                        pos.y = stackY;
+                }
             }
         }
         _isPourTilted = false;
@@ -2582,14 +2592,24 @@ public class ObjectGrabber : MonoBehaviour
               * Quaternion.AngleAxis(_wallRotation, Vector3.forward)
             : _held.transform.rotation;
 
-        // Smart book placement preview — match held rotation, handle stacking
+        // Smart book placement: flat everywhere, upright only at flagged edges
         var ghostBook = _held.GetComponent<BookItem>();
         if (!_currentSurface.IsVertical && ghostBook != null && ghostBook.UseSmartPlacement)
         {
-            placeRot = _held.transform.rotation;
-            float stackY = GetFlatBookStackTop(_currentSurface, placePos);
-            if (stackY > placePos.y)
-                placePos.y = stackY;
+            float yaw = placeRot.eulerAngles.y;
+            bool atEdge = _currentSurface.IsNearLengthEdge(placePos, gridSize + 0.01f);
+
+            if (atEdge)
+            {
+                placeRot = Quaternion.Euler(ghostBook.UprightOffset) * Quaternion.Euler(0f, yaw, 0f);
+            }
+            else
+            {
+                placeRot = Quaternion.Euler(ghostBook.FlatOffset) * Quaternion.Euler(0f, yaw, 0f);
+                float stackY = GetFlatBookStackTop(_currentSurface, placePos);
+                if (stackY > placePos.y)
+                    placePos.y = stackY;
+            }
         }
 
         // Mirror the home-snap override from Place() so ghost matches exactly

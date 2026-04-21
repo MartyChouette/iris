@@ -36,6 +36,10 @@ public class BookCollectionItem : MonoBehaviour
     [Tooltip("Peak height of the reward arc.")]
     [SerializeField] private float _arcHeight = 0.4f;
 
+    [Header("Clean Shader")]
+    [Tooltip("Shader to swap onto books when collection completes (drag PSXLit here).")]
+    [SerializeField] private Shader _completedShader;
+
     [Header("Audio")]
     [Tooltip("SFX when the collection completes (correct order).")]
     [SerializeField] private AudioClip _completionSFX;
@@ -98,6 +102,23 @@ public class BookCollectionItem : MonoBehaviour
         // Frame the books with the moment camera
         if (ApartmentManager.Instance == null || ApartmentManager.Instance.ItemDiscoveryMoments)
             MomentCamera.FrameTarget(transform.position, _celebrationDelay + 2f);
+
+        // Wait one frame so ClearHeld/SetRenderOnTop(false) finishes restoring
+        // shaders before we swap them. Otherwise our swap gets overwritten.
+        yield return null;
+
+        // Swap all 3 books to the clean shader via PlaceableObject's instance material
+        Shader cleanShader = _completedShader;
+        if (cleanShader == null && PSXRenderController.Instance != null)
+            cleanShader = PSXRenderController.Instance.PSXLitShader;
+        foreach (var book in GetComponentsInChildren<PlaceableObject>(true))
+        {
+            if (cleanShader != null)
+                book.ForceShader(cleanShader);
+            var psx = book.GetComponent<PSXObjectSettings>();
+            if (psx == null) psx = book.gameObject.AddComponent<PSXObjectSettings>();
+            psx.SnapResolution = 0f;
+        }
 
         yield return new WaitForSeconds(_celebrationDelay);
 

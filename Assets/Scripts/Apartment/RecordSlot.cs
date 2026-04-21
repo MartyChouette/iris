@@ -43,9 +43,6 @@ public class RecordSlot : MonoBehaviour
     [Tooltip("Where the vinyl snaps to on the platter.")]
     [SerializeField] private Transform _platePlacementPoint;
 
-    [Tooltip("Seconds for the vinyl to interpolate onto the platter.")]
-    [SerializeField] private float _placementLerpDuration = 0.4f;
-
     [Header("Tone Arm")]
     [Tooltip("Reference to the ToneArm component.")]
     [SerializeField] private ToneArm _toneArm;
@@ -66,7 +63,6 @@ public class RecordSlot : MonoBehaviour
     private Material _labelMat;
     private bool _isPlaying;
     private float _currentSpinSpeed;
-    private Coroutine _placementLerp;
     private ReactableTag _cachedReactable;
 
     public bool IsPlaying => _isPlaying;
@@ -156,9 +152,12 @@ public class RecordSlot : MonoBehaviour
         if (_labelMat != null)
             _labelMat.color = vinyl.Definition.labelColor;
 
-        // Interpolate vinyl onto platter, then auto-play
-        if (_placementLerp != null) StopCoroutine(_placementLerp);
-        _placementLerp = StartCoroutine(LerpVinylToPlatterAndPlay(held.transform));
+        // Snap vinyl onto platter instantly, then auto-play
+        Vector3 targetPos = _platePlacementPoint != null ? _platePlacementPoint.position : transform.position;
+        Quaternion targetRot = _platePlacementPoint != null ? _platePlacementPoint.rotation : transform.rotation;
+        held.transform.position = targetPos;
+        held.transform.rotation = targetRot;
+        Play();
 
         // Clear turntable highlight
         var slotHL = GetComponent<InteractableHighlight>();
@@ -180,31 +179,6 @@ public class RecordSlot : MonoBehaviour
             hl.SetHighlighted(on);
             break;
         }
-    }
-
-    private IEnumerator LerpVinylToPlatterAndPlay(Transform vinyl)
-    {
-        Vector3 startPos = vinyl.position;
-        Quaternion startRot = vinyl.rotation;
-        Vector3 targetPos = _platePlacementPoint != null ? _platePlacementPoint.position : transform.position;
-        Quaternion targetRot = _platePlacementPoint != null ? _platePlacementPoint.rotation : transform.rotation;
-
-        float elapsed = 0f;
-        while (elapsed < _placementLerpDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, elapsed / _placementLerpDuration);
-            vinyl.position = Vector3.Lerp(startPos, targetPos, t);
-            vinyl.rotation = Quaternion.Slerp(startRot, targetRot, t);
-            yield return null;
-        }
-
-        vinyl.position = targetPos;
-        vinyl.rotation = targetRot;
-        _placementLerp = null;
-
-        // Auto-play once the vinyl settles on the platter
-        Play();
     }
 
     // ── Playback controls ────────────────────────────────────────────
@@ -386,13 +360,6 @@ public class RecordSlot : MonoBehaviour
     {
         _isPlaying = false;
         _currentSpinSpeed = 0f;
-
-        // Stop any in-flight placement lerp so it doesn't call Play() after eject
-        if (_placementLerp != null)
-        {
-            StopCoroutine(_placementLerp);
-            _placementLerp = null;
-        }
 
         AudioManager.Instance?.StopMusic();
         MoodMachine.Instance?.RemoveSource("Music");

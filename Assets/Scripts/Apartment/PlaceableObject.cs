@@ -307,6 +307,16 @@ public class PlaceableObject : MonoBehaviour
     /// <summary>True if the glitch shader is currently applied.</summary>
     public bool IsGlitched => _isGlitched;
 
+    /// <summary>Force the instance material to a specific shader, bypassing glitch state tracking.</summary>
+    public void ForceShader(Shader shader)
+    {
+        if (_instanceMat != null && shader != null)
+        {
+            _instanceMat.shader = shader;
+            _isGlitched = false;
+        }
+    }
+
     /// <summary>Capture current rotation as the disheveled pose (rotation only, position untouched).</summary>
     [ContextMenu("Capture Disheveled Rotation")]
     private void CaptureDisheveledPose()

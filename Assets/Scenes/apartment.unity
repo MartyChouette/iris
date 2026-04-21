@@ -1394,8 +1394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeController
   _doorPivotL: {fileID: 2251124905623526925}
   _doorPivotR: {fileID: 3544450267697097882}
-  _hingePointL: {fileID: 1796030846}
-  _hingePointR: {fileID: 273494464}
   _openAngleL: 10
   _openAngleR: 10
   _tweenDuration: 0.6
@@ -4142,9 +4140,9 @@ MonoBehaviour:
   canWallMount: 0
   wallOnly: 0
   crookedAngleRange: 12
-  _rotateAxis: {x: 0, y: 1, z: 0}
+  _rotateAxis: {x: 0, y: 0, z: 0}
   _allowYaw: 0
-  _allowFlip: 0
+  _allowFlip: 1
   _allowRoll: 0
   _allowAutoStraighten: 1
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4299,6 +4297,7 @@ MonoBehaviour:
   _celebrationDelay: 0.4
   _arcDuration: 0.7
   _arcHeight: 0.4
+  _completedShader: {fileID: 4800000, guid: 73f2b341f32221d4ea251313f2a4198b, type: 3}
   _completionSFX: {fileID: 0}
 --- !u!114 &206099566
 MonoBehaviour:
@@ -6609,37 +6608,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 945406885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &340343147
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 340343148}
-  m_Layer: 25
-  m_Name: pivot L
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &340343148
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340343147}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -0.00561, y: 0.0093, z: -0.00488}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7051821470587040125}
-  m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!1 &340469180
 GameObject:
   m_ObjectHideFlags: 0
@@ -8017,8 +7985,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeController
   _doorPivotL: {fileID: 7729171288449015294}
   _doorPivotR: {fileID: 2251124905847525957}
-  _hingePointL: {fileID: 1852545639}
-  _hingePointR: {fileID: 340343148}
   _openAngleL: -110
   _openAngleR: 110
   _tweenDuration: 0.6
@@ -8047,6 +8013,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 457948451}
+  - {fileID: 430454221}
+  - {fileID: 749080493}
+  - {fileID: 7729171288449015294}
+  - {fileID: 2251124905847525957}
+  - {fileID: 8624508534935937536}
+  - {fileID: 2297663740577021530}
+  - {fileID: 8680648817779371709}
   - {fileID: 7051821470587040125}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8075,12 +8049,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 430454220}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0043, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: -0.7071068, z: 0.00000017881392, w: -0.000000119209275}
+  m_LocalPosition: {x: 0, y: 0.6597228, z: 0}
+  m_LocalScale: {x: 153.42392, y: 35.518513, z: 98.39013}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &430454222
 MonoBehaviour:
@@ -8676,12 +8650,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457948450}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00682, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: -0.7071068, z: 0.00000017881392, w: -0.000000119209275}
+  m_LocalPosition: {x: 0, y: 1.0463512, z: 0}
+  m_LocalScale: {x: 153.42392, y: 35.518513, z: 98.39013}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &457948452
 MonoBehaviour:
@@ -9244,7 +9218,7 @@ MonoBehaviour:
   canWallMount: 0
   wallOnly: 0
   crookedAngleRange: 0
-  _rotateAxis: {x: 0, y: 1, z: 0}
+  _rotateAxis: {x: 0, y: 0, z: 0}
   _allowYaw: 0
   _allowFlip: 0
   _allowRoll: 0
@@ -9401,6 +9375,7 @@ MonoBehaviour:
   _celebrationDelay: 0.4
   _arcDuration: 0.7
   _arcHeight: 0.4
+  _completedShader: {fileID: 4800000, guid: 73f2b341f32221d4ea251313f2a4198b, type: 3}
   _completionSFX: {fileID: 0}
 --- !u!114 &478580149
 MonoBehaviour:
@@ -15249,12 +15224,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749080492}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00249, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: -0.7071068, z: 0.00000017881392, w: -0.000000119209275}
+  m_LocalPosition: {x: 0, y: 0.3820256, z: 0}
+  m_LocalScale: {x: 153.42392, y: 35.518513, z: 98.39013}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &749080494
 MonoBehaviour:
@@ -33359,6 +33334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScreenFade
   _canvasGroup: {fileID: 1596364687}
   _phaseText: {fileID: 2065388147}
+  _fadeExposureBoost: 3
   defaultFadeOutDuration: 0.5
   defaultFadeInDuration: 0.5
   fadeOutCurve:
@@ -38677,37 +38653,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848525541}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1852545638
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1852545639}
-  m_Layer: 25
-  m_Name: pivot R
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1852545639
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852545638}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00661, y: 0.00983, z: 0.00485}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7051821470587040125}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1858919477
 GameObject:
   m_ObjectHideFlags: 0
@@ -48633,12 +48578,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095641928006830914}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710677, y: 0.00000008940698, z: 0.70710677, w: -0.0000002384186}
-  m_LocalPosition: {x: -0.0053141885, y: 0.01049664, z: -0.0045940573}
-  m_LocalScale: {x: 1.0163629, y: 2.8154347, z: 0.65178907}
+  m_LocalRotation: {x: -0.5000001, y: -0.49999997, z: -0.50000006, w: 0.49999994}
+  m_LocalPosition: {x: -0.37282515, y: 0.8153238, z: 0.45200968}
+  m_LocalScale: {x: 100.00005, y: 100.000046, z: 100.00002}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2292339034119131264
 GameObject:
@@ -48803,12 +48748,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469754570880326903}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001479733, y: 0.0010518718, z: -0.000037627742}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: -0.7071068, z: 0.00000017881392, w: -0.000000119209275}
+  m_LocalPosition: {x: -0.037360907, y: 0.22702646, z: 0.0037021637}
+  m_LocalScale: {x: 153.42392, y: 35.518513, z: 98.39013}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2297663741690999314
 Transform:
@@ -51564,7 +51509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   _slideAxis: 3
-  slideDistance: 0.3
+  slideDistance: 90
   slideDuration: 0.3
   contentsRoot: {fileID: 1407251356}
   _interiorSurface: {fileID: 1657533973}
@@ -53360,8 +53305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
-  _slideAxis: 4
-  _slideDistance: 0.01
+  _slideAxis: 3
+  _slideDistance: 0.4
   _tweenDuration: 0.4
   _clickLayer:
     serializedVersion: 2
@@ -53805,17 +53750,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 153.42392, y: 35.518513, z: 98.39013}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 457948451}
-  - {fileID: 430454221}
-  - {fileID: 749080493}
-  - {fileID: 7729171288449015294}
-  - {fileID: 2251124905847525957}
-  - {fileID: 1852545639}
-  - {fileID: 340343148}
-  - {fileID: 8624508534935937536}
-  - {fileID: 2297663740577021530}
-  - {fileID: 8680648817779371709}
+  m_Children: []
   m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7095641928006830914
@@ -54330,12 +54265,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3719460825809799985}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710677, y: 0.00000008940698, z: 0.70710677, w: -0.0000002384186}
-  m_LocalPosition: {x: -0.005288541, y: 0.01049665, z: 0.004521585}
-  m_LocalScale: {x: 1.0163629, y: 2.8154347, z: 0.65178907}
+  m_LocalRotation: {x: -0.5000001, y: -0.49999997, z: -0.50000006, w: 0.49999994}
+  m_LocalPosition: {x: -0.37282515, y: 0.81138873, z: -0.44487953}
+  m_LocalScale: {x: 100.00005, y: 100.000046, z: 100.00002}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7729171288449015295
 BoxCollider:
@@ -54681,7 +54616,6 @@ MonoBehaviour:
   _rotationSpeed: 33.3
   _spinTransitionDuration: 1.5
   _platePlacementPoint: {fileID: 1538588163}
-  _placementLerpDuration: 0.4
   _toneArm: {fileID: 136355913}
   snapRadius: 0.06
   _playSFX: {fileID: 0}
@@ -55196,7 +55130,7 @@ MonoBehaviour:
   canWallMount: 0
   wallOnly: 0
   crookedAngleRange: 12
-  _rotateAxis: {x: 0, y: 1, z: 0}
+  _rotateAxis: {x: 0, y: 0, z: 0}
   _allowYaw: 0
   _allowFlip: 0
   _allowRoll: 0
@@ -55274,6 +55208,7 @@ MonoBehaviour:
   _celebrationDelay: 0.4
   _arcDuration: 0.7
   _arcHeight: 0.4
+  _completedShader: {fileID: 4800000, guid: 73f2b341f32221d4ea251313f2a4198b, type: 3}
   _completionSFX: {fileID: 0}
 --- !u!114 &8226558599481057032
 MonoBehaviour:
@@ -55755,12 +55690,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3320156332230729451}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0.000000059604638, z: 0.70710677, w: -0.00000023841855}
-  m_LocalPosition: {x: 0.005908776, y: 0.008238497, z: 0.00004178027}
-  m_LocalScale: {x: 1.0163623, y: 2.8154337, z: 0.65178883}
+  m_LocalRotation: {x: -0.50000006, y: -0.49999994, z: -0.50000006, w: 0.4999999}
+  m_LocalPosition: {x: -0.29261923, y: -0.90654755, z: -0.004110813}
+  m_LocalScale: {x: 100.000015, y: 100.00002, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8624508534935937537
 MonoBehaviour:
@@ -55775,7 +55710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
   _slideAxis: 0
-  _slideDistance: 0.3
+  _slideDistance: 3
   _tweenDuration: 0.4
   _clickLayer:
     serializedVersion: 2
@@ -55821,12 +55756,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406990945131250867}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0.000000059604638, z: 0.70710677, w: -0.00000023841855}
-  m_LocalPosition: {x: 0.0017687543, y: 0.0056093936, z: -0.000044839435}
-  m_LocalScale: {x: 1.0163623, y: 2.8154337, z: 0.65178883}
+  m_LocalRotation: {x: -0.50000006, y: -0.49999994, z: -0.50000006, w: 0.4999999}
+  m_LocalPosition: {x: -0.19923735, y: -0.27136922, z: 0.0044116974}
+  m_LocalScale: {x: 100.000015, y: 100.00002, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7051821470587040125}
+  m_Father: {fileID: 427413295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8680648817779371710
 MonoBehaviour:
@@ -55840,8 +55775,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a576ae316c488f240a79ffc6d9046d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeDrawer
-  _slideAxis: 4
-  _slideDistance: 0.01
+  _slideAxis: 3
+  _slideDistance: 0.4
   _tweenDuration: 0.4
   _clickLayer:
     serializedVersion: 2

@@ -19043,3 +19043,606 @@ Assets/Settings/SampleSceneProfile.asset
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260420_215832
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+---
+
+## Session End: 20260420_215858
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_215904
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_220026
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_221311
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_221606
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222008
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222148
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222236
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222242
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222407
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222528
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222622
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_222938
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_223113
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_223147
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_223335
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_224118
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_224516
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_225004
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_225830
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_230517
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_230733
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_230850
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_231204
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_232153
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260420_232813
+### Commits
+17ef44d double exposure effect, clean highlight, book stacking, fridge fixes, hover highlight removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_082339
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_093815
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_103221
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_103803
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_104225
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_104613
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_104901
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_104943
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_105116
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_105216
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_105835
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_105938
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_110019
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_110145
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_111120
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_113725
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_113905
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_114301
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_115512
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_122139
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_131701
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_135521
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_140043
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_141009
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/FridgeController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/New Material.mat
+Assets/Shader/New Material.mat.meta
+production/session-logs/session-log.md
+---
+

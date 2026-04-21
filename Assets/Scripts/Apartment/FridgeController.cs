@@ -17,12 +17,6 @@ public class FridgeController : MonoBehaviour
     [Tooltip("Right door transform.")]
     [SerializeField] private Transform _doorPivotR;
 
-    [Tooltip("Empty GameObject at the LEFT EDGE of the left door (the hinge point). If null, uses the door transform's own position.")]
-    [SerializeField] private Transform _hingePointL;
-
-    [Tooltip("Empty GameObject at the RIGHT EDGE of the right door (the hinge point). If null, uses the door transform's own position.")]
-    [SerializeField] private Transform _hingePointR;
-
     [Tooltip("Degrees to rotate the left door (negative = opens outward).")]
     [SerializeField] private float _openAngleL = -110f;
 
@@ -67,11 +61,10 @@ public class FridgeController : MonoBehaviour
     private DoorState _stateL = DoorState.Closed;
     private DoorState _stateR = DoorState.Closed;
 
-    // Snapshot of each door's closed-state transform (world space)
+    // Snapshot of each door's closed-state transform
     private Vector3 _closedPosL, _closedPosR;
     private Quaternion _closedRotL, _closedRotR;
-    // Auto-computed hinge positions if no hinge transforms assigned
-    private Vector3 _hingePosL, _hingePosR;
+    private Quaternion _closedLocalRotL, _closedLocalRotR;
 
     private void Awake()
     {
@@ -88,37 +81,17 @@ public class FridgeController : MonoBehaviour
         {
             _closedPosL = _doorPivotL.position;
             _closedRotL = _doorPivotL.rotation;
-            _hingePosL = _hingePointL != null
-                ? _hingePointL.position
-                : FindHingeEdge(_doorPivotL, left: true);
+            _closedLocalRotL = _doorPivotL.localRotation;
         }
         if (_doorPivotR != null)
         {
             _closedPosR = _doorPivotR.position;
             _closedRotR = _doorPivotR.rotation;
-            _hingePosR = _hingePointR != null
-                ? _hingePointR.position
-                : FindHingeEdge(_doorPivotR, left: false);
+            _closedLocalRotR = _doorPivotR.localRotation;
         }
 
         if (_interiorLight != null)
             _interiorLight.enabled = false;
-    }
-
-    /// <summary>
-    /// Auto-detect hinge position from the door's renderer bounds.
-    /// Left door hinges on its leftmost edge, right door on its rightmost.
-    /// Uses world-space bounds so model rotation/scale don't matter.
-    /// </summary>
-    private static Vector3 FindHingeEdge(Transform door, bool left)
-    {
-        var renderer = door.GetComponentInChildren<Renderer>();
-        if (renderer == null) return door.position;
-
-        Bounds b = renderer.bounds;
-        // Hinge at the outer edge — full height of the door, centered vertically
-        float x = left ? b.min.x : b.max.x;
-        return new Vector3(x, b.center.y, b.center.z);
     }
 
     // Input managed by IrisInput singleton — no local enable/disable needed.
@@ -320,8 +293,8 @@ public class FridgeController : MonoBehaviour
         StopAllCoroutines();
         _stateL = DoorState.Closed;
         _stateR = DoorState.Closed;
-        if (_doorPivotL != null) { _doorPivotL.position = _closedPosL; _doorPivotL.rotation = _closedRotL; }
-        if (_doorPivotR != null) { _doorPivotR.position = _closedPosR; _doorPivotR.rotation = _closedRotR; }
+        if (_doorPivotL != null) _doorPivotL.localRotation = _closedLocalRotL;
+        if (_doorPivotR != null) _doorPivotR.localRotation = _closedLocalRotR;
         if (_interiorLight != null) _interiorLight.enabled = false;
     }
 
@@ -341,9 +314,11 @@ public class FridgeController : MonoBehaviour
         else if (!opening && _closeSFX != null)
             AudioManager.Instance?.PlaySFX(_closeSFX);
 
-        Vector3 hingePos = isLeft ? _hingePosL : _hingePosR;
+        // Animate in local space to avoid shearing from non-uniform parent scale.
+        Quaternion closedLocalRot = isLeft ? _closedLocalRotL : _closedLocalRotR;
+        float openAngle = isLeft ? _openAngleL : _openAngleR;
+        float startAngle = opening ? 0f : openAngle;
 
-        float rotated = 0f;
         float elapsed = 0f;
         while (elapsed < _tweenDuration)
         {
@@ -351,18 +326,15 @@ public class FridgeController : MonoBehaviour
             float t = Mathf.Clamp01(elapsed / _tweenDuration);
             t = t * t * (3f - 2f * t); // smooth step
 
-            float target = totalAngle * t;
-            float delta = target - rotated;
-            pivot.RotateAround(hingePos, Vector3.up, delta);
-            rotated = target;
+            float currentAngle = startAngle + totalAngle * t;
+            pivot.localRotation = Quaternion.AngleAxis(currentAngle, Vector3.up) * closedLocalRot;
 
             yield return null;
         }
 
         // Snap to exact final angle
-        float remaining = totalAngle - rotated;
-        if (Mathf.Abs(remaining) > 0.001f)
-            pivot.RotateAround(hingePos, Vector3.up, remaining);
+        float finalAngle = startAngle + totalAngle;
+        pivot.localRotation = Quaternion.AngleAxis(finalAngle, Vector3.up) * closedLocalRot;
 
         if (isLeft) _stateL = opening ? DoorState.Open : DoorState.Closed;
         else        _stateR = opening ? DoorState.Open : DoorState.Closed;

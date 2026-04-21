@@ -224,6 +224,10 @@ public class PairableItem : MonoBehaviour
         if (_renderer != null)
         {
             _renderer.SetPropertyBlock(new MaterialPropertyBlock()); // clear all overrides
+
+            // Re-apply PSXObjectSettings so snap=0 survives the MPB clear
+            var psx = GetComponent<PSXObjectSettings>();
+            if (psx != null) psx.Apply();
         }
     }
 
@@ -292,6 +296,8 @@ public class PairableItem : MonoBehaviour
         var allInStack = stackRoot.GetComponentsInChildren<PairableItem>(true);
         for (int i = 0; i < allInStack.Length; i++)
             DisablePSXEffects(allInStack[i].gameObject);
+        // Held item isn't parented yet — clear it explicitly
+        DisablePSXEffects(held.gameObject);
 
         // Play snap sound
         if (_snapSound != null)
@@ -346,7 +352,7 @@ public class PairableItem : MonoBehaviour
             // falling back to whichever side is still free.
             Transform sbsRoot = FindStackRoot(transform);
 
-            // Straighten root to upright so all items face the same direction.
+            // Straighten root — strip dishevel tilt, keep only yaw.
             Vector3 rootEuler = sbsRoot.eulerAngles;
             sbsRoot.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
 
@@ -483,17 +489,12 @@ public class PairableItem : MonoBehaviour
     /// </summary>
     private static void DisablePSXEffects(GameObject go)
     {
-        // Set PSXObjectSettings to explicitly zero out vertex snap + affine warp.
-        // This overrides the global PSXRenderController values via MaterialPropertyBlock,
-        // making this specific object render at full quality while the rest of the
-        // scene stays lo-fi.
         var psx = go.GetComponent<PSXObjectSettings>();
         if (psx == null) psx = go.AddComponent<PSXObjectSettings>();
         psx.SnapResolution = 0f;
         psx.AffineIntensity = 0f;
         psx.ShadowDither = 0f;
 
-        // Restore the original shader (undo the glitch shader swap from PairableItem.Start)
         var placeable = go.GetComponent<PlaceableObject>();
         if (placeable != null)
             placeable.SetGlitched(false);

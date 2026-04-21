@@ -18,6 +18,10 @@ public class ScreenFade : MonoBehaviour
     [Tooltip("Text shown during phase transitions (separate from DreamText used by GameClock).")]
     [SerializeField] private TMP_Text _phaseText;
 
+    [Header("Overexposure")]
+    [Tooltip("Extra post-exposure added during fade-out to bloom the scene into white.")]
+    [SerializeField] private float _fadeExposureBoost = 3f;
+
     [Header("Default Durations")]
     [Tooltip("Default fade-out duration in seconds. Set to 0 for a hard cut.")]
     public float defaultFadeOutDuration = 0.5f;
@@ -37,6 +41,8 @@ public class ScreenFade : MonoBehaviour
 
     // Track the active fade coroutine so we can stop it before starting a new one
     private Coroutine _activeFadeCoroutine;
+    private float _originalExposure;
+    private bool _exposureBoosted;
 
     // Safety net: if the screen stays fully opaque for this many seconds
     // with no active fade coroutine, force-clear it. Catches ALL cases where
@@ -224,11 +230,21 @@ public class ScreenFade : MonoBehaviour
         // let clicks through so buttons are responsive immediately.
         _canvasGroup.blocksRaycasts = blockWhenDone;
 
+        // Capture exposure at start of fade-out so we can boost into white
+        bool fadingOut = to > from;
+        if (fadingOut && _fadeExposureBoost > 0f && AtmosphereController.Instance != null && !_exposureBoosted)
+        {
+            _originalExposure = AtmosphereController.Instance.PostExposure;
+            AtmosphereController.Instance.SuppressMoodOverrides = true;
+            _exposureBoosted = true;
+        }
+
         // Hard cut — instant transition
         if (duration <= 0f)
         {
             _canvasGroup.alpha = to;
             _canvasGroup.blocksRaycasts = blockWhenDone;
+            ApplyFadeExposure(to > from ? 1f : 0f);
             IsFading = false;
             yield break;
         }
@@ -240,12 +256,31 @@ public class ScreenFade : MonoBehaviour
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
             float curved = curve != null ? curve.Evaluate(t) : t;
-            _canvasGroup.alpha = Mathf.Lerp(from, to, curved);
+            float alpha = Mathf.Lerp(from, to, curved);
+            _canvasGroup.alpha = alpha;
+            ApplyFadeExposure(alpha);
             yield return null;
         }
 
         _canvasGroup.alpha = to;
         _canvasGroup.blocksRaycasts = blockWhenDone;
+        ApplyFadeExposure(to);
+
+        // Restore exposure when fade-in completes (alpha reaches 0)
+        if (to <= 0f && _exposureBoosted)
+        {
+            AtmosphereController.Instance.PostExposure = _originalExposure;
+            AtmosphereController.Instance.SuppressMoodOverrides = false;
+            _exposureBoosted = false;
+        }
+
         IsFading = false;
+    }
+
+    private void ApplyFadeExposure(float alpha)
+    {
+        if (!_exposureBoosted || _fadeExposureBoost <= 0f) return;
+        if (AtmosphereController.Instance == null) return;
+        AtmosphereController.Instance.PostExposure = _originalExposure + _fadeExposureBoost * alpha;
     }
 }
