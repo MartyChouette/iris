@@ -486,20 +486,6 @@ public class ObjectGrabber : MonoBehaviour
                 return;
             }
 
-            // Check for turntable button click (play/pause) — blocked during dates
-            if (DateSessionManager.Instance == null || !DateSessionManager.Instance.IsDateActive)
-            {
-                var turntableBtn = hit.collider.GetComponent<TurntableButton>();
-                if (turntableBtn == null)
-                    turntableBtn = hit.collider.GetComponentInParent<TurntableButton>();
-                if (turntableBtn != null)
-                {
-                    turntableBtn.Press();
-                    ConsumeClick();
-                    return;
-                }
-            }
-
             // Click on album sleeve — extract vinyl if hovered/peeking (fully blocked during dates)
             bool dateActiveForSleeve = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive;
             if (!dateActiveForSleeve)
@@ -1161,6 +1147,10 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
+        // Exclusion zones
+        if (PlacementExclusionZone.IsExcluded(pos))
+            return;
+
         // Cubby capacity check — reject placement if cubby is full
         var capacityCubby = DrawerController.FindByInteriorSurface(_currentSurface);
         if (capacityCubby != null && !capacityCubby.HasInteriorCapacity)
@@ -1444,6 +1434,8 @@ public class ObjectGrabber : MonoBehaviour
     /// When holding a vinyl disc near the turntable, softly pull the grab
     /// target toward the platter to signal "you can place this here."
     /// </summary>
+    private bool _turntableLidOpen;
+
     private void UpdateTurntableSnap()
     {
         if (_held == null) return;
@@ -1452,7 +1444,22 @@ public class ObjectGrabber : MonoBehaviour
 
         Vector3 snapPos = RecordSlot.Instance.SnapPoint;
         float dist = Vector3.Distance(snapPos, _grabTarget);
-        if (dist > _turntableSnapRadius || dist < 0.01f) return;
+
+        bool inRange = dist <= _turntableSnapRadius && dist > 0.01f;
+
+        // Lid opens on proximity, closes when leaving
+        if (inRange && !_turntableLidOpen)
+        {
+            RecordSlot.Instance.OpenLidExternal();
+            _turntableLidOpen = true;
+        }
+        else if (!inRange && _turntableLidOpen)
+        {
+            RecordSlot.Instance.CloseLidExternal();
+            _turntableLidOpen = false;
+        }
+
+        if (!inRange) return;
 
         float proximity = 1f - (dist / _turntableSnapRadius);
         float strength = proximity * proximity * _turntableSnapStrength;
@@ -1898,6 +1905,13 @@ public class ObjectGrabber : MonoBehaviour
         ShowShadow(false);
         DestroyGhostPreview();
         ClearPlantHighlights();
+
+        // Close lid if we dropped the vinyl without placing it
+        if (_turntableLidOpen && RecordSlot.Instance != null)
+        {
+            RecordSlot.Instance.CloseLidExternal();
+            _turntableLidOpen = false;
+        }
 
         // Clear turntable highlight if we were holding a record
         if (RecordSlot.Instance != null)
@@ -2448,6 +2462,13 @@ public class ObjectGrabber : MonoBehaviour
         foreach (var pi in _ghostPreviewGO.GetComponentsInChildren<PairableItem>(true))
             DestroyImmediate(pi);
 
+        // Destroy lights and their URP dependencies first (DestroyImmediate
+        // needed because UniversalAdditionalLightData depends on Light).
+        foreach (var ld in _ghostPreviewGO.GetComponentsInChildren<UnityEngine.Rendering.Universal.UniversalAdditionalLightData>(true))
+            DestroyImmediate(ld);
+        foreach (var light in _ghostPreviewGO.GetComponentsInChildren<Light>(true))
+            DestroyImmediate(light);
+
         var comps = _ghostPreviewGO.GetComponentsInChildren<Component>(includeInactive: true);
         for (int i = 0; i < comps.Length; i++)
         {
@@ -2644,6 +2665,10 @@ public class ObjectGrabber : MonoBehaviour
                 overBarrier = Physics.Raycast(placePos, Vector3.down, 0.15f, _barrierLayer);
             if (overBarrier) canPlace = false;
         }
+
+        // Exclusion zones (no-place areas without physical colliders)
+        if (canPlace && PlacementExclusionZone.IsExcluded(placePos))
+            canPlace = false;
 
         // Fridge shelves blocked when doors are closed
         if (canPlace && FridgeController.Instance != null

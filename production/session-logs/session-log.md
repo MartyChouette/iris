@@ -19646,3 +19646,254 @@ Assets/Shader/New Material.mat.meta
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260421_144959
+### Commits
+c206319 book smart placement, PSX vertex snap control, fridge local rotation, record snap, fade overexposure
+---
+
+## Session End: 20260421_145212
+### Commits
+c206319 book smart placement, PSX vertex snap control, fridge local rotation, record snap, fade overexposure
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_145819
+### Commits
+c206319 book smart placement, PSX vertex snap control, fridge local rotation, record snap, fade overexposure
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_150149
+### Commits
+c206319 book smart placement, PSX vertex snap control, fridge local rotation, record snap, fade overexposure
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260421_160504
+### Commits
+c206319 book smart placement, PSX vertex snap control, fridge local rotation, record snap, fade overexposure
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_184106
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_184115
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_184711
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_190436
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_190812
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_190840
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_192027
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_192455
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_192642
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_193118
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_193624
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_195549
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_200024
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_200110
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_203359
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_203718
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_211145
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_214112
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_214212
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_220225
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_221551
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_221948
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_222141
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_223646
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_224602
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_230019
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260422_232321
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+

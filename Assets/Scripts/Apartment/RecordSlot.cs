@@ -6,9 +6,8 @@ using UnityEngine;
 /// manages playback via AudioManager, drives the tone arm and disc spin,
 /// feeds MoodMachine, and toggles ReactableTag.
 ///
-/// Play/Pause are triggered by tiny TurntableButton children, not by
-/// clicking the turntable itself. Clicking the vinyl on the platter
-/// ejects it back into the player's hand.
+/// Play/Pause are triggered by clicking the turntable body.
+/// Clicking the vinyl on the platter ejects it back into the player's hand.
 ///
 /// Scene-scoped singleton (one turntable per apartment).
 /// </summary>
@@ -43,6 +42,16 @@ public class RecordSlot : MonoBehaviour
     [Tooltip("Where the vinyl snaps to on the platter.")]
     [SerializeField] private Transform _platePlacementPoint;
 
+    [Header("Lid")]
+    [Tooltip("Transform of the lid (hinges from back). Null = no lid.")]
+    [SerializeField] private Transform _lid;
+
+    [Tooltip("Closed local rotation of the lid.")]
+    [SerializeField] private Vector3 _lidClosedAngle = new Vector3(-80f, 0f, 0f);
+
+    [Tooltip("Seconds for the lid to open/close.")]
+    [SerializeField] private float _lidTweenDuration = 0.4f;
+
     [Header("Tone Arm")]
     [Tooltip("Reference to the ToneArm component.")]
     [SerializeField] private ToneArm _toneArm;
@@ -63,6 +72,8 @@ public class RecordSlot : MonoBehaviour
     private Material _labelMat;
     private bool _isPlaying;
     private float _currentSpinSpeed;
+    private Coroutine _lidTween;
+    private Quaternion _lidOpenRot; // captured from the model's posed position
     private ReactableTag _cachedReactable;
 
     public bool IsPlaying => _isPlaying;
@@ -86,6 +97,13 @@ public class RecordSlot : MonoBehaviour
 
         _cachedReactable = GetComponent<ReactableTag>();
 
+        // Capture the lid's model pose as the open position, then snap closed
+        if (_lid != null)
+        {
+            _lidOpenRot = _lid.localRotation;
+            _lid.localRotation = Quaternion.Euler(_lidClosedAngle);
+        }
+
         if (_discRenderer != null)
         {
             _labelMat = new Material(_discRenderer.sharedMaterial);
@@ -107,8 +125,14 @@ public class RecordSlot : MonoBehaviour
         float lerpRate = _spinTransitionDuration > 0f ? Time.deltaTime / _spinTransitionDuration : 1f;
         _currentSpinSpeed = Mathf.MoveTowards(_currentSpinSpeed, targetSpeed, _rotationSpeed * lerpRate);
 
-        if (_discVisual != null && Mathf.Abs(_currentSpinSpeed) > 0.01f)
-            _discVisual.Rotate(Vector3.up, _currentSpinSpeed * Time.deltaTime, Space.Self);
+        if (Mathf.Abs(_currentSpinSpeed) > 0.01f)
+        {
+            float delta = _currentSpinSpeed * Time.deltaTime;
+            if (_discVisual != null)
+                _discVisual.Rotate(Vector3.up, delta, Space.Self);
+            if (_loadedPlaceable != null)
+                _loadedPlaceable.transform.Rotate(Vector3.up, delta, Space.Self);
+        }
     }
 
     // ── Vinyl acceptance ─────────────────────────────────────────────
@@ -152,7 +176,8 @@ public class RecordSlot : MonoBehaviour
         if (_labelMat != null)
             _labelMat.color = vinyl.Definition.labelColor;
 
-        // Snap vinyl onto platter instantly, then auto-play
+        // Close lid over the record, snap vinyl onto platter, then auto-play
+        CloseLid();
         Vector3 targetPos = _platePlacementPoint != null ? _platePlacementPoint.position : transform.position;
         Quaternion targetRot = _platePlacementPoint != null ? _platePlacementPoint.rotation : transform.rotation;
         held.transform.position = targetPos;
@@ -167,23 +192,9 @@ public class RecordSlot : MonoBehaviour
         return true;
     }
 
-    /// <summary>Turn the Play button highlight on or off.</summary>
-    private void HighlightPlayButton(bool on)
-    {
-        var buttons = GetComponentsInChildren<TurntableButton>(true);
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            if (buttons[i].Type != TurntableButton.ButtonType.Play) continue;
-            var hl = buttons[i].GetComponent<InteractableHighlight>();
-            if (hl == null) hl = buttons[i].gameObject.AddComponent<InteractableHighlight>();
-            hl.SetHighlighted(on);
-            break;
-        }
-    }
-
     // ── Playback controls ────────────────────────────────────────────
 
-    /// <summary>Start playback. Called by TurntableButton (Play).</summary>
+    /// <summary>Start playback. Called when vinyl is placed or turntable clicked.</summary>
     public void Play()
     {
         if (_loadedVinyl == null || _loadedVinyl.Definition == null) return;
@@ -216,7 +227,7 @@ public class RecordSlot : MonoBehaviour
         Debug.Log($"[RecordSlot] Playing: {def.title} by {def.artist}");
     }
 
-    /// <summary>Pause playback. Called by TurntableButton (Pause).</summary>
+    /// <summary>Pause playback. Called when turntable clicked while playing.</summary>
     public void Pause()
     {
         if (!_isPlaying) return;
@@ -277,6 +288,7 @@ public class RecordSlot : MonoBehaviour
         if (_loadedVinyl == null) return;
 
         StopPlaybackInternal();
+        CloseLid();
 
         var vinyl = _loadedVinyl;
         if (_loadedPlaceable != null)
@@ -308,6 +320,7 @@ public class RecordSlot : MonoBehaviour
         if (_loadedPlaceable == null || _loadedVinyl == null) return null;
 
         StopPlaybackInternal();
+        CloseLid();
 
         _loadedPlaceable.transform.SetParent(null, true);
         _loadedVinyl.ConfigureForGrab();
@@ -336,6 +349,7 @@ public class RecordSlot : MonoBehaviour
         if (_loadedPlaceable == null && _loadedVinyl == null) return;
 
         StopPlaybackInternal();
+        CloseLid();
 
         // Return vinyl to its sleeve
         if (_loadedVinyl != null && _loadedVinyl.HomeSleeve != null)
@@ -367,5 +381,40 @@ public class RecordSlot : MonoBehaviour
         if (_cachedReactable != null) _cachedReactable.IsActive = false;
 
         if (_toneArm != null) _toneArm.SnapToRest();
+    }
+
+    // ── Lid ──────────────────────────────────────────────────────────
+
+    private void OpenLid() => OpenLidExternal();
+    private void CloseLid() => CloseLidExternal();
+
+    public void OpenLidExternal()
+    {
+        if (_lid == null) return;
+        if (_lidTween != null) StopCoroutine(_lidTween);
+        _lidTween = StartCoroutine(TweenLid(_lidOpenRot));
+    }
+
+    public void CloseLidExternal()
+    {
+        if (_lid == null) return;
+        if (_lidTween != null) StopCoroutine(_lidTween);
+        _lidTween = StartCoroutine(TweenLid(Quaternion.Euler(_lidClosedAngle)));
+    }
+
+    private IEnumerator TweenLid(Quaternion targetRot)
+    {
+        Quaternion startRot = _lid.localRotation;
+        float elapsed = 0f;
+        while (elapsed < _lidTweenDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / _lidTweenDuration;
+            t = t * t * (3f - 2f * t);
+            _lid.localRotation = Quaternion.Slerp(startRot, targetRot, t);
+            yield return null;
+        }
+        _lid.localRotation = targetRot;
+        _lidTween = null;
     }
 }
