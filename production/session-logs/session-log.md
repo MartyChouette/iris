@@ -19897,3 +19897,112 @@ Assets/Scripts/Apartment/RecordSlot.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260422_234011
+### Commits
+a133bb4 record player lid + spin, placement exclusion zones, ghost light fix, turntable button removal
+---
+
+## Session End: 20260423_000905
+### Commits
+a133bb4 record player lid + spin, placement exclusion zones, ghost light fix, turntable button removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_010006
+### Commits
+a133bb4 record player lid + spin, placement exclusion zones, ghost light fix, turntable button removal
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_100113
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_102908
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_110617
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_111936
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_111958
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_113432
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_124602
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_124743
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_124913
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/DynamicMeshCutter/Scripts/Core/MeshCutting.cs
+Assets/Scripts/DynamicMeshCutter/Scripts/Utility/MeshTargetShephard.cs
+Assets/Scripts/Framework/JointCutSuppressor.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_125101
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/DynamicMeshCutter/Scripts/Core/MeshCutting.cs
+Assets/Scripts/DynamicMeshCutter/Scripts/Utility/MeshTargetShephard.cs
+Assets/Scripts/Fluids/SapParticleController.cs
+Assets/Scripts/Framework/JointCutSuppressor.cs
+Assets/Shader/HighlightClean.shader
+production/session-logs/session-log.md
+---
+

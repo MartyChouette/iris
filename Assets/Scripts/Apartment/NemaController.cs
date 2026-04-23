@@ -261,6 +261,8 @@ public class NemaController : MonoBehaviour
         SafeSetFloat(H_LookWeight, _lookWeight);
     }
 
+    private bool _debugLookLogged;
+
     private void LateUpdate()
     {
         if (_model == null) return;
@@ -268,6 +270,7 @@ public class NemaController : MonoBehaviour
         // Manual head look-at (when no Animator IK)
         if (_headBone != null && _lookWeight > 0.01f && _hasLookTarget)
         {
+            if (!_debugLookLogged) { Debug.Log($"[Nema] Using MANUAL head bone look-at (bone='{_headBone.name}')"); _debugLookLogged = true; }
             Vector3 toTarget = _lookTarget - _headBone.position;
             if (toTarget.sqrMagnitude > 0.01f)
             {
@@ -279,9 +282,13 @@ public class NemaController : MonoBehaviour
 
     // ── Animator IK callback (if Animator has IK pass enabled) ──
 
+    private bool _debugIKLogged;
+
     private void OnAnimatorIK(int layerIndex)
     {
         if (_animator == null) return;
+
+        if (!_debugIKLogged) { Debug.Log($"[Nema] Using ANIMATOR IK look-at (animator='{_animator.name}')"); _debugIKLogged = true; }
 
         if (_hasLookTarget && _lookWeight > 0.01f)
         {
@@ -642,6 +649,17 @@ public class NemaController : MonoBehaviour
         // have its own animator we fall back to the serialized one.
         var animOnTarget = target.GetComponentInChildren<Animator>();
         if (animOnTarget != null) _animator = animOnTarget;
+
+        // Re-find head bone on the new model for manual look-at fallback
+        if (_animator != null)
+        {
+            var headT = _animator.GetBoneTransform(HumanBodyBones.Head);
+            if (headT != null) _headBone = headT;
+        }
+
+        // Reset debug flags so we log which system the new model uses
+        _debugLookLogged = false;
+        _debugIKLogged = false;
     }
 
     // ── Public API for the secret dancing overlay ───────────────────

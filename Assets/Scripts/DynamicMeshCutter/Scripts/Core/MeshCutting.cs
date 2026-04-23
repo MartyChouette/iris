@@ -448,6 +448,13 @@ namespace DynamicMeshCutter
         private static List<KeyValuePair<int, float>> _sortedBoneWeights = new List<KeyValuePair<int, float>>(16);
         private static Dictionary<int, float> _boneWeightAccum = new Dictionary<int, float>(8);
 
+        [UnityEngine.RuntimeInitializeOnLoadMethod(UnityEngine.RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStatics()
+        {
+            _sortedBoneWeights.Clear();
+            _boneWeightAccum.Clear();
+        }
+
         public BoneWeight GetBoneweightCenter(List<BoneWeight> fBoneWeights)
         {
             BoneWeight center = new BoneWeight();

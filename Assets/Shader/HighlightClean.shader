@@ -1,13 +1,12 @@
 Shader "Iris/HighlightClean"
 {
-    // Clean silhouette outline — follows real geometry exactly.
-    // No vertex snapping, no jitter, no PSX effects.
+    // Clean silhouette outline — uniform screen-space width.
+    // Extrudes in clip space so the line is the same pixel width
+    // regardless of mesh complexity, distance, or vertex count.
     Properties
     {
         _OutlineColor ("Outline Color", Color) = (1, 0.95, 0.85, 1)
-        _OutlineWidth ("Outline Width", Range(0.001, 0.05)) = 0.008
-        _PulseSpeed   ("Pulse Speed", Range(0, 8)) = 2.0
-        _PulseAmount  ("Pulse Amount", Range(0, 0.5)) = 0.1
+        _OutlineWidth ("Outline Width (px)", Range(0.5, 10)) = 2.0
     }
 
     SubShader
@@ -47,23 +46,28 @@ Shader "Iris/HighlightClean"
             CBUFFER_START(UnityPerMaterial)
                 half4  _OutlineColor;
                 half   _OutlineWidth;
-                half   _PulseSpeed;
-                half   _PulseAmount;
             CBUFFER_END
 
             Varyings vert(Attributes input)
             {
                 Varyings output;
-                float3 norm = normalize(input.normalOS);
-                float3 extruded = input.positionOS.xyz + norm * _OutlineWidth;
-                output.positionCS = TransformObjectToHClip(extruded);
+
+                // Transform vertex and normal to clip space
+                float4 clipPos = TransformObjectToHClip(input.positionOS.xyz);
+                float3 normalWS = TransformObjectToWorldNormal(input.normalOS);
+                float3 normalCS = mul((float3x3)UNITY_MATRIX_VP, normalWS);
+
+                // Push outward in screen space — width is in pixels
+                float2 offset = normalize(normalCS.xy) * _OutlineWidth * 2.0 / _ScreenParams.xy * clipPos.w;
+                clipPos.xy += offset;
+
+                output.positionCS = clipPos;
                 return output;
             }
 
             half4 frag(Varyings input) : SV_Target
             {
-                half pulse = 1.0 + sin(_Time.y * _PulseSpeed) * _PulseAmount;
-                return half4(_OutlineColor.rgb, _OutlineColor.a * pulse);
+                return _OutlineColor;
             }
             ENDHLSL
         }

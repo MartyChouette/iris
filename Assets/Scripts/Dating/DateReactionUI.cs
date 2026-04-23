@@ -10,6 +10,9 @@ using TMPro;
 /// </summary>
 public class DateReactionUI : MonoBehaviour
 {
+    private static readonly WaitForSeconds s_wait07 = new WaitForSeconds(0.7f);
+    private static readonly WaitForSeconds s_wait18 = new WaitForSeconds(1.8f);
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStatics()
     {
@@ -244,7 +247,7 @@ public class DateReactionUI : MonoBehaviour
         // Position text above icon
         _bubbleText.rectTransform.localPosition = new Vector3(0f, 0.4f, 0f);
 
-        yield return new WaitForSeconds(0.7f);
+        yield return s_wait07;
 
         // --- Phase 2: Reaction icon + sentiment (1.8s) ---
         _iconRenderer.sprite = type switch
@@ -281,7 +284,7 @@ public class DateReactionUI : MonoBehaviour
 
         _bubbleGO.transform.localScale = Vector3.one * 0.7f;
 
-        yield return new WaitForSeconds(1.8f);
+        yield return s_wait18;
 
         // --- Phase 3: Fade out (0.3s) ---
         float fadeTime = 0.3f;

@@ -16,6 +16,15 @@ public static class JointCutSuppressor
     // PERF: Reusable list to avoid allocation in foreach
     private static List<Joint> _tempJointsList = new List<Joint>(64);
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        _savedBreakForces.Clear();
+        _savedBreakTorques.Clear();
+        _isSuppressed = false;
+        _tempJointsList.Clear();
+    }
+
     /// <summary>
     /// Suppress all joint breaks by setting breakForce/breakTorque to infinity.
     /// Call this BEFORE cutting.

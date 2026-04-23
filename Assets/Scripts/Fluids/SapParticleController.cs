@@ -24,6 +24,7 @@ public class SapParticleController : MonoBehaviour
     public static SapParticleController Instance { get; private set; }
 
     private static readonly WaitForSeconds s_pollWait = new WaitForSeconds(0.1f);
+    private static readonly WaitForSeconds s_wait015 = new WaitForSeconds(0.15f);
 
     [System.Serializable]
     public class SapBurstProfile
@@ -350,7 +351,7 @@ public class SapParticleController : MonoBehaviour
             ps.transform.rotation = Quaternion.LookRotation(direction);
             ps.Emit(dripCount);
             elapsed += interval;
-            yield return new WaitForSeconds(interval);
+            yield return s_wait015;
         }
 
         // Let remaining particles finish
