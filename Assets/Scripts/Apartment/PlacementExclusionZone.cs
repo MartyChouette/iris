@@ -11,6 +11,9 @@ public class PlacementExclusionZone : MonoBehaviour
     [Tooltip("Half-extents of the exclusion box in local space.")]
     [SerializeField] private Vector3 _halfExtents = new Vector3(0.5f, 0.1f, 0.5f);
 
+    [Tooltip("Ignore height — block the full column above/below the zone (good for floor zones).")]
+    [SerializeField] private bool _ignoreHeight = true;
+
     private static readonly List<PlacementExclusionZone> s_all = new();
     public static IReadOnlyList<PlacementExclusionZone> All => s_all;
 
@@ -22,7 +25,7 @@ public class PlacementExclusionZone : MonoBehaviour
     {
         Vector3 local = transform.InverseTransformPoint(worldPos);
         return Mathf.Abs(local.x) <= _halfExtents.x
-            && Mathf.Abs(local.y) <= _halfExtents.y
+            && (_ignoreHeight || Mathf.Abs(local.y) <= _halfExtents.y)
             && Mathf.Abs(local.z) <= _halfExtents.z;
     }
 

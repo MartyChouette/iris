@@ -432,9 +432,13 @@ public class DateSessionManager : MonoBehaviour
 
     private IEnumerator ArrivalTransition()
     {
+        Debug.Log("[DateSessionManager] P1_DEBUG: ArrivalTransition START");
+
         // Fade out
+        Debug.Log("[DateSessionManager] P1_DEBUG: FadeOut begin");
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
+        Debug.Log("[DateSessionManager] P1_DEBUG: FadeOut done");
 
         // Everything between FadeOut and FadeIn is wrapped so a crash
         // at ANY point can't leave the screen stuck white.
@@ -445,7 +449,9 @@ public class DateSessionManager : MonoBehaviour
         catch (System.Exception e) { Debug.LogError($"[DateSessionManager] Phase title failed: {e}"); }
 
         // Use realtime wait so timeScale=0 can't hang this
+        Debug.Log($"[DateSessionManager] P1_DEBUG: phase title hold begin ({phaseTitleHold}s realtime)");
         yield return new WaitForSecondsRealtime(phaseTitleHold);
+        Debug.Log("[DateSessionManager] P1_DEBUG: phase title hold done");
 
         try
         {
@@ -464,7 +470,9 @@ public class DateSessionManager : MonoBehaviour
             _accumulatedReactions.Clear();
             _scoredTags.Clear();
 
+            Debug.Log("[DateSessionManager] P1_DEBUG: SpawnDateCharacter begin");
             SpawnDateCharacter();
+            Debug.Log($"[DateSessionManager] P1_DEBUG: SpawnDateCharacter done — GO={_dateCharacterGO?.name ?? "NULL"}");
 
             if (dateArrivedSFX != null && AudioManager.Instance != null)
                 AudioManager.Instance.PlaySFX(dateArrivedSFX);
@@ -480,43 +488,63 @@ public class DateSessionManager : MonoBehaviour
         }
 
         // Fade in ALWAYS runs
+        Debug.Log("[DateSessionManager] P1_DEBUG: FadeIn begin");
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
+        Debug.Log("[DateSessionManager] P1_DEBUG: FadeIn done");
 
         // Unblock input after fade so IsTransitioning clears
         if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = false;
 
         // Cinematic face sweep — close-up pan across the date's face with name
+        Debug.Log($"[DateSessionManager] P1_DEBUG: ArrivalFaceSweep check — enabled={_enableArrivalSweep}, GO={_dateCharacterGO?.name ?? "NULL"}, timeScale={Time.timeScale}");
         if (_enableArrivalSweep && _dateCharacterGO != null)
+        {
+            Debug.Log("[DateSessionManager] P1_DEBUG: ArrivalFaceSweep begin");
             yield return ArrivalFaceSweep();
+            Debug.Log("[DateSessionManager] P1_DEBUG: ArrivalFaceSweep done");
+        }
 
         // Epic title drop over the live scene
+        Debug.Log($"[DateSessionManager] P1_DEBUG: PhaseTitleDrop check — instance={PhaseTitleDrop.Instance != null}");
         if (PhaseTitleDrop.Instance != null)
+        {
+            Debug.Log("[DateSessionManager] P1_DEBUG: PhaseTitleDrop.Show begin");
             yield return PhaseTitleDrop.Instance.Show("Impressions");
+            Debug.Log("[DateSessionManager] P1_DEBUG: PhaseTitleDrop.Show done");
+        }
 
-#if UNITY_EDITOR
-        Debug.Log($"[DateSessionManager] Phase 1: Arrival — entrance judgments for {_currentDate.characterName}.");
-#endif
+        Debug.Log($"[DateSessionManager] P1_DEBUG: Phase 1 Arrival — entrance judgments for {_currentDate?.characterName ?? "NULL"}");
 
         // Run entrance judgments (NPC is already at judgment point)
         if (_entranceJudgments != null && _currentDate != null)
         {
             var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
+            Debug.Log($"[DateSessionManager] P1_DEBUG: RunJudgments begin — reactionUI={reactionUI != null}");
             yield return _entranceJudgments.RunJudgments(reactionUI, _currentDate);
+            Debug.Log("[DateSessionManager] P1_DEBUG: RunJudgments done");
+        }
+        else
+        {
+            Debug.LogWarning($"[DateSessionManager] P1_DEBUG: SKIPPED RunJudgments — judgments={_entranceJudgments != null}, date={_currentDate != null}");
         }
 
         // No mid-date fails: the date always plays through all 3 phases.
         // Low affection just means no flower at the end.
 
         // Wait for player to acknowledge Phase 1 results
+        Debug.Log($"[DateSessionManager] P1_DEBUG: PhaseContinueButton check — instance={PhaseContinueButton.Instance != null}");
         if (PhaseContinueButton.Instance != null)
         {
             bool clicked = false;
             PhaseContinueButton.Instance.Show(() => clicked = true);
+            Debug.Log("[DateSessionManager] P1_DEBUG: waiting for Continue button click...");
             yield return new WaitUntil(() => clicked || _state != SessionState.DateInProgress);
+            Debug.Log($"[DateSessionManager] P1_DEBUG: Continue clicked={clicked}, state={_state}");
             if (_state != SessionState.DateInProgress) yield break;
         }
 
+        Debug.Log("[DateSessionManager] P1_DEBUG: ArrivalTransition COMPLETE — starting Phase 2");
         yield return TransitionToPhase2();
     }
 

@@ -101,10 +101,21 @@ public class PlacementSurface : MonoBehaviour
         size.y = Mathf.Abs(size.y);
         size.z = Mathf.Abs(size.z);
 
+        // Minimum trigger thickness in world-space meters, converted to local
+        // space so deeply-scaled hierarchies (e.g. CartModel) don't explode.
+        Vector3 ls = transform.lossyScale;
         if (normalAxis == SurfaceAxis.Up)
-            size.y = Mathf.Max(size.y, 0.05f);
+        {
+            float scaleY = Mathf.Abs(ls.y);
+            float minLocal = scaleY > 0.001f ? 0.05f / scaleY : 0.05f;
+            size.y = Mathf.Max(size.y, minLocal);
+        }
         else
-            size.z = Mathf.Max(size.z, 0.15f);
+        {
+            float scaleZ = Mathf.Abs(ls.z);
+            float minLocal = scaleZ > 0.001f ? 0.15f / scaleZ : 0.15f;
+            size.z = Mathf.Max(size.z, minLocal);
+        }
 
         box.center = center;
         box.size = size;

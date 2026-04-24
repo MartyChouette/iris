@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa76e9de32addb547babc27455a914b5, type: 3}
+  m_Name: Recipe_Rum_Daiquiri
+  m_EditorClassIdentifier: Assembly-CSharp::DrinkRecipeDefinition
+  drinkName: Raspberry Rum Daiquiri
+  requiredGlass: {fileID: 0}
+  ingredients:
+  - {fileID: 11400000, guid: 069248350386f5b45b72f2e4e019d5cd, type: 2}
+  - {fileID: 11400000, guid: 0ca0cd26521fd544c953c4599826da3a, type: 2}
+  - {fileID: 11400000, guid: d1f13c9d80189f04ba012d5946fd309a, type: 2}
+  portionNormalized:
+  - 0.4
+  - 0.3
+  - 0.3
+  requiresStir: 0
+  stirDuration: 2
+  perfectStirSpeedMin: 1.5
+  perfectStirSpeedMax: 4
+  baseScore: 100
+  idealFillLevel: 0.75
+  fillTolerance: 0.1
+  pourRate: 0.15
+  foamRateMultiplier: 1.3
+  targetOscSpeed: 0.4
+  targetOscAmplitude: 0.12
+  foamSettleRate: 0.25
+  liquidColor: {r: 0.8, g: 0.6, b: 0.3, a: 0.8}
+  portionTolerance: 0.08
+  garnishes:
+  - {fileID: 11400000, guid: 9785868ccea525743a63ae1e7ffdcd93, type: 2}
