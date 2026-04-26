@@ -201,6 +201,13 @@ public class ApartmentManager : MonoBehaviour
         if (brain == null)
             Debug.LogError("[ApartmentManager] No CinemachineBrain found in scene.");
 
+        // Snap camera to starting area immediately so the first rendered frame
+        // doesn't show the scene-saved camera position before Start() runs.
+        if (areas != null && areas.Length > 0)
+        {
+            _currentAreaIndex = Mathf.Clamp(_startAreaIndex, 0, areas.Length - 1);
+            ApplyCameraImmediate(areas[_currentAreaIndex]);
+        }
     }
 
     // Input managed by IrisInput singleton — no local enable/disable needed.
@@ -558,6 +565,10 @@ public class ApartmentManager : MonoBehaviour
     {
         if (browseCamera == null) return;
         if (_zoomSteps == null || _zoomSteps.Length == 0) return;
+
+        // Don't allow manual zoom while a phase camera preset is active —
+        // date phases have specific camera setups that zoom would break.
+        if (_presetOverrideActive) return;
 
         // Scroll always zooms — rotation moved to R key
 

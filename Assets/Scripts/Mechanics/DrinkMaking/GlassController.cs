@@ -280,15 +280,17 @@ public class GlassController : MonoBehaviour
 
         float glassHeight = definition.worldHeight;
 
-        // Liquid transform — scale Y from bottom
+        // Liquid transform — scale Y from fill start (above stem for wine glasses)
         if (liquidTransform != null)
         {
-            float liquidHeight = _liquidLevel * glassHeight;
+            float fillStart = definition.fillStartNormalized * glassHeight;
+            float fillRange = glassHeight - fillStart;
+            float liquidHeight = _liquidLevel * fillRange;
             liquidTransform.localScale = new Vector3(
                 liquidTransform.localScale.x,
                 Mathf.Max(liquidHeight, 0.001f),
                 liquidTransform.localScale.z);
-            liquidTransform.localPosition = new Vector3(0f, liquidHeight * 0.5f, 0f);
+            liquidTransform.localPosition = new Vector3(0f, fillStart + liquidHeight * 0.5f, 0f);
         }
 
         // Liquid renderer colour
@@ -300,18 +302,44 @@ public class GlassController : MonoBehaviour
             liquidRenderer.SetPropertyBlock(mpb);
         }
 
-        // Foam transform — sits on top of liquid, height = foam - liquid
+        // Foam transform — sits on top of liquid, height = foam - liquid.
+        // Fades out as foam settles so it disappears cleanly.
         if (foamTransform != null)
         {
-            float liquidHeight = _liquidLevel * glassHeight;
-            float foamHeight = (_foamLevel - _liquidLevel) * glassHeight;
+            float fillStart = definition.fillStartNormalized * glassHeight;
+            float fillRange = glassHeight - fillStart;
+            float liquidHeight = fillStart + _liquidLevel * fillRange;
+            float foamHeight = (_foamLevel - _liquidLevel) * fillRange;
             foamHeight = Mathf.Max(foamHeight, 0f);
 
-            foamTransform.localScale = new Vector3(
-                foamTransform.localScale.x,
-                Mathf.Max(foamHeight, 0.001f),
-                foamTransform.localScale.z);
-            foamTransform.localPosition = new Vector3(0f, liquidHeight + foamHeight * 0.5f, 0f);
+            // Fade foam opacity based on how much foam remains above liquid
+            float foamRatio = _liquidLevel > 0.001f ? (_foamLevel - _liquidLevel) / Mathf.Max(_liquidLevel, 0.01f) : 0f;
+            float foamAlpha = Mathf.Clamp01(foamRatio * 5f); // fades out over last 20%
+
+            if (foamAlpha < 0.01f)
+            {
+                foamTransform.gameObject.SetActive(false);
+            }
+            else
+            {
+                foamTransform.gameObject.SetActive(true);
+                foamTransform.localScale = new Vector3(
+                    foamTransform.localScale.x,
+                    Mathf.Max(foamHeight, 0.001f),
+                    foamTransform.localScale.z);
+                foamTransform.localPosition = new Vector3(0f, liquidHeight + foamHeight * 0.5f, 0f);
+
+                if (foamRenderer != null)
+                {
+                    var mpb = new MaterialPropertyBlock();
+                    foamRenderer.GetPropertyBlock(mpb);
+                    Color c = mpb.GetColor("_BaseColor");
+                    if (c.a == 0f) c = Color.white;
+                    c.a = foamAlpha;
+                    mpb.SetColor("_BaseColor", c);
+                    foamRenderer.SetPropertyBlock(mpb);
+                }
+            }
         }
 
         // Fill line marker

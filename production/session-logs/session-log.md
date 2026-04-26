@@ -20126,3 +20126,5059 @@ Assets/Scripts/Dating/DateSessionManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260423_205004
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+fe0e864 stability audit: static resets, WaitForSeconds caching, clean outline shader, Nema head bone auto-bind
+---
+
+## Session End: 20260423_205126
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+fe0e864 stability audit: static resets, WaitForSeconds caching, clean outline shader, Nema head bone auto-bind
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_211254
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+fe0e864 stability audit: static resets, WaitForSeconds caching, clean outline shader, Nema head bone auto-bind
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_221709
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_225636
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_230056
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_230231
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_230421
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_234923
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Record.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_235248
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Record.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260423_235725
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Record.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_001854
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Record.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_004639
+### Commits
+1af8931 phase 1 debug logs, placement surface scale fix, rain + daiquiri assets
+### Uncommitted Changes
+Assets/Record.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_113656
+### Uncommitted Changes
+Assets/Record.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_132651
+### Uncommitted Changes
+Assets/Record.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_133818
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_134505
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_134516
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_213744
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_214358
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_215238
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_215441
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_220834
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_220955
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_221215
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_221324
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_223457
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_223940
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_224233
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_224240
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_224307
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_224324
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_224334
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_224342
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_224757
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_225602
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_230301
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_231254
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_231424
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_233651
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260424_234052
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_001142
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_001228
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_002155
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_002651
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_002810
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_003224
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_003627
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_004224
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_004238
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_004626
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_004959
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_005027
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_005156
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_005420
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_005538
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_010350
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_154726
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_161150
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_161354
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_161521
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_165714
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_165732
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_170136
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_170326
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_171628
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_171947
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_172144
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_172227
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_172423
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_172540
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_172652
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_172814
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_172938
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_173641
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_173726
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_173815
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_174712
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_175137
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_181645
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_182004
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_183631
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_184225
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_184459
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_185421
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_232526
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260425_233017
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_125112
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_132937
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_133048
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_133422
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_134852
+### Uncommitted Changes
+Assets/Audio/ES_Button Click, Input Response, Tap, Short - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Positive 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button Press Click, Tap, Video Game, Main Menu, Select, Return, Negative 04 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Double Click, Fast, Phone Tap - Epidemic Sound.wav.meta
+Assets/Audio/ES_Button, Press, Click, Video Game, Variations - Epidemic Sound.wav.meta
+Assets/Audio/ES_Crushing Skull, Bones - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Click 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Fan, Pedestal, Head Adjust Clicks 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Finger Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Flower Vase, Big, Pick Up, Put Down, Wood Surface, Heavy 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn One Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Speed Control, Dial Turn Three Clicks, Slow - Epidemic Sound.wav.meta
+Assets/Audio/ES_Heater Fan, Small, Thermostat, Click On Or Off - Epidemic Sound.wav.meta
+Assets/Audio/ES_Knife, Slice Onion 03 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Lock, Latch, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mac Pro, Hardware, Ram Memory, Click In, Out - Epidemic Sound.wav.meta
+Assets/Audio/ES_Metal Click, Rattle, Close Variations 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Mini, Dumper, Petrol, Cap, Screw, On, Lock, Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Ocean, Rhythmic Waves, Crashing In On Beach, Distant Birds 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Pops, Cute, Tap Reverse, Pops - Epidemic Sound.wav.meta
+Assets/Audio/ES_Portable Heater, Radiator, Switch Click - Epidemic Sound.wav.meta
+Assets/Audio/ES_Small, Ticking, Close, Metallic 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Sweeter - Blood Harmony.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 06 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 29 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Breaking Bones 30 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tearing, Wet, Bones 02 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Tick, Medium, Loopable, Clocks 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Vegetable, Carrot, Peeling, Trimming Top 01 - Epidemic Sound.wav.meta
+Assets/Audio/ES_Waves, Ocean, Coming In On Beach, Wind, Birds - Epidemic Sound.wav.meta
+Assets/Audio/glass_pickup_ES_Button Press Click, Tap, Video Game, Main Menu, Select 01 - Epidemic Sound.wav.meta
+Assets/Audio/light_switch_ES_Clothes Peg, Click - Epidemic Sound.wav.meta
+Assets/Audio/nema_sfx_editing_click.wav.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star01.png.meta
+Assets/Lana Studio/Hyper Casual FX/Textures/Star02.png.meta
+Assets/Record.prefab
+Assets/Resources/Audio/default_click.wav.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/PlacementExclusionZone.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/LoadingScreen.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassDefinition.cs
+Assets/Scripts/Mechanics/Watering/PotController.cs
+Assets/Scripts/UI/AffectionBar.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/rainmachine.prefab
+Assets/rainmachine.prefab.meta
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+

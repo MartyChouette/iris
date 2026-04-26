@@ -442,6 +442,16 @@ public class ObjectGrabber : MonoBehaviour
         // No placeable hit — check for cubby/drawer door click
         if (placeable == null)
         {
+            // Demo-locked doors jiggle instead of opening
+            var demoLock = hit.collider.GetComponent<DemoLock>();
+            if (demoLock == null) demoLock = hit.collider.GetComponentInParent<DemoLock>();
+            if (demoLock != null)
+            {
+                demoLock.OnClicked();
+                ConsumeClick();
+                return;
+            }
+
             // Cabinets/cubbies/drawers are blocked during all date phases
             bool dateActiveForDrawer = DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive;
             if (!dateActiveForDrawer)
@@ -507,17 +517,20 @@ public class ObjectGrabber : MonoBehaviour
                 }
             }
 
-            // Click on a drink glass while not holding anything → finish the drink
+            // Click on a drink glass while not holding anything → serve it
             var clickedGlass = hit.collider.GetComponent<DrinkGlass>();
             if (clickedGlass == null)
                 clickedGlass = hit.collider.GetComponentInParent<DrinkGlass>();
-            if (clickedGlass != null && DrinkPourManager.Instance != null
-                && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Pouring
-                && DrinkPourManager.Instance.ActiveGlass == clickedGlass)
+            if (clickedGlass != null && DrinkPourManager.Instance != null)
             {
-                DrinkPourManager.Instance.FinishDrink();
-                ConsumeClick();
-                return;
+                var pourState = DrinkPourManager.Instance.CurrentState;
+                if (pourState == DrinkPourManager.State.Pouring
+                    || pourState == DrinkPourManager.State.WaitingForDelivery)
+                {
+                    DrinkPourManager.Instance.ServeGlass(clickedGlass);
+                    ConsumeClick();
+                    return;
+                }
             }
 
             // Click on vinyl sitting on platter:
@@ -540,6 +553,14 @@ public class ObjectGrabber : MonoBehaviour
                         InitGrab();
                     }
                 }
+                ConsumeClick();
+                return;
+            }
+
+            // Click on turntable lid — toggle open/close
+            if (RecordSlot.Instance != null && RecordSlot.Instance.IsLidTarget(hit.collider))
+            {
+                RecordSlot.Instance.ToggleLid();
                 ConsumeClick();
                 return;
             }
@@ -615,8 +636,8 @@ public class ObjectGrabber : MonoBehaviour
         if (DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive)
         {
             bool isBottle = placeable.GetComponent<BottleItem>() != null;
-            bool isDrinkGlass = placeable.GetComponent<DrinkGlass>() != null;
-            if (!isBottle && !isDrinkGlass)
+            // Glasses are never picked up — player clicks to serve, not grab
+            if (!isBottle)
             {
                 if (DateInspectSystem.Instance != null && DateInspectSystem.Instance.TryInspect())
                     ConsumeClick();
@@ -809,41 +830,8 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
-        // ── Deliver finished drink to date character ──
-        if (_held.GetComponent<DrinkGlass>() != null
-            && DrinkPourManager.Instance != null
-            && DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.WaitingForDelivery
-            && DateSessionManager.Instance != null
-            && DateSessionManager.Instance.DateCharacter != null)
-        {
-            // Proximity check — click anywhere while near the date to deliver.
-            // More forgiving than requiring a precise raycast hit on the character model.
-            Vector3 datePos = DateSessionManager.Instance.DateCharacter.transform.position;
-            float dist = Vector3.Distance(_grabTarget, datePos);
-            if (dist < 1.5f)
-            {
-                DrinkPourManager.Instance.DeliverToDate();
-                ClearHeld();
-                ConsumeClick();
-                return;
-            }
-
-            // Fallback: raycast through all objects to find the date character
-            Ray deliverRay = cam.ScreenPointToRay(IrisInput.CursorPosition);
-            int deliveryHitCount = Physics.RaycastNonAlloc(deliverRay, s_deliveryHitBuffer, 100f);
-            for (int i = 0; i < deliveryHitCount; i++)
-            {
-                var dateChar = s_deliveryHitBuffer[i].collider.GetComponent<DateCharacterController>();
-                if (dateChar == null) dateChar = s_deliveryHitBuffer[i].collider.GetComponentInParent<DateCharacterController>();
-                if (dateChar != null)
-                {
-                    DrinkPourManager.Instance.DeliverToDate();
-                    ClearHeld();
-                    ConsumeClick();
-                    return;
-                }
-            }
-        }
+        // Drink delivery is now click-to-serve (no pickup needed) — handled
+        // in the non-holding click path above via DrinkPourManager.ServeGlass().
 
         // ── DiscoBall check ──
         if (_currentSurface != null)
@@ -1089,8 +1077,12 @@ public class ObjectGrabber : MonoBehaviour
         }
         else
         {
-            // Strip any pour tilt — place items upright
-            rot = _isPourTilted ? Quaternion.identity : _held.transform.rotation;
+            // Watering can always goes upright; other items keep held rotation
+            // unless they were pour-tilted (bottles near glasses)
+            if (_held.GetComponent<WateringCan>() != null)
+                rot = Quaternion.Euler(0f, _held.transform.eulerAngles.y, 0f);
+            else
+                rot = _isPourTilted ? Quaternion.identity : _held.transform.rotation;
 
             // Smart book placement: flat everywhere, upright only at flagged edges
             var placeBook = _held.GetComponent<BookItem>();
@@ -1447,7 +1439,7 @@ public class ObjectGrabber : MonoBehaviour
 
         bool inRange = dist <= _turntableSnapRadius && dist > 0.01f;
 
-        // Lid opens on proximity, closes when leaving
+        // Auto-open lid on proximity (player closes it manually)
         if (inRange && !_turntableLidOpen)
         {
             RecordSlot.Instance.OpenLidExternal();
@@ -1455,8 +1447,7 @@ public class ObjectGrabber : MonoBehaviour
         }
         else if (!inRange && _turntableLidOpen)
         {
-            RecordSlot.Instance.CloseLidExternal();
-            _turntableLidOpen = false;
+            _turntableLidOpen = false; // reset tracking flag, but don't auto-close
         }
 
         if (!inRange) return;
@@ -1604,17 +1595,19 @@ public class ObjectGrabber : MonoBehaviour
             _wateringUIEngagedPlant = null;
             PotCrossSectionUI.Instance?.Hide();
 
-            // Place the can on the nearest surface
+            // Place the can upright on the nearest surface
+            Quaternion uprightRot = Quaternion.Euler(0f, _held.transform.eulerAngles.y, 0f);
             var nearest = FindNearestSurfaceForHeld(_heldRb != null ? _heldRb.position : _held.transform.position);
             if (nearest != null)
             {
                 var hitResult = nearest.ProjectOntoSurface(_held.transform.position, cam != null ? cam.transform.position : (Vector3?)null);
                 float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
                 Vector3 pos = hitResult.worldPosition + hitResult.surfaceNormal * halfExtent;
-                _held.OnPlaced(nearest, false, pos, Quaternion.identity);
+                _held.OnPlaced(nearest, false, pos, uprightRot);
             }
             else
             {
+                _held.transform.rotation = uprightRot;
                 _held.OnDropped();
             }
             _isPourTilted = false;
@@ -1705,27 +1698,32 @@ public class ObjectGrabber : MonoBehaviour
 
         _grabTarget = Vector3.Lerp(_grabTarget, pourPos, strength);
 
-        // Tilt the 3D watering can to look like it's pouring
+        // Tilt the watering can toward the plant for pouring.
+        // Spout faces along local X — rotate so spout aims at plant, then pitch to pour.
         if (_held != null && proximity > 0.5f)
         {
-            // Tilt toward the plant center (spout tips inward)
-            Vector3 tiltDir = (plantCenter - _held.transform.position).normalized;
-            tiltDir.y = 0f;
-            float tiltAngle = Mathf.Lerp(0f, 35f, (proximity - 0.5f) / 0.5f); // up to 35° tilt
-            Quaternion tiltRot = Quaternion.LookRotation(tiltDir, Vector3.up)
-                               * Quaternion.Euler(tiltAngle, 0f, 0f);
+            Vector3 toPlant = (plantCenter - _held.transform.position);
+            toPlant.y = 0f;
+            if (toPlant.sqrMagnitude < 0.001f) toPlant = Vector3.forward;
+            toPlant.Normalize();
+
+            // Yaw: face the spout toward the plant
+            float yaw = Mathf.Atan2(toPlant.x, toPlant.z) * Mathf.Rad2Deg;
+            float tiltAngle = Mathf.Lerp(0f, 20f, (proximity - 0.5f) / 0.5f);
+            Quaternion tiltRot = Quaternion.Euler(tiltAngle, yaw, 0f);
             _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation, tiltRot,
-                                                         Time.deltaTime * 8f);
+                                                         Time.deltaTime * 6f);
             _isPourTilted = true;
         }
         else if (_held != null && _isPourTilted)
         {
-            // Restore upright when leaving pour range
+            // Restore upright (keep yaw, zero pitch/roll)
+            Quaternion upright = Quaternion.Euler(0f, _held.transform.eulerAngles.y, 0f);
             _held.transform.rotation = Quaternion.Slerp(_held.transform.rotation,
-                Quaternion.identity, Time.deltaTime * 8f);
-            if (Quaternion.Angle(_held.transform.rotation, Quaternion.identity) < 1f)
+                upright, Time.deltaTime * 8f);
+            if (Quaternion.Angle(_held.transform.rotation, upright) < 1f)
             {
-                _held.transform.rotation = Quaternion.identity;
+                _held.transform.rotation = upright;
                 _isPourTilted = false;
             }
         }
@@ -1906,12 +1904,8 @@ public class ObjectGrabber : MonoBehaviour
         DestroyGhostPreview();
         ClearPlantHighlights();
 
-        // Close lid if we dropped the vinyl without placing it
-        if (_turntableLidOpen && RecordSlot.Instance != null)
-        {
-            RecordSlot.Instance.CloseLidExternal();
-            _turntableLidOpen = false;
-        }
+        // Reset proximity tracking (lid stays open — player closes manually)
+        _turntableLidOpen = false;
 
         // Clear turntable highlight if we were holding a record
         if (RecordSlot.Instance != null)
@@ -2500,9 +2494,10 @@ public class ObjectGrabber : MonoBehaviour
             mat.SetFloat("_Surface", 1f);
             mat.SetFloat("_Blend", 0f);
             mat.SetFloat("_ZWrite", 0f);
+            mat.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
             mat.SetOverrideTag("RenderType", "Transparent");
             mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-            mat.renderQueue = 3100;
+            mat.renderQueue = 3500;
             mat.color = _ghostTint;
             r.sharedMaterial = mat;
             r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
@@ -2587,8 +2582,8 @@ public class ObjectGrabber : MonoBehaviour
         {
             bool slotFree = slotZone.TryPeekNextDepositSlot(out Vector3 slotPos, out Quaternion slotRot);
             Vector3 slotShadow = slotFree
-                ? slotPos + hitResult.surfaceNormal * 0.01f
-                : hitResult.worldPosition + hitResult.surfaceNormal * 0.01f;
+                ? slotPos + hitResult.surfaceNormal * 0.02f
+                : hitResult.worldPosition + hitResult.surfaceNormal * 0.02f;
 
             _shadowMat.color = slotFree ? s_shadowValid : s_shadowInvalid;
             _shadowGO.transform.position = slotShadow;
@@ -2642,7 +2637,8 @@ public class ObjectGrabber : MonoBehaviour
 
         // Shadow always sits directly under the ghost on the surface face.
         // Derived from placePos so any override (home snap, etc.) keeps them aligned.
-        Vector3 shadowPos = placePos - hitResult.surfaceNormal * (halfExtent - 0.01f);
+        // Shadow sits just above the surface face to avoid z-fighting with the floor
+        Vector3 shadowPos = hitResult.worldPosition + hitResult.surfaceNormal * 0.02f;
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
         bool canPlace = (!_currentSurface.IsVertical || _held.CanWallMount)

@@ -90,7 +90,9 @@ public class PairableItem : MonoBehaviour
         if (!_isPaired && _placeable != null)
         {
             _placeable.SetGlitched(true);
+#if UNITY_EDITOR
             Debug.Log($"[PairableItem] Start: applied glitch to '{name}'");
+#endif
         }
         else
         {

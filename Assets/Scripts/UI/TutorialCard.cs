@@ -57,6 +57,9 @@ public class TutorialCard : MonoBehaviour
     {
         _onDismiss = onDismiss;
 
+        // Ensure the GameObject is active so coroutines can run
+        gameObject.SetActive(true);
+
         // Destroy any scene-wired card and build the runtime two-page version
         if (_root != null)
         {

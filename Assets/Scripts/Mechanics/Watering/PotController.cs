@@ -212,24 +212,36 @@ public class PotController : MonoBehaviour
             soilTransform.localPosition = new Vector3(0f, soilHeight * 0.5f, 0f);
         }
 
-        // Foam transform — sits on top of soil, height = foam - water
+        // Foam transform — sits on top of soil, fades as it settles
         if (foamTransform != null)
         {
             float soilHeight = _waterLevel * h;
             float foamHeight = Mathf.Max((_foamLevel - _waterLevel) * h, 0f);
 
-            foamTransform.localScale = new Vector3(
-                foamTransform.localScale.x,
-                Mathf.Max(foamHeight, 0.001f),
-                foamTransform.localScale.z);
-            foamTransform.localPosition = new Vector3(0f, soilHeight + foamHeight * 0.5f, 0f);
+            float foamRatio = _waterLevel > 0.001f ? (_foamLevel - _waterLevel) / Mathf.Max(_waterLevel, 0.01f) : 0f;
+            float foamAlpha = Mathf.Clamp01(foamRatio * 5f);
 
-            // Foam colour via MPB
-            if (foamRenderer != null)
+            if (foamAlpha < 0.01f)
             {
-                foamRenderer.GetPropertyBlock(_foamMPB);
-                _foamMPB.SetColor("_BaseColor", definition.foamColor);
-                foamRenderer.SetPropertyBlock(_foamMPB);
+                foamTransform.gameObject.SetActive(false);
+            }
+            else
+            {
+                foamTransform.gameObject.SetActive(true);
+                foamTransform.localScale = new Vector3(
+                    foamTransform.localScale.x,
+                    Mathf.Max(foamHeight, 0.001f),
+                    foamTransform.localScale.z);
+                foamTransform.localPosition = new Vector3(0f, soilHeight + foamHeight * 0.5f, 0f);
+
+                if (foamRenderer != null)
+                {
+                    foamRenderer.GetPropertyBlock(_foamMPB);
+                    Color fc = definition.foamColor;
+                    fc.a = foamAlpha;
+                    _foamMPB.SetColor("_BaseColor", fc);
+                    foamRenderer.SetPropertyBlock(_foamMPB);
+                }
             }
         }
 

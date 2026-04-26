@@ -85,9 +85,10 @@ public class FlyController : MonoBehaviour
         // Tiny scale — fly is about 1.5cm
         transform.localScale = Vector3.one * 0.015f;
 
-        // Collider for click detection
+        // Trigger collider for click detection only — no physics collisions
         var col = gameObject.AddComponent<SphereCollider>();
         col.radius = 3f; // expanded radius in local space (0.015 * 3 = ~0.045m hit zone)
+        col.isTrigger = true;
 
         // ReactableTag — Nema dislikes pests
         var tag = gameObject.AddComponent<ReactableTag>();
@@ -145,6 +146,50 @@ public class FlyController : MonoBehaviour
         // Buzz volume respects global settings
         float globalVol = AccessibilitySettings.MasterVolume * AccessibilitySettings.SFXVolume;
         _buzzSource.volume = _buzzVolume * globalVol;
+    }
+
+    /// <summary>The transform this fly orbits around.</summary>
+    public Transform Target => _target;
+
+    /// <summary>Dismiss all flies targeting this transform or any of its children.</summary>
+    public static void DismissFliesFor(Transform root)
+    {
+        if (root == null) return;
+        for (int i = s_all.Count - 1; i >= 0; i--)
+        {
+            if (s_all[i] == null || s_all[i]._target == null) continue;
+            if (s_all[i]._target == root || s_all[i]._target.IsChildOf(root))
+                s_all[i].FlyAway();
+        }
+    }
+
+    /// <summary>Fly away and self-destruct. Called when the source item is cleaned up.</summary>
+    public void FlyAway()
+    {
+        if (_isDead) return;
+        _isDead = true;
+        if (_buzzSource != null) _buzzSource.Stop();
+        var tag = GetComponent<ReactableTag>();
+        if (tag != null) tag.IsActive = false;
+        StartCoroutine(FlyAwayRoutine());
+    }
+
+    private System.Collections.IEnumerator FlyAwayRoutine()
+    {
+        // Fly upward and shrink over 0.5s
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + Vector3.up * 1.5f + Random.insideUnitSphere * 0.5f;
+        float elapsed = 0f;
+        float duration = 0.5f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            transform.position = Vector3.Lerp(startPos, endPos, t);
+            transform.localScale = Vector3.one * 0.015f * (1f - t);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     /// <summary>Swat this fly. Called by FlySpawner on click detection.</summary>

@@ -99,9 +99,7 @@ public class BookCollectionItem : MonoBehaviour
 
     private IEnumerator CelebrationSequence()
     {
-        // Frame the books with the moment camera
-        if (ApartmentManager.Instance == null || ApartmentManager.Instance.ItemDiscoveryMoments)
-            MomentCamera.FrameTarget(transform.position, _celebrationDelay + 2f);
+        // No camera takeover — player stays in control
 
         // Wait one frame so ClearHeld/SetRenderOnTop(false) finishes restoring
         // shaders before we swap them. Otherwise our swap gets overwritten.
@@ -129,46 +127,27 @@ public class BookCollectionItem : MonoBehaviour
         // Scale pop on the book stack
         yield return ScalePop(transform, 0.35f);
 
-        // Spawn reward
+        // Spawn reward beside the books (no arc, no coffee table flight)
         if (_rewardPrefab == null) yield break;
 
-        Vector3 spawnPos = transform.position + Vector3.up * 0.25f;
+        Vector3 spawnPos = transform.position + transform.right * 0.15f + Vector3.up * 0.02f;
+        SmokePoof.Spawn(spawnPos);
         var reward = Instantiate(_rewardPrefab, spawnPos, Quaternion.identity);
 
-        // Strip physics during arc
-        var rb = reward.GetComponent<Rigidbody>();
-        bool wasKinematic = true;
-        if (rb != null)
-        {
-            wasKinematic = rb.isKinematic;
-            rb.isKinematic = true;
-        }
-        foreach (var col in reward.GetComponentsInChildren<Collider>())
-            col.enabled = false;
-
-        // Find coffee table position
-        Vector3 targetPos = FindCoffeeTablePosition();
-        yield return ArcToPosition(reward, spawnPos, targetPos);
-
-        // Re-enable physics so the item can be picked up
-        if (rb != null) rb.isKinematic = wasKinematic;
-        foreach (var col in reward.GetComponentsInChildren<Collider>())
-            col.enabled = true;
-
-        // Snap to nearest surface grid
+        // Snap to nearest surface
         var placeable = reward.GetComponent<PlaceableObject>();
         if (placeable != null)
         {
-            var surface = PlacementSurface.FindNearest(targetPos, skipVertical: true);
+            var surface = PlacementSurface.FindNearest(spawnPos, skipVertical: true);
             if (surface != null)
-                placeable.OnPlaced(surface, true, targetPos, reward.transform.rotation);
+                placeable.OnPlaced(surface, true, spawnPos, reward.transform.rotation);
         }
 
         // Caption
         if (!string.IsNullOrEmpty(_rewardCaption))
             CaptionDisplay.Show(_rewardCaption, 3f);
 
-        Debug.Log($"[BookCollectionItem] Collection complete! Reward spawned at {targetPos}.");
+        Debug.Log($"[BookCollectionItem] Collection complete! Reward at {spawnPos}.");
     }
 
     /// <summary>Quick squish-and-pop scale animation on the book stack.</summary>

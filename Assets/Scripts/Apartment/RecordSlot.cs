@@ -75,9 +75,11 @@ public class RecordSlot : MonoBehaviour
     private Coroutine _lidTween;
     private Quaternion _lidOpenRot; // captured from the model's posed position
     private ReactableTag _cachedReactable;
+    private bool _lidOpen;
 
     public bool IsPlaying => _isPlaying;
     public bool IsLoaded => _loadedVinyl != null;
+    public bool IsLidOpen => _lidOpen;
     public RecordDefinition CurrentRecord => _loadedVinyl != null ? _loadedVinyl.Definition : null;
 
     /// <summary>World position vinyl snaps to (for magnetic snap in ObjectGrabber).</summary>
@@ -176,10 +178,11 @@ public class RecordSlot : MonoBehaviour
         if (_labelMat != null)
             _labelMat.color = vinyl.Definition.labelColor;
 
-        // Close lid over the record, snap vinyl onto platter, then auto-play
-        CloseLid();
+        // Auto-open lid when accepting a record (player must close it manually)
+        OpenLid();
         Vector3 targetPos = _platePlacementPoint != null ? _platePlacementPoint.position : transform.position;
         Quaternion targetRot = _platePlacementPoint != null ? _platePlacementPoint.rotation : transform.rotation;
+        Debug.Log($"[RecordSlot] Snapping vinyl to targetPos={targetPos}, platePt={(_platePlacementPoint != null ? _platePlacementPoint.name : "NULL")}, slotTransform={transform.position}, parent={transform.name}");
         held.transform.position = targetPos;
         held.transform.rotation = targetRot;
         Play();
@@ -288,7 +291,6 @@ public class RecordSlot : MonoBehaviour
         if (_loadedVinyl == null) return;
 
         StopPlaybackInternal();
-        CloseLid();
 
         var vinyl = _loadedVinyl;
         if (_loadedPlaceable != null)
@@ -320,7 +322,6 @@ public class RecordSlot : MonoBehaviour
         if (_loadedPlaceable == null || _loadedVinyl == null) return null;
 
         StopPlaybackInternal();
-        CloseLid();
 
         _loadedPlaceable.transform.SetParent(null, true);
         _loadedVinyl.ConfigureForGrab();
@@ -349,7 +350,6 @@ public class RecordSlot : MonoBehaviour
         if (_loadedPlaceable == null && _loadedVinyl == null) return;
 
         StopPlaybackInternal();
-        CloseLid();
 
         // Return vinyl to its sleeve
         if (_loadedVinyl != null && _loadedVinyl.HomeSleeve != null)
@@ -386,11 +386,28 @@ public class RecordSlot : MonoBehaviour
     // ── Lid ──────────────────────────────────────────────────────────
 
     private void OpenLid() => OpenLidExternal();
-    private void CloseLid() => CloseLidExternal();
+
+    /// <summary>True if the given collider belongs to the lid transform (for click detection).</summary>
+    public bool IsLidTarget(Collider col)
+    {
+        if (_lid == null || col == null) return false;
+        return col.transform == _lid || col.transform.IsChildOf(_lid);
+    }
+
+    /// <summary>Toggle lid open/closed. Called when the player clicks the lid.</summary>
+    public void ToggleLid()
+    {
+        if (_lidOpen)
+            CloseLidExternal();
+        else
+            OpenLidExternal();
+    }
 
     public void OpenLidExternal()
     {
         if (_lid == null) return;
+        if (_lidOpen) return;
+        _lidOpen = true;
         if (_lidTween != null) StopCoroutine(_lidTween);
         _lidTween = StartCoroutine(TweenLid(_lidOpenRot));
     }
@@ -398,6 +415,8 @@ public class RecordSlot : MonoBehaviour
     public void CloseLidExternal()
     {
         if (_lid == null) return;
+        if (!_lidOpen) return;
+        _lidOpen = false;
         if (_lidTween != null) StopCoroutine(_lidTween);
         _lidTween = StartCoroutine(TweenLid(Quaternion.Euler(_lidClosedAngle)));
     }

@@ -172,24 +172,7 @@ public class PlaceableObject : MonoBehaviour
         {
             if (_lastPlacedSurface == null) return 1;
             if (IsHiddenInCubby) return 1;
-
-            int mult = _lastPlacedSurface.EffectMultiplier;
-
-            // Paired bonus: shoes/items that are paired score higher
-            var pairable = GetComponent<PairableItem>();
-            if (pairable != null && pairable.IsPaired)
-                mult += 1;
-
-            // Stack bonus: stacked dishes score higher per plate in the stack
-            var stackable = GetComponent<StackablePlate>();
-            if (stackable != null)
-            {
-                int stackSize = GetComponentsInChildren<StackablePlate>().Length;
-                if (stackSize > 1)
-                    mult += stackSize - 1; // +1 per extra plate in stack
-            }
-
-            return mult;
+            return _lastPlacedSurface.EffectMultiplier;
         }
     }
     public Vector3 HomePosition => _homePosition;
@@ -242,7 +225,9 @@ public class PlaceableObject : MonoBehaviour
 
         ApplyGlitch();
 
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] {name} disheveled.");
+#endif
     }
 
     private void ApplyGlitch()
@@ -271,7 +256,9 @@ public class PlaceableObject : MonoBehaviour
         _instanceMat.shader = s_glitchShader;
         _instanceMat.SetFloat("_GlitchIntensity", 0f);
         _isGlitched = true;
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] ApplyGlitch on '{name}': {_originalShader.name} → {s_glitchShader.name}");
+#endif
     }
 
     private void RemoveGlitch()
@@ -292,7 +279,9 @@ public class PlaceableObject : MonoBehaviour
             return;
         }
 
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] RemoveGlitch on '{name}': {_instanceMat.shader.name} → {_originalShader.name}");
+#endif
         _instanceMat.shader = _originalShader;
         _isGlitched = false;
     }
@@ -322,7 +311,9 @@ public class PlaceableObject : MonoBehaviour
     private void CaptureDisheveledPose()
     {
         _disheveledRotation = transform.rotation;
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] {name} disheveled rotation captured: {transform.eulerAngles}");
+#endif
     }
 
     /// <summary>Capture current rotation as the home/normal rotation (rotation only, position untouched).</summary>
@@ -330,7 +321,9 @@ public class PlaceableObject : MonoBehaviour
     private void CaptureHomeRotation()
     {
         _homeRotation = transform.rotation;
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] {name} home rotation captured: {transform.eulerAngles}");
+#endif
     }
 
     /// <summary>Capture current position + rotation as the full home pose.</summary>
@@ -339,7 +332,9 @@ public class PlaceableObject : MonoBehaviour
     {
         _homePosition = transform.position;
         _homeRotation = transform.rotation;
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] {name} home pose captured: pos={_homePosition}, rot={transform.eulerAngles}");
+#endif
     }
 
     /// <summary>Clear the home position and rotation. Object will have no home.</summary>
@@ -349,7 +344,9 @@ public class PlaceableObject : MonoBehaviour
         _homePosition = Vector3.zero;
         _homeRotation = Quaternion.identity;
         _useSpawnAsHome = false;
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] {name} home position cleared.");
+#endif
     }
 
     /// <summary>Clear the captured disheveled pose.</summary>
@@ -357,7 +354,9 @@ public class PlaceableObject : MonoBehaviour
     private void ClearDisheveledPose()
     {
         _disheveledRotation = Quaternion.identity;
+#if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] {name} disheveled rotation cleared.");
+#endif
     }
 
     /// <summary>

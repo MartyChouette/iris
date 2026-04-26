@@ -36,7 +36,9 @@ public class PlacementExclusionZone : MonoBehaviour
         {
             if (s_all[i].Contains(worldPos))
             {
+#if UNITY_EDITOR
                 Debug.Log($"[ExclusionZone] BLOCKED at {worldPos} by '{s_all[i].name}'");
+#endif
                 return true;
             }
         }

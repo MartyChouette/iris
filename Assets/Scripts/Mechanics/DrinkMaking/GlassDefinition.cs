@@ -15,6 +15,10 @@ public class GlassDefinition : ScriptableObject
     [Tooltip("Relative capacity — shot ~0.3, rocks ~0.7, tall ~1.0.")]
     public float capacity = 1f;
 
+    [Tooltip("Where liquid starts filling (0 for tumblers, ~0.4 for wine glasses with stems).")]
+    [Range(0f, 1f)]
+    public float fillStartNormalized = 0f;
+
     [Tooltip("Where the perfect fill line sits (0-1 of glass height).")]
     [Range(0f, 1f)]
     public float fillLineNormalized = 0.8f;

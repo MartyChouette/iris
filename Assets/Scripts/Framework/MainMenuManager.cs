@@ -174,6 +174,7 @@ public class MainMenuManager : MonoBehaviour
             _preloadOp.allowSceneActivation = false;
             Debug.Log($"[MainMenuManager] Preloading scene {_targetSceneIndex} in background.");
         }
+
     }
 
     private void Update()

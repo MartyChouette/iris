@@ -214,6 +214,10 @@ public class DropZone : MonoBehaviour
                 AudioManager.Instance.PlaySFX(_depositSFX);
         }
 
+        // Dismiss flies orbiting this item (checks children too — flies
+        // track ReactableTag transforms which may be on child objects)
+        FlyController.DismissFliesFor(item.transform);
+
         Debug.Log($"[DropZone] {item.name} deposited at {_zoneName}. Total: {DepositCount}");
     }
 

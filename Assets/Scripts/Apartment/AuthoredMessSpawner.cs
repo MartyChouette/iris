@@ -108,12 +108,16 @@ public class AuthoredMessSpawner : MonoBehaviour
         if (!dpmPresent || dpmPastMorning)
 #endif
         {
+#if UNITY_EDITOR
             Debug.Log("[AuthoredMessSpawner] Auto-spawning mess (no DPM or already past morning).");
+#endif
             SpawnDailyMess();
         }
         else
         {
+#if UNITY_EDITOR
             Debug.Log($"[AuthoredMessSpawner] Waiting for DPM to trigger spawn (phase={DayPhaseManager.Instance.CurrentPhase}).");
+#endif
         }
     }
 
@@ -126,9 +130,11 @@ public class AuthoredMessSpawner : MonoBehaviour
         _spawnedBlueprintNames.Clear();
         CleanUpPreviousObjects();
 
+#if UNITY_EDITOR
         Debug.Log($"[AuthoredMessSpawner] SpawnDailyMess — blueprints={(_allBlueprints != null ? _allBlueprints.Length : 0)}, " +
                   $"stainSlots={(_stainSlots != null ? _stainSlots.Length : 0)}, " +
                   $"cleaningMgr={(_cleaningManager != null ? "OK" : "NULL")}");
+#endif
 
         var outcome = DateOutcomeCapture.LastOutcome;
         int currentDay = GameClock.Instance != null ? GameClock.Instance.CurrentDay : 1;
@@ -205,8 +211,10 @@ public class AuthoredMessSpawner : MonoBehaviour
         // Clear date outcome after spawning
         DateOutcomeCapture.ClearForNewDay();
 
+#if UNITY_EDITOR
         Debug.Log($"[AuthoredMessSpawner] Spawned {selectedStains.Count} stains, " +
                   $"{selectedObjects.Count} objects from {_spawnedBlueprintNames.Count} blueprints.");
+#endif
     }
 
     private bool IsEligible(MessBlueprint bp, DateOutcomeCapture.DateOutcome outcome, int currentDay)

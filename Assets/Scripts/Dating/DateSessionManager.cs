@@ -444,7 +444,7 @@ public class DateSessionManager : MonoBehaviour
         // at ANY point can't leave the screen stuck white.
         try
         {
-            ScreenFade.Instance?.ShowPhaseTitle("Impressions");
+            // Phase title shown via PhaseTitleDrop after fade-in (not ScreenFade, to avoid double text)
         }
         catch (System.Exception e) { Debug.LogError($"[DateSessionManager] Phase title failed: {e}"); }
 
@@ -564,8 +564,7 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
 
-        try { ScreenFade.Instance?.ShowPhaseTitle("Drinks"); }
-        catch (System.Exception e) { Debug.LogError($"[DateSessionManager] Phase title failed: {e}"); }
+        // Phase title shown via PhaseTitleDrop after fade-in (not ScreenFade, to avoid double text)
 
         yield return new WaitForSecondsRealtime(phaseTitleHold);
 
@@ -577,9 +576,14 @@ public class DateSessionManager : MonoBehaviour
             _moodCheckTimer = 0f;
 
             StartPhase2Pulse();
-            HighlightDrinkGlasses(true);
+            // Signal glass choice — DrinkPourManager highlights glasses
+            if (DrinkPourManager.Instance != null)
+                DrinkPourManager.Instance.BeginGlassChoice();
+            else
+                HighlightDrinkGlasses(true);
             SetBottleHomes(useCounter: true);
 
+            Debug.Log($"[DateSessionManager] Phase2 model swap: sceneModels={(_activeSceneModels != null ? "OK" : "NULL")}, kitchenModel={(_activeSceneModels?.kitchenModel != null ? _activeSceneModels.kitchenModel.name : "NULL")}");
             if (_activeSceneModels != null && _activeSceneModels.kitchenModel != null)
             {
                 if (_dateCharacter != null)
@@ -592,6 +596,7 @@ public class DateSessionManager : MonoBehaviour
             }
             else
             {
+                Debug.LogWarning("[DateSessionManager] Phase2: No kitchen model — warping existing character.");
                 Vector3 kitchenPos = kitchenStandPoint != null ? kitchenStandPoint.position
                     : new Vector3(-4f, 0f, -4.5f);
                 if (_dateCharacter != null)
@@ -643,7 +648,7 @@ public class DateSessionManager : MonoBehaviour
                 if (DrinkPourManager.Instance != null
                     && DrinkPourManager.Instance.CurrentState != DrinkPourManager.State.Idle)
                 {
-                    DrinkPourManager.Instance.ServeDrink();
+                    DrinkPourManager.Instance.ServeGlass(DrinkPourManager.Instance.ActiveGlass);
                 }
                 served = true;
             }, "Serve \u2192");
@@ -674,8 +679,7 @@ public class DateSessionManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
 
-        try { ScreenFade.Instance?.ShowPhaseTitle("Warming Up"); }
-        catch (System.Exception e) { Debug.LogError($"[DateSessionManager] Phase title failed: {e}"); }
+        // Phase title shown via PhaseTitleDrop after fade-in (not ScreenFade, to avoid double text)
 
         yield return new WaitForSecondsRealtime(phaseTitleHold);
 
@@ -1391,10 +1395,11 @@ public class DateSessionManager : MonoBehaviour
         rot.enabled = true;
         rot.z = new ParticleSystem.MinMaxCurve(-1f, 1f);
 
-        // Velocity — slight random spread
+        // Velocity — slight random spread (all axes must use the same curve mode)
         var vel = ps.velocityOverLifetime;
         vel.enabled = true;
         vel.x = new ParticleSystem.MinMaxCurve(-0.15f, 0.15f);
+        vel.y = new ParticleSystem.MinMaxCurve(0f, 0f);
         vel.z = new ParticleSystem.MinMaxCurve(-0.15f, 0.15f);
 
         // Material
@@ -1904,7 +1909,7 @@ public class DateSessionManager : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
 
             am.SetPresetBase(

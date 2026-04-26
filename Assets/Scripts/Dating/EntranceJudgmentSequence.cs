@@ -10,8 +10,8 @@ using UnityEngine;
 /// </summary>
 public class EntranceJudgmentSequence : MonoBehaviour
 {
-    // ── Cached WaitForSeconds to avoid per-yield allocations ──
-    private static readonly WaitForSeconds s_wait25 = new WaitForSeconds(2.5f);
+    // ── Cached waits (realtime so timeScale=0 can't hang judgments) ──
+    private static readonly WaitForSecondsRealtime s_wait25 = new WaitForSecondsRealtime(2.5f);
 
     [Header("Timing")]
     [Tooltip("Seconds to pause before the first judgment.")]
@@ -66,7 +66,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
     {
         if (date == null) yield break;
 
-        yield return new WaitForSeconds(_preJudgmentPause);
+        yield return new WaitForSecondsRealtime(_preJudgmentPause);
 
         // --- Judgment 1: Music ---
         PlayJudgingSFX();
@@ -86,7 +86,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
         if (musicReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Music: {musicReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Music → {musicReaction}");
-        yield return new WaitForSeconds(_interJudgmentPause);
+        yield return new WaitForSecondsRealtime(_interJudgmentPause);
 
         // --- Judgment 2: Perfume / Mood + Smell ---
         PlayJudgingSFX();
@@ -109,7 +109,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
         if (moodReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Perfume/Mood: {moodReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Perfume → {moodReaction}");
-        yield return new WaitForSeconds(_interJudgmentPause);
+        yield return new WaitForSecondsRealtime(_interJudgmentPause);
 
         // --- Judgment 3: Outfit ---
         PlayJudgingSFX();
@@ -121,7 +121,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
         if (outfitReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Outfit: {outfitReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Outfit → {outfitReaction}");
-        yield return new WaitForSeconds(_interJudgmentPause);
+        yield return new WaitForSecondsRealtime(_interJudgmentPause);
 
         // --- Judgment 4: Cleanliness ---
         PlayJudgingSFX();
@@ -143,7 +143,7 @@ public class EntranceJudgmentSequence : MonoBehaviour
         if (cleanReaction == ReactionType.Dislike) PlaySneezeSFX();
         Debug.Log($"[EntranceJudgmentSequence] Cleanliness: {cleanReaction}");
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Cleanliness → {cleanReaction}");
-        yield return new WaitForSeconds(_interJudgmentPause);
+        yield return new WaitForSecondsRealtime(_interJudgmentPause);
     }
 
     private void PlayJudgingSFX()

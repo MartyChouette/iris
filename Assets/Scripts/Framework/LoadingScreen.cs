@@ -253,10 +253,6 @@ public class LoadingScreen : MonoBehaviour
         SetProgress(1f);
         yield return null;
 
-        // Warm up shaders to avoid stutter on first render
-        Shader.WarmupAllShaders();
-        yield return null;
-
         // Fade out
         float fadeTime = 0.5f;
         float elapsed = 0f;
@@ -303,9 +299,6 @@ public class LoadingScreen : MonoBehaviour
         }
 
         SetProgress(1f);
-        yield return null;
-
-        Shader.WarmupAllShaders();
         yield return null;
 
         float fadeTime = 0.5f;

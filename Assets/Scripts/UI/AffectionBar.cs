@@ -176,8 +176,8 @@ public class AffectionBar : MonoBehaviour
             if (_pulseTimer > 0f)
             {
                 _pulseTimer -= Time.deltaTime;
-                float t = _pulseTimer / 0.8f;
-                float pulse = Mathf.Sin(t * Mathf.PI * 5f) * Mathf.Pow(t, 0.5f); // 5 bounces, decaying
+                float t = Mathf.Max(0f, _pulseTimer / 0.8f);
+                float pulse = Mathf.Sin(t * Mathf.PI * 5f) * Mathf.Sqrt(t); // 5 bounces, decaying
                 size *= 1f + Mathf.Abs(pulse) * 0.6f; // up to 60% bigger
                 rotation = pulse * 15f; // wobble rotation
             }
