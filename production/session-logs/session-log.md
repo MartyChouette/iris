@@ -25722,3 +25722,125 @@ production/session-logs/session-log.md
 679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
 ---
 
+## Session End: 20260426_224231
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+---
+
+## Session End: 20260426_224433
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_224616
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_224914
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_225104
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_225342
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_225618
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_230351
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_231006
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_233737
+### Commits
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BottleItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/Phase2EnvironmentDim.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+production/session-logs/session-log.md
+---
+

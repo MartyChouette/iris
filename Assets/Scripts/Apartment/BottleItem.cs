@@ -81,6 +81,9 @@ public class BottleItem : MonoBehaviour
 
         var po = GetComponent<PlaceableObject>();
         if (po != null)
-            po.ForceRestoreMaterial();
+        {
+            po.SetRenderOnTop(false);
+            po.OnDropped(); // resets state to Resting so bottle can be picked up again
+        }
     }
 }

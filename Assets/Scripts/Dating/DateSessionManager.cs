@@ -614,7 +614,7 @@ public class DateSessionManager : MonoBehaviour
             {
                 var nemaKitchen = NemaController.Instance != null
                     ? NemaController.Instance.ActiveModel : null;
-                Phase2EnvironmentDim.Instance.DimEnvironment(
+                Phase2EnvironmentDim.Instance.HideEnvironment(
                     _dateCharacterGO != null ? _dateCharacterGO.transform : null,
                     nemaKitchen);
             }

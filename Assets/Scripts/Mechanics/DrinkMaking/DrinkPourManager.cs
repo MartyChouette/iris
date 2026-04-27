@@ -135,15 +135,18 @@ public class DrinkPourManager : MonoBehaviour
         // Switch active glass (contents persist — never clear on switch)
         if (_activeGlass != glass)
         {
+            // Un-highlight previous glass
+            HighlightSingleGlass(_activeGlass, false);
             _activeGlass = glass;
             _activeRecipe = FindRecipeForGlass(glass);
         }
 
         _pouringIngredient = ingredient;
 
-        // Turn off glass highlights, turn on ingredient highlights
+        // Turn off all glass highlights, highlight only the engaged glass
         if (CurrentState == State.ChoosingGlass)
             HighlightAllGlasses(false);
+        HighlightSingleGlass(glass, true);
 
         if (CurrentState != State.Pouring)
         {
@@ -159,6 +162,7 @@ public class DrinkPourManager : MonoBehaviour
     public void StopPouring()
     {
         _pouringIngredient = null;
+        HighlightSingleGlass(_activeGlass, false);
         // Stay in Pouring state — player can grab another bottle
     }
 
@@ -204,6 +208,7 @@ public class DrinkPourManager : MonoBehaviour
 
         _glassHighlightActive = false;
         HighlightAllGlasses(false);
+        HighlightSingleGlass(_activeGlass, false);
         PickupDescriptionHUD.Instance?.Hide();
 
         CalculateScore();
@@ -432,5 +437,15 @@ public class DrinkPourManager : MonoBehaviour
         }
 
         if (!on) InteractableHighlight.SuppressVisuals = true;
+    }
+
+    private void HighlightSingleGlass(DrinkGlass glass, bool on)
+    {
+        if (glass == null) return;
+        if (on) InteractableHighlight.SuppressVisuals = false;
+        var hl = glass.GetComponent<InteractableHighlight>();
+        if (hl == null && on)
+            hl = glass.gameObject.AddComponent<InteractableHighlight>();
+        if (hl != null) hl.SetHighlighted(on);
     }
 }

@@ -278,6 +278,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3298368814140690512, guid: 5292c727fa375a94fbbe8573e7178595, type: 3}
+--- !u!1 &5506865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1558642255686185359, guid: b37889ec1493de446bcfaf827b964767, type: 3}
+  m_PrefabInstance: {fileID: 62138513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5897382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,6 +1368,7 @@ GameObject:
   - component: {fileID: 60188333}
   - component: {fileID: 60188332}
   - component: {fileID: 60188331}
+  - component: {fileID: 60188334}
   m_Layer: 15
   m_Name: Kettle
   m_TagString: Untagged
@@ -1526,6 +1532,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0020315642, y: 0.0020315642, z: 0.002008342}
   m_Center: {x: -0.0000000033760448, y: -0.00000013934917, z: -0.00037157908}
+--- !u!114 &60188334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60188327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1001 &62138513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1641,13 +1664,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1558642255686185359, guid: b37889ec1493de446bcfaf827b964767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 62138521}
   m_SourcePrefab: {fileID: 100100000, guid: b37889ec1493de446bcfaf827b964767, type: 3}
 --- !u!4 &62138514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3445587615029214451, guid: b37889ec1493de446bcfaf827b964767, type: 3}
   m_PrefabInstance: {fileID: 62138513}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &62138521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5506865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &62745141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,6 +2587,7 @@ GameObject:
   - component: {fileID: 89499668}
   - component: {fileID: 89499667}
   - component: {fileID: 89499666}
+  - component: {fileID: 89499669}
   m_Layer: 15
   m_Name: Water Pitcher
   m_TagString: Untagged
@@ -2707,6 +2751,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0023721007, y: 0.0013745457, z: 0.0033104725}
   m_Center: {x: 0.0006407891, y: 0.000000015337728, z: -0.00024503056}
+--- !u!114 &89499669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89499662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1001 &94751424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3512,6 +3573,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 139230408}
+    - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 139230415}
   m_SourcePrefab: {fileID: 100100000, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
 --- !u!4 &139230405 stripped
 Transform:
@@ -3633,6 +3697,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecordItem
   _definition: {fileID: 11400000, guid: 9ace90e69ec7519317d58464fe24d57d, type: 2}
+--- !u!114 &139230415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139230406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &140841905
 GameObject:
   m_ObjectHideFlags: 0
@@ -4204,6 +4285,7 @@ GameObject:
   - component: {fileID: 155673892}
   - component: {fileID: 155673891}
   - component: {fileID: 155673890}
+  - component: {fileID: 155673896}
   m_Layer: 15
   m_Name: Garnish_Cherry
   m_TagString: Untagged
@@ -4383,6 +4465,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155673888}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &155673896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155673888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &158204158
 GameObject:
   m_ObjectHideFlags: 0
@@ -5662,7 +5761,7 @@ Camera:
   far clip plane: 500
   field of view: 46.1
   orthographic: 1
-  orthographic size: 1.0976363
+  orthographic size: 1.3716805
   m_Depth: -100
   m_CullingMask:
     serializedVersion: 2
@@ -5686,8 +5785,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205141428}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10058099, y: 0.85669816, z: -0.18258983, w: 0.47181854}
-  m_LocalPosition: {x: 11.492165, y: -7.131252, z: -10.727907}
+  m_LocalRotation: {x: 0.069966175, y: 0.85846555, z: -0.121624686, w: 0.49330434}
+  m_LocalPosition: {x: -5.8483896, y: 1.6471648, z: 0.3428476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5710,6 +5809,7 @@ GameObject:
   - component: {fileID: 206099564}
   - component: {fileID: 206099565}
   - component: {fileID: 206099566}
+  - component: {fileID: 206099567}
   m_Layer: 15
   m_Name: Single_Medium_Book The Dead Letter Love 3 of 3
   m_TagString: Untagged
@@ -5932,6 +6032,23 @@ MonoBehaviour:
   _flatOffset: {x: 90, y: 0, z: 0}
   _hiddenItemPrefab: {fileID: 0}
   _hiddenItemMinDay: 0
+--- !u!114 &206099567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206099557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &206389198
 GameObject:
   m_ObjectHideFlags: 0
@@ -6889,6 +7006,7 @@ GameObject:
   - component: {fileID: 252631762}
   - component: {fileID: 252631764}
   - component: {fileID: 252631763}
+  - component: {fileID: 252631765}
   m_Layer: 15
   m_Name: Wine Glass
   m_TagString: Untagged
@@ -7067,6 +7185,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &252631765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252631757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &260727592
 GameObject:
   m_ObjectHideFlags: 0
@@ -12534,6 +12669,7 @@ GameObject:
   - component: {fileID: 478580147}
   - component: {fileID: 478580148}
   - component: {fileID: 478580149}
+  - component: {fileID: 478580150}
   m_Layer: 15
   m_Name: Single_Medium_Book The Dead Letter Love 2 of 3
   m_TagString: Untagged
@@ -12756,6 +12892,23 @@ MonoBehaviour:
   _flatOffset: {x: 90, y: 0, z: 0}
   _hiddenItemPrefab: {fileID: 0}
   _hiddenItemMinDay: 0
+--- !u!114 &478580150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478580140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &479891199
 GameObject:
   m_ObjectHideFlags: 0
@@ -13077,6 +13230,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 488569105}
+    - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 488569112}
   m_SourcePrefab: {fileID: 100100000, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
 --- !u!4 &488569102 stripped
 Transform:
@@ -13198,6 +13354,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecordItem
   _definition: {fileID: 11400000, guid: 79e6580bfc642e6a3246c6f9f51d87c9, type: 2}
+--- !u!114 &488569112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488569103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &489105372
 GameObject:
   m_ObjectHideFlags: 0
@@ -13682,7 +13855,7 @@ GameObject:
   - component: {fileID: 509328818}
   - component: {fileID: 509328817}
   m_Layer: 15
-  m_Name: Cube.004 (1)
+  m_Name: lampshadecap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17545,11 +17718,11 @@ MonoBehaviour:
   _entranceJudgments: {fileID: 666569914}
   _arrivalCamera:
     label: Arrival
-    position: {x: 0.33846283, y: 1.872476, z: -4.5949864}
-    rotation: {x: 4.8128047, y: 273.5738, z: 0.0024011666}
+    position: {x: 1.3522434, y: 1.8710984, z: -4.256108}
+    rotation: {x: 4.8128047, y: 273.5738, z: 0.0024011668}
     fov: 46.1
-    nearClip: 0.099999994
-    farClip: 20000
+    nearClip: 0.08301052
+    farClip: 16602.104
     perspective: 1
     perspectiveFOV: 46.1
     panLimit: 0.5
@@ -17557,21 +17730,21 @@ MonoBehaviour:
     captured: 1
   _kitchenCamera:
     label: Kitchen / BackgroundJudging
-    position: {x: 11.381068, y: -3.978615, z: -7.774618}
-    rotation: {x: 25.783073, y: 117.95954, z: 0.002867254}
-    fov: 0.9280207
-    nearClip: -50
+    position: {x: -3.5093675, y: 4.070878, z: 0.34430128}
+    rotation: {x: 24.267952, y: 121.72459, z: 0.005486204}
+    fov: 0.94903004
+    nearClip: -500
     farClip: 500
     perspective: 0
-    perspectiveFOV: 56.9
+    perspectiveFOV: 46.1
     panLimit: 0.5
     zoomStep: -1
     captured: 1
   _couchCamera:
     label: Couch / Reveal
-    position: {x: 11.492165, y: -7.131252, z: -10.727907}
-    rotation: {x: 24.064241, y: 122.31376, z: 0.0022945856}
-    fov: 1.0976363
+    position: {x: -5.8483896, y: 1.6471648, z: 0.3428476}
+    rotation: {x: 16.131954, y: 120.23474, z: 0.007821172}
+    fov: 1.3716805
     nearClip: -500
     farClip: 500
     perspective: 0
@@ -17662,8 +17835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 579a7d292ab0e854f826e192b4f6c10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Phase2EnvironmentDim
-  _dimAmount: 0.05
-  _fadeDuration: 0.8
   _excludeRoots:
   - {fileID: 347036757}
 --- !u!1 &667232708
@@ -20244,6 +20415,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1076965512}
+    - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1076965515}
   m_SourcePrefab: {fileID: 100100000, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
 --- !u!1 &749080492
 GameObject:
@@ -25911,6 +26085,7 @@ GameObject:
   - component: {fileID: 955522065}
   - component: {fileID: 955522064}
   - component: {fileID: 955522068}
+  - component: {fileID: 955522069}
   m_Layer: 15
   m_Name: Scissors
   m_TagString: Untagged
@@ -26060,6 +26235,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.22, y: 0.03, z: 0.16}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &955522069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955522062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &956397685
 GameObject:
   m_ObjectHideFlags: 0
@@ -31326,6 +31518,7 @@ GameObject:
   - component: {fileID: 975222924}
   - component: {fileID: 975222926}
   - component: {fileID: 975222925}
+  - component: {fileID: 975222927}
   m_Layer: 15
   m_Name: RumBottle
   m_TagString: Untagged
@@ -31508,6 +31701,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &975222927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975222919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!21 &981694296
 Material:
   serializedVersion: 8
@@ -31643,7 +31853,7 @@ GameObject:
   - component: {fileID: 994100372}
   - component: {fileID: 994100374}
   m_Layer: 15
-  m_Name: Cube (1)
+  m_Name: Lamp Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34159,6 +34369,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VinylDisc
   _labelRenderer: {fileID: 1076965504}
+--- !u!114 &1076965515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076965502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1077417105
 GameObject:
   m_ObjectHideFlags: 0
@@ -38509,6 +38736,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1253001537}
+    - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1253001544}
   m_SourcePrefab: {fileID: 100100000, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
 --- !u!4 &1253001534 stripped
 Transform:
@@ -38630,6 +38860,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecordItem
   _definition: {fileID: 11400000, guid: c1ba46bcfbd493cf8965c76f62de092a, type: 2}
+--- !u!114 &1253001544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253001535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1257367307
 GameObject:
   m_ObjectHideFlags: 0
@@ -40167,6 +40414,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1292015914}
+    - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1292015921}
   m_SourcePrefab: {fileID: 100100000, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
 --- !u!4 &1292015911 stripped
 Transform:
@@ -40288,6 +40538,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecordItem
   _definition: {fileID: 11400000, guid: 288968c57989f4643456b2107b32dbb3, type: 2}
+--- !u!114 &1292015921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292015912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1301510340
 GameObject:
   m_ObjectHideFlags: 0
@@ -44332,6 +44599,7 @@ GameObject:
   - component: {fileID: 1473568835}
   - component: {fileID: 1473568837}
   - component: {fileID: 1473568836}
+  - component: {fileID: 1473568838}
   m_Layer: 15
   m_Name: Red Wine
   m_TagString: Untagged
@@ -44514,6 +44782,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1473568838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473568830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1481122821
 GameObject:
   m_ObjectHideFlags: 0
@@ -45398,7 +45683,7 @@ GameObject:
   - component: {fileID: 1527031321}
   - component: {fileID: 1527031320}
   m_Layer: 15
-  m_Name: Cube.003 (1)
+  m_Name: Lamp_Shade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46462,6 +46747,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1573539986}
+    - targetCorrespondingSourceObject: {fileID: 5486034758403598339, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1573539993}
   m_SourcePrefab: {fileID: 100100000, guid: 8e450b8b1365b6d45b7945f99da53a83, type: 3}
 --- !u!4 &1573539983 stripped
 Transform:
@@ -46583,6 +46871,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecordItem
   _definition: {fileID: 11400000, guid: 82a65b374fdb31f801350dda9a0e1fcb, type: 2}
+--- !u!114 &1573539993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573539984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1573676660
 GameObject:
   m_ObjectHideFlags: 0
@@ -50222,6 +50527,7 @@ GameObject:
   - component: {fileID: 1671656480}
   - component: {fileID: 1671656483}
   - component: {fileID: 1671656482}
+  - component: {fileID: 1671656484}
   m_Layer: 15
   m_Name: lamp
   m_TagString: Untagged
@@ -50349,6 +50655,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1671656484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671656478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1674266353
 GameObject:
   m_ObjectHideFlags: 0
@@ -52546,6 +52869,7 @@ GameObject:
   - component: {fileID: 1735786996}
   - component: {fileID: 1735786995}
   - component: {fileID: 1735786994}
+  - component: {fileID: 1735786997}
   m_Layer: 15
   m_Name: jar of candy I love
   m_TagString: Untagged
@@ -52710,6 +53034,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.011387491, y: 0.012106376, z: 0.0034732423}
   m_Center: {x: -0.000000038882717, y: -0.00000010011717, z: -0.001581864}
+--- !u!114 &1735786997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735786990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1736265307
 GameObject:
   m_ObjectHideFlags: 0
@@ -52756,6 +53097,7 @@ GameObject:
   - component: {fileID: 1743046052}
   - component: {fileID: 1743046051}
   - component: {fileID: 1743046050}
+  - component: {fileID: 1743046056}
   m_Layer: 15
   m_Name: Garnish_Lime
   m_TagString: Untagged
@@ -52935,6 +53277,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743046048}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1743046056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743046048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1750278477
 GameObject:
   m_ObjectHideFlags: 0
@@ -56327,6 +56686,7 @@ GameObject:
   - component: {fileID: 1857878110}
   - component: {fileID: 1857878109}
   - component: {fileID: 1857878111}
+  - component: {fileID: 1857878112}
   m_Layer: 15
   m_Name: Raspberry Juice
   m_TagString: Untagged
@@ -56508,6 +56868,23 @@ MonoBehaviour:
   _homePosition: {x: 0, y: 0, z: 0}
   _homeTolerance: 0.2
   _homeRotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &1857878112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857878104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &1858919477
 GameObject:
   m_ObjectHideFlags: 0
@@ -62142,6 +62519,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1931151281058514120, guid: 5292c727fa375a94fbbe8573e7178595, type: 3}
+--- !u!1 &2090544772 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1558642255686185359, guid: b37889ec1493de446bcfaf827b964767, type: 3}
+  m_PrefabInstance: {fileID: 4660727641665894702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2091395749
 GameObject:
   m_ObjectHideFlags: 0
@@ -62970,6 +63352,7 @@ GameObject:
   - component: {fileID: 2141916680}
   - component: {fileID: 2141916679}
   - component: {fileID: 2141916678}
+  - component: {fileID: 2141916681}
   m_Layer: 15
   m_Name: milk box (1)
   m_TagString: Untagged
@@ -63133,6 +63516,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0008465101, y: 0.00084651035, z: 0.0014282659}
   m_Center: {x: 0.0000019017612, y: 0.0000012095267, z: -0.0002448142}
+--- !u!114 &2141916681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141916674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!21 &2143072126
 Material:
   serializedVersion: 8
@@ -63309,6 +63709,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3445587615029214451, guid: b37889ec1493de446bcfaf827b964767, type: 3}
   m_PrefabInstance: {fileID: 4660727641665894702}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &98012793716388090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090544772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!23 &131466395836234370
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68345,6 +68762,7 @@ GameObject:
   - component: {fileID: 8226558599481057030}
   - component: {fileID: 8226558599481057031}
   - component: {fileID: 8226558599481057032}
+  - component: {fileID: 8226558599481057033}
   m_Layer: 15
   m_Name: Single_Medium_Book The Dead Letter Love 1 of 3
   m_TagString: Untagged
@@ -68864,6 +69282,7 @@ GameObject:
   - component: {fileID: 6358458495724261079}
   - component: {fileID: 6358458495724261078}
   - component: {fileID: 6358458495724261080}
+  - component: {fileID: 6358458495724261081}
   m_Layer: 15
   m_Name: Single Book
   m_TagString: Untagged
@@ -69421,7 +69840,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1558642255686185359, guid: b37889ec1493de446bcfaf827b964767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 98012793716388090}
   m_SourcePrefab: {fileID: 100100000, guid: b37889ec1493de446bcfaf827b964767, type: 3}
 --- !u!33 &4668013534364736438
 MeshFilter:
@@ -70764,6 +71186,23 @@ MonoBehaviour:
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
   _interactShader: {fileID: 0}
+--- !u!114 &6358458495724261081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006675188290007892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!1 &6510876032257490167
 GameObject:
   m_ObjectHideFlags: 0
@@ -71205,6 +71644,7 @@ GameObject:
   - component: {fileID: 7469228494855248028}
   - component: {fileID: 7469228494855248027}
   - component: {fileID: 7469228494855248029}
+  - component: {fileID: 7469228494855248030}
   m_Layer: 15
   m_Name: milk box_used_trash
   m_TagString: Untagged
@@ -71439,6 +71879,23 @@ MonoBehaviour:
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
   _interactShader: {fileID: 0}
+--- !u!114 &7469228494855248030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7142204098766548127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!33 &7600488553096381212
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -72046,6 +72503,23 @@ MonoBehaviour:
   _flatOffset: {x: 90, y: 0, z: 0}
   _hiddenItemPrefab: {fileID: 0}
   _hiddenItemMinDay: 0
+--- !u!114 &8226558599481057033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3297569424532663882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
 --- !u!4 &8344858413277194190
 Transform:
   m_ObjectHideFlags: 0

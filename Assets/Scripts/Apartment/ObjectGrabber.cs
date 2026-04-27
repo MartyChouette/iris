@@ -449,6 +449,16 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
+        // Light switch on the clicked collider — toggle even if parent is a PlaceableObject
+        // (e.g. lamp shade toggles light, lamp base picks up the whole lamp)
+        var directSwitch = hit.collider.GetComponent<LightSwitch>();
+        if (directSwitch != null)
+        {
+            directSwitch.Toggle();
+            ConsumeClick();
+            return;
+        }
+
         // No placeable hit — check for cubby/drawer door click
         if (placeable == null)
         {
@@ -1255,10 +1265,10 @@ public class ObjectGrabber : MonoBehaviour
 
     [Header("Bottle Snap")]
     [Tooltip("World-space radius at which a held bottle snaps toward a glass.")]
-    [SerializeField] private float _bottleSnapRadius = 0.6f;
+    [SerializeField] private float _bottleSnapRadius = 1.2f;
 
     [Tooltip("How strongly the bottle is pulled toward the glass pour position.")]
-    [SerializeField, Range(0f, 1f)] private float _bottleSnapStrength = 0.7f;
+    [SerializeField, Range(0f, 1f)] private float _bottleSnapStrength = 0.9f;
 
     [Header("Watering Can Snap")]
     [Tooltip("World-space radius at which the watering can snaps toward a plant.")]
@@ -1465,6 +1475,7 @@ public class ObjectGrabber : MonoBehaviour
     // ── Bottle magnetic snap ────────────────────────────────────────
 
     private DrinkGlass _nearestDrinkGlass;
+    private DrinkGlass _magnetizedGlass; // tracks highlight state
 
     private void UpdateBottleSnap()
     {
@@ -1523,9 +1534,22 @@ public class ObjectGrabber : MonoBehaviour
 
         if (bestGlass == null)
         {
+            if (_magnetizedGlass != null)
+            {
+                SetGlassMagnetHighlight(_magnetizedGlass, false);
+                _magnetizedGlass = null;
+            }
             if (wasPouring)
                 DrinkPourManager.Instance.StopPouring();
             return;
+        }
+
+        // Highlight the glass we're snapping to
+        if (bestGlass != _magnetizedGlass)
+        {
+            SetGlassMagnetHighlight(_magnetizedGlass, false);
+            SetGlassMagnetHighlight(bestGlass, true);
+            _magnetizedGlass = bestGlass;
         }
 
         _nearestDrinkGlass = bestGlass;
@@ -1896,6 +1920,13 @@ public class ObjectGrabber : MonoBehaviour
             _wateringUIEngagedPlant = null;
         }
 
+        // Clear glass magnetize highlight
+        if (_magnetizedGlass != null)
+        {
+            SetGlassMagnetHighlight(_magnetizedGlass, false);
+            _magnetizedGlass = null;
+        }
+
         ShowShadow(false);
         DestroyGhostPreview();
         ClearPlantHighlights();
@@ -1957,6 +1988,16 @@ public class ObjectGrabber : MonoBehaviour
     private void ClearPlantHighlights()
     {
         SetPlantHighlights(false);
+    }
+
+    private void SetGlassMagnetHighlight(DrinkGlass glass, bool on)
+    {
+        if (glass == null) return;
+        if (on) InteractableHighlight.SuppressVisuals = false;
+        var hl = glass.GetComponent<InteractableHighlight>();
+        if (hl == null && on)
+            hl = glass.gameObject.AddComponent<InteractableHighlight>();
+        if (hl != null) hl.SetHighlighted(on);
     }
 
     // ── Grab target (surface raycast with depth-plane fallback) ──────
