@@ -88,7 +88,8 @@ public class ItemLabelOverlay : MonoBehaviour
 
             // Get bounds top
             float topY = p.transform.position.y;
-            var rend = p.GetComponent<Renderer>();
+            var rend = p.GetComponent<Renderer>()
+                    ?? p.GetComponentInChildren<Renderer>();
             if (rend != null)
                 topY = rend.bounds.max.y;
 

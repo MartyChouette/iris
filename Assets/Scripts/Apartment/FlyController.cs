@@ -29,8 +29,11 @@ public class FlyController : MonoBehaviour
     [SerializeField] private float _jitterAmount = 0.05f;
 
     [Header("Audio")]
-    [Tooltip("Buzz volume at closest approach.")]
-    [SerializeField, Range(0f, 1f)] private float _buzzVolume = 0.04f;
+    [Tooltip("Buzz volume at closest approach (max after fade-in).")]
+    [SerializeField, Range(0f, 1f)] private float _buzzVolume = 0.015f;
+
+    [Tooltip("Seconds for buzz to fade in from silence.")]
+    [SerializeField] private float _buzzFadeIn = 3f;
 
     [Tooltip("Buzz frequency (Hz).")]
     [SerializeField] private float _buzzFrequency = 180f;
@@ -55,6 +58,7 @@ public class FlyController : MonoBehaviour
     // Splat
     private float _splatTimer = -1f;
     private const float SplatDuration = 0.4f;
+    private float _buzzAge;
 
     private void OnEnable() => s_all.Add(this);
     private void OnDisable() => s_all.Remove(this);
@@ -102,7 +106,8 @@ public class FlyController : MonoBehaviour
         _buzzSource.minDistance = 0.3f;
         _buzzSource.maxDistance = _buzzRange;
         _buzzSource.rolloffMode = AudioRolloffMode.Linear;
-        _buzzSource.volume = _buzzVolume;
+        _buzzSource.volume = 0f;
+        _buzzAge = 0f;
         CreateBuzzClip();
         _buzzSource.Play();
     }
@@ -143,9 +148,11 @@ public class FlyController : MonoBehaviour
 
         transform.position = _targetCenter + new Vector3(x, y, z) + _jitterOffset;
 
-        // Buzz volume respects global settings
+        // Buzz fades in from silence, respects global settings
+        _buzzAge += Time.deltaTime;
+        float fadeT = _buzzFadeIn > 0f ? Mathf.Clamp01(_buzzAge / _buzzFadeIn) : 1f;
         float globalVol = AccessibilitySettings.MasterVolume * AccessibilitySettings.SFXVolume;
-        _buzzSource.volume = _buzzVolume * globalVol;
+        _buzzSource.volume = _buzzVolume * fadeT * globalVol;
     }
 
     /// <summary>The transform this fly orbits around.</summary>

@@ -608,6 +608,16 @@ public class DateSessionManager : MonoBehaviour
 
             if (phaseTransitionSFX != null && AudioManager.Instance != null)
                 AudioManager.Instance.PlaySFX(phaseTransitionSFX);
+
+            // Dim everything except drink area, kitchen Nema, and kitchen date
+            if (Phase2EnvironmentDim.Instance != null)
+            {
+                var nemaKitchen = NemaController.Instance != null
+                    ? NemaController.Instance.ActiveModel : null;
+                Phase2EnvironmentDim.Instance.DimEnvironment(
+                    _dateCharacterGO != null ? _dateCharacterGO.transform : null,
+                    nemaKitchen);
+            }
         }
         catch (System.Exception e)
         {
@@ -661,6 +671,7 @@ public class DateSessionManager : MonoBehaviour
     {
         StopPhase2Pulse();
         HighlightDrinkGlasses(false);
+        Phase2EnvironmentDim.Instance?.RestoreEnvironment();
 
         // Restore fridge bottles to their original home (fridge shelf)
         SetBottleHomes(useCounter: false);
@@ -1820,6 +1831,10 @@ public class DateSessionManager : MonoBehaviour
         if (ApartmentManager.Instance == null) return;
 
         StopPhaseCameraLerp();
+
+        // Reset pan so the phase framing is exact (no leftover player pan)
+        ApartmentManager.Instance.ResetPanOffset();
+
         ApartmentManager.Instance.SetPresetBase(
             frame.position,
             Quaternion.Euler(frame.rotation),
@@ -1850,6 +1865,14 @@ public class DateSessionManager : MonoBehaviour
         if (ApartmentManager.Instance == null) return;
 
         if (duration < 0f) duration = _phaseCameraLerpDuration;
+
+        // Reset pan so start/end positions are consistent with the phase framing
+        ApartmentManager.Instance.ResetPanOffset();
+
+        // Apply pan limit and zoom for the target phase immediately
+        float panLim = frame.panLimit == 0f ? 0.5f : frame.panLimit;
+        ApartmentManager.Instance.SetPresetPanLimit(panLim);
+        ApartmentManager.Instance.ForceZoomStep(frame.zoomStep);
 
         StopPhaseCameraLerp();
         _phaseCameraLerp = StartCoroutine(PhaseCameraLerpRoutine(frame, duration));

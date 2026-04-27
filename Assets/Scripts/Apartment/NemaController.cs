@@ -75,6 +75,10 @@ public class NemaController : MonoBehaviour
 
     // Runtime flag so phase changes respect an active secret dance.
     private bool _dancingSecretActive;
+    private GameObject _activeModelGO;
+
+    /// <summary>The currently active Nema model's transform (for dim exclusion, etc).</summary>
+    public Transform ActiveModel => _activeModelGO != null ? _activeModelGO.transform : (_model != null ? _model : null);
 
     [Header("Look-At")]
     [Tooltip("How fast the look-at weight blends in/out (per second).")]
@@ -634,9 +638,10 @@ public class NemaController : MonoBehaviour
                     _areaModels[i].SetActive(false);
         }
 
-        if (target == null) return;
+        if (target == null) { _activeModelGO = null; return; }
 
         target.SetActive(true);
+        _activeModelGO = target;
 
         // Models that were inactive during PSXRenderController's startup scan
         // still have their original URP/Standard shaders, which may be stripped

@@ -25182,3 +25182,537 @@ ProjectSettings/ProjectSettings.asset
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260426_164351
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+---
+
+## Session End: 20260426_164413
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_164432
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_164534
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_164540
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_164625
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_164659
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_164919
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_165231
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_170215
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_170832
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_171117
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_173429
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_180315
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_181129
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_181245
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_181713
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_181847
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_183005
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_184157
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_184711
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_191537
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_192131
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_193659
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_194605
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_195633
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_200028
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_200228
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_202538
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_204353
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_204721
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_205733
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_205803
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_210051
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_210416
+### Commits
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Editor/DateSessionManagerEditor.cs
+Assets/Editor/SceneViewNearClip.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/FlyController.cs
+Assets/Scripts/Apartment/ItemLabelOverlay.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/apartment_blockout_detail_2nd_pass.fbx.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+

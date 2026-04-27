@@ -134,6 +134,8 @@ public class ApartmentManager : MonoBehaviour
     public Quaternion CurrentBaseRotation => _baseRotation;
     /// <summary>Base FOV/ortho size before zoom layering.</summary>
     public float CurrentBaseFOV => _baseFOV;
+    /// <summary>Zoom steps array (editor use). Index 0 = most zoomed out.</summary>
+    public float[] ZoomSteps => _zoomSteps;
 
     /// <summary>Fired when the player switches apartment areas. Arg = new area index.</summary>
     public event System.Action<int> OnAreaChanged;
@@ -294,14 +296,18 @@ public class ApartmentManager : MonoBehaviour
 
     private void Update()
     {
-        if (DayPhaseManager.Instance != null && !DayPhaseManager.Instance.IsInteractionPhase)
-            return;
+        bool interactionAllowed = DayPhaseManager.Instance == null || DayPhaseManager.Instance.IsInteractionPhase;
+
+        // Camera must ALWAYS update so preset overrides (date phase cameras)
+        // take effect immediately — even during fade transitions.
+        ApplyParallax();
+
+        if (!interactionAllowed) return;
 
         UpdateTransition();
         HandleBrowsingInput();
         HandleZoomInput();
         HandlePanInput();
-        ApplyParallax();
         UpdateHoverHighlight();
     }
 
@@ -392,6 +398,9 @@ public class ApartmentManager : MonoBehaviour
         if (cameraTestController != null && cameraTestController.ActivePresetIndex >= 0) return;
         if (!_isTransitioning) return;
         if (browseCamera == null) return;
+
+        // Preset override (date phase cameras) owns _basePosition — don't fight it
+        if (_presetOverrideActive) { _isTransitioning = false; return; }
 
         float step = transitionSpeed * Time.deltaTime;
 
@@ -557,6 +566,7 @@ public class ApartmentManager : MonoBehaviour
         if (_zoomSteps == null || _zoomSteps.Length == 0) return;
         _currentZoomStep = Mathf.Clamp(step, 0, _zoomSteps.Length - 1);
         _targetZoom = _zoomSteps[_currentZoomStep];
+        _currentZoom = _targetZoom; // Apply immediately (HandleZoomInput is blocked during presets)
         ClampPanOffset();
         UpdateZoomIndicator();
     }
@@ -628,9 +638,10 @@ public class ApartmentManager : MonoBehaviour
         }
         float scale = Mathf.Max(zoomFactor, 1f);
 
-        // If custom pan center is set, offset the pan relative to it
+        // When a preset override is active (date phase cameras), pan is always
+        // relative to _basePosition (the phase camera). Otherwise use custom pan center.
         Vector3 centerOffset = Vector3.zero;
-        if (_panCenter != Vector3.zero)
+        if (!_presetOverrideActive && _panCenter != Vector3.zero)
             centerOffset = _panCenter - _basePosition;
 
         Vector3 adjusted = _panOffset - centerOffset;
@@ -798,6 +809,9 @@ public class ApartmentManager : MonoBehaviour
 
     /// <summary>Override the pan distance limit while a preset is active. Set -1 to use default.</summary>
     public void SetPresetPanLimit(float maxPan) => _presetPanLimit = maxPan;
+
+    /// <summary>Reset player pan offset to zero (used when phase cameras set an absolute framing).</summary>
+    public void ResetPanOffset() => _panOffset = Vector3.zero;
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
     {

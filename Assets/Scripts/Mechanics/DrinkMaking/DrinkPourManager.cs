@@ -419,6 +419,8 @@ public class DrinkPourManager : MonoBehaviour
 
     private void HighlightAllGlasses(bool on)
     {
+        if (on) InteractableHighlight.SuppressVisuals = false;
+
         var glasses = DrinkGlass.All;
         for (int i = 0; i < glasses.Count; i++)
         {
@@ -428,5 +430,7 @@ public class DrinkPourManager : MonoBehaviour
                 hl = glasses[i].gameObject.AddComponent<InteractableHighlight>();
             if (hl != null) hl.SetHighlighted(on);
         }
+
+        if (!on) InteractableHighlight.SuppressVisuals = true;
     }
 }

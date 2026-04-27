@@ -439,6 +439,16 @@ public class ObjectGrabber : MonoBehaviour
         if (placeable == null)
             placeable = hit.collider.GetComponentInParent<PlaceableObject>();
 
+        // Perfume bottle — click to spray in place (no pickup)
+        var perfumeHit = hit.collider.GetComponent<PerfumeBottle>();
+        if (perfumeHit == null) perfumeHit = hit.collider.GetComponentInParent<PerfumeBottle>();
+        if (perfumeHit != null)
+        {
+            perfumeHit.SprayOnce();
+            ConsumeClick();
+            return;
+        }
+
         // No placeable hit — check for cubby/drawer door click
         if (placeable == null)
         {
@@ -680,7 +690,9 @@ public class ObjectGrabber : MonoBehaviour
         }
 
         // Cache collider bounds BEFORE disabling — used for shadow size + surface offset
-        var pickupCol = placeable.GetComponent<Collider>();
+        // Check children too: compound objects (e.g. plant pot) have colliders on child meshes
+        var pickupCol = placeable.GetComponent<Collider>()
+                     ?? placeable.GetComponentInChildren<Collider>();
         if (pickupCol != null)
         {
             _heldBoundsExtents = pickupCol.bounds.extents;
@@ -799,25 +811,9 @@ public class ObjectGrabber : MonoBehaviour
         {
             if (DrinkPourManager.Instance != null)
             {
-                // If this ingredient was already poured into this glass during
-                // the current session, the player wants to put the bottle down
-                // rather than re-enter the pour loop.
-                bool alreadyPoured =
-                    DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Pouring
-                    && DrinkPourManager.Instance.ActiveGlass == _nearestDrinkGlass
-                    && _nearestDrinkGlass.PourOrder.Contains(heldBottle.Ingredient);
-
-                if (alreadyPoured)
-                {
-                    DrinkPourManager.Instance.StopPouring();
-                    // Fall through to normal placement
-                }
-                else
-                {
-                    DrinkPourManager.Instance.StartPouring(_nearestDrinkGlass, heldBottle.Ingredient);
-                    ConsumeClick();
-                    return; // keep holding the bottle
-                }
+                DrinkPourManager.Instance.StartPouring(_nearestDrinkGlass, heldBottle.Ingredient);
+                ConsumeClick();
+                return; // keep holding the bottle
             }
         }
 
@@ -2280,7 +2276,8 @@ public class ObjectGrabber : MonoBehaviour
             float dz = Mathf.Abs(worldPos.z - po.transform.position.z);
             if (dx > cellRadius || dz > cellRadius) continue;
 
-            var col = po.GetComponent<Collider>();
+            var col = po.GetComponent<Collider>()
+                   ?? po.GetComponentInChildren<Collider>();
             if (col != null)
             {
                 float bookTop = col.bounds.max.y;

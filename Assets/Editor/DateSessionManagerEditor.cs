@@ -52,32 +52,53 @@ public class DateSessionManagerEditor : Editor
 
         if (GUILayout.Button($"Capture → {label}", GUILayout.Height(22)))
         {
-            var sv = SceneView.lastActiveSceneView;
-            if (sv != null)
+            // In Play mode, capture from the game camera (what the player sees)
+            // so position/rotation/FOV match exactly at runtime.
+            // In Edit mode, fall back to the Scene View camera.
+            if (Application.isPlaying && Camera.main != null)
             {
-                if (!sv.orthographic)
-                {
-                    sv.orthographic = true;
-                    sv.Repaint();
-                    Debug.LogWarning($"[DateSessionManager] Scene View was in perspective — switched to ortho before capturing {label}.");
-                }
-
+                var gameCam = Camera.main;
                 Undo.RecordObject(mgr, $"Capture {label} Camera");
-                frame.position = sv.camera.transform.position;
-                frame.rotation = sv.camera.transform.eulerAngles;
-                frame.fov = sv.camera.orthographicSize;
-                if (!frame.captured)
-                {
-                    frame.nearClip = -9f;
-                    frame.farClip = 1000f;
-                }
+                frame.position = gameCam.transform.position;
+                frame.rotation = gameCam.transform.eulerAngles;
+                frame.fov = gameCam.orthographic ? gameCam.orthographicSize : gameCam.fieldOfView;
+                frame.perspective = !gameCam.orthographic;
+                frame.perspectiveFOV = gameCam.fieldOfView;
+                frame.nearClip = gameCam.nearClipPlane;
+                frame.farClip = gameCam.farClipPlane;
                 frame.captured = true;
                 EditorUtility.SetDirty(mgr);
-                Debug.Log($"[DateSessionManager] Captured {label}: pos={frame.position}, rot={frame.rotation}, orthoSize={frame.fov:F2}");
+                Debug.Log($"[DateSessionManager] Captured {label} from GAME camera: pos={frame.position}, rot={frame.rotation}, fov={frame.fov:F2}, ortho={gameCam.orthographic}");
             }
             else
             {
-                Debug.LogWarning("[DateSessionManager] No active Scene View.");
+                var sv = SceneView.lastActiveSceneView;
+                if (sv != null)
+                {
+                    if (!sv.orthographic)
+                    {
+                        sv.orthographic = true;
+                        sv.Repaint();
+                        Debug.LogWarning($"[DateSessionManager] Scene View was in perspective — switched to ortho before capturing {label}.");
+                    }
+
+                    Undo.RecordObject(mgr, $"Capture {label} Camera");
+                    frame.position = sv.camera.transform.position;
+                    frame.rotation = sv.camera.transform.eulerAngles;
+                    frame.fov = sv.camera.orthographicSize;
+                    if (!frame.captured)
+                    {
+                        frame.nearClip = -9f;
+                        frame.farClip = 1000f;
+                    }
+                    frame.captured = true;
+                    EditorUtility.SetDirty(mgr);
+                    Debug.Log($"[DateSessionManager] Captured {label} from SCENE VIEW: pos={frame.position}, rot={frame.rotation}, orthoSize={frame.fov:F2}");
+                }
+                else
+                {
+                    Debug.LogWarning("[DateSessionManager] No active Scene View.");
+                }
             }
         }
 

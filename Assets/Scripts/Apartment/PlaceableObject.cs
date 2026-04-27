@@ -765,6 +765,10 @@ public class PlaceableObject : MonoBehaviour
         if (drawer != null)
             drawer.RemoveStoredItem(this);
 
+        // Disable colliders FIRST so switching to dynamic Rigidbody doesn't
+        // cause a physics impulse from overlapping the surface we were sitting on.
+        SetCollidersEnabled(false);
+
         if (_rb != null)
             _rb.isKinematic = false;
 
@@ -794,9 +798,6 @@ public class PlaceableObject : MonoBehaviour
                 }
             }
         }
-
-        // Disable colliders so held object doesn't block raycasts or knock items
-        SetCollidersEnabled(false);
 
         // Render held object on top of all scene geometry so it's always visible
         SetRenderOnTop(true);
@@ -956,7 +957,8 @@ public class PlaceableObject : MonoBehaviour
             if (!other.canWallMount) continue;
             if (other.CurrentState == State.Held) continue;
 
-            var otherCol = other.GetComponent<Collider>();
+            var otherCol = other.GetComponent<Collider>()
+                        ?? other.GetComponentInChildren<Collider>();
             if (otherCol == null) continue;
 
             Bounds otherBounds = otherCol.bounds;

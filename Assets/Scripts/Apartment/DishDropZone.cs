@@ -76,6 +76,9 @@ public class DishDropZone : MonoBehaviour
         if (tag != null)
             tag.SmellAmount = 0f;
 
+        // Dismiss flies after a short delay so they don't vanish instantly
+        StartCoroutine(DismissFliesDelayed(plate.transform, 2f));
+
         // Clean the plate visually (dirty brown → clean white)
         var plateRend = plate.GetComponent<Renderer>();
         if (plateRend != null && plateRend.material != null)
@@ -102,6 +105,12 @@ public class DishDropZone : MonoBehaviour
             AudioManager.Instance.PlaySFX(null); // placeholder — wire actual clip later
 
         Debug.Log($"[DishDropZone] Plate deposited. Total: {DepositCount}");
+    }
+
+    private System.Collections.IEnumerator DismissFliesDelayed(Transform root, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        FlyController.DismissFliesFor(root);
     }
 
     private void OnDestroy()
