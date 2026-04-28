@@ -183,17 +183,21 @@ public class FlyController : MonoBehaviour
 
     private System.Collections.IEnumerator FlyAwayRoutine()
     {
-        // Fly upward and shrink over 0.5s
+        // Fly high into the sky and shrink — long enough to feel like it's leaving
         Vector3 startPos = transform.position;
-        Vector3 endPos = startPos + Vector3.up * 1.5f + Random.insideUnitSphere * 0.5f;
+        Vector3 endPos = startPos + Vector3.up * 6f + Random.insideUnitSphere * 1.5f;
         float elapsed = 0f;
-        float duration = 0.5f;
+        float duration = 2f;
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
-            transform.position = Vector3.Lerp(startPos, endPos, t);
-            transform.localScale = Vector3.one * 0.015f * (1f - t);
+            // Ease-in so it accelerates upward
+            float curved = t * t;
+            transform.position = Vector3.Lerp(startPos, endPos, curved);
+            // Only start shrinking in the second half
+            float shrink = t < 0.5f ? 1f : 1f - (t - 0.5f) * 2f;
+            transform.localScale = Vector3.one * 0.015f * shrink;
             yield return null;
         }
         Destroy(gameObject);

@@ -109,10 +109,12 @@ public class DishDropZone : MonoBehaviour
 
     private System.Collections.IEnumerator DismissFliesDelayed(GameObject plateGO, float delay)
     {
+        // Let flies linger around the sink area before shooing them off
         yield return new WaitForSeconds(delay);
         FlyController.DismissFliesFor(plateGO.transform);
-        // Give flies time to animate out, then fully deactivate the plate
-        yield return new WaitForSeconds(1f);
+        // Keep plate transform alive so flies have a valid orbit target
+        // while they animate skyward (~2s fly-away + buffer)
+        yield return new WaitForSeconds(3f);
         if (plateGO != null) plateGO.SetActive(false);
     }
 

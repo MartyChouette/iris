@@ -109,12 +109,12 @@ public class PhaseTitleDrop : MonoBehaviour
         var shadowRT = shadowGO.AddComponent<RectTransform>();
         shadowRT.anchorMin = Vector2.zero;
         shadowRT.anchorMax = Vector2.one;
-        shadowRT.offsetMin = new Vector2(4f, -4f);
-        shadowRT.offsetMax = new Vector2(4f, -4f);
+        shadowRT.offsetMin = new Vector2(3f, -3f);
+        shadowRT.offsetMax = new Vector2(3f, -3f);
         _shadowText = shadowGO.AddComponent<TextMeshProUGUI>();
         _shadowText.fontSize = _fontSize;
         _shadowText.alignment = TextAlignmentOptions.Center;
-        _shadowText.color = _shadowColor;
+        _shadowText.color = new Color(0f, 0f, 0f, 0.35f);
         _shadowText.fontStyle = FontStyles.Normal;
         _shadowText.textWrappingMode = TMPro.TextWrappingModes.NoWrap;
 
@@ -140,6 +140,19 @@ public class PhaseTitleDrop : MonoBehaviour
             _titleText.font = theme.primaryFont;
             _shadowText.font = theme.primaryFont;
         }
+
+        // Disable TMP material underlay — the font material has a built-in
+        // underlay that stacks with our manual shadow GO, causing double text.
+        DisableUnderlay(_titleText);
+        DisableUnderlay(_shadowText);
+    }
+
+    private static void DisableUnderlay(TMP_Text text)
+    {
+        // Create instance material so we don't modify the shared font asset
+        text.fontMaterial = new Material(text.fontMaterial);
+        text.fontMaterial.SetFloat("_UnderlayDilate", -1f);
+        text.fontMaterial.SetColor("_UnderlayColor", Color.clear);
     }
 
     /// <summary>Show an epic title drop over the live scene.</summary>
