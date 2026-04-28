@@ -28226,3 +28226,114 @@ ProjectSettings/QualitySettings.asset
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260427_202322
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+---
+
+## Session End: 20260427_212720
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_213204
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_213604
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_215407
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_215853
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_220431
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_220940
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_221308
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_221524
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_221649
+### Commits
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_224355
+### Commits
+d674c02 fix phase camera interaction: bypass Cinemachine stale projection matrix
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
