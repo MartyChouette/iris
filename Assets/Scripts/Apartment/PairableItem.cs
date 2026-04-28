@@ -375,7 +375,8 @@ public class PairableItem : MonoBehaviour
                 parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
 
             held.transform.position = worldSnapPos;
-            held.transform.localRotation = Quaternion.identity;
+            // Inherit the root's rotation so paired items face the same direction
+            held.transform.rotation = sbsRoot.rotation;
         }
 
         // Disable held item's standalone behavior

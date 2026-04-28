@@ -9,6 +9,10 @@ using UnityEngine;
 public class PhaseJumperWindow : EditorWindow
 {
     private Vector2 _scroll;
+    private DatePersonalDefinition _selectedDate;
+    private DatePersonalDefinition[] _allDates;
+    private string[] _dateNames;
+    private int _dateIndex;
 
     [MenuItem("Iris/Phase Jumper")]
     public static void Open()
@@ -60,6 +64,59 @@ public class PhaseJumperWindow : EditorWindow
 
         EditorGUILayout.Space(10);
 
+        // ── Schedule Date ──
+        EditorGUILayout.LabelField("Schedule Date", EditorStyles.boldLabel);
+        GUI.enabled = playing;
+
+        // Refresh date list
+        if (_allDates == null || GUILayout.Button("Refresh Date List", GUILayout.Height(20)))
+        {
+            _allDates = Resources.FindObjectsOfTypeAll<DatePersonalDefinition>();
+            _dateNames = new string[_allDates.Length];
+            for (int i = 0; i < _allDates.Length; i++)
+                _dateNames[i] = _allDates[i].characterName;
+            // Try to match current selection
+            _dateIndex = 0;
+            if (_selectedDate != null)
+                for (int i = 0; i < _allDates.Length; i++)
+                    if (_allDates[i] == _selectedDate) { _dateIndex = i; break; }
+        }
+
+        if (_allDates != null && _allDates.Length > 0)
+        {
+            _dateIndex = EditorGUILayout.Popup("Date Character", _dateIndex, _dateNames);
+            _selectedDate = _allDates[_dateIndex];
+
+            string currentDateName = DateSessionManager.Instance != null && DateSessionManager.Instance.CurrentDate != null
+                ? DateSessionManager.Instance.CurrentDate.characterName : "None";
+            EditorGUILayout.LabelField($"  Current: {currentDateName}");
+
+            if (GUILayout.Button($"Schedule {_selectedDate.characterName}", GUILayout.Height(26)))
+            {
+                if (DateSessionManager.Instance != null)
+                {
+                    DateSessionManager.Instance.ScheduleDate(_selectedDate);
+                    Debug.Log($"[PhaseJumper] Scheduled date: {_selectedDate.characterName}");
+                }
+            }
+
+            if (GUILayout.Button("Schedule + Force Doorbell", GUILayout.Height(26)))
+            {
+                if (DateSessionManager.Instance != null)
+                {
+                    DateSessionManager.Instance.ScheduleDate(_selectedDate);
+                    DateSessionManager.Instance.OnDateCharacterArrived();
+                    Debug.Log($"[PhaseJumper] Scheduled + arrived: {_selectedDate.characterName}");
+                }
+            }
+        }
+        else
+        {
+            EditorGUILayout.HelpBox("No DatePersonalDefinition assets found.", MessageType.Warning);
+        }
+
+        EditorGUILayout.Space(10);
+
         // ── Date Phases ──
         EditorGUILayout.LabelField("Date Phases", EditorStyles.boldLabel);
 
@@ -69,8 +126,7 @@ public class PhaseJumperWindow : EditorWindow
         if (!hasDate && playing)
         {
             EditorGUILayout.HelpBox(
-                "No date scheduled. Start Exploration first, then schedule a date " +
-                "or use Quick-Boot with a date pre-selected.", MessageType.Warning);
+                "No date scheduled. Use the dropdown above to schedule one.", MessageType.Warning);
         }
 
         GUI.enabled = playing && hasDate;
@@ -87,6 +143,9 @@ public class PhaseJumperWindow : EditorWindow
         GUI.enabled = playing;
 
         EditorGUILayout.Space(5);
+
+        if (Button("Skip Forward >>", "Click Continue/Serve, select first glass, advance current step"))
+            SkipForward();
 
         if (Button("End Date Now", "Skip to date end + results"))
         {
@@ -210,6 +269,74 @@ public class PhaseJumperWindow : EditorWindow
     {
         if (DateSessionManager.Instance != null)
             DateSessionManager.Instance.ApplyPhaseCamera(phase);
+    }
+
+    /// <summary>
+    /// Skip forward through the current date blocker:
+    /// - If Continue/Serve button is showing → click it
+    /// - If choosing a glass → select the first one
+    /// - If choosing serve glass → serve the first filled one
+    /// </summary>
+    private static void SkipForward()
+    {
+        // Click Continue/Serve button if visible
+        if (PhaseContinueButton.Instance != null
+            && PhaseContinueButton.Instance.gameObject.activeInHierarchy)
+        {
+            // Invoke the button's click via reflection (OnButtonClicked is private)
+            var method = typeof(PhaseContinueButton).GetMethod("OnButtonClicked",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (method != null)
+            {
+                method.Invoke(PhaseContinueButton.Instance, null);
+                Debug.Log("[PhaseJumper] Skipped: clicked Continue/Serve button.");
+                return;
+            }
+        }
+
+        // DrinkPourManager states
+        var dpm = DrinkPourManager.Instance;
+        if (dpm != null)
+        {
+            if (dpm.CurrentState == DrinkPourManager.State.ChoosingGlass)
+            {
+                // Select the first glass
+                var glasses = DrinkGlass.All;
+                for (int i = 0; i < glasses.Count; i++)
+                {
+                    if (glasses[i] != null)
+                    {
+                        dpm.SelectGlass(glasses[i]);
+                        Debug.Log($"[PhaseJumper] Skipped: selected glass {glasses[i].name}.");
+                        return;
+                    }
+                }
+            }
+
+            if (dpm.CurrentState == DrinkPourManager.State.ChoosingServeGlass)
+            {
+                // Serve the first glass that has liquid
+                var glasses = DrinkGlass.All;
+                for (int i = 0; i < glasses.Count; i++)
+                {
+                    if (glasses[i] != null && glasses[i].TotalFill > 0f)
+                    {
+                        dpm.ServeGlass(glasses[i]);
+                        Debug.Log($"[PhaseJumper] Skipped: served glass {glasses[i].name}.");
+                        return;
+                    }
+                }
+                // No filled glass — serve first anyway
+                if (glasses.Count > 0 && glasses[0] != null)
+                {
+                    dpm.ServeGlass(glasses[0]);
+                    Debug.Log("[PhaseJumper] Skipped: force-served empty glass.");
+                    return;
+                }
+            }
+        }
+
+        Debug.Log("[PhaseJumper] Skip: nothing to skip right now.");
     }
 
     private static void SetPrivateField<T>(object target, string fieldName, T value)

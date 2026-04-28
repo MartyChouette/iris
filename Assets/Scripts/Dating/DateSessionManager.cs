@@ -480,7 +480,7 @@ public class DateSessionManager : MonoBehaviour
             OnDateSessionStarted?.Invoke(_currentDate);
             OnAffectionChanged?.Invoke(_affection);
 
-            ApplyPhaseCamera(DatePhase.Arrival);
+            // ApplyPhaseCamera(DatePhase.Arrival);
         }
         catch (System.Exception e)
         {
@@ -554,7 +554,7 @@ public class DateSessionManager : MonoBehaviour
 
         // Pre-transition NPC dialogue
         string preLine = s_prePhase2Lines[UnityEngine.Random.Range(0, s_prePhase2Lines.Length)];
-        reactionUI?.ShowText(preLine, 2.0f);
+        if (reactionUI != null && reactionUI.gameObject.activeInHierarchy) reactionUI.ShowText(preLine, 2.0f);
         yield return s_wait25;
 
         // Block input during transition
@@ -609,15 +609,11 @@ public class DateSessionManager : MonoBehaviour
             if (phaseTransitionSFX != null && AudioManager.Instance != null)
                 AudioManager.Instance.PlaySFX(phaseTransitionSFX);
 
-            // Dim everything except drink area, kitchen Nema, and kitchen date
-            if (Phase2EnvironmentDim.Instance != null)
-            {
-                var nemaKitchen = NemaController.Instance != null
-                    ? NemaController.Instance.ActiveModel : null;
-                Phase2EnvironmentDim.Instance.HideEnvironment(
-                    _dateCharacterGO != null ? _dateCharacterGO.transform : null,
-                    nemaKitchen);
-            }
+            // Hide everything except drink area, kitchen Nema, kitchen date,
+            // all glasses and all bottles (player needs to see + click them)
+            // Phase2EnvironmentDim disabled — re-enable when collider handling is added
+            // if (Phase2EnvironmentDim.Instance != null)
+            //     Phase2EnvironmentDim.Instance.HideEnvironment(...);
         }
         catch (System.Exception e)
         {
@@ -631,47 +627,66 @@ public class DateSessionManager : MonoBehaviour
         // Unblock input now that transition is complete
         if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = false;
 
-        // Now glide the camera over to the kitchen while the player watches.
-        LerpPhaseCamera(DatePhase.BackgroundJudging);
+        // Skip phase camera — use free browse until captures are properly set up
+        // LerpPhaseCamera(DatePhase.BackgroundJudging);
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)
             yield return PhaseTitleDrop.Instance.Show("Drinks");
 
+        // Re-fetch reaction UI from the new model (old one is inactive after swap)
+        reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
+
         // Post-transition NPC dialogue
         yield return s_wait05;
         string postLine = s_postPhase2Lines[UnityEngine.Random.Range(0, s_postPhase2Lines.Length)];
-        reactionUI?.ShowText(postLine, 2.0f);
+        if (reactionUI != null && reactionUI.gameObject.activeInHierarchy)
+            reactionUI.ShowText(postLine, 2.0f);
 
 #if UNITY_EDITOR
         Debug.Log("[DateSessionManager] Phase 2: Kitchen — player makes drink, NPC watches.");
 #endif
 
-        // Show "Serve" button — player clicks when they're done mixing.
-        // This replaces the old pick-up-glass + walk-to-date delivery flow.
+        // ── Step 1: Blink glasses → player clicks one to select ──
+        Debug.Log($"[DateSessionManager] P2: IsTransitioning={DayPhaseManager.Instance?.IsTransitioning}, IsInteractionPhase={DayPhaseManager.Instance?.IsInteractionPhase}, DrinkPourMgr={(DrinkPourManager.Instance != null ? "OK" : "NULL")}");
+        if (DrinkPourManager.Instance != null)
+            DrinkPourManager.Instance.BeginGlassChoice();
+
+        // Wait until player has selected a glass (state moves past ChoosingGlass)
+        yield return new WaitUntil(() =>
+            DrinkPourManager.Instance == null
+            || DrinkPourManager.Instance.CurrentState != DrinkPourManager.State.ChoosingGlass
+            || _state != SessionState.DateInProgress);
+        if (_state != SessionState.DateInProgress) yield break;
+
+        // ── Step 2: Player pours freely, then clicks "Serve" ──
         if (PhaseContinueButton.Instance != null)
         {
-            bool served = false;
-            PhaseContinueButton.Instance.Show(() =>
-            {
-                // Auto-serve the drink via DrinkPourManager
-                if (DrinkPourManager.Instance != null
-                    && DrinkPourManager.Instance.CurrentState != DrinkPourManager.State.Idle)
-                {
-                    DrinkPourManager.Instance.ServeGlass(DrinkPourManager.Instance.ActiveGlass);
-                }
-                served = true;
-            }, "Serve \u2192");
-            yield return new WaitUntil(() => served || _state != SessionState.DateInProgress);
+            bool serveClicked = false;
+            PhaseContinueButton.Instance.Show(() => { serveClicked = true; }, "Serve");
+
+            yield return new WaitUntil(() => serveClicked || _state != SessionState.DateInProgress);
             if (_state != SessionState.DateInProgress) yield break;
+            PhaseContinueButton.Instance.Hide();
         }
+
+        // ── Step 3: Blink glasses → player clicks which one to serve ──
+        if (DrinkPourManager.Instance != null)
+            DrinkPourManager.Instance.BeginServeChoice();
+
+        // Wait until a glass is served (state goes Idle)
+        yield return new WaitUntil(() =>
+            DrinkPourManager.Instance == null
+            || DrinkPourManager.Instance.CurrentState == DrinkPourManager.State.Idle
+            || _state != SessionState.DateInProgress);
+        if (_state != SessionState.DateInProgress) yield break;
     }
 
     private IEnumerator TransitionToPhase3()
     {
         StopPhase2Pulse();
         HighlightDrinkGlasses(false);
-        Phase2EnvironmentDim.Instance?.RestoreEnvironment();
+        // Phase2EnvironmentDim.Instance?.RestoreEnvironment();
 
         // Restore fridge bottles to their original home (fridge shelf)
         SetBottleHomes(useCounter: false);
@@ -680,7 +695,7 @@ public class DateSessionManager : MonoBehaviour
 
         // Pre-transition NPC dialogue
         string preLine = s_prePhase3Lines[UnityEngine.Random.Range(0, s_prePhase3Lines.Length)];
-        reactionUI?.ShowText(preLine, 2.0f);
+        if (reactionUI != null && reactionUI.gameObject.activeInHierarchy) reactionUI.ShowText(preLine, 2.0f);
         yield return s_wait25;
 
         // Block input during transition
@@ -736,16 +751,19 @@ public class DateSessionManager : MonoBehaviour
         if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = false;
 
         // Glide camera over to the couch while the player watches.
-        LerpPhaseCamera(DatePhase.Reveal);
+        // LerpPhaseCamera(DatePhase.Reveal);
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)
             yield return PhaseTitleDrop.Instance.Show("Warming Up");
 
+        // Re-fetch reaction UI from the new model (old one is inactive after swap)
+        reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
+
         // Post-transition NPC dialogue
         yield return s_wait05;
         string postLine = s_postPhase3Lines[UnityEngine.Random.Range(0, s_postPhase3Lines.Length)];
-        reactionUI?.ShowText(postLine, 2.0f);
+        if (reactionUI != null && reactionUI.gameObject.activeInHierarchy) reactionUI.ShowText(postLine, 2.0f);
         yield return s_wait25;
 
 #if UNITY_EDITOR
@@ -933,9 +951,7 @@ public class DateSessionManager : MonoBehaviour
 #endif
 
             SpawnReactionParticles(itemPos, reaction);
-
-            if (multiplier > 1)
-                SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
+            SpawnMultiplierPopup(itemPos + Vector3.up * 0.22f, multiplier, reaction);
 
             yield return s_waitRevealStep;
         }
@@ -1163,18 +1179,19 @@ public class DateSessionManager : MonoBehaviour
         go.transform.position = worldPos;
 
         var tm = go.AddComponent<TextMesh>();
-        tm.text = $"×{multiplier}";
+        string sign = reaction == ReactionType.Like ? "+" : "-";
+        tm.text = multiplier > 1 ? $"{sign}{multiplier}" : sign;
         tm.fontSize = 64;
 
-        // Scale size and color intensity by multiplier value:
-        // ×1 = base size + like/dislike color
-        // ×5 = 2× base size + deep red
-        float t = Mathf.Clamp01((multiplier - 1f) / 4f); // 0 at ×1, 1 at ×5
+        // Scale size by multiplier: ×1 = base, ×5 = 2× base
+        float t = Mathf.Clamp01((multiplier - 1f) / 4f);
         tm.characterSize = Mathf.Lerp(_popupCharSize, _popupCharSize * 2f, t);
 
-        Color baseColor = reaction == ReactionType.Like ? _popupLikeColor : _popupDislikeColor;
-        Color hotColor = new Color(1f, 0.15f, 0.1f, 1f); // deep red
-        tm.color = Color.Lerp(baseColor, hotColor, t);
+        // Green for positive, red for negative
+        Color likeColor = new Color(0.2f, 0.9f, 0.3f, 1f);
+        Color dislikeColor = new Color(0.95f, 0.2f, 0.15f, 1f);
+        Color baseColor = reaction == ReactionType.Like ? likeColor : dislikeColor;
+        tm.color = Color.Lerp(baseColor * 0.85f, baseColor, t);
 
         tm.anchor = TextAnchor.MiddleCenter;
         tm.alignment = TextAlignment.Center;
@@ -1239,7 +1256,7 @@ public class DateSessionManager : MonoBehaviour
             // Always face the camera (billboard) — re-fetch if null in case it became valid
             if (cam == null) cam = Camera.main;
             if (cam != null)
-                t.rotation = Quaternion.LookRotation(t.position - cam.transform.position, Vector3.up);
+                t.rotation = Quaternion.LookRotation(cam.transform.forward, Vector3.up);
 
             // Fade: pop in fast, hold, fade out
             float alpha;
@@ -1637,7 +1654,7 @@ public class DateSessionManager : MonoBehaviour
         }
 
         // Smooth glide back to phase camera (no hard snap)
-        LerpPhaseCamera(DatePhase.Arrival, 0.3f);
+        // LerpPhaseCamera(DatePhase.Arrival, 0.3f);
     }
 
     /// <summary>Returns true when the player wants to skip a cinematic animation (click or Space).</summary>
@@ -1752,7 +1769,7 @@ public class DateSessionManager : MonoBehaviour
         am?.SetPresetBase(finalCamPos, finalCamRot, _verdictZoomFOV);
 
         // 6. Suspense — thinking face
-        reactionUI?.ShowText("Hmm...", _drinkTastingHold);
+        if (reactionUI != null && reactionUI.gameObject.activeInHierarchy) reactionUI.ShowText("Hmm...", _drinkTastingHold);
         yield return CacheDrinkTastingWait();
 
         // 7. Verdict reaction

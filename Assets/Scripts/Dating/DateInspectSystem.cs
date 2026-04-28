@@ -211,8 +211,8 @@ public class DateInspectSystem : MonoBehaviour
         DateSessionManager.SpawnReactionParticles(
             tag.transform.position + Vector3.up * 0.3f, reaction);
 
-        // 6. World-space multiplier popup (×2, ×3, etc.)
-        if (multiplier > 1)
+        // 6. World-space multiplier popup — always shown (green for positive, red for negative)
+        if (reaction != ReactionType.Neutral)
             dsm.SpawnMultiplierPopup(
                 tag.transform.position + Vector3.up * 0.52f, multiplier, reaction);
 

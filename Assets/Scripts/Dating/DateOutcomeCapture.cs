@@ -13,6 +13,8 @@ public static class DateOutcomeCapture
         public bool succeeded;
         public float affection;
         public string characterName;
+        public DatePersonalDefinition dateCharacter;
+        public int dateCount; // how many times this character has visited (cumulative)
         public string[] reactionTags;
         public bool drinkServed;
 
@@ -53,12 +55,24 @@ public static class DateOutcomeCapture
             }
         }
 
+        // Count how many times this character has been dated (check DateHistory)
+        int visitCount = 0;
+        if (date != null && DateHistory.Entries != null)
+        {
+            for (int i = 0; i < DateHistory.Entries.Count; i++)
+                if (DateHistory.Entries[i].name == date.characterName)
+                    visitCount++;
+        }
+        visitCount++; // include this date
+
         LastOutcome = new DateOutcome
         {
             hadDate = true,
             succeeded = succeeded,
             affection = affection,
             characterName = date != null ? date.characterName : "",
+            dateCharacter = date,
+            dateCount = visitCount,
             reactionTags = tags,
             drinkServed = drink
         };

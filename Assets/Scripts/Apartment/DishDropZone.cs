@@ -76,13 +76,13 @@ public class DishDropZone : MonoBehaviour
         if (tag != null)
             tag.SmellAmount = 0f;
 
-        // Dismiss flies after a short delay so they don't vanish instantly
-        StartCoroutine(DismissFliesDelayed(plate.transform, 2f));
+        // Dismiss flies after a short delay — hide plate renderers but keep
+        // the transform alive so flies have a valid orbit target while exiting.
+        StartCoroutine(DismissFliesDelayed(plate.gameObject, 2f));
 
-        // Clean the plate visually (dirty brown → clean white)
-        var plateRend = plate.GetComponent<Renderer>();
-        if (plateRend != null && plateRend.material != null)
-            plateRend.material.color = new Color(0.95f, 0.95f, 0.92f);
+        // Hide plate visually (renderers off, not GameObject — transform stays for flies)
+        foreach (var r in plate.GetComponentsInChildren<Renderer>())
+            r.enabled = false;
 
         var col = plate.GetComponent<Collider>();
         if (col != null)
@@ -107,10 +107,13 @@ public class DishDropZone : MonoBehaviour
         Debug.Log($"[DishDropZone] Plate deposited. Total: {DepositCount}");
     }
 
-    private System.Collections.IEnumerator DismissFliesDelayed(Transform root, float delay)
+    private System.Collections.IEnumerator DismissFliesDelayed(GameObject plateGO, float delay)
     {
         yield return new WaitForSeconds(delay);
-        FlyController.DismissFliesFor(root);
+        FlyController.DismissFliesFor(plateGO.transform);
+        // Give flies time to animate out, then fully deactivate the plate
+        yield return new WaitForSeconds(1f);
+        if (plateGO != null) plateGO.SetActive(false);
     }
 
     private void OnDestroy()

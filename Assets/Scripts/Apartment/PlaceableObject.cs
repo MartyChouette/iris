@@ -777,9 +777,10 @@ public class PlaceableObject : MonoBehaviour
         if (_isGlitched && _startDishelved)
             RemoveGlitch();
 
-        if (_allowAutoStraighten)
+        if (_allowAutoStraighten && !canWallMount)
         {
             // Auto-straighten to home rotation on pickup (if home was captured)
+            // Skip wall-mountable items — their rotation is intentional
             if (_homeRotation != Quaternion.identity)
             {
                 transform.rotation = _homeRotation;
@@ -918,6 +919,8 @@ public class PlaceableObject : MonoBehaviour
 
     public void AlignToWall(Vector3 wallNormal, float rotationAngle)
     {
+        // Face the wall normal, then apply user yaw. Works cleanly when the
+        // root has (0,0,0) rotation and the mesh visual is on a child.
         transform.rotation = Quaternion.LookRotation(wallNormal, Vector3.up)
             * Quaternion.AngleAxis(rotationAngle, Vector3.forward);
     }

@@ -16,7 +16,7 @@ public class DrinkPourManager : MonoBehaviour
 {
     public static DrinkPourManager Instance { get; private set; }
 
-    public enum State { Idle, Pouring, Garnishing, Scoring, WaitingForDelivery, ChoosingGlass }
+    public enum State { Idle, ChoosingGlass, Pouring, Garnishing, Scoring, WaitingForDelivery, ChoosingServeGlass }
 
     [Header("Recipes")]
     [Tooltip("Available recipes the player can make.")]
@@ -66,58 +66,58 @@ public class DrinkPourManager : MonoBehaviour
     private void OnEnable() { _clickAction?.Enable(); }
     private void OnDisable() { _clickAction?.Disable(); }
 
-    private bool _glassHighlightActive;
-
     private void Update()
     {
         switch (CurrentState)
         {
             case State.Pouring:
                 UpdatePouring();
-                // Prompt to click the glass when hands are empty and liquid has been poured
-                if (!ObjectGrabber.IsHoldingObject && _activeGlass != null && _activeGlass.TotalFill > 0f)
-                {
-                    if (!_glassHighlightActive)
-                    {
-                        _glassHighlightActive = true;
-                        var hl = _activeGlass.GetComponent<InteractableHighlight>();
-                        if (hl != null) hl.SetHighlighted(true);
-                        PickupDescriptionHUD.Instance?.Show("Click the glass to finish the drink");
-                    }
-                }
-                else if (_glassHighlightActive)
-                {
-                    _glassHighlightActive = false;
-                    var hl = _activeGlass != null ? _activeGlass.GetComponent<InteractableHighlight>() : null;
-                    if (hl != null) hl.SetHighlighted(false);
-                    PickupDescriptionHUD.Instance?.Hide();
-                }
                 break;
-            case State.Scoring:
-                _scoreTimer -= Time.deltaTime;
-                if (_scoreTimer <= 0f) EnterDeliveryMode();
-                break;
-            case State.WaitingForDelivery:
-                // Update prompt based on whether the player is holding the glass
-                if (ObjectGrabber.IsHoldingObject
-                    && ObjectGrabber.HeldObject != null
-                    && ObjectGrabber.HeldObject.GetComponent<DrinkGlass>() != null)
-                {
-                    string dateName = DateSessionManager.Instance?.CurrentDate?.characterName ?? "your date";
-                    PickupDescriptionHUD.Instance?.Show($"Click on {dateName}!");
-                }
+            case State.ChoosingServeGlass:
+                // Waiting for player to click a glass to serve
                 break;
         }
     }
 
     // ── Called by ObjectGrabber ──────────────────────────────────────
 
-    /// <summary>Enter glass-choosing mode — highlight all glasses so the player picks one.</summary>
+    /// <summary>Step 1: highlight all glasses so the player picks one to begin.</summary>
     public void BeginGlassChoice()
     {
         CurrentState = State.ChoosingGlass;
         HighlightAllGlasses(true);
-        Debug.Log("[DrinkPourManager] Choose a glass to pour into.");
+        Debug.Log("[DrinkPourManager] Step 1: Choose a glass.");
+    }
+
+    /// <summary>Called by ObjectGrabber when player clicks a glass during ChoosingGlass state.</summary>
+    public void SelectGlass(DrinkGlass glass)
+    {
+        if (glass == null) return;
+        _activeGlass = glass;
+        _activeRecipe = FindRecipeForGlass(glass);
+
+        HighlightAllGlasses(false);
+        CurrentState = State.Pouring;
+        _overflowSFXPlayed = false;
+
+        if (DrinkCutawayUI.Instance != null)
+            DrinkCutawayUI.Instance.Show(glass, _activeRecipe);
+
+        // Blink bottles so the player knows to grab one
+        HighlightAllBottles(true);
+
+        Debug.Log($"[DrinkPourManager] Glass selected — {glass.name}. Pour away!");
+    }
+
+    /// <summary>Step 3: player clicked Serve → highlight glasses for final choice.</summary>
+    public void BeginServeChoice()
+    {
+        HighlightSingleGlass(_activeGlass, false);
+        DrinkCutawayUI.Instance?.Hide();
+
+        CurrentState = State.ChoosingServeGlass;
+        HighlightAllGlasses(true);
+        Debug.Log("[DrinkPourManager] Choose which glass to serve.");
     }
 
     /// <summary>Start pouring an ingredient into a glass.</summary>
@@ -143,19 +143,14 @@ public class DrinkPourManager : MonoBehaviour
 
         _pouringIngredient = ingredient;
 
-        // Turn off all glass highlights, highlight only the engaged glass
-        if (CurrentState == State.ChoosingGlass)
-            HighlightAllGlasses(false);
+        // Clear bottle highlights once the player has grabbed one
+        HighlightAllBottles(false);
+
         HighlightSingleGlass(glass, true);
 
-        if (CurrentState != State.Pouring)
-        {
-            CurrentState = State.Pouring;
-            _overflowSFXPlayed = false;
-
-            if (DrinkCutawayUI.Instance != null)
-                DrinkCutawayUI.Instance.Show(glass, _activeRecipe);
-        }
+        // Update cutaway UI if we switched glasses
+        if (DrinkCutawayUI.Instance != null)
+            DrinkCutawayUI.Instance.Show(glass, _activeRecipe);
     }
 
     /// <summary>Stop the current pour (bottle moved away or released).</summary>
@@ -166,25 +161,7 @@ public class DrinkPourManager : MonoBehaviour
         // Stay in Pouring state — player can grab another bottle
     }
 
-    /// <summary>Player signals they're done (clicks glass when not holding a bottle).</summary>
-    public void FinishDrink()
-    {
-        if (CurrentState == State.Pouring || CurrentState == State.Garnishing)
-        {
-            // Clear the "click glass" prompt
-            _glassHighlightActive = false;
-            if (_activeGlass != null)
-            {
-                var hl = _activeGlass.GetComponent<InteractableHighlight>();
-                if (hl != null) hl.SetHighlighted(false);
-            }
-            PickupDescriptionHUD.Instance?.Hide();
-
-            CalculateScore();
-            CurrentState = State.Scoring;
-            _scoreTimer = _scoreDisplayTime;
-        }
-    }
+    // FinishDrink removed — flow is now: pour freely → click Serve → choose glass
 
     /// <summary>Add a garnish to the active glass.</summary>
     public void AddGarnish(DrinkGarnishDefinition garnish)
@@ -198,6 +175,10 @@ public class DrinkPourManager : MonoBehaviour
     /// Click a glass to serve it to the date. Called from ObjectGrabber
     /// when the player clicks a glass during Pouring or WaitingForDelivery.
     /// </summary>
+    /// <summary>
+    /// Serve a specific glass to the date. Called from ObjectGrabber when
+    /// the player clicks a glass during ChoosingServeGlass state.
+    /// </summary>
     public void ServeGlass(DrinkGlass glass)
     {
         if (glass == null) return;
@@ -206,7 +187,6 @@ public class DrinkPourManager : MonoBehaviour
         _activeGlass = glass;
         _activeRecipe = FindRecipeForGlass(glass);
 
-        _glassHighlightActive = false;
         HighlightAllGlasses(false);
         HighlightSingleGlass(_activeGlass, false);
         PickupDescriptionHUD.Instance?.Hide();
@@ -382,22 +362,6 @@ public class DrinkPourManager : MonoBehaviour
         return 0f;
     }
 
-    // ── Delivery ────────────────────────────────────────────────────
-
-    /// <summary>
-    /// After scoring, re-highlight glasses so the player can click one to serve.
-    /// </summary>
-    private void EnterDeliveryMode()
-    {
-        DrinkCutawayUI.Instance?.Hide();
-        _glassHighlightActive = false;
-        CurrentState = State.WaitingForDelivery;
-
-        HighlightAllGlasses(true);
-        PickupDescriptionHUD.Instance?.Show("Click a glass to serve!");
-        Debug.Log("[DrinkPourManager] Click a glass to serve.");
-    }
-
     // ── Session management ──────────────────────────────────────────
 
     private void EndSession()
@@ -447,5 +411,23 @@ public class DrinkPourManager : MonoBehaviour
         if (hl == null && on)
             hl = glass.gameObject.AddComponent<InteractableHighlight>();
         if (hl != null) hl.SetHighlighted(on);
+    }
+
+    private void HighlightAllBottles(bool on)
+    {
+        if (on) InteractableHighlight.SuppressVisuals = false;
+
+        foreach (var po in PlaceableObject.All)
+        {
+            if (po == null) continue;
+            var bottle = po.GetComponent<BottleItem>();
+            if (bottle == null) continue;
+            var hl = po.GetComponent<InteractableHighlight>();
+            if (hl == null && on)
+                hl = po.gameObject.AddComponent<InteractableHighlight>();
+            if (hl != null) hl.SetHighlighted(on);
+        }
+
+        if (!on) InteractableHighlight.SuppressVisuals = true;
     }
 }

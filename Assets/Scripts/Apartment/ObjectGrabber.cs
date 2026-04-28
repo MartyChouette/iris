@@ -218,6 +218,7 @@ public class ObjectGrabber : MonoBehaviour
     private RigidbodyConstraints _originalConstraints;
     private float _heldShadowDiameter;
     private Vector3 _heldBoundsExtents;
+    private Vector3 _heldBoundsCenterOffset; // collider center relative to pivot
 
     // Pickup feel: plucky spring on pickup, then ramp to stiff carry
     private float _pickupTimer;
@@ -228,6 +229,7 @@ public class ObjectGrabber : MonoBehaviour
     private PlacementSurface _lastValidSurface;
     private float _wallRotation;
     private bool _isOnWall;
+    private Vector3 _heldOriginalForward; // which way the item faced when picked up
     private bool _isPourTilted;
 
     // Double-click detection for plate unstacking
@@ -280,10 +282,32 @@ public class ObjectGrabber : MonoBehaviour
 
     private void Update()
     {
-        if (DayPhaseManager.Instance != null && !DayPhaseManager.Instance.IsInteractionPhase)
+        // RAW DEBUG — fires before any gate, uses old Input API as fallback
+        if (Input.GetMouseButtonDown(0))
+        {
+            var c = Camera.main;
+            bool uiBlock = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+            bool irisClick = IrisInput.Instance != null && IrisInput.Instance.Click.WasPressedThisFrame();
+            bool mouseExists = UnityEngine.InputSystem.Mouse.current != null;
+            string hitName = "MISS";
+            if (c != null)
+            {
+                Ray r = c.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(r, out RaycastHit h, 100f))
+                    hitName = $"{h.collider.gameObject.name} (layer={h.collider.gameObject.layer})";
+            }
+            Debug.LogWarning($"[OG-RAW] click! cam={c?.name ?? "NULL"} uiBlock={uiBlock} irisClick={irisClick} mouse={mouseExists} hit={hitName} phase={DayPhaseManager.Instance?.CurrentPhase} transitioning={DayPhaseManager.Instance?.IsTransitioning}");
+        }
+
+        // Only block input during actual fades, not during gameplay waits
+        if (DayPhaseManager.Instance != null && DayPhaseManager.Instance.IsTransitioning
+            && ScreenFade.Instance != null && ScreenFade.Instance.IsFading)
             return;
 
-        if (!_isEnabled) return;
+        // Always use the current main camera (Cinemachine brain may switch)
+        var mainCam = Camera.main;
+        if (mainCam != null && mainCam != cam)
+            cam = mainCam;
 
         // Reset click consumption flag at start of each frame
         if (Time.frameCount != s_lastConsumedFrame)
@@ -293,7 +317,21 @@ public class ObjectGrabber : MonoBehaviour
         {
             // Block game-world clicks when pointer is over UI
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            {
+                // Find which UI element is blocking
+                var ped = new UnityEngine.EventSystems.PointerEventData(EventSystem.current);
+                ped.position = IrisInput.CursorPosition;
+                var results = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
+                EventSystem.current.RaycastAll(ped, results);
+                string blocker = "unknown";
+                for (int i = 0; i < results.Count; i++)
+                {
+                    blocker = $"{results[i].gameObject.name} (parent={results[i].gameObject.transform.parent?.name ?? "root"})";
+                    break;
+                }
+                Debug.LogWarning($"[ObjectGrabber] Click blocked by UI: {blocker}");
                 return;
+            }
 
             if (_held == null)
             {
@@ -525,28 +563,27 @@ public class ObjectGrabber : MonoBehaviour
                     clickedSleeve = hit.collider.GetComponentInParent<AlbumSleeve>();
                 if (clickedSleeve != null && clickedSleeve.IsHovered)
                 {
-                    var vinylPlaceable = clickedSleeve.ExtractVinyl();
-                    if (vinylPlaceable != null)
-                    {
-                        ConsumeClick();
-                        _held = vinylPlaceable;
-                        _pickupTimer = PickupFeelDuration;
-                        InitGrab();
-                        return;
-                    }
+                    if (TryExtractAndGrab(clickedSleeve)) return;
                 }
             }
 
-            // Click on a drink glass while not holding anything → serve it
+            // Click on a drink glass while not holding anything
             var clickedGlass = hit.collider.GetComponent<DrinkGlass>();
             if (clickedGlass == null)
                 clickedGlass = hit.collider.GetComponentInParent<DrinkGlass>();
             if (clickedGlass != null && DrinkPourManager.Instance != null)
             {
                 var pourState = DrinkPourManager.Instance.CurrentState;
-                if (pourState == DrinkPourManager.State.Pouring
-                    || pourState == DrinkPourManager.State.WaitingForDelivery)
+                if (pourState == DrinkPourManager.State.ChoosingGlass)
                 {
+                    // Step 1: player picks which glass to pour into
+                    DrinkPourManager.Instance.SelectGlass(clickedGlass);
+                    ConsumeClick();
+                    return;
+                }
+                if (pourState == DrinkPourManager.State.ChoosingServeGlass)
+                {
+                    // Step 3: player picks which glass to serve the date
                     DrinkPourManager.Instance.ServeGlass(clickedGlass);
                     ConsumeClick();
                     return;
@@ -615,16 +652,7 @@ public class ObjectGrabber : MonoBehaviour
                 if (vinylOnSleeve == null) vinylOnSleeve = placeable.GetComponentInChildren<VinylDisc>();
                 var parentSleeve = vinylOnSleeve != null ? vinylOnSleeve.HomeSleeve : null;
                 if (parentSleeve != null && parentSleeve.IsHovered)
-                {
-                    var vinylPlaceable = parentSleeve.ExtractVinyl();
-                    if (vinylPlaceable != null)
-                    {
-                        ConsumeClick();
-                        _held = vinylPlaceable;
-                        _pickupTimer = PickupFeelDuration;
-                        InitGrab();
-                    }
-                }
+                    TryExtractAndGrab(parentSleeve);
             }
             return; // never grab the sleeve itself
         }
@@ -637,28 +665,41 @@ public class ObjectGrabber : MonoBehaviour
             var sleeve = vinylDisc.HomeSleeve;
             if (!dateActive && sleeve != null && sleeve.IsHovered)
             {
-                var vinylPlaceable = sleeve.ExtractVinyl();
-                if (vinylPlaceable != null)
-                {
-                    ConsumeClick();
-                    _held = vinylPlaceable;
-                    _pickupTimer = PickupFeelDuration;
-                    InitGrab();
-                    return;
-                }
+                if (TryExtractAndGrab(sleeve)) return;
             }
         }
 
 
-        // During date phases (1-3), block general item pickup.
-        // Only bottles (Phase 2 drink-making) and drink glasses (delivery) are allowed.
-        // Other items can be inspected (click → date reacts) via DateInspectSystem.
+        // During date phases — check for glass clicks before blocking general pickup
         if (DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive)
         {
+            Debug.Log($"[ObjectGrabber] Date click: {placeable.name}, isBottle={placeable.GetComponent<BottleItem>() != null}, pourState={DrinkPourManager.Instance?.CurrentState}");
+            // Glass click: selecting or serving during drink phase
+            var clickedGlass = placeable.GetComponent<DrinkGlass>();
+            if (clickedGlass == null) clickedGlass = placeable.GetComponentInParent<DrinkGlass>();
+            if (clickedGlass == null) clickedGlass = placeable.GetComponentInChildren<DrinkGlass>();
+            if (clickedGlass != null && DrinkPourManager.Instance != null)
+            {
+                var pourState = DrinkPourManager.Instance.CurrentState;
+                if (pourState == DrinkPourManager.State.ChoosingGlass)
+                {
+                    DrinkPourManager.Instance.SelectGlass(clickedGlass);
+                    ConsumeClick();
+                    return;
+                }
+                if (pourState == DrinkPourManager.State.ChoosingServeGlass)
+                {
+                    DrinkPourManager.Instance.ServeGlass(clickedGlass);
+                    ConsumeClick();
+                    return;
+                }
+            }
+
+            // Bottles are allowed during Phase 2
             bool isBottle = placeable.GetComponent<BottleItem>() != null;
-            // Glasses are never picked up — player clicks to serve, not grab
             if (!isBottle)
             {
+                // Everything else → inspect reaction (click → date reacts)
                 if (DateInspectSystem.Instance != null && DateInspectSystem.Instance.TryInspect())
                     ConsumeClick();
                 return;
@@ -706,11 +747,13 @@ public class ObjectGrabber : MonoBehaviour
         if (pickupCol != null)
         {
             _heldBoundsExtents = pickupCol.bounds.extents;
+            _heldBoundsCenterOffset = pickupCol.bounds.center - placeable.transform.position;
             _heldShadowDiameter = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.z) * 2f * 1.3f;
         }
         else
         {
             _heldBoundsExtents = Vector3.one * 0.1f;
+            _heldBoundsCenterOffset = Vector3.zero;
             _heldShadowDiameter = 0.3f;
         }
 
@@ -744,8 +787,25 @@ public class ObjectGrabber : MonoBehaviour
 
         _currentSurface = placeable.LastPlacedSurface;
         _lastValidSurface = _currentSurface;
-        _wallRotation = 0f;
-        _isOnWall = false;
+        _isOnWall = _currentSurface != null && _currentSurface.IsVertical;
+
+        // Preserve wall rotation so pick-up + put-down keeps the same facing
+        _heldOriginalForward = placeable.transform.forward;
+        if (_isOnWall)
+        {
+            // Use the item's own forward to determine which side of the wall it was on
+            Vector3 wallNormal = Vector3.Dot(_heldOriginalForward, _currentSurface.SurfaceNormal) >= 0f
+                ? _currentSurface.SurfaceNormal
+                : -_currentSurface.SurfaceNormal;
+            Quaternion faceWall = Quaternion.LookRotation(wallNormal, Vector3.up);
+            Quaternion delta = Quaternion.Inverse(faceWall) * placeable.transform.rotation;
+            _wallRotation = delta.eulerAngles.z;
+            if (_wallRotation > 180f) _wallRotation -= 360f;
+        }
+        else
+        {
+            _wallRotation = 0f;
+        }
 
         placeable.OnPickedUp();
 
@@ -810,6 +870,19 @@ public class ObjectGrabber : MonoBehaviour
             }
 
             // Not near a plant — fall through to normal surface placement below
+        }
+
+        // ── Gunpla part near body → attach ──
+        if (_nearestGunplaBody != null)
+        {
+            var heldPart = _held.GetComponent<GunplaPart>();
+            if (heldPart != null && _nearestGunplaBody.CanAccept(heldPart))
+            {
+                _nearestGunplaBody.AttachPart(heldPart);
+                ClearHeld();
+                ConsumeClick();
+                return;
+            }
         }
 
         // ── Bottle near glass → start pouring instead of placing ──
@@ -1078,8 +1151,14 @@ public class ObjectGrabber : MonoBehaviour
         bool bookIsFlat = false;
         if (_currentSurface.IsVertical)
         {
-            rot = Quaternion.LookRotation(hitResult.surfaceNormal, Vector3.up)
-                * Quaternion.AngleAxis(_wallRotation, Vector3.forward);
+            // Use a consistent normal: if the item's original forward agrees with
+            // the hit normal, use it as-is; otherwise flip. This prevents the
+            // camera-dependent face detection from flipping the painting around.
+            Vector3 wallNormal = hitResult.surfaceNormal;
+            if (_held.CanWallMount && Vector3.Dot(_heldOriginalForward, wallNormal) < 0f)
+                wallNormal = -wallNormal;
+            _held.AlignToWall(wallNormal, _wallRotation);
+            rot = _held.transform.rotation;
         }
         else
         {
@@ -1798,7 +1877,10 @@ public class ObjectGrabber : MonoBehaviour
         }
         if (topChild == null) return false;
 
-        // Detach the top plate — it becomes the new held object
+        var topPlaceable = topChild.GetComponent<PlaceableObject>();
+        if (topPlaceable == null) return false;
+
+        // Detach the top plate
         topChild.PrepareForGrab();
 
         // Drop the current stack onto the nearest surface
@@ -1807,21 +1889,12 @@ public class ObjectGrabber : MonoBehaviour
         _heldRb.useGravity = true;
         _held.OnDropped();
 
-        // Pick up the detached top plate
-        var oldHeld = _held;
-        _held = topChild.GetComponent<PlaceableObject>();
-        _heldRb = topChild.GetComponent<Rigidbody>();
-        if (_heldRb != null)
-        {
-            _heldRb.useGravity = false;
-            _heldRb.isKinematic = false;
-            _grabTarget = _heldRb.worldCenterOfMass;
-            _originalConstraints = _heldRb.constraints;
-            _heldRb.constraints = _originalConstraints | RigidbodyConstraints.FreezeRotation;
-        }
-        _held.OnPickedUp();
+        // Pick up the detached top plate via InitGrab (full setup: bounds, shadow, ghost, etc.)
+        _held = topPlaceable;
+        _pickupTimer = PickupFeelDuration;
+        InitGrab();
 
-        Debug.Log($"[ObjectGrabber] Unstacked {topChild.name} from {oldHeld.name}");
+        Debug.Log($"[ObjectGrabber] Unstacked {topChild.name}");
         return true;
     }
 
@@ -1927,6 +2000,9 @@ public class ObjectGrabber : MonoBehaviour
             _magnetizedGlass = null;
         }
 
+        _isPourTilted = false;
+        _nearestGunplaBody = null;
+
         ShowShadow(false);
         DestroyGhostPreview();
         ClearPlantHighlights();
@@ -1988,6 +2064,19 @@ public class ObjectGrabber : MonoBehaviour
     private void ClearPlantHighlights()
     {
         SetPlantHighlights(false);
+    }
+
+    /// <summary>Extract vinyl from a sleeve and grab it. Returns true if successful.</summary>
+    private bool TryExtractAndGrab(AlbumSleeve sleeve)
+    {
+        if (sleeve == null) return false;
+        var vinylPlaceable = sleeve.ExtractVinyl();
+        if (vinylPlaceable == null) return false;
+        ConsumeClick();
+        _held = vinylPlaceable;
+        _pickupTimer = PickupFeelDuration;
+        InitGrab();
+        return true;
     }
 
     private void SetGlassMagnetHighlight(DrinkGlass glass, bool on)
@@ -2102,7 +2191,12 @@ public class ObjectGrabber : MonoBehaviour
                     cam.transform.forward);
 
                 if (_isOnWall)
-                    _held.AlignToWall(hitResult.surfaceNormal, _wallRotation);
+                {
+                    Vector3 wn = hitResult.surfaceNormal;
+                    if (_held.CanWallMount && Vector3.Dot(_heldOriginalForward, wn) < 0f)
+                        wn = -wn;
+                    _held.AlignToWall(wn, _wallRotation);
+                }
 
                 foundSurface = true;
                 break; // first valid, non-occluded surface wins
@@ -2138,6 +2232,49 @@ public class ObjectGrabber : MonoBehaviour
 
         // Bottle snap: pull toward nearest drink glass when carrying a bottle.
         UpdateBottleSnap();
+
+        // Gunpla snap: pull held part toward body when nearby.
+        UpdateGunplaSnap();
+    }
+
+    // ── Gunpla part magnetic snap ────────────────────────────────────
+
+    private GunplaFigure _nearestGunplaBody;
+
+    private void UpdateGunplaSnap()
+    {
+        _nearestGunplaBody = null;
+        if (_held == null) return;
+
+        var part = _held.GetComponent<GunplaPart>();
+        if (part == null || part.IsAttached) return;
+
+        // Find nearest GunplaBody that can accept this part
+        GunplaFigure bestBody = null;
+        float bestDist = float.MaxValue;
+
+        for (int i = 0; i < GunplaFigure.All.Count; i++)
+        {
+            var body = GunplaFigure.All[i];
+            if (body == null || !body.CanAccept(part)) continue;
+
+            float dist = Vector3.Distance(body.transform.position, _grabTarget);
+            if (dist < body.SnapRadius && dist < bestDist)
+            {
+                bestDist = dist;
+                bestBody = body;
+            }
+        }
+
+        if (bestBody == null) return;
+
+        _nearestGunplaBody = bestBody;
+
+        // Magnetic pull toward the attach point
+        Vector3 attachPos = bestBody.GetAttachPosition(part);
+        float proximity = 1f - (bestDist / bestBody.SnapRadius);
+        float strength = proximity * proximity * 0.9f;
+        _grabTarget = Vector3.Lerp(_grabTarget, attachPos, strength);
     }
 
     /// <summary>
@@ -2243,8 +2380,14 @@ public class ObjectGrabber : MonoBehaviour
 
     private float GetHeldHalfExtentAlongNormal(Vector3 normal)
     {
-        // Use cached extents (colliders are disabled while held)
-        return Mathf.Abs(Vector3.Dot(_heldBoundsExtents, normal.normalized)) + PlacementSafetyMargin;
+        // Distance from pivot to the bottom of the collider along the surface normal.
+        // extentDot = half-height of collider along normal
+        // centerDot = how far the collider center is from the pivot along normal
+        // Subtracting gives the distance from pivot to the collider's bottom edge.
+        Vector3 n = normal.normalized;
+        float extentDot = Mathf.Abs(Vector3.Dot(_heldBoundsExtents, n));
+        float centerDot = Vector3.Dot(_heldBoundsCenterOffset, n);
+        return Mathf.Max(extentDot - centerDot, 0.01f) + PlacementSafetyMargin;
     }
 
     // ── Smart book placement ─────────────────────────────────────────

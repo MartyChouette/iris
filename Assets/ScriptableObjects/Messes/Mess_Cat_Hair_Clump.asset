@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MessBlueprint
   messName: Cat Hair Clump
   description: cat hair?
-  category: 1
+  category: 0
   messType: 1
   spillDefinition: {fileID: 0}
   objectPrefab: {fileID: 0}
@@ -27,7 +27,7 @@ MonoBehaviour:
   requireReactionTag: 
   requireBadFlowerTrim: 0
   requireGoodFlowerTrim: 0
-  minDay: 1
+  minDay: 2
   maxDay: 50
   spawnPosition: {x: 1.0689088, y: 0.30638155, z: -0.33377767}
   spawnRotation: {x: 0, y: 0, z: 0}

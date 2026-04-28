@@ -653,7 +653,13 @@ public class NemaController : MonoBehaviour
         // tracking keeps working after a phase switch. If the target doesn't
         // have its own animator we fall back to the serialized one.
         var animOnTarget = target.GetComponentInChildren<Animator>();
-        if (animOnTarget != null) _animator = animOnTarget;
+        if (animOnTarget != null)
+        {
+            _animator = animOnTarget;
+            // Snap to default pose immediately so there's no T-pose flash
+            _animator.Update(0f);
+            _animator.Update(0f);
+        }
 
         // Re-find head bone on the new model for manual look-at fallback
         if (_animator != null)

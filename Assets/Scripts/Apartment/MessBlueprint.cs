@@ -41,6 +41,12 @@ public class MessBlueprint : ScriptableObject
     public Color objectColor = Color.gray;
 
     [Header("Conditions")]
+    [Tooltip("If set, this mess only appears if this specific character was the previous date.")]
+    public DatePersonalDefinition requirePreviousDate;
+
+    [Tooltip("Minimum number of times the required character must have visited (0 = any). E.g. 2 = only after their 2nd date.")]
+    public int requireDateVisitCount;
+
     [Tooltip("If DateAftermath: require last date succeeded?")]
     public bool requireDateSuccess;
 

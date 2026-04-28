@@ -27,27 +27,41 @@ public class InteractableHighlight : MonoBehaviour
     private static readonly List<InteractableHighlight> s_all = new();
     public static IReadOnlyList<InteractableHighlight> All => s_all;
 
-    // ── Suppress visual highlight (cursor system replaces it) ───────────────
-    // When true, the highlight shader overlay is skipped but the component
-    // stays registered in s_all so cursor detection still works.
-    // Set to false to re-enable visual highlights.
-    private static bool s_suppressVisuals = true;
+    // ── Suppress visual highlight (ref-counted) ───────────────
+    // Multiple systems can request highlights simultaneously.
+    // Only suppress when NO system wants highlights (count == 0).
+    private static int s_unsuppressCount;
 
-    /// <summary>Enable/disable the highlight shader overlay globally. Registry stays active either way.</summary>
+    /// <summary>
+    /// Ref-counted suppress. Set true to request highlights, false to release.
+    /// Highlights render when at least one requester is active.
+    /// </summary>
     public static bool SuppressVisuals
     {
-        get => s_suppressVisuals;
+        get => s_unsuppressCount <= 0;
         set
         {
-            if (s_suppressVisuals == value) return;
-            s_suppressVisuals = value;
-            // Strip overlays from all highlights when suppressing
-            if (value)
+            if (!value)
+                s_unsuppressCount++;
+            else
             {
-                for (int i = 0; i < s_all.Count; i++)
-                    s_all[i].StripOverlayMaterials();
+                s_unsuppressCount = Mathf.Max(s_unsuppressCount - 1, 0);
+                // Strip overlays only when all requesters have released
+                if (s_unsuppressCount <= 0)
+                {
+                    for (int i = 0; i < s_all.Count; i++)
+                        s_all[i].StripOverlayMaterials();
+                }
             }
         }
+    }
+
+    /// <summary>Force reset the suppress counter (use on scene transitions).</summary>
+    public static void ResetSuppressCount()
+    {
+        s_unsuppressCount = 0;
+        for (int i = 0; i < s_all.Count; i++)
+            s_all[i].StripOverlayMaterials();
     }
 
     // ── Highlight style ───────────────
@@ -207,7 +221,7 @@ public class InteractableHighlight : MonoBehaviour
 
         // When visuals are suppressed, skip highlight material setup.
         // The component only exists for the static registry (cursor detection).
-        if (s_suppressVisuals) return;
+        if (SuppressVisuals) return;
 
         if (_renderers.Length == 0) return;
 
@@ -387,7 +401,7 @@ public class InteractableHighlight : MonoBehaviour
     private void RebuildMaterials()
     {
         // When visuals are suppressed, do nothing — don't touch materials at all
-        if (s_suppressVisuals)
+        if (SuppressVisuals)
             return;
 
         // Materials weren't set up if visuals were suppressed during Awake —

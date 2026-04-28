@@ -4,6 +4,7 @@ Shader "Iris/Fullscreen/PSXPost"
     {
         _ColorDepth     ("Color Depth (levels per channel)", Float) = 32
         _DitherIntensity ("Dither Intensity", Range(0, 1)) = 0.5
+        _DitherShadowBias ("Dither Shadow Bias (0 = uniform, 1 = dark areas only)", Range(0, 1)) = 0.7
     }
 
     SubShader
@@ -32,6 +33,7 @@ Shader "Iris/Fullscreen/PSXPost"
             CBUFFER_START(UnityPerMaterial)
                 float _ColorDepth;
                 half  _DitherIntensity;
+                half  _DitherShadowBias;
                 float2 _DitherResolution; // low-res pixel grid size for dither alignment
             CBUFFER_END
 
@@ -109,7 +111,14 @@ Shader "Iris/Fullscreen/PSXPost"
                 float threshold = BayerMatrix[idx] - 0.5; // center around 0
 
                 float3 c = screen.rgb;
-                c += threshold * (1.0 / levels) * _DitherIntensity;
+
+                // Shadow-biased dither: at _DitherShadowBias = 1, dither only
+                // appears in dark areas (classic PS1 stipple shadows). At 0, uniform.
+                float luminance = dot(c, float3(0.299, 0.587, 0.114));
+                float darknessMask = 1.0 - saturate(luminance * 2.0); // 1 in dark, 0 in bright
+                float biasedIntensity = lerp(_DitherIntensity, _DitherIntensity * darknessMask, _DitherShadowBias);
+
+                c += threshold * (1.0 / levels) * biasedIntensity;
 
                 // ── Color depth reduction (posterization) ──
                 c = floor(c * levels + 0.5) / levels;

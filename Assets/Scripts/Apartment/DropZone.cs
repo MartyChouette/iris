@@ -77,6 +77,9 @@ public class DropZone : MonoBehaviour
     [Tooltip("Maximum number of slots in the rack.")]
     [SerializeField, Range(1, 12)] private int _slotCount = 4;
 
+    [Tooltip("Extra rotation applied to items when slotted (Euler degrees, local space). Use this to angle shoes on the rack.")]
+    [SerializeField] private Vector3 _slotRotationOffset;
+
     [Tooltip("Radius around each slot used to detect whether it's already occupied. Deposited items are kinematic-locked exactly at slot center, so this should be tight — larger values cause adjacent slots to false-positive on each other's shoes.")]
     [SerializeField] private float _slotOccupancyRadius = 0.03f;
 
@@ -246,7 +249,7 @@ public class DropZone : MonoBehaviour
             if (!IsSlotOccupied(candidate))
             {
                 worldPos = candidate;
-                worldRot = transform.rotation;
+                worldRot = transform.rotation * Quaternion.Euler(_slotRotationOffset);
                 return true;
             }
         }

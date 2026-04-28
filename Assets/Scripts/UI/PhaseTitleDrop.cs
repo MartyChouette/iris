@@ -132,6 +132,14 @@ public class PhaseTitleDrop : MonoBehaviour
         _titleText.color = _textColor;
         _titleText.fontStyle = FontStyles.Normal;
         _titleText.textWrappingMode = TMPro.TextWrappingModes.NoWrap;
+
+        // Apply game font
+        var theme = IrisTextTheme.Active;
+        if (theme != null && theme.primaryFont != null)
+        {
+            _titleText.font = theme.primaryFont;
+            _shadowText.font = theme.primaryFont;
+        }
     }
 
     /// <summary>Show an epic title drop over the live scene.</summary>

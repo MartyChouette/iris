@@ -463,7 +463,9 @@ public class ApartmentManager : MonoBehaviour
         {
             Vector3 right = _baseRotation * Vector3.right;
             Vector3 up = _baseRotation * Vector3.up;
-            _panOffset += (right * h + up * v) * _keyPanSpeed * Time.deltaTime;
+            float keySpeed = _keyPanSpeed * ZoomSpeedScale;
+            if (_presetOverrideActive) keySpeed *= _presetPanSpeedScale;
+            _panOffset += (right * h + up * v) * keySpeed * Time.deltaTime;
             ClampPanOffset();
         }
 
@@ -547,7 +549,9 @@ public class ApartmentManager : MonoBehaviour
 
         Vector3 right = _baseRotation * Vector3.right;
         Vector3 up = _baseRotation * Vector3.up;
-        _panOffset += (right * hFactor + up * vFactor) * _edgePanMaxSpeed * Time.deltaTime;
+        float edgeSpeed = _edgePanMaxSpeed * ZoomSpeedScale;
+        if (_presetOverrideActive) edgeSpeed *= _presetPanSpeedScale;
+        _panOffset += (right * hFactor + up * vFactor) * edgeSpeed * Time.deltaTime;
         ClampPanOffset();
     }
 
@@ -624,7 +628,9 @@ public class ApartmentManager : MonoBehaviour
         // Move along camera-local right/up axes
         Vector3 right = _baseRotation * Vector3.right;
         Vector3 up = _baseRotation * Vector3.up;
-        _panOffset -= (right * delta.x + up * delta.y) * panSpeed;
+        float dragSpeed = panSpeed * ZoomSpeedScale;
+        if (_presetOverrideActive) dragSpeed *= _presetPanSpeedScale;
+        _panOffset -= (right * delta.x + up * delta.y) * dragSpeed;
         ClampPanOffset();
     }
 
@@ -809,6 +815,19 @@ public class ApartmentManager : MonoBehaviour
 
     /// <summary>Override the pan distance limit while a preset is active. Set -1 to use default.</summary>
     public void SetPresetPanLimit(float maxPan) => _presetPanLimit = maxPan;
+
+    [Tooltip("Pan speed multiplier when a phase camera preset is active (0-1). Lower = less sensitive.")]
+    [SerializeField, Range(0.05f, 1f)] private float _presetPanSpeedScale = 0.35f;
+
+    /// <summary>Returns a speed multiplier based on zoom level (1 = fully zoomed out, smaller = zoomed in).</summary>
+    private float ZoomSpeedScale
+    {
+        get
+        {
+            if (_zoomSteps == null || _zoomSteps.Length == 0 || _currentZoom <= 0f) return 1f;
+            return Mathf.Clamp(_currentZoom / _zoomSteps[0], 0.15f, 1f);
+        }
+    }
 
     /// <summary>Reset player pan offset to zero (used when phase cameras set an absolute framing).</summary>
     public void ResetPanOffset() => _panOffset = Vector3.zero;

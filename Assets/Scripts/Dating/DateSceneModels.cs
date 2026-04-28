@@ -59,6 +59,15 @@ public class DateSceneModels : MonoBehaviour
         {
             target.SetActive(true);
 
+            // Force animator to snap to its default state immediately so the
+            // first visible frame shows the correct pose (no T-pose flash).
+            var anim = target.GetComponentInChildren<Animator>();
+            if (anim != null)
+            {
+                anim.Update(0f);
+                anim.Update(0f); // double update ensures state machine + blend tree settle
+            }
+
             // Models inactive during PSXRenderController's startup scan still
             // have URP/Standard shaders — swap to PSXLit to avoid stripped-shader
             // invisibility in builds.

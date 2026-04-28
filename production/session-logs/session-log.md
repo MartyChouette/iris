@@ -25844,3 +25844,2385 @@ Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260426_234242
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+---
+
+## Session End: 20260426_234523
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260426_234706
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_001000
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_001124
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+679ba6a click-to-serve drinks, demo locks, blanket reveal generalization, watering can fixes
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_004442
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_005639
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_011028
+### Commits
+fd98cb9 glass magnetize highlight, bottle re-pickup fix, lamp switch, env hide, snap radius
+5ebaf75 remove test runner artifacts, graphics settings update
+0d50ac6 phase camera preview tool, environment dim, perfume click-to-spray, camera + pickup fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_124912
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_125451
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_125502
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_130835
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_130848
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_131508
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_143211
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_143223
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_143400
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_143657
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_144256
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_144559
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_153207
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_153233
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_153328
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_153733
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_153957
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_154116
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_160806
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_161107
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_161354
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_161714
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_161859
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_161913
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_162942
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_163023
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_163341
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_164227
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_164251
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_164312
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_170815
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_171132
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_171312
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_175523
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_175641
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_180011
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_180304
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_180612
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_181053
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_182331
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_182644
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_182834
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_183130
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_183715
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_184129
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_184627
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_185030
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_185201
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_185406
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_190000
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_190546
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_190635
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_190859
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_190924
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_191022
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_191034
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_191331
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_191530
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_192025
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_192301
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_192509
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_192553
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_192948
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_193204
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_193524
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_193532
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_193607
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_193830
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_194336
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_194548
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_194937
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_195002
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_195016
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_195201
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_195223
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_195406
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_195504
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_200136
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_200832
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_201021
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_201111
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_201227
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260427_201320
+### Uncommitted Changes
+Assets/Editor/PhaseJumperWindow.cs
+Assets/PLACEHOLDER_PARIS PORTRAIT.png
+Assets/PLACEHOLDER_PARIS PORTRAIT.png.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Messes/Mess_Cat_Hair_Clump.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DishDropZone.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/MessBlueprint.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateInspectSystem.cs
+Assets/Scripts/Dating/DateOutcomeCapture.cs
+Assets/Scripts/Dating/DateSceneModels.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TeenGirl_Body.png
+Assets/TeenGirl_Body.png.meta
+Assets/TeenGirl_Head.png
+Assets/TeenGirl_Head.png.meta
+Assets/TeenGirl_Head_Small.png
+Assets/TeenGirl_Head_Small.png.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+ProjectSettings/GraphicsSettings.asset
+ProjectSettings/QualitySettings.asset
+production/session-logs/session-log.md
+---
+

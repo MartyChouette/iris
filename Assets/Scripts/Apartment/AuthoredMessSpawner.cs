@@ -233,6 +233,14 @@ public class AuthoredMessSpawner : MonoBehaviour
             if (!outcome.hadFlowerTrim || outcome.flowerScore < 80) return false;
         }
 
+        // Specific date character requirement
+        if (bp.requirePreviousDate != null)
+        {
+            if (!outcome.hadDate) return false;
+            if (outcome.dateCharacter != bp.requirePreviousDate) return false;
+            if (bp.requireDateVisitCount > 0 && outcome.dateCount < bp.requireDateVisitCount) return false;
+        }
+
         // DateAftermath conditions
         if (bp.category == MessBlueprint.MessCategory.DateAftermath)
         {
