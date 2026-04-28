@@ -2938,6 +2938,22 @@ PrefabInstance:
       propertyPath: _hasDisheveledPose
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 313667517070882803, guid: 70920a758af76c44db7688329e14505a, type: 3}
+      propertyPath: _disheveledRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 313667517070882803, guid: 70920a758af76c44db7688329e14505a, type: 3}
+      propertyPath: _disheveledRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 313667517070882803, guid: 70920a758af76c44db7688329e14505a, type: 3}
+      propertyPath: _disheveledRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 313667517070882803, guid: 70920a758af76c44db7688329e14505a, type: 3}
+      propertyPath: _disheveledRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1515829841650547399, guid: 70920a758af76c44db7688329e14505a, type: 3}
       propertyPath: m_Name
       value: dirty plate
@@ -13015,7 +13031,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
   displayName: 
-  tags: []
+  tags:
+  - 
   isActive: 1
   reactionIcon: {fileID: 0}
   smellAmount: 0
@@ -25281,7 +25298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &931532493
 Transform:
   m_ObjectHideFlags: 0
@@ -45441,8 +45458,9 @@ GameObject:
   - component: {fileID: 1537133408}
   - component: {fileID: 1537133410}
   - component: {fileID: 1537133409}
+  - component: {fileID: 1537133411}
   m_Layer: 0
-  m_Name: water_can.001 (1)
+  m_Name: plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45457,7 +45475,7 @@ Transform:
   m_GameObject: {fileID: 1537133407}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -3.5274606, y: 1.5596714, z: 5.0497217}
+  m_LocalPosition: {x: -3.589, y: 1.5596714, z: 5.032}
   m_LocalScale: {x: 124.48459, y: 124.484566, z: 124.484566}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45519,6 +45537,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537133407}
+  m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
+--- !u!64 &1537133411
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537133407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
 --- !u!1 &1539162959
 GameObject:

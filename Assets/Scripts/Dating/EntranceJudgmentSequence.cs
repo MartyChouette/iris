@@ -88,27 +88,34 @@ public class EntranceJudgmentSequence : MonoBehaviour
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Music → {musicReaction}");
         yield return new WaitForSecondsRealtime(_interJudgmentPause);
 
-        // --- Judgment 2: Perfume / Mood + Smell ---
+        // --- Judgment 2: Perfume ---
         PlayJudgingSFX();
-        var moodReaction = EvaluatePerfumeMood(date);
+        var sprayed = PerfumeBottle.LastSprayed;
+        var perfumeReaction = ReactionEvaluator.EvaluatePerfume(sprayed, date.preferences);
 
         // Smell downgrade (only when not always-positive)
         if (!_alwaysPositive)
         {
             float totalSmell = SmellTracker.TotalSmell;
             if (totalSmell > SmellTracker.SmellThreshold * 2f)
-                moodReaction = ReactionType.Dislike;
-            else if (totalSmell > SmellTracker.SmellThreshold && moodReaction == ReactionType.Like)
-                moodReaction = ReactionType.Neutral;
+                perfumeReaction = ReactionType.Dislike;
+            else if (totalSmell > SmellTracker.SmellThreshold && perfumeReaction == ReactionType.Like)
+                perfumeReaction = ReactionType.Neutral;
         }
 
-        if (_alwaysPositive) moodReaction = ReactionType.Like;
-        reactionUI?.ShowLabeledReaction(moodReaction, "The Perfume");
-        DateSessionManager.Instance?.ApplyReaction(moodReaction);
-        ShowJudgmentJuice(reactionUI, "The Perfume", moodReaction);
-        if (moodReaction == ReactionType.Dislike) PlaySneezeSFX();
-        Debug.Log($"[EntranceJudgmentSequence] Perfume/Mood: {moodReaction}");
-        DateDebugOverlay.Instance?.LogReaction($"[Entrance] Perfume → {moodReaction}");
+        if (_alwaysPositive) perfumeReaction = ReactionType.Like;
+
+        string perfumeLabel = sprayed != null ? sprayed.perfumeName : "No Perfume";
+        // Show custom no-perfume comment if configured
+        if (sprayed == null && !string.IsNullOrEmpty(date.preferences.noPerfumeComment))
+            reactionUI?.ShowText(date.preferences.noPerfumeComment, 2f);
+
+        reactionUI?.ShowLabeledReaction(perfumeReaction, perfumeLabel);
+        DateSessionManager.Instance?.ApplyReaction(perfumeReaction);
+        ShowJudgmentJuice(reactionUI, perfumeLabel, perfumeReaction);
+        if (perfumeReaction == ReactionType.Dislike) PlaySneezeSFX();
+        Debug.Log($"[EntranceJudgmentSequence] Perfume: {perfumeLabel} → {perfumeReaction}");
+        DateDebugOverlay.Instance?.LogReaction($"[Entrance] Perfume ({perfumeLabel}) → {perfumeReaction}");
         yield return new WaitForSecondsRealtime(_interJudgmentPause);
 
         // --- Judgment 3: Outfit ---
@@ -184,11 +191,8 @@ public class EntranceJudgmentSequence : MonoBehaviour
         return ReactionEvaluator.EvaluateOutfit(outfit, date.preferences);
     }
 
-    private ReactionType EvaluatePerfumeMood(DatePersonalDefinition date)
-    {
-        float mood = MoodMachine.Instance?.Mood ?? 0f;
-        return ReactionEvaluator.EvaluateMood(mood, date.preferences);
-    }
+    // EvaluatePerfumeMood removed — perfume judgment now uses
+    // ReactionEvaluator.EvaluatePerfume() with actual perfume tags.
 
     private ReactionType EvaluateCleanliness()
     {

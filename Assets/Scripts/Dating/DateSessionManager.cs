@@ -2043,6 +2043,7 @@ public class DateSessionManager : MonoBehaviour
         _state = SessionState.Idle;
         _cachedApartmentRenderers = null;
         _cachedBottles = null;
+        PerfumeBottle.ClearLastSprayed();
     }
 
     private void SucceedDate()
@@ -2126,6 +2127,7 @@ public class DateSessionManager : MonoBehaviour
         _state = SessionState.Idle;
         _cachedApartmentRenderers = null;
         _cachedBottles = null;
+        PerfumeBottle.ClearLastSprayed();
         OnDateSessionEnded?.Invoke(_currentDate, _affection);
     }
 

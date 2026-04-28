@@ -28454,3 +28454,49 @@ Assets/Scripts/UI/PhaseTitleDrop.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260428_002454
+### Commits
+25867e9 flies linger at sink and fly skyward, fix double phase title text
+8ae7dd8 fix purple highlights, cache scene queries, add shader warmup
+f87459b re-enable phase cameras: snap behind white fade, lerp on post-verdict
+3a09e61 fix phase camera interaction: bypass Cinemachine stale projection matrix
+d674c02 fix phase camera interaction: bypass Cinemachine stale projection matrix
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+---
+
+## Session End: 20260428_002509
+### Commits
+25867e9 flies linger at sink and fly skyward, fix double phase title text
+8ae7dd8 fix purple highlights, cache scene queries, add shader warmup
+f87459b re-enable phase cameras: snap behind white fade, lerp on post-verdict
+3a09e61 fix phase camera interaction: bypass Cinemachine stale projection matrix
+d674c02 fix phase camera interaction: bypass Cinemachine stale projection matrix
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_154533
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_173635
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_175630
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Bookcase/PerfumeDefinition.cs
+Assets/Scripts/Dating/DatePreferences.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Dating/ReactionEvaluator.cs
+ProjectSettings/ProjectSettings.asset
+production/session-logs/session-log.md
+---
+

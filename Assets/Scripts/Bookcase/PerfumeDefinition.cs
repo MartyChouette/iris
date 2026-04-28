@@ -29,8 +29,12 @@ public class PerfumeDefinition : ScriptableObject
     [Tooltip("Tint for ambient mood particles.")]
     public Color moodParticleColor = new Color(1f, 0.9f, 0.8f, 0.3f);
 
+    [Header("Type")]
+    [Tooltip("Tag identifying this perfume type (e.g. 'floral', 'woody', 'citrus', 'fresh'). Matched against date preferences.")]
+    public string perfumeTag = "";
+
     [Header("Mood Machine")]
-    [Tooltip("Mood value this perfume pushes toward (0 = sunny, 1 = stormy).")]
+    [Tooltip("Mood value this perfume pushes toward (0 = sunny, 1 = stormy). Drives visual atmosphere only.")]
     [Range(0f, 1f)]
     public float moodValue = 0.5f;
 

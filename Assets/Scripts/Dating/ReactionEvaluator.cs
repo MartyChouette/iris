@@ -158,7 +158,27 @@ public static class ReactionEvaluator
         return ReactionType.Dislike;
     }
 
-    /// <summary>Evaluate how the current mood matches the date's preferences.</summary>
+    /// <summary>Evaluate the sprayed perfume against the date's perfume preferences.</summary>
+    public static ReactionType EvaluatePerfume(PerfumeDefinition perfume, DatePreferences prefs)
+    {
+        if (prefs == null) return ReactionType.Neutral;
+        if (perfume == null) return prefs.noPerfumeReaction;
+
+        string tag = perfume.perfumeTag;
+        if (string.IsNullOrEmpty(tag)) return ReactionType.Neutral;
+
+        for (int i = 0; i < prefs.likedPerfumeTags.Length; i++)
+            if (string.Equals(tag, prefs.likedPerfumeTags[i], System.StringComparison.OrdinalIgnoreCase))
+                return ReactionType.Like;
+
+        for (int i = 0; i < prefs.dislikedPerfumeTags.Length; i++)
+            if (string.Equals(tag, prefs.dislikedPerfumeTags[i], System.StringComparison.OrdinalIgnoreCase))
+                return ReactionType.Dislike;
+
+        return ReactionType.Neutral;
+    }
+
+    /// <summary>Evaluate how the current mood matches the date's preferences (dormant — kept for future use).</summary>
     public static ReactionType EvaluateMood(float currentMood, DatePreferences prefs)
     {
         if (prefs == null) return ReactionType.Neutral;

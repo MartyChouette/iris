@@ -23,6 +23,9 @@ public class PerfumeBottle : MonoBehaviour
     /// <summary>Fired when any perfume is sprayed.</summary>
     public static event System.Action OnPerfumeSprayed;
 
+    /// <summary>The most recently sprayed perfume definition (null if none sprayed this session).</summary>
+    public static PerfumeDefinition LastSprayed { get; private set; }
+
     public PerfumeDefinition Definition => definition;
     public bool SprayComplete { get; private set; }
 
@@ -30,6 +33,12 @@ public class PerfumeBottle : MonoBehaviour
     private Material _instanceMaterial;
     private Color _baseColor;
     private bool _isHovered;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() => LastSprayed = null;
+
+    /// <summary>Clear the last sprayed perfume (call on date end).</summary>
+    public static void ClearLastSprayed() => LastSprayed = null;
 
     private void OnEnable() => s_all.Add(this);
     private void OnDisable() => s_all.Remove(this);
@@ -105,6 +114,7 @@ public class PerfumeBottle : MonoBehaviour
         if (reactable != null) reactable.IsActive = true;
 
         SprayComplete = true;
+        LastSprayed = definition;
         OnPerfumeSprayed?.Invoke();
     }
 
