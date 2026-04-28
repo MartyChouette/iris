@@ -249,6 +249,20 @@ public class ApartmentManager : MonoBehaviour
         BuildZoomIndicator();
     }
 
+    private void LateUpdate()
+    {
+        if (!_topDownActive) return;
+
+        var cam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
+        if (cam == null) return;
+
+        // Straight overhead: position above target, look straight down
+        cam.transform.position = _topDownTarget + Vector3.up * _topDownHeight + _panOffset;
+        cam.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        cam.orthographic = true;
+        cam.orthographicSize = _currentZoom >= 0f ? _currentZoom : _topDownOrthoSize;
+    }
+
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
@@ -309,9 +323,12 @@ public class ApartmentManager : MonoBehaviour
 
         if (!interactionAllowed) return;
 
+        HandleTopDownToggle();
         UpdateTransition();
         HandleBrowsingInput();
         HandleZoomInput();
+        // Continuously ease pan back into bounds (zoom changes may push it out)
+        ClampPanOffset(soft: true);
         HandlePanInput();
         UpdateHoverHighlight();
     }
@@ -407,6 +424,9 @@ public class ApartmentManager : MonoBehaviour
         // Preset override (date phase cameras) owns _basePosition — don't fight it
         if (_presetOverrideActive) { _isTransitioning = false; return; }
 
+        // Top-down owns _basePosition — don't fight it
+        if (_topDownActive) { _isTransitioning = false; return; }
+
         float step = transitionSpeed * Time.deltaTime;
 
         _basePosition = Vector3.Lerp(_basePosition, _targetPosition, step);
@@ -430,6 +450,60 @@ public class ApartmentManager : MonoBehaviour
     // ──────────────────────────────────────────────────────────────
     // Browsing
     // ──────────────────────────────────────────────────────────────
+
+    [Header("Top-Down View (Tab)")]
+    [Tooltip("Position the camera looks at from above when top-down is active.")]
+    [SerializeField] private Vector3 _topDownTarget = new Vector3(-2f, 0f, -2f);
+
+    [Tooltip("Height above the target for the top-down camera.")]
+    [SerializeField] private float _topDownHeight = 12f;
+
+    [Tooltip("Ortho size for the top-down view.")]
+    [SerializeField] private float _topDownOrthoSize = 8f;
+
+    [Tooltip("Seconds to lerp between normal and top-down views.")]
+    [SerializeField] private float _topDownLerpSpeed = 6f;
+
+    private bool _topDownActive;
+    private Vector3 _savedPosition;
+    private Quaternion _savedRotation;
+    private float _savedFOV;
+    private Vector3 _savedPanOffset;
+
+    private void HandleTopDownToggle()
+    {
+        if (_presetOverrideActive) return; // don't fight date phase cameras
+        if (!Input.GetKeyDown(KeyCode.Tab)) return;
+
+        _topDownActive = !_topDownActive;
+
+        if (_topDownActive)
+        {
+            // Save current state to restore later
+            _savedPosition = _basePosition;
+            _savedRotation = _baseRotation;
+            _savedFOV = _baseFOV;
+            _savedPanOffset = _panOffset;
+            _panOffset = Vector3.zero;
+            _currentParallaxOffset = Vector3.zero;
+            _currentParallaxRotation = Quaternion.identity;
+
+            // Disable Cinemachine entirely so nothing fights our LateUpdate writes
+            if (browseCamera != null) browseCamera.enabled = false;
+            if (brain != null) brain.enabled = false;
+        }
+        else
+        {
+            // Restore saved state
+            _basePosition = _savedPosition;
+            _baseRotation = _savedRotation;
+            _baseFOV = _savedFOV;
+            _panOffset = _savedPanOffset;
+
+            if (brain != null) brain.enabled = true;
+            if (browseCamera != null) browseCamera.enabled = true;
+        }
+    }
 
     [Header("Keyboard Pan")]
     [Tooltip("Pan speed for WASD/arrow keys (world units per second).")]
@@ -466,9 +540,19 @@ public class ApartmentManager : MonoBehaviour
 
         if (Mathf.Abs(h) > 0.01f || Mathf.Abs(v) > 0.01f)
         {
-            Vector3 right = _baseRotation * Vector3.right;
-            Vector3 up = _baseRotation * Vector3.up;
-            float keySpeed = _keyPanSpeed * ZoomSpeedScale;
+            // Top-down: pan along world X/Z. Normal: pan along camera-local axes.
+            Vector3 right, up;
+            if (_topDownActive)
+            {
+                right = Vector3.right;
+                up = Vector3.forward;
+            }
+            else
+            {
+                right = _baseRotation * Vector3.right;
+                up = _baseRotation * Vector3.up;
+            }
+            float keySpeed = _keyPanSpeed;
             if (_presetOverrideActive) keySpeed *= _presetPanSpeedScale;
             _panOffset += (right * h + up * v) * keySpeed * Time.deltaTime;
             ClampPanOffset();
@@ -554,7 +638,7 @@ public class ApartmentManager : MonoBehaviour
 
         Vector3 right = _baseRotation * Vector3.right;
         Vector3 up = _baseRotation * Vector3.up;
-        float edgeSpeed = _edgePanMaxSpeed * ZoomSpeedScale;
+        float edgeSpeed = _edgePanMaxSpeed;
         if (_presetOverrideActive) edgeSpeed *= _presetPanSpeedScale;
         _panOffset += (right * hFactor + up * vFactor) * edgeSpeed * Time.deltaTime;
         ClampPanOffset();
@@ -576,7 +660,7 @@ public class ApartmentManager : MonoBehaviour
         _currentZoomStep = Mathf.Clamp(step, 0, _zoomSteps.Length - 1);
         _targetZoom = _zoomSteps[_currentZoomStep];
         _currentZoom = _targetZoom; // Apply immediately (HandleZoomInput is blocked during presets)
-        ClampPanOffset();
+        ClampPanOffset(soft: true);
         UpdateZoomIndicator();
     }
 
@@ -611,8 +695,8 @@ public class ApartmentManager : MonoBehaviour
                 _currentZoomStep = newStep;
                 _targetZoom = _zoomSteps[_currentZoomStep];
 
-                // Re-clamp pan so it doesn't exceed the new zoom's limit
-                ClampPanOffset();
+                // Re-clamp pan — soft so it eases back instead of snapping
+                ClampPanOffset(soft: true);
                 UpdateZoomIndicator();
             }
         }
@@ -630,55 +714,83 @@ public class ApartmentManager : MonoBehaviour
         Vector2 delta = IrisInput.Instance.PanDelta.ReadValue<Vector2>();
         if (delta.sqrMagnitude < 0.01f) return;
 
-        // Move along camera-local right/up axes
-        Vector3 right = _baseRotation * Vector3.right;
-        Vector3 up = _baseRotation * Vector3.up;
-        float dragSpeed = panSpeed * ZoomSpeedScale;
+        // Top-down: drag along world X/Z. Normal: drag along camera-local axes.
+        Vector3 right, up;
+        if (_topDownActive)
+        {
+            right = Vector3.right;
+            up = Vector3.forward;
+        }
+        else
+        {
+            right = _baseRotation * Vector3.right;
+            up = _baseRotation * Vector3.up;
+        }
+        float dragSpeed = panSpeed;
         if (_presetOverrideActive) dragSpeed *= _presetPanSpeedScale;
         _panOffset -= (right * delta.x + up * delta.y) * dragSpeed;
         ClampPanOffset();
     }
 
-    private void ClampPanOffset()
+    /// <summary>
+    /// Clamp pan so the camera's visible edges never leave the world boundary.
+    /// Called from input (hard clamp — player hits a wall) and from zoom
+    /// (soft clamp — smoothly eases back into bounds over frames).
+    /// </summary>
+    private void ClampPanOffset(bool soft = false)
     {
-        float zoomFactor = 1f;
-        if (_zoomSteps != null && _zoomSteps.Length > 0 && _currentZoom > 0f)
-        {
-            float baseZoom = _zoomSteps[0];
-            zoomFactor = baseZoom / Mathf.Max(_currentZoom, 1f);
-        }
-        float scale = Mathf.Max(zoomFactor, 1f);
-
-        // When a preset override is active (date phase cameras), pan is always
-        // relative to _basePosition (the phase camera). Otherwise use custom pan center.
         Vector3 centerOffset = Vector3.zero;
-        if (!_presetOverrideActive && _panCenter != Vector3.zero)
+        if (!_presetOverrideActive && !_topDownActive && _panCenter != Vector3.zero)
             centerOffset = _panCenter - _basePosition;
 
         Vector3 adjusted = _panOffset - centerOffset;
 
         if (_panBoundsHalf.x > 0f && _panBoundsHalf.y > 0f)
         {
-            // Rectangular clamp in camera-local space
-            Vector3 right = _baseRotation * Vector3.right;
-            Vector3 up = _baseRotation * Vector3.up;
+            // Camera visible half-extents in world units (ortho)
+            float visibleHalfH = _currentZoom > 0f ? _currentZoom : 0f;
+            float visibleHalfW = visibleHalfH * ((float)Screen.width / Screen.height);
+
+            // Allowed pan = world boundary minus visible extent
+            float allowX = Mathf.Max(_panBoundsHalf.x - visibleHalfW, 0f);
+            float allowY = Mathf.Max(_panBoundsHalf.y - visibleHalfH, 0f);
+
+            Vector3 right, up;
+            if (_topDownActive)
+            {
+                right = Vector3.right;
+                up = Vector3.forward;
+            }
+            else
+            {
+                right = _baseRotation * Vector3.right;
+                up = _baseRotation * Vector3.up;
+            }
 
             float dotR = Vector3.Dot(adjusted, right);
             float dotU = Vector3.Dot(adjusted, up);
 
-            dotR = Mathf.Clamp(dotR, -_panBoundsHalf.x * scale, _panBoundsHalf.x * scale);
-            dotU = Mathf.Clamp(dotU, -_panBoundsHalf.y * scale, _panBoundsHalf.y * scale);
+            float clampedR = Mathf.Clamp(dotR, -allowX, allowX);
+            float clampedU = Mathf.Clamp(dotU, -allowY, allowY);
 
-            _panOffset = centerOffset + right * dotR + up * dotU;
+            Vector3 target = centerOffset + right * clampedR + up * clampedU;
+
+            // Soft clamp: lerp toward bounds (used after zoom changes).
+            // Hard clamp: snap immediately (used during pan input).
+            _panOffset = soft ? Vector3.Lerp(_panOffset, target, Time.deltaTime * 8f) : target;
         }
         else
         {
-            // Circular clamp — use tighter preset limit when active
             float basePan = (_presetOverrideActive && _presetPanLimit >= 0f) ? _presetPanLimit : panMaxDistance;
-            float effectiveMaxPan = basePan * scale;
-            if (adjusted.magnitude > effectiveMaxPan)
-                adjusted = adjusted.normalized * effectiveMaxPan;
-            _panOffset = centerOffset + adjusted;
+            if (adjusted.magnitude > basePan)
+            {
+                Vector3 target = centerOffset + adjusted.normalized * basePan;
+                _panOffset = soft ? Vector3.Lerp(_panOffset, target, Time.deltaTime * 8f) : target;
+            }
+            else
+            {
+                _panOffset = centerOffset + adjusted;
+            }
         }
     }
 
@@ -952,7 +1064,7 @@ public class ApartmentManager : MonoBehaviour
 
         bool isOrtho = browseCamera.Lens.ModeOverride == Unity.Cinemachine.LensSettings.OverrideModes.Orthographic;
 
-        if ((parallaxMaxOffset > 0f || parallaxMaxRotation > 0f) && !AccessibilitySettings.ReduceMotion)
+        if ((parallaxMaxOffset > 0f || parallaxMaxRotation > 0f) && !AccessibilitySettings.ReduceMotion && !_topDownActive)
         {
             Vector2 mousePos = IrisInput.CursorPosition;
             float nx = (mousePos.x / Screen.width - 0.5f) * 2f;
@@ -992,6 +1104,9 @@ public class ApartmentManager : MonoBehaviour
             _currentParallaxRotation = Quaternion.Slerp(_currentParallaxRotation, Quaternion.identity,
                 Time.deltaTime * parallaxSmoothing);
         }
+
+        // Top-down is driven entirely by LateUpdate — skip virtual camera writes
+        if (_topDownActive) return;
 
         // Write final position = base + parallax + pan
         t.position = _basePosition + _currentParallaxOffset + _panOffset;

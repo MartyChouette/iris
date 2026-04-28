@@ -354,10 +354,6 @@ public class PairableItem : MonoBehaviour
             // falling back to whichever side is still free.
             Transform sbsRoot = FindStackRoot(transform);
 
-            // Straighten root — strip dishevel tilt, keep only yaw.
-            Vector3 rootEuler = sbsRoot.eulerAngles;
-            sbsRoot.rotation = Quaternion.Euler(0f, rootEuler.y, 0f);
-
             Vector3 localPos = GetSideBySideLocalOffset(sbsRoot, held);
 
             // Calculate world-space target position so both items sit at the

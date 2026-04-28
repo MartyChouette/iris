@@ -28500,3 +28500,223 @@ ProjectSettings/ProjectSettings.asset
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260428_175837
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+---
+
+## Session End: 20260428_180009
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_180128
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_180623
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_181458
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_181800
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_182206
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_182558
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_182728
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_183016
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_183249
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_183733
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_183947
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_184219
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_184343
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_184352
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_185038
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_185207
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_185229
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_185525
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_185852
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_190439
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_190900
+### Commits
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
