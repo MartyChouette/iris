@@ -480,7 +480,7 @@ public class DateSessionManager : MonoBehaviour
             OnDateSessionStarted?.Invoke(_currentDate);
             OnAffectionChanged?.Invoke(_affection);
 
-            // ApplyPhaseCamera(DatePhase.Arrival);
+            ApplyPhaseCamera(DatePhase.Arrival);
         }
         catch (System.Exception e)
         {
@@ -620,15 +620,15 @@ public class DateSessionManager : MonoBehaviour
             Debug.LogError($"[DateSessionManager] TransitionToPhase2 setup failed: {e}");
         }
 
+        // Snap camera into phase framing while screen is still white
+        ApplyPhaseCamera(DatePhase.BackgroundJudging);
+
         // Fade in always runs even if setup threw
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 
         // Unblock input now that transition is complete
         if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = false;
-
-        // Skip phase camera — use free browse until captures are properly set up
-        // LerpPhaseCamera(DatePhase.BackgroundJudging);
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)
@@ -743,15 +743,15 @@ public class DateSessionManager : MonoBehaviour
             Debug.LogError($"[DateSessionManager] TransitionToPhase3 setup failed: {e}");
         }
 
+        // Snap camera into phase framing while screen is still white
+        ApplyPhaseCamera(DatePhase.Reveal);
+
         // Fade in always runs even if setup threw
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
 
         // Unblock input now that transition is complete
         if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = false;
-
-        // Glide camera over to the couch while the player watches.
-        // LerpPhaseCamera(DatePhase.Reveal);
 
         // Epic title drop over the live scene
         if (PhaseTitleDrop.Instance != null)
@@ -1654,7 +1654,7 @@ public class DateSessionManager : MonoBehaviour
         }
 
         // Smooth glide back to phase camera (no hard snap)
-        // LerpPhaseCamera(DatePhase.Arrival, 0.3f);
+        LerpPhaseCamera(DatePhase.Arrival, 0.3f);
     }
 
     /// <summary>Returns true when the player wants to skip a cinematic animation (click or Space).</summary>
