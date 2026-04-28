@@ -28384,3 +28384,37 @@ Assets/Scripts/Dating/DateSessionManager.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260427_233937
+### Commits
+f87459b re-enable phase cameras: snap behind white fade, lerp on post-verdict
+3a09e61 fix phase camera interaction: bypass Cinemachine stale projection matrix
+d674c02 fix phase camera interaction: bypass Cinemachine stale projection matrix
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+---
+
+## Session End: 20260427_234410
+### Commits
+f87459b re-enable phase cameras: snap behind white fade, lerp on post-verdict
+3a09e61 fix phase camera interaction: bypass Cinemachine stale projection matrix
+d674c02 fix phase camera interaction: bypass Cinemachine stale projection matrix
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_000220
+### Commits
+f87459b re-enable phase cameras: snap behind white fade, lerp on post-verdict
+3a09e61 fix phase camera interaction: bypass Cinemachine stale projection matrix
+d674c02 fix phase camera interaction: bypass Cinemachine stale projection matrix
+2fdae9a drink phase rework, gunpla system, interaction fixes, phase cameras disabled
+### Uncommitted Changes
+Assets/Resources/ShaderCollection.asset
+Assets/Scenes/apartment.unity
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Rendering/ShaderCollection.cs
+ProjectSettings/GraphicsSettings.asset
+production/session-logs/session-log.md
+---
+

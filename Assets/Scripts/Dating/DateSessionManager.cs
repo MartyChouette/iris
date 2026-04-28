@@ -291,6 +291,8 @@ public class DateSessionManager : MonoBehaviour
     private Color _fridgeOrigColor;
     private Color _drinkOrigColor;
     private Coroutine _phaseCameraLerp;
+    private Renderer[] _cachedApartmentRenderers;
+    private BottleItem[] _cachedBottles;
 
     // ──────────────────────────────────────────────────────────────
     // Public API
@@ -473,6 +475,10 @@ public class DateSessionManager : MonoBehaviour
             Debug.Log("[DateSessionManager] P1_DEBUG: SpawnDateCharacter begin");
             SpawnDateCharacter();
             Debug.Log($"[DateSessionManager] P1_DEBUG: SpawnDateCharacter done — GO={_dateCharacterGO?.name ?? "NULL"}");
+
+            // Cache scene queries now so transitions don't hitch later
+            _cachedApartmentRenderers = Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None);
+            _cachedBottles = Object.FindObjectsByType<BottleItem>(FindObjectsSortMode.None);
 
             if (dateArrivedSFX != null && AudioManager.Instance != null)
                 AudioManager.Instance.PlaySFX(dateArrivedSFX);
@@ -1073,7 +1079,9 @@ public class DateSessionManager : MonoBehaviour
             foreach (var r in NatureBoxController.Instance.GetComponentsInChildren<Renderer>(true))
                 preserve.Add(r.gameObject);
 
-        foreach (var r in Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None))
+        // Use cached renderer list (populated at date start) to avoid FindObjectsByType hitch
+        var renderers = _cachedApartmentRenderers ?? Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None);
+        foreach (var r in renderers)
         {
             if (r == null || !r.enabled) continue;
             if (r.gameObject.scene != apartmentScene) continue;
@@ -1099,9 +1107,9 @@ public class DateSessionManager : MonoBehaviour
     }
 
     /// <summary>Switch all BottleItem homes between counter (Phase 2) and original (fridge).</summary>
-    private static void SetBottleHomes(bool useCounter)
+    private void SetBottleHomes(bool useCounter)
     {
-        var bottles = Object.FindObjectsByType<BottleItem>(FindObjectsSortMode.None);
+        var bottles = _cachedBottles ?? Object.FindObjectsByType<BottleItem>(FindObjectsSortMode.None);
         for (int i = 0; i < bottles.Length; i++)
         {
             if (bottles[i] == null) continue;
@@ -2033,6 +2041,8 @@ public class DateSessionManager : MonoBehaviour
         DateEndScreen.Instance?.Show(_currentDate, _affection, failed: true);
         AutoSaveController.Instance?.PerformSave("date_failed");
         _state = SessionState.Idle;
+        _cachedApartmentRenderers = null;
+        _cachedBottles = null;
     }
 
     private void SucceedDate()
@@ -2114,6 +2124,8 @@ public class DateSessionManager : MonoBehaviour
         // 4. Now fire event → DayPhaseManager routes to FlowerTrimming (if pending) or Evening
         AutoSaveController.Instance?.PerformSave("date_succeeded");
         _state = SessionState.Idle;
+        _cachedApartmentRenderers = null;
+        _cachedBottles = null;
         OnDateSessionEnded?.Invoke(_currentDate, _affection);
     }
 

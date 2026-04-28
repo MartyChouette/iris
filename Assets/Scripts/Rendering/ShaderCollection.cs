@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -27,15 +28,35 @@ public class ShaderCollection : ScriptableObject
         }
     }
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Preload()
     {
-        // Force-load at startup so all shader references are alive before any Shader.Find() calls.
-        // NOTE: We no longer call Shader.WarmupAllShaders() here — it blocked the main thread
-        // for 3-5+ seconds compiling every variant. Shaders compile on first use instead,
-        // which spreads the cost across gameplay rather than front-loading it.
         var inst = Instance;
-        if (inst != null)
-            Debug.Log($"[ShaderCollection] Loaded {inst.shaders.Length} shaders.");
+        if (inst == null) return;
+        Debug.Log($"[ShaderCollection] Loaded {inst.shaders.Length} shaders — warming across frames.");
+
+        // Create a temporary GO to run the warmup coroutine, then self-destruct
+        var go = new GameObject("[ShaderWarmup]");
+        Object.DontDestroyOnLoad(go);
+        go.hideFlags = HideFlags.HideAndDontSave;
+        var runner = go.AddComponent<ShaderWarmupRunner>();
+        runner.StartCoroutine(WarmupRoutine(inst, go));
     }
+
+    private static IEnumerator WarmupRoutine(ShaderCollection collection, GameObject runner)
+    {
+        // Create a throwaway material for each shader to force compilation,
+        // spread across frames so we don't hitch.
+        for (int i = 0; i < collection.shaders.Length; i++)
+        {
+            if (collection.shaders[i] == null) continue;
+            var mat = new Material(collection.shaders[i]);
+            Object.Destroy(mat);
+            yield return null;
+        }
+        Debug.Log("[ShaderCollection] Warmup complete.");
+        Object.Destroy(runner);
+    }
+
+    private class ShaderWarmupRunner : MonoBehaviour { }
 }
