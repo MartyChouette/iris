@@ -5,6 +5,7 @@ using Unity.Cinemachine;
 using TMPro;
 using Iris.Apartment;
 
+[DefaultExecutionOrder(-50)] // Run before ObjectGrabber so camera sync is ready for raycasts
 public class ApartmentManager : MonoBehaviour
 {
     public enum State { Browsing }
@@ -159,6 +160,10 @@ public class ApartmentManager : MonoBehaviour
 
     // Browse camera suppression (DayPhaseManager lowers during Morning)
     private bool _browseSuppressed;
+
+    // Cached brain output camera — synced every frame so Update()-based raycasts
+    // (ObjectGrabber) see the current pose instead of last LateUpdate's.
+    private Camera _brainOutputCamera;
 
     // External camera lock (watering zoom etc.) — skips camera writes but keeps everything else running
     private bool _cameraLocked;
@@ -831,6 +836,48 @@ public class ApartmentManager : MonoBehaviour
 
     /// <summary>Reset player pan offset to zero (used when phase cameras set an absolute framing).</summary>
     public void ResetPanOffset() => _panOffset = Vector3.zero;
+
+    /// <summary>
+    /// Build a ray from screen position using the browse camera's current transform
+    /// and lens — completely bypasses Camera.main's stale Cinemachine matrices.
+    /// </summary>
+    public Ray ScreenPointToRay(Vector2 screenPos)
+    {
+        if (browseCamera == null)
+            return Camera.main != null ? Camera.main.ScreenPointToRay(screenPos) : default;
+
+        var t = browseCamera.transform;
+        var lens = browseCamera.Lens;
+        bool ortho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
+
+        float viewportX = (screenPos.x / Screen.width) * 2f - 1f;
+        float viewportY = (screenPos.y / Screen.height) * 2f - 1f;
+
+        if (Input.GetMouseButtonDown(0))
+            Debug.LogWarning($"[AM-Ray] ortho={ortho} size={lens.OrthographicSize:F2} fov={lens.FieldOfView:F2} near={lens.NearClipPlane:F2} far={lens.FarClipPlane:F2} vp=({viewportX:F3},{viewportY:F3}) pos={t.position:F2} fwd={t.forward:F3}");
+
+        if (ortho)
+        {
+            float halfH = lens.OrthographicSize;
+            float halfW = halfH * ((float)Screen.width / Screen.height);
+            // Don't use lens.NearClipPlane — the CM Lens getter returns stale
+            // state data (e.g. -500) instead of the value ApplyParallax wrote.
+            // Near clip only shifts ray origin along forward; irrelevant for raycasts.
+            Vector3 origin = t.position
+                + t.right * (viewportX * halfW)
+                + t.up * (viewportY * halfH);
+            return new Ray(origin, t.forward);
+        }
+        else
+        {
+            float halfFov = lens.FieldOfView * 0.5f * Mathf.Deg2Rad;
+            float aspect = (float)Screen.width / Screen.height;
+            Vector3 dir = t.forward
+                + t.right * (viewportX * Mathf.Tan(halfFov) * aspect)
+                + t.up * (viewportY * Mathf.Tan(halfFov));
+            return new Ray(t.position, dir.normalized);
+        }
+    }
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
     {

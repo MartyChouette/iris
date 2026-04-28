@@ -273,6 +273,19 @@ public class ObjectGrabber : MonoBehaviour
 
     // Input managed by IrisInput singleton — no local enable/disable needed.
 
+    /// <summary>
+    /// Build a ray from screen position. Uses ApartmentManager's browse camera
+    /// directly to avoid Cinemachine's stale projection matrix on Camera.main.
+    /// Falls back to Camera.main when ApartmentManager isn't available.
+    /// </summary>
+    private Ray ScreenRay(Vector2 screenPos)
+    {
+        var am = ApartmentManager.Instance;
+        if (am != null)
+            return am.ScreenPointToRay(screenPos);
+        return cam != null ? cam.ScreenPointToRay(screenPos) : default;
+    }
+
     private void OnDestroy()
     {
         if (s_instance == this) s_instance = null;
@@ -286,17 +299,35 @@ public class ObjectGrabber : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             var c = Camera.main;
-            bool uiBlock = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-            bool irisClick = IrisInput.Instance != null && IrisInput.Instance.Click.WasPressedThisFrame();
-            bool mouseExists = UnityEngine.InputSystem.Mouse.current != null;
-            string hitName = "MISS";
+            string hitMain = "MISS";
+            Ray rMain = default;
             if (c != null)
             {
-                Ray r = c.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(r, out RaycastHit h, 100f))
-                    hitName = $"{h.collider.gameObject.name} (layer={h.collider.gameObject.layer})";
+                rMain = c.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(rMain, out RaycastHit h, 100f))
+                    hitMain = $"{h.collider.gameObject.name} (layer={h.collider.gameObject.layer})";
             }
-            Debug.LogWarning($"[OG-RAW] click! cam={c?.name ?? "NULL"} uiBlock={uiBlock} irisClick={irisClick} mouse={mouseExists} hit={hitName} phase={DayPhaseManager.Instance?.CurrentPhase} transitioning={DayPhaseManager.Instance?.IsTransitioning}");
+
+            // Fresh camera test — copy browseCamera transform, no Cinemachine contamination
+            string hitFresh = "NO_AM";
+            Ray rFresh = default;
+            var am = ApartmentManager.Instance;
+            if (am != null)
+            {
+                rFresh = am.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(rFresh, out RaycastHit h2, 100f))
+                    hitFresh = $"{h2.collider.gameObject.name} (layer={h2.collider.gameObject.layer})";
+                else
+                    hitFresh = "MISS";
+            }
+
+            bool presetActive = false;
+            if (am != null)
+            {
+                var pf = am.GetType().GetField("_presetOverrideActive", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (pf != null) presetActive = (bool)pf.GetValue(am);
+            }
+            Debug.LogWarning($"[OG-RAW] CMain={hitMain} ray={rMain.origin:F1}→{rMain.direction:F2} | Fresh={hitFresh} ray={rFresh.origin:F1}→{rFresh.direction:F2} | preset={presetActive} phase={DayPhaseManager.Instance?.CurrentPhase}");
         }
 
         // Only block input during actual fades, not during gameplay waits
@@ -385,7 +416,7 @@ public class ObjectGrabber : MonoBehaviour
     {
         AlbumSleeve hovered = null;
 
-        Ray ray = cam.ScreenPointToRay(IrisInput.CursorPosition);
+        Ray ray = ScreenRay(IrisInput.CursorPosition);
         // Check both placeable layer and RecordSleeves layer (30) so all
         // sleeves are hoverable regardless of which layer they're on.
         int sleeveMask = placeableLayer | (1 << 30);
@@ -465,7 +496,7 @@ public class ObjectGrabber : MonoBehaviour
     private void TryPickUp()
     {
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = cam.ScreenPointToRay(screenPos);
+        Ray ray = ScreenRay(screenPos);
 
         // QueryTriggerInteraction.Collide so mess items (petals, trimmings)
         // with trigger colliders can be clicked. Also check RecordSleeves layer (30).
@@ -1366,7 +1397,7 @@ public class ObjectGrabber : MonoBehaviour
         if (heldPairable.IsPaired && heldPairable.Mode == PairableItem.PairMode.SpecificPartner) return false;
 
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = cam.ScreenPointToRay(screenPos);
+        Ray ray = ScreenRay(screenPos);
 
         // Use SphereCast for forgiving click area, fall back to RaycastNonAlloc
         PairableItem clickedPairable = FindComponentAlongRay<PairableItem>(ray, placeableLayer);
@@ -1908,7 +1939,7 @@ public class ObjectGrabber : MonoBehaviour
 
         // Raycast to see what we clicked on
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = cam.ScreenPointToRay(screenPos);
+        Ray ray = ScreenRay(screenPos);
         if (!Physics.Raycast(ray, out RaycastHit hit, 100f)) return false;
 
         // Check the hit object and its parents for a DropZone
@@ -2094,7 +2125,7 @@ public class ObjectGrabber : MonoBehaviour
     private void UpdateGrabTarget()
     {
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = cam.ScreenPointToRay(screenPos);
+        Ray ray = ScreenRay(screenPos);
 
         bool foundSurface = false;
 
