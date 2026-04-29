@@ -734,31 +734,40 @@ public class ObjectGrabber : MonoBehaviour
             }
 
             // Phase 2 (BackgroundJudging): glasses and bottles allowed for drink making
-            var clickedGlass = placeable.GetComponent<DrinkGlass>();
-            if (clickedGlass == null) clickedGlass = placeable.GetComponentInParent<DrinkGlass>();
-            if (clickedGlass == null) clickedGlass = placeable.GetComponentInChildren<DrinkGlass>();
-            if (clickedGlass != null && DrinkPourManager.Instance != null)
+            if (datePhase == DateSessionManager.DatePhase.BackgroundJudging)
             {
-                var pourState = DrinkPourManager.Instance.CurrentState;
-                if (pourState == DrinkPourManager.State.ChoosingGlass)
+                var clickedGlass = placeable.GetComponent<DrinkGlass>();
+                if (clickedGlass == null) clickedGlass = placeable.GetComponentInParent<DrinkGlass>();
+                if (clickedGlass == null) clickedGlass = placeable.GetComponentInChildren<DrinkGlass>();
+                if (clickedGlass != null && DrinkPourManager.Instance != null)
                 {
-                    DrinkPourManager.Instance.SelectGlass(clickedGlass);
-                    ConsumeClick();
-                    return;
+                    var pourState = DrinkPourManager.Instance.CurrentState;
+                    if (pourState == DrinkPourManager.State.ChoosingGlass)
+                    {
+                        DrinkPourManager.Instance.SelectGlass(clickedGlass);
+                        ConsumeClick();
+                        return;
+                    }
+                    if (pourState == DrinkPourManager.State.ChoosingServeGlass)
+                    {
+                        DrinkPourManager.Instance.ServeGlass(clickedGlass);
+                        ConsumeClick();
+                        return;
+                    }
+                    // During Pouring state, clicking a glass is ignored (player pours via bottle)
                 }
-                if (pourState == DrinkPourManager.State.ChoosingServeGlass)
-                {
-                    DrinkPourManager.Instance.ServeGlass(clickedGlass);
-                    ConsumeClick();
-                    return;
-                }
-            }
 
-            // Bottles allowed during Phase 2 only
-            bool isBottle = placeable.GetComponent<BottleItem>() != null;
-            if (isBottle && datePhase == DateSessionManager.DatePhase.BackgroundJudging)
-            {
-                // Fall through to normal pickup below
+                // Bottles allowed — fall through to normal pickup
+                bool isBottle = placeable.GetComponent<BottleItem>() != null;
+                if (isBottle)
+                {
+                    // Fall through to normal pickup below
+                }
+                else
+                {
+                    // Non-glass, non-bottle clicks during Phase 2 — ignore silently
+                    return;
+                }
             }
             else
             {
