@@ -149,10 +149,18 @@ public class PhaseTitleDrop : MonoBehaviour
 
     private static void DisableUnderlay(TMP_Text text)
     {
-        // Create instance material so we don't modify the shared font asset
-        text.fontMaterial = new Material(text.fontMaterial);
-        text.fontMaterial.SetFloat("_UnderlayDilate", -1f);
-        text.fontMaterial.SetColor("_UnderlayColor", Color.clear);
+        // Create instance material so we don't modify the shared font asset.
+        // Cache the reference — TMP's fontMaterial getter can return a different
+        // instance than what was just set, especially in builds.
+        var mat = new Material(text.fontMaterial);
+        mat.SetFloat("_UnderlayDilate", -1f);
+        mat.SetColor("_UnderlayColor", Color.clear);
+        // Also disable underlay keywords that some SDF shaders check
+        mat.DisableKeyword("UNDERLAY_ON");
+        mat.DisableKeyword("UNDERLAY_INNER");
+        text.fontMaterial = mat;
+        // Force TMP to use the new material immediately
+        text.SetMaterialDirty();
     }
 
     /// <summary>Show an epic title drop over the live scene.</summary>
