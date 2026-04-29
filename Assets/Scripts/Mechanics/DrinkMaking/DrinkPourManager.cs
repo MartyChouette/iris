@@ -211,7 +211,8 @@ public class DrinkPourManager : MonoBehaviour
         CalculateScore();
 
         // Hand off to DateSessionManager — triggers reaction + phase 3
-        DateSessionManager.Instance?.ReceiveDrink(_activeRecipe, _lastScore);
+        // Pass the glass so DateSessionManager can hide it and spawn a dirty copy
+        DateSessionManager.Instance?.ReceiveDrink(_activeRecipe, _lastScore, _activeGlass);
 
         DrinkCutawayUI.Instance?.Hide();
         _activeGlass = null;

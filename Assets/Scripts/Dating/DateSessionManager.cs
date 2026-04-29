@@ -146,6 +146,9 @@ public class DateSessionManager : MonoBehaviour
     [Tooltip("Suspense pause (seconds) before the drink verdict is revealed.")]
     [SerializeField] private float _drinkTastingHold = 1.5f;
 
+    [Tooltip("Prefab spawned on the coffee table after serving. Becomes a dirty dish the next day.")]
+    [SerializeField] private GameObject _dirtyGlassPrefab;
+
     [Header("Fade Timing")]
     [Tooltip("Fade duration for phase transitions (seconds).")]
     [SerializeField] private float fadeDuration = 0.3f;
@@ -693,6 +696,10 @@ public class DateSessionManager : MonoBehaviour
         StopPhase2Pulse();
         HighlightDrinkGlasses(false);
         // Phase2EnvironmentDim.Instance?.RestoreEnvironment();
+
+        // Reset drink minigame — clear all glass contents and state
+        // so it's fresh for the next date
+        ResetDrinkMinigame();
 
         // Restore fridge bottles to their original home (fridge shelf)
         SetBottleHomes(useCounter: false);
@@ -1491,11 +1498,60 @@ public class DateSessionManager : MonoBehaviour
     }
 
     /// <summary>Called when a drink is delivered to the coffee table.</summary>
-    public void ReceiveDrink(DrinkRecipeDefinition recipe, int score)
+    public void ReceiveDrink(DrinkRecipeDefinition recipe, int score, DrinkGlass servedGlass = null)
     {
         if (_state != SessionState.DateInProgress || _currentDate == null) return;
         if (_drinkVerdictRunning) return;
+
+        // Hide the original glass at the drink station
+        if (servedGlass != null)
+            servedGlass.gameObject.SetActive(false);
+
+        // Spawn a dirty glass on the coffee table (persists as next-day dish)
+        SpawnDirtyGlass();
+
         StartCoroutine(DrinkVerdictSequence(recipe, score));
+    }
+
+    private GameObject _spawnedDirtyGlass;
+
+    private void SpawnDirtyGlass()
+    {
+        if (_dirtyGlassPrefab == null || coffeeTableDeliveryPoint == null) return;
+
+        // Destroy any previously spawned glass (only one served drink per date)
+        if (_spawnedDirtyGlass != null)
+            Destroy(_spawnedDirtyGlass);
+
+        _spawnedDirtyGlass = Instantiate(
+            _dirtyGlassPrefab,
+            coffeeTableDeliveryPoint.position,
+            coffeeTableDeliveryPoint.rotation);
+
+        // Configure as a dirty dish that won't smell until the next day
+        var po = _spawnedDirtyGlass.GetComponent<PlaceableObject>();
+        if (po != null)
+            po.ConfigureHome("CoffeeTable");
+    }
+
+    /// <summary>
+    /// Reset all drink minigame state at end of Phase 2 so it's clean for the next date.
+    /// Clears glass contents, re-enables hidden glasses, and idles the pour manager.
+    /// </summary>
+    private void ResetDrinkMinigame()
+    {
+        // Force pour manager back to idle
+        DrinkPourManager.Instance?.ForceIdle();
+
+        // Clear contents from all glasses and re-enable any that were hidden
+        var glasses = DrinkGlass.All;
+        for (int i = glasses.Count - 1; i >= 0; i--)
+        {
+            if (glasses[i] == null) continue;
+            glasses[i].Clear();
+            if (!glasses[i].gameObject.activeSelf)
+                glasses[i].gameObject.SetActive(true);
+        }
     }
 
     [Header("Arrival Cinematic — Face Sweep")]

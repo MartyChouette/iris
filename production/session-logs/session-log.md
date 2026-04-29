@@ -29346,3 +29346,46 @@ d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
 a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
 ---
 
+## Session End: 20260429_121343
+### Commits
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+---
+
+## Session End: 20260429_122130
+### Commits
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_122224
+### Commits
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
