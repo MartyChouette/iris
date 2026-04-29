@@ -68,7 +68,7 @@ public class ApartmentManager : MonoBehaviour
     [SerializeField] private Vector2 _panBoundsHalf;
 
     [Header("Zoom (Stepped)")]
-    [Tooltip("Discrete zoom levels (FOV or ortho size). Index 0 = most zoomed out, last = most zoomed in.")]
+    [Tooltip("Discrete zoom levels (FOV or ortho size). Index 0 = most zoomed in, last = most zoomed out.")]
     [SerializeField] private float[] _zoomSteps = { 100f, 80f, 60f, 45f, 30f };
 
     [Tooltip("Starting zoom step index (0-based).")]
