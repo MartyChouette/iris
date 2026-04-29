@@ -103,7 +103,9 @@ public class FlySpawner : MonoBehaviour
         if (_cam == null) return;
 
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = _cam.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null
+            ? ApartmentManager.Instance.ScreenPointToRay(screenPos)
+            : _cam.ScreenPointToRay(screenPos);
 
         // Check all hits — fly might be behind another collider
         int hitCount = Physics.RaycastNonAlloc(ray, s_swatHitBuffer, 100f, _clickMask);

@@ -112,7 +112,10 @@ public class DateInspectSystem : MonoBehaviour
     private void UpdateHover()
     {
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = _cam.ScreenPointToRay(screenPos);
+        // Use ApartmentManager's manual ray to avoid stale projection matrices
+        Ray ray = ApartmentManager.Instance != null
+            ? ApartmentManager.Instance.ScreenPointToRay(screenPos)
+            : _cam.ScreenPointToRay(screenPos);
 
         ReactableTag foundTag = null;
 

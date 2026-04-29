@@ -152,7 +152,9 @@ public class CursorWorldShadow : MonoBehaviour
         SyncCursorTexture();
 
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = _cam.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null
+            ? ApartmentManager.Instance.ScreenPointToRay(screenPos)
+            : _cam.ScreenPointToRay(screenPos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance, _surfaceLayers))
         {

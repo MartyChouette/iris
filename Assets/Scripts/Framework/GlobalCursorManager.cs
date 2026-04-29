@@ -440,7 +440,13 @@ public class GlobalCursorManager : MonoBehaviour
         }
 
         Vector2 cursorPos = IrisInput.CursorPosition;
-        Ray ray = _cachedCamera.ScreenPointToRay(cursorPos);
+        // Use ApartmentManager's manual ray (builds from Camera.main's current
+        // transform + orthoSize, avoiding stale projection matrices).
+        Ray ray;
+        if (ApartmentManager.Instance != null)
+            ray = ApartmentManager.Instance.ScreenPointToRay(cursorPos);
+        else
+            ray = _cachedCamera.ScreenPointToRay(cursorPos);
 
         CursorType desired = CursorType.Default;
 
