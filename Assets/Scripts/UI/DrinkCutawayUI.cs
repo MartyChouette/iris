@@ -545,13 +545,13 @@ public class DrinkCutawayUI : MonoBehaviour
         // No GraphicRaycaster — this is a display-only overlay.
         // Adding one would block all game clicks via IsPointerOverGameObject.
 
-        // Glass container — horizontally centered, vertically centered
+        // Glass container — center-top of screen
         var glassGO = CreateUI("Glass", _canvasRoot.transform);
         _glassRT = glassGO.GetComponent<RectTransform>();
-        _glassRT.anchorMin = new Vector2(0.5f, 0.5f);
-        _glassRT.anchorMax = new Vector2(0.5f, 0.5f);
-        _glassRT.pivot = new Vector2(0.5f, 0.5f);
-        _glassRT.anchoredPosition = Vector2.zero;
+        _glassRT.anchorMin = new Vector2(0.5f, 1f);
+        _glassRT.anchorMax = new Vector2(0.5f, 1f);
+        _glassRT.pivot = new Vector2(0.5f, 1f);
+        _glassRT.anchoredPosition = new Vector2(0f, -20f); // 20px from top
         _glassRT.sizeDelta = new Vector2(_glassWidthHighball, _glassHeight);
         glassGO.AddComponent<Image>().color = _glassColor;
 
@@ -623,14 +623,14 @@ public class DrinkCutawayUI : MonoBehaviour
         _statusText.alignment = TextAlignmentOptions.Center;
         _statusText.color = new Color(1f, 1f, 1f, 0.7f);
 
-        // ── Recipe card — left of glass, centered ──
+        // ── Recipe card — left of glass, top-anchored ──
         _recipeCardRoot = CreateUI("RecipeCard", _canvasRoot.transform);
         var cardRT = _recipeCardRoot.GetComponent<RectTransform>();
-        cardRT.anchorMin = new Vector2(0.5f, 0.5f);
-        cardRT.anchorMax = new Vector2(0.5f, 0.5f);
-        cardRT.pivot = new Vector2(1f, 0.5f);
+        cardRT.anchorMin = new Vector2(0.5f, 1f);
+        cardRT.anchorMax = new Vector2(0.5f, 1f);
+        cardRT.pivot = new Vector2(1f, 1f);
         // Position left of the glass (glass is centered, ~120 wide / 2 = 60 + gap)
-        cardRT.anchoredPosition = new Vector2(-80f, 0f);
+        cardRT.anchoredPosition = new Vector2(-80f, -20f);
         cardRT.sizeDelta = new Vector2(260f, 220f);
 
         // Semi-transparent background
@@ -653,13 +653,13 @@ public class DrinkCutawayUI : MonoBehaviour
         _recipeTitle.fontStyle = FontStyles.Bold;
         _recipeTitle.raycastTarget = false;
 
-        // Dump button — below recipe card, centered
+        // Dump button — below the glass/recipe area
         _dumpButton = CreateUI("DumpButton", _canvasRoot.transform);
         var dumpRT = _dumpButton.GetComponent<RectTransform>();
-        dumpRT.anchorMin = new Vector2(0.5f, 0.5f);
-        dumpRT.anchorMax = new Vector2(0.5f, 0.5f);
-        dumpRT.pivot = new Vector2(0.5f, 0.5f);
-        dumpRT.anchoredPosition = new Vector2(0f, -210f);
+        dumpRT.anchorMin = new Vector2(0.5f, 1f);
+        dumpRT.anchorMax = new Vector2(0.5f, 1f);
+        dumpRT.pivot = new Vector2(0.5f, 1f);
+        dumpRT.anchoredPosition = new Vector2(0f, -(_glassHeight + 40f));
         dumpRT.sizeDelta = new Vector2(160f, 30f);
         var dumpBG = _dumpButton.AddComponent<Image>();
         dumpBG.color = new Color(0.3f, 0.15f, 0.15f, 0.6f);
