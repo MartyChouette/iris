@@ -53,6 +53,7 @@ public class PhaseTitleDrop : MonoBehaviour
     private TMP_Text _shadowText;
     private CanvasGroup _group;
     private Coroutine _activeRoutine;
+    private Material _cleanFontMat; // font material with underlay stripped — reused across shows
 
     private static readonly int TiltAmountID = Shader.PropertyToID("_TiltShiftAmount");
     private static readonly int TiltCenterID = Shader.PropertyToID("_TiltShiftCenter");
@@ -141,26 +142,20 @@ public class PhaseTitleDrop : MonoBehaviour
             _shadowText.font = theme.primaryFont;
         }
 
-        // Disable TMP material underlay — the font material has a built-in
-        // underlay that stacks with our manual shadow GO, causing double text.
-        DisableUnderlay(_titleText);
-        DisableUnderlay(_shadowText);
-    }
+        // Create ONE clean font material with underlay fully zeroed out.
+        // TMP's internal material management resets per-call overrides, so we
+        // keep a persistent instance and re-assign it after every text change.
+        _cleanFontMat = new Material(_titleText.font.material);
+        _cleanFontMat.SetFloat("_UnderlayDilate", -1f);
+        _cleanFontMat.SetFloat("_UnderlayOffsetX", 0f);
+        _cleanFontMat.SetFloat("_UnderlayOffsetY", 0f);
+        _cleanFontMat.SetFloat("_UnderlaySoftness", 0f);
+        _cleanFontMat.SetColor("_UnderlayColor", Color.clear);
+        _cleanFontMat.DisableKeyword("UNDERLAY_ON");
+        _cleanFontMat.DisableKeyword("UNDERLAY_INNER");
 
-    private static void DisableUnderlay(TMP_Text text)
-    {
-        // Create instance material so we don't modify the shared font asset.
-        // Cache the reference — TMP's fontMaterial getter can return a different
-        // instance than what was just set, especially in builds.
-        var mat = new Material(text.fontMaterial);
-        mat.SetFloat("_UnderlayDilate", -1f);
-        mat.SetColor("_UnderlayColor", Color.clear);
-        // Also disable underlay keywords that some SDF shaders check
-        mat.DisableKeyword("UNDERLAY_ON");
-        mat.DisableKeyword("UNDERLAY_INNER");
-        text.fontMaterial = mat;
-        // Force TMP to use the new material immediately
-        text.SetMaterialDirty();
+        _titleText.fontMaterial = _cleanFontMat;
+        _shadowText.fontMaterial = _cleanFontMat;
     }
 
     /// <summary>Show an epic title drop over the live scene.</summary>
@@ -177,9 +172,12 @@ public class PhaseTitleDrop : MonoBehaviour
         _titleText.text = text;
         _shadowText.text = text;
 
-        // TMP can reset material properties when text changes — re-apply underlay disable
-        DisableUnderlay(_titleText);
-        DisableUnderlay(_shadowText);
+        // TMP resets to the font's shared material on text change — force rebuild
+        // then re-assign our clean material so underlay never reappears.
+        _titleText.ForceMeshUpdate(true);
+        _shadowText.ForceMeshUpdate(true);
+        _titleText.fontMaterial = _cleanFontMat;
+        _shadowText.fontMaterial = _cleanFontMat;
 
         // Set tilt-shift parameters
         Shader.SetGlobalFloat(TiltCenterID, _tiltShiftCenter);

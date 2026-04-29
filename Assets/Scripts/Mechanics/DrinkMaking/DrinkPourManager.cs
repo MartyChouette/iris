@@ -225,6 +225,9 @@ public class DrinkPourManager : MonoBehaviour
     /// <summary>Force back to idle (phase transitions).</summary>
     public void ForceIdle()
     {
+        HighlightAllGlasses(false);
+        HighlightAllBottles(false);
+        HighlightSingleGlass(_activeGlass, false);
         DrinkCutawayUI.Instance?.Hide();
         _activeGlass = null;
         _activeRecipe = null;
@@ -407,11 +410,18 @@ public class DrinkPourManager : MonoBehaviour
     }
 
     // ── Glass highlight helpers ─────────────────────────────────────
+    // Each drink-making step uses a distinct highlight layer so the
+    // player always knows exactly what to click:
+    //   ChoosingGlass:      Display (soft blue)  — "pick a glass"
+    //   Pouring glass:      Gaze    (teal)       — "this glass is active"
+    //   Pouring bottle:     Gaze    (teal)       — "grab this next"
+    //   ChoosingServeGlass: PrepLiked (cyan-green) — "serve this one"
 
     private void HighlightAllGlasses(bool on)
     {
         if (on) InteractableHighlight.SuppressVisuals = false;
 
+        bool isServe = CurrentState == State.ChoosingServeGlass;
         var glasses = DrinkGlass.All;
         for (int i = 0; i < glasses.Count; i++)
         {
@@ -419,7 +429,19 @@ public class DrinkPourManager : MonoBehaviour
             var hl = glasses[i].GetComponent<InteractableHighlight>();
             if (hl == null && on)
                 hl = glasses[i].gameObject.AddComponent<InteractableHighlight>();
-            if (hl != null) hl.SetHighlighted(on);
+            if (hl == null) continue;
+
+            if (!on)
+            {
+                // Clear all drink-related layers cleanly
+                hl.SetDisplayHighlighted(false);
+                hl.SetPrepLikedHighlighted(false);
+                hl.SetGazeHighlighted(false);
+            }
+            else if (isServe)
+                hl.SetPrepLikedHighlighted(true);  // cyan-green = ready to serve
+            else
+                hl.SetDisplayHighlighted(true);     // soft blue = choose a glass
         }
 
         if (!on) InteractableHighlight.SuppressVisuals = true;
@@ -432,7 +454,7 @@ public class DrinkPourManager : MonoBehaviour
         var hl = glass.GetComponent<InteractableHighlight>();
         if (hl == null && on)
             hl = glass.gameObject.AddComponent<InteractableHighlight>();
-        if (hl != null) hl.SetHighlighted(on);
+        if (hl != null) hl.SetGazeHighlighted(on); // teal = active glass
     }
 
     /// <summary>Highlight only the bottle for the next expected ingredient in the recipe.</summary>
@@ -466,7 +488,7 @@ public class DrinkPourManager : MonoBehaviour
             var hl = po.GetComponent<InteractableHighlight>();
             if (isNext && hl == null)
                 hl = po.gameObject.AddComponent<InteractableHighlight>();
-            if (hl != null) hl.SetHighlighted(isNext);
+            if (hl != null) hl.SetGazeHighlighted(isNext); // teal = grab this bottle
         }
     }
 
@@ -482,7 +504,7 @@ public class DrinkPourManager : MonoBehaviour
             var hl = po.GetComponent<InteractableHighlight>();
             if (hl == null && on)
                 hl = po.gameObject.AddComponent<InteractableHighlight>();
-            if (hl != null) hl.SetHighlighted(on);
+            if (hl != null) hl.SetGazeHighlighted(on);
         }
 
         if (!on) InteractableHighlight.SuppressVisuals = true;
