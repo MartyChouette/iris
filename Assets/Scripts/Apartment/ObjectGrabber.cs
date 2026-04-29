@@ -502,26 +502,21 @@ public class ObjectGrabber : MonoBehaviour
         // with trigger colliders can be clicked. Also check RecordSleeves layer (30).
         int pickupMask = placeableLayer | (1 << 30);
         if (!Physics.Raycast(ray, out RaycastHit hit, 100f, pickupMask, QueryTriggerInteraction.Collide))
-        {
-            // Debug: try with all layers to see if ANYTHING is there
-            if (Physics.Raycast(ray, out RaycastHit debugHit, 100f))
-                Debug.Log($"[TryPickUp] Missed on placeableLayer but hit {debugHit.collider.gameObject.name} (layer={debugHit.collider.gameObject.layer})");
-            else
-            {
-                var mainCam = Camera.main;
-                Debug.Log($"[TryPickUp] Ray hit nothing. ray.origin={ray.origin:F2} ray.dir={ray.direction:F3} cam={mainCam?.name ?? "NULL"} pos={mainCam?.transform.position:F2} fwd={mainCam?.transform.forward:F3} ortho={mainCam?.orthographic} size={mainCam?.orthographicSize:F2}");
-            }
             return;
-        }
-        Debug.Log($"[TryPickUp] Hit: {hit.collider.gameObject.name} (layer={hit.collider.gameObject.layer}, hasPlaceable={hit.collider.GetComponent<PlaceableObject>() != null}, hasGlass={hit.collider.GetComponent<DrinkGlass>() != null})");
 
         var placeable = hit.collider.GetComponent<PlaceableObject>();
 
-        // If we hit a paired child (disabled PlaceableObject), go to the stack root
+        // If we hit a paired child (disabled PlaceableObject), go to the stack root.
+        // Also check hit.rigidbody — Unity may report the parent's rigidbody for
+        // child colliders in compound physics bodies.
         if (placeable == null || !placeable.enabled)
         {
+            // Check the hit collider's GameObject first, then rigidbody's GameObject
             var pairable = hit.collider.GetComponent<PairableItem>();
             if (pairable == null) pairable = hit.collider.GetComponentInParent<PairableItem>();
+            if (pairable == null && hit.rigidbody != null)
+                pairable = hit.rigidbody.GetComponent<PairableItem>();
+
             if (pairable != null && pairable.IsPaired)
             {
                 // Walk to stack root and use its PlaceableObject
@@ -529,6 +524,23 @@ public class ObjectGrabber : MonoBehaviour
                 while (root.parent != null && root.parent.GetComponent<PairableItem>() != null)
                     root = root.parent;
                 placeable = root.GetComponent<PlaceableObject>();
+            }
+            // Also try: hit.rigidbody may be the root shoe directly
+            else if (pairable == null && hit.rigidbody != null)
+            {
+                var rbPairable = hit.rigidbody.GetComponent<PairableItem>();
+                if (rbPairable != null && rbPairable.IsPaired)
+                {
+                    Transform root = rbPairable.transform;
+                    while (root.parent != null && root.parent.GetComponent<PairableItem>() != null)
+                        root = root.parent;
+                    placeable = root.GetComponent<PlaceableObject>();
+                }
+                // Not paired but has a PlaceableObject — just use it
+                else if (hit.rigidbody.GetComponent<PlaceableObject>() is { } rbPlaceable && rbPlaceable.enabled)
+                {
+                    placeable = rbPlaceable;
+                }
             }
         }
 
