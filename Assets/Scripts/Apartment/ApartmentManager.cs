@@ -981,44 +981,23 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     public Ray ScreenPointToRay(Vector2 screenPos)
     {
-        // Manual ray from the browseCamera's current transform and our own zoom state.
-        // Camera.main's properties lag one frame behind Cinemachine (set in LateUpdate).
-        // browseCamera.transform is written by ApplyParallax in Update — always current.
-        // _currentZoom is our authoritative ortho size — always current.
+        // Use Camera.main's transform — it IS what's rendered on screen.
+        // Use _currentZoom for ortho size — our own authoritative value.
+        // NEVER use Camera.main.ScreenPointToRay (stale projection matrix).
+        // NEVER use browseCamera.Lens (stale Cinemachine data).
+        // NEVER use browseCamera.transform (may differ from rendered view).
+        var cam = Camera.main;
+        if (cam == null) return default;
 
+        var t = cam.transform;
         float viewportX = (screenPos.x / Screen.width) * 2f - 1f;
         float viewportY = (screenPos.y / Screen.height) * 2f - 1f;
         float aspect = (float)Screen.width / Screen.height;
 
-        // Top-down mode: browseCamera is disabled, use output camera transform
-        // but our own _currentZoom for ortho size (Camera.main's is one frame behind)
-        if (_topDownActive)
-        {
-            var outCam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
-            if (outCam == null) return default;
-            var ct = outCam.transform;
-            float tdOrtho = _currentZoom > 0f ? _currentZoom : _topDownOrthoSize;
-            float tdHalfH = tdOrtho;
-            float tdHalfW = tdHalfH * aspect;
-            return new Ray(ct.position + ct.right * (viewportX * tdHalfW) + ct.up * (viewportY * tdHalfH), ct.forward);
-        }
-
-        if (browseCamera == null)
-        {
-            var fallback = Camera.main;
-            return fallback != null ? fallback.ScreenPointToRay(screenPos) : default;
-        }
-
-        var t = browseCamera.transform;
-
-        // Resolve ortho size: our authoritative _currentZoom, or Camera.main's as last resort.
-        // Never read from browseCamera.Lens — Cinemachine's getter returns stale data.
-        float orthoSize = _currentZoom;
-        if (orthoSize <= 0f)
-        {
-            var mainCam = Camera.main;
-            orthoSize = mainCam != null && mainCam.orthographic ? mainCam.orthographicSize : 5f;
-        }
+        // Ortho size: our value first, then Camera.main's, then safe default
+        float orthoSize = _currentZoom > 0f ? _currentZoom
+            : cam.orthographic ? cam.orthographicSize
+            : 5f;
 
         float halfH = orthoSize;
         float halfW = halfH * aspect;
