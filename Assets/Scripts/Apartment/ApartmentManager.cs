@@ -1008,25 +1008,22 @@ public class ApartmentManager : MonoBehaviour
         }
 
         var t = browseCamera.transform;
-        bool isOrtho = browseCamera.Lens.ModeOverride == Unity.Cinemachine.LensSettings.OverrideModes.Orthographic;
 
-        if (isOrtho && _currentZoom > 0f)
+        // Resolve ortho size: our authoritative _currentZoom, or Camera.main's as last resort.
+        // Never read from browseCamera.Lens — Cinemachine's getter returns stale data.
+        float orthoSize = _currentZoom;
+        if (orthoSize <= 0f)
         {
-            float halfH = _currentZoom;
-            float halfW = halfH * aspect;
-            Vector3 origin = t.position
-                + t.right * (viewportX * halfW)
-                + t.up * (viewportY * halfH);
-            return new Ray(origin, t.forward);
+            var mainCam = Camera.main;
+            orthoSize = mainCam != null && mainCam.orthographic ? mainCam.orthographicSize : 5f;
         }
 
-        // Perspective fallback
-        float fov = _currentZoom > 0f ? _currentZoom : browseCamera.Lens.FieldOfView;
-        float halfFov = fov * 0.5f * Mathf.Deg2Rad;
-        Vector3 dir = t.forward
-            + t.right * (viewportX * Mathf.Tan(halfFov) * aspect)
-            + t.up * (viewportY * Mathf.Tan(halfFov));
-        return new Ray(t.position, dir.normalized);
+        float halfH = orthoSize;
+        float halfW = halfH * aspect;
+        Vector3 origin = t.position
+            + t.right * (viewportX * halfW)
+            + t.up * (viewportY * halfH);
+        return new Ray(origin, t.forward);
     }
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
