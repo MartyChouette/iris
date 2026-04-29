@@ -54,6 +54,11 @@ public class DateReactionUI : MonoBehaviour
     private WaitForSeconds _waitNotice;
     private WaitForSeconds _waitReaction;
 
+    // Screen-space text overlay — always visible regardless of camera focus
+    private static Canvas s_screenTextCanvas;
+    private TMP_Text _screenText;
+    private RectTransform _screenTextRT;
+
     private void Awake()
     {
         // Create a child object for the reaction bubble
@@ -89,6 +94,30 @@ public class DateReactionUI : MonoBehaviour
             if (_cachedCamera != null)
                 _bubbleGO.transform.rotation = _cachedCamera.transform.rotation;
         }
+
+        // Track character position for screen-space text
+        if (_screenText != null && _screenText.gameObject.activeSelf)
+            UpdateScreenTextPosition();
+    }
+
+    private void UpdateScreenTextPosition()
+    {
+        if (_cachedCamera == null) _cachedCamera = Camera.main;
+        if (_cachedCamera == null || _screenTextRT == null) return;
+
+        Vector3 worldPos = transform.position + Vector3.up * (bubbleHeight + 0.3f);
+        Vector3 screenPos = _cachedCamera.WorldToScreenPoint(worldPos);
+
+        // Clamp to screen edges so text is always visible (with margin)
+        const float margin = 80f;
+        screenPos.x = Mathf.Clamp(screenPos.x, margin, Screen.width - margin);
+        screenPos.y = Mathf.Clamp(screenPos.y, margin, Screen.height - margin);
+
+        // Handle behind-camera: push to top of screen
+        if (screenPos.z < 0f)
+            screenPos.y = Screen.height - margin;
+
+        _screenTextRT.position = new Vector3(screenPos.x, screenPos.y, 0f);
     }
 
     /// <summary>Show a reaction sequence: notice → reaction icon → fade out.</summary>
@@ -172,33 +201,27 @@ public class DateReactionUI : MonoBehaviour
 
     private IEnumerator TextSequence(string message, float duration)
     {
-        _bubbleGO.SetActive(true);
-        _iconRenderer.enabled = false;
-
-        EnsureBubbleText();
-
-        _bubbleText.text = message;
-        _bubbleText.gameObject.SetActive(true);
-        _bubbleGO.transform.localScale = Vector3.one * 0.5f;
+        // Use screen-space text so dialogue is always visible
+        EnsureScreenText();
+        _screenText.text = message;
+        _screenText.color = Color.white;
+        _screenText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(duration);
 
         // Fade out
         float fadeTime = 0.3f;
         float elapsed = 0f;
-        Color startColor = _bubbleText.color;
         while (elapsed < fadeTime)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / fadeTime;
-            _bubbleText.color = new Color(startColor.r, startColor.g, startColor.b, 1f - t);
+            _screenText.color = new Color(1f, 1f, 1f, 1f - t);
             yield return null;
         }
 
-        _bubbleText.gameObject.SetActive(false);
-        _bubbleText.color = startColor;
-        _iconRenderer.enabled = true;
-        _bubbleGO.SetActive(false);
+        _screenText.gameObject.SetActive(false);
+        _screenText.color = Color.white;
         _activeReaction = null;
     }
 
@@ -220,7 +243,7 @@ public class DateReactionUI : MonoBehaviour
     private IEnumerator LabeledReactionSequence(ReactionType type, string topicLabel, Sprite itemIcon = null)
     {
         _bubbleGO.SetActive(true);
-        EnsureBubbleText();
+        EnsureScreenText();
         EnsureItemIconRenderer();
 
         // --- Phase 1: Topic label (0.7s) ---
@@ -241,11 +264,10 @@ public class DateReactionUI : MonoBehaviour
             _itemIconRenderer.enabled = false;
         }
 
-        _bubbleText.text = topicLabel;
-        _bubbleText.color = Color.white;
-        _bubbleText.gameObject.SetActive(true);
-        // Position text above icon
-        _bubbleText.rectTransform.localPosition = new Vector3(0f, 0.4f, 0f);
+        // Screen-space topic label
+        _screenText.text = topicLabel;
+        _screenText.color = Color.white;
+        _screenText.gameObject.SetActive(true);
 
         yield return s_wait07;
 
@@ -257,12 +279,13 @@ public class DateReactionUI : MonoBehaviour
             _ => neutralSprite
         };
 
-        _iconRenderer.color = type switch
+        Color reactionColor = type switch
         {
             ReactionType.Like => new Color(1f, 0.4f, 0.5f),
             ReactionType.Dislike => new Color(0.5f, 0.5f, 1f),
             _ => Color.white
         };
+        _iconRenderer.color = reactionColor;
 
         // Play SFX
         AudioClip clip = type switch
@@ -277,10 +300,9 @@ public class DateReactionUI : MonoBehaviour
         // Screen-space emoticon flash (fire-and-forget, runs alongside bubble)
         ShowEmoticonFlash(type);
 
-        _bubbleText.text = GetRandomSentiment(type);
-        _bubbleText.color = _iconRenderer.color;
-        // Position text below icon
-        _bubbleText.rectTransform.localPosition = new Vector3(0f, -0.4f, 0f);
+        // Screen-space sentiment text
+        _screenText.text = GetRandomSentiment(type);
+        _screenText.color = reactionColor;
 
         _bubbleGO.transform.localScale = Vector3.one * 0.7f;
 
@@ -290,7 +312,7 @@ public class DateReactionUI : MonoBehaviour
         float fadeTime = 0.3f;
         float elapsed = 0f;
         Color iconStart = _iconRenderer.color;
-        Color textStart = _bubbleText.color;
+        Color textStart = _screenText.color;
         Color itemIconStart = _itemIconRenderer != null && _itemIconRenderer.enabled
             ? _itemIconRenderer.color : Color.clear;
         while (elapsed < fadeTime)
@@ -298,15 +320,14 @@ public class DateReactionUI : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / fadeTime;
             _iconRenderer.color = new Color(iconStart.r, iconStart.g, iconStart.b, 1f - t);
-            _bubbleText.color = new Color(textStart.r, textStart.g, textStart.b, 1f - t);
+            _screenText.color = new Color(textStart.r, textStart.g, textStart.b, 1f - t);
             if (_itemIconRenderer != null && _itemIconRenderer.enabled)
                 _itemIconRenderer.color = new Color(itemIconStart.r, itemIconStart.g, itemIconStart.b, 1f - t);
             yield return null;
         }
 
-        _bubbleText.gameObject.SetActive(false);
-        _bubbleText.rectTransform.localPosition = Vector3.zero;
-        _bubbleText.color = Color.white;
+        _screenText.gameObject.SetActive(false);
+        _screenText.color = Color.white;
         _iconRenderer.enabled = true;
         if (_itemIconRenderer != null) _itemIconRenderer.enabled = false;
         _bubbleGO.SetActive(false);
@@ -333,6 +354,39 @@ public class DateReactionUI : MonoBehaviour
         // Render text through walls
         _bubbleText.renderer.material.SetInt("unity_GUIZTestMode", (int)CompareFunction.Always);
         _bubbleText.renderer.material.renderQueue = 4001;
+    }
+
+    private void EnsureScreenText()
+    {
+        if (_screenText != null) return;
+
+        if (s_screenTextCanvas == null)
+        {
+            var canvasGO = new GameObject("DateScreenTextCanvas");
+            DontDestroyOnLoad(canvasGO);
+            s_screenTextCanvas = canvasGO.AddComponent<Canvas>();
+            s_screenTextCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            s_screenTextCanvas.sortingOrder = 95; // above gameplay, below ScreenFade
+            var scaler = canvasGO.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920f, 1080f);
+        }
+
+        var go = new GameObject("DateScreenText");
+        go.transform.SetParent(s_screenTextCanvas.transform, false);
+        _screenTextRT = go.AddComponent<RectTransform>();
+        _screenTextRT.pivot = new Vector2(0.5f, 0f);
+        _screenTextRT.sizeDelta = new Vector2(500f, 60f);
+
+        _screenText = go.AddComponent<TextMeshProUGUI>();
+        _screenText.fontSize = 24f;
+        _screenText.alignment = TextAlignmentOptions.Center;
+        _screenText.color = Color.white;
+        _screenText.outlineWidth = 0.3f;
+        _screenText.outlineColor = new Color32(0, 0, 0, 180);
+        _screenText.textWrappingMode = TextWrappingModes.Normal;
+        _screenText.raycastTarget = false;
+        go.SetActive(false);
     }
 
     private void EnsureItemIconRenderer()
