@@ -660,11 +660,11 @@ public class InteractableHighlight : MonoBehaviour
                 Debug.LogWarning("[InteractableHighlight] Highlight shader not found for current style.");
         }
 
-        // Gaze — amber
+        // Gaze — teal
         if (s_sharedGazeMat == null)
             s_sharedGazeMat = MakeMatForStyle(GazeColor, 0.4f, 1.5f, 0.08f);
 
-        // Display — warm peach, subtlest
+        // Display — soft blue
         if (s_sharedDisplayMat == null)
             s_sharedDisplayMat = MakeMatForStyle(DisplayColor, 0.25f, 1f, 0.05f);
 
