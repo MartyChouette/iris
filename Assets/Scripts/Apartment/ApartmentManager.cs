@@ -981,20 +981,23 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     public Ray ScreenPointToRay(Vector2 screenPos)
     {
-        // Use Camera.main's transform — it IS what's rendered on screen.
-        // Use _currentZoom for ortho size — our own authoritative value.
-        // NEVER use Camera.main.ScreenPointToRay (stale projection matrix).
-        // NEVER use browseCamera.Lens (stale Cinemachine data).
-        // NEVER use browseCamera.transform (may differ from rendered view).
         var cam = Camera.main;
         if (cam == null) return default;
 
+        // Normal browse: Camera.main.ScreenPointToRay works perfectly —
+        // the projection matrix matches the rendered view.
+        // Only use manual ray during phase camera presets or top-down,
+        // where the projection matrix hasn't caught up to the zoom change.
+        if (!_presetOverrideActive && !_topDownActive)
+            return cam.ScreenPointToRay(screenPos);
+
+        // Phase cameras / top-down: manual ray from Camera.main's transform
+        // and our authoritative _currentZoom (projection matrix is stale).
         var t = cam.transform;
         float viewportX = (screenPos.x / Screen.width) * 2f - 1f;
         float viewportY = (screenPos.y / Screen.height) * 2f - 1f;
         float aspect = (float)Screen.width / Screen.height;
 
-        // Ortho size: our value first, then Camera.main's, then safe default
         float orthoSize = _currentZoom > 0f ? _currentZoom
             : cam.orthographic ? cam.orthographicSize
             : 5f;
@@ -1004,10 +1007,6 @@ public class ApartmentManager : MonoBehaviour
         Vector3 origin = t.position
             + t.right * (viewportX * halfW)
             + t.up * (viewportY * halfH);
-
-        if (Input.GetMouseButtonDown(0))
-            Debug.Log($"[ScreenPointToRay] pos={t.position:F2} fwd={t.forward:F3} orthoSize={orthoSize:F2} _currentZoom={_currentZoom:F2} cam.orthoSize={cam.orthographicSize:F2} cam.ortho={cam.orthographic} origin={origin:F2} vp=({viewportX:F3},{viewportY:F3})");
-
         return new Ray(origin, t.forward);
     }
 
