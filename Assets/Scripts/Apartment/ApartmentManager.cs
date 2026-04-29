@@ -1004,6 +1004,10 @@ public class ApartmentManager : MonoBehaviour
         Vector3 origin = t.position
             + t.right * (viewportX * halfW)
             + t.up * (viewportY * halfH);
+
+        if (Input.GetMouseButtonDown(0))
+            Debug.Log($"[ScreenPointToRay] pos={t.position:F2} fwd={t.forward:F3} orthoSize={orthoSize:F2} _currentZoom={_currentZoom:F2} cam.orthoSize={cam.orthographicSize:F2} cam.ortho={cam.orthographic} origin={origin:F2} vp=({viewportX:F3},{viewportY:F3})");
+
         return new Ray(origin, t.forward);
     }
 
