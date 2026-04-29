@@ -91,14 +91,7 @@ public class DreamScreen : MonoBehaviour
 
         _time += Time.unscaledDeltaTime;
 
-        // Rotate the gradient texture slowly
-        if (_psychedelicRT != null)
-            _psychedelicRT.localRotation = Quaternion.Euler(0f, 0f, _time * _rotateSpeed);
-
-        // Regenerate texture every 3rd frame to save CPU
-        _updateFrame++;
-        if (_updateFrame % 3 == 0)
-            UpdateGradientTexture(_time * _hueShiftSpeed);
+        // Psychedelic visuals disabled — just show text over dark background
     }
 
     // ── Public API ──────────────────────────────────────────────────
@@ -241,24 +234,17 @@ public class DreamScreen : MonoBehaviour
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.interactable = false;
 
-        // Psychedelic gradient overlay (scaled up + rotated to fill screen with no corners)
-        _gradientTex = new Texture2D(TexW, TexH, TextureFormat.RGBA32, false);
-        _gradientTex.filterMode = FilterMode.Bilinear;
-        _gradientTex.wrapMode = TextureWrapMode.Repeat;
-        UpdateGradientTexture(0f);
-
-        var imgGO = new GameObject("PsychedelicBG");
-        imgGO.transform.SetParent(_canvasRoot.transform, false);
-        _psychedelicRT = imgGO.AddComponent<RectTransform>();
-        _psychedelicRT.anchorMin = new Vector2(0.5f, 0.5f);
-        _psychedelicRT.anchorMax = new Vector2(0.5f, 0.5f);
-        _psychedelicRT.pivot = new Vector2(0.5f, 0.5f);
-        // Scale up so rotation doesn't reveal corners
-        _psychedelicRT.sizeDelta = new Vector2(2800f, 2800f);
-
-        _psychedelicImage = imgGO.AddComponent<RawImage>();
-        _psychedelicImage.texture = _gradientTex;
-        _psychedelicImage.raycastTarget = false;
+        // Solid dark background instead of psychedelic gradient
+        var bgGO = new GameObject("DarkBG");
+        bgGO.transform.SetParent(_canvasRoot.transform, false);
+        var bgRT = bgGO.AddComponent<RectTransform>();
+        bgRT.anchorMin = Vector2.zero;
+        bgRT.anchorMax = Vector2.one;
+        bgRT.offsetMin = Vector2.zero;
+        bgRT.offsetMax = Vector2.zero;
+        var bgImg = bgGO.AddComponent<Image>();
+        bgImg.color = new Color(0.05f, 0.05f, 0.08f, 1f);
+        bgImg.raycastTarget = false;
 
         // Floating dream text
         var textGO = new GameObject("DreamText");

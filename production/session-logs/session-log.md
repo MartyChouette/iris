@@ -29334,3 +29334,15 @@ Assets/Scripts/UI/PhaseTitleDrop.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260429_121000
+### Commits
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+---
+

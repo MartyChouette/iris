@@ -791,6 +791,8 @@ public class DateSessionManager : MonoBehaviour
 
         // Release phase camera back to original apartment angle for the sweep
         ReleasePhaseCamera();
+        // Pull out to farthest zoom so the full apartment is visible for judgment
+        ApartmentManager.Instance?.ForceZoomStep(0);
         yield return s_wait05;
 
         // Sweep remaining un-inspected items as a wave (from the wide OG angle)
