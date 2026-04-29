@@ -505,8 +505,25 @@ public class ObjectGrabber : MonoBehaviour
             return;
 
         var placeable = hit.collider.GetComponent<PlaceableObject>();
+        // Skip disabled PlaceableObjects (paired children) — walk up to the enabled parent
+        if (placeable != null && !placeable.enabled)
+            placeable = null;
         if (placeable == null)
+        {
             placeable = hit.collider.GetComponentInParent<PlaceableObject>();
+            // Same check for parent — find first enabled one
+            if (placeable != null && !placeable.enabled)
+            {
+                Transform walk = placeable.transform.parent;
+                placeable = null;
+                while (walk != null)
+                {
+                    var p = walk.GetComponent<PlaceableObject>();
+                    if (p != null && p.enabled) { placeable = p; break; }
+                    walk = walk.parent;
+                }
+            }
+        }
 
         // Perfume bottle — click to spray in place (no pickup)
         var perfumeHit = hit.collider.GetComponent<PerfumeBottle>();

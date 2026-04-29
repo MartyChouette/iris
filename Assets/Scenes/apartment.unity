@@ -25277,7 +25277,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929224191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71b51f9af8c6194ab521348af2210a9, type: 3}
   m_Name: 
@@ -32288,7 +32288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03dce145d058c964b8100cc962f34241, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.6964893
+      value: 5.788
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03dce145d058c964b8100cc962f34241, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32296,7 +32296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03dce145d058c964b8100cc962f34241, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.74
+      value: 3.092
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03dce145d058c964b8100cc962f34241, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32877,8 +32877,8 @@ Transform:
   m_GameObject: {fileID: 1026915558}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.341, y: 1.062, z: 2.257}
-  m_LocalScale: {x: 0.88, y: 0.04, z: 1.01}
+  m_LocalPosition: {x: -0.341, y: 1.041, z: 2.257}
+  m_LocalScale: {x: 0.88, y: 0.0001, z: 1.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1931283749}
@@ -32897,7 +32897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacementSurface
   localBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.49, y: 0.5, z: 0.49}
+    m_Extent: {x: 0.49, y: 0.001, z: 0.49}
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
@@ -39858,11 +39858,11 @@ MonoBehaviour:
     m_Center: {x: 2.52, y: 1.8, z: -3.78}
     m_Extent: {x: 1.44, y: 1.81, z: 1.64}
   _livingRoomBounds:
-    m_Center: {x: -1.38, y: 1.57, z: 0.7}
-    m_Extent: {x: 4.61, y: 1.87, z: 2.75}
+    m_Center: {x: -1.38, y: 1.57, z: 0.8}
+    m_Extent: {x: 4.56, y: 1.87, z: 3.2}
   _entranceBounds:
-    m_Center: {x: -2.51, y: 0.64, z: -4.06}
-    m_Extent: {x: 3.43, y: 1.09, z: 2.02}
+    m_Center: {x: -2.51, y: 2.06, z: -4.17}
+    m_Extent: {x: 3.43, y: 2.44, z: 1.8}
 --- !u!4 &1271655109
 Transform:
   m_ObjectHideFlags: 0
@@ -50390,7 +50390,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671656478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b71b51f9af8c6194ab521348af2210a9, type: 3}
   m_Name: 
@@ -54532,7 +54532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacementSurface
   localBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.017, y: 0.011, z: 0.002}
+    m_Extent: {x: 0.017, y: 0.011, z: 0.0001}
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0

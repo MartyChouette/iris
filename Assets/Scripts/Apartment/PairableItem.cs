@@ -375,10 +375,8 @@ public class PairableItem : MonoBehaviour
             held.transform.rotation = sbsRoot.rotation;
         }
 
-        // Disable held item's standalone behavior
-        var heldCol = held.GetComponent<Collider>();
-        if (heldCol != null) heldCol.enabled = false;
-
+        // Disable held item's standalone PlaceableObject but keep collider
+        // so clicks on the child route up to the parent for pickup.
         if (held._placeable != null)
             held._placeable.enabled = false;
 

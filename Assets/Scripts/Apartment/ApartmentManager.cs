@@ -955,6 +955,13 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     public Ray ScreenPointToRay(Vector2 screenPos)
     {
+        // Top-down: Cinemachine is disabled, use the output camera directly
+        if (_topDownActive)
+        {
+            var outCam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
+            if (outCam != null) return outCam.ScreenPointToRay(screenPos);
+        }
+
         if (browseCamera == null)
             return Camera.main != null ? Camera.main.ScreenPointToRay(screenPos) : default;
 

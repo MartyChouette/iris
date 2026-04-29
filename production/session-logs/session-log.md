@@ -28720,3 +28720,43 @@ Assets/Scripts/Apartment/PairableItem.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260428_191614
+### Commits
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+---
+
+## Session End: 20260428_192334
+### Commits
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_203101
+### Commits
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_203750
+### Commits
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
