@@ -955,35 +955,52 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     public Ray ScreenPointToRay(Vector2 screenPos)
     {
-        // Manual ray construction from Camera.main's current properties.
-        // Camera.ScreenPointToRay uses the projection matrix from the last render,
-        // which is stale during Update (Cinemachine writes in LateUpdate).
-        // The camera's transform and orthographicSize ARE current, so we use those directly.
-        var cam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
-        if (cam == null) return default;
+        // Manual ray from the browseCamera's current transform and our own zoom state.
+        // Camera.main's properties lag one frame behind Cinemachine (set in LateUpdate).
+        // browseCamera.transform is written by ApplyParallax in Update — always current.
+        // _currentZoom is our authoritative ortho size — always current.
 
-        var t = cam.transform;
         float viewportX = (screenPos.x / Screen.width) * 2f - 1f;
         float viewportY = (screenPos.y / Screen.height) * 2f - 1f;
         float aspect = (float)Screen.width / Screen.height;
 
-        if (cam.orthographic)
+        // Top-down mode: use the output camera directly (browseCamera is disabled)
+        if (_topDownActive)
         {
-            float halfH = cam.orthographicSize;
+            var outCam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
+            if (outCam == null) return default;
+            var ct = outCam.transform;
+            float tdHalfH = outCam.orthographicSize;
+            float tdHalfW = tdHalfH * aspect;
+            return new Ray(ct.position + ct.right * (viewportX * tdHalfW) + ct.up * (viewportY * tdHalfH), ct.forward);
+        }
+
+        if (browseCamera == null)
+        {
+            var fallback = Camera.main;
+            return fallback != null ? fallback.ScreenPointToRay(screenPos) : default;
+        }
+
+        var t = browseCamera.transform;
+        bool isOrtho = browseCamera.Lens.ModeOverride == Unity.Cinemachine.LensSettings.OverrideModes.Orthographic;
+
+        if (isOrtho && _currentZoom > 0f)
+        {
+            float halfH = _currentZoom;
             float halfW = halfH * aspect;
             Vector3 origin = t.position
                 + t.right * (viewportX * halfW)
                 + t.up * (viewportY * halfH);
             return new Ray(origin, t.forward);
         }
-        else
-        {
-            float halfFov = cam.fieldOfView * 0.5f * Mathf.Deg2Rad;
-            Vector3 dir = t.forward
-                + t.right * (viewportX * Mathf.Tan(halfFov) * aspect)
-                + t.up * (viewportY * Mathf.Tan(halfFov));
-            return new Ray(t.position, dir.normalized);
-        }
+
+        // Perspective fallback
+        float fov = _currentZoom > 0f ? _currentZoom : browseCamera.Lens.FieldOfView;
+        float halfFov = fov * 0.5f * Mathf.Deg2Rad;
+        Vector3 dir = t.forward
+            + t.right * (viewportX * Mathf.Tan(halfFov) * aspect)
+            + t.up * (viewportY * Mathf.Tan(halfFov));
+        return new Ray(t.position, dir.normalized);
     }
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
