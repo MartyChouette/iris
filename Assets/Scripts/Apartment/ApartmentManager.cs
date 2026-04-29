@@ -127,7 +127,7 @@ public class ApartmentManager : MonoBehaviour
     public int CurrentAreaIndex => _currentAreaIndex;
 
     /// <summary>Current ortho size of the browse camera (for cinematic zoom calculations).</summary>
-    public float CurrentOrthoSize => browseCamera != null ? browseCamera.Lens.OrthographicSize : 5f;
+    public float CurrentOrthoSize => _currentZoom > 0f ? _currentZoom : 5f;
 
     /// <summary>Base camera position before parallax/pan offsets. Use this as the start point for cinematics.</summary>
     public Vector3 CurrentBasePosition => _basePosition;
@@ -990,13 +990,15 @@ public class ApartmentManager : MonoBehaviour
         float viewportY = (screenPos.y / Screen.height) * 2f - 1f;
         float aspect = (float)Screen.width / Screen.height;
 
-        // Top-down mode: use the output camera directly (browseCamera is disabled)
+        // Top-down mode: browseCamera is disabled, use output camera transform
+        // but our own _currentZoom for ortho size (Camera.main's is one frame behind)
         if (_topDownActive)
         {
             var outCam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
             if (outCam == null) return default;
             var ct = outCam.transform;
-            float tdHalfH = outCam.orthographicSize;
+            float tdOrtho = _currentZoom > 0f ? _currentZoom : _topDownOrthoSize;
+            float tdHalfH = tdOrtho;
             float tdHalfW = tdHalfH * aspect;
             return new Ray(ct.position + ct.right * (viewportX * tdHalfW) + ct.up * (viewportY * tdHalfH), ct.forward);
         }
