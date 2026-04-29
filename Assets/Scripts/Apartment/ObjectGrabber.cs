@@ -505,24 +505,26 @@ public class ObjectGrabber : MonoBehaviour
             return;
 
         var placeable = hit.collider.GetComponent<PlaceableObject>();
-        // Skip disabled PlaceableObjects (paired children) — walk up to the enabled parent
-        if (placeable != null && !placeable.enabled)
-            placeable = null;
+
+        // If we hit a paired child (disabled PlaceableObject), go to the stack root
+        if (placeable == null || !placeable.enabled)
+        {
+            var pairable = hit.collider.GetComponent<PairableItem>();
+            if (pairable == null) pairable = hit.collider.GetComponentInParent<PairableItem>();
+            if (pairable != null && pairable.IsPaired)
+            {
+                // Walk to stack root and use its PlaceableObject
+                Transform root = pairable.transform;
+                while (root.parent != null && root.parent.GetComponent<PairableItem>() != null)
+                    root = root.parent;
+                placeable = root.GetComponent<PlaceableObject>();
+            }
+        }
+
+        // Standard parent walk for non-paired items
         if (placeable == null)
         {
             placeable = hit.collider.GetComponentInParent<PlaceableObject>();
-            // Same check for parent — find first enabled one
-            if (placeable != null && !placeable.enabled)
-            {
-                Transform walk = placeable.transform.parent;
-                placeable = null;
-                while (walk != null)
-                {
-                    var p = walk.GetComponent<PlaceableObject>();
-                    if (p != null && p.enabled) { placeable = p; break; }
-                    walk = walk.parent;
-                }
-            }
         }
 
         // Perfume bottle — click to spray in place (no pickup)
@@ -1432,12 +1434,9 @@ public class ObjectGrabber : MonoBehaviour
         // Use SphereCast for forgiving click area, fall back to RaycastNonAlloc
         PairableItem clickedPairable = FindComponentAlongRay<PairableItem>(ray, placeableLayer);
 
-        // If precise click missed, accept the snap target we're already locked onto
-        if ((clickedPairable == null || clickedPairable == heldPairable || !clickedPairable.CanPairWith(heldPairable))
-            && _pairSnapTarget != null && _pairSnapTarget.CanPairWith(heldPairable))
-        {
-            clickedPairable = _pairSnapTarget;
-        }
+        // Only accept the magnetic snap target if the player actually clicked
+        // on the partner item — not on empty space or a surface.
+        // This prevents accidental pairing when trying to place near the partner.
 
         if (clickedPairable == null || clickedPairable == heldPairable) return false;
         if (!clickedPairable.CanPairWith(heldPairable)) return false;

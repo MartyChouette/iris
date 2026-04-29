@@ -40,6 +40,10 @@ public class GunplaFigure : MonoBehaviour
     [Tooltip("How long each glance lasts.")]
     [SerializeField] private float _glanceDuration = 2f;
 
+    [Header("System")]
+    [Tooltip("Disable to turn off the entire gunpla assembly system.")]
+    [SerializeField] private bool _systemEnabled = false;
+
     [Header("Snap Radius")]
     [Tooltip("World-space distance at which a held part magnetically snaps to this body.")]
     [SerializeField] private float _snapRadius = 0.5f;
@@ -75,8 +79,11 @@ public class GunplaFigure : MonoBehaviour
     }
 
     /// <summary>Can this body accept the given part?</summary>
+    public bool SystemEnabled => _systemEnabled;
+
     public bool CanAccept(GunplaPart part)
     {
+        if (!_systemEnabled) return false;
         if (part == null || part.IsAttached) return false;
         return part.Type switch
         {
