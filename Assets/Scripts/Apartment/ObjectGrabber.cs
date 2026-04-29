@@ -502,7 +502,15 @@ public class ObjectGrabber : MonoBehaviour
         // with trigger colliders can be clicked. Also check RecordSleeves layer (30).
         int pickupMask = placeableLayer | (1 << 30);
         if (!Physics.Raycast(ray, out RaycastHit hit, 100f, pickupMask, QueryTriggerInteraction.Collide))
+        {
+            // Debug: try with all layers to see if ANYTHING is there
+            if (Physics.Raycast(ray, out RaycastHit debugHit, 100f))
+                Debug.Log($"[TryPickUp] Missed on placeableLayer but hit {debugHit.collider.gameObject.name} (layer={debugHit.collider.gameObject.layer})");
+            else
+                Debug.Log("[TryPickUp] Ray hit nothing at all.");
             return;
+        }
+        Debug.Log($"[TryPickUp] Hit: {hit.collider.gameObject.name} (layer={hit.collider.gameObject.layer}, hasPlaceable={hit.collider.GetComponent<PlaceableObject>() != null}, hasGlass={hit.collider.GetComponent<DrinkGlass>() != null})");
 
         var placeable = hit.collider.GetComponent<PlaceableObject>();
 
