@@ -40,6 +40,7 @@ public class DrinkCutawayUI : MonoBehaviour
 
     private bool _isShowing;
     private DrinkGlass _activeGlass;
+    private DrinkRecipeDefinition _activeRecipe;
     private float _smoothFoam;
 
     // Glass shape masking
@@ -47,6 +48,18 @@ public class DrinkCutawayUI : MonoBehaviour
     private Mask _glassMask;
     private Texture2D _silhouetteTexture;
     private Sprite _silhouetteSprite;
+
+    // Recipe card
+    private GameObject _recipeCardRoot;
+    private TMP_Text _recipeTitle;
+    private readonly List<(TMP_Text label, Image swatch, TMP_Text status)> _recipeRows = new();
+    private readonly HashSet<int> _ingredientsDinged = new(); // indices already marked green
+
+    // Near-overflow warning
+    private Image _nearOverflowImage;
+
+    // Dump button
+    private GameObject _dumpButton;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void AutoSpawn()
@@ -108,7 +121,9 @@ public class DrinkCutawayUI : MonoBehaviour
     {
         _isShowing = true;
         _activeGlass = glass;
+        _activeRecipe = recipe;
         _smoothFoam = glass.TotalFill;
+        _ingredientsDinged.Clear();
 
         // Detect glass shape
         string glassName = recipe?.requiredGlass?.glassName ?? "";
@@ -137,6 +152,9 @@ public class DrinkCutawayUI : MonoBehaviour
             _drinkNameText.text = recipe != null ? recipe.drinkName : "Drink";
 
         SetOverflowing(false);
+        SetNearOverflow(false);
+        PopulateRecipeCard(recipe);
+        if (_dumpButton != null) _dumpButton.SetActive(true);
         _canvasRoot.SetActive(true);
     }
 
@@ -144,6 +162,9 @@ public class DrinkCutawayUI : MonoBehaviour
     {
         _isShowing = false;
         _activeGlass = null;
+        _activeRecipe = null;
+        if (_recipeCardRoot != null) _recipeCardRoot.SetActive(false);
+        if (_dumpButton != null) _dumpButton.SetActive(false);
         if (_canvasRoot != null) _canvasRoot.SetActive(false);
     }
 
@@ -155,6 +176,16 @@ public class DrinkCutawayUI : MonoBehaviour
     public void SetOverflowing(bool overflow)
     {
         if (_overflowImage != null) _overflowImage.gameObject.SetActive(overflow);
+    }
+
+    public void SetNearOverflow(bool near)
+    {
+        if (_nearOverflowImage != null) _nearOverflowImage.gameObject.SetActive(near);
+        if (near && _statusText != null)
+        {
+            _statusText.text = "Almost full!";
+            _statusText.color = new Color(1f, 0.8f, 0.3f, 0.9f);
+        }
     }
 
     // ── Layer rendering ─────────────────────────────────────────────
@@ -215,6 +246,9 @@ public class DrinkCutawayUI : MonoBehaviour
 
         // Overflow
         SetOverflowing(_activeGlass.IsOverflowing);
+
+        // Real-time recipe card feedback
+        UpdateRecipeCardFeedback();
     }
 
     private void AddLayerImage()
@@ -232,6 +266,157 @@ public class DrinkCutawayUI : MonoBehaviour
         // Insert below foam in sibling order
         go.transform.SetSiblingIndex(_glassRT.childCount - 3);
         _layerImages.Add((img, rt));
+    }
+
+    // ── Recipe card ──────────────────────────────────────────────────
+
+    private void PopulateRecipeCard(DrinkRecipeDefinition recipe)
+    {
+        if (_recipeCardRoot == null) return;
+
+        // Clear old rows
+        for (int i = 0; i < _recipeRows.Count; i++)
+        {
+            if (_recipeRows[i].label != null) Destroy(_recipeRows[i].label.transform.parent.gameObject);
+        }
+        _recipeRows.Clear();
+
+        if (recipe == null || recipe.ingredients == null || recipe.ingredients.Length == 0)
+        {
+            _recipeCardRoot.SetActive(false);
+            return;
+        }
+
+        if (_recipeTitle != null)
+            _recipeTitle.text = recipe.drinkName;
+
+        for (int i = 0; i < recipe.ingredients.Length; i++)
+        {
+            var ingredient = recipe.ingredients[i];
+            float portion = i < recipe.portionNormalized.Length ? recipe.portionNormalized[i] : 0f;
+
+            var rowGO = new GameObject($"Row_{i}");
+            rowGO.transform.SetParent(_recipeCardRoot.transform, false);
+            var rowRT = rowGO.AddComponent<RectTransform>();
+            rowRT.anchorMin = new Vector2(0f, 1f);
+            rowRT.anchorMax = new Vector2(1f, 1f);
+            rowRT.pivot = new Vector2(0f, 1f);
+            // Title is ~30px, each row is 28px, 4px gap
+            rowRT.anchoredPosition = new Vector2(0f, -34f - i * 32f);
+            rowRT.sizeDelta = new Vector2(0f, 28f);
+
+            // Color swatch
+            var swatchGO = new GameObject("Swatch");
+            swatchGO.transform.SetParent(rowGO.transform, false);
+            var swatchRT = swatchGO.AddComponent<RectTransform>();
+            swatchRT.anchorMin = new Vector2(0f, 0.15f);
+            swatchRT.anchorMax = new Vector2(0f, 0.85f);
+            swatchRT.pivot = new Vector2(0f, 0.5f);
+            swatchRT.anchoredPosition = new Vector2(8f, 0f);
+            swatchRT.sizeDelta = new Vector2(16f, 0f);
+            var swatchImg = swatchGO.AddComponent<Image>();
+            swatchImg.color = ingredient.liquidColor;
+            swatchImg.raycastTarget = false;
+
+            // Ingredient name + portion descriptor
+            var labelGO = new GameObject("Label");
+            labelGO.transform.SetParent(rowGO.transform, false);
+            var labelRT = labelGO.AddComponent<RectTransform>();
+            labelRT.anchorMin = new Vector2(0f, 0f);
+            labelRT.anchorMax = new Vector2(1f, 1f);
+            labelRT.offsetMin = new Vector2(30f, 0f);
+            labelRT.offsetMax = new Vector2(-36f, 0f);
+            var label = labelGO.AddComponent<TextMeshProUGUI>();
+            label.text = $"{ingredient.ingredientName} — {PortionDescriptor(portion)}";
+            label.fontSize = 15f;
+            label.alignment = TextAlignmentOptions.MidlineLeft;
+            label.color = new Color(0.9f, 0.9f, 0.9f, 0.85f);
+            label.raycastTarget = false;
+
+            // Status indicator (checkmark)
+            var statusGO = new GameObject("Status");
+            statusGO.transform.SetParent(rowGO.transform, false);
+            var statusRT = statusGO.AddComponent<RectTransform>();
+            statusRT.anchorMin = new Vector2(1f, 0f);
+            statusRT.anchorMax = new Vector2(1f, 1f);
+            statusRT.pivot = new Vector2(1f, 0.5f);
+            statusRT.anchoredPosition = new Vector2(-4f, 0f);
+            statusRT.sizeDelta = new Vector2(24f, 0f);
+            var statusText = statusGO.AddComponent<TextMeshProUGUI>();
+            statusText.text = "";
+            statusText.fontSize = 16f;
+            statusText.alignment = TextAlignmentOptions.Center;
+            statusText.raycastTarget = false;
+
+            _recipeRows.Add((label, swatchImg, statusText));
+        }
+
+        _recipeCardRoot.SetActive(true);
+    }
+
+    private void UpdateRecipeCardFeedback()
+    {
+        if (_activeRecipe == null || _activeRecipe.ingredients == null || _activeGlass == null) return;
+
+        for (int i = 0; i < _recipeRows.Count && i < _activeRecipe.ingredients.Length; i++)
+        {
+            var ingredient = _activeRecipe.ingredients[i];
+            float target = _activeRecipe.portionNormalized[i] * _activeRecipe.idealFillLevel;
+            float tolerance = _activeRecipe.portionTolerance;
+
+            // Find how much of this ingredient is in the glass
+            float actual = 0f;
+            var layers = _activeGlass.Layers;
+            for (int j = 0; j < layers.Count; j++)
+            {
+                if (layers[j].ingredient == ingredient)
+                { actual = layers[j].amount; break; }
+            }
+
+            var (label, swatch, status) = _recipeRows[i];
+
+            if (actual > 0f && Mathf.Abs(actual - target) <= tolerance)
+            {
+                // In tolerance — green checkmark
+                if (!_ingredientsDinged.Contains(i))
+                {
+                    _ingredientsDinged.Add(i);
+                    // TODO: play subtle ding SFX here
+                }
+                label.color = new Color(0.4f, 0.95f, 0.5f, 1f);
+                status.text = "\u2713"; // ✓
+                status.color = new Color(0.4f, 0.95f, 0.5f, 1f);
+            }
+            else if (actual > target + tolerance)
+            {
+                // Overshot — amber
+                label.color = new Color(1f, 0.8f, 0.3f, 1f);
+                status.text = "\u2713";
+                status.color = new Color(1f, 0.8f, 0.3f, 1f);
+            }
+            else if (actual > 0f)
+            {
+                // Pouring but not enough yet
+                label.color = new Color(0.9f, 0.9f, 0.9f, 1f);
+                status.text = "...";
+                status.color = new Color(0.9f, 0.9f, 0.9f, 0.5f);
+            }
+            else
+            {
+                // Not started
+                label.color = new Color(0.9f, 0.9f, 0.9f, 0.85f);
+                status.text = "";
+            }
+        }
+    }
+
+    private static string PortionDescriptor(float portion)
+    {
+        if (portion >= 0.8f) return "fill it up";
+        if (portion >= 0.6f) return "most of it";
+        if (portion >= 0.4f) return "about half";
+        if (portion >= 0.2f) return "a quarter";
+        return "a splash";
     }
 
     // ── Glass shape silhouettes ────────────────────────────────────
@@ -415,6 +600,17 @@ public class DrinkCutawayUI : MonoBehaviour
         _drinkNameText.alignment = TextAlignmentOptions.Center;
         _drinkNameText.color = Color.white;
 
+        // Near-overflow warning (amber band near top)
+        var nearOverflowGO = CreateUI("NearOverflow", glassGO.transform);
+        var nearOverflowRT = nearOverflowGO.GetComponent<RectTransform>();
+        nearOverflowRT.anchorMin = new Vector2(0f, 0.82f);
+        nearOverflowRT.anchorMax = new Vector2(1f, 0.95f);
+        nearOverflowRT.offsetMin = Vector2.zero; nearOverflowRT.offsetMax = Vector2.zero;
+        _nearOverflowImage = nearOverflowGO.AddComponent<Image>();
+        _nearOverflowImage.color = new Color(1f, 0.75f, 0.2f, 0.35f);
+        _nearOverflowImage.raycastTarget = false;
+        nearOverflowGO.SetActive(false);
+
         // Status — below the glass
         var statusGO = CreateUI("Status", glassGO.transform);
         var statusRT = statusGO.GetComponent<RectTransform>();
@@ -426,6 +622,61 @@ public class DrinkCutawayUI : MonoBehaviour
         _statusText.text = ""; _statusText.fontSize = 18f;
         _statusText.alignment = TextAlignmentOptions.Center;
         _statusText.color = new Color(1f, 1f, 1f, 0.7f);
+
+        // ── Recipe card — left of glass ──
+        _recipeCardRoot = CreateUI("RecipeCard", _canvasRoot.transform);
+        var cardRT = _recipeCardRoot.GetComponent<RectTransform>();
+        cardRT.anchorMin = new Vector2(1f, 0.5f);
+        cardRT.anchorMax = new Vector2(1f, 0.5f);
+        cardRT.pivot = new Vector2(1f, 0.5f);
+        // Position to the left of the glass (glass is at -100 from right edge, ~120 wide)
+        cardRT.anchoredPosition = new Vector2(-230f, 0f);
+        cardRT.sizeDelta = new Vector2(200f, 200f);
+
+        // Semi-transparent background
+        var cardBG = _recipeCardRoot.AddComponent<Image>();
+        cardBG.color = new Color(0.05f, 0.05f, 0.1f, 0.6f);
+        cardBG.raycastTarget = false;
+
+        // Recipe title
+        var titleGO = CreateUI("RecipeTitle", _recipeCardRoot.transform);
+        var titleRT = titleGO.GetComponent<RectTransform>();
+        titleRT.anchorMin = new Vector2(0f, 1f);
+        titleRT.anchorMax = new Vector2(1f, 1f);
+        titleRT.pivot = new Vector2(0.5f, 1f);
+        titleRT.anchoredPosition = new Vector2(0f, -4f);
+        titleRT.sizeDelta = new Vector2(0f, 26f);
+        _recipeTitle = titleGO.AddComponent<TextMeshProUGUI>();
+        _recipeTitle.fontSize = 17f;
+        _recipeTitle.alignment = TextAlignmentOptions.Center;
+        _recipeTitle.color = new Color(1f, 0.9f, 0.7f, 1f);
+        _recipeTitle.fontStyle = FontStyles.Bold;
+        _recipeTitle.raycastTarget = false;
+
+        // Dump button — below recipe card
+        _dumpButton = CreateUI("DumpButton", _canvasRoot.transform);
+        var dumpRT = _dumpButton.GetComponent<RectTransform>();
+        dumpRT.anchorMin = new Vector2(1f, 0.5f);
+        dumpRT.anchorMax = new Vector2(1f, 0.5f);
+        dumpRT.pivot = new Vector2(1f, 0.5f);
+        dumpRT.anchoredPosition = new Vector2(-270f, -120f);
+        dumpRT.sizeDelta = new Vector2(120f, 30f);
+        var dumpBG = _dumpButton.AddComponent<Image>();
+        dumpBG.color = new Color(0.3f, 0.15f, 0.15f, 0.6f);
+        dumpBG.raycastTarget = false;
+        var dumpText = CreateUI("DumpText", _dumpButton.transform);
+        var dumpTextRT = dumpText.GetComponent<RectTransform>();
+        dumpTextRT.anchorMin = Vector2.zero; dumpTextRT.anchorMax = Vector2.one;
+        dumpTextRT.offsetMin = Vector2.zero; dumpTextRT.offsetMax = Vector2.zero;
+        var dumpTMP = dumpText.AddComponent<TextMeshProUGUI>();
+        dumpTMP.text = "[Backspace] Pour Out";
+        dumpTMP.fontSize = 13f;
+        dumpTMP.alignment = TextAlignmentOptions.Center;
+        dumpTMP.color = new Color(1f, 0.7f, 0.7f, 0.7f);
+        dumpTMP.raycastTarget = false;
+
+        _recipeCardRoot.SetActive(false);
+        _dumpButton.SetActive(false);
     }
 
     private static GameObject CreateUI(string name, Transform parent)

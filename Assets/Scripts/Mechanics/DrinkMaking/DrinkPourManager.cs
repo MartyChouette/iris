@@ -72,6 +72,9 @@ public class DrinkPourManager : MonoBehaviour
         {
             case State.Pouring:
                 UpdatePouring();
+                // Backspace/Delete dumps the glass
+                if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete))
+                    ResetActiveGlass();
                 break;
             case State.ChoosingServeGlass:
                 // Waiting for player to click a glass to serve
@@ -103,8 +106,8 @@ public class DrinkPourManager : MonoBehaviour
         if (DrinkCutawayUI.Instance != null)
             DrinkCutawayUI.Instance.Show(glass, _activeRecipe);
 
-        // Blink bottles so the player knows to grab one
-        HighlightAllBottles(true);
+        // Highlight the first ingredient's bottle
+        HighlightNextIngredientBottle();
 
         Debug.Log($"[DrinkPourManager] Glass selected — {glass.name}. Pour away!");
     }
@@ -159,6 +162,20 @@ public class DrinkPourManager : MonoBehaviour
         _pouringIngredient = null;
         HighlightSingleGlass(_activeGlass, false);
         // Stay in Pouring state — player can grab another bottle
+
+        // Update bottle highlight to next expected ingredient
+        HighlightNextIngredientBottle();
+    }
+
+    /// <summary>Empty the active glass so the player can start over.</summary>
+    public void ResetActiveGlass()
+    {
+        if (_activeGlass == null) return;
+        _activeGlass.Clear();
+        _overflowSFXPlayed = false;
+        DrinkCutawayUI.Instance?.SetStatus("Glass emptied");
+        HighlightNextIngredientBottle();
+        Debug.Log("[DrinkPourManager] Glass reset.");
     }
 
     // FinishDrink removed — flow is now: pour freely → click Serve → choose glass
@@ -233,6 +250,10 @@ public class DrinkPourManager : MonoBehaviour
             float delta = rate * Time.deltaTime;
             _activeGlass.AddLiquid(_pouringIngredient, delta);
 
+            // Near-overflow warning
+            if (_activeGlass.NearOverflow)
+                DrinkCutawayUI.Instance?.SetNearOverflow(true);
+
             // Overflow
             if (_activeGlass.IsOverflowing && !_overflowSFXPlayed)
             {
@@ -240,6 +261,7 @@ public class DrinkPourManager : MonoBehaviour
                 if (overflowSFX != null && AudioManager.Instance != null)
                     AudioManager.Instance.PlaySFX(overflowSFX);
                 DrinkCutawayUI.Instance?.SetStatus("Overflowing!");
+                DrinkCutawayUI.Instance?.SetNearOverflow(false);
             }
         }
         else
@@ -266,7 +288,7 @@ public class DrinkPourManager : MonoBehaviour
         float layerScore = CalculateLayerScore();
         float fillScore = CalculateFillScore();
         float garnishBonus = CalculateGarnishBonus();
-        float overflowPenalty = _activeGlass.IsOverflowing ? -20f : 0f;
+        float overflowPenalty = _activeGlass.IsOverflowing ? -15f : 0f;
 
         float raw = orderScore + layerScore + fillScore + garnishBonus + overflowPenalty;
         _lastScore = Mathf.Clamp((int)raw, 0, _activeRecipe.baseScore);
@@ -282,10 +304,10 @@ public class DrinkPourManager : MonoBehaviour
         Debug.Log($"[DrinkPourManager] Score: {_lastScore} (order={orderScore:F0} layer={layerScore:F0} fill={fillScore:F0} garnish={garnishBonus:F0} overflow={overflowPenalty:F0})");
     }
 
-    /// <summary>0-30 points: were ingredients poured in the correct order?</summary>
+    /// <summary>0-10 points bonus: were ingredients poured in the correct order?</summary>
     private float CalculateOrderScore()
     {
-        if (_activeRecipe.ingredients == null || _activeRecipe.ingredients.Length == 0) return 30f;
+        if (_activeRecipe.ingredients == null || _activeRecipe.ingredients.Length == 0) return 10f;
 
         var order = _activeGlass.PourOrder;
         var expected = _activeRecipe.ingredients;
@@ -296,16 +318,16 @@ public class DrinkPourManager : MonoBehaviour
             if (order[i] == expected[i]) correct++;
         }
 
-        if (correct == expected.Length) return 30f;
-        if (correct >= expected.Length - 1) return 15f;
+        if (correct == expected.Length) return 10f;
+        if (correct >= expected.Length - 1) return 5f;
         return 0f;
     }
 
-    /// <summary>0-40 points: how close is each layer to its target portion?</summary>
+    /// <summary>0-50 points: how close is each layer to its target portion?</summary>
     private float CalculateLayerScore()
     {
         if (_activeRecipe.ingredients == null || _activeRecipe.portionNormalized == null)
-            return 40f;
+            return 50f;
 
         float totalFill = _activeGlass.TotalFill;
         if (totalFill <= 0f) return 0f;
@@ -322,16 +344,16 @@ public class DrinkPourManager : MonoBehaviour
             totalAccuracy += accuracy;
         }
 
-        return (totalAccuracy / count) * 40f;
+        return (totalAccuracy / count) * 50f;
     }
 
-    /// <summary>0-20 points: how close is total fill to the target line?</summary>
+    /// <summary>0-30 points: how close is total fill to the target line?</summary>
     private float CalculateFillScore()
     {
         float totalFill = _activeGlass.TotalFill;
         float dist = Mathf.Abs(totalFill - _activeRecipe.idealFillLevel);
         float accuracy = Mathf.Clamp01(1f - dist / Mathf.Max(_activeRecipe.fillTolerance, 0.01f));
-        return accuracy * 20f;
+        return accuracy * 30f;
     }
 
     /// <summary>0-10 points: correct garnishes?</summary>
@@ -411,6 +433,41 @@ public class DrinkPourManager : MonoBehaviour
         if (hl == null && on)
             hl = glass.gameObject.AddComponent<InteractableHighlight>();
         if (hl != null) hl.SetHighlighted(on);
+    }
+
+    /// <summary>Highlight only the bottle for the next expected ingredient in the recipe.</summary>
+    private void HighlightNextIngredientBottle()
+    {
+        if (_activeRecipe == null || _activeRecipe.ingredients == null || _activeGlass == null)
+        {
+            HighlightAllBottles(false);
+            return;
+        }
+
+        int step = _activeGlass.PourOrder.Count;
+        if (step >= _activeRecipe.ingredients.Length)
+        {
+            // All ingredients poured
+            HighlightAllBottles(false);
+            DrinkCutawayUI.Instance?.SetStatus("Ready to serve!");
+            return;
+        }
+
+        var nextIngredient = _activeRecipe.ingredients[step];
+
+        InteractableHighlight.SuppressVisuals = false;
+        foreach (var po in PlaceableObject.All)
+        {
+            if (po == null) continue;
+            var bottle = po.GetComponent<BottleItem>();
+            if (bottle == null) continue;
+
+            bool isNext = bottle.Ingredient == nextIngredient;
+            var hl = po.GetComponent<InteractableHighlight>();
+            if (isNext && hl == null)
+                hl = po.gameObject.AddComponent<InteractableHighlight>();
+            if (hl != null) hl.SetHighlighted(isNext);
+        }
     }
 
     private void HighlightAllBottles(bool on)

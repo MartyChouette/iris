@@ -48,6 +48,9 @@ public class DrinkGlass : MonoBehaviour
     public float FoamLevel => _foamLevel;
     public bool IsOverflowing => _overflowed;
 
+    /// <summary>True when fill is approaching overflow (85%+) but hasn't overflowed yet.</summary>
+    public bool NearOverflow => TotalFill > 0.85f && !_overflowed;
+
     /// <summary>Total liquid in the glass (sum of all layers).</summary>
     public float TotalFill
     {
