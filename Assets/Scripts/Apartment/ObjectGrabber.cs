@@ -556,7 +556,8 @@ public class ObjectGrabber : MonoBehaviour
             if (noPlaceableGlass != null && DrinkPourManager.Instance != null)
             {
                 var pourState = DrinkPourManager.Instance.CurrentState;
-                if (pourState == DrinkPourManager.State.ChoosingGlass)
+                if (pourState == DrinkPourManager.State.ChoosingGlass
+                    || pourState == DrinkPourManager.State.Pouring)
                 {
                     DrinkPourManager.Instance.SelectGlass(noPlaceableGlass);
                     ConsumeClick();
@@ -762,8 +763,10 @@ public class ObjectGrabber : MonoBehaviour
                 if (clickedGlass != null && DrinkPourManager.Instance != null)
                 {
                     var pourState = DrinkPourManager.Instance.CurrentState;
-                    if (pourState == DrinkPourManager.State.ChoosingGlass)
+                    if (pourState == DrinkPourManager.State.ChoosingGlass
+                        || pourState == DrinkPourManager.State.Pouring)
                     {
+                        // Select or switch glass — shows cutaway + recipe card
                         DrinkPourManager.Instance.SelectGlass(clickedGlass);
                         ConsumeClick();
                         return;
@@ -774,7 +777,6 @@ public class ObjectGrabber : MonoBehaviour
                         ConsumeClick();
                         return;
                     }
-                    // During Pouring state, clicking a glass is ignored (player pours via bottle)
                 }
 
                 // Bottles allowed — fall through to normal pickup
@@ -1712,12 +1714,21 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
-        // Highlight the glass we're snapping to
+        // Highlight the glass we're snapping to + show its cutaway/recipe
         if (bestGlass != _magnetizedGlass)
         {
             SetGlassMagnetHighlight(_magnetizedGlass, false);
             SetGlassMagnetHighlight(bestGlass, true);
             _magnetizedGlass = bestGlass;
+
+            // Show this glass's recipe cutaway so the player sees what they're making
+            if (DrinkPourManager.Instance != null && bestGlass != null)
+            {
+                var recipe = DrinkPourManager.Instance.ActiveRecipe;
+                // Switch active glass if it changed
+                if (bestGlass != DrinkPourManager.Instance.ActiveGlass)
+                    DrinkPourManager.Instance.SelectGlass(bestGlass);
+            }
         }
 
         _nearestDrinkGlass = bestGlass;

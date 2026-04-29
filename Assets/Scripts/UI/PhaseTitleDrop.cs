@@ -177,6 +177,10 @@ public class PhaseTitleDrop : MonoBehaviour
         _titleText.text = text;
         _shadowText.text = text;
 
+        // TMP can reset material properties when text changes — re-apply underlay disable
+        DisableUnderlay(_titleText);
+        DisableUnderlay(_shadowText);
+
         // Set tilt-shift parameters
         Shader.SetGlobalFloat(TiltCenterID, _tiltShiftCenter);
         Shader.SetGlobalFloat(TiltWidthID, _tiltShiftWidth);
