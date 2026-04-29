@@ -506,41 +506,18 @@ public class ObjectGrabber : MonoBehaviour
 
         var placeable = hit.collider.GetComponent<PlaceableObject>();
 
-        // If we hit a paired child (disabled PlaceableObject), go to the stack root.
-        // Also check hit.rigidbody — Unity may report the parent's rigidbody for
-        // child colliders in compound physics bodies.
+        // Walk up the hierarchy to find the first ENABLED PlaceableObject.
+        // Handles: paired children (disabled PlaceableObject), compound colliders,
+        // and any nested structure.
         if (placeable == null || !placeable.enabled)
         {
-            // Check the hit collider's GameObject first, then rigidbody's GameObject
-            var pairable = hit.collider.GetComponent<PairableItem>();
-            if (pairable == null) pairable = hit.collider.GetComponentInParent<PairableItem>();
-            if (pairable == null && hit.rigidbody != null)
-                pairable = hit.rigidbody.GetComponent<PairableItem>();
-
-            if (pairable != null && pairable.IsPaired)
+            placeable = null;
+            Transform walk = hit.collider.transform;
+            while (walk != null)
             {
-                // Walk to stack root and use its PlaceableObject
-                Transform root = pairable.transform;
-                while (root.parent != null && root.parent.GetComponent<PairableItem>() != null)
-                    root = root.parent;
-                placeable = root.GetComponent<PlaceableObject>();
-            }
-            // Also try: hit.rigidbody may be the root shoe directly
-            else if (pairable == null && hit.rigidbody != null)
-            {
-                var rbPairable = hit.rigidbody.GetComponent<PairableItem>();
-                if (rbPairable != null && rbPairable.IsPaired)
-                {
-                    Transform root = rbPairable.transform;
-                    while (root.parent != null && root.parent.GetComponent<PairableItem>() != null)
-                        root = root.parent;
-                    placeable = root.GetComponent<PlaceableObject>();
-                }
-                // Not paired but has a PlaceableObject — just use it
-                else if (hit.rigidbody.GetComponent<PlaceableObject>() is { } rbPlaceable && rbPlaceable.enabled)
-                {
-                    placeable = rbPlaceable;
-                }
+                var p = walk.GetComponent<PlaceableObject>();
+                if (p != null && p.enabled) { placeable = p; break; }
+                walk = walk.parent;
             }
         }
 

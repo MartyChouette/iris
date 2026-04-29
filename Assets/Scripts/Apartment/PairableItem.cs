@@ -314,15 +314,16 @@ public class PairableItem : MonoBehaviour
         StartCoroutine(RunPairPulse());
         held.StartCoroutine(held.RunPairPulse());
 
-        // Remove child's Rigidbody so its collider becomes part of the root's
-        // compound body. This ensures raycasts on the child report the root's
-        // Rigidbody, making click-to-pick-up work on either shoe.
+        // Keep child kinematic so it doesn't interfere with root physics
         var heldRb = held.GetComponent<Rigidbody>();
         if (heldRb != null)
         {
-            heldRb.linearVelocity = Vector3.zero;
-            heldRb.angularVelocity = Vector3.zero;
-            Destroy(heldRb);
+            if (!heldRb.isKinematic)
+            {
+                heldRb.linearVelocity = Vector3.zero;
+                heldRb.angularVelocity = Vector3.zero;
+            }
+            heldRb.isKinematic = true;
         }
 
         // Find the topmost item in the stack to parent onto
