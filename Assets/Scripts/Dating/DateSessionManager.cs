@@ -764,7 +764,7 @@ public class DateSessionManager : MonoBehaviour
             yield return PhaseTitleDrop.Instance.Show("Warming Up");
 
         // Re-fetch reaction UI from the new model (old one is inactive after swap)
-        reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
+        var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
 
         // Post-transition NPC dialogue
         yield return s_wait05;
