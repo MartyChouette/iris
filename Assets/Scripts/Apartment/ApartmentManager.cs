@@ -955,47 +955,12 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     public Ray ScreenPointToRay(Vector2 screenPos)
     {
-        // Top-down: Cinemachine is disabled, use the output camera directly
-        if (_topDownActive)
-        {
-            var outCam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
-            if (outCam != null) return outCam.ScreenPointToRay(screenPos);
-        }
-
-        if (browseCamera == null)
-            return Camera.main != null ? Camera.main.ScreenPointToRay(screenPos) : default;
-
-        var t = browseCamera.transform;
-        var lens = browseCamera.Lens;
-        bool ortho = lens.ModeOverride == LensSettings.OverrideModes.Orthographic;
-
-        float viewportX = (screenPos.x / Screen.width) * 2f - 1f;
-        float viewportY = (screenPos.y / Screen.height) * 2f - 1f;
-
-        if (Input.GetMouseButtonDown(0))
-            Debug.LogWarning($"[AM-Ray] ortho={ortho} size={lens.OrthographicSize:F2} fov={lens.FieldOfView:F2} near={lens.NearClipPlane:F2} far={lens.FarClipPlane:F2} vp=({viewportX:F3},{viewportY:F3}) pos={t.position:F2} fwd={t.forward:F3}");
-
-        if (ortho)
-        {
-            float halfH = lens.OrthographicSize;
-            float halfW = halfH * ((float)Screen.width / Screen.height);
-            // Don't use lens.NearClipPlane — the CM Lens getter returns stale
-            // state data (e.g. -500) instead of the value ApplyParallax wrote.
-            // Near clip only shifts ray origin along forward; irrelevant for raycasts.
-            Vector3 origin = t.position
-                + t.right * (viewportX * halfW)
-                + t.up * (viewportY * halfH);
-            return new Ray(origin, t.forward);
-        }
-        else
-        {
-            float halfFov = lens.FieldOfView * 0.5f * Mathf.Deg2Rad;
-            float aspect = (float)Screen.width / Screen.height;
-            Vector3 dir = t.forward
-                + t.right * (viewportX * Mathf.Tan(halfFov) * aspect)
-                + t.up * (viewportY * Mathf.Tan(halfFov));
-            return new Ray(t.position, dir.normalized);
-        }
+        // Use the brain's output camera directly — it always has the correct
+        // rendered state. The old manual ray from browseCamera.Lens was unreliable
+        // because Cinemachine's Lens getter returns stale internal data.
+        var cam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
+        if (cam != null) return cam.ScreenPointToRay(screenPos);
+        return default;
     }
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)

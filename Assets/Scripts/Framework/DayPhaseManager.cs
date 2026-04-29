@@ -518,9 +518,15 @@ public class DayPhaseManager : MonoBehaviour
         // Close all station UIs/HUDs on any phase change
         DismissAllStationUI();
 
-        // Go to Bed panel is only visible during Evening
+        // Go to Bed panel + its canvas are only visible during Evening.
+        // The canvas has a GraphicRaycaster that blocks game clicks if left active.
         if (_goToBedPanel != null)
-            _goToBedPanel.SetActive(phase == DayPhase.Evening);
+        {
+            bool showBed = phase == DayPhase.Evening;
+            _goToBedPanel.SetActive(showBed);
+            if (_goToBedPanel.transform.parent != null)
+                _goToBedPanel.transform.parent.gameObject.SetActive(showBed);
+        }
         switch (phase)
         {
             case DayPhase.Morning:

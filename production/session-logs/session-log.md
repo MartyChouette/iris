@@ -28760,3 +28760,100 @@ Assets/Scripts/Apartment/PairableItem.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260428_211454
+### Commits
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+---
+
+## Session End: 20260428_211936
+### Commits
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_212501
+### Commits
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_215011
+### Commits
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/EntranceJudgmentSequence.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/Cleaning/CleaningManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_221037
+### Commits
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_221150
+### Commits
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_221226
+### Commits
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_221752
+### Commits
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/DayPhaseManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260428_222842
+### Commits
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+production/session-logs/session-log.md
+---
+
