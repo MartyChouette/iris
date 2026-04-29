@@ -507,7 +507,10 @@ public class ObjectGrabber : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit debugHit, 100f))
                 Debug.Log($"[TryPickUp] Missed on placeableLayer but hit {debugHit.collider.gameObject.name} (layer={debugHit.collider.gameObject.layer})");
             else
-                Debug.Log("[TryPickUp] Ray hit nothing at all.");
+            {
+                var mainCam = Camera.main;
+                Debug.Log($"[TryPickUp] Ray hit nothing. ray.origin={ray.origin:F2} ray.dir={ray.direction:F3} cam={mainCam?.name ?? "NULL"} pos={mainCam?.transform.position:F2} fwd={mainCam?.transform.forward:F3} ortho={mainCam?.orthographic} size={mainCam?.orthographicSize:F2}");
+            }
             return;
         }
         Debug.Log($"[TryPickUp] Hit: {hit.collider.gameObject.name} (layer={hit.collider.gameObject.layer}, hasPlaceable={hit.collider.GetComponent<PlaceableObject>() != null}, hasGlass={hit.collider.GetComponent<DrinkGlass>() != null})");
