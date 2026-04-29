@@ -521,10 +521,14 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // Standard parent walk for non-paired items
+        // Standard parent walk — skip disabled PlaceableObjects (paired children)
         if (placeable == null)
         {
-            placeable = hit.collider.GetComponentInParent<PlaceableObject>();
+            var candidates = hit.collider.GetComponentsInParent<PlaceableObject>(true);
+            for (int i = 0; i < candidates.Length; i++)
+            {
+                if (candidates[i].enabled) { placeable = candidates[i]; break; }
+            }
         }
 
         // Perfume bottle — click to spray in place (no pickup)
@@ -1462,14 +1466,33 @@ public class ObjectGrabber : MonoBehaviour
         Vector2 screenPos = IrisInput.CursorPosition;
         Ray ray = ScreenRay(screenPos);
 
-        // Use SphereCast for forgiving click area, fall back to RaycastNonAlloc
-        PairableItem clickedPairable = FindComponentAlongRay<PairableItem>(ray, placeableLayer);
+        // Find a PairableItem along the ray, skipping the held item (its collider
+        // sits at the cursor and would block the ray to the partner behind it).
+        PairableItem clickedPairable = null;
+        float bestDist = float.MaxValue;
+        int hitCount = Physics.RaycastNonAlloc(ray, s_pairHitBuffer, 100f, placeableLayer);
+        for (int i = 0; i < hitCount; i++)
+        {
+            var comp = s_pairHitBuffer[i].collider.GetComponent<PairableItem>();
+            if (comp == null) comp = s_pairHitBuffer[i].collider.GetComponentInParent<PairableItem>();
+            if (comp == null || comp == heldPairable) continue;
+            if (s_pairHitBuffer[i].distance < bestDist)
+            {
+                bestDist = s_pairHitBuffer[i].distance;
+                clickedPairable = comp;
+            }
+        }
+        // SphereCast fallback for forgiving click area
+        if (clickedPairable == null
+            && Physics.SphereCast(ray, PairStackRadius, out RaycastHit sphereHit, 100f, placeableLayer))
+        {
+            var comp = sphereHit.collider.GetComponent<PairableItem>();
+            if (comp == null) comp = sphereHit.collider.GetComponentInParent<PairableItem>();
+            if (comp != null && comp != heldPairable)
+                clickedPairable = comp;
+        }
 
-        // Only accept the magnetic snap target if the player actually clicked
-        // on the partner item — not on empty space or a surface.
-        // This prevents accidental pairing when trying to place near the partner.
-
-        if (clickedPairable == null || clickedPairable == heldPairable) return false;
+        if (clickedPairable == null) return false;
         if (!clickedPairable.CanPairWith(heldPairable)) return false;
 
         // Release held item from grabber

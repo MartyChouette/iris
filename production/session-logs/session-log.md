@@ -29245,3 +29245,67 @@ Assets/Scenes/apartment.unity
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260429_104802
+### Commits
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+---
+
+## Session End: 20260429_110240
+### Commits
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_111335
+### Commits
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_112748
+### Commits
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_113732
+### Commits
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+

@@ -349,17 +349,11 @@ public class PairableItem : MonoBehaviour
         }
         else
         {
-            // SideBySide — parent to the stack ROOT so items fan out from center.
-            // Pick the side (+ or - offset) closest to where the held item is,
-            // falling back to whichever side is still free.
+            // SideBySide — center both shoes symmetrically around root's position.
+            // Child goes to full offset in local space, then root shifts by half
+            // so the pair straddles the original anchor point.
             Transform sbsRoot = FindStackRoot(transform);
-
             Vector3 localPos = GetSideBySideLocalOffset(sbsRoot, held);
-
-            // Calculate world-space target position so both items sit at the
-            // same ground level — prevents one floating above the other.
-            Vector3 worldSnapPos = sbsRoot.TransformPoint(localPos);
-            worldSnapPos.y = sbsRoot.position.y; // match root's Y exactly
 
             // Preserve world scale — parent may have different scale that deforms the child
             Vector3 heldWorldScale = held.transform.lossyScale;
@@ -370,9 +364,17 @@ public class PairableItem : MonoBehaviour
                 parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
                 parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
 
-            held.transform.position = worldSnapPos;
-            // Inherit the root's rotation so paired items face the same direction
-            held.transform.rotation = sbsRoot.rotation;
+            // Place child at full offset in local space (Y=0 keeps both at same height)
+            held.transform.localPosition = new Vector3(localPos.x, 0f, localPos.z);
+            held.transform.localRotation = Quaternion.identity;
+
+            // Shift root by half the offset so the pair is centered on the anchor
+            Vector3 halfShift = sbsRoot.TransformDirection(localPos * 0.5f);
+            halfShift.y = 0f;
+            sbsRoot.position -= halfShift;
+
+            // Resize root's BoxCollider to encompass both shoes
+            ResizeColliderToChildren(sbsRoot);
         }
 
         // Disable held item's standalone PlaceableObject but keep collider
@@ -408,10 +410,10 @@ public class PairableItem : MonoBehaviour
             return stackTop.position + Vector3.up * _snapOffset.y;
         }
 
-        // SideBySide — pick the best free side relative to the stack root
+        // SideBySide — return half-offset (pair centers around root)
         Transform root = FindStackRoot(transform);
         Vector3 localPos = GetSideBySideLocalOffset(root, held);
-        return root.TransformPoint(localPos);
+        return root.TransformPoint(localPos * 0.5f);
     }
 
     /// <summary>Walk up to the root of a paired stack.</summary>
@@ -455,6 +457,34 @@ public class PairableItem : MonoBehaviour
 
         // Both occupied (stack full) — default to positive
         return _snapOffset;
+    }
+
+    /// <summary>
+    /// Resize the root's BoxCollider so it encompasses all child Renderers.
+    /// Called after SideBySide pairing so the collider covers both shoes.
+    /// </summary>
+    private static void ResizeColliderToChildren(Transform root)
+    {
+        var box = root.GetComponent<BoxCollider>();
+        if (box == null) return;
+
+        // Gather world-space bounds from all renderers in the hierarchy
+        var renderers = root.GetComponentsInChildren<Renderer>();
+        if (renderers.Length == 0) return;
+
+        Bounds combined = renderers[0].bounds;
+        for (int i = 1; i < renderers.Length; i++)
+            combined.Encapsulate(renderers[i].bounds);
+
+        // Convert world bounds to root's local space
+        box.center = root.InverseTransformPoint(combined.center);
+        // InverseTransformVector handles rotation but not non-uniform scale correctly,
+        // so divide each axis by lossyScale manually.
+        Vector3 ls = root.lossyScale;
+        box.size = new Vector3(
+            ls.x != 0f ? combined.size.x / Mathf.Abs(ls.x) : combined.size.x,
+            ls.y != 0f ? combined.size.y / Mathf.Abs(ls.y) : combined.size.y,
+            ls.z != 0f ? combined.size.z / Mathf.Abs(ls.z) : combined.size.z);
     }
 
     /// <summary>Walk the transform hierarchy to find the topmost stacked PairableItem.</summary>
