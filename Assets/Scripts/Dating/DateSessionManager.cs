@@ -749,7 +749,9 @@ public class DateSessionManager : MonoBehaviour
             Debug.LogError($"[DateSessionManager] TransitionToPhase3 setup failed: {e}");
         }
 
-        // Snap camera into phase framing while screen is still white
+        // Release drink-verdict camera, then immediately snap to Phase 3 framing
+        // (both happen while faded — no visible flash)
+        ApartmentManager.Instance?.ClearPresetBase();
         ApplyPhaseCamera(DatePhase.Reveal);
 
         // Fade in always runs even if setup threw
@@ -1868,7 +1870,8 @@ public class DateSessionManager : MonoBehaviour
             yield return ScreenFade.Instance.FadeOut(0.5f);
 
         RestoreApartmentRenderers(hiddenRenderers);
-        am?.ClearPresetBase();
+        // Don't ClearPresetBase here — that would flash the kitchen camera.
+        // TransitionToPhase3 snaps the Phase 3 camera while still faded.
 
         // Transition to Phase 3 while still faded — it does its own fade-in
         yield return TransitionToPhase3();
