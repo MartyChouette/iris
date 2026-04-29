@@ -550,6 +550,26 @@ public class ObjectGrabber : MonoBehaviour
         // No placeable hit — check for cubby/drawer door click
         if (placeable == null)
         {
+            // DrinkGlass without PlaceableObject — handle during date Phase 2
+            var noPlaceableGlass = hit.collider.GetComponent<DrinkGlass>();
+            if (noPlaceableGlass == null) noPlaceableGlass = hit.collider.GetComponentInParent<DrinkGlass>();
+            if (noPlaceableGlass != null && DrinkPourManager.Instance != null)
+            {
+                var pourState = DrinkPourManager.Instance.CurrentState;
+                if (pourState == DrinkPourManager.State.ChoosingGlass)
+                {
+                    DrinkPourManager.Instance.SelectGlass(noPlaceableGlass);
+                    ConsumeClick();
+                    return;
+                }
+                if (pourState == DrinkPourManager.State.ChoosingServeGlass)
+                {
+                    DrinkPourManager.Instance.ServeGlass(noPlaceableGlass);
+                    ConsumeClick();
+                    return;
+                }
+            }
+
             // Demo-locked doors jiggle instead of opening
             var demoLock = hit.collider.GetComponent<DemoLock>();
             if (demoLock == null) demoLock = hit.collider.GetComponentInParent<DemoLock>();
