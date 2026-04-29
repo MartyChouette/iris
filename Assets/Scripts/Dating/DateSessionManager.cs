@@ -704,17 +704,10 @@ public class DateSessionManager : MonoBehaviour
         // Restore fridge bottles to their original home (fridge shelf)
         SetBottleHomes(useCounter: false);
 
-        var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
-
-        // Pre-transition NPC dialogue
-        string preLine = s_prePhase3Lines[UnityEngine.Random.Range(0, s_prePhase3Lines.Length)];
-        if (reactionUI != null && reactionUI.gameObject.activeInHierarchy) reactionUI.ShowText(preLine, 2.0f);
-        yield return s_wait25;
-
         // Block input during transition
         if (DayPhaseManager.Instance != null) DayPhaseManager.Instance.IsTransitioning = true;
 
-        // Fade out
+        // Fade out (instant if already faded from drink verdict)
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(fadeDuration);
 
@@ -1867,17 +1860,15 @@ public class DateSessionManager : MonoBehaviour
             yield return new WaitUntil(() => clicked);
         }
 
-        // 10. Fade to white, restore apartment, release camera
+        // 10. Fade out, restore apartment, go straight to Phase 3
+        //     (skip returning to Phase 2 camera — transition handles its own fade-in)
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeOut(0.5f);
 
         RestoreApartmentRenderers(hiddenRenderers);
         am?.ClearPresetBase();
 
-        if (ScreenFade.Instance != null)
-            yield return ScreenFade.Instance.FadeIn(0.3f);
-
-        // 6. Transition to Phase 3
+        // Transition to Phase 3 while still faded — it does its own fade-in
         yield return TransitionToPhase3();
         _drinkVerdictRunning = false;
     }
