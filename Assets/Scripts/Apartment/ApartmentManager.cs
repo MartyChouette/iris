@@ -955,12 +955,35 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     public Ray ScreenPointToRay(Vector2 screenPos)
     {
-        // Use the brain's output camera directly — it always has the correct
-        // rendered state. The old manual ray from browseCamera.Lens was unreliable
-        // because Cinemachine's Lens getter returns stale internal data.
+        // Manual ray construction from Camera.main's current properties.
+        // Camera.ScreenPointToRay uses the projection matrix from the last render,
+        // which is stale during Update (Cinemachine writes in LateUpdate).
+        // The camera's transform and orthographicSize ARE current, so we use those directly.
         var cam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
-        if (cam != null) return cam.ScreenPointToRay(screenPos);
-        return default;
+        if (cam == null) return default;
+
+        var t = cam.transform;
+        float viewportX = (screenPos.x / Screen.width) * 2f - 1f;
+        float viewportY = (screenPos.y / Screen.height) * 2f - 1f;
+        float aspect = (float)Screen.width / Screen.height;
+
+        if (cam.orthographic)
+        {
+            float halfH = cam.orthographicSize;
+            float halfW = halfH * aspect;
+            Vector3 origin = t.position
+                + t.right * (viewportX * halfW)
+                + t.up * (viewportY * halfH);
+            return new Ray(origin, t.forward);
+        }
+        else
+        {
+            float halfFov = cam.fieldOfView * 0.5f * Mathf.Deg2Rad;
+            Vector3 dir = t.forward
+                + t.right * (viewportX * Mathf.Tan(halfFov) * aspect)
+                + t.up * (viewportY * Mathf.Tan(halfFov));
+            return new Ray(t.position, dir.normalized);
+        }
     }
 
     public void SetPresetBase(Vector3 pos, Quaternion rot, float fov)
