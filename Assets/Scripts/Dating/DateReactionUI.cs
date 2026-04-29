@@ -379,7 +379,7 @@ public class DateReactionUI : MonoBehaviour
         _screenTextRT.sizeDelta = new Vector2(500f, 60f);
 
         _screenText = go.AddComponent<TextMeshProUGUI>();
-        _screenText.fontSize = 24f;
+        _screenText.fontSize = 36f;
         _screenText.alignment = TextAlignmentOptions.Center;
         _screenText.color = Color.white;
         _screenText.outlineWidth = 0.3f;
