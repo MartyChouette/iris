@@ -29081,3 +29081,167 @@ e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor 
 6f8bbe6 rework perfume judgment: check actual perfume tag, not mood value
 ---
 
+## Session End: 20260429_020613
+### Commits
+cafdf02 session log update
+ba62419 fix all stale raycast cameras, add top-down zoom save/restore
+5a754b7 fix persistent raycast mismatch: use browseCamera transform + _currentZoom
+0760bb2 route all gameplay raycasts through ApartmentManager.ScreenPointToRay
+0313b03 fix PhaseTitleDrop underlay in builds, keep ray debug logging
+95258a3 fix stale projection matrix: manual ray from Camera.main properties
+265ca97 add detailed ray debug: origin, direction, camera state
+2f808ec add debug logging to TryPickUp to diagnose Phase 2 click failures
+0795732 fix Phase 2 glass clicks: handle DrinkGlass without PlaceableObject
+2ebd466 fix Phase 2 softlock: glass/bottle clicks blocked by date interaction rules
+82d28a4 drink making UX overhaul: recipe card, pour feedback, scoring rebalance
+d774d79 fix paired item pickup via stack root, disable gunpla assembly, comment outfit judgment
+2eb32aa fix raycast blind spots: use brain output camera, toggle GoToBed canvas
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+---
+
+## Session End: 20260429_021050
+### Commits
+f6122bb fix paired item pickup: destroy child Rigidbody for compound collider
+cafdf02 session log update
+ba62419 fix all stale raycast cameras, add top-down zoom save/restore
+5a754b7 fix persistent raycast mismatch: use browseCamera transform + _currentZoom
+0760bb2 route all gameplay raycasts through ApartmentManager.ScreenPointToRay
+0313b03 fix PhaseTitleDrop underlay in builds, keep ray debug logging
+95258a3 fix stale projection matrix: manual ray from Camera.main properties
+265ca97 add detailed ray debug: origin, direction, camera state
+2f808ec add debug logging to TryPickUp to diagnose Phase 2 click failures
+0795732 fix Phase 2 glass clicks: handle DrinkGlass without PlaceableObject
+2ebd466 fix Phase 2 softlock: glass/bottle clicks blocked by date interaction rules
+82d28a4 drink making UX overhaul: recipe card, pour feedback, scoring rebalance
+d774d79 fix paired item pickup via stack root, disable gunpla assembly, comment outfit judgment
+2eb32aa fix raycast blind spots: use brain output camera, toggle GoToBed canvas
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_021414
+### Commits
+ab06197 revert Rigidbody destruction, simplify paired pickup to parent walk
+f6122bb fix paired item pickup: destroy child Rigidbody for compound collider
+cafdf02 session log update
+ba62419 fix all stale raycast cameras, add top-down zoom save/restore
+5a754b7 fix persistent raycast mismatch: use browseCamera transform + _currentZoom
+0760bb2 route all gameplay raycasts through ApartmentManager.ScreenPointToRay
+0313b03 fix PhaseTitleDrop underlay in builds, keep ray debug logging
+95258a3 fix stale projection matrix: manual ray from Camera.main properties
+265ca97 add detailed ray debug: origin, direction, camera state
+2f808ec add debug logging to TryPickUp to diagnose Phase 2 click failures
+0795732 fix Phase 2 glass clicks: handle DrinkGlass without PlaceableObject
+2ebd466 fix Phase 2 softlock: glass/bottle clicks blocked by date interaction rules
+82d28a4 drink making UX overhaul: recipe card, pour feedback, scoring rebalance
+d774d79 fix paired item pickup via stack root, disable gunpla assembly, comment outfit judgment
+2eb32aa fix raycast blind spots: use brain output camera, toggle GoToBed canvas
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_021841
+### Commits
+26ad694 Phase 2: click any glass anytime, bottle snap shows cutaway, fix double title
+ab06197 revert Rigidbody destruction, simplify paired pickup to parent walk
+f6122bb fix paired item pickup: destroy child Rigidbody for compound collider
+cafdf02 session log update
+ba62419 fix all stale raycast cameras, add top-down zoom save/restore
+5a754b7 fix persistent raycast mismatch: use browseCamera transform + _currentZoom
+0760bb2 route all gameplay raycasts through ApartmentManager.ScreenPointToRay
+0313b03 fix PhaseTitleDrop underlay in builds, keep ray debug logging
+95258a3 fix stale projection matrix: manual ray from Camera.main properties
+265ca97 add detailed ray debug: origin, direction, camera state
+2f808ec add debug logging to TryPickUp to diagnose Phase 2 click failures
+0795732 fix Phase 2 glass clicks: handle DrinkGlass without PlaceableObject
+2ebd466 fix Phase 2 softlock: glass/bottle clicks blocked by date interaction rules
+82d28a4 drink making UX overhaul: recipe card, pour feedback, scoring rebalance
+d774d79 fix paired item pickup via stack root, disable gunpla assembly, comment outfit judgment
+2eb32aa fix raycast blind spots: use brain output camera, toggle GoToBed canvas
+e702e22 date phase interaction rules: no pickup in Phase 3, no cleaning, cursor restrictions
+4e8c267 fix paired item pickup, top-down raycasts, keep child colliders active
+58b0f21 top-down camera (Tab), world-space pan bounds, shoe pairing fix
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_100844
+### Commits
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+26ad694 Phase 2: click any glass anytime, bottle snap shows cutaway, fix double title
+ab06197 revert Rigidbody destruction, simplify paired pickup to parent walk
+f6122bb fix paired item pickup: destroy child Rigidbody for compound collider
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_101005
+### Commits
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+26ad694 Phase 2: click any glass anytime, bottle snap shows cutaway, fix double title
+ab06197 revert Rigidbody destruction, simplify paired pickup to parent walk
+f6122bb fix paired item pickup: destroy child Rigidbody for compound collider
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_101336
+### Commits
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+26ad694 Phase 2: click any glass anytime, bottle snap shows cutaway, fix double title
+ab06197 revert Rigidbody destruction, simplify paired pickup to parent walk
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_101442
+### Commits
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+26ad694 Phase 2: click any glass anytime, bottle snap shows cutaway, fix double title
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_101544
+### Commits
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+26ad694 Phase 2: click any glass anytime, bottle snap shows cutaway, fix double title
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_101837
+### Commits
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
