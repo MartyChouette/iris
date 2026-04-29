@@ -490,13 +490,13 @@ public class ApartmentManager : MonoBehaviour
             _currentParallaxOffset = Vector3.zero;
             _currentParallaxRotation = Quaternion.identity;
 
-            // Save and override zoom for top-down
+            // Save and override zoom — start top-down at the farthest zoom step
             _savedZoomStep = _currentZoomStep;
             _savedZoom = _currentZoom;
-            _currentZoom = _topDownOrthoSize;
-            _targetZoom = _topDownOrthoSize;
-            // Find the zoom step closest to the top-down size
-            _currentZoomStep = FindClosestZoomStep(_topDownOrthoSize);
+            int farStep = _zoomSteps.Length - 1;
+            _currentZoomStep = farStep;
+            _currentZoom = _zoomSteps[farStep];
+            _targetZoom = _zoomSteps[farStep];
 
             // Disable Cinemachine entirely so nothing fights our LateUpdate writes
             if (browseCamera != null) browseCamera.enabled = false;

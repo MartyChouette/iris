@@ -87,7 +87,9 @@ public class DrinkPourManager : MonoBehaviour
     /// <summary>Step 1: highlight all glasses so the player picks one to begin.</summary>
     public void BeginGlassChoice()
     {
-        // Unsuppress highlights once for the entire drink-making session
+        // Force-reset suppress counter so highlights are guaranteed to render.
+        // The ref-counted suppress can drift if previous sessions didn't clean up.
+        InteractableHighlight.ResetSuppressCount();
         InteractableHighlight.SuppressVisuals = false;
         CurrentState = State.ChoosingGlass;
         HighlightAllGlasses(true);
