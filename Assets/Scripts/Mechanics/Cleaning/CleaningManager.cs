@@ -284,7 +284,7 @@ public class CleaningManager : MonoBehaviour
         _sfxCooldown -= Time.deltaTime;
 
         Vector2 pointer = IrisInput.CursorPosition;
-        Ray ray = _mainCamera.ScreenPointToRay(pointer);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : _mainCamera.ScreenPointToRay(pointer);
 
         bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, 100f, _cleanableLayer);
 

@@ -104,7 +104,7 @@ public class GraftingController : MonoBehaviour
         if (!_clickAction.WasPressedThisFrame()) return;
 
         Vector2 pointer = _pointerAction.ReadValue<Vector2>();
-        Ray ray = mainCamera.ScreenPointToRay(pointer);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : mainCamera.ScreenPointToRay(pointer);
 
         if (!Physics.Raycast(ray, out RaycastHit hit, 100f, partLayer)) return;
 
@@ -136,7 +136,7 @@ public class GraftingController : MonoBehaviour
 
         // Follow cursor in world space
         Vector2 pointer = _pointerAction.ReadValue<Vector2>();
-        Ray ray = mainCamera.ScreenPointToRay(pointer);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : mainCamera.ScreenPointToRay(pointer);
         Plane worldPlane = new Plane(Vector3.forward, _heldPart.transform.position);
         if (worldPlane.Raycast(ray, out float enter))
         {

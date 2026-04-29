@@ -267,7 +267,7 @@ public class ScissorStation : MonoBehaviour
             return;
         }
 
-        Ray ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(Input.mousePosition) : raycastCamera.ScreenPointToRay(Input.mousePosition);
 
         if (debugDrawRay)
             Debug.DrawRay(ray.origin, ray.direction * maxClickDistance, Color.yellow, debugRayDuration);

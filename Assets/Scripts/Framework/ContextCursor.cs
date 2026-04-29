@@ -65,7 +65,7 @@ public class CursorContext : MonoBehaviour
 
     void CheckUnderMouse()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(Input.mousePosition) : mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))

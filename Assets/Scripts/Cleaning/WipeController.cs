@@ -76,7 +76,7 @@ public class WipeController : MonoBehaviour
         if (spillSurface == null) return;
 
         Vector2 screenPos = _mousePosition.ReadValue<Vector2>();
-        Ray ray = cam.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(screenPos) : cam.ScreenPointToRay(screenPos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, spillLayer))
         {

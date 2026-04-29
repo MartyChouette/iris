@@ -469,6 +469,8 @@ public class ApartmentManager : MonoBehaviour
     private Quaternion _savedRotation;
     private float _savedFOV;
     private Vector3 _savedPanOffset;
+    private int _savedZoomStep;
+    private float _savedZoom;
 
     private void HandleTopDownToggle()
     {
@@ -488,6 +490,14 @@ public class ApartmentManager : MonoBehaviour
             _currentParallaxOffset = Vector3.zero;
             _currentParallaxRotation = Quaternion.identity;
 
+            // Save and override zoom for top-down
+            _savedZoomStep = _currentZoomStep;
+            _savedZoom = _currentZoom;
+            _currentZoom = _topDownOrthoSize;
+            _targetZoom = _topDownOrthoSize;
+            // Find the zoom step closest to the top-down size
+            _currentZoomStep = FindClosestZoomStep(_topDownOrthoSize);
+
             // Disable Cinemachine entirely so nothing fights our LateUpdate writes
             if (browseCamera != null) browseCamera.enabled = false;
             if (brain != null) brain.enabled = false;
@@ -499,6 +509,9 @@ public class ApartmentManager : MonoBehaviour
             _baseRotation = _savedRotation;
             _baseFOV = _savedFOV;
             _panOffset = _savedPanOffset;
+            _currentZoomStep = _savedZoomStep;
+            _currentZoom = _savedZoom;
+            _targetZoom = _savedZoom;
 
             if (brain != null) brain.enabled = true;
             if (browseCamera != null) browseCamera.enabled = true;
@@ -662,6 +675,19 @@ public class ApartmentManager : MonoBehaviour
         _currentZoom = _targetZoom; // Apply immediately (HandleZoomInput is blocked during presets)
         ClampPanOffset(soft: true);
         UpdateZoomIndicator();
+    }
+
+    private int FindClosestZoomStep(float targetSize)
+    {
+        if (_zoomSteps == null || _zoomSteps.Length == 0) return 0;
+        int best = 0;
+        float bestDist = Mathf.Abs(_zoomSteps[0] - targetSize);
+        for (int i = 1; i < _zoomSteps.Length; i++)
+        {
+            float dist = Mathf.Abs(_zoomSteps[i] - targetSize);
+            if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        return best;
     }
 
     private void HandleZoomInput()

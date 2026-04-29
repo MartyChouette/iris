@@ -219,7 +219,7 @@ public class ScissorsCutController : MonoBehaviour
     private void TryStartDrawing()
     {
         Vector2 screenPos = _mousePosition.ReadValue<Vector2>();
-        Ray ray = cam.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(screenPos) : cam.ScreenPointToRay(screenPos);
 
         if (!RaycastSurface(ray, out Vector3 hitPoint, out Vector3 hitNormal, out Vector2 hitUV))
             return;
@@ -253,7 +253,7 @@ public class ScissorsCutController : MonoBehaviour
     private void UpdateDrawing()
     {
         Vector2 screenPos = _mousePosition.ReadValue<Vector2>();
-        Ray ray = cam.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(screenPos) : cam.ScreenPointToRay(screenPos);
 
         if (!RaycastSurface(ray, out Vector3 hitPoint, out Vector3 hitNormal, out Vector2 hitUV))
             return;

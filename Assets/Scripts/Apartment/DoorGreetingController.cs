@@ -137,7 +137,7 @@ public class DoorGreetingController : MonoBehaviour
         if (_mainCamera == null) return false;
 
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = _mainCamera.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(screenPos) : _mainCamera.ScreenPointToRay(screenPos);
 
         return Physics.Raycast(ray, out _, 100f, _doorLayer);
     }

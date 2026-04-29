@@ -173,7 +173,7 @@ public class DrinkMakingManager : MonoBehaviour, IStationManager
         // Click → select bottle or start pour on glass
         if (_clickAction.WasPressedThisFrame())
         {
-            Ray ray = mainCamera.ScreenPointToRay(pointer);
+            Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : mainCamera.ScreenPointToRay(pointer);
             if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
                 // Check if hit a bottle
@@ -289,7 +289,7 @@ public class DrinkMakingManager : MonoBehaviour, IStationManager
             Vector2 pointer = _mousePosition.ReadValue<Vector2>();
 
             // Convert screen position to world position on the glass plane
-            Ray ray = mainCamera.ScreenPointToRay(pointer);
+            Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : mainCamera.ScreenPointToRay(pointer);
             Plane glassPlane = new Plane(Vector3.forward,
                 glass != null ? glass.transform.position : Vector3.zero);
 

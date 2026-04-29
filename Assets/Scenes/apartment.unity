@@ -17923,7 +17923,7 @@ MonoBehaviour:
     perspective: 0
     perspectiveFOV: 46.1
     panLimit: 0.5
-    zoomStep: -1
+    zoomStep: 1
     captured: 1
   _couchCamera:
     label: Couch / Reveal
@@ -17935,7 +17935,7 @@ MonoBehaviour:
     perspective: 0
     perspectiveFOV: 46.1
     panLimit: 2.12
-    zoomStep: -1
+    zoomStep: 1
     captured: 1
   _phaseCameraLerpDuration: 1.6
   _fridgeHighlightRenderer: {fileID: 0}
@@ -24896,6 +24896,7 @@ MonoBehaviour:
   _maxLookAngle: 35
   _glanceInterval: 5
   _glanceDuration: 2
+  _systemEnabled: 0
   _snapRadius: 0.5
 --- !u!114 &919967258
 MonoBehaviour:

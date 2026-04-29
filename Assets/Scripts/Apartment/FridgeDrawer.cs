@@ -62,7 +62,7 @@ public class FridgeDrawer : MonoBehaviour
         if (_mainCamera == null) return;
 
         Vector2 mousePos = IrisInput.CursorPosition;
-        var ray = _mainCamera.ScreenPointToRay(mousePos);
+        var ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(mousePos) : _mainCamera.ScreenPointToRay(mousePos);
 
         if (!Physics.Raycast(ray, out var hit, 20f, _clickLayer)) return;
 

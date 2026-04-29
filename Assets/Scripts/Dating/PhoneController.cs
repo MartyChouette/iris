@@ -208,7 +208,7 @@ public class PhoneController : MonoBehaviour, IStationManager
         if (_mainCamera == null) return false;
 
         Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = _mainCamera.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(screenPos) : _mainCamera.ScreenPointToRay(screenPos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, phoneLayer))
         {

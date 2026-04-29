@@ -122,7 +122,7 @@ public class FridgeController : MonoBehaviour
         if (ObjectGrabber.IsHoldingObject) return;
 
         Vector2 mousePos = IrisInput.CursorPosition;
-        var ray = _mainCamera.ScreenPointToRay(mousePos);
+        var ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(mousePos) : _mainCamera.ScreenPointToRay(mousePos);
 
         if (!Physics.Raycast(ray, out var fridgeHit, 20f, _fridgeLayer)) return;
 
@@ -175,7 +175,7 @@ public class FridgeController : MonoBehaviour
         // Raycast to confirm player clicked on the fridge
         if (_mainCamera == null) return;
         Vector2 mousePos = IrisInput.CursorPosition;
-        var ray = _mainCamera.ScreenPointToRay(mousePos);
+        var ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(mousePos) : _mainCamera.ScreenPointToRay(mousePos);
         if (!Physics.Raycast(ray, out _, 20f, _fridgeLayer)) return;
 
         // Find the first shelf with a free slot

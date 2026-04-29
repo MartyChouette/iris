@@ -381,7 +381,7 @@ public class NemaController : MonoBehaviour
         if (_cachedCamera == null) _cachedCamera = Camera.main;
         if (_cachedCamera == null) return false;
 
-        Ray ray = _cachedCamera.ScreenPointToRay(IrisInput.CursorPosition);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(IrisInput.CursorPosition) : _cachedCamera.ScreenPointToRay(IrisInput.CursorPosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, _lookAtRaycastMask))
         {
             worldPos = hit.point;

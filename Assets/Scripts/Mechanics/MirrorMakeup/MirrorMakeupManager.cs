@@ -223,7 +223,7 @@ public class MirrorMakeupManager : MonoBehaviour, IStationManager
             // Phase 1: click on the sticker pad to peel one off
             if (_clickAction.WasPressedThisFrame())
             {
-                Ray ray = _mainCamera.ScreenPointToRay(pointer);
+                Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : _mainCamera.ScreenPointToRay(pointer);
                 if (Physics.Raycast(ray, out _, 100f, _stickerPadLayer))
                 {
                     _holdingSticker = true;
@@ -239,7 +239,7 @@ public class MirrorMakeupManager : MonoBehaviour, IStationManager
             // Cursor sticker follows mouse — project onto a plane at face depth
             if (_cursorSticker != null)
             {
-                Ray ray = _mainCamera.ScreenPointToRay(pointer);
+                Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : _mainCamera.ScreenPointToRay(pointer);
                 float faceZ = _faceCanvas.transform.position.z;
                 float dist = (faceZ - ray.origin.z) / ray.direction.z;
                 if (dist > 0f)
@@ -276,7 +276,7 @@ public class MirrorMakeupManager : MonoBehaviour, IStationManager
     private bool TryGetFaceUV(Vector2 screenPos, out Vector2 uv)
     {
         uv = Vector2.zero;
-        Ray ray = _mainCamera.ScreenPointToRay(screenPos);
+        Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(screenPos) : _mainCamera.ScreenPointToRay(screenPos);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, _faceLayer))
         {
             uv = hit.textureCoord;

@@ -197,7 +197,7 @@ public class SimpleDrinkManager : MonoBehaviour, IStationManager
             if (IrisInput.Instance != null && IrisInput.Instance.Click.WasPressedThisFrame())
             {
                 Vector2 pointer = IrisInput.CursorPosition;
-                Ray ray = _mainCamera.ScreenPointToRay(pointer);
+                Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(pointer) : _mainCamera.ScreenPointToRay(pointer);
                 if (Physics.Raycast(ray, out RaycastHit hit, 100f, _glassLayer))
                 {
                     _pourStarted = true;
