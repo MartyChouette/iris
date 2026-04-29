@@ -118,17 +118,17 @@ public class EntranceJudgmentSequence : MonoBehaviour
         DateDebugOverlay.Instance?.LogReaction($"[Entrance] Perfume ({perfumeLabel}) → {perfumeReaction}");
         yield return new WaitForSecondsRealtime(_interJudgmentPause);
 
-        // --- Judgment 3: Outfit ---
-        PlayJudgingSFX();
-        var outfitReaction = EvaluateOutfit(date);
-        if (_alwaysPositive) outfitReaction = ReactionType.Like;
-        reactionUI?.ShowLabeledReaction(outfitReaction, "Your Outfit");
-        DateSessionManager.Instance?.ApplyReaction(outfitReaction);
-        ShowJudgmentJuice(reactionUI, "Your Outfit", outfitReaction);
-        if (outfitReaction == ReactionType.Dislike) PlaySneezeSFX();
-        Debug.Log($"[EntranceJudgmentSequence] Outfit: {outfitReaction}");
-        DateDebugOverlay.Instance?.LogReaction($"[Entrance] Outfit → {outfitReaction}");
-        yield return new WaitForSecondsRealtime(_interJudgmentPause);
+        // --- Judgment 3: Outfit (disabled — no outfit system yet) ---
+        // PlayJudgingSFX();
+        // var outfitReaction = EvaluateOutfit(date);
+        // if (_alwaysPositive) outfitReaction = ReactionType.Like;
+        // reactionUI?.ShowLabeledReaction(outfitReaction, "Your Outfit");
+        // DateSessionManager.Instance?.ApplyReaction(outfitReaction);
+        // ShowJudgmentJuice(reactionUI, "Your Outfit", outfitReaction);
+        // if (outfitReaction == ReactionType.Dislike) PlaySneezeSFX();
+        // Debug.Log($"[EntranceJudgmentSequence] Outfit: {outfitReaction}");
+        // DateDebugOverlay.Instance?.LogReaction($"[Entrance] Outfit → {outfitReaction}");
+        // yield return new WaitForSecondsRealtime(_interJudgmentPause);
 
         // --- Judgment 4: Cleanliness ---
         PlayJudgingSFX();

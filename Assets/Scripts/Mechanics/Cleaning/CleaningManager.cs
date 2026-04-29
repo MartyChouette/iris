@@ -251,7 +251,14 @@ public class CleaningManager : MonoBehaviour
         }
 
         // Block cleaning outside interaction phases (name entry, newspaper, date end)
+        // and during all date phases (arrival, drink making, reveal)
         if (DayPhaseManager.Instance != null && !DayPhaseManager.Instance.IsInteractionPhase)
+        {
+            SetSpongeVisual(Vector3.zero, false);
+            _hoveredSurface = null;
+            return;
+        }
+        if (DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive)
         {
             SetSpongeVisual(Vector3.zero, false);
             _hoveredSurface = null;

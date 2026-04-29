@@ -472,6 +472,39 @@ public class GlobalCursorManager : MonoBehaviour
 
     private static CursorType ClassifyHit(GameObject go)
     {
+        // During dates, restrict context cursors by phase
+        var dsm = DateSessionManager.Instance;
+        if (dsm != null && dsm.IsDateActive)
+        {
+            var phase = dsm.CurrentDatePhase;
+
+            // Phase 3 (Reveal): only show Interact cursor for inspectable items
+            if (phase == DateSessionManager.DatePhase.Reveal)
+            {
+                if (Has<InteractableHighlight>(go)
+                 || Has<PlaceableObject>(go)
+                 || HasFlowerTag(go))           return CursorType.Interact;
+                return CursorType.Default;
+            }
+
+            // Phase 2 (BackgroundJudging): drink interactions + interact
+            if (phase == DateSessionManager.DatePhase.BackgroundJudging)
+            {
+                if (Has<DrinkGlass>(go))        return CursorType.Interact;
+                if (Has<BottleItem>(go))        return CursorType.Interact;
+                if (Has<InteractableHighlight>(go)
+                 || Has<PlaceableObject>(go))   return CursorType.Interact;
+                return CursorType.Default;
+            }
+
+            // Phase 1 (Arrival): interact cursor only, no special contexts
+            if (Has<InteractableHighlight>(go)
+             || Has<PlaceableObject>(go)
+             || HasFlowerTag(go))               return CursorType.Interact;
+            return CursorType.Default;
+        }
+
+        // Normal (non-date) cursor classification
         if (Has<WaterablePlant>(go))       return CursorType.Interact;
         if (Has<FridgeController>(go))     return CursorType.Interact;
         if (Has<PhoneController>(go))      return CursorType.Interact;

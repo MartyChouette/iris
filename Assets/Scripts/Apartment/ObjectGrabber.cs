@@ -718,11 +718,20 @@ public class ObjectGrabber : MonoBehaviour
         }
 
 
-        // During date phases — check for glass clicks before blocking general pickup
+        // During date phases — block pickup, allow only phase-appropriate interactions
         if (DateSessionManager.Instance != null && DateSessionManager.Instance.IsDateActive)
         {
-            Debug.Log($"[ObjectGrabber] Date click: {placeable.name}, isBottle={placeable.GetComponent<BottleItem>() != null}, pourState={DrinkPourManager.Instance?.CurrentState}");
-            // Glass click: selecting or serving during drink phase
+            var datePhase = DateSessionManager.Instance.CurrentDatePhase;
+
+            // Phase 3 (Reveal): observation only — click to inspect, no pickup at all
+            if (datePhase == DateSessionManager.DatePhase.Reveal)
+            {
+                if (DateInspectSystem.Instance != null && DateInspectSystem.Instance.TryInspect())
+                    ConsumeClick();
+                return;
+            }
+
+            // Phase 2 (BackgroundJudging): glasses and bottles allowed for drink making
             var clickedGlass = placeable.GetComponent<DrinkGlass>();
             if (clickedGlass == null) clickedGlass = placeable.GetComponentInParent<DrinkGlass>();
             if (clickedGlass == null) clickedGlass = placeable.GetComponentInChildren<DrinkGlass>();
@@ -743,11 +752,15 @@ public class ObjectGrabber : MonoBehaviour
                 }
             }
 
-            // Bottles are allowed during Phase 2
+            // Bottles allowed during Phase 2 only
             bool isBottle = placeable.GetComponent<BottleItem>() != null;
-            if (!isBottle)
+            if (isBottle && datePhase == DateSessionManager.DatePhase.BackgroundJudging)
             {
-                // Everything else → inspect reaction (click → date reacts)
+                // Fall through to normal pickup below
+            }
+            else
+            {
+                // Phase 1 or anything else — inspect reaction, no pickup
                 if (DateInspectSystem.Instance != null && DateInspectSystem.Instance.TryInspect())
                     ConsumeClick();
                 return;
