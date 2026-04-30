@@ -59,8 +59,14 @@ public class DatePreferences
     [Tooltip("Multiplier on reaction strength. >1 = expressive, <1 = reserved.")]
     public float reactionStrength = 1f;
 
+    [Header("Generic Reaction Lines")]
+    [Tooltip("Custom fallback lines for this date (replaces the default 'Loves it!' etc). Leave empty to use defaults.")]
+    public string[] likeLines = { };
+    public string[] neutralLines = { };
+    public string[] dislikeLines = { };
+
     [Header("Bespoke Reactions")]
-    [Tooltip("Custom dialogue lines triggered by specific item tags. Overrides the generic sentiment text.")]
+    [Tooltip("Custom dialogue lines triggered by specific item tags. Overrides generic lines above.")]
     public BespokeReaction[] bespokeReactions = { };
 
     [System.Serializable]
@@ -75,6 +81,22 @@ public class DatePreferences
         [Tooltip("Custom line the date says when they see this tag.")]
         [TextArea(1, 3)]
         public string line;
+    }
+
+    /// <summary>
+    /// Get a random generic line for this date's reaction type.
+    /// Returns null if no custom lines are configured (caller uses hardcoded defaults).
+    /// </summary>
+    public string GetGenericLine(ReactionType reaction)
+    {
+        var lines = reaction switch
+        {
+            ReactionType.Like => likeLines,
+            ReactionType.Dislike => dislikeLines,
+            _ => neutralLines
+        };
+        if (lines == null || lines.Length == 0) return null;
+        return lines[UnityEngine.Random.Range(0, lines.Length)];
     }
 
     /// <summary>

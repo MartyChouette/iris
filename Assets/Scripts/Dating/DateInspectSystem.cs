@@ -205,11 +205,13 @@ public class DateInspectSystem : MonoBehaviour
             AffectionBar.Instance?.ShowPopup(popText, liked);
         }
 
-        // 4. Date character reaction bubble (bespoke line if configured, else random)
-        string bespokeLine = prefs.GetBespokeLine(tag.Tags, reaction);
+        // 4. Date character reaction bubble
+        // Priority: bespoke tag line → per-date generic lines → hardcoded defaults
+        string customLine = prefs.GetBespokeLine(tag.Tags, reaction)
+                         ?? prefs.GetGenericLine(reaction);
         var reactionUI = dsm.DateCharacter?.GetComponent<DateReactionUI>();
         if (reactionUI != null)
-            reactionUI.ShowLabeledReaction(reaction, tag.DisplayName, tag.ReactionIcon, bespokeLine);
+            reactionUI.ShowLabeledReaction(reaction, tag.DisplayName, tag.ReactionIcon, customLine);
 
         // 5. Particles at item
         DateSessionManager.SpawnReactionParticles(
