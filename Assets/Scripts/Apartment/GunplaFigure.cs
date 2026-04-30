@@ -129,27 +129,14 @@ public class GunplaFigure : MonoBehaviour
 
         _isComplete = true;
 
-        // Enable animator — starts cycling hero poses
-        if (_animator != null)
-        {
-            _animator.enabled = true;
-            _animator.Update(0f);
-            _animator.Update(0f);
-        }
-
-        // Cache head base rotation for look-at blending
-        if (_headBone != null)
-            _headBaseRotation = _headBone.localRotation;
+        // Animator and head-tracking disabled — gunpla stays in its static pose
 
         Debug.Log("[GunplaFigure] All parts collected! Gunpla is complete.");
     }
 
     private void LateUpdate()
     {
-        if (!_isComplete) return;
-        if (_headBone == null) return;
-
-        UpdateLookAtNema();
+        // Disabled — gunpla stays stationary, no pose cycling or head tracking
     }
 
     private void UpdateLookAtNema()
