@@ -29389,3 +29389,414 @@ a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260429_123101
+### Commits
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+---
+
+## Session End: 20260429_124139
+### Commits
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_124339
+### Commits
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_124536
+### Commits
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_124725
+### Commits
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_124908
+### Commits
+c08002a fix CS0103: declare reactionUI in TransitionToPhase3
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_131154
+### Commits
+52d4201 top-down starts at farthest zoom, force-reset highlight suppress
+f874caf fix kitchen camera flash: defer ClearPresetBase to TransitionToPhase3
+c08002a fix CS0103: declare reactionUI in TransitionToPhase3
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_135933
+### Commits
+608bcb4 remove highlight debug logging (issue was wrong material on objects)
+52d4201 top-down starts at farthest zoom, force-reset highlight suppress
+f874caf fix kitchen camera flash: defer ClearPresetBase to TransitionToPhase3
+c08002a fix CS0103: declare reactionUI in TransitionToPhase3
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_140046
+### Commits
+608bcb4 remove highlight debug logging (issue was wrong material on objects)
+52d4201 top-down starts at farthest zoom, force-reset highlight suppress
+f874caf fix kitchen camera flash: defer ClearPresetBase to TransitionToPhase3
+c08002a fix CS0103: declare reactionUI in TransitionToPhase3
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_140136
+### Commits
+608bcb4 remove highlight debug logging (issue was wrong material on objects)
+52d4201 top-down starts at farthest zoom, force-reset highlight suppress
+f874caf fix kitchen camera flash: defer ClearPresetBase to TransitionToPhase3
+c08002a fix CS0103: declare reactionUI in TransitionToPhase3
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_140647
+### Commits
+608bcb4 remove highlight debug logging (issue was wrong material on objects)
+52d4201 top-down starts at farthest zoom, force-reset highlight suppress
+f874caf fix kitchen camera flash: defer ClearPresetBase to TransitionToPhase3
+c08002a fix CS0103: declare reactionUI in TransitionToPhase3
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+2aa62fd disable psychedelic dream screen, zoom out after Phase 3
+7764969 fix phase title doubling, add distinct drink-making highlights
+a743557 fix shoe pairing: center offset, resize collider, skip held item in ray
+97f717b set scene rigidbodies to kinematic, update session logs
+ae63ac6 fix raycast: Camera.main.ScreenPointToRay for normal, manual for phases
+59b62b8 add raycast debug log to diagnose build failure
+8e88a09 final raycast fix: use Camera.main.transform (the rendered view)
+d389617 eliminate all stale Lens reads: _currentZoom is single source of truth
+a67183a definitive raycast fix: single ortho path, never read browseCamera.Lens
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_201428
+### Commits
+608bcb4 remove highlight debug logging (issue was wrong material on objects)
+52d4201 top-down starts at farthest zoom, force-reset highlight suppress
+f874caf fix kitchen camera flash: defer ClearPresetBase to TransitionToPhase3
+c08002a fix CS0103: declare reactionUI in TransitionToPhase3
+eafe724 fix post-Phase-3 zoom: use last step (farthest out), not step 0
+94ec0e2 skip Phase 2 return after drink verdict, go straight to Phase 3
+99b15b5 fix highlight shaders: stop toggling SuppressVisuals per-call
+991d8e1 move drink UI to center-top of screen
+53d7375 increase screen-space dialogue text to 36pt
+1353515 center drink UI, convert character dialogue to screen-space
+f4cac85 served drink: spawn dirty glass on table, reset minigame at Phase 2 end
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_223857
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260429_231207
+### Commits
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_000021
+### Commits
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_000156
+### Commits
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_002858
+### Commits
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_003025
+### Commits
+2442c11 Revert "make gunpla stationary — skip pickup for GunplaFigure objects"
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_003113
+### Commits
+0d39b27 disable gunpla animations and head tracking — stays stationary
+2442c11 Revert "make gunpla stationary — skip pickup for GunplaFigure objects"
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_003142
+### Commits
+0d39b27 disable gunpla animations and head tracking — stays stationary
+2442c11 Revert "make gunpla stationary — skip pickup for GunplaFigure objects"
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_003229
+### Commits
+0d39b27 disable gunpla animations and head tracking — stays stationary
+2442c11 Revert "make gunpla stationary — skip pickup for GunplaFigure objects"
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_003356
+### Commits
+0d39b27 disable gunpla animations and head tracking — stays stationary
+2442c11 Revert "make gunpla stationary — skip pickup for GunplaFigure objects"
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260430_003800
+### Commits
+4acd1c9 lock gunpla kinematic after placement so it doesn't slide
+0d39b27 disable gunpla animations and head tracking — stays stationary
+2442c11 Revert "make gunpla stationary — skip pickup for GunplaFigure objects"
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+### Uncommitted Changes
+Assets/Materials/PSXLit_Dissovable.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
