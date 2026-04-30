@@ -58,4 +58,43 @@ public class DatePreferences
     [Header("Personality")]
     [Tooltip("Multiplier on reaction strength. >1 = expressive, <1 = reserved.")]
     public float reactionStrength = 1f;
+
+    [Header("Bespoke Reactions")]
+    [Tooltip("Custom dialogue lines triggered by specific item tags. Overrides the generic sentiment text.")]
+    public BespokeReaction[] bespokeReactions = { };
+
+    [System.Serializable]
+    public struct BespokeReaction
+    {
+        [Tooltip("Item tag that triggers this line (matched against ReactableTag.tags).")]
+        public string tag;
+
+        [Tooltip("Positive, negative, or neutral — filters when this line can play.")]
+        public ReactionType sentiment;
+
+        [Tooltip("Custom line the date says when they see this tag.")]
+        [TextArea(1, 3)]
+        public string line;
+    }
+
+    /// <summary>
+    /// Look up a bespoke line for a set of item tags and a reaction type.
+    /// Only matches if the reaction sentiment matches (so you can have different
+    /// lines for liking vs disliking the same tag). Returns null if no match.
+    /// </summary>
+    public string GetBespokeLine(string[] itemTags, ReactionType reaction)
+    {
+        if (bespokeReactions == null || bespokeReactions.Length == 0 || itemTags == null) return null;
+        for (int i = 0; i < bespokeReactions.Length; i++)
+        {
+            if (string.IsNullOrEmpty(bespokeReactions[i].tag)) continue;
+            if (bespokeReactions[i].sentiment != reaction) continue;
+            for (int j = 0; j < itemTags.Length; j++)
+            {
+                if (string.Equals(bespokeReactions[i].tag, itemTags[j], System.StringComparison.OrdinalIgnoreCase))
+                    return bespokeReactions[i].line;
+            }
+        }
+        return null;
+    }
 }

@@ -232,15 +232,15 @@ public class DateReactionUI : MonoBehaviour
     }
 
     /// <summary>Show a labeled reaction with an optional item icon above the NPC's head.</summary>
-    public void ShowLabeledReaction(ReactionType type, string topicLabel, Sprite itemIcon)
+    public void ShowLabeledReaction(ReactionType type, string topicLabel, Sprite itemIcon, string bespokeLine = null)
     {
         if (_activeReaction != null)
             StopCoroutine(_activeReaction);
 
-        _activeReaction = StartCoroutine(LabeledReactionSequence(type, topicLabel, itemIcon));
+        _activeReaction = StartCoroutine(LabeledReactionSequence(type, topicLabel, itemIcon, bespokeLine));
     }
 
-    private IEnumerator LabeledReactionSequence(ReactionType type, string topicLabel, Sprite itemIcon = null)
+    private IEnumerator LabeledReactionSequence(ReactionType type, string topicLabel, Sprite itemIcon = null, string bespokeLine = null)
     {
         _bubbleGO.SetActive(true);
         EnsureScreenText();
@@ -301,7 +301,7 @@ public class DateReactionUI : MonoBehaviour
         ShowEmoticonFlash(type);
 
         // Screen-space sentiment text
-        _screenText.text = GetRandomSentiment(type);
+        _screenText.text = bespokeLine ?? GetRandomSentiment(type);
         _screenText.color = reactionColor;
 
         _bubbleGO.transform.localScale = Vector3.one * 0.7f;
