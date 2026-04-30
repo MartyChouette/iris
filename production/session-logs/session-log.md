@@ -29800,3 +29800,19 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260430_004526
+### Commits
+187a5e8 scene updates: material fix, gunpla model, TMP fallback, session logs
+4acd1c9 lock gunpla kinematic after placement so it doesn't slide
+0d39b27 disable gunpla animations and head tracking — stays stationary
+2442c11 Revert "make gunpla stationary — skip pickup for GunplaFigure objects"
+13ea397 make gunpla stationary — skip pickup for GunplaFigure objects
+f7127b7 add per-date generic reaction lines in inspector
+f320677 add bespoke reaction lines per tag on DatePreferences
+---
+
+## Session End: 20260430_104320
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+

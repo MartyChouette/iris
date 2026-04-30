@@ -50,6 +50,7 @@ MonoBehaviour:
     dislikedTags:
     - edgy
     - dark
+    - weeb
     preferredMoodMin: 0.1
     preferredMoodMax: 0.4
     likedDrinks:
@@ -62,5 +63,13 @@ MonoBehaviour:
     - elegant
     dislikedOutfitTags:
     - edgy
+    likedPerfumeTags: []
+    dislikedPerfumeTags: []
+    noPerfumeReaction: 1
+    noPerfumeComment: 
     clutterTolerance: 0.5
     reactionStrength: 1
+    likeLines: []
+    neutralLines: []
+    dislikeLines: []
+    bespokeReactions: []
