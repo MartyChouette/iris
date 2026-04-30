@@ -69,6 +69,8 @@ public class GunplaFigure : MonoBehaviour
     public bool HasWings => _wings != null;
     public float SnapRadius => _snapRadius;
 
+    private PlaceableObject _placeable;
+
     private void Awake()
     {
         // Start with animator disabled — only plays when all parts attached
@@ -76,6 +78,19 @@ public class GunplaFigure : MonoBehaviour
             _animator.enabled = false;
 
         _glanceTimer = _glanceInterval;
+
+        // Lock kinematic after placement so it doesn't slide around
+        _placeable = GetComponent<PlaceableObject>();
+    }
+
+    private void LockAfterPlacement()
+    {
+        var rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
     }
 
     /// <summary>Can this body accept the given part?</summary>
@@ -134,9 +149,18 @@ public class GunplaFigure : MonoBehaviour
         Debug.Log("[GunplaFigure] All parts collected! Gunpla is complete.");
     }
 
+    private PlaceableObject.State _lastState;
+
     private void LateUpdate()
     {
-        // Disabled — gunpla stays stationary, no pose cycling or head tracking
+        // Lock kinematic the frame after placement so physics doesn't push it around
+        if (_placeable != null)
+        {
+            var state = _placeable.CurrentState;
+            if (state == PlaceableObject.State.Placed && _lastState != PlaceableObject.State.Placed)
+                LockAfterPlacement();
+            _lastState = state;
+        }
     }
 
     private void UpdateLookAtNema()
