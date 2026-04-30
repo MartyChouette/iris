@@ -804,10 +804,6 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // Gunpla is stationary — don't pick it up
-        if (placeable.GetComponent<GunplaFigure>() != null)
-            return;
-
         ConsumeClick();
         _held = placeable;
         _pickupTimer = PickupFeelDuration;
