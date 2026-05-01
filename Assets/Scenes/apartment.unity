@@ -1059,6 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -3173,6 +3174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -3693,6 +3695,274 @@ MonoBehaviour:
   _bounceAmount: 0.03
   _bounceRate: 2
   _bounceFalloff: 8
+--- !u!1001 &145478983
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1839521863}
+    m_Modifications:
+    - target: {fileID: -9203324390398772745, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.448322
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.468
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.9640002
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3410185793394415013, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Name
+      value: recordPlayer_plate
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Name
+      value: record_player
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578709097331664583, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Name
+      value: record arm
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578709097331664583, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217234437682292332, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Name
+      value: record Lid
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217234437682292332, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 8485173162082002552, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+    - {fileID: 281855664364225751, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+    - {fileID: -7271449666460269675, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 511346336}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145478986}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145478992}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145478991}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145478996}
+    - targetCorrespondingSourceObject: {fileID: 9217234437682292332, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 509210698}
+    - targetCorrespondingSourceObject: {fileID: 8578709097331664583, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145478990}
+  m_SourcePrefab: {fileID: 100100000, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+--- !u!4 &145478984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+  m_PrefabInstance: {fileID: 145478983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &145478985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+  m_PrefabInstance: {fileID: 145478983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &145478986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145478985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f888d73d4ff2014fbb1fd62a697ace0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecordSlot
+  _discVisual: {fileID: 0}
+  _discRenderer: {fileID: 1253001536}
+  _rotationSpeed: 33.3
+  _spinTransitionDuration: 1.5
+  _platePlacementPoint: {fileID: 145478987}
+  _lid: {fileID: 145478989}
+  _lidClosedAngle: {x: -80, y: 0, z: 0}
+  _lidTweenDuration: 0.65
+  _toneArm: {fileID: 145478990}
+  snapRadius: 0.6
+  _playSFX: {fileID: 0}
+  _stopSFX: {fileID: 0}
+--- !u!4 &145478987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4083501151425157549, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+  m_PrefabInstance: {fileID: 145478983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &145478988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8578709097331664583, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+  m_PrefabInstance: {fileID: 145478983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &145478989 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -859322575320243141, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+  m_PrefabInstance: {fileID: 145478983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &145478990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145478988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1229fc6fce697bb41954a9d1e515ab79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToneArm
+  _armPivot: {fileID: 511346336}
+  _restAngle: -30
+  _playAngle: 5
+  _swingDuration: 1.2
+  _swingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _needleDropSFX: {fileID: 0}
+  _needleLiftSFX: {fileID: 0}
+--- !u!114 &145478991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145478985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8657feb6d8d41f4419ce15d86f98dd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementSurface
+  localBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.05, z: 0.5}
+  normalAxis: 0
+  surfaceLayerIndex: 0
+  _isFloor: 0
+  _effectMultiplier: 1
+--- !u!114 &145478992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145478985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: My Ex's Record Player
+  tags:
+  - music
+  - vinyl
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
+--- !u!64 &145478996
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145478985}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &145622211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,6 +4146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -5352,13 +5623,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206099557}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.49999985, z: 0.5, w: 0.5000002}
-  m_LocalPosition: {x: 0.327, y: 1.402, z: 4.449}
+  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
+  m_LocalPosition: {x: 0.768, y: 0.961, z: 10.474}
   m_LocalScale: {x: 2.267133, y: 6.429288, z: 9.139097}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450653414306598}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 90}
 --- !u!114 &206099559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5386,7 +5657,7 @@ MonoBehaviour:
   _allowYaw: 0
   _allowFlip: 0
   _allowRoll: 0
-  _allowAutoStraighten: 1
+  _allowAutoStraighten: 0
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 1
   _pickupSFXOverride: {fileID: 8300000, guid: c284ad04b9782384d9a44b855673afe0, type: 3}
@@ -6660,6 +6931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -7880,6 +8152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -8178,28 +8451,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3733326169713674248, guid: 5292c727fa375a94fbbe8573e7178595, type: 3}
---- !u!64 &319542545
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8403245043752432121, guid: 5292c727fa375a94fbbe8573e7178595, type: 3}
 --- !u!64 &326926657
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8361,6 +8612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -9209,6 +9461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -9913,6 +10166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -9951,7 +10205,7 @@ MonoBehaviour:
   _placeSFXOverride: {fileID: 0}
   _useSpawnAsHome: 0
   _homePosition: {x: 0, y: 0, z: 0}
-  _homeTolerance: 0.2
+  _homeTolerance: 0
   _homeRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!54 &378970876
 Rigidbody:
@@ -10672,6 +10926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -13282,6 +13537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -13829,6 +14085,64 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501147311}
   m_Mesh: {fileID: -1971044003467700821, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
+--- !u!1 &509210695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9217234437682292332, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+  m_PrefabInstance: {fileID: 145478983}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &509210698
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509210695}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4142219771195877799, guid: dc5ce3b1113c1b64ab325910067dc52d, type: 3}
+--- !u!1 &511346335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511346336}
+  m_Layer: 15
+  m_Name: recordarm_pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &511346336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511346335}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: -0.000000029802322, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 1.130027, y: 1.6440849, z: 3.5084472}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 145478984}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511419718
 GameObject:
   m_ObjectHideFlags: 0
@@ -14030,40 +14344,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 801454412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &518980287
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 518980288}
-  m_Layer: 0
-  m_Name: Gunpla
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &518980288
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518980287}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2301356200798820552}
-  - {fileID: 415709289853667116}
-  - {fileID: 6795386457082005103}
-  m_Father: {fileID: 1432456868272418290}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519472464
 GameObject:
   m_ObjectHideFlags: 0
@@ -14121,8 +14401,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.16, y: 0.32, z: 0.13}
-  m_Center: {x: 0.01, y: 0, z: -0.07}
+  m_Size: {x: 0.16, y: 0.36, z: 0.13}
+  m_Center: {x: 0.01, y: 0.04, z: -0.07}
 --- !u!114 &519472467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14154,6 +14434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -14237,7 +14518,7 @@ MonoBehaviour:
   _specificPartner: {fileID: 2087950770}
   _maxGroupSize: 0
   _snapMode: 0
-  _snapOffset: {x: 0.00001, y: 0, z: 0}
+  _snapOffset: {x: 0, y: 0, z: 0}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
@@ -14311,6 +14592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -14884,6 +15166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -15443,6 +15726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -16488,6 +16772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -16505,7 +16790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PairableItem
   _pairMode: 0
-  _specificPartner: {fileID: 0}
+  _specificPartner: {fileID: 887305164}
   _maxGroupSize: 0
   _snapMode: 0
   _snapOffset: {x: 0.0001, y: 0, z: 0}
@@ -16534,7 +16819,7 @@ MonoBehaviour:
   _daysLeftOut: 0
   canWallMount: 0
   wallOnly: 0
-  crookedAngleRange: 12
+  crookedAngleRange: 0
   _rotateAxis: {x: 0, y: 1, z: 0}
   _allowYaw: 1
   _allowFlip: 1
@@ -17685,7 +17970,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 654024157}
-  - component: {fileID: 654024158}
   m_Layer: 15
   m_Name: overhead light
   m_TagString: Untagged
@@ -17713,27 +17997,6 @@ Transform:
   - {fileID: 501147312}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &654024158
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654024156}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &655491371
 GameObject:
   m_ObjectHideFlags: 0
@@ -20736,6 +20999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -22121,14 +22385,14 @@ GameObject:
   - component: {fileID: 788062491}
   - component: {fileID: 788062499}
   - component: {fileID: 788062498}
-  - component: {fileID: 788062497}
   - component: {fileID: 788062496}
   - component: {fileID: 788062495}
   - component: {fileID: 788062494}
   - component: {fileID: 788062493}
   - component: {fileID: 788062492}
+  - component: {fileID: 788062500}
   m_Layer: 15
-  m_Name: plate (3)
+  m_Name: plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22178,6 +22442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -22195,7 +22460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PairableItem
   _pairMode: 1
-  _specificPartner: {fileID: 788062494}
+  _specificPartner: {fileID: 0}
   _maxGroupSize: 0
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.2}
@@ -22225,11 +22490,11 @@ MonoBehaviour:
   canWallMount: 0
   wallOnly: 0
   crookedAngleRange: 0
-  _rotateAxis: {x: 0, y: 1, z: 0}
+  _rotateAxis: {x: 0, y: 0, z: 0}
   _allowYaw: 1
   _allowFlip: 1
   _allowRoll: 1
-  _allowAutoStraighten: 1
+  _allowAutoStraighten: 0
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 0
   _pickupSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
@@ -22265,28 +22530,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &788062497
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788062490}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
 --- !u!23 &788062498
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22344,6 +22587,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788062490}
   m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
+--- !u!65 &788062500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788062490}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019088488, y: 0.0019072304, z: 0.00019331816}
+  m_Center: {x: -0.00000033856494, y: -0.000000048574307, z: -0.000017231836}
 --- !u!1 &788164268
 GameObject:
   m_ObjectHideFlags: 0
@@ -22948,6 +23212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -23584,7 +23849,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.32, y: 0.23, z: 0.16}
+  m_Size: {x: 0.32, y: 0.03, z: 0.16}
   m_Center: {x: -0.04, y: 0, z: -0.08}
 --- !u!114 &887305163
 MonoBehaviour:
@@ -23598,6 +23863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -23615,7 +23881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PairableItem
   _pairMode: 0
-  _specificPartner: {fileID: 0}
+  _specificPartner: {fileID: 598752063}
   _maxGroupSize: 0
   _snapMode: 0
   _snapOffset: {x: 0.0001, y: 0, z: 0}
@@ -23644,7 +23910,7 @@ MonoBehaviour:
   _daysLeftOut: 0
   canWallMount: 0
   wallOnly: 0
-  crookedAngleRange: 12
+  crookedAngleRange: 0
   _rotateAxis: {x: 0, y: 1, z: 0}
   _allowYaw: 1
   _allowFlip: 1
@@ -23656,7 +23922,7 @@ MonoBehaviour:
   _placeSFXOverride: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
   _useSpawnAsHome: 0
   _homePosition: {x: 0, y: 0, z: 0}
-  _homeTolerance: 0.2
+  _homeTolerance: 0
   _homeRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!54 &887305166
 Rigidbody:
@@ -24040,6 +24306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -24491,6 +24758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -24867,6 +25135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -25045,7 +25314,7 @@ GameObject:
   - component: {fileID: 919967256}
   - component: {fileID: 919967255}
   m_Layer: 15
-  m_Name: Gunpla
+  m_Name: proto Gunpla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25109,6 +25378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -25756,6 +26026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -27178,6 +27449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -32417,14 +32689,14 @@ GameObject:
   - component: {fileID: 977792466}
   - component: {fileID: 977792474}
   - component: {fileID: 977792473}
-  - component: {fileID: 977792472}
   - component: {fileID: 977792471}
   - component: {fileID: 977792470}
   - component: {fileID: 977792469}
   - component: {fileID: 977792468}
   - component: {fileID: 977792467}
+  - component: {fileID: 977792475}
   m_Layer: 15
-  m_Name: plate (1)
+  m_Name: plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32474,6 +32746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -32491,7 +32764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PairableItem
   _pairMode: 1
-  _specificPartner: {fileID: 977792469}
+  _specificPartner: {fileID: 0}
   _maxGroupSize: 0
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.2}
@@ -32521,11 +32794,11 @@ MonoBehaviour:
   canWallMount: 0
   wallOnly: 0
   crookedAngleRange: 0
-  _rotateAxis: {x: 0, y: 1, z: 0}
+  _rotateAxis: {x: 0, y: 0, z: 0}
   _allowYaw: 1
   _allowFlip: 1
   _allowRoll: 1
-  _allowAutoStraighten: 1
+  _allowAutoStraighten: 0
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 0
   _pickupSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
@@ -32561,28 +32834,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &977792472
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 977792465}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
 --- !u!23 &977792473
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -32640,6 +32891,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977792465}
   m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
+--- !u!65 &977792475
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977792465}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019088488, y: 0.0019072304, z: 0.00019331816}
+  m_Center: {x: -0.0000003434544, y: -0.000000037398436, z: -0.000017232767}
 --- !u!21 &981694296
 Material:
   serializedVersion: 8
@@ -34327,6 +34599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -35061,6 +35334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -35657,6 +35931,7 @@ GameObject:
   - component: {fileID: 1091974737}
   - component: {fileID: 1091974736}
   - component: {fileID: 1091974735}
+  - component: {fileID: 1091974738}
   m_Layer: 15
   m_Name: boots_l (1)
   m_TagString: Untagged
@@ -35730,12 +36005,34 @@ Transform:
   m_GameObject: {fileID: 1091974734}
   serializedVersion: 2
   m_LocalRotation: {x: -0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999997}
-  m_LocalPosition: {x: 0.08100003, y: 0.1748198, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100.000015, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2087950768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1091974738
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091974734}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4094513742387753640, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
 --- !u!1 &1097472275
 GameObject:
   m_ObjectHideFlags: 0
@@ -36587,14 +36884,14 @@ GameObject:
   - component: {fileID: 1158650102}
   - component: {fileID: 1158650110}
   - component: {fileID: 1158650109}
-  - component: {fileID: 1158650108}
   - component: {fileID: 1158650107}
   - component: {fileID: 1158650106}
   - component: {fileID: 1158650105}
   - component: {fileID: 1158650104}
   - component: {fileID: 1158650103}
+  - component: {fileID: 1158650111}
   m_Layer: 15
-  m_Name: plate (2)
+  m_Name: plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36609,7 +36906,7 @@ Transform:
   m_GameObject: {fileID: 1158650101}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 2.302, y: 1.621, z: 3.721}
+  m_LocalPosition: {x: 2.302, y: 1.602, z: 3.721}
   m_LocalScale: {x: 124.48459, y: 124.484566, z: 124.484566}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36644,6 +36941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -36661,7 +36959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PairableItem
   _pairMode: 1
-  _specificPartner: {fileID: 1158650105}
+  _specificPartner: {fileID: 0}
   _maxGroupSize: 0
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.2}
@@ -36691,19 +36989,19 @@ MonoBehaviour:
   canWallMount: 0
   wallOnly: 0
   crookedAngleRange: 0
-  _rotateAxis: {x: 0, y: 1, z: 0}
+  _rotateAxis: {x: 0, y: 0, z: 0}
   _allowYaw: 1
   _allowFlip: 1
   _allowRoll: 1
-  _allowAutoStraighten: 1
+  _allowAutoStraighten: 0
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 0
   _pickupSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
   _placeSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
   _useSpawnAsHome: 0
-  _homePosition: {x: 2.287714, y: 0.90549916, z: -2.6168401}
-  _homeTolerance: 0.2
-  _homeRotation: {x: -0.49942014, y: -0.50057936, z: -0.50057936, w: 0.49942014}
+  _homePosition: {x: 0, y: 0, z: 0}
+  _homeTolerance: 0
+  _homeRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!54 &1158650107
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36731,28 +37029,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &1158650108
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158650101}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
 --- !u!23 &1158650109
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36810,6 +37086,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158650101}
   m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
+--- !u!65 &1158650111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158650101}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019088488, y: 0.0019072304, z: 0.00019331816}
+  m_Center: {x: -0.00000033693513, y: -0.00000003553579, z: -0.000017233233}
 --- !u!1 &1166877766
 GameObject:
   m_ObjectHideFlags: 0
@@ -38978,6 +39275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -39454,6 +39752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -40047,6 +40346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -40591,6 +40891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -41155,6 +41456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -46068,12 +46370,12 @@ GameObject:
   - component: {fileID: 1537133408}
   - component: {fileID: 1537133410}
   - component: {fileID: 1537133409}
-  - component: {fileID: 1537133411}
   - component: {fileID: 1537133416}
   - component: {fileID: 1537133415}
   - component: {fileID: 1537133414}
   - component: {fileID: 1537133413}
   - component: {fileID: 1537133412}
+  - component: {fileID: 1537133417}
   m_Layer: 15
   m_Name: plate
   m_TagString: Untagged
@@ -46153,28 +46455,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537133407}
   m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
---- !u!64 &1537133411
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537133407}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1767743680419711529, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
 --- !u!114 &1537133412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46204,6 +46484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -46251,18 +46532,18 @@ MonoBehaviour:
   canWallMount: 0
   wallOnly: 0
   crookedAngleRange: 0
-  _rotateAxis: {x: 0, y: 1, z: 0}
+  _rotateAxis: {x: 0, y: 0, z: 0}
   _allowYaw: 1
   _allowFlip: 1
   _allowRoll: 1
-  _allowAutoStraighten: 1
+  _allowAutoStraighten: 0
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 0
   _pickupSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
   _placeSFXOverride: {fileID: 8300000, guid: 333b86038c1426f4eaee8d980538bd21, type: 3}
   _useSpawnAsHome: 0
   _homePosition: {x: 2.287714, y: 0.90549916, z: -2.6168401}
-  _homeTolerance: 0.2
+  _homeTolerance: 0
   _homeRotation: {x: -0.49942014, y: -0.50057936, z: -0.50057936, w: 0.49942014}
 --- !u!54 &1537133416
 Rigidbody:
@@ -46291,6 +46572,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1537133417
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537133407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019088488, y: 0.0019072304, z: 0.00019331816}
+  m_Center: {x: -0.0000003434544, y: -0.000000037398436, z: -0.000017232767}
 --- !u!1 &1539162959
 GameObject:
   m_ObjectHideFlags: 0
@@ -46360,6 +46662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -46930,6 +47233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -48499,7 +48803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1606804649
 Transform:
   m_ObjectHideFlags: 0
@@ -48508,8 +48812,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606804648}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.358999, y: 1.609, z: 3.5810013}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 5.881999, y: 1.1489999, z: 4.2609987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48524,7 +48828,7 @@ Transform:
   - {fileID: 1464453921}
   - {fileID: 1948991886}
   - {fileID: 416981512}
-  m_Father: {fileID: 1942182767}
+  m_Father: {fileID: 1839521863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1606804650
 MonoBehaviour:
@@ -48807,6 +49111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -50500,6 +50805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -50833,6 +51139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -51096,6 +51403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -52601,6 +52909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -53399,6 +53708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -55436,6 +55746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -55462,7 +55773,7 @@ MonoBehaviour:
   _daysLeftOut: 0
   canWallMount: 0
   wallOnly: 0
-  crookedAngleRange: 12
+  crookedAngleRange: 0
   _rotateAxis: {x: 0, y: 1, z: 0}
   _allowYaw: 1
   _allowFlip: 1
@@ -55474,7 +55785,7 @@ MonoBehaviour:
   _placeSFXOverride: {fileID: 0}
   _useSpawnAsHome: 0
   _homePosition: {x: 0, y: 0, z: 0}
-  _homeTolerance: 0.2
+  _homeTolerance: 0
   _homeRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!54 &1815047575
 Rigidbody:
@@ -55703,6 +56014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -56269,6 +56581,8 @@ Transform:
   - {fileID: 513965289}
   - {fileID: 688060873}
   - {fileID: 845707215}
+  - {fileID: 1606804649}
+  - {fileID: 145478984}
   - {fileID: 5465213581192626402}
   - {fileID: 6151023684486888929}
   - {fileID: 5018026338236984218}
@@ -56446,6 +56760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -57870,6 +58185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -58484,7 +58800,6 @@ Transform:
   - {fileID: 1811261871}
   - {fileID: 734085956}
   - {fileID: 1259265358}
-  - {fileID: 1606804649}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1946338814
@@ -58771,6 +59086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -58970,6 +59286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -59664,6 +59981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -59885,6 +60203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -61885,6 +62204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -62456,8 +62776,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2087950768}
-  - component: {fileID: 2087950769}
   - component: {fileID: 2087950770}
+  - component: {fileID: 2087950769}
   - component: {fileID: 2087950774}
   - component: {fileID: 2087950773}
   - component: {fileID: 2087950772}
@@ -62478,7 +62798,7 @@ Transform:
   m_GameObject: {fileID: 2087950767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.12, y: 0.0868, z: -3.86}
+  m_LocalPosition: {x: 1.12, y: 0.32, z: -3.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -62504,8 +62824,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25, y: 0.28, z: 0.11}
-  m_Center: {x: 0.04, y: 0.17, z: 0.09}
+  m_Size: {x: 0.25, y: 0.39, z: 0.11}
+  m_Center: {x: 0.04, y: 0.04, z: 0.09}
 --- !u!114 &2087950770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62522,7 +62842,7 @@ MonoBehaviour:
   _specificPartner: {fileID: 519472471}
   _maxGroupSize: 0
   _snapMode: 0
-  _snapOffset: {x: 0.00001, y: 0, z: 0}
+  _snapOffset: {x: 0, y: 0, z: 0}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
@@ -62557,6 +62877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -63908,7 +64229,7 @@ Transform:
   m_GameObject: {fileID: 2799578873588204240}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.926, y: 0.076, z: -12.091}
+  m_LocalPosition: {x: 0.1, y: -0.025, z: -10.076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64085,24 +64406,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &350451168965243634
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6795386457082005103}
-  - component: {fileID: 3799933933562351978}
-  - component: {fileID: 6056962185760779373}
-  m_Layer: 15
-  m_Name: gunpla wings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!33 &351719854375941559
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -64136,21 +64439,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &415709289853667116
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4620465469182696987}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.015999973, z: -10.330002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 518980288}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &516865124262708260
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -64303,7 +64591,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2366363662911607707}
   - {fileID: 1885137343856509744}
   - {fileID: 478580141}
   - {fileID: 206099558}
@@ -64926,7 +65213,6 @@ Transform:
   - {fileID: 8112530938759546516}
   - {fileID: 7887509155874276555}
   - {fileID: 8708213961143555310}
-  - {fileID: 518980288}
   - {fileID: 1663588563}
   - {fileID: 7159029461184488730}
   - {fileID: 3518607658125862677}
@@ -64975,7 +65261,7 @@ Transform:
   m_GameObject: {fileID: 1709027919393851882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.796, y: 0.076, z: -12.091}
+  m_LocalPosition: {x: -0.03, y: -0.025, z: -10.076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -68172,14 +68458,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2204536657497990967
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4620465469182696987}
-  m_Mesh: {fileID: 2363565981455421637, guid: 29779f5f357818c4ca8636a99f036a0a, type: 3}
 --- !u!4 &2251124905623526925
 Transform:
   m_ObjectHideFlags: 0
@@ -68335,6 +68613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -68372,21 +68651,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2069677308}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2301356200798820552
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2616268169004716972}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.015999973, z: -10.330002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 518980288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2312966125935332577
 MeshRenderer:
@@ -68452,21 +68716,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1432456868272418290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2366363662911607707
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.70690125, y: -0.017047878, z: 0.017047878, w: 0.70690125}
-  m_LocalPosition: {x: 0.572, y: 1.047, z: 10.813}
-  m_LocalScale: {x: 2.0157468, y: 5.7163897, z: 8.125728}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 543450653414306598}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 2.763}
 --- !u!33 &2435376540113158582
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -68679,24 +68928,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2616268169004716972
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2301356200798820552}
-  - component: {fileID: 4381877282347263440}
-  - component: {fileID: 8359238830631310407}
-  m_Layer: 15
-  m_Name: gunpla sword
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &2799578873588204240
 GameObject:
   m_ObjectHideFlags: 0
@@ -69671,14 +69902,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!33 &3799933933562351978
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350451168965243634}
-  m_Mesh: {fileID: 149541833691738144, guid: 29779f5f357818c4ca8636a99f036a0a, type: 3}
 --- !u!1 &3808815814781344839
 GameObject:
   m_ObjectHideFlags: 0
@@ -69733,6 +69956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -69968,55 +70192,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!23 &3966054173071612080
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4620465469182696987}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -3846018093981099296, guid: 29779f5f357818c4ca8636a99f036a0a, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &3978988947200056213
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -70033,29 +70208,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6693466182323574915}
   m_Mesh: {fileID: -8474135593728794106, guid: 29779f5f357818c4ca8636a99f036a0a, type: 3}
---- !u!1 &4006675188290007892
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2366363662911607707}
-  - component: {fileID: 6358458495724261077}
-  - component: {fileID: 5896569102276347454}
-  - component: {fileID: 319542545}
-  - component: {fileID: 6358458495724261079}
-  - component: {fileID: 6358458495724261078}
-  - component: {fileID: 6358458495724261080}
-  - component: {fileID: 6358458495724261081}
-  m_Layer: 15
-  m_Name: Single Book
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 91
-  m_IsActive: 1
 --- !u!4 &4019622136804313642
 Transform:
   m_ObjectHideFlags: 0
@@ -70361,14 +70513,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1047600299}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
---- !u!33 &4381877282347263440
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2616268169004716972}
-  m_Mesh: {fileID: 7414509850709746518, guid: 29779f5f357818c4ca8636a99f036a0a, type: 3}
 --- !u!33 &4397915641816329983
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -70605,24 +70749,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6273861239639246077, guid: 51875e9baf500ec4380db98ded611ef8, type: 3}
---- !u!1 &4620465469182696987
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 415709289853667116}
-  - component: {fileID: 2204536657497990967}
-  - component: {fileID: 3966054173071612080}
-  m_Layer: 15
-  m_Name: gunpla body
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!33 &4655595304765578047
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -70896,7 +71022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &5252682844967364972
 GameObject:
   m_ObjectHideFlags: 0
@@ -70973,7 +71099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &5322269652891032520
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -71315,6 +71441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -71398,7 +71525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &5652247742527030369
 GameObject:
   m_ObjectHideFlags: 0
@@ -71519,55 +71646,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 543450652145830559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &5896569102276347454
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &5917506384152057344
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -71623,7 +71701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6013846691818460692
 GameObject:
   m_ObjectHideFlags: 0
@@ -71643,55 +71721,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 91
   m_IsActive: 1
---- !u!23 &6056962185760779373
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350451168965243634}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!4 &6122397981289792754
 Transform:
   m_ObjectHideFlags: 0
@@ -71943,6 +71972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -72131,6 +72161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -72170,110 +72201,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5258659847615025163}
   m_Mesh: {fileID: -903803834866492458, guid: 29779f5f357818c4ca8636a99f036a0a, type: 3}
---- !u!33 &6358458495724261077
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  m_Mesh: {fileID: 8403245043752432121, guid: 5292c727fa375a94fbbe8573e7178595, type: 3}
---- !u!114 &6358458495724261078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71b51f9af8c6194ab521348af2210a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlaceableObject
-  heldBrightness: 1.4
-  respawnDelay: 0.5
-  _itemCategory: 7
-  _homeZoneName: 
-  _altHomeZoneName: 
-  _itemDescription: 
-  _smellPerDay: 0
-  _daysLeftOut: 0
-  canWallMount: 0
-  wallOnly: 0
-  crookedAngleRange: 12
-  _rotateAxis: {x: 0, y: 1, z: 0}
-  _allowYaw: 1
-  _allowFlip: 1
-  _allowRoll: 1
-  _allowAutoStraighten: 1
-  _disheveledRotation: {x: 0.65725005, y: 0.26081097, z: -0.26081085, w: 0.6572502}
-  _startDishelved: 1
-  _pickupSFXOverride: {fileID: 8300000, guid: c284ad04b9782384d9a44b855673afe0, type: 3}
-  _placeSFXOverride: {fileID: 8300000, guid: c284ad04b9782384d9a44b855673afe0, type: 3}
-  _useSpawnAsHome: 1
-  _homePosition: {x: 1.382, y: 1.167862, z: 8.313}
-  _homeTolerance: 0.2
-  _homeRotation: {x: 0.7070278, y: -0.010560274, z: 0.010560244, w: 0.70702815}
---- !u!54 &6358458495724261079
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &6358458495724261080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
-  _highlightShader: {fileID: 0}
-  _outlineShader: {fileID: 0}
-  _overlayShader: {fileID: 0}
-  _interactShader: {fileID: 0}
---- !u!114 &6358458495724261081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006675188290007892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
-  displayName: 
-  tags: []
-  isActive: 1
-  reactionIcon: {fileID: 0}
-  smellAmount: 0
 --- !u!23 &6406921338260048239
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -72739,6 +72666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -72778,21 +72706,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6795386457082005103
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350451168965243634}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.015999973, z: -10.330002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 518980288}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6798389371677664836
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -73388,6 +73301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -73909,6 +73823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -74366,6 +74281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -74394,55 +74310,6 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3907487022733824284}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!23 &8359238830631310407
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2616268169004716972}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -74727,6 +74594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -74939,6 +74807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -75054,6 +74923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 4800000, guid: 7c75dae07c943734f9ca85462ecf13df, type: 3}
   _outlineShader: {fileID: 4800000, guid: 53304a462bedc884193752a37307cab4, type: 3}
   _overlayShader: {fileID: 4800000, guid: 77ebec38f41a0d944962bb0ed94f7103, type: 3}
@@ -75394,6 +75264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}
@@ -75547,6 +75418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
   _highlightShader: {fileID: 0}
   _outlineShader: {fileID: 0}
   _overlayShader: {fileID: 0}

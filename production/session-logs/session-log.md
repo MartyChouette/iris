@@ -29816,3 +29816,230 @@ f320677 add bespoke reaction lines per tag on DatePreferences
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260430_152055
+### Commits
+967da4f scene updates, Date_Paris preferences, session logs
+---
+
+## Session End: 20260430_164043
+### Commits
+967da4f scene updates, Date_Paris preferences, session logs
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_093620
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_132451
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_141138
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_143018
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_143622
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_145051
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_145748
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_150439
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_151550
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_151945
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_152010
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_152424
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_152548
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_153015
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_153324
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_155119
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_155620
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_155951
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_161801
+### Commits
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

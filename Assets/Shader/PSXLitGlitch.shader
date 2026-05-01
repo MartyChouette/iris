@@ -109,12 +109,13 @@ Shader "Iris/PSXLitGlitch"
                 VertexPositionInputs posInputs = GetVertexPositionInputs(input.positionOS.xyz);
                 float4 clipPos = posInputs.positionCS;
 
-                // ── Vertex snapping ──
+                // ── Vertex snapping (world space — distance-independent) ──
                 float2 snapRes = _VertexSnapResolution.xy;
                 if (snapRes.x > 0 && snapRes.y > 0)
                 {
-                    clipPos.xy = floor(clipPos.xy / clipPos.w * snapRes + 0.5)
-                               / snapRes * clipPos.w;
+                    float3 posWS = posInputs.positionWS;
+                    posWS = floor(posWS * snapRes.x + 0.5) / snapRes.x;
+                    clipPos = TransformWorldToHClip(posWS);
                 }
 
                 // ── Vertex jitter (glitch) ──

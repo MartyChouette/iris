@@ -350,12 +350,44 @@ public class PairableItem : MonoBehaviour
         else
         {
             // SideBySide — center both shoes symmetrically around root's position.
-            // Child goes to full offset in local space, then root shifts by half
-            // so the pair straddles the original anchor point.
             Transform sbsRoot = FindStackRoot(transform);
-            Vector3 localPos = GetSideBySideLocalOffset(sbsRoot, held);
 
-            // Preserve world scale — parent may have different scale that deforms the child
+            // Auto-compute offset from world-space bounds when not configured.
+            // Use the SMALLEST horizontal dimension as shoe "width" — shoes are
+            // longer than wide, so min(sizeX, sizeZ) avoids the 1-unit bug from
+            // using full AABB extent projections on elongated meshes.
+            Vector3 effectiveOffset = _snapOffset;
+            if (effectiveOffset.sqrMagnitude < 0.0001f)
+            {
+                var rootRend = GetComponentInChildren<Renderer>();
+                var heldRend = held.GetComponentInChildren<Renderer>();
+                if (rootRend != null && heldRend != null)
+                {
+                    float rootW = Mathf.Min(rootRend.bounds.size.x, rootRend.bounds.size.z);
+                    float heldW = Mathf.Min(heldRend.bounds.size.x, heldRend.bounds.size.z);
+                    float totalWidth = (rootW + heldW) * 0.5f + 0.005f;
+                    effectiveOffset = new Vector3(totalWidth, 0f, 0f);
+                }
+                else
+                {
+                    effectiveOffset = new Vector3(0.12f, 0f, 0f);
+                }
+            }
+
+            Vector3 localPos = GetSideBySideLocalOffset(sbsRoot, held, effectiveOffset);
+
+            // Keep held shoe's rigidbody kinematic
+            if (heldRb != null)
+            {
+                if (!heldRb.isKinematic)
+                {
+                    heldRb.linearVelocity = Vector3.zero;
+                    heldRb.angularVelocity = Vector3.zero;
+                }
+                heldRb.isKinematic = true;
+            }
+
+            // Parent held to root, preserve scale
             Vector3 heldWorldScale = held.transform.lossyScale;
             held.transform.SetParent(sbsRoot, true);
             Vector3 parentScale = sbsRoot.lossyScale;
@@ -364,11 +396,11 @@ public class PairableItem : MonoBehaviour
                 parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
                 parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
 
-            // Place child at full offset in local space (Y=0 keeps both at same height)
+            // Place child at offset, same Y and rotation as root
             held.transform.localPosition = new Vector3(localPos.x, 0f, localPos.z);
             held.transform.localRotation = Quaternion.identity;
 
-            // Shift root by half the offset so the pair is centered on the anchor
+            // Shift root by half offset so pair is centered on original position
             Vector3 halfShift = sbsRoot.TransformDirection(localPos * 0.5f);
             halfShift.y = 0f;
             sbsRoot.position -= halfShift;
@@ -412,7 +444,21 @@ public class PairableItem : MonoBehaviour
 
         // SideBySide — return half-offset (pair centers around root)
         Transform root = FindStackRoot(transform);
-        Vector3 localPos = GetSideBySideLocalOffset(root, held);
+        Vector3 effectiveOffset = _snapOffset;
+        if (effectiveOffset.sqrMagnitude < 0.0001f)
+        {
+            var rootRend = GetComponentInChildren<Renderer>();
+            var heldRend = held.GetComponentInChildren<Renderer>();
+            if (rootRend != null && heldRend != null)
+            {
+                float rootW = Mathf.Min(rootRend.bounds.size.x, rootRend.bounds.size.z);
+                float heldW = Mathf.Min(heldRend.bounds.size.x, heldRend.bounds.size.z);
+                effectiveOffset = new Vector3((rootW + heldW) * 0.5f + 0.005f, 0f, 0f);
+            }
+            else
+                effectiveOffset = new Vector3(0.12f, 0f, 0f);
+        }
+        Vector3 localPos = GetSideBySideLocalOffset(root, held, effectiveOffset);
         return root.TransformPoint(localPos * 0.5f);
     }
 
@@ -429,7 +475,7 @@ public class PairableItem : MonoBehaviour
     /// For SideBySide mode: pick +offset or -offset from the root, choosing
     /// the side closest to the held item. If one side is occupied, use the other.
     /// </summary>
-    private Vector3 GetSideBySideLocalOffset(Transform root, PairableItem held)
+    private Vector3 GetSideBySideLocalOffset(Transform root, PairableItem held, Vector3 offset)
     {
         bool positiveOccupied = false;
         bool negativeOccupied = false;
@@ -437,7 +483,7 @@ public class PairableItem : MonoBehaviour
         foreach (Transform child in root)
         {
             if (child.GetComponent<PairableItem>() == null) continue;
-            float dot = Vector3.Dot(child.localPosition.normalized, _snapOffset.normalized);
+            float dot = Vector3.Dot(child.localPosition.normalized, offset.normalized);
             if (dot >= 0f) positiveOccupied = true;
             else negativeOccupied = true;
         }
@@ -445,19 +491,25 @@ public class PairableItem : MonoBehaviour
         // If both free, pick the side closer to the held item
         if (!positiveOccupied && !negativeOccupied)
         {
-            Vector3 posWorld = root.TransformPoint(_snapOffset);
-            Vector3 negWorld = root.TransformPoint(-_snapOffset);
+            Vector3 posWorld = root.TransformPoint(offset);
+            Vector3 negWorld = root.TransformPoint(-offset);
             float distPos = Vector3.Distance(held.transform.position, posWorld);
             float distNeg = Vector3.Distance(held.transform.position, negWorld);
-            return distPos <= distNeg ? _snapOffset : -_snapOffset;
+            return distPos <= distNeg ? offset : -offset;
         }
 
-        if (!negativeOccupied) return -_snapOffset;
-        if (!positiveOccupied) return _snapOffset;
+        if (!negativeOccupied) return -offset;
+        if (!positiveOccupied) return offset;
 
         // Both occupied (stack full) — default to positive
-        return _snapOffset;
+        return offset;
     }
+
+
+
+    /// <summary>Component-wise absolute value of a Vector3.</summary>
+    private static Vector3 Abs(Vector3 v) =>
+        new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
 
     /// <summary>
     /// Resize the root's BoxCollider so it encompasses all child Renderers.

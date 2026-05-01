@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public enum HighlightStyle
 {
+    Global = -1,    // Use the global style (per-item override only)
     Outline,        // Solid line around silhouette (back-face extrusion)
     RimGlow,        // Fresnel edge glow + subtle fill (original)
     SolidOverlay,   // Flat semi-transparent color wash
@@ -89,8 +90,10 @@ public class InteractableHighlight : MonoBehaviour
 
     public static void CycleStyle()
     {
-        var values = System.Enum.GetValues(typeof(HighlightStyle));
-        int next = ((int)s_currentStyle + 1) % values.Length;
+        // Skip Global (-1) — that's only for per-item overrides
+        int next = (int)s_currentStyle + 1;
+        if (next > (int)HighlightStyle.CleanOutline)
+            next = (int)HighlightStyle.Outline;
         CurrentStyle = (HighlightStyle)next;
     }
 
@@ -148,6 +151,10 @@ public class InteractableHighlight : MonoBehaviour
         ApplyGlobalShaderParams();
     }
 
+    [Header("Per-Item Style Override")]
+    [Tooltip("Override the global highlight style for this item. Leave at Global to use the global style. Use RimGlow for glasses, bottles, cues.")]
+    [SerializeField] private HighlightStyle _itemStyle = HighlightStyle.Global;
+
     [Tooltip("Drag Iris/Highlight shader here so it's included in builds.")]
     [SerializeField] private Shader _highlightShader;
 
@@ -190,6 +197,13 @@ public class InteractableHighlight : MonoBehaviour
 
     // Per-instance interact material (copies base texture for affine warp overlay)
     private Material _instanceInteractMat;
+
+    // Per-instance override materials (only created when _itemStyle != Global)
+    private Material _overrideRimMat;
+    private Material _overrideGazeMat;
+    private Material _overrideDisplayMat;
+    private Material _overridePrepLikedMat;
+    private Material _overridePrepDislikedMat;
 
     // Per-instance glitch rim materials (only created for objects with _GlitchIntensity > 0)
     private float _glitchIntensity;
@@ -262,6 +276,7 @@ public class InteractableHighlight : MonoBehaviour
             _baseMaterialArrays[i] = _renderers[i].sharedMaterials;
 
         DetectGlitch();
+        BuildOverrideMaterials();
     }
 
     private void OnEnable() => s_all.Add(this);
@@ -380,9 +395,30 @@ public class InteractableHighlight : MonoBehaviour
         return _instanceInteractMat;
     }
 
-    private Material PickRim(Material shared, Material glitch)
+    private Material PickRim(Material shared, Material glitch, Material overrideMat = null)
     {
+        if (overrideMat != null) return overrideMat;
         return _glitchIntensity > 0 && glitch != null ? glitch : shared;
+    }
+
+    private void BuildOverrideMaterials()
+    {
+        if (_itemStyle == HighlightStyle.Global) return;
+        DestroyOverrideMaterials();
+        _overrideRimMat = MakeMatForStyle(_itemStyle, HoverColor, 0.5f, 2f, 0.1f);
+        _overrideGazeMat = MakeMatForStyle(_itemStyle, GazeColor, 0.4f, 1.5f, 0.08f);
+        _overrideDisplayMat = MakeMatForStyle(_itemStyle, DisplayColor, 0.25f, 1f, 0.05f);
+        _overridePrepLikedMat = MakeMatForStyle(_itemStyle, PrepLikedColor, 0.4f, 1.5f, 0.08f);
+        _overridePrepDislikedMat = MakeMatForStyle(_itemStyle, PrepDislikedColor, 0.4f, 1.5f, 0.08f);
+    }
+
+    private void DestroyOverrideMaterials()
+    {
+        if (_overrideRimMat != null) { Destroy(_overrideRimMat); _overrideRimMat = null; }
+        if (_overrideGazeMat != null) { Destroy(_overrideGazeMat); _overrideGazeMat = null; }
+        if (_overrideDisplayMat != null) { Destroy(_overrideDisplayMat); _overrideDisplayMat = null; }
+        if (_overridePrepLikedMat != null) { Destroy(_overridePrepLikedMat); _overridePrepLikedMat = null; }
+        if (_overridePrepDislikedMat != null) { Destroy(_overridePrepDislikedMat); _overridePrepDislikedMat = null; }
     }
 
     // ── Material rebuild ───────────────
@@ -449,27 +485,27 @@ public class InteractableHighlight : MonoBehaviour
             }
             if (_displayActive)
             {
-                var m = PickRim(s_sharedDisplayMat, _glitchDisplayMat);
+                var m = PickRim(s_sharedDisplayMat, _glitchDisplayMat, _overrideDisplayMat);
                 if (m != null) mats[slot++] = m;
             }
             if (_prepLikedActive)
             {
-                var m = PickRim(s_sharedPrepLikedMat, _glitchPrepLikedMat);
+                var m = PickRim(s_sharedPrepLikedMat, _glitchPrepLikedMat, _overridePrepLikedMat);
                 if (m != null) mats[slot++] = m;
             }
             if (_prepDislikedActive)
             {
-                var m = PickRim(s_sharedPrepDislikedMat, _glitchPrepDislikedMat);
+                var m = PickRim(s_sharedPrepDislikedMat, _glitchPrepDislikedMat, _overridePrepDislikedMat);
                 if (m != null) mats[slot++] = m;
             }
             if (_gazeActive)
             {
-                var m = PickRim(s_sharedGazeMat, _glitchGazeMat);
+                var m = PickRim(s_sharedGazeMat, _glitchGazeMat, _overrideGazeMat);
                 if (m != null) mats[slot++] = m;
             }
             if (_highlighted)
             {
-                var m = PickRim(s_sharedRimMat, _glitchRimMat);
+                var m = PickRim(s_sharedRimMat, _glitchRimMat, _overrideRimMat);
                 if (m != null) mats[slot++] = m;
             }
 
@@ -486,6 +522,7 @@ public class InteractableHighlight : MonoBehaviour
         if (_glitchPrepLikedMat != null) Destroy(_glitchPrepLikedMat);
         if (_glitchPrepDislikedMat != null) Destroy(_glitchPrepDislikedMat);
         if (_glitchInteractMat != null) Destroy(_glitchInteractMat);
+        DestroyOverrideMaterials();
     }
 
     // ── PSXLit swap ───────────────
@@ -523,11 +560,16 @@ public class InteractableHighlight : MonoBehaviour
 
     private static Material MakeMatForStyle(Color color, float intensityScale, float pulseSpeed, float pulseAmount)
     {
+        return MakeMatForStyle(s_currentStyle, color, intensityScale, pulseSpeed, pulseAmount);
+    }
+
+    private static Material MakeMatForStyle(HighlightStyle style, Color color, float intensityScale, float pulseSpeed, float pulseAmount)
+    {
         // Scale per-layer intensity by the global tuning alpha
         float alpha = s_tuneAlpha * intensityScale * 2f;
         float pulse = s_tunePulse;
 
-        switch (s_currentStyle)
+        switch (style)
         {
             case HighlightStyle.Outline:
                 return MakeOutlineMat(color, s_tuneWidth * intensityScale * 2f, pulseSpeed, pulse);
