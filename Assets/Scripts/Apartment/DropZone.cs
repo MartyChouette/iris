@@ -302,24 +302,6 @@ public class DropZone : MonoBehaviour
         return n;
     }
 
-    /// <summary>Old physics-based count — kept for reference but no longer used.</summary>
-    private int CountOccupiedSlotsPhysics()
-    {
-        if (!_useSlotting || _slotCount <= 0) return 0;
-
-        Vector3 axis = _slotLocalAxis.sqrMagnitude > 0.0001f
-            ? _slotLocalAxis.normalized
-            : Vector3.right;
-
-        int n = 0;
-        for (int i = 0; i < _slotCount; i++)
-        {
-            Vector3 localSlot = _slotLocalOrigin + axis * (_slotSpacing * i);
-            Vector3 candidate = transform.TransformPoint(localSlot);
-            if (IsSlotOccupied(candidate)) n++;
-        }
-        return n;
-    }
 
     /// <summary>
     /// Peek at the next free slot WITHOUT claiming it. Used by ObjectGrabber's
