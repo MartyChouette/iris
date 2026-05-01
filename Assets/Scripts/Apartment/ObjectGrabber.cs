@@ -1185,6 +1185,7 @@ public class ObjectGrabber : MonoBehaviour
                         // re-enables physics via PlaceableObject.OnPickedUp.
                         LockRigidbodyAtSlot(_held);
 
+                        zone.ClaimSlotFor(_held);
                         zone.RegisterDeposit(_held);
                         OnObjectPlaced?.Invoke(_held);
                         PlayPlaceSFX(_held);

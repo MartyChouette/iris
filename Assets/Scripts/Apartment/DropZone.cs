@@ -80,8 +80,8 @@ public class DropZone : MonoBehaviour
     [Tooltip("Extra rotation applied to items when slotted (Euler degrees, local space). Use this to angle shoes on the rack.")]
     [SerializeField] private Vector3 _slotRotationOffset;
 
-    [Tooltip("Radius around each slot used to detect whether it's already occupied. Deposited items are kinematic-locked exactly at slot center, so this should be tight — larger values cause adjacent slots to false-positive on each other's shoes.")]
-    [SerializeField] private float _slotOccupancyRadius = 0.03f;
+    [Tooltip("Radius around each slot used to detect whether it's already occupied. Must be large enough to catch paired shoes whose collider center is offset from the pivot after ResizeColliderToChildren.")]
+    [SerializeField] private float _slotOccupancyRadius = 0.12f;
 
     public string ZoneName => _zoneName;
     public bool DestroyOnDeposit => _destroyOnDeposit;
@@ -112,8 +112,15 @@ public class DropZone : MonoBehaviour
     private bool _playerHoldingMatch;
     private bool _pulsing;
 
+    // Explicit slot occupancy — tracks which PlaceableObject is in each slot.
+    // Cleared when the item is picked up (removed from scene hierarchy near slot).
+    private PlaceableObject[] _slotOccupants;
+
     private void Start()
     {
+        if (_useSlotting && _slotCount > 0)
+            _slotOccupants = new PlaceableObject[_slotCount];
+
         if (_zoneRenderer == null)
             _zoneRenderer = GetComponent<Renderer>();
 
@@ -236,7 +243,14 @@ public class DropZone : MonoBehaviour
     {
         worldPos = default;
         worldRot = default;
-        if (!_useSlotting || _slotCount <= 0) return false;
+        if (!_useSlotting || _slotCount <= 0 || _slotOccupants == null) return false;
+
+        // Clean up stale entries (item was picked up or destroyed)
+        for (int i = 0; i < _slotOccupants.Length; i++)
+        {
+            if (_slotOccupants[i] != null && _slotOccupants[i].CurrentState != PlaceableObject.State.Placed)
+                _slotOccupants[i] = null;
+        }
 
         Vector3 axis = _slotLocalAxis.sqrMagnitude > 0.0001f
             ? _slotLocalAxis.normalized
@@ -244,34 +258,52 @@ public class DropZone : MonoBehaviour
 
         for (int i = 0; i < _slotCount; i++)
         {
-            Vector3 localSlot = _slotLocalOrigin + axis * (_slotSpacing * i);
-            Vector3 candidate = transform.TransformPoint(localSlot);
-            if (!IsSlotOccupied(candidate))
-            {
-                worldPos = candidate;
-                worldRot = transform.rotation * Quaternion.Euler(_slotRotationOffset);
-                return true;
-            }
-        }
-        return false;
-    }
+            if (_slotOccupants[i] != null) continue; // slot taken
 
-    private bool IsSlotOccupied(Vector3 worldPos)
-    {
-        int count = Physics.OverlapSphereNonAlloc(worldPos, _slotOccupancyRadius, s_slotOverlapBuffer);
-        var held = ObjectGrabber.HeldObject;
-        for (int i = 0; i < count; i++)
-        {
-            var po = s_slotOverlapBuffer[i].GetComponentInParent<PlaceableObject>();
-            if (po == null) continue;
-            if (held != null && (po == held || po.transform.IsChildOf(held.transform))) continue;
+            Vector3 localSlot = _slotLocalOrigin + axis * (_slotSpacing * i);
+            worldPos = transform.TransformPoint(localSlot);
+            worldRot = transform.rotation * Quaternion.Euler(_slotRotationOffset);
             return true;
         }
         return false;
     }
 
+    /// <summary>Claim the next free slot for the given item. Called after deposit.</summary>
+    public void ClaimSlotFor(PlaceableObject item)
+    {
+        if (_slotOccupants == null) return;
+        for (int i = 0; i < _slotOccupants.Length; i++)
+        {
+            if (_slotOccupants[i] == null)
+            {
+                _slotOccupants[i] = item;
+                return;
+            }
+        }
+    }
+
     /// <summary>How many slots currently have a PlaceableObject sitting in them.</summary>
     public int CountOccupiedSlots()
+    {
+        if (_slotOccupants == null) return 0;
+
+        // Clean stale entries
+        for (int i = 0; i < _slotOccupants.Length; i++)
+        {
+            if (_slotOccupants[i] != null && _slotOccupants[i].CurrentState != PlaceableObject.State.Placed)
+                _slotOccupants[i] = null;
+        }
+
+        int n = 0;
+        for (int i = 0; i < _slotOccupants.Length; i++)
+        {
+            if (_slotOccupants[i] != null) n++;
+        }
+        return n;
+    }
+
+    /// <summary>Old physics-based count — kept for reference but no longer used.</summary>
+    private int CountOccupiedSlotsPhysics()
     {
         if (!_useSlotting || _slotCount <= 0) return 0;
 

@@ -396,9 +396,26 @@ public class PairableItem : MonoBehaviour
                 parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
                 parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
 
-            // Place child at offset, same Y and rotation as root
+            // Place child at offset, same rotation as root
             held.transform.localPosition = new Vector3(localPos.x, 0f, localPos.z);
             held.transform.localRotation = Quaternion.identity;
+
+            // Align soles — L/R meshes often have different pivot heights.
+            // Uses sharedMesh.bounds (constant) + TransformPoint (always current),
+            // NOT Renderer.bounds (which can be stale within the same frame).
+            var rootFilter = GetComponentInChildren<MeshFilter>();
+            var heldFilter = held.GetComponentInChildren<MeshFilter>();
+            if (rootFilter != null && heldFilter != null
+                && rootFilter.sharedMesh != null && heldFilter.sharedMesh != null)
+            {
+                float rootBottom = sbsRoot.TransformPoint(
+                    new Vector3(0f, rootFilter.sharedMesh.bounds.min.y, 0f)).y;
+                float heldBottom = held.transform.TransformPoint(
+                    new Vector3(0f, heldFilter.sharedMesh.bounds.min.y, 0f)).y;
+                float diff = rootBottom - heldBottom;
+                if (Mathf.Abs(diff) > 0.001f)
+                    held.transform.position += Vector3.up * diff;
+            }
 
             // Shift root by half offset so pair is centered on original position
             Vector3 halfShift = sbsRoot.TransformDirection(localPos * 0.5f);

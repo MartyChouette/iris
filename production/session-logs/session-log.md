@@ -30043,3 +30043,77 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260501_162003
+### Commits
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+---
+
+## Session End: 20260501_162402
+### Commits
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_162503
+### Commits
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_163158
+### Commits
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_163403
+### Commits
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_164725
+### Commits
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_165100
+### Commits
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_170538
+### Commits
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+production/session-logs/session-log.md
+---
+

@@ -39324,7 +39324,7 @@ MonoBehaviour:
   _daysLeftOut: 0
   canWallMount: 0
   wallOnly: 0
-  crookedAngleRange: 12
+  crookedAngleRange: 0
   _rotateAxis: {x: 0, y: 1, z: 0}
   _allowYaw: 1
   _allowFlip: 1
@@ -39385,7 +39385,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.1, z: 0.17}
-  m_Center: {x: 0.04, y: 0, z: -0.08}
+  m_Center: {x: 0.04, y: 0, z: 1.09}
 --- !u!114 &1243566203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59315,7 +59315,7 @@ MonoBehaviour:
   _daysLeftOut: 0
   canWallMount: 0
   wallOnly: 0
-  crookedAngleRange: 12
+  crookedAngleRange: 0
   _rotateAxis: {x: 0, y: 1, z: 0}
   _allowYaw: 1
   _allowFlip: 1
@@ -59327,7 +59327,7 @@ MonoBehaviour:
   _placeSFXOverride: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
   _useSpawnAsHome: 0
   _homePosition: {x: 0, y: 0, z: 0}
-  _homeTolerance: 0.2
+  _homeTolerance: 0
   _homeRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!65 &1953798387
 BoxCollider:
@@ -59349,7 +59349,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.23, y: 0.17, z: 0.1}
-  m_Center: {x: 0.16, y: 0.07, z: 0}
+  m_Center: {x: 0.08, y: 0.07, z: 0}
 --- !u!54 &1953798388
 Rigidbody:
   m_ObjectHideFlags: 0
