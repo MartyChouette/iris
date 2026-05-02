@@ -31605,3 +31605,114 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260502_051643
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+---
+
+## Session End: 20260502_051732
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+### Uncommitted Changes
+Assets/Scripts/Dating/DateReactionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_052149
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_052245
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_053816
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_054950
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_055050
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/HotkeyHints.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_055517
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PlacementPreviewSettings.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/HotkeyHints.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_061345
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/Daisy_Flower_Scene.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/GameModes/Mode_7Minutes.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PlacementPreviewSettings.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

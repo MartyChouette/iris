@@ -55,20 +55,32 @@ public class HotkeyHints : MonoBehaviour
         scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920f, 1080f);
 
+        // Background panel
+        var bgGO = new GameObject("HintBG");
+        bgGO.transform.SetParent(canvasGO.transform, false);
+        var bgRT = bgGO.AddComponent<RectTransform>();
+        bgRT.anchorMin = new Vector2(0.5f, 0f);
+        bgRT.anchorMax = new Vector2(0.5f, 0f);
+        bgRT.pivot = new Vector2(0.5f, 0f);
+        bgRT.anchoredPosition = new Vector2(0f, 6f);
+        bgRT.sizeDelta = new Vector2(620f, 34f);
+        var bgImg = bgGO.AddComponent<UnityEngine.UI.Image>();
+        bgImg.color = new Color(0f, 0f, 0f, 0.35f);
+        bgImg.raycastTarget = false;
+
         var textGO = new GameObject("HintText");
-        textGO.transform.SetParent(canvasGO.transform, false);
+        textGO.transform.SetParent(bgGO.transform, false);
         var rt = textGO.AddComponent<RectTransform>();
-        rt.anchorMin = new Vector2(0.5f, 0f);
-        rt.anchorMax = new Vector2(0.5f, 0f);
-        rt.pivot = new Vector2(0.5f, 0f);
-        rt.anchoredPosition = new Vector2(0f, 10f);
-        rt.sizeDelta = new Vector2(600f, 30f);
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = new Vector2(10f, 2f);
+        rt.offsetMax = new Vector2(-10f, -2f);
 
         var tmp = textGO.AddComponent<TextMeshProUGUI>();
         tmp.text = $"F8 Feedback  |  F9 Bug Report  |  {GameVersion.Display}";
         tmp.fontSize = 16f;
         tmp.alignment = TextAlignmentOptions.Center;
-        tmp.color = new Color(1f, 1f, 1f, 0.3f);
+        tmp.color = new Color(1f, 1f, 1f, 0.4f);
         tmp.raycastTarget = false;
     }
 }

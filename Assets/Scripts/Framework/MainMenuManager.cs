@@ -395,7 +395,7 @@ public class MainMenuManager : MonoBehaviour
         panelRT.anchorMin = new Vector2(0f, 0f);
         panelRT.anchorMax = new Vector2(0f, 0f);
         panelRT.pivot = new Vector2(0f, 0f);
-        panelRT.anchoredPosition = new Vector2(30f, 30f);
+        panelRT.anchoredPosition = new Vector2(30f, 100f);
         panelRT.sizeDelta = new Vector2(240f, 220f);
 
         // Redirect all child creation to the container

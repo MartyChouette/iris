@@ -707,9 +707,8 @@ public class ApartmentManager : MonoBehaviour
         if (browseCamera == null) return;
         if (_zoomSteps == null || _zoomSteps.Length == 0) return;
 
-        // Don't allow manual zoom while a phase camera preset is active —
-        // date phases have specific camera setups that zoom would break.
-        if (_presetOverrideActive) return;
+        // During preset: only allow zoom if a range was configured
+        if (_presetOverrideActive && (_presetZoomMin < 0 || _presetZoomMax < 0)) return;
 
         // Scroll always zooms — rotation moved to R key
 
@@ -727,7 +726,9 @@ public class ApartmentManager : MonoBehaviour
             // Scroll up = zoom in. Respect invert scroll setting.
             int raw = scroll > 0f ? -1 : 1;
             int direction = AccessibilitySettings.InvertScroll ? -raw : raw;
-            int newStep = Mathf.Clamp(_currentZoomStep + direction, 0, _zoomSteps.Length - 1);
+            int lo = (_presetOverrideActive && _presetZoomMin >= 0) ? _presetZoomMin : 0;
+            int hi = (_presetOverrideActive && _presetZoomMax >= 0) ? _presetZoomMax : _zoomSteps.Length - 1;
+            int newStep = Mathf.Clamp(_currentZoomStep + direction, lo, hi);
             if (newStep != _currentZoomStep)
             {
                 _currentZoomStep = newStep;
@@ -970,19 +971,61 @@ public class ApartmentManager : MonoBehaviour
         UpdateZoomIndicator();
     }
 
+    private static readonly Color TickUnavailable = new Color(1f, 1f, 1f, 0.05f);
+
     private void UpdateZoomIndicator()
     {
         if (_zoomTicks == null) return;
+
+        // Determine available range
+        int lo, hi;
+        if (_presetOverrideActive && _presetZoomMin >= 0 && _presetZoomMax >= 0)
+        {
+            lo = _presetZoomMin;
+            hi = _presetZoomMax;
+        }
+        else if (_presetOverrideActive)
+        {
+            // Preset active but no range — zoom locked, hide all
+            lo = -1;
+            hi = -1;
+        }
+        else
+        {
+            lo = 0;
+            hi = _zoomSteps.Length - 1;
+        }
+
+        bool zoomAvailable = lo >= 0 && hi >= 0 && lo != hi;
+
         for (int i = 0; i < _zoomTicks.Length; i++)
         {
             if (_zoomTicks[i] == null) continue;
-            // Invert so bottom = zoomed out, top = zoomed in
             int visualIdx = _zoomTicks.Length - 1 - i;
-            _zoomTicks[i].color = (visualIdx == _currentZoomStep) ? TickActive : TickInactive;
 
-            // Active tick is slightly wider
+            bool isActive = visualIdx == _currentZoomStep;
+            bool inRange = zoomAvailable && visualIdx >= lo && visualIdx <= hi;
+
+            if (!zoomAvailable)
+            {
+                // Zoom locked — hide indicator entirely
+                _zoomTicks[i].color = Color.clear;
+            }
+            else if (isActive)
+            {
+                _zoomTicks[i].color = TickActive;
+            }
+            else if (inRange)
+            {
+                _zoomTicks[i].color = TickInactive;
+            }
+            else
+            {
+                _zoomTicks[i].color = TickUnavailable;
+            }
+
             var rt = _zoomTicks[i].rectTransform;
-            rt.sizeDelta = (visualIdx == _currentZoomStep)
+            rt.sizeDelta = isActive && zoomAvailable
                 ? new Vector2(24f, 60f)
                 : new Vector2(15f, 60f);
         }
@@ -1001,9 +1044,18 @@ public class ApartmentManager : MonoBehaviour
     private bool _presetPerspective;
     private float _presetPerspectiveFOV = 60f;
     private float _presetPanLimit = -1f; // -1 = use default panMaxDistance
+    private int _presetZoomMin = -1; // -1 = zoom locked during preset
+    private int _presetZoomMax = -1;
 
     /// <summary>Override the pan distance limit while a preset is active. Set -1 to use default.</summary>
     public void SetPresetPanLimit(float maxPan) => _presetPanLimit = maxPan;
+
+    /// <summary>Allow zoom scrolling within a step range during a preset. Both -1 = zoom locked.</summary>
+    public void SetPresetZoomRange(int minStep, int maxStep)
+    {
+        _presetZoomMin = minStep;
+        _presetZoomMax = maxStep;
+    }
 
     [Tooltip("Pan speed multiplier when a phase camera preset is active (0-1). Lower = less sensitive.")]
     [SerializeField, Range(0.05f, 1f)] private float _presetPanSpeedScale = 0.35f;
@@ -1107,6 +1159,8 @@ public class ApartmentManager : MonoBehaviour
         _presetPerspective = false;
         _presetPerspectiveFOV = 60f;
         _presetPanLimit = -1f;
+        _presetZoomMin = -1;
+        _presetZoomMax = -1;
 
         // Snap back to current area (reads from defaultPreset if set)
         if (areas != null && areas.Length > 0)

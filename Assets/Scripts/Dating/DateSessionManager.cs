@@ -215,8 +215,12 @@ public class DateSessionManager : MonoBehaviour
         public float perspectiveFOV;
         [Tooltip("Maximum pan distance during this phase. 0 = locked in place, -1 = use default.")]
         public float panLimit;
-        [Tooltip("Which zoom step to force (0 = most zoomed out, -1 = don't override).")]
+        [Tooltip("Which zoom step to force (0 = most zoomed in, -1 = don't override).")]
         public int zoomStep;
+        [Tooltip("Minimum zoom step the player can scroll to during this phase (-1 = same as zoomStep).")]
+        public int zoomStepMin;
+        [Tooltip("Maximum zoom step the player can scroll to during this phase (-1 = same as zoomStep).")]
+        public int zoomStepMax;
         public bool captured;
     }
 
@@ -1927,6 +1931,12 @@ public class DateSessionManager : MonoBehaviour
 
         // Force zoom step if configured (-1 = don't override)
         ApartmentManager.Instance.ForceZoomStep(frame.zoomStep);
+
+        // Allow zoom within a range if configured
+        int minStep = frame.zoomStepMin >= 0 ? frame.zoomStepMin : frame.zoomStep;
+        int maxStep = frame.zoomStepMax >= 0 ? frame.zoomStepMax : frame.zoomStep;
+        if (minStep != maxStep && minStep >= 0 && maxStep >= 0)
+            ApartmentManager.Instance.SetPresetZoomRange(minStep, maxStep);
     }
 
     /// <summary>
@@ -1950,6 +1960,12 @@ public class DateSessionManager : MonoBehaviour
         float panLim = frame.panLimit == 0f ? 0.5f : frame.panLimit;
         ApartmentManager.Instance.SetPresetPanLimit(panLim);
         ApartmentManager.Instance.ForceZoomStep(frame.zoomStep);
+
+        // Allow zoom within a range if configured
+        int minStep = frame.zoomStepMin >= 0 ? frame.zoomStepMin : frame.zoomStep;
+        int maxStep = frame.zoomStepMax >= 0 ? frame.zoomStepMax : frame.zoomStep;
+        if (minStep != maxStep && minStep >= 0 && maxStep >= 0)
+            ApartmentManager.Instance.SetPresetZoomRange(minStep, maxStep);
 
         StopPhaseCameraLerp();
         _phaseCameraLerp = StartCoroutine(PhaseCameraLerpRoutine(frame, duration));

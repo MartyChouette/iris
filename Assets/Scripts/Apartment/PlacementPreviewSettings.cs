@@ -23,7 +23,7 @@ public class PlacementPreviewSettings : MonoBehaviour
 
     [Header("Ghost Preview")]
     [Tooltip("Show a translucent duplicate of the held item at the placement position.")]
-    public bool showGhost = true;
+    public bool showGhost = false;
 
     [Tooltip("Ghost visual style.")]
     public GhostStyle ghostStyle = GhostStyle.Filled;

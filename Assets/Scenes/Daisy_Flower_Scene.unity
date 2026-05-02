@@ -7898,7 +7898,7 @@ GameObject:
   - component: {fileID: 774411313}
   - component: {fileID: 774411312}
   m_Layer: 6
-  m_Name: Daisy_Leaf_L (2)
+  m_Name: Daisy_Leaf_L
   m_TagString: Leaf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10586,6 +10586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd246e34ff9b2474f9a754c8ecbc1c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RRestart
+  _enableRKeyRestart: 0
 --- !u!1 &1338079570
 GameObject:
   m_ObjectHideFlags: 0

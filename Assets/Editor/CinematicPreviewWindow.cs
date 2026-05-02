@@ -159,8 +159,12 @@ public class CinematicPreviewWindow : EditorWindow
 
         EditorGUILayout.Space(5);
 
+        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Copy Settings to DateSessionManager", GUILayout.Height(28)))
             CopyToDateSessionManager();
+        if (GUILayout.Button("Copy to Clipboard", GUILayout.Height(28)))
+            CopySettingsToClipboard();
+        EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space(5);
 
@@ -369,6 +373,37 @@ public class CinematicPreviewWindow : EditorWindow
         so.ApplyModifiedProperties();
         EditorUtility.SetDirty(dsm);
         Debug.Log($"[CinematicPreview] Copied {_cinematic} settings to DateSessionManager.");
+    }
+
+    private void CopySettingsToClipboard()
+    {
+        string text;
+        if (_cinematic == CinematicType.FaceSweep)
+        {
+            text = $"Face Sweep Settings\n" +
+                   $"  Distance:        {_sweepDistance:F2}\n" +
+                   $"  Sweep Width:     {_sweepWidth:F2}\n" +
+                   $"  FOV/Ortho Size:  {_sweepFOV:F2}\n" +
+                   $"  Approach Angle:  {_sweepApproachAngle:F1}\n" +
+                   $"  Start Height:    {_sweepStartHeight:F2}\n" +
+                   $"  End Height:      {_sweepEndHeight:F2}\n" +
+                   $"  Look-At Height:  {_sweepLookAtHeight:F2}";
+        }
+        else
+        {
+            float orbits = (_swirlEndAngle - _swirlStartAngle) / 360f;
+            text = $"Verdict Swirl Settings\n" +
+                   $"  End Distance:    {_swirlDistance:F2}\n" +
+                   $"  FOV/Ortho Size:  {_swirlFOV:F2}\n" +
+                   $"  Start Angle:     {_swirlStartAngle:F1}\n" +
+                   $"  End Angle:       {_swirlEndAngle:F1} ({orbits:F2} orbits)\n" +
+                   $"  Start Height:    {_swirlStartHeight:F2}\n" +
+                   $"  End Height:      {_swirlEndHeight:F2}\n" +
+                   $"  Look-At Height:  {_swirlLookAtHeight:F2}";
+        }
+
+        GUIUtility.systemCopyBuffer = text;
+        Debug.Log($"[CinematicPreview] Copied to clipboard:\n{text}");
     }
 
     private void OnDestroy()
