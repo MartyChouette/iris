@@ -514,17 +514,22 @@ public class GlobalCursorManager : MonoBehaviour
         if (Has<WaterablePlant>(go))       return CursorType.Interact;
         if (Has<FridgeController>(go))     return CursorType.Interact;
         if (Has<PhoneController>(go))      return CursorType.Interact;
-        if (Has<DrawerController>(go))     return CursorType.Drawer;
+        if (Has<InteractableHighlight>(go)
+         || Has<PlaceableObject>(go)
+         || Has<RecordSlot>(go)
+         || HasFlowerTag(go))              return CursorType.Interact;
+        { // Only show drawer cursor when the drawer is closed; when open, let the ray
+          // fall through so items inside the cubby get their own cursor.
+            var dc = go.GetComponent<DrawerController>() ?? go.GetComponentInParent<DrawerController>();
+            if (dc != null && dc.CurrentState == DrawerController.State.Closed)
+                return CursorType.Drawer;
+        }
         if (Has<DrinkGlass>(go))            return CursorType.Interact;
         if (Has<BottleItem>(go))           return CursorType.Interact;
         if (Has<FlyController>(go))         return CursorType.Interact;
         if (Has<CleanableSurface>(go))     return CursorType.Interact;
         if (Has<ScissorStation>(go))      return CursorType.Scissors;
         if (Has<LightSwitch>(go))          return CursorType.Interact;
-        if (Has<InteractableHighlight>(go)
-         || Has<PlaceableObject>(go)
-         || Has<RecordSlot>(go)
-         || HasFlowerTag(go))              return CursorType.Interact;
         return CursorType.Default;
     }
 

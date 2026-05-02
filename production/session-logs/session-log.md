@@ -31763,3 +31763,194 @@ Assets/Scripts/Framework/ScreenFade.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260502_070043
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+---
+
+## Session End: 20260502_135653
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_135857
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_135940
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_140017
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_140656
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_140801
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_140832
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_140846
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_140902
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_141148
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_141324
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_141620
+### Commits
+d3dc8c7 hint display fix, ScreenFade click-through, Paris camera reaction, summary cleanup
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_153235
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_153247
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_153942
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_154111
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_154631
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_155926
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_161003
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_173405
+### Commits
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

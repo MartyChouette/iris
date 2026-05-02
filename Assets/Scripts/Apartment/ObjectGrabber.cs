@@ -2735,7 +2735,7 @@ public class ObjectGrabber : MonoBehaviour
     private void BuildGhostPreview(PlaceableObject source)
     {
         var cfg = PlacementPreviewSettings.Instance;
-        if (cfg != null && !cfg.showGhost) return;
+        if (cfg == null || !cfg.showGhost) return;
         if (source == null) return;
         DestroyGhostPreview();
 
