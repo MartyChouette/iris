@@ -112,7 +112,6 @@ public class GameEndSummaryScreen : MonoBehaviour
             sb.AppendLine("<b>Your Dates</b>");
             foreach (var e in entries)
             {
-                string result = e.succeeded ? "OK" : "X";
                 string line = $"  Day {e.day}: {e.name} — {e.grade} ({e.affection:F0}%)";
 
                 // Learned likes

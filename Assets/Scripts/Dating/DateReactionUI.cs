@@ -96,7 +96,7 @@ public class DateReactionUI : MonoBehaviour
         }
 
         // Track character position for screen-space text
-        if (_screenText != null && _screenText.gameObject.activeSelf)
+        if (_screenText != null && _screenTextRT.gameObject.activeSelf)
             UpdateScreenTextPosition();
     }
 
@@ -108,14 +108,15 @@ public class DateReactionUI : MonoBehaviour
         Vector3 worldPos = transform.position + Vector3.up * (bubbleHeight + 0.3f);
         Vector3 screenPos = _cachedCamera.WorldToScreenPoint(worldPos);
 
-        // Clamp to screen edges so text is always visible (with margin)
-        const float margin = 80f;
-        screenPos.x = Mathf.Clamp(screenPos.x, margin, Screen.width - margin);
-        screenPos.y = Mathf.Clamp(screenPos.y, margin, Screen.height - margin);
+        // Clamp to screen edges so text is always visible (with deep margin)
+        const float marginX = 200f;
+        const float marginY = 150f;
+        screenPos.x = Mathf.Clamp(screenPos.x, marginX, Screen.width - marginX);
+        screenPos.y = Mathf.Clamp(screenPos.y, marginY, Screen.height - marginY);
 
         // Handle behind-camera: push to top of screen
         if (screenPos.z < 0f)
-            screenPos.y = Screen.height - margin;
+            screenPos.y = Screen.height - marginY;
 
         _screenTextRT.position = new Vector3(screenPos.x, screenPos.y, 0f);
     }
@@ -205,7 +206,7 @@ public class DateReactionUI : MonoBehaviour
         EnsureScreenText();
         _screenText.text = message;
         _screenText.color = Color.white;
-        _screenText.gameObject.SetActive(true);
+        _screenTextRT.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(duration);
 
@@ -220,7 +221,7 @@ public class DateReactionUI : MonoBehaviour
             yield return null;
         }
 
-        _screenText.gameObject.SetActive(false);
+        _screenTextRT.gameObject.SetActive(false);
         _screenText.color = Color.white;
         _activeReaction = null;
     }
@@ -267,7 +268,7 @@ public class DateReactionUI : MonoBehaviour
         // Screen-space topic label
         _screenText.text = topicLabel;
         _screenText.color = Color.white;
-        _screenText.gameObject.SetActive(true);
+        _screenTextRT.gameObject.SetActive(true);
 
         yield return s_wait07;
 
@@ -326,7 +327,7 @@ public class DateReactionUI : MonoBehaviour
             yield return null;
         }
 
-        _screenText.gameObject.SetActive(false);
+        _screenTextRT.gameObject.SetActive(false);
         _screenText.color = Color.white;
         _iconRenderer.enabled = true;
         if (_itemIconRenderer != null) _itemIconRenderer.enabled = false;
@@ -372,21 +373,35 @@ public class DateReactionUI : MonoBehaviour
             scaler.referenceResolution = new Vector2(1920f, 1080f);
         }
 
-        var go = new GameObject("DateScreenText");
-        go.transform.SetParent(s_screenTextCanvas.transform, false);
-        _screenTextRT = go.AddComponent<RectTransform>();
+        // Background panel for readability over busy scenes
+        var bgGO = new GameObject("DateScreenTextBG");
+        bgGO.transform.SetParent(s_screenTextCanvas.transform, false);
+        _screenTextRT = bgGO.AddComponent<RectTransform>();
         _screenTextRT.pivot = new Vector2(0.5f, 0f);
-        _screenTextRT.sizeDelta = new Vector2(500f, 60f);
+        _screenTextRT.sizeDelta = new Vector2(750f, 90f);
 
-        _screenText = go.AddComponent<TextMeshProUGUI>();
+        var bgImg = bgGO.AddComponent<Image>();
+        bgImg.color = new Color(0f, 0f, 0f, 0.45f);
+        bgImg.raycastTarget = false;
+
+        // Text inside the background
+        var textGO = new GameObject("Text");
+        textGO.transform.SetParent(bgGO.transform, false);
+        var textRT = textGO.AddComponent<RectTransform>();
+        textRT.anchorMin = Vector2.zero;
+        textRT.anchorMax = Vector2.one;
+        textRT.offsetMin = new Vector2(20f, 8f);
+        textRT.offsetMax = new Vector2(-20f, -8f);
+
+        _screenText = textGO.AddComponent<TextMeshProUGUI>();
         _screenText.fontSize = 36f;
         _screenText.alignment = TextAlignmentOptions.Center;
         _screenText.color = Color.white;
-        _screenText.outlineWidth = 0.3f;
-        _screenText.outlineColor = new Color32(0, 0, 0, 180);
+        _screenText.outlineWidth = 0.35f;
+        _screenText.outlineColor = new Color32(0, 0, 0, 220);
         _screenText.textWrappingMode = TextWrappingModes.Normal;
         _screenText.raycastTarget = false;
-        go.SetActive(false);
+        bgGO.SetActive(false);
     }
 
     private void EnsureItemIconRenderer()

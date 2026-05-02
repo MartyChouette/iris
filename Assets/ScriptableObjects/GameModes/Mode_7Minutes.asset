@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameModeConfig
   modeName: DEMO
   modeDescription: Play at your own pace. No time limits.
-  totalDays: 7
+  totalDays: 1
   demoTimeLimitSeconds: 0
   realSecondsPerGameHour: 26
   prepDuration: 260

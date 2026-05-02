@@ -100,4 +100,50 @@ public class DatePersonalDefinition : ScriptableObject
     [Header("Preferences")]
     [Tooltip("What this date likes and dislikes in the apartment.")]
     public DatePreferences preferences = new DatePreferences();
+
+    // ──────────────────────────────────────────────────────────────
+    // Item Reactions (Stage 3)
+    // ──────────────────────────────────────────────────────────────
+    [Header("Item Reactions")]
+    [Tooltip("What this date says when the player clicks on specific items during stage 3.")]
+    public ItemReaction[] itemReactions = { };
+
+    [System.Serializable]
+    public class ItemReaction
+    {
+        [Tooltip("Tag to match against ReactableTag (e.g. 'vinyl', 'plant', 'perfume_floral').")]
+        public string tag = "";
+
+        [TextArea(2, 4)]
+        [Tooltip("What this date says about the item.")]
+        public string dialogue = "";
+    }
+
+    /// <summary>Look up what this date says about an item with the given tag.</summary>
+    public string GetReactionDialogue(string tag)
+    {
+        if (itemReactions == null || string.IsNullOrEmpty(tag)) return null;
+        for (int i = 0; i < itemReactions.Length; i++)
+        {
+            if (itemReactions[i].tag == tag)
+                return itemReactions[i].dialogue;
+        }
+        return null;
+    }
+
+    /// <summary>Look up what this date says about a ReactableTag (checks all tags on the item).</summary>
+    public string GetReactionDialogue(ReactableTag reactable)
+    {
+        if (itemReactions == null || reactable == null) return null;
+        var tags = reactable.Tags;
+        for (int t = 0; t < tags.Length; t++)
+        {
+            for (int i = 0; i < itemReactions.Length; i++)
+            {
+                if (itemReactions[i].tag == tags[t])
+                    return itemReactions[i].dialogue;
+            }
+        }
+        return null;
+    }
 }

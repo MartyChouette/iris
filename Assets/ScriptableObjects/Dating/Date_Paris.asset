@@ -48,14 +48,11 @@ MonoBehaviour:
     - plant
     - book
     dislikedTags:
-    - edgy
-    - dark
     - weeb
     preferredMoodMin: 0.1
     preferredMoodMax: 0.4
     likedDrinks:
-    - {fileID: 11400000, guid: c4fe4fc3da70d6b47875cbf1b78e7e2d, type: 2}
-    - {fileID: 11400000, guid: 8e94fe9970229e2479b02042dad94cda, type: 2}
+    - {fileID: 11400000, guid: ba0e1e44b66c240409dc4037f9a8b120, type: 2}
     dislikedDrinks:
     - {fileID: 11400000, guid: 6a3a5231bffc4934784c25151316ecfb, type: 2}
     likedOutfitTags:
@@ -73,3 +70,6 @@ MonoBehaviour:
     neutralLines: []
     dislikeLines: []
     bespokeReactions: []
+  itemReactions:
+  - tag: camera
+    dialogue: My ex loved photography

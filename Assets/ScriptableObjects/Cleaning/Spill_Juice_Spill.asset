@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b361915585fc3478290cbf183dab59, type: 3}
   m_Name: Spill_Juice_Spill
   m_EditorClassIdentifier: Assembly-CSharp::SpillDefinition
-  spillType: 0
-  spillColor: {r: 0.6, g: 0.35, b: 0.1, a: 1}
-  coverage: 0.7
-  seed: 56
-  textureSize: 128
-  stubbornness: 0.2
+  spillType: 1
+  spillColor: {r: 0.72327036, g: 0.04992735, b: 0, a: 1}
+  coverage: 0.554
+  seed: 75
+  textureSize: 64
+  stubbornness: 0.132
   displayName: Juice Spill

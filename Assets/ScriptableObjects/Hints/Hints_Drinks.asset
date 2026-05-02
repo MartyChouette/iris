@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f908e66e4e88246ab087e013975690, type: 3}
+  m_Name: Hints_Drinks
+  m_EditorClassIdentifier: Assembly-CSharp::HintDefinition
+  phase: 1
+  hintContent: "LMB\u2192bottles: pick up drink to pour to the cup\r\nLMB\u2192continue:
+    then LMB click on cup to serve"
+  hintPrompt: Will Paris like this drink?

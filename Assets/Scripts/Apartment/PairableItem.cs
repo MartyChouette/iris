@@ -331,21 +331,33 @@ public class PairableItem : MonoBehaviour
 
         if (_snapMode == SnapMode.Stacked)
         {
-            // Stack in world space — place flat on top of the topmost plate's mesh
-            var renderer = stackTop.GetComponentInChildren<Renderer>();
-            Vector3 stackPos;
-            if (renderer != null)
-                stackPos = renderer.bounds.center + Vector3.up * renderer.bounds.extents.y;
-            else
-                stackPos = stackTop.position + Vector3.up * _snapOffset.y;
-
-            // Keep world rotation from the root plate (all plates face the same way)
-            Quaternion stackRot = transform.rotation;
-
-            // Parent, then set world pos/rot (worldPositionStays=false would lose it)
-            held.transform.SetParent(stackTop, true);
-            held.transform.position = stackPos;
+            // Match rotation first so bounds are comparable
+            Transform root = FindStackRoot(transform);
+            Quaternion stackRot = root.rotation;
             held.transform.rotation = stackRot;
+
+            // Align the held book's center XZ with the bottom book's center XZ,
+            // then sit it on top of the bottom book's bounds.
+            var botRenderer = stackTop.GetComponentInChildren<Renderer>();
+            var topRenderer = held.GetComponentInChildren<Renderer>();
+
+            float topY = botRenderer != null ? botRenderer.bounds.max.y : stackTop.position.y;
+            Vector3 botCenter = botRenderer != null ? botRenderer.bounds.center : stackTop.position;
+            Vector3 topCenter = topRenderer != null ? topRenderer.bounds.center : held.transform.position;
+            Vector3 topPivotOffset = held.transform.position - topCenter;
+
+            // Place held book so its visual center aligns with bottom book's center
+            Vector3 stackPos = new Vector3(botCenter.x, topY, botCenter.z) + topPivotOffset;
+            stackPos.y = topY + (held.transform.position.y - (topRenderer != null ? topRenderer.bounds.min.y : held.transform.position.y));
+
+            Vector3 heldWorldScale = held.transform.lossyScale;
+            held.transform.SetParent(stackTop, true);
+            Vector3 parentScale = stackTop.lossyScale;
+            held.transform.localScale = new Vector3(
+                parentScale.x != 0f ? heldWorldScale.x / parentScale.x : 1f,
+                parentScale.y != 0f ? heldWorldScale.y / parentScale.y : 1f,
+                parentScale.z != 0f ? heldWorldScale.z / parentScale.z : 1f);
+            held.transform.position = stackPos;
         }
         else
         {
@@ -596,7 +608,7 @@ public class PairableItem : MonoBehaviour
             placeable.SetGlitched(false);
     }
 
-    /// <summary>Turn off InteractableHighlight on a GameObject (both highlighted and interact-highlighted).</summary>
+    /// <summary>Turn off and disable InteractableHighlight on a GameObject so it can't re-trigger.</summary>
     private static void ClearHighlight(GameObject go)
     {
         var hl = go.GetComponent<InteractableHighlight>();
@@ -604,6 +616,7 @@ public class PairableItem : MonoBehaviour
         {
             hl.SetHighlighted(false);
             hl.SetInteractHighlighted(false);
+            hl.enabled = false;
         }
     }
 

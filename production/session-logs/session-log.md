@@ -30291,3 +30291,1475 @@ Assets/Shader/SpriteGlow.mat
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260501_212457
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+---
+
+## Session End: 20260501_212743
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_212835
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_213338
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_213808
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_214747
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_215058
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_223758
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_224208
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_224602
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_225212
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_225801
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_231242
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_004459
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_004812
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_005047
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_005144
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_005338
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_005411
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_005725
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_005907
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_010003
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_010323
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_010541
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_011236
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_011359
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_011926
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_012327
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_012637
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_012937
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_014510
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_015004
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_015102
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_015147
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_015302
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_015727
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_015739
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_015919
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_020138
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_020950
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_021948
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_022017
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_022358
+### Commits
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_023157
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_024152
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_024705
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_025437
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_032026
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_032652
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_032802
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_033047
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_033422
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_033526
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_034306
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_034426
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_035204
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_035341
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_035647
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+edce36a Adjust book position
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_042732
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_043125
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_043607
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_044321
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_050057
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_050339
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_050556
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_050737
+### Commits
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+24ea474 Hint UI
+### Uncommitted Changes
+Assets/Scenes/UI_Mockup.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Cleaning/Spill_Juice_Spill.asset
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/ScriptableObjects/Messes/Mess_Mystery_Stain.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/MessProximityHum.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Dating/DatePersonalDefinition.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_051643
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+---
+
+## Session End: 20260502_051732
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+### Uncommitted Changes
+Assets/Scripts/Dating/DateReactionUI.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_052149
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_052245
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+7c3f791 gunpla completion effects, fix SpriteGlow material color
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_053816
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+3665236 Main Menu Update
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_054950
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_055050
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/HotkeyHints.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_055517
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PlacementPreviewSettings.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/HotkeyHints.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_061345
+### Commits
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Editor/CinematicPreviewWindow.cs
+Assets/Scenes/Daisy_Flower_Scene.unity
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/GameModes/Mode_7Minutes.asset
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/PlacementPreviewSettings.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/HotkeyHints.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_061436
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+---
+
+## Session End: 20260502_061508
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_062542
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/ScreenFade.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_065354
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Framework/ScreenFade.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_065939
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Framework/ScreenFade.cs
+production/session-logs/session-log.md
+---
+

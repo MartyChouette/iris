@@ -136,7 +136,8 @@ public class MainMenuManager : MonoBehaviour
         else
             ShowPanel(MenuState.ModeSelect);
 
-        // Start silent — music plays when the player previews a mood
+        // Default to Cozy mood music on menu load
+        PreviewMood("Cozy");
 
         // Fade in from black
         if (ScreenFade.Instance != null)
@@ -394,8 +395,8 @@ public class MainMenuManager : MonoBehaviour
         panelRT.anchorMin = new Vector2(0f, 0f);
         panelRT.anchorMax = new Vector2(0f, 0f);
         panelRT.pivot = new Vector2(0f, 0f);
-        panelRT.anchoredPosition = new Vector2(30f, 30f);
-        panelRT.sizeDelta = new Vector2(220f, 180f);
+        panelRT.anchoredPosition = new Vector2(30f, 100f);
+        panelRT.sizeDelta = new Vector2(240f, 220f);
 
         // Redirect all child creation to the container
         _musicVoteContainer = container.transform;
@@ -424,20 +425,55 @@ public class MainMenuManager : MonoBehaviour
         _sadBtnImg    = MakeVoteButton("Sad",    new Vector2(0f, -75f),  _sadTint);
         _creepyBtnImg = MakeVoteButton("Creepy", new Vector2(0f, -110f), _creepyTint);
 
-        // Cast Vote button
+        // Separator line between mood buttons and vote button
+        var separatorGO = new GameObject("Separator");
+        separatorGO.transform.SetParent(_musicVoteContainer, false);
+        var sepRT = separatorGO.AddComponent<RectTransform>();
+        sepRT.anchorMin = new Vector2(0.1f, 1f);
+        sepRT.anchorMax = new Vector2(0.9f, 1f);
+        sepRT.pivot = new Vector2(0.5f, 1f);
+        sepRT.anchoredPosition = new Vector2(0f, -125f);
+        sepRT.sizeDelta = new Vector2(0f, 1f);
+        var sepImg = separatorGO.AddComponent<Image>();
+        sepImg.color = new Color(1f, 1f, 1f, 0.15f);
+        sepImg.raycastTarget = false;
+
+        // Helper text explaining the vote
+        var helperGO = new GameObject("VoteHelper");
+        helperGO.transform.SetParent(_musicVoteContainer, false);
+        var helperRT = helperGO.AddComponent<RectTransform>();
+        helperRT.anchorMin = new Vector2(0f, 1f);
+        helperRT.anchorMax = new Vector2(1f, 1f);
+        helperRT.pivot = new Vector2(0.5f, 1f);
+        helperRT.anchoredPosition = new Vector2(0f, -132f);
+        helperRT.sizeDelta = new Vector2(0f, 20f);
+        var helperTMP = helperGO.AddComponent<TextMeshProUGUI>();
+        helperTMP.text = "Your vote shapes the menu vibe for everyone";
+        helperTMP.fontSize = 11f;
+        helperTMP.fontStyle = FontStyles.Italic;
+        helperTMP.alignment = TextAlignmentOptions.Center;
+        helperTMP.color = new Color(0.7f, 0.7f, 0.65f, 0.6f);
+        helperTMP.raycastTarget = false;
+        if (theme != null && theme.primaryFont != null) helperTMP.font = theme.primaryFont;
+
+        // Cast Vote button — bigger, distinct, spaced away
         var voteGO = new GameObject("CastVoteBtn");
         voteGO.transform.SetParent(_musicVoteContainer, false);
         var voteRT = voteGO.AddComponent<RectTransform>();
         voteRT.anchorMin = new Vector2(0f, 1f);
         voteRT.anchorMax = new Vector2(1f, 1f);
         voteRT.pivot = new Vector2(0.5f, 1f);
-        voteRT.anchoredPosition = new Vector2(0f, -148f);
-        voteRT.sizeDelta = new Vector2(0f, 28f);
+        voteRT.anchoredPosition = new Vector2(0f, -158f);
+        voteRT.sizeDelta = new Vector2(0f, 40f);
 
         var voteImg = voteGO.AddComponent<Image>();
-        voteImg.color = new Color(0.15f, 0.15f, 0.18f, 0.8f);
+        voteImg.color = new Color(0.25f, 0.45f, 0.3f, 0.9f);
         var voteBtn = voteGO.AddComponent<Button>();
         voteBtn.targetGraphic = voteImg;
+        var voteBtnColors = voteBtn.colors;
+        voteBtnColors.highlightedColor = new Color(0.35f, 0.6f, 0.4f);
+        voteBtnColors.pressedColor = new Color(0.2f, 0.7f, 0.35f);
+        voteBtn.colors = voteBtnColors;
         voteBtn.onClick.AddListener(CastMusicVote);
 
         var voteTxtGO = new GameObject("Label");
@@ -447,10 +483,11 @@ public class MainMenuManager : MonoBehaviour
         voteTxtRT.anchorMax = Vector2.one;
         voteTxtRT.sizeDelta = Vector2.zero;
         var voteTMP = voteTxtGO.AddComponent<TextMeshProUGUI>();
-        voteTMP.text = "Cast Vote";
-        voteTMP.fontSize = 15f;
+        voteTMP.text = "\u2714  Cast Your Vote";
+        voteTMP.fontSize = 18f;
+        voteTMP.fontStyle = FontStyles.Bold;
         voteTMP.alignment = TextAlignmentOptions.Center;
-        voteTMP.color = new Color(0.7f, 0.85f, 0.7f);
+        voteTMP.color = new Color(0.85f, 1f, 0.88f);
         voteTMP.raycastTarget = false;
         if (theme != null && theme.primaryFont != null) voteTMP.font = theme.primaryFont;
     }

@@ -240,17 +240,8 @@ public class ObjectGrabber : MonoBehaviour
     private GameObject _shadowGO;
     private MeshRenderer _shadowRenderer;
     private Material _shadowMat;
-    private static readonly Color s_shadowValid = new Color(0.25f, 0.9f, 0.3f, 0.75f);
-    private static readonly Color s_shadowInvalid = new Color(0.95f, 0.18f, 0.2f, 0.75f);
 
     // Ghost preview (translucent copy of the held item at the snapped grid cell)
-    [Header("Ghost Preview")]
-    [Tooltip("If true, a translucent duplicate of the held item is shown at the grid-snapped cell so the player sees exactly where it will land. Works alongside the disc shadow.")]
-    [SerializeField] private bool _useGhostPreview = true;
-    [Tooltip("Tint applied to the ghost preview when placement is valid.")]
-    [SerializeField] private Color _ghostTint = new Color(0.5f, 0.95f, 0.55f, 0.35f);
-    [Tooltip("Tint applied to the ghost preview when the item can't fit / can't be placed.")]
-    [SerializeField] private Color _ghostTintInvalid = new Color(0.95f, 0.2f, 0.2f, 0.35f);
     private GameObject _ghostPreviewGO;
     private readonly List<Material> _ghostPreviewMats = new();
 
@@ -346,6 +337,31 @@ public class ObjectGrabber : MonoBehaviour
 
         if (IrisInput.Instance != null && IrisInput.Instance.Click.WasPressedThisFrame())
         {
+            // Gunpla attach: check before UI blocker so clicking the body
+            // while holding a part always works, even if UI overlaps.
+            // RaycastAll so the floor/table surface doesn't swallow the hit.
+            if (_held != null)
+            {
+                var heldPart = _held.GetComponent<GunplaPart>();
+                if (heldPart != null && !heldPart.IsAttached)
+                {
+                    Ray ray = ScreenRay(IrisInput.CursorPosition);
+                    var hits = Physics.RaycastAll(ray, 50f);
+                    for (int i = 0; i < hits.Length; i++)
+                    {
+                        var clickedBody = hits[i].collider.GetComponent<GunplaFigure>()
+                            ?? hits[i].collider.GetComponentInParent<GunplaFigure>();
+                        if (clickedBody != null && clickedBody.CanAccept(heldPart))
+                        {
+                            clickedBody.AttachPart(heldPart);
+                            ClearHeld();
+                            ConsumeClick();
+                            return;
+                        }
+                    }
+                }
+            }
+
             // Block game-world clicks when pointer is over UI
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             {
@@ -970,7 +986,7 @@ public class ObjectGrabber : MonoBehaviour
             // Not near a plant — fall through to normal surface placement below
         }
 
-        // ── Gunpla part near body → attach ──
+        // ── Gunpla part near body → attach (proximity snap fallback) ──
         if (_nearestGunplaBody != null)
         {
             var heldPart = _held.GetComponent<GunplaPart>();
@@ -1178,6 +1194,9 @@ public class ObjectGrabber : MonoBehaviour
                     if (zone.UseSlotting
                         && zone.TryGetNextDepositSlot(out var slotPos, out var slotRot))
                     {
+                        // Preserve the item's current rotation if the zone allows it
+                        if (zone.PreserveItemRotation)
+                            slotRot = _held.transform.rotation;
                         _held.OnPlaced(_currentSurface, true, slotPos, slotRot);
 
                         // Lock slotted items in place — they shouldn't fall off
@@ -1268,26 +1287,6 @@ public class ObjectGrabber : MonoBehaviour
             else
                 rot = _isPourTilted ? Quaternion.identity : _held.transform.rotation;
 
-            // Smart book placement: flat everywhere, upright only at flagged edges
-            var placeBook = _held.GetComponent<BookItem>();
-            if (placeBook != null && placeBook.UseSmartPlacement)
-            {
-                float yaw = rot.eulerAngles.y;
-                bool atEdge = _currentSurface.IsNearLengthEdge(pos, gridSize + 0.01f);
-
-                if (atEdge)
-                {
-                    rot = Quaternion.Euler(placeBook.UprightOffset) * Quaternion.Euler(0f, yaw, 0f);
-                }
-                else
-                {
-                    rot = Quaternion.Euler(placeBook.FlatOffset) * Quaternion.Euler(0f, yaw, 0f);
-                    bookIsFlat = true;
-                    float stackY = GetFlatBookStackTop(_currentSurface, pos);
-                    if (stackY > pos.y)
-                        pos.y = stackY;
-                }
-            }
         }
         _isPourTilted = false;
 
@@ -1345,16 +1344,8 @@ public class ObjectGrabber : MonoBehaviour
         var occupant = FindOccupant(pos);
         if (occupant != null)
         {
-            // Allow flat book stacking
-            var heldBook = _held.GetComponent<BookItem>();
-            var occBook = occupant.GetComponent<BookItem>();
-            bool canStack = heldBook != null && heldBook.UseSmartPlacement
-                && occBook != null && occBook.UseSmartPlacement && occBook.IsPlacedFlat;
-            if (!canStack)
-            {
-                Debug.Log($"[ObjectGrabber] BLOCKED: cell occupied at {pos}");
-                return;
-            }
+            Debug.Log($"[ObjectGrabber] BLOCKED: cell occupied at {pos}");
+            return;
         }
 
         // Restore constraints before placement configures the rigidbody
@@ -2053,7 +2044,25 @@ public class ObjectGrabber : MonoBehaviour
         }
         if (!matches) return false;
 
-        // Deposit
+        // Slotted zone (shoe rack) — use the slot system to position the item
+        if (zone.UseSlotting && zone.TryGetNextDepositSlot(out var slotPos, out var slotRot))
+        {
+            if (slotRot == Quaternion.identity && zone.PreserveItemRotation)
+                slotRot = _held.transform.rotation;
+            var surface = zone.GetComponent<PlacementSurface>()
+                ?? zone.GetComponentInParent<PlacementSurface>();
+            _held.OnPlaced(surface, true, slotPos, slotRot);
+            LockRigidbodyAtSlot(_held);
+            zone.ClaimSlotFor(_held);
+            zone.RegisterDeposit(_held);
+            OnObjectPlaced?.Invoke(_held);
+            PlayPlaceSFX(_held);
+            Debug.Log($"[ObjectGrabber] Slotted {_held.name} at zone '{zone.ZoneName}'");
+            ClearHeld();
+            return true;
+        }
+
+        // Non-slotted deposit (trash can, sink, etc.)
         _held.ForceRestoreMaterial();
         _held.ForceDestroySilhouette();
         var item = _held;
@@ -2446,56 +2455,24 @@ public class ObjectGrabber : MonoBehaviour
     }
 
     // ── Rotate input ────────────────────────────────────────────────
-    // RMB          = roll (Z axis)
-    // Mouse Fwd(4) = yaw  (Y axis)
-    // Mouse Back(3)= flip (X axis — toggle upright/flat)
+    // RMB = rotate around the item's configured RotateAxis (per-item X, Y, or Z)
 
     private void UpdateScrollInput()
     {
         if (_held == null) return;
 
         var mouse = UnityEngine.InputSystem.Mouse.current;
+        bool rotatePressed = mouse != null && mouse.rightButton.wasPressedThisFrame;
+        if (!rotatePressed) return;
 
-        // RMB = roll around Z (blocked for smart-placement books — only 2 poses allowed)
-        bool rollPressed = mouse != null && mouse.rightButton.wasPressedThisFrame;
-        var heldBookSP = _held.GetComponent<BookItem>();
-        bool isSmartBook = heldBookSP != null && heldBookSP.UseSmartPlacement;
-        if (rollPressed && _held.AllowRoll && !isSmartBook)
-        {
-            float angle = scrollRotateStep;
-            _held.transform.Rotate(0f, 0f, angle, Space.Self);
-        }
+        Vector3 axis = _held.RotateAxis;
+        if (axis.sqrMagnitude < 0.001f) return; // rotation locked for this item
 
-        // Mouse Forward (4) = yaw around Y
-        bool yawPressed = Input.GetMouseButtonDown(4);
-        if (!yawPressed
-            && UnityEngine.InputSystem.Gamepad.current != null
-            && UnityEngine.InputSystem.Gamepad.current.rightShoulder.wasPressedThisFrame)
-            yawPressed = true;
-
-        if (yawPressed && _held.AllowYaw)
-        {
-            float angle = scrollRotateStep;
-            if (_isOnWall)
-                _wallRotation += angle;
-            else
-                _held.transform.Rotate(0f, angle, 0f, Space.World);
-        }
-
-        // Mouse Back (3) = flip around X (toggle upright/flat)
-        bool flipPressed = Input.GetMouseButtonDown(3);
-
-        if (flipPressed && _held.AllowFlip && !isSmartBook)
-        {
-            Vector3 euler = _held.transform.eulerAngles;
-            float xAngle = Mathf.DeltaAngle(euler.x, 0f);
-            bool isUpright = Mathf.Abs(xAngle) < 45f;
-
-            if (isUpright)
-                _held.transform.Rotate(90f, 0f, 0f, Space.Self); // lay flat
-            else
-                _held.transform.rotation = Quaternion.Euler(0f, euler.y, 0f); // stand up
-        }
+        float angle = scrollRotateStep;
+        if (_isOnWall && Mathf.Abs(axis.y) > 0.5f)
+            _wallRotation += angle;
+        else
+            _held.transform.RotateAround(_held.RotatePivotWorld, axis, angle);
     }
 
     // ── Helper: half-extent along a normal ────────────────────────────
@@ -2718,7 +2695,8 @@ public class ObjectGrabber : MonoBehaviour
         if (shader == null) shader = Shader.Find("Unlit/Transparent");
         _shadowMat = new Material(shader);
         _shadowMat.mainTexture = tex;
-        _shadowMat.color = s_shadowValid;
+        var cfgInit = PlacementPreviewSettings.Instance;
+        _shadowMat.color = cfgInit != null ? cfgInit.shadowValidColor : new Color(0.25f, 0.9f, 0.3f, 0.75f);
         _shadowMat.SetFloat("_Surface", 1f);
         _shadowMat.SetFloat("_Blend", 0f);
         _shadowMat.SetInt("_ZTest", (int)CompareFunction.Always);
@@ -2732,8 +2710,18 @@ public class ObjectGrabber : MonoBehaviour
 
     private void ShowShadow(bool show)
     {
+        var cfg = PlacementPreviewSettings.Instance;
+        if (cfg != null && !cfg.showShadow) show = false;
         if (_shadowGO != null)
             _shadowGO.SetActive(show);
+    }
+
+    private Color GetShadowColor(bool valid)
+    {
+        var cfg = PlacementPreviewSettings.Instance;
+        if (cfg != null)
+            return valid ? cfg.shadowValidColor : cfg.shadowInvalidColor;
+        return valid ? new Color(0.25f, 0.9f, 0.3f, 0.75f) : new Color(0.95f, 0.18f, 0.2f, 0.75f);
     }
 
     // ── Ghost preview ──────────────────────────────────────────────
@@ -2746,7 +2734,9 @@ public class ObjectGrabber : MonoBehaviour
     /// </summary>
     private void BuildGhostPreview(PlaceableObject source)
     {
-        if (!_useGhostPreview || source == null) return;
+        var cfg = PlacementPreviewSettings.Instance;
+        if (cfg != null && !cfg.showGhost) return;
+        if (source == null) return;
         DestroyGhostPreview();
 
         _ghostPreviewGO = Instantiate(source.gameObject);
@@ -2754,15 +2744,10 @@ public class ObjectGrabber : MonoBehaviour
         _ghostPreviewGO.transform.localScale = source.transform.lossyScale;
 
         // Strip everything that isn't a pure visual (transform + mesh render).
-        // Destroy RequireComponent owners first (PlaceableObject → Rigidbody/Collider
-        // dependency) so their dependencies can be removed in the second pass.
         foreach (var po in _ghostPreviewGO.GetComponentsInChildren<PlaceableObject>(true))
             DestroyImmediate(po);
         foreach (var pi in _ghostPreviewGO.GetComponentsInChildren<PairableItem>(true))
             DestroyImmediate(pi);
-
-        // Destroy lights and their URP dependencies first (DestroyImmediate
-        // needed because UniversalAdditionalLightData depends on Light).
         foreach (var ld in _ghostPreviewGO.GetComponentsInChildren<UnityEngine.Rendering.Universal.UniversalAdditionalLightData>(true))
             DestroyImmediate(ld);
         foreach (var light in _ghostPreviewGO.GetComponentsInChildren<Light>(true))
@@ -2779,38 +2764,84 @@ public class ObjectGrabber : MonoBehaviour
             Destroy(c);
         }
 
-        // Force every layer to IgnoreRaycast so the ghost never catches
-        // cursor raycasts, occupancy checks, or placement surface hits.
-        int ignoreLayer = 2; // built-in IgnoreRaycast
+        int ignoreLayer = 2;
         foreach (Transform t in _ghostPreviewGO.GetComponentsInChildren<Transform>(true))
             t.gameObject.layer = ignoreLayer;
 
-        // Replace materials with a translucent tint version so the ghost looks
-        // like a semi-see-through preview instead of a solid duplicate.
+        Color validColor = cfg != null ? cfg.ghostValidColor : new Color(0.5f, 0.95f, 0.55f, 0.35f);
+        bool outline = cfg != null && cfg.ghostStyle == PlacementPreviewSettings.GhostStyle.Outline;
+        float thickness = cfg != null ? cfg.outlineThickness : 0.005f;
+
         _ghostPreviewMats.Clear();
-        var ghostShader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
-        if (ghostShader == null) ghostShader = Shader.Find("Sprites/Default");
-        var renderers = _ghostPreviewGO.GetComponentsInChildren<Renderer>(includeInactive: true);
-        for (int i = 0; i < renderers.Length; i++)
+        var renderers = _ghostPreviewGO.GetComponentsInChildren<MeshRenderer>(includeInactive: true);
+
+        if (outline)
         {
-            var r = renderers[i];
-            if (r == null) continue;
-            var mat = new Material(ghostShader);
-            mat.SetFloat("_Surface", 1f);
-            mat.SetFloat("_Blend", 0f);
-            mat.SetFloat("_ZWrite", 0f);
-            mat.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-            mat.SetOverrideTag("RenderType", "Transparent");
-            mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-            mat.renderQueue = 3500;
-            mat.color = _ghostTint;
-            r.sharedMaterial = mat;
-            r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            r.receiveShadows = false;
-            _ghostPreviewMats.Add(mat);
+            var outlineShader = Shader.Find("Universal Render Pipeline/Unlit");
+            if (outlineShader == null) outlineShader = Shader.Find("Unlit/Color");
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                var r = renderers[i];
+                if (r == null) continue;
+                var mf = r.GetComponent<MeshFilter>();
+                if (mf != null && mf.sharedMesh != null)
+                {
+                    var mesh = Instantiate(mf.sharedMesh);
+                    var verts = mesh.vertices;
+                    var norms = mesh.normals;
+                    for (int v = 0; v < verts.Length; v++)
+                        verts[v] += norms[v] * thickness;
+                    mesh.vertices = verts;
+                    mesh.RecalculateBounds();
+                    mf.sharedMesh = mesh;
+                }
+                var mat = new Material(outlineShader);
+                mat.color = validColor;
+                mat.SetFloat("_Surface", 1f);
+                mat.SetFloat("_Blend", 0f);
+                mat.SetFloat("_Cull", 1f);
+                mat.SetFloat("_ZWrite", 0f);
+                mat.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+                mat.SetOverrideTag("RenderType", "Transparent");
+                mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+                mat.renderQueue = 3500;
+                // Replace ALL material slots with the ghost material
+                var mats = new Material[r.sharedMaterials.Length];
+                for (int m = 0; m < mats.Length; m++) mats[m] = mat;
+                r.sharedMaterials = mats;
+                r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                r.receiveShadows = false;
+                _ghostPreviewMats.Add(mat);
+            }
+        }
+        else
+        {
+            var ghostShader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+            if (ghostShader == null) ghostShader = Shader.Find("Sprites/Default");
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                var r = renderers[i];
+                if (r == null) continue;
+                var mat = new Material(ghostShader);
+                mat.SetFloat("_Surface", 1f);
+                mat.SetFloat("_Blend", 0f);
+                mat.SetFloat("_ZWrite", 0f);
+                mat.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+                mat.SetOverrideTag("RenderType", "Transparent");
+                mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+                mat.renderQueue = 3500;
+                mat.color = validColor;
+                // Replace ALL material slots with the ghost material
+                var mats = new Material[r.sharedMaterials.Length];
+                for (int m = 0; m < mats.Length; m++) mats[m] = mat;
+                r.sharedMaterials = mats;
+                r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                r.receiveShadows = false;
+                _ghostPreviewMats.Add(mat);
+            }
         }
 
-        _ghostPreviewGO.SetActive(false); // hidden until UpdateShadow positions it
+        _ghostPreviewGO.SetActive(false);
     }
 
     /// <summary>Position the ghost at the currently-planned placement pose.
@@ -2824,8 +2855,10 @@ public class ObjectGrabber : MonoBehaviour
             if (!_ghostPreviewGO.activeSelf)
                 _ghostPreviewGO.SetActive(true);
 
-            // Tint ghost based on placement validity
-            Color tint = valid ? _ghostTint : _ghostTintInvalid;
+            var cfg = PlacementPreviewSettings.Instance;
+            Color validColor = cfg != null ? cfg.ghostValidColor : new Color(0.5f, 0.95f, 0.55f, 0.35f);
+            Color invalidColor = cfg != null ? cfg.ghostInvalidColor : new Color(0.95f, 0.2f, 0.2f, 0.35f);
+            Color tint = valid ? validColor : invalidColor;
             for (int i = 0; i < _ghostPreviewMats.Count; i++)
                 if (_ghostPreviewMats[i] != null) _ghostPreviewMats[i].color = tint;
         }
@@ -2890,14 +2923,18 @@ public class ObjectGrabber : MonoBehaviour
                 ? slotPos + hitResult.surfaceNormal * 0.02f
                 : hitResult.worldPosition + hitResult.surfaceNormal * 0.02f;
 
-            _shadowMat.color = slotFree ? s_shadowValid : s_shadowInvalid;
+            _shadowMat.color = GetShadowColor(slotFree);
             _shadowGO.transform.position = slotShadow;
             _shadowGO.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
             _shadowGO.transform.localScale = new Vector3(_heldShadowDiameter, 1f, _heldShadowDiameter);
 
             // Ghost preview follows the slot pose — red if rack is full.
+            // Preserve held rotation when the zone allows it.
+            Quaternion ghostRot = slotFree
+                ? (slotZone.PreserveItemRotation ? _held.transform.rotation : slotRot)
+                : Quaternion.identity;
             UpdateGhostPreview(slotFree ? slotPos : hitResult.worldPosition,
-                               slotFree ? slotRot : Quaternion.identity,
+                               ghostRot,
                                show: true, valid: slotFree);
             return;
         }
@@ -2912,26 +2949,6 @@ public class ObjectGrabber : MonoBehaviour
             ? Quaternion.LookRotation(hitResult.surfaceNormal, Vector3.up)
               * Quaternion.AngleAxis(_wallRotation, Vector3.forward)
             : _held.transform.rotation;
-
-        // Smart book placement: flat everywhere, upright only at flagged edges
-        var ghostBook = _held.GetComponent<BookItem>();
-        if (!_currentSurface.IsVertical && ghostBook != null && ghostBook.UseSmartPlacement)
-        {
-            float yaw = placeRot.eulerAngles.y;
-            bool atEdge = _currentSurface.IsNearLengthEdge(placePos, gridSize + 0.01f);
-
-            if (atEdge)
-            {
-                placeRot = Quaternion.Euler(ghostBook.UprightOffset) * Quaternion.Euler(0f, yaw, 0f);
-            }
-            else
-            {
-                placeRot = Quaternion.Euler(ghostBook.FlatOffset) * Quaternion.Euler(0f, yaw, 0f);
-                float stackY = GetFlatBookStackTop(_currentSurface, placePos);
-                if (stackY > placePos.y)
-                    placePos.y = stackY;
-            }
-        }
 
         // Mirror the home-snap override from Place() so ghost matches exactly
         if (_held.HasHome && Vector3.Distance(placePos, _held.HomePosition) < _held.HomeTolerance)
@@ -2990,19 +3007,11 @@ public class ObjectGrabber : MonoBehaviour
                 var occPair = occupant.GetComponent<PairableItem>();
                 bool canStackHere = heldPair != null && occPair != null
                     && occPair.CanPairWith(heldPair);
-                // Allow flat book stacking in preview
-                if (!canStackHere)
-                {
-                    var heldBook = _held.GetComponent<BookItem>();
-                    var occBook = occupant.GetComponent<BookItem>();
-                    canStackHere = heldBook != null && heldBook.UseSmartPlacement
-                        && occBook != null && occBook.UseSmartPlacement && occBook.IsPlacedFlat;
-                }
                 if (!canStackHere) canPlace = false;
             }
         }
 
-        _shadowMat.color = canPlace ? s_shadowValid : s_shadowInvalid;
+        _shadowMat.color = GetShadowColor(canPlace);
         _shadowGO.transform.position = shadowPos;
         _shadowGO.transform.rotation = shadowRot;
         _shadowGO.transform.localScale = new Vector3(_heldShadowDiameter, 1f, _heldShadowDiameter);

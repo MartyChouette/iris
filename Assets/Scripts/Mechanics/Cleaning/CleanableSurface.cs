@@ -318,6 +318,8 @@ public class CleanableSurface : MonoBehaviour
                 if (dist < threshold)
                 {
                     float edge = Mathf.Clamp01(1f - dist / threshold);
+                    // Boost minimum opacity so stains are visible on light floors
+                    edge = Mathf.Lerp(0.6f, 1f, edge);
                     byte a = (byte)(edge * 255f);
 
                     pixels[idx] = new Color32(r, g, b, a);

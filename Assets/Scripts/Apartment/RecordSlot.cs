@@ -163,16 +163,20 @@ public class RecordSlot : MonoBehaviour
 
         vinyl.ConfigureForTurntable();
 
-        // Preserve the vinyl's world scale before parenting — the turntable
-        // may have a non-uniform scale that would deform the disc.
+        // Parent to the placement point so local zero = correct position/rotation.
+        // Preserve world scale so the turntable's scale doesn't deform the disc.
+        Transform anchor = _platePlacementPoint != null ? _platePlacementPoint : transform;
         Vector3 vinylWorldScale = held.transform.lossyScale;
-        held.transform.SetParent(transform, true);
-        // Recompute local scale to maintain original world scale under new parent
-        Vector3 parentScale = transform.lossyScale;
+        held.transform.SetParent(anchor, true);
+        Vector3 parentScale = anchor.lossyScale;
         held.transform.localScale = new Vector3(
             parentScale.x != 0f ? vinylWorldScale.x / parentScale.x : 1f,
             parentScale.y != 0f ? vinylWorldScale.y / parentScale.y : 1f,
             parentScale.z != 0f ? vinylWorldScale.z / parentScale.z : 1f);
+
+        // Snap to anchor origin — local zero = exact placement point
+        held.transform.localPosition = Vector3.zero;
+        held.transform.localRotation = Quaternion.identity;
 
         // Apply label color
         if (_labelMat != null)
@@ -180,11 +184,6 @@ public class RecordSlot : MonoBehaviour
 
         // Auto-open lid when accepting a record (player must close it manually)
         OpenLid();
-        Vector3 targetPos = _platePlacementPoint != null ? _platePlacementPoint.position : transform.position;
-        Quaternion targetRot = _platePlacementPoint != null ? _platePlacementPoint.rotation : transform.rotation;
-        Debug.Log($"[RecordSlot] Snapping vinyl to targetPos={targetPos}, platePt={(_platePlacementPoint != null ? _platePlacementPoint.name : "NULL")}, slotTransform={transform.position}, parent={transform.name}");
-        held.transform.position = targetPos;
-        held.transform.rotation = targetRot;
         Play();
 
         // Clear turntable highlight

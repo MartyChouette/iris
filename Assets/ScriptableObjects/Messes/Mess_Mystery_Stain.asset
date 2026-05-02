@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5efed0c7b7bca40822027625fe0cf5, type: 3}
   m_Name: Mess_Mystery_Stain
   m_EditorClassIdentifier: Assembly-CSharp::MessBlueprint
-  messName: Mystery Stain
-  description: Best not to think about where this came from.
+  messName: Stain
+  description: I  keep making messes
   category: 2
   messType: 0
   spillDefinition: {fileID: 11400000, guid: aef3340373ba58f4c857ce4ca6e7688f, type: 2}
   objectPrefab: {fileID: 0}
   objectScale: {x: 0.1, y: 0.1, z: 0.1}
-  objectColor: {r: 1, g: 0, b: 0, a: 1}
+  objectColor: {r: 0.6792453, g: 0, b: 0, a: 1}
+  requirePreviousDate: {fileID: 0}
+  requireDateVisitCount: 0
   requireDateSuccess: 0
   requireDateFailure: 0
   minAffection: 0
@@ -29,7 +31,7 @@ MonoBehaviour:
   requireGoodFlowerTrim: 0
   minDay: 0
   maxDay: 50
-  spawnPosition: {x: 0, y: 0.189404, z: -0.83}
+  spawnPosition: {x: 0, y: 0.1, z: -0.83}
   spawnRotation: {x: 0, y: 0, z: 0}
   allowedAreas: 0000000001000000
   weight: 1
