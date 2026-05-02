@@ -1655,10 +1655,8 @@ public class DateSessionManager : MonoBehaviour
         Vector3 sweepStart = new Vector3(sweepStartXZ.x, charRoot.y + _sweepStartHeight, sweepStartXZ.z);
         Vector3 sweepEnd = new Vector3(sweepEndXZ.x, charRoot.y + _sweepEndHeight, sweepEndXZ.z);
 
-        // Show character name
-        string charName = _currentDate != null ? _currentDate.characterName : "";
-        if (PhaseTitleDrop.Instance != null && !string.IsNullOrEmpty(charName))
-            PhaseTitleDrop.Instance.Show(charName);
+        // Character name title removed — "Impressions" title drop follows
+        // immediately and was overwriting this, causing a double-flash.
 
         // Phase 1: Push in from current position to sweep start
         bool skipped = false;

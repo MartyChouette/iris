@@ -52,29 +52,32 @@ public class PlaceableObject : MonoBehaviour
     [Tooltip("Random rotation range (degrees) applied when spawned on a wall.")]
     [SerializeField] private float crookedAngleRange = 12f;
 
+    public enum RotateMode { Y, X, Z, None }
+
     [Header("Rotate Input")]
-    [Tooltip("World-space axis around which the rotate button (RMB) turns this item. Default (0,1,0) = yaw around world up. Use (0,-1,0) to invert. Set to (0,0,0) to lock rotation entirely (useful for books where yaw would tip them off the shelf).")]
-    [SerializeField] private Vector3 _rotateAxis = Vector3.up;
+    [Tooltip("Which axis RMB rotates this item around. None = rotation locked.")]
+    [SerializeField] private RotateMode _rotateMode = RotateMode.Y;
 
-    /// <summary>World axis for the rotate input. Zero = rotation locked.</summary>
-    public Vector3 RotateAxis => _rotateAxis;
-
-    [Header("Allowed Rotations")]
-    [Tooltip("Allow RMB yaw rotation (turn left/right around Y axis).")]
-    [SerializeField] private bool _allowYaw = true;
-
-    [Tooltip("Allow Mouse Back flip (toggle between upright and laying flat around X).")]
-    [SerializeField] private bool _allowFlip = true;
-
-    [Tooltip("Allow RMB roll (rotate around Z axis).")]
-    [SerializeField] private bool _allowRoll = true;
+    [Tooltip("Optional child transform used as the rotation pivot. Leave empty to rotate around the object's own origin.")]
+    [SerializeField] private Transform _rotatePivot;
 
     [Tooltip("Allow pickup to auto-straighten (zero X/Z tilt). Uncheck for items that should keep their orientation when grabbed.")]
     [SerializeField] private bool _allowAutoStraighten = true;
 
-    public bool AllowYaw => _allowYaw;
-    public bool AllowFlip => _allowFlip;
-    public bool AllowRoll => _allowRoll;
+    public RotateMode Rotation => _rotateMode;
+
+    /// <summary>World axis for the rotate input. Zero = rotation locked.</summary>
+    public Vector3 RotateAxis => _rotateMode switch
+    {
+        RotateMode.X => Vector3.right,
+        RotateMode.Y => Vector3.up,
+        RotateMode.Z => Vector3.forward,
+        _ => Vector3.zero
+    };
+
+    /// <summary>World-space pivot point for rotation. Falls back to transform.position if unset.</summary>
+    public Vector3 RotatePivotWorld => _rotatePivot != null ? _rotatePivot.position : transform.position;
+
     public bool AllowAutoStraighten => _allowAutoStraighten;
 
     [Header("Disheveled Pose")]
@@ -836,7 +839,12 @@ public class PlaceableObject : MonoBehaviour
                     IsAtHome = true;
                     ResetSmellAging();
                     // Item is home — clear glitch indicator
-                    if (_isGlitched) RemoveGlitch();
+                    // But keep glitch on unpaired pairables (glitch = "find my partner")
+                    var pairable = GetComponent<PairableItem>();
+                    bool needsPairing = pairable != null
+                        && pairable.Mode == PairableItem.PairMode.SpecificPartner
+                        && !pairable.IsPaired;
+                    if (_isGlitched && !needsPairing) RemoveGlitch();
                 }
             }
         }

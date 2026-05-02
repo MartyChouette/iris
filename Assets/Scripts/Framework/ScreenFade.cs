@@ -133,6 +133,10 @@ public class ScreenFade : MonoBehaviour
     public Coroutine FadeIn(float duration)
     {
         if (_activeFadeCoroutine != null) StopCoroutine(_activeFadeCoroutine);
+        // Disable raycast target on the panel image immediately so buttons
+        // underneath are clickable as soon as the fade starts.
+        var img = _canvasGroup != null ? _canvasGroup.GetComponent<Image>() : null;
+        if (img != null) img.raycastTarget = false;
         _activeFadeCoroutine = StartCoroutine(FadeCoroutine(1f, 0f, duration, false, fadeInCurve));
         return _activeFadeCoroutine;
     }

@@ -25,7 +25,7 @@ public class MessProximityHum : MonoBehaviour
     [SerializeField] private float _frequency = 110f;
 
     [Tooltip("Maximum volume at closest proximity.")]
-    [SerializeField, Range(0f, 1f)] private float _maxVolume = 0.25f;
+    [SerializeField, Range(0f, 1f)] private float _maxVolume = 0.08f;
 
     [Tooltip("Volume smoothing time (seconds).")]
     [SerializeField] private float _smoothTime = 0.15f;

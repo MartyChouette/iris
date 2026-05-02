@@ -80,12 +80,16 @@ public class DropZone : MonoBehaviour
     [Tooltip("Extra rotation applied to items when slotted (Euler degrees, local space). Use this to angle shoes on the rack.")]
     [SerializeField] private Vector3 _slotRotationOffset;
 
+    [Tooltip("When true, slotted items keep the rotation the player placed them in instead of snapping to the slot rotation.")]
+    [SerializeField] private bool _preserveItemRotation;
+
     [Tooltip("Radius around each slot used to detect whether it's already occupied. Must be large enough to catch paired shoes whose collider center is offset from the pivot after ResizeColliderToChildren.")]
     [SerializeField] private float _slotOccupancyRadius = 0.12f;
 
     public string ZoneName => _zoneName;
     public bool DestroyOnDeposit => _destroyOnDeposit;
     public bool UseSlotting => _useSlotting;
+    public bool PreserveItemRotation => _preserveItemRotation;
 
     /// <summary>Total slots configured (only meaningful when UseSlotting is true).</summary>
     public int SlotCount => _slotCount;
@@ -248,8 +252,18 @@ public class DropZone : MonoBehaviour
         // Clean up stale entries (item was picked up or destroyed)
         for (int i = 0; i < _slotOccupants.Length; i++)
         {
-            if (_slotOccupants[i] != null && _slotOccupants[i].CurrentState != PlaceableObject.State.Placed)
-                _slotOccupants[i] = null;
+            if (_slotOccupants[i] != null)
+            {
+                if (_slotOccupants[i] == null) // destroyed
+                {
+                    _slotOccupants[i] = null;
+                }
+                else if (_slotOccupants[i].CurrentState != PlaceableObject.State.Placed)
+                {
+                    Debug.Log($"[DropZone] Stale cleanup: slot {i} freed — '{_slotOccupants[i].name}' state={_slotOccupants[i].CurrentState}");
+                    _slotOccupants[i] = null;
+                }
+            }
         }
 
         Vector3 axis = _slotLocalAxis.sqrMagnitude > 0.0001f
@@ -262,9 +276,11 @@ public class DropZone : MonoBehaviour
 
             Vector3 localSlot = _slotLocalOrigin + axis * (_slotSpacing * i);
             worldPos = transform.TransformPoint(localSlot);
-            worldRot = transform.rotation * Quaternion.Euler(_slotRotationOffset);
+            worldRot = _preserveItemRotation ? Quaternion.identity : transform.rotation * Quaternion.Euler(_slotRotationOffset);
+            Debug.Log($"[DropZone] Assigning slot {i} at {worldPos}");
             return true;
         }
+        Debug.Log($"[DropZone] All {_slotCount} slots occupied!");
         return false;
     }
 
@@ -277,9 +293,11 @@ public class DropZone : MonoBehaviour
             if (_slotOccupants[i] == null)
             {
                 _slotOccupants[i] = item;
+                Debug.Log($"[DropZone] Claimed slot {i} for '{item.name}' (state={item.CurrentState})");
                 return;
             }
         }
+        Debug.LogWarning($"[DropZone] No free slot to claim for '{item.name}'!");
     }
 
     /// <summary>How many slots currently have a PlaceableObject sitting in them.</summary>

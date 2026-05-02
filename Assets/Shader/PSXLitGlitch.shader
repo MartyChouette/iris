@@ -231,9 +231,20 @@ Shader "Iris/PSXLitGlitch"
                 }
 
                 half3 diffuse = mainLight.color * NdotL * shadowAtten;
-                half3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
 
-                half3 lit = albedo.rgb * (diffuse + ambient + 0.15);
+                // Additional lights (point/spot lamps in the apartment)
+                uint additionalLightCount = GetAdditionalLightsCount();
+                for (uint li = 0; li < additionalLightCount; li++)
+                {
+                    Light addLight = GetAdditionalLight(li, input.positionWS);
+                    half addNdotL = saturate(dot(normalWS, addLight.direction));
+                    diffuse += addLight.color * addNdotL * addLight.distanceAttenuation * addLight.shadowAttenuation;
+                }
+
+                // Ambient: use SH probe lighting (URP doesn't populate UNITY_LIGHTMODEL_AMBIENT)
+                half3 ambient = SampleSH(normalWS);
+
+                half3 lit = albedo.rgb * (diffuse + ambient);
                 lit = MixFog(lit, input.fogFactor);
                 return half4(lit, 1.0);
             }

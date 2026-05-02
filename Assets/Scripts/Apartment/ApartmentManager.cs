@@ -464,6 +464,9 @@ public class ApartmentManager : MonoBehaviour
     [Tooltip("Seconds to lerp between normal and top-down views.")]
     [SerializeField] private float _topDownLerpSpeed = 6f;
 
+    [Tooltip("Rectangular world-space half-extents for top-down pan bounds (X = left/right, Y = forward/back). The camera's visible edges are subtracted so you can always reach the apartment edges at any zoom.")]
+    [SerializeField] private Vector2 _topDownBoundsHalf = new Vector2(6f, 6f);
+
     private bool _topDownActive;
     private Vector3 _savedPosition;
     private Quaternion _savedRotation;
@@ -649,8 +652,17 @@ public class ApartmentManager : MonoBehaviour
         _edgePanHoldTimer += Time.deltaTime;
         if (_edgePanHoldTimer < _edgePanActivationDelay) return;
 
-        Vector3 right = _baseRotation * Vector3.right;
-        Vector3 up = _baseRotation * Vector3.up;
+        Vector3 right, up;
+        if (_topDownActive)
+        {
+            right = Vector3.right;
+            up = Vector3.forward;
+        }
+        else
+        {
+            right = _baseRotation * Vector3.right;
+            up = _baseRotation * Vector3.up;
+        }
         float edgeSpeed = _edgePanMaxSpeed;
         if (_presetOverrideActive) edgeSpeed *= _presetPanSpeedScale;
         _panOffset += (right * hFactor + up * vFactor) * edgeSpeed * Time.deltaTime;
@@ -735,7 +747,12 @@ public class ApartmentManager : MonoBehaviour
     private void HandlePanInput()
     {
         if (SuppressPan) return;
-        if (IrisInput.Instance == null || !IrisInput.Instance.PanButton.IsPressed()) return;
+        if (IrisInput.Instance == null) return;
+
+        // Top-down: allow left-click drag in addition to MMB drag.
+        bool mmb = IrisInput.Instance.PanButton.IsPressed();
+        bool lmbDrag = _topDownActive && Input.GetMouseButton(0);
+        if (!mmb && !lmbDrag) return;
 
         Vector2 delta = IrisInput.Instance.PanDelta.ReadValue<Vector2>();
         if (delta.sqrMagnitude < 0.01f) return;
@@ -765,8 +782,15 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     private void ClampPanOffset(bool soft = false)
     {
+        // Top-down uses its own dedicated bounds centered on _topDownTarget
+        if (_topDownActive)
+        {
+            ClampPanOffsetTopDown(soft);
+            return;
+        }
+
         Vector3 centerOffset = Vector3.zero;
-        if (!_presetOverrideActive && !_topDownActive && _panCenter != Vector3.zero)
+        if (!_presetOverrideActive && _panCenter != Vector3.zero)
             centerOffset = _panCenter - _basePosition;
 
         Vector3 adjusted = _panOffset - centerOffset;
@@ -781,17 +805,8 @@ public class ApartmentManager : MonoBehaviour
             float allowX = Mathf.Max(_panBoundsHalf.x - visibleHalfW, 0f);
             float allowY = Mathf.Max(_panBoundsHalf.y - visibleHalfH, 0f);
 
-            Vector3 right, up;
-            if (_topDownActive)
-            {
-                right = Vector3.right;
-                up = Vector3.forward;
-            }
-            else
-            {
-                right = _baseRotation * Vector3.right;
-                up = _baseRotation * Vector3.up;
-            }
+            Vector3 right = _baseRotation * Vector3.right;
+            Vector3 up = _baseRotation * Vector3.up;
 
             float dotR = Vector3.Dot(adjusted, right);
             float dotU = Vector3.Dot(adjusted, up);
@@ -801,8 +816,6 @@ public class ApartmentManager : MonoBehaviour
 
             Vector3 target = centerOffset + right * clampedR + up * clampedU;
 
-            // Soft clamp: lerp toward bounds (used after zoom changes).
-            // Hard clamp: snap immediately (used during pan input).
             _panOffset = soft ? Vector3.Lerp(_panOffset, target, Time.deltaTime * 8f) : target;
         }
         else
@@ -818,6 +831,39 @@ public class ApartmentManager : MonoBehaviour
                 _panOffset = centerOffset + adjusted;
             }
         }
+    }
+
+    /// <summary>
+    /// Zoom-aware rectangular clamp for top-down view. Camera visible extents
+    /// are subtracted from the world bounds so the apartment edges are always
+    /// reachable at any zoom level.
+    /// </summary>
+    private void ClampPanOffsetTopDown(bool soft)
+    {
+        if (_topDownBoundsHalf.x <= 0f && _topDownBoundsHalf.y <= 0f)
+        {
+            // No bounds configured — fall back to circular limit
+            if (_panOffset.magnitude > panMaxDistance)
+                _panOffset = soft
+                    ? Vector3.Lerp(_panOffset, _panOffset.normalized * panMaxDistance, Time.deltaTime * 8f)
+                    : _panOffset.normalized * panMaxDistance;
+            return;
+        }
+
+        // Camera visible half-extents in world units (ortho, looking straight down)
+        float visibleHalfZ = _currentZoom > 0f ? _currentZoom : _topDownOrthoSize;
+        float visibleHalfX = visibleHalfZ * ((float)Screen.width / Screen.height);
+
+        // Allowed pan = world boundary minus what's already visible
+        float allowX = Mathf.Max(_topDownBoundsHalf.x - visibleHalfX, 0f);
+        float allowZ = Mathf.Max(_topDownBoundsHalf.y - visibleHalfZ, 0f);
+
+        // Pan offset is in world X/Z
+        float clampedX = Mathf.Clamp(_panOffset.x, -allowX, allowX);
+        float clampedZ = Mathf.Clamp(_panOffset.z, -allowZ, allowZ);
+
+        Vector3 target = new Vector3(clampedX, 0f, clampedZ);
+        _panOffset = soft ? Vector3.Lerp(_panOffset, target, Time.deltaTime * 8f) : target;
     }
 
     private void CycleArea(int direction)
