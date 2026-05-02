@@ -71,5 +71,5 @@ MonoBehaviour:
     dislikeLines: []
     bespokeReactions: []
   itemReactions:
-  - tag: 
-    dialogue: 
+  - tag: camera
+    dialogue: My ex loved photography

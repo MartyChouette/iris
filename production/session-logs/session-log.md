@@ -31716,3 +31716,50 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260502_061436
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+---
+
+## Session End: 20260502_061508
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_062542
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/ScreenFade.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_065354
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Framework/ScreenFade.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260502_065939
+### Commits
+8986396 UI polish, zoom range system, demo end flow, cinematic clipboard
+b2d5257 major session: placement, rotation, hints, shaders, book stacking, date fixes
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Dating/Date_Paris.asset
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Framework/ScreenFade.cs
+production/session-logs/session-log.md
+---
+

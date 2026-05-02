@@ -116,6 +116,9 @@ public class ScreenFade : MonoBehaviour
     /// </summary>
     public Coroutine FadeOut(float duration)
     {
+        // Re-enable canvas before fading out (may have been disabled after fade-in)
+        var canvas = _canvasGroup != null ? _canvasGroup.GetComponent<Canvas>() : null;
+        if (canvas != null) canvas.enabled = true;
         if (_activeFadeCoroutine != null) StopCoroutine(_activeFadeCoroutine);
         _activeFadeCoroutine = StartCoroutine(FadeCoroutine(0f, 1f, duration, true, fadeOutCurve));
         return _activeFadeCoroutine;
@@ -249,6 +252,11 @@ public class ScreenFade : MonoBehaviour
             _canvasGroup.alpha = to;
             _canvasGroup.blocksRaycasts = blockWhenDone;
             ApplyFadeExposure(to > from ? 1f : 0f);
+            if (to <= 0f)
+            {
+                var c = _canvasGroup.GetComponent<Canvas>();
+                if (c != null) c.enabled = false;
+            }
             IsFading = false;
             yield break;
         }
@@ -276,6 +284,14 @@ public class ScreenFade : MonoBehaviour
             AtmosphereController.Instance.PostExposure = _originalExposure;
             AtmosphereController.Instance.SuppressMoodOverrides = false;
             _exposureBoosted = false;
+        }
+
+        // Disable the canvas entirely when fully transparent so it can't
+        // intercept clicks via GraphicRaycaster on the scene object.
+        if (to <= 0f)
+        {
+            var canvas = _canvasGroup.GetComponent<Canvas>();
+            if (canvas != null) canvas.enabled = false;
         }
 
         IsFading = false;
