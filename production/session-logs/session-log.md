@@ -30147,3 +30147,147 @@ Assets/Scripts/Apartment/DropZone.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260501_182156
+### Commits
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+---
+
+## Session End: 20260501_195814
+### Commits
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_210928
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_211105
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_211218
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_211714
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_211845
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_211915
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_212134
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+68b8bd4 Gumpla
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Shader/SpriteGlow.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260501_212305
+### Commits
+24ea474 Hint UI
+edce36a Adjust book position
+a7d8e85 Added a few placeable
+329020c remove dead CountOccupiedSlotsPhysics method calling undefined IsSlotOccupied
+229e21b explicit slot occupancy tracking, sole-alignment for paired items
+8f2b6a2 new tamagotchi
+7fef118 fix shoe pairing offset, per-item highlight style, world-space vertex snap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Shader/SpriteGlow.mat
+production/session-logs/session-log.md
+---
+

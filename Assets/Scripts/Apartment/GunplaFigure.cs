@@ -40,6 +40,19 @@ public class GunplaFigure : MonoBehaviour
     [Tooltip("How long each glance lasts.")]
     [SerializeField] private float _glanceDuration = 2f;
 
+    [Header("Completion")]
+    [Tooltip("SFX played when all parts are attached.")]
+    [SerializeField] private AudioClip _completionSFX;
+
+    [Tooltip("How high the gunpla floats above its placed position when complete.")]
+    [SerializeField] private float _floatHeight = 0.15f;
+
+    [Tooltip("Speed of the gentle bob once floating.")]
+    [SerializeField] private float _bobSpeed = 1.5f;
+
+    [Tooltip("Amplitude of the bob.")]
+    [SerializeField] private float _bobAmplitude = 0.03f;
+
     [Header("System")]
     [Tooltip("Disable to turn off the entire gunpla assembly system.")]
     [SerializeField] private bool _systemEnabled = false;
@@ -56,6 +69,7 @@ public class GunplaFigure : MonoBehaviour
     private bool _isGlancing;
     private float _glanceElapsed;
     private Quaternion _headBaseRotation;
+    private Vector3 _floatBasePos;
 
     // Static registry
     private static readonly System.Collections.Generic.List<GunplaFigure> s_all = new();
@@ -144,9 +158,28 @@ public class GunplaFigure : MonoBehaviour
 
         _isComplete = true;
 
-        // Animator and head-tracking disabled — gunpla stays in its static pose
+        // Smoke poof
+        SmokePoof.Spawn(transform.position, 0.25f);
 
-        Debug.Log("[GunplaFigure] All parts collected! Gunpla is complete.");
+        // Completion sound
+        if (_completionSFX != null)
+            AudioManager.Instance?.PlaySFX(_completionSFX);
+
+        // Enable animator for hero poses
+        if (_animator != null)
+            _animator.enabled = true;
+
+        // Activate head bone look-at
+        if (_headBone != null)
+            _headBaseRotation = _headBone.localRotation;
+
+        // Disable PlaceableObject so the completed gunpla can't be picked up
+        if (_placeable != null)
+            _placeable.enabled = false;
+
+        // Start floating
+        _floatBasePos = transform.position + Vector3.up * _floatHeight;
+        transform.position = _floatBasePos;
     }
 
     private PlaceableObject.State _lastState;
@@ -154,13 +187,23 @@ public class GunplaFigure : MonoBehaviour
     private void LateUpdate()
     {
         // Lock kinematic the frame after placement so physics doesn't push it around
-        if (_placeable != null)
+        if (_placeable != null && !_isComplete)
         {
             var state = _placeable.CurrentState;
             if (state == PlaceableObject.State.Placed && _lastState != PlaceableObject.State.Placed)
                 LockAfterPlacement();
             _lastState = state;
         }
+
+        if (!_isComplete) return;
+
+        // Gentle floating bob
+        float bob = Mathf.Sin(Time.time * _bobSpeed) * _bobAmplitude;
+        transform.position = _floatBasePos + Vector3.up * bob;
+
+        // Head tracking
+        if (_headBone != null)
+            UpdateLookAtNema();
     }
 
     private void UpdateLookAtNema()
