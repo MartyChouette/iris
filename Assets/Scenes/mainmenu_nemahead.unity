@@ -737,8 +737,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1983,7 +1983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TMP_FocusBlur
   morphSpeed: 3
-  jitterIntensity: 4
+  jitterIntensity: 8
   noiseScale: 10
   preserveCharacterShape: 0
   updateInterval: 0.033
@@ -3288,8 +3288,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3598,7 +3598,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257088889}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4606,7 +4606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TMP_FocusBlur
   morphSpeed: 3
   jitterIntensity: 4
-  noiseScale: 10
+  noiseScale: 20
   preserveCharacterShape: 0
   updateInterval: 0.033
 --- !u!114 &1505304433
@@ -4638,8 +4638,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6023,7 +6023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2006171278}
   - component: {fileID: 2006171280}
-  - component: {fileID: 2006171279}
+  - component: {fileID: 2006171281}
   m_Layer: 0
   m_Name: 6_background
   m_TagString: Untagged
@@ -6046,21 +6046,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2006171279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006171277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2249074651ab9b44fb8206bc4b7c2487, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BacklightPulse
-  dimColor: {r: 1.149, g: 2.742, b: 3.291, a: 1}
-  brightColor: {r: 2.92, g: 6.716, b: 8.041, a: 1}
-  pulseSpeed: 0.4
 --- !u!212 &2006171280
 SpriteRenderer:
   serializedVersion: 2
@@ -6087,7 +6072,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 0f40333ba5bdf584793135d5d5d352c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6120,6 +6105,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2006171281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006171277}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2249074651ab9b44fb8206bc4b7c2487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BacklightPulse
+  dimColor: {r: 0, g: 0.7490196, b: 0.13059446, a: 0.29803923}
+  brightColor: {r: 0.3276961, g: 0.74901974, b: 0.61376786, a: 0}
+  pulseSpeed: 0.4
 --- !u!1 &2024394057
 GameObject:
   m_ObjectHideFlags: 0
