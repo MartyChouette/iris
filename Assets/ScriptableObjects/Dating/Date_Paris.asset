@@ -66,9 +66,14 @@ MonoBehaviour:
     noPerfumeComment: 
     clutterTolerance: 0.5
     reactionStrength: 1
-    likeLines: []
+    likeLines:
+    - Love that.
+    - It has charm.
     neutralLines: []
-    dislikeLines: []
+    dislikeLines:
+    - Yikes.
+    - Sure.
+    - "It\u2019s ugly, but it has charm."
     bespokeReactions: []
   itemReactions:
   - tag: camera
