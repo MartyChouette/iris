@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
@@ -36,6 +37,36 @@ public class PickupDescriptionHUD : MonoBehaviour
             _canvasGroup = _panelRoot.GetComponent<CanvasGroup>();
             if (_canvasGroup == null)
                 _canvasGroup = _panelRoot.AddComponent<CanvasGroup>();
+
+            // Ensure dark background
+            var img = _panelRoot.GetComponent<Image>();
+            if (img == null)
+            {
+                img = _panelRoot.AddComponent<Image>();
+                img.color = new Color(0f, 0f, 0f, 0.55f);
+            }
+            else if (img.color.a < 0.1f)
+            {
+                img.color = new Color(0f, 0f, 0f, 0.55f);
+            }
+
+            // Ensure the panel auto-sizes to fit text content
+            var csf = _panelRoot.GetComponent<ContentSizeFitter>();
+            if (csf == null) csf = _panelRoot.AddComponent<ContentSizeFitter>();
+            csf.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+            csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            // Add padding via HorizontalLayoutGroup if not already present
+            var hlg = _panelRoot.GetComponent<HorizontalLayoutGroup>();
+            if (hlg == null)
+            {
+                hlg = _panelRoot.AddComponent<HorizontalLayoutGroup>();
+                hlg.padding = new RectOffset(16, 16, 8, 8);
+                hlg.childAlignment = TextAnchor.MiddleCenter;
+                hlg.childForceExpandWidth = false;
+                hlg.childForceExpandHeight = false;
+            }
+
             _panelRoot.SetActive(false);
         }
     }

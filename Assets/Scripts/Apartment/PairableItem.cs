@@ -44,6 +44,10 @@ public class PairableItem : MonoBehaviour
     [Tooltip("Sound when items snap together.")]
     [SerializeField] private AudioClip _snapSound;
 
+    [Header("Description")]
+    [Tooltip("Description to use after pairing (replaces PlaceableObject.ItemDescription). Leave empty to keep original.")]
+    [SerializeField] private string _pairedDescription = "";
+
     [Header("Partner Highlight")]
     [Tooltip("Color to pulse when the partner is being held.")]
     [SerializeField] private Color _partnerPulseColor = new Color(1f, 0.85f, 0.4f, 0.6f);
@@ -287,6 +291,12 @@ public class PairableItem : MonoBehaviour
         if (_placeable != null) _placeable.SetGlitched(false);
         if (held._placeable != null) held._placeable.SetGlitched(false);
 
+        // Update description to paired version on the root item
+        if (!string.IsNullOrEmpty(_pairedDescription) && _placeable != null)
+            _placeable.ItemDescription = _pairedDescription;
+        else if (!string.IsNullOrEmpty(held._pairedDescription) && _placeable != null)
+            _placeable.ItemDescription = held._pairedDescription;
+
         // Kill InteractableHighlight on BOTH items — no lingering glow after pairing
         ClearHighlight(gameObject);
         ClearHighlight(held.gameObject);
@@ -364,19 +374,21 @@ public class PairableItem : MonoBehaviour
             // SideBySide — center both shoes symmetrically around root's position.
             Transform sbsRoot = FindStackRoot(transform);
 
-            // Auto-compute offset from world-space bounds when not configured.
+            // Auto-compute offset from local mesh bounds (rotation-stable).
             // Use the SMALLEST horizontal dimension as shoe "width" — shoes are
-            // longer than wide, so min(sizeX, sizeZ) avoids the 1-unit bug from
-            // using full AABB extent projections on elongated meshes.
+            // longer than wide, so min(sizeX, sizeZ) avoids oversized gaps.
             Vector3 effectiveOffset = _snapOffset;
             if (effectiveOffset.sqrMagnitude < 0.0001f)
             {
-                var rootRend = GetComponentInChildren<Renderer>();
-                var heldRend = held.GetComponentInChildren<Renderer>();
-                if (rootRend != null && heldRend != null)
+                var rootMF = GetComponentInChildren<MeshFilter>();
+                var heldMF = held.GetComponentInChildren<MeshFilter>();
+                if (rootMF != null && heldMF != null
+                    && rootMF.sharedMesh != null && heldMF.sharedMesh != null)
                 {
-                    float rootW = Mathf.Min(rootRend.bounds.size.x, rootRend.bounds.size.z);
-                    float heldW = Mathf.Min(heldRend.bounds.size.x, heldRend.bounds.size.z);
+                    Vector3 rootSize = rootMF.sharedMesh.bounds.size;
+                    Vector3 heldSize = heldMF.sharedMesh.bounds.size;
+                    float rootW = Mathf.Min(rootSize.x, rootSize.z);
+                    float heldW = Mathf.Min(heldSize.x, heldSize.z);
                     float totalWidth = (rootW + heldW) * 0.5f + 0.005f;
                     effectiveOffset = new Vector3(totalWidth, 0f, 0f);
                 }

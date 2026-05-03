@@ -702,17 +702,17 @@ public class InteractableHighlight : MonoBehaviour
                 Debug.LogWarning("[InteractableHighlight] Highlight shader not found for current style.");
         }
 
-        // Gaze — teal
+        // Gaze — teal (bottles during drink phase — must be very visible)
         if (s_sharedGazeMat == null)
-            s_sharedGazeMat = MakeMatForStyle(GazeColor, 0.4f, 1.5f, 0.08f);
+            s_sharedGazeMat = MakeMatForStyle(GazeColor, 0.8f, 2.5f, 0.3f);
 
-        // Display — soft blue
+        // Display — bright blue (glasses during drink phase — must be very visible)
         if (s_sharedDisplayMat == null)
-            s_sharedDisplayMat = MakeMatForStyle(DisplayColor, 0.25f, 1f, 0.05f);
+            s_sharedDisplayMat = MakeMatForStyle(DisplayColor, 0.8f, 2.5f, 0.3f);
 
         // Prep liked — green
         if (s_sharedPrepLikedMat == null)
-            s_sharedPrepLikedMat = MakeMatForStyle(PrepLikedColor, 0.4f, 1.5f, 0.08f);
+            s_sharedPrepLikedMat = MakeMatForStyle(PrepLikedColor, 0.7f, 2f, 0.2f);
 
         // Prep disliked — red
         if (s_sharedPrepDislikedMat == null)

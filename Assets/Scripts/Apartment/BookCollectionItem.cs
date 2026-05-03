@@ -40,6 +40,10 @@ public class BookCollectionItem : MonoBehaviour
     [Tooltip("Shader to swap onto books when collection completes (drag PSXLit here).")]
     [SerializeField] private Shader _completedShader;
 
+    [Header("Description")]
+    [Tooltip("Description for the completed book stack (replaces PlaceableObject.ItemDescription). Leave empty to keep original.")]
+    [SerializeField] private string _completedDescription = "";
+
     [Header("Audio")]
     [Tooltip("SFX when the collection completes (correct order).")]
     [SerializeField] private AudioClip _completionSFX;
@@ -117,6 +121,14 @@ public class BookCollectionItem : MonoBehaviour
             var psx = book.GetComponent<PSXObjectSettings>();
             if (psx == null) psx = book.gameObject.AddComponent<PSXObjectSettings>();
             psx.SnapResolution = 0f;
+        }
+
+        // Update description on the root book (the one the player picks up)
+        if (!string.IsNullOrEmpty(_completedDescription))
+        {
+            var rootPlaceable = GetComponent<PlaceableObject>();
+            if (rootPlaceable != null)
+                rootPlaceable.ItemDescription = _completedDescription;
         }
 
         yield return new WaitForSeconds(_celebrationDelay);

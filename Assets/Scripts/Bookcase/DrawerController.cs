@@ -198,13 +198,14 @@ public class DrawerController : MonoBehaviour
 
     private IEnumerator TranslateRoutine(bool opening)
     {
-        Vector3 slideDir = _slideAxis switch
+        // Use pure local-space axis so the open position is always consistent
+        Vector3 localSlideDir = _slideAxis switch
         {
-            SlideAxis.Right => transform.right,
-            SlideAxis.Up    => transform.up,
-            _               => transform.forward
+            SlideAxis.Right => Vector3.right,
+            SlideAxis.Up    => Vector3.up,
+            _               => Vector3.forward
         };
-        Vector3 openPosition = _closedPosition - transform.parent.InverseTransformDirection(slideDir) * slideDistance;
+        Vector3 openPosition = _closedPosition - localSlideDir * slideDistance;
         Vector3 startPos = transform.localPosition;
         Vector3 endPos = opening ? openPosition : _closedPosition;
         float elapsed = 0f;
@@ -227,10 +228,15 @@ public class DrawerController : MonoBehaviour
     /// </summary>
     private IEnumerator HingeRoutine(bool opening)
     {
-        // Pivot at bottom edge: half the door height below center, in local space
+        // Pivot at bottom edge: use local-space collider bounds so height is stable
         var col = GetComponent<Collider>();
         float halfHeight = col != null ? col.bounds.extents.y : 0.15f;
-        Vector3 pivotOffset = -transform.up * halfHeight;
+
+        // Compute pivot offset from the CLOSED orientation so it's consistent
+        Quaternion closedWorldRot = transform.parent != null
+            ? transform.parent.rotation * _closedRotation
+            : _closedRotation;
+        Vector3 pivotOffset = -(closedWorldRot * Vector3.up) * halfHeight;
 
         float openAngle = Mathf.Abs(slideDistance) > 0.01f ? slideDistance : 90f;
         Quaternion openRotation = _closedRotation * Quaternion.AngleAxis(openAngle, Vector3.right);
@@ -238,9 +244,8 @@ public class DrawerController : MonoBehaviour
         Quaternion startRot = transform.localRotation;
         Quaternion endRot = opening ? openRotation : _closedRotation;
 
-        Vector3 startPos = transform.localPosition;
-        // Calculate where position needs to be so the bottom edge stays fixed
-        Vector3 closedPivotWorld = transform.parent.TransformPoint(_closedPosition) + transform.rotation * pivotOffset;
+        // Anchor = world position of the bottom edge when door is closed
+        Vector3 closedPivotWorld = transform.parent.TransformPoint(_closedPosition) + pivotOffset;
 
         float elapsed = 0f;
 
@@ -252,15 +257,24 @@ public class DrawerController : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
 
             // Keep bottom edge pinned: recalculate position from pivot
-            Vector3 currentPivotOffset = transform.rotation * pivotOffset;
+            Vector3 currentPivotOffset = transform.rotation * (-(Vector3.up) * halfHeight);
             transform.position = closedPivotWorld - currentPivotOffset;
 
             yield return null;
         }
 
+        // Force exact closed pose to prevent any floating-point drift
         transform.localRotation = endRot;
-        Vector3 finalPivotOffset = transform.rotation * pivotOffset;
-        transform.position = closedPivotWorld - finalPivotOffset;
+        if (!opening)
+        {
+            transform.localPosition = _closedPosition;
+            transform.localRotation = _closedRotation;
+        }
+        else
+        {
+            Vector3 finalPivotOffset = transform.rotation * (-(Vector3.up) * halfHeight);
+            transform.position = closedPivotWorld - finalPivotOffset;
+        }
     }
 
     // ── Interior surface privacy ────────────────────────────────────

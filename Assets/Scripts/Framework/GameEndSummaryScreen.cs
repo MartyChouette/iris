@@ -154,7 +154,7 @@ public class GameEndSummaryScreen : MonoBehaviour
 
             // Living plants
             int plantCount = 0;
-            int plantSlots = 4;
+            int plantSlots = WaterablePlant.All.Count;
             if (LivingFlowerPlantManager.Instance != null)
             {
                 var plants = LivingFlowerPlantManager.Instance.ActivePlants;
@@ -177,12 +177,13 @@ public class GameEndSummaryScreen : MonoBehaviour
                 sb.AppendLine("  Tidiness: N/A");
 
             int plantCount = 0;
+            int totalPlants = WaterablePlant.All.Count;
             if (LivingFlowerPlantManager.Instance != null)
             {
                 var plants = LivingFlowerPlantManager.Instance.ActivePlants;
                 plantCount = plants != null ? plants.Count : 0;
             }
-            sb.AppendLine($"  Living plants: {plantCount}/4");
+            sb.AppendLine($"  Living plants: {plantCount}/{totalPlants}");
 
             _apartmentSectionText.text = sb.ToString();
         }

@@ -1395,6 +1395,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 16
   m_TargetDisplay: 0
+--- !u!1 &60591432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 60591433}
+  m_Layer: 15
+  m_Name: roto_pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &60591433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60591432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00003, y: 0.00101, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1906111841}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &62138513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5305,6 +5336,7 @@ MonoBehaviour:
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.005}
   _snapSound: {fileID: 0}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.1254902, g: 0.6980392, b: 0.6666667, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &206099565
@@ -5326,6 +5358,7 @@ MonoBehaviour:
   _arcDuration: 0.7
   _arcHeight: 0.4
   _completedShader: {fileID: 4800000, guid: 73f2b341f32221d4ea251313f2a4198b, type: 3}
+  _completedDescription: 
   _completionSFX: {fileID: 0}
 --- !u!114 &206099566
 MonoBehaviour:
@@ -12478,6 +12511,7 @@ MonoBehaviour:
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.005}
   _snapSound: {fileID: 0}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.1254902, g: 0.6980392, b: 0.6666667, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &478580148
@@ -12499,6 +12533,7 @@ MonoBehaviour:
   _arcDuration: 0.7
   _arcHeight: 0.4
   _completedShader: {fileID: 4800000, guid: 73f2b341f32221d4ea251313f2a4198b, type: 3}
+  _completedDescription: 
   _completionSFX: {fileID: 0}
 --- !u!114 &478580149
 MonoBehaviour:
@@ -14030,6 +14065,7 @@ MonoBehaviour:
   _snapMode: 0
   _snapOffset: {x: 0, y: 0, z: 0}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
 --- !u!1 &535872860
@@ -15619,6 +15655,7 @@ MonoBehaviour:
   _snapMode: 0
   _snapOffset: {x: 0.0001, y: 0, z: 0}
   _snapSound: {fileID: 0}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &598752064
@@ -15736,7 +15773,7 @@ MonoBehaviour:
   _placeSFX: {fileID: 8300000, guid: db75e3c39a484fb49af982426713784b, type: 3}
   maxTetherDistance: 3
   _pairSnapRadius: 0.4
-  _trashSnapRadius: 0.8
+  _trashSnapRadius: 0.3
   _trashSnapStrength: 0.45
   _turntableSnapRadius: 0.6
   _turntableSnapStrength: 0.5
@@ -21162,6 +21199,7 @@ MonoBehaviour:
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.2}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4, g: 1, b: 0.9764706, a: 0.6}
   _partnerPulseSpeed: 2
 --- !u!114 &788062495
@@ -21866,6 +21904,46 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7222170473553695161, guid: 48516de501939ae44aece510b8c7b3ec, type: 3}
   m_PrefabInstance: {fileID: 904653280}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &838531123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838531119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 12
+    m_Right: 12
+    m_Top: 6
+    m_Bottom: 6
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &838531124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838531119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!1 &845707209
 GameObject:
   m_ObjectHideFlags: 0
@@ -22656,6 +22734,7 @@ MonoBehaviour:
   _snapMode: 0
   _snapOffset: {x: 0.0001, y: 0, z: 0}
   _snapSound: {fileID: 0}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &887305165
@@ -23392,8 +23471,12 @@ PrefabInstance:
       value: 412
       objectReference: {fileID: 0}
     - target: {fileID: 7749487796268797075, guid: 48516de501939ae44aece510b8c7b3ec, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749487796268797075, guid: 48516de501939ae44aece510b8c7b3ec, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 538.1279
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7749487796268797075, guid: 48516de501939ae44aece510b8c7b3ec, type: 3}
       propertyPath: m_LocalScale.x
@@ -23410,7 +23493,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7222170473553695161, guid: 48516de501939ae44aece510b8c7b3ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 838531124}
+    - targetCorrespondingSourceObject: {fileID: 7222170473553695161, guid: 48516de501939ae44aece510b8c7b3ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 838531123}
   m_SourcePrefab: {fileID: 100100000, guid: 48516de501939ae44aece510b8c7b3ec, type: 3}
 --- !u!1 &904856953
 GameObject:
@@ -25201,8 +25290,8 @@ Transform:
   m_GameObject: {fileID: 937516501}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.24227276, y: 0.17499924, z: 0}
-  m_LocalScale: {x: 2.1545453, y: 1, z: 0.95}
+  m_LocalPosition: {x: 0.242, y: 0.17499924, z: -0.068}
+  m_LocalScale: {x: 2.1545453, y: 1, z: 0.77}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 878294346}
@@ -31421,6 +31510,7 @@ MonoBehaviour:
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.2}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4, g: 1, b: 0.9764706, a: 0.6}
   _partnerPulseSpeed: 2
 --- !u!114 &977792470
@@ -32116,7 +32206,7 @@ Transform:
   m_GameObject: {fileID: 1026915558}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.341, y: 1.041, z: 2.257}
+  m_LocalPosition: {x: -0.341, y: 1.022, z: 2.257}
   m_LocalScale: {x: 0.88, y: 0.0001, z: 1.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33031,7 +33121,7 @@ MonoBehaviour:
   _destroyOnDeposit: 0
   _zoneRenderer: {fileID: 1053943096}
   _hideRendererWhenInactive: 1
-  _activeColor: {r: 0.4, g: 0.9, b: 1, a: 0.55}
+  _activeColor: {r: 0.4, g: 0.9, b: 1, a: 0.25882354}
   _pulseSpeed: 2
   _depositSFX: {fileID: 8300000, guid: c284ad04b9782384d9a44b855673afe0, type: 3}
   _trashSFX: {fileID: 8300000, guid: d43f5f54a48c48b4fb61c919925a3fb3, type: 3}
@@ -35231,6 +35321,7 @@ MonoBehaviour:
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.2}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4, g: 1, b: 0.9764706, a: 0.6}
   _partnerPulseSpeed: 2
 --- !u!114 &1158650106
@@ -37596,6 +37687,7 @@ MonoBehaviour:
   _snapMode: 0
   _snapOffset: {x: 0, y: 0, z: 0.09}
   _snapSound: {fileID: 0}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &1243566200
@@ -38885,7 +38977,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.36, z: 0.04}
-  m_Center: {x: 0, y: -0.06, z: 0}
+  m_Center: {x: 0, y: 0.18, z: 0}
 --- !u!4 &1266969109
 Transform:
   m_ObjectHideFlags: 0
@@ -38895,7 +38987,7 @@ Transform:
   m_GameObject: {fileID: 1266969107}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.37189, y: -0.847, z: 1.00966}
+  m_LocalPosition: {x: -4.37189, y: -0.833, z: 1.00966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39140,7 +39232,7 @@ Transform:
   m_GameObject: {fileID: 1270268369}
   serializedVersion: 2
   m_LocalRotation: {x: -0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999997}
-  m_LocalPosition: {x: -0.3970003, y: 0.46776062, z: 1.501998}
+  m_LocalPosition: {x: -0.3970003, y: 0.44786066, z: 1.501998}
   m_LocalScale: {x: 100.000015, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44369,6 +44461,7 @@ MonoBehaviour:
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.2}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4, g: 1, b: 0.9764706, a: 0.6}
   _partnerPulseSpeed: 2
 --- !u!114 &1537133415
@@ -46692,7 +46785,7 @@ Transform:
   m_GameObject: {fileID: 1599699181}
   serializedVersion: 2
   m_LocalRotation: {x: -0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999997}
-  m_LocalPosition: {x: -0.3970003, y: 0.46776098, z: 2.961998}
+  m_LocalPosition: {x: -0.3970003, y: 0.44786102, z: 2.961998}
   m_LocalScale: {x: 100.000015, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48462,7 +48555,7 @@ Transform:
   m_GameObject: {fileID: 1651675477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18700027, y: 1.0399, z: 2.1919975}
+  m_LocalPosition: {x: -0.18700027, y: 1.02, z: 2.1919975}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50799,7 +50892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.21200001
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52184,6 +52277,7 @@ GameObject:
   - component: {fileID: 1781937945}
   - component: {fileID: 1781937944}
   - component: {fileID: 1781937946}
+  - component: {fileID: 1781937947}
   m_Layer: 22
   m_Name: round_arch_dinning_table (1)
   m_TagString: Untagged
@@ -52200,7 +52294,7 @@ Transform:
   m_GameObject: {fileID: 1781937941}
   serializedVersion: 2
   m_LocalRotation: {x: -0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999997}
-  m_LocalPosition: {x: -0.35700035, y: 1.0032284, z: 2.2319975}
+  m_LocalPosition: {x: -0.35700035, y: 0.98332846, z: 2.2319975}
   m_LocalScale: {x: 31.3945, y: 31.394499, z: 21.44701}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52286,6 +52380,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3236779455120672472, guid: b66edaceda4ec394f827274abbb860c8, type: 3}
+--- !u!65 &1781937947
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781937941}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.02, y: 0.02, z: 0.04}
+  m_Center: {x: 0, y: 8.018087e-10, z: -0.019691447}
 --- !u!1 &1785403046
 GameObject:
   m_ObjectHideFlags: 0
@@ -55152,6 +55267,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5107283540610344171}
+  - {fileID: 60591433}
   m_Father: {fileID: 1432456868272418290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1906111842
@@ -55174,7 +55290,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.001842636, y: 0.0022575113, z: 0.0016965391}
-  m_Center: {x: -0.000069067995, y: 0.00072306715, z: -0.00010757769}
+  m_Center: {x: -0.000069067995, y: 0.00072306715, z: -0.00027}
 --- !u!114 &1906111843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55234,7 +55350,7 @@ MonoBehaviour:
   wallOnly: 0
   crookedAngleRange: 0
   _rotateMode: 0
-  _rotatePivot: {fileID: 0}
+  _rotatePivot: {fileID: 60591433}
   _allowAutoStraighten: 0
   _disheveledRotation: {x: 0, y: 0, z: 0, w: 1}
   _startDishelved: 0
@@ -56723,6 +56839,7 @@ MonoBehaviour:
   _snapMode: 0
   _snapOffset: {x: 0, y: 0, z: 0.09}
   _snapSound: {fileID: 0}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &1953798385
@@ -57347,7 +57464,7 @@ Transform:
   m_GameObject: {fileID: 1994708121}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02699995, y: 1.054, z: 2.0719976}
+  m_LocalPosition: {x: -0.02699995, y: 1.0341, z: 2.0719976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64530,6 +64647,7 @@ MonoBehaviour:
   _snapMode: 0
   _snapOffset: {x: 0, y: 0, z: 0}
   _snapSound: {fileID: 8300000, guid: 6afc046ff2d6c914cb4399bb990c9468, type: 3}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.4156863, g: 0.3529412, b: 0.8039216, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &2087950771
@@ -72057,7 +72175,7 @@ Transform:
   m_GameObject: {fileID: 2056490394510321164}
   serializedVersion: 2
   m_LocalRotation: {x: 2.842171e-14, y: -0.000000029802322, z: 1, w: 0.00000019470718}
-  m_LocalPosition: {x: 0, y: 0.00014230736, z: -0.0005061375}
+  m_LocalPosition: {x: 0, y: 0.00014, z: -0.00071}
   m_LocalScale: {x: 1.122813, y: 1.122813, z: 1.122813}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73497,7 +73615,7 @@ Transform:
   m_GameObject: {fileID: 5596681304972672593}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76851,6 +76969,7 @@ MonoBehaviour:
   _snapMode: 1
   _snapOffset: {x: 0, y: 0, z: 0.005}
   _snapSound: {fileID: 0}
+  _pairedDescription: 
   _partnerPulseColor: {r: 0.1254902, g: 0.6980392, b: 0.6666667, a: 1}
   _partnerPulseSpeed: 2
 --- !u!114 &8226558599481057031
@@ -76872,6 +76991,7 @@ MonoBehaviour:
   _arcDuration: 0.7
   _arcHeight: 0.4
   _completedShader: {fileID: 4800000, guid: 73f2b341f32221d4ea251313f2a4198b, type: 3}
+  _completedDescription: 
   _completionSFX: {fileID: 0}
 --- !u!114 &8226558599481057032
 MonoBehaviour:
@@ -77393,7 +77513,7 @@ Transform:
   m_GameObject: {fileID: 6170640174925629292}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

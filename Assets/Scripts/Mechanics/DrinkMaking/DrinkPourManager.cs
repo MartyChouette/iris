@@ -43,6 +43,7 @@ public class DrinkPourManager : MonoBehaviour
     private DrinkRecipeDefinition _activeRecipe;
     private DrinkIngredientDefinition _pouringIngredient;
     private bool _overflowSFXPlayed;
+    private bool _waitingForFirstBottle;
     private float _scoreTimer;
     private int _lastScore;
 
@@ -106,12 +107,13 @@ public class DrinkPourManager : MonoBehaviour
         HighlightAllGlasses(false);
         CurrentState = State.Pouring;
         _overflowSFXPlayed = false;
+        _waitingForFirstBottle = true;
 
         if (DrinkCutawayUI.Instance != null)
             DrinkCutawayUI.Instance.Show(glass, _activeRecipe);
 
-        // Highlight the first ingredient's bottle
-        HighlightNextIngredientBottle();
+        // Flash ALL bottles until the player picks one up
+        HighlightAllBottles(true);
 
         Debug.Log($"[DrinkPourManager] Glass selected — {glass.name}. Pour away!");
     }
@@ -151,7 +153,11 @@ public class DrinkPourManager : MonoBehaviour
         _pouringIngredient = ingredient;
 
         // Clear bottle highlights once the player has grabbed one
-        HighlightAllBottles(false);
+        if (_waitingForFirstBottle)
+        {
+            _waitingForFirstBottle = false;
+            HighlightAllBottles(false);
+        }
 
         HighlightSingleGlass(glass, true);
 
@@ -239,6 +245,7 @@ public class DrinkPourManager : MonoBehaviour
         _activeGlass = null;
         _activeRecipe = null;
         _pouringIngredient = null;
+        _waitingForFirstBottle = false;
         CurrentState = State.Idle;
     }
 

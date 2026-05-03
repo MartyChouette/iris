@@ -180,8 +180,10 @@ public class DropZone : MonoBehaviour
 
             if (_instanceMat != null)
             {
-                float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * _pulseSpeed * Mathf.PI * 2f);
-                _instanceMat.color = Color.Lerp(_originalColor, _activeColor, pulse);
+                float pulse = 0.15f + 0.2f * Mathf.Sin(Time.time * _pulseSpeed * Mathf.PI * 2f);
+                Color subtle = _activeColor;
+                subtle.a *= 0.35f;
+                _instanceMat.color = Color.Lerp(_originalColor, subtle, pulse);
             }
         }
         else if (_pulsing)

@@ -164,11 +164,18 @@ public class RecordSlot : MonoBehaviour
         vinyl.ConfigureForTurntable();
 
         // Parent to the placement point so local zero = correct position/rotation.
+        // Use worldPositionStays=true to preserve the vinyl's world scale.
         Transform anchor = _platePlacementPoint != null ? _platePlacementPoint : transform;
-        held.transform.SetParent(anchor, false);
+        Vector3 vinylWorldScale = held.transform.lossyScale;
+        held.transform.SetParent(anchor, true);
         held.transform.localPosition = Vector3.zero;
         held.transform.localRotation = Quaternion.identity;
-        held.transform.localScale = Vector3.one;
+        // Restore world scale so the disc isn't deformed by the anchor's scale
+        Vector3 parentScale = anchor.lossyScale;
+        held.transform.localScale = new Vector3(
+            parentScale.x != 0f ? vinylWorldScale.x / parentScale.x : 1f,
+            parentScale.y != 0f ? vinylWorldScale.y / parentScale.y : 1f,
+            parentScale.z != 0f ? vinylWorldScale.z / parentScale.z : 1f);
 
         // Apply label color
         if (_labelMat != null)

@@ -109,9 +109,12 @@ public class BlanketItem : MonoBehaviour
         if (_popSFX != null && AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(_popSFX);
 
-        Vector3 spawnPos = transform.position + Vector3.up * 0.05f;
+        // Raycast down from the blanket to find the actual floor/surface
+        Vector3 spawnPos = transform.position;
+        if (Physics.Raycast(transform.position + Vector3.up * 0.05f, Vector3.down, out RaycastHit floorHit, 2f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            spawnPos = floorHit.point;
 
-        SmokePoof.Spawn(spawnPos);
+        SmokePoof.Spawn(spawnPos + Vector3.up * 0.05f);
 
         // Activate scene objects
         if (_hiddenSceneObjects != null)
@@ -120,6 +123,8 @@ public class BlanketItem : MonoBehaviour
             {
                 if (_hiddenSceneObjects[i] == null) continue;
                 _hiddenSceneObjects[i].SetActive(true);
+                _hiddenSceneObjects[i].transform.position = spawnPos;
+                // PlacementFlash.Spawn(spawnPos); // TODO: replace with better reveal effect
                 Debug.Log($"[BlanketItem] Revealed scene object: {_hiddenSceneObjects[i].name}");
             }
         }
@@ -130,7 +135,10 @@ public class BlanketItem : MonoBehaviour
             for (int i = 0; i < _hiddenItemPrefabs.Length; i++)
             {
                 if (_hiddenItemPrefabs[i] == null) continue;
-                Instantiate(_hiddenItemPrefabs[i], spawnPos + Vector3.right * (i * 0.1f), Quaternion.identity);
+                Quaternion spawnRot = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+                Vector3 itemPos = spawnPos + Vector3.right * (i * 0.1f);
+                Instantiate(_hiddenItemPrefabs[i], itemPos, spawnRot);
+                // PlacementFlash.Spawn(itemPos); // TODO: replace with better reveal effect
                 Debug.Log($"[BlanketItem] Spawned hidden item: {_hiddenItemPrefabs[i].name}");
             }
         }

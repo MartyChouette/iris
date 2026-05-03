@@ -293,10 +293,12 @@ public class CleanableSurface : MonoBehaviour
         float maxRadius = _textureSize * 0.5f * _definition.coverage;
         float seed = _definition.seed;
 
+        // Darken spill color for better contrast against light surfaces
         Color c = _definition.spillColor;
-        byte r = (byte)(c.r * 255f);
-        byte g = (byte)(c.g * 255f);
-        byte b = (byte)(c.b * 255f);
+        float darken = 0.6f;
+        byte r = (byte)(c.r * darken * 255f);
+        byte g = (byte)(c.g * darken * 255f);
+        byte b = (byte)(c.b * darken * 255f);
 
         _totalDirtPixels = 0;
 
@@ -319,7 +321,7 @@ public class CleanableSurface : MonoBehaviour
                 {
                     float edge = Mathf.Clamp01(1f - dist / threshold);
                     // Boost minimum opacity so stains are visible on light floors
-                    edge = Mathf.Lerp(0.6f, 1f, edge);
+                    edge = Mathf.Lerp(0.75f, 1f, edge);
                     byte a = (byte)(edge * 255f);
 
                     pixels[idx] = new Color32(r, g, b, a);

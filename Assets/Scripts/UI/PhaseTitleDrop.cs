@@ -50,7 +50,7 @@ public class PhaseTitleDrop : MonoBehaviour
 
     private Canvas _canvas;
     private TMP_Text _titleText;
-    private TMP_Text _shadowText;
+    // _shadowText removed — was causing double-text appearance
     private CanvasGroup _group;
     private Coroutine _activeRoutine;
     private Material _cleanFontMat; // font material with underlay stripped — reused across shows
@@ -104,22 +104,7 @@ public class PhaseTitleDrop : MonoBehaviour
         _group.blocksRaycasts = false;
         _group.interactable = false;
 
-        // Shadow text (offset down-right)
-        var shadowGO = new GameObject("Shadow");
-        shadowGO.transform.SetParent(transform, false);
-        var shadowRT = shadowGO.AddComponent<RectTransform>();
-        shadowRT.anchorMin = Vector2.zero;
-        shadowRT.anchorMax = Vector2.one;
-        shadowRT.offsetMin = new Vector2(3f, -3f);
-        shadowRT.offsetMax = new Vector2(3f, -3f);
-        _shadowText = shadowGO.AddComponent<TextMeshProUGUI>();
-        _shadowText.fontSize = _fontSize;
-        _shadowText.alignment = TextAlignmentOptions.Center;
-        _shadowText.color = new Color(0f, 0f, 0f, 0.35f);
-        _shadowText.fontStyle = FontStyles.Normal;
-        _shadowText.textWrappingMode = TMPro.TextWrappingModes.NoWrap;
-
-        // Main title text
+        // Main title text (no separate shadow — use TMP outline instead)
         var titleGO = new GameObject("Title");
         titleGO.transform.SetParent(transform, false);
         var titleRT = titleGO.AddComponent<RectTransform>();
@@ -137,14 +122,9 @@ public class PhaseTitleDrop : MonoBehaviour
         // Apply game font
         var theme = IrisTextTheme.Active;
         if (theme != null && theme.primaryFont != null)
-        {
             _titleText.font = theme.primaryFont;
-            _shadowText.font = theme.primaryFont;
-        }
 
         // Create ONE clean font material with underlay fully zeroed out.
-        // TMP's internal material management resets per-call overrides, so we
-        // keep a persistent instance and re-assign it after every text change.
         _cleanFontMat = new Material(_titleText.font.material);
         _cleanFontMat.SetFloat("_UnderlayDilate", -1f);
         _cleanFontMat.SetFloat("_UnderlayOffsetX", 0f);
@@ -155,7 +135,6 @@ public class PhaseTitleDrop : MonoBehaviour
         _cleanFontMat.DisableKeyword("UNDERLAY_INNER");
 
         _titleText.fontMaterial = _cleanFontMat;
-        _shadowText.fontMaterial = _cleanFontMat;
     }
 
     /// <summary>Show an epic title drop over the live scene.</summary>
@@ -170,14 +149,11 @@ public class PhaseTitleDrop : MonoBehaviour
     private IEnumerator TitleSequence(string text)
     {
         _titleText.text = text;
-        _shadowText.text = text;
 
         // TMP resets to the font's shared material on text change — force rebuild
         // then re-assign our clean material so underlay never reappears.
         _titleText.ForceMeshUpdate(true);
-        _shadowText.ForceMeshUpdate(true);
         _titleText.fontMaterial = _cleanFontMat;
-        _shadowText.fontMaterial = _cleanFontMat;
 
         // Set tilt-shift parameters
         Shader.SetGlobalFloat(TiltCenterID, _tiltShiftCenter);

@@ -32062,3 +32062,718 @@ Assets/Scripts/Apartment/RecordSlot.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260503_135412
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+---
+
+## Session End: 20260503_135603
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_135653
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_135735
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_140757
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_140901
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_141202
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_141522
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_141632
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_141737
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_142533
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_143226
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_143610
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_143835
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_143845
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_144535
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_150748
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_155614
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_163258
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_163754
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_164202
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_164430
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_164751
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_164856
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_172854
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_180906
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_181138
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_181345
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_181549
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_181730
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_184046
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_185457
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_185811
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_190359
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_190628
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_190800
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_191147
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_191345
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_191617
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_192539
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_193618
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_194533
+### Commits
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/GameEndSummaryScreen.cs
+Assets/Scripts/Framework/ScreenFade.cs
+Assets/Scripts/Mechanics/Cleaning/CleanableSurface.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

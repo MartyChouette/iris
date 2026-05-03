@@ -75,8 +75,24 @@ public class PlaceableObject : MonoBehaviour
         _ => Vector3.zero
     };
 
-    /// <summary>World-space pivot point for rotation. Falls back to transform.position if unset.</summary>
-    public Vector3 RotatePivotWorld => _rotatePivot != null ? _rotatePivot.position : transform.position;
+    private Collider _cachedRotatePivotCol;
+    private bool _cachedRotatePivotColResolved;
+
+    /// <summary>World-space pivot point for rotation. Uses explicit pivot, then collider center, then transform origin.</summary>
+    public Vector3 RotatePivotWorld
+    {
+        get
+        {
+            if (_rotatePivot != null) return _rotatePivot.position;
+            if (!_cachedRotatePivotColResolved)
+            {
+                _cachedRotatePivotCol = GetComponent<Collider>();
+                _cachedRotatePivotColResolved = true;
+            }
+            if (_cachedRotatePivotCol != null) return _cachedRotatePivotCol.bounds.center;
+            return transform.position;
+        }
+    }
 
     public bool AllowAutoStraighten => _allowAutoStraighten;
 
@@ -119,7 +135,11 @@ public class PlaceableObject : MonoBehaviour
     public ItemCategory Category => _itemCategory;
     public string HomeZoneName => _homeZoneName;
     public string AltHomeZoneName => _altHomeZoneName;
-    public string ItemDescription => !string.IsNullOrEmpty(_itemDescription) ? _itemDescription : name;
+    public string ItemDescription
+    {
+        get => !string.IsNullOrEmpty(_itemDescription) ? _itemDescription : name;
+        set => _itemDescription = value;
+    }
     public AudioClip PickupSFXOverride => _pickupSFXOverride;
     public AudioClip PlaceSFXOverride => _placeSFXOverride;
     private bool _isAtHomeOverride;

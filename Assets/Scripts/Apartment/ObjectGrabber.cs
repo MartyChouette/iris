@@ -1305,25 +1305,14 @@ public class ObjectGrabber : MonoBehaviour
                 rot = _held.HomeRotation;
         }
 
-        // Barrier check — reject if placement position overlaps or sits directly
-        // above a barrier volume (counter body, furniture interior, etc.).
-        // Sphere check catches items placed inside barriers, downward ray catches
-        // barriers beneath the surface that the sphere can't reach.
+        // Barrier check — reject if placement position overlaps a barrier volume.
+        // Only the sphere overlap is used; the old downward ray was hitting barrier
+        // colliders inside counter/table bodies directly below valid surfaces.
         if (_barrierLayer != 0 && !_currentSurface.IsVertical)
         {
-            // Skip barrier checks entirely for wall surfaces — the wall itself
-            // is on the barrier layer, so both the sphere and downward ray
-            // would always hit it and block every placement.
-            bool blocked = Physics.CheckSphere(pos, 0.08f, _barrierLayer);
-            if (!blocked)
+            if (Physics.CheckSphere(pos, 0.009f, _barrierLayer))
             {
-                // Probe downward from placement pos — catches barriers inside
-                // counter/table bodies that sit just below the surface.
-                blocked = Physics.Raycast(pos, Vector3.down, 0.15f, _barrierLayer);
-            }
-            if (blocked)
-            {
-                Debug.Log($"[ObjectGrabber] BLOCKED: placement at {pos} is over barrier geometry.");
+                Debug.Log($"[ObjectGrabber] BLOCKED: placement at {pos} is inside barrier geometry.");
                 return;
             }
         }
@@ -1331,6 +1320,24 @@ public class ObjectGrabber : MonoBehaviour
         // Exclusion zones
         if (PlacementExclusionZone.IsExcluded(pos))
             return;
+
+        // Bounds check: reject if item footprint hangs off the surface
+        if (!_currentSurface.IsFloor && !_currentSurface.IsVertical)
+        {
+            float halfX = _heldBoundsExtents.x;
+            float halfZ = _heldBoundsExtents.z;
+            Vector3 surfNormal = _currentSurface.SurfaceNormal;
+            Vector3 fwd = Vector3.ProjectOnPlane(rot * Vector3.forward, surfNormal).normalized;
+            Vector3 rgt = Vector3.Cross(surfNormal, fwd).normalized;
+            if (!_currentSurface.ContainsWorldPoint(pos + rgt * halfX + fwd * halfZ)
+             || !_currentSurface.ContainsWorldPoint(pos - rgt * halfX + fwd * halfZ)
+             || !_currentSurface.ContainsWorldPoint(pos + rgt * halfX - fwd * halfZ)
+             || !_currentSurface.ContainsWorldPoint(pos - rgt * halfX - fwd * halfZ))
+            {
+                Debug.Log($"[ObjectGrabber] BLOCKED: item footprint hangs off surface edge at {pos}");
+                return;
+            }
+        }
 
         // Cubby capacity check — reject placement if cubby is full
         var capacityCubby = DrawerController.FindByInteriorSurface(_currentSurface);
@@ -2286,6 +2293,11 @@ public class ObjectGrabber : MonoBehaviour
                             // Allow if the blocker is the surface's own furniture
                             bool sameFurniture = occHit.transform.IsChildOf(surface.transform)
                                               || surface.transform.IsChildOf(occHit.transform);
+                            // Allow if blocker shares a parent with the surface
+                            // (e.g. barrier box inside a counter whose top is the surface)
+                            if (!sameFurniture && surface.transform.parent != null
+                                && occHit.transform.parent == surface.transform.parent)
+                                sameFurniture = true;
                             // Allow if the hit is very close to the surface — it's
                             // the surface's own supporting geometry (floor slab,
                             // table top mesh, etc.), not a separate occluder.
@@ -2983,14 +2995,12 @@ public class ObjectGrabber : MonoBehaviour
             canPlace = _currentSurface.IsFloor || isTrashCan;
         }
 
-        // Barrier: blocked if placement sits over barrier geometry.
+        // Barrier: blocked if placement overlaps barrier geometry.
         // Skip for wall surfaces — the wall itself is on the barrier layer.
         if (canPlace && _barrierLayer != 0 && !_currentSurface.IsVertical)
         {
-            bool overBarrier = Physics.CheckSphere(placePos, 0.08f, _barrierLayer);
-            if (!overBarrier)
-                overBarrier = Physics.Raycast(placePos, Vector3.down, 0.15f, _barrierLayer);
-            if (overBarrier) canPlace = false;
+            if (Physics.CheckSphere(placePos, 0.009f, _barrierLayer))
+                canPlace = false;
         }
 
         // Exclusion zones (no-place areas without physical colliders)
@@ -3005,6 +3015,22 @@ public class ObjectGrabber : MonoBehaviour
         // Cubby interiors blocked when door is closed
         if (canPlace && IsCubbyAndClosed(_currentSurface))
             canPlace = false;
+
+        // Bounds check: reject if the item's footprint hangs off the surface edge.
+        // Skip for floors (infinite-feeling) and walls (handled by wall snap).
+        if (canPlace && !_currentSurface.IsFloor && !_currentSurface.IsVertical)
+        {
+            float halfX = _heldBoundsExtents.x;
+            float halfZ = _heldBoundsExtents.z;
+            // Check all four footprint corners against the surface bounds
+            Vector3 fwd = Vector3.ProjectOnPlane(placeRot * Vector3.forward, hitResult.surfaceNormal).normalized;
+            Vector3 rgt = Vector3.Cross(hitResult.surfaceNormal, fwd).normalized;
+            if (!_currentSurface.ContainsWorldPoint(placePos + rgt * halfX + fwd * halfZ)
+             || !_currentSurface.ContainsWorldPoint(placePos - rgt * halfX + fwd * halfZ)
+             || !_currentSurface.ContainsWorldPoint(placePos + rgt * halfX - fwd * halfZ)
+             || !_currentSurface.ContainsWorldPoint(placePos - rgt * halfX - fwd * halfZ))
+                canPlace = false;
+        }
 
         // Occupancy: blocked unless the occupant is a valid pair partner of the held item.
         if (canPlace)
