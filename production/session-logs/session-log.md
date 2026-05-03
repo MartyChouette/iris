@@ -31954,3 +31954,111 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260502_173626
+### Commits
+24e1618 disable ghost preview by default, fix drawer cursor blocking items
+35c14a5 Added item description and sound
+f587ec6 Merge branch 'main' of https://github.com/MartyChouette/iris
+---
+
+## Session End: 20260502_232431
+### Commits
+24e1618 disable ghost preview by default, fix drawer cursor blocking items
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_001404
+### Commits
+24e1618 disable ghost preview by default, fix drawer cursor blocking items
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_002351
+### Commits
+24e1618 disable ghost preview by default, fix drawer cursor blocking items
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_091033
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_111427
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_111527
+### Uncommitted Changes
+Assets/Scripts/Apartment/GunplaFigure.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_113617
+### Uncommitted Changes
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_114056
+### Uncommitted Changes
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_114918
+### Uncommitted Changes
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_120356
+### Uncommitted Changes
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_121531
+### Uncommitted Changes
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_124616
+### Uncommitted Changes
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_124800
+### Uncommitted Changes
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/DropZone.cs
+Assets/Scripts/Apartment/GunplaFigure.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+

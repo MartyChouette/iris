@@ -173,10 +173,6 @@ public class GunplaFigure : MonoBehaviour
         if (_headBone != null)
             _headBaseRotation = _headBone.localRotation;
 
-        // Disable PlaceableObject so the completed gunpla can't be picked up
-        if (_placeable != null)
-            _placeable.enabled = false;
-
         // Start floating
         _floatBasePos = transform.position + Vector3.up * _floatHeight;
         transform.position = _floatBasePos;
@@ -186,13 +182,24 @@ public class GunplaFigure : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Lock kinematic the frame after placement so physics doesn't push it around
-        if (_placeable != null && !_isComplete)
+        if (_placeable != null)
         {
             var state = _placeable.CurrentState;
+
+            // Lock kinematic the frame after placement
             if (state == PlaceableObject.State.Placed && _lastState != PlaceableObject.State.Placed)
+            {
                 LockAfterPlacement();
+                // Recalculate float base whenever re-placed
+                if (_isComplete)
+                    _floatBasePos = transform.position + Vector3.up * _floatHeight;
+            }
+
             _lastState = state;
+
+            // Don't override position while held
+            if (state == PlaceableObject.State.Held)
+                return;
         }
 
         if (!_isComplete) return;

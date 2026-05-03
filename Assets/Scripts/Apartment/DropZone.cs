@@ -243,21 +243,16 @@ public class DropZone : MonoBehaviour
     /// disabled, the rack is full, or the slot config is degenerate. The
     /// returned position is in world space; rotation matches this transform.
     /// </summary>
-    public bool TryGetNextDepositSlot(out Vector3 worldPos, out Quaternion worldRot)
+    /// <summary>Clean up stale slot entries (picked up or destroyed items).</summary>
+    private void CleanStaleSlots()
     {
-        worldPos = default;
-        worldRot = default;
-        if (!_useSlotting || _slotCount <= 0 || _slotOccupants == null) return false;
-
-        // Clean up stale entries (item was picked up or destroyed)
+        if (_slotOccupants == null) return;
         for (int i = 0; i < _slotOccupants.Length; i++)
         {
             if (_slotOccupants[i] != null)
             {
                 if (_slotOccupants[i] == null) // destroyed
-                {
                     _slotOccupants[i] = null;
-                }
                 else if (_slotOccupants[i].CurrentState != PlaceableObject.State.Placed)
                 {
                     Debug.Log($"[DropZone] Stale cleanup: slot {i} freed — '{_slotOccupants[i].name}' state={_slotOccupants[i].CurrentState}");
@@ -265,35 +260,96 @@ public class DropZone : MonoBehaviour
                 }
             }
         }
+    }
 
+    /// <summary>Get the world position of slot at the given index.</summary>
+    private Vector3 GetSlotWorldPos(int index)
+    {
         Vector3 axis = _slotLocalAxis.sqrMagnitude > 0.0001f
-            ? _slotLocalAxis.normalized
-            : Vector3.right;
+            ? _slotLocalAxis.normalized : Vector3.right;
+        Vector3 localSlot = _slotLocalOrigin + axis * (_slotSpacing * index);
+        return transform.TransformPoint(localSlot);
+    }
+
+    /// <summary>The last slot index returned by a nearest/next query. Used by ClaimSlotFor.</summary>
+    private int _lastQueriedSlot = -1;
+
+    public bool TryGetNextDepositSlot(out Vector3 worldPos, out Quaternion worldRot)
+    {
+        worldPos = default;
+        worldRot = default;
+        if (!_useSlotting || _slotCount <= 0 || _slotOccupants == null) return false;
+
+        CleanStaleSlots();
 
         for (int i = 0; i < _slotCount; i++)
         {
-            if (_slotOccupants[i] != null) continue; // slot taken
-
-            Vector3 localSlot = _slotLocalOrigin + axis * (_slotSpacing * i);
-            worldPos = transform.TransformPoint(localSlot);
+            if (_slotOccupants[i] != null) continue;
+            worldPos = GetSlotWorldPos(i);
             worldRot = _preserveItemRotation ? Quaternion.identity : transform.rotation * Quaternion.Euler(_slotRotationOffset);
-            Debug.Log($"[DropZone] Assigning slot {i} at {worldPos}");
+            _lastQueriedSlot = i;
             return true;
         }
-        Debug.Log($"[DropZone] All {_slotCount} slots occupied!");
         return false;
     }
 
-    /// <summary>Claim the next free slot for the given item. Called after deposit.</summary>
+    /// <summary>
+    /// Find the free slot nearest to a world-space cursor position.
+    /// Lets the player choose which slot to place in instead of sequential fill.
+    /// </summary>
+    public bool TryGetNearestFreeSlot(Vector3 cursorWorldPos, out Vector3 worldPos, out Quaternion worldRot)
+    {
+        worldPos = default;
+        worldRot = default;
+        if (!_useSlotting || _slotCount <= 0 || _slotOccupants == null) return false;
+
+        CleanStaleSlots();
+
+        int bestIdx = -1;
+        float bestDist = float.MaxValue;
+
+        for (int i = 0; i < _slotCount; i++)
+        {
+            if (_slotOccupants[i] != null) continue;
+            Vector3 slotWorld = GetSlotWorldPos(i);
+            float dist = (slotWorld - cursorWorldPos).sqrMagnitude;
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                bestIdx = i;
+            }
+        }
+
+        if (bestIdx < 0) return false;
+
+        worldPos = GetSlotWorldPos(bestIdx);
+        worldRot = _preserveItemRotation ? Quaternion.identity : transform.rotation * Quaternion.Euler(_slotRotationOffset);
+        _lastQueriedSlot = bestIdx;
+        return true;
+    }
+
+    /// <summary>Claim the slot that was last returned by TryGetNearestFreeSlot/TryGetNextDepositSlot.</summary>
     public void ClaimSlotFor(PlaceableObject item)
     {
         if (_slotOccupants == null) return;
+
+        // Claim the specific slot that was queried
+        if (_lastQueriedSlot >= 0 && _lastQueriedSlot < _slotOccupants.Length
+            && _slotOccupants[_lastQueriedSlot] == null)
+        {
+            _slotOccupants[_lastQueriedSlot] = item;
+            Debug.Log($"[DropZone] Claimed slot {_lastQueriedSlot} for '{item.name}'");
+            _lastQueriedSlot = -1;
+            return;
+        }
+
+        // Fallback: first free slot
         for (int i = 0; i < _slotOccupants.Length; i++)
         {
             if (_slotOccupants[i] == null)
             {
                 _slotOccupants[i] = item;
-                Debug.Log($"[DropZone] Claimed slot {i} for '{item.name}' (state={item.CurrentState})");
+                Debug.Log($"[DropZone] Claimed slot {i} for '{item.name}' (fallback)");
                 return;
             }
         }
@@ -322,14 +378,13 @@ public class DropZone : MonoBehaviour
 
 
     /// <summary>
-    /// Peek at the next free slot WITHOUT claiming it. Used by ObjectGrabber's
-    /// hover-snap so the held shoe visually locks to the slot it would land in.
+    /// Peek at the nearest free slot to a cursor position WITHOUT claiming it.
+    /// Used by ObjectGrabber's hover-snap so the held shoe visually locks to the
+    /// slot it would land in.
     /// </summary>
-    public bool TryPeekNextDepositSlot(out Vector3 worldPos, out Quaternion worldRot)
+    public bool TryPeekNearestSlot(Vector3 cursorWorldPos, out Vector3 worldPos, out Quaternion worldRot)
     {
-        // Currently identical to TryGetNextDepositSlot — slots are reserved by
-        // physical occupancy, not state, so peek and take are the same op.
-        return TryGetNextDepositSlot(out worldPos, out worldRot);
+        return TryGetNearestFreeSlot(cursorWorldPos, out worldPos, out worldRot);
     }
 
     /// <summary>

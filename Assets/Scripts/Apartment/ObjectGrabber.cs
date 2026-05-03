@@ -1189,13 +1189,15 @@ public class ObjectGrabber : MonoBehaviour
                         return;
                     }
 
-                    // Auto-slot deposit (shoe rack, etc.) — snap to the next
-                    // free slot in a row instead of dropping at the cursor.
+                    // Auto-slot deposit (shoe rack, etc.) — snap to the nearest
+                    // free slot to where the player is pointing.
                     if (zone.UseSlotting
-                        && zone.TryGetNextDepositSlot(out var slotPos, out var slotRot))
+                        && zone.TryGetNearestFreeSlot(_grabTarget, out var slotPos, out var slotRot))
                     {
-                        // Preserve the item's current rotation if the zone allows it
-                        if (zone.PreserveItemRotation)
+                        // Pairable items (shoes) always keep the player's rotation;
+                        // other items respect the zone's PreserveItemRotation flag.
+                        var heldPairable = _held.GetComponent<PairableItem>();
+                        if (heldPairable != null || zone.PreserveItemRotation)
                             slotRot = _held.transform.rotation;
                         _held.OnPlaced(_currentSurface, true, slotPos, slotRot);
 
@@ -1293,10 +1295,14 @@ public class ObjectGrabber : MonoBehaviour
         // Home snap: if placing very close to the item's home position, use exact home pos/rot.
         // Use a tight radius so wall items can be placed freely on the wall without
         // constantly snapping back to their spawn point.
+        // Paired items (shoes) keep the player's chosen rotation so they can be
+        // arranged freely on the shoe rack.
         if (_held.HasHome && Vector3.Distance(pos, _held.HomePosition) < _held.HomeTolerance)
         {
             pos = _held.HomePosition;
-            rot = _held.HomeRotation;
+            var pairable = _held.GetComponent<PairableItem>();
+            if (pairable == null || !pairable.IsPaired)
+                rot = _held.HomeRotation;
         }
 
         // Barrier check — reject if placement position overlaps or sits directly
@@ -2044,10 +2050,11 @@ public class ObjectGrabber : MonoBehaviour
         }
         if (!matches) return false;
 
-        // Slotted zone (shoe rack) — use the slot system to position the item
-        if (zone.UseSlotting && zone.TryGetNextDepositSlot(out var slotPos, out var slotRot))
+        // Slotted zone (shoe rack) — snap to nearest free slot
+        if (zone.UseSlotting && zone.TryGetNearestFreeSlot(_grabTarget, out var slotPos, out var slotRot))
         {
-            if (slotRot == Quaternion.identity && zone.PreserveItemRotation)
+            var heldPairable = _held.GetComponent<PairableItem>();
+            if (heldPairable != null || zone.PreserveItemRotation)
                 slotRot = _held.transform.rotation;
             var surface = zone.GetComponent<PlacementSurface>()
                 ?? zone.GetComponentInParent<PlacementSurface>();
@@ -2305,7 +2312,7 @@ public class ObjectGrabber : MonoBehaviour
                 if (slotZone == null) slotZone = surface.GetComponentInParent<DropZone>();
                 if (slotZone != null && slotZone.UseSlotting && _held != null
                     && (slotZone.ZoneName == _held.HomeZoneName || slotZone.ZoneName == _held.AltHomeZoneName)
-                    && slotZone.TryPeekNextDepositSlot(out var slotPos, out _))
+                    && slotZone.TryPeekNearestSlot(pos, out var slotPos, out _))
                 {
                     pos = slotPos;
                     if (_heldRb != null)
@@ -2918,7 +2925,7 @@ public class ObjectGrabber : MonoBehaviour
 
         if (isSlotZoneMatch)
         {
-            bool slotFree = slotZone.TryPeekNextDepositSlot(out Vector3 slotPos, out Quaternion slotRot);
+            bool slotFree = slotZone.TryPeekNearestSlot(hitResult.worldPosition, out Vector3 slotPos, out Quaternion slotRot);
             Vector3 slotShadow = slotFree
                 ? slotPos + hitResult.surfaceNormal * 0.02f
                 : hitResult.worldPosition + hitResult.surfaceNormal * 0.02f;
@@ -2954,7 +2961,9 @@ public class ObjectGrabber : MonoBehaviour
         if (_held.HasHome && Vector3.Distance(placePos, _held.HomePosition) < _held.HomeTolerance)
         {
             placePos = _held.HomePosition;
-            placeRot = _held.HomeRotation;
+            var pairable = _held.GetComponent<PairableItem>();
+            if (pairable == null || !pairable.IsPaired)
+                placeRot = _held.HomeRotation;
         }
 
         // Shadow always sits directly under the ghost on the surface face.

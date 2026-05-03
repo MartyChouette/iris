@@ -101,9 +101,9 @@ public class BookCollectionItem : MonoBehaviour
     {
         // No camera takeover — player stays in control
 
-        // Wait one frame so ClearHeld/SetRenderOnTop(false) finishes restoring
-        // shaders before we swap them. Otherwise our swap gets overwritten.
-        yield return null;
+        // Wait for the pair-pulse animation to finish (~1s) so it doesn't
+        // overwrite the shader/color swap with the teal pulse color.
+        yield return new WaitForSeconds(1.1f);
 
         // Swap all 3 books to the clean shader via PlaceableObject's instance material
         Shader cleanShader = _completedShader;
@@ -113,6 +113,7 @@ public class BookCollectionItem : MonoBehaviour
         {
             if (cleanShader != null)
                 book.ForceShader(cleanShader);
+            book.ForceRestoreMaterial();
             var psx = book.GetComponent<PSXObjectSettings>();
             if (psx == null) psx = book.gameObject.AddComponent<PSXObjectSettings>();
             psx.SnapResolution = 0f;

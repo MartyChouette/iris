@@ -782,23 +782,30 @@ public class PlaceableObject : MonoBehaviour
 
         if (_allowAutoStraighten && !canWallMount)
         {
-            // Auto-straighten to home rotation on pickup (if home was captured)
-            // Skip wall-mountable items — their rotation is intentional
-            if (_homeRotation != Quaternion.identity)
+            // Skip auto-straighten for pairable items (shoes) — player controls rotation
+            var pairable = GetComponent<PairableItem>();
+            bool skipStraighten = pairable != null;
+
+            if (!skipStraighten)
             {
-                transform.rotation = _homeRotation;
-                if (_rb != null) _rb.angularVelocity = Vector3.zero;
-            }
-            else
-            {
-                // No home rotation — just zero X/Z, keep Y
-                Vector3 euler = transform.eulerAngles;
-                float xTilt = Mathf.Abs(Mathf.DeltaAngle(euler.x, 0f));
-                float zTilt = Mathf.Abs(Mathf.DeltaAngle(euler.z, 0f));
-                if (xTilt > 1f || zTilt > 1f)
+                // Auto-straighten to home rotation on pickup (if home was captured)
+                // Skip wall-mountable items — their rotation is intentional
+                if (_homeRotation != Quaternion.identity)
                 {
-                    transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
+                    transform.rotation = _homeRotation;
                     if (_rb != null) _rb.angularVelocity = Vector3.zero;
+                }
+                else
+                {
+                    // No home rotation — just zero X/Z, keep Y
+                    Vector3 euler = transform.eulerAngles;
+                    float xTilt = Mathf.Abs(Mathf.DeltaAngle(euler.x, 0f));
+                    float zTilt = Mathf.Abs(Mathf.DeltaAngle(euler.z, 0f));
+                    if (xTilt > 1f || zTilt > 1f)
+                    {
+                        transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
+                        if (_rb != null) _rb.angularVelocity = Vector3.zero;
+                    }
                 }
             }
         }
