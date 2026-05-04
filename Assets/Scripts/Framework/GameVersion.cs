@@ -11,11 +11,12 @@ using UnityEngine;
 /// History:
 ///   v1.0–v3.0  — early prototypes (pre-versioning)
 ///   v0.4.0     — demo build (single day, Paris date, apartment cleanup)
+///   v0.5.0     — juice pass (feel, audio, UI polish, placement improvements)
 /// </summary>
 public static class GameVersion
 {
     public const int Major = 0;
-    public const int Minor = 4;
+    public const int Minor = 5;
     public const int Patch = 0;
 
     public const string Label = ""; // e.g. "alpha", "beta", "rc1", ""
