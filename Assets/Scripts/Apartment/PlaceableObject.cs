@@ -451,8 +451,20 @@ public class PlaceableObject : MonoBehaviour
 
             _originalColor = _instanceMats[0] != null ? _instanceMats[0].color : Color.white;
 
-            // Capture the original shader from slot 0 before anything applies glitch.
+            // Capture every slot's original shader before anything applies glitch.
             _originalShader = _instanceMats[0] != null ? _instanceMats[0].shader : null;
+            _originalShaders = new Shader[_instanceMats.Length];
+            for (int i = 0; i < _instanceMats.Length; i++)
+            {
+                if (_instanceMats[i] == null) continue;
+                _originalShaders[i] = _instanceMats[i].shader;
+                // If authored with PSXLitGlitch, fall back to PSXLit
+                if (_originalShaders[i] != null && _originalShaders[i].name == "Iris/PSXLitGlitch")
+                {
+                    var psxLit = Shader.Find("Iris/PSXLit");
+                    if (psxLit != null) _originalShaders[i] = psxLit;
+                }
+            }
             if (_originalShader != null && _originalShader.name == "Iris/PSXLitGlitch")
             {
                 var psxLit = Shader.Find("Iris/PSXLit");
@@ -1291,34 +1303,42 @@ public class PlaceableObject : MonoBehaviour
                 if (r.gameObject.name == "StinkLines") continue;
                 if (r.gameObject.name == "Silhouette") continue;
 
-                // Instantiate the material so we don't mutate the shared asset.
-                var mat = r.material; // this implicitly instances
-                _renderOnTopStates.Add(new RenderOnTopState
+                // Instance ALL material slots so multi-material meshes are preserved.
+                var mats = r.materials; // implicitly instances all slots
+                for (int m = 0; m < mats.Length; m++)
                 {
-                    renderer = r,
-                    instanceMat = mat,
-                    savedShader = mat.shader,
-                    savedQueue = mat.renderQueue,
-                });
-
-                mat.shader = s_heldOnTopShader;
-                mat.renderQueue = 4000;
+                    if (mats[m] == null) continue;
+                    _renderOnTopStates.Add(new RenderOnTopState
+                    {
+                        renderer = r,
+                        instanceMat = mats[m],
+                        savedShader = mats[m].shader,
+                        savedQueue = mats[m].renderQueue,
+                    });
+                    mats[m].shader = s_heldOnTopShader;
+                    mats[m].renderQueue = 4000;
+                }
+                r.materials = mats;
             }
         }
         else
         {
-            // Restore original shader + queue on each tracked renderer.
+            // Restore original shader + queue on each tracked material.
             // If the item was un-glitched while held (e.g. paired via SnapPair),
-            // use the pre-glitch original shader instead of the saved glitch shader.
-            Shader restoreShader = null;
-            if (!_isGlitched && _originalShader != null)
-                restoreShader = _originalShader;
-
+            // use the per-slot original shaders instead of the saved glitch shader.
             for (int i = 0; i < _renderOnTopStates.Count; i++)
             {
                 var s = _renderOnTopStates[i];
                 if (s.instanceMat == null || s.renderer == null) continue;
-                s.instanceMat.shader = restoreShader ?? s.savedShader ?? s.instanceMat.shader;
+
+                Shader restore = s.savedShader;
+                // If un-glitched while held, the saved shader is glitch — use the
+                // per-slot original instead.
+                if (!_isGlitched && _originalShaders != null && i < _originalShaders.Length
+                    && _originalShaders[i] != null)
+                    restore = _originalShaders[i];
+
+                s.instanceMat.shader = restore ?? s.instanceMat.shader;
                 s.instanceMat.renderQueue = s.savedQueue;
             }
             _renderOnTopStates.Clear();

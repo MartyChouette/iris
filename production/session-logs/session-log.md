@@ -33284,3 +33284,8 @@ production/session-logs/session-log.md
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260504_180915
+### Commits
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+---
+
