@@ -731,6 +731,10 @@ public class ObjectGrabber : MonoBehaviour
         if (placeable.CurrentState == PlaceableObject.State.Held)
             return;
 
+        // Settle immunity: item was just placed — skip pickup for ~3 frames to prevent re-grab
+        if (placeable.IsSettling)
+            return;
+
         // Album sleeves are static — never grab them
         if (placeable.GetComponent<AlbumSleeve>() != null
             || placeable.GetComponentInParent<AlbumSleeve>() != null)
@@ -1427,7 +1431,14 @@ public class ObjectGrabber : MonoBehaviour
 
         // Settle bounce feel on the placed item
         if (_held != null)
+        {
             _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
+
+            // Dust motes on heavy items (bounds volume > threshold)
+            float vol = _heldBoundsExtents.x * _heldBoundsExtents.y * _heldBoundsExtents.z * 8f;
+            if (vol > 0.005f)
+                SmokePoof.Spawn(_held.transform.position, 0.08f, new Color(0.75f, 0.7f, 0.65f, 0.3f));
+        }
 
         ClearHeld();
     }

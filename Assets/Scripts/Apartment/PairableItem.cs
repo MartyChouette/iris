@@ -311,11 +311,12 @@ public class PairableItem : MonoBehaviour
         // Held item isn't parented yet — clear it explicitly
         DisablePSXEffects(held.gameObject);
 
-        // Play snap sound
+        // Play snap sound + smoke poof
         if (_snapSound != null)
             AudioManager.Instance?.PlaySFX(_snapSound);
         else if (held._snapSound != null)
             AudioManager.Instance?.PlaySFX(held._snapSound);
+        SmokePoof.Spawn(held.transform.position, 0.1f);
 
         // Pulse both items to confirm the pairing
         // Re-cache renderer in case it was lost

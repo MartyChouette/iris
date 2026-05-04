@@ -409,6 +409,11 @@ public class PlaceableObject : MonoBehaviour
     private Coroutine _flashCoroutine;
     private Coroutine _snapBounceCoroutine;
 
+    // Settle immunity: prevents accidental re-grab immediately after placement.
+    private float _settleTimer;
+    /// <summary>True for ~0.05 s after OnPlaced so the grabber ignores this item.</summary>
+    public bool IsSettling => _settleTimer > 0f;
+
     private void OnEnable() => s_all.Add(this);
     private void OnDisable() => s_all.Remove(this);
 
@@ -696,6 +701,10 @@ public class PlaceableObject : MonoBehaviour
     {
         if (CurrentState == State.Held) return;
 
+        // Tick down settle immunity (set by OnPlaced to block accidental re-grab)
+        if (_settleTimer > 0f)
+            _settleTimer -= Time.deltaTime;
+
         if (!s_worldBounds.Contains(transform.position))
         {
             _fallTimer += Time.deltaTime;
@@ -915,6 +924,9 @@ public class PlaceableObject : MonoBehaviour
             CheckWallOverlap();
 
         Debug.Log($"[PlaceableObject] {name} placed at {position} (grid={gridSnapped}, wall={surface != null && surface.IsVertical}).");
+
+        // Block accidental re-grab for ~3 frames after placement
+        _settleTimer = 0.05f;
 
         // Satisfying scale bounce on placement
         if (_snapBounceCoroutine != null) StopCoroutine(_snapBounceCoroutine);

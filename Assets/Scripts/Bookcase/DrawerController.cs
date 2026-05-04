@@ -184,6 +184,7 @@ public class DrawerController : MonoBehaviour
         if (opening)
         {
             CurrentState = State.Open;
+            SmokePoof.Spawn(transform.position, 0.08f);
             if (contentsRoot != null)
                 contentsRoot.SetActive(true);
             PositionStoredItems();

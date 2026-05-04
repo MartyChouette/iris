@@ -541,9 +541,28 @@ public class GlobalCursorManager : MonoBehaviour
         return CursorType.Default;
     }
 
+    // Per-frame component cache for Has<T> — cleared once at the start of each new frame.
+    // Key: (instanceID, System.Type). Components don't change mid-frame so this is safe.
+    private static readonly System.Collections.Generic.Dictionary<(int, System.Type), bool> s_componentCache = new();
+    private static int s_cacheFrame = -1;
+
     private static bool Has<T>(GameObject go) where T : Component
     {
-        return go.GetComponent<T>() != null || go.GetComponentInParent<T>() != null;
+        // Clear stale cache entries at the start of each new frame
+        int frame = Time.frameCount;
+        if (frame != s_cacheFrame)
+        {
+            s_componentCache.Clear();
+            s_cacheFrame = frame;
+        }
+
+        var key = (go.GetInstanceID(), typeof(T));
+        if (s_componentCache.TryGetValue(key, out bool cached))
+            return cached;
+
+        bool result = go.GetComponent<T>() != null || go.GetComponentInParent<T>() != null;
+        s_componentCache[key] = result;
+        return result;
     }
 
     private static bool HasFlowerTag(GameObject go)
