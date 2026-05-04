@@ -255,9 +255,9 @@ public class PlaceableObject : MonoBehaviour
 
     private void ApplyGlitch()
     {
-        if (_instanceMat == null)
+        if (_instanceMats == null || _instanceMats.Length == 0)
         {
-            Debug.LogWarning($"[PlaceableObject] ApplyGlitch skipped on '{name}' — no _instanceMat");
+            Debug.LogWarning($"[PlaceableObject] ApplyGlitch skipped on '{name}' — no instance materials");
             return;
         }
         if (_isGlitched) return;
@@ -273,40 +273,52 @@ public class PlaceableObject : MonoBehaviour
             return;
         }
 
-        // Only capture original if not already saved (Awake captures it early)
-        if (_originalShader == null)
-            _originalShader = _instanceMat.shader;
-        _instanceMat.shader = s_glitchShader;
-        _instanceMat.SetFloat("_GlitchIntensity", 0f);
+        if (_originalShader == null && _instanceMats[0] != null)
+            _originalShader = _instanceMats[0].shader;
+
+        // Save each slot's shader so multi-material objects restore correctly
+        _originalShaders = new Shader[_instanceMats.Length];
+        for (int i = 0; i < _instanceMats.Length; i++)
+        {
+            if (_instanceMats[i] == null) continue;
+            _originalShaders[i] = _instanceMats[i].shader;
+            _instanceMats[i].shader = s_glitchShader;
+            _instanceMats[i].SetFloat("_GlitchIntensity", 0f);
+        }
         _isGlitched = true;
 #if UNITY_EDITOR
-        Debug.Log($"[PlaceableObject] ApplyGlitch on '{name}': {_originalShader.name} → {s_glitchShader.name}");
+        Debug.Log($"[PlaceableObject] ApplyGlitch on '{name}': → {s_glitchShader.name} ({_instanceMats.Length} slots)");
 #endif
     }
 
+    // Per-slot original shaders — saved before glitch so each slot restores correctly
+    private Shader[] _originalShaders;
+
     private void RemoveGlitch()
     {
-        if (!_isGlitched)
+        if (!_isGlitched) return;
+        if (_instanceMats == null || _instanceMats.Length == 0) return;
+
+        if (_originalShaders != null)
         {
-            Debug.LogWarning($"[PlaceableObject] RemoveGlitch skipped on '{name}' — not glitched");
-            return;
+            for (int i = 0; i < _instanceMats.Length; i++)
+            {
+                if (_instanceMats[i] == null) continue;
+                var restore = (i < _originalShaders.Length && _originalShaders[i] != null)
+                    ? _originalShaders[i] : _originalShader;
+                if (restore != null) _instanceMats[i].shader = restore;
+            }
         }
-        if (_instanceMat == null)
+        else if (_originalShader != null)
         {
-            Debug.LogWarning($"[PlaceableObject] RemoveGlitch skipped on '{name}' — no _instanceMat");
-            return;
-        }
-        if (_originalShader == null)
-        {
-            Debug.LogWarning($"[PlaceableObject] RemoveGlitch skipped on '{name}' — no _originalShader");
-            return;
+            for (int i = 0; i < _instanceMats.Length; i++)
+                if (_instanceMats[i] != null) _instanceMats[i].shader = _originalShader;
         }
 
-#if UNITY_EDITOR
-        Debug.Log($"[PlaceableObject] RemoveGlitch on '{name}': {_instanceMat.shader.name} → {_originalShader.name}");
-#endif
-        _instanceMat.shader = _originalShader;
         _isGlitched = false;
+#if UNITY_EDITOR
+        Debug.Log($"[PlaceableObject] RemoveGlitch on '{name}' ({_instanceMats.Length} slots)");
+#endif
     }
 
     /// <summary>Public toggle for the PSX glitch shader swap (used by PairableItem for unpaired-state hint).</summary>
@@ -322,11 +334,10 @@ public class PlaceableObject : MonoBehaviour
     /// <summary>Force the instance material to a specific shader, bypassing glitch state tracking.</summary>
     public void ForceShader(Shader shader)
     {
-        if (_instanceMat != null && shader != null)
-        {
-            _instanceMat.shader = shader;
-            _isGlitched = false;
-        }
+        if (_instanceMats == null || shader == null) return;
+        for (int i = 0; i < _instanceMats.Length; i++)
+            if (_instanceMats[i] != null) _instanceMats[i].shader = shader;
+        _isGlitched = false;
     }
 
     /// <summary>Capture current rotation as the disheveled pose (rotation only, position untouched).</summary>
@@ -391,8 +402,8 @@ public class PlaceableObject : MonoBehaviour
                           && _lastPlacedSurface == null;
 
     private Renderer _renderer;
-    private Material _instanceMat;
-    private Color _originalColor;
+    private Material[] _instanceMats;   // cloned per-slot materials (all slots)
+    private Color _originalColor;       // color of slot 0 (for restore/flash)
 
     // Silhouette overlay (see-through when occluded)
     private Material _silhouetteMat;
@@ -429,16 +440,19 @@ public class PlaceableObject : MonoBehaviour
     {
         _renderer = GetComponent<Renderer>();
         if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
-        if (_renderer != null && _renderer.sharedMaterial != null)
+        if (_renderer != null && _renderer.sharedMaterials.Length > 0)
         {
-            _instanceMat = new Material(_renderer.sharedMaterial);
-            _renderer.material = _instanceMat;
-            _originalColor = _instanceMat.color;
+            // Clone ALL material slots so runtime changes don't mutate shared assets
+            var shared = _renderer.sharedMaterials;
+            _instanceMats = new Material[shared.Length];
+            for (int i = 0; i < shared.Length; i++)
+                _instanceMats[i] = shared[i] != null ? new Material(shared[i]) : null;
+            _renderer.materials = _instanceMats;
 
-            // Capture the original shader NOW before anything applies glitch.
-            // If the material was already authored with PSXLitGlitch, fall back
-            // to PSXLit so RemoveGlitch has a clean shader to restore to.
-            _originalShader = _instanceMat.shader;
+            _originalColor = _instanceMats[0] != null ? _instanceMats[0].color : Color.white;
+
+            // Capture the original shader from slot 0 before anything applies glitch.
+            _originalShader = _instanceMats[0] != null ? _instanceMats[0].shader : null;
             if (_originalShader != null && _originalShader.name == "Iris/PSXLitGlitch")
             {
                 var psxLit = Shader.Find("Iris/PSXLit");
@@ -767,7 +781,9 @@ public class PlaceableObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_instanceMat != null) Destroy(_instanceMat);
+        if (_instanceMats != null)
+            for (int i = 0; i < _instanceMats.Length; i++)
+                if (_instanceMats[i] != null) Destroy(_instanceMats[i]);
         if (_silhouetteMat != null) Destroy(_silhouetteMat);
         if (_silhouetteGO != null) Destroy(_silhouetteGO);
         DestroyStinkLines();
@@ -1165,7 +1181,7 @@ public class PlaceableObject : MonoBehaviour
 
     private void StartFlash()
     {
-        if (_instanceMat == null) return;
+        if (_instanceMats == null || _instanceMats.Length == 0) return;
         if (_flashCoroutine != null) StopCoroutine(_flashCoroutine);
         _flashCoroutine = StartCoroutine(FlashRoutine());
     }
@@ -1175,9 +1191,9 @@ public class PlaceableObject : MonoBehaviour
         Color bright = _originalColor * 2f;
         for (int i = 0; i < 2; i++)
         {
-            _instanceMat.color = bright;
+            SetInstanceColor(bright);
             yield return new WaitForSeconds(0.1f);
-            _instanceMat.color = _originalColor;
+            SetInstanceColor(_originalColor);
             yield return new WaitForSeconds(0.1f);
         }
         _flashCoroutine = null;
@@ -1321,8 +1337,9 @@ public class PlaceableObject : MonoBehaviour
 
     private void RestoreMaterial()
     {
-        if (_instanceMat != null)
-            _instanceMat.color = _originalColor;
+        if (_instanceMats == null) return;
+        for (int i = 0; i < _instanceMats.Length; i++)
+            if (_instanceMats[i] != null) _instanceMats[i].color = _originalColor;
     }
 
     /// <summary>Public version for external systems (PairableItem) to force color restore.</summary>
@@ -1331,11 +1348,12 @@ public class PlaceableObject : MonoBehaviour
         RestoreMaterial();
     }
 
-    /// <summary>Set instance material color directly (for PairableItem pulse). Returns false if no instance material.</summary>
+    /// <summary>Set all instance material colors directly (for PairableItem pulse). Returns false if no instance materials.</summary>
     public bool SetInstanceColor(Color color)
     {
-        if (_instanceMat == null) return false;
-        _instanceMat.color = color;
+        if (_instanceMats == null || _instanceMats.Length == 0) return false;
+        for (int i = 0; i < _instanceMats.Length; i++)
+            if (_instanceMats[i] != null) _instanceMats[i].color = color;
         return true;
     }
 
@@ -1344,27 +1362,29 @@ public class PlaceableObject : MonoBehaviour
 
     /// <summary>
     /// Override the instance material's shader and properties from a source material.
-    /// Call AFTER Awake (which creates _instanceMat) and BEFORE InteractableHighlight
+    /// Call AFTER Awake (which creates _instanceMats) and BEFORE InteractableHighlight
     /// caches base materials. Preserves the material reference so pickup/place still works.
     /// </summary>
     public void ApplyMaterialOverride(Material source, Color color)
     {
         if (source == null) return;
 
-        if (_instanceMat == null)
+        if (_instanceMats == null || _instanceMats.Length == 0)
         {
             // Awake hasn't run yet — set on the renderer directly
             _renderer = GetComponent<Renderer>();
             if (_renderer == null) return;
-            _instanceMat = new Material(source);
-            _instanceMat.color = color;
-            _renderer.material = _instanceMat;
+            var mat = new Material(source);
+            mat.color = color;
+            _instanceMats = new[] { mat };
+            _renderer.material = mat;
         }
         else
         {
-            _instanceMat.shader = source.shader;
-            _instanceMat.CopyPropertiesFromMaterial(source);
-            _instanceMat.color = color;
+            // Override slot 0 with source properties
+            _instanceMats[0].shader = source.shader;
+            _instanceMats[0].CopyPropertiesFromMaterial(source);
+            _instanceMats[0].color = color;
         }
         _originalColor = color;
     }

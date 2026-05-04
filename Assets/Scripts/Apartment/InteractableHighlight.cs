@@ -230,8 +230,7 @@ public class InteractableHighlight : MonoBehaviour
     {
         _renderers = GetComponentsInChildren<Renderer>();
 
-        // Always swap standard shaders to PSXLit (visual style, not highlight related)
-        SwapToPSXLit();
+        // PSXLit auto-swap removed — artist materials stay as authored (URP).
 
         // When visuals are suppressed, skip highlight material setup.
         // The component only exists for the static registry (cursor detection).
