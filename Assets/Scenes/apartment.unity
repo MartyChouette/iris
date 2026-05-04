@@ -889,6 +889,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!65 &43062313
 BoxCollider:
@@ -2665,6 +2666,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!21 &126564081
 Material:
@@ -3602,6 +3604,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!114 &145478992
 MonoBehaviour:
@@ -3914,6 +3917,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &158490887
 MeshRenderer:
@@ -5959,6 +5963,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &224704483
 MeshRenderer:
@@ -7731,6 +7736,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &309815294
 GameObject:
@@ -8318,6 +8324,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 2
 --- !u!23 &334531083
 MeshRenderer:
@@ -8448,6 +8455,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 0
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!65 &336786092
 BoxCollider:
@@ -10487,6 +10495,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &412025810
 MeshRenderer:
@@ -10926,10 +10935,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacementSurface
   localBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.0001, y: 0.004, z: 0.004}
+    m_Extent: {x: 0.51, y: 0.004, z: 0.4}
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!65 &430454223
 BoxCollider:
@@ -10988,6 +10998,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 1
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!65 &435676709
 BoxCollider:
@@ -11507,7 +11518,7 @@ Transform:
   m_GameObject: {fileID: 457948450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.322, y: 2.756, z: 2.774}
+  m_LocalPosition: {x: -4.322, y: 2.769, z: 2.774}
   m_LocalScale: {x: 0.59, y: 0.01, z: 0.39}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11527,10 +11538,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacementSurface
   localBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.0001, y: 0.004, z: 0.004}
+    m_Extent: {x: 0.49, y: 0.004, z: 0.4}
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!65 &457948453
 BoxCollider:
@@ -11905,6 +11917,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &467061879
 GameObject:
@@ -12781,6 +12794,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1001 &488569101
 PrefabInstance:
@@ -14141,6 +14155,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!21 &536505647
 Material:
@@ -15772,6 +15787,12 @@ MonoBehaviour:
     m_Bits: 2147483648
   _pickupSFX: {fileID: 8300000, guid: db75e3c39a484fb49af982426713784b, type: 3}
   _placeSFX: {fileID: 8300000, guid: db75e3c39a484fb49af982426713784b, type: 3}
+  _surfaceWood: {fileID: 0}
+  _surfaceGlass: {fileID: 0}
+  _surfaceMetal: {fileID: 0}
+  _surfaceStone: {fileID: 0}
+  _surfaceFabric: {fileID: 0}
+  _surfacePlastic: {fileID: 0}
   maxTetherDistance: 3
   _pairSnapRadius: 0.4
   _trashSnapRadius: 0.3
@@ -20173,7 +20194,7 @@ Transform:
   m_GameObject: {fileID: 749080492}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.354, y: 2.241, z: 2.89}
+  m_LocalPosition: {x: -4.354, y: 2.22, z: 2.89}
   m_LocalScale: {x: 0.59, y: 0.01, z: 0.39}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20193,10 +20214,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacementSurface
   localBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.0001, y: 0.004, z: 0.004}
+    m_Extent: {x: 0.48, y: 0.64, z: 0.47}
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!65 &749080495
 BoxCollider:
@@ -21398,6 +21420,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &788164271
 MeshRenderer:
@@ -21820,6 +21843,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 2
 --- !u!65 &814993382
 BoxCollider:
@@ -22469,6 +22493,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 2
 --- !u!65 &878294349
 BoxCollider:
@@ -23646,6 +23671,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 0
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!65 &910334821
 BoxCollider:
@@ -24383,6 +24409,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &925438251
 MeshRenderer:
@@ -25339,6 +25366,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &939474985
 GameObject:
@@ -25390,6 +25418,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 0
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &942130649
 GameObject:
@@ -25777,6 +25806,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &949702576
 MeshRenderer:
@@ -32234,6 +32264,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 2
 --- !u!23 &1026915561
 MeshRenderer:
@@ -33161,6 +33192,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 0
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 2
 --- !u!23 &1053943096
 MeshRenderer:
@@ -35520,6 +35552,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &1166877769
 MeshRenderer:
@@ -36291,6 +36324,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 3
 --- !u!23 &1192554163
 MeshRenderer:
@@ -37478,6 +37512,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 0
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1227803253
 GameObject:
@@ -38627,6 +38662,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 2
 --- !u!23 &1259265360
 MeshRenderer:
@@ -40250,6 +40286,7 @@ MonoBehaviour:
   normalAxis: 1
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &1327611587
 MeshRenderer:
@@ -41310,6 +41347,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1388815621
 GameObject:
@@ -42588,6 +42626,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &1450394870
 MeshRenderer:
@@ -42853,6 +42892,7 @@ MonoBehaviour:
   normalAxis: 1
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1464453920
 GameObject:
@@ -46096,6 +46136,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 0
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1585347282 stripped
 GameObject:
@@ -47061,6 +47102,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 0
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1609128934
 GameObject:
@@ -47600,7 +47642,7 @@ MonoBehaviour:
   panSpeed: 0.003
   panMaxDistance: 4
   _panCenter: {x: -2.01, y: 1.99, z: -1}
-  _panBoundsHalf: {x: 6, y: 3}
+  _panBoundsHalf: {x: 6, y: 4}
   _zoomSteps:
   - 0.2
   - 0.9
@@ -47620,7 +47662,7 @@ MonoBehaviour:
   browseHintsPanel: {fileID: 809716015}
   _navLeftLabel: {fileID: 0}
   _navRightLabel: {fileID: 0}
-  _topDownTarget: {x: -2, y: 0, z: -2}
+  _topDownTarget: {x: -0.7, y: 0, z: -1}
   _topDownHeight: 12
   _topDownOrthoSize: 8
   _topDownLerpSpeed: 6
@@ -49884,6 +49926,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &1701245796
 MeshRenderer:
@@ -50997,6 +51040,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!23 &1734822068
 MeshRenderer:
@@ -51981,6 +52025,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1769832796
 GameObject:
@@ -52552,6 +52597,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 2
 --- !u!23 &1787230443
 MeshRenderer:
@@ -52681,6 +52727,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 1
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1794186461
 GameObject:
@@ -52939,6 +52986,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 0
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!1 &1803815534
 GameObject:
@@ -64519,6 +64567,7 @@ MonoBehaviour:
   normalAxis: 0
   surfaceLayerIndex: 22
   _isFloor: 1
+  _surfaceMaterial: 0
   _effectMultiplier: 1
 --- !u!64 &2078872262
 MeshCollider:

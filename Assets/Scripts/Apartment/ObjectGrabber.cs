@@ -507,7 +507,6 @@ public class ObjectGrabber : MonoBehaviour
         if (_heldRb.linearVelocity.sqrMagnitude > activeMaxSpeed * activeMaxSpeed)
             _heldRb.linearVelocity = _heldRb.linearVelocity.normalized * activeMaxSpeed;
 
-        // Carry tilt removed — felt bad in practice
     }
 
     // ── Pick up ──────────────────────────────────────────────────────
