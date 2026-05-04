@@ -32819,3 +32819,49 @@ production/session-logs/session-log.md
 744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
 ---
 
+## Session End: 20260503_202746
+### Commits
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+---
+
+## Session End: 20260503_202756
+### Commits
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_204425
+### Commits
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_204849
+### Commits
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlacementSurface.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

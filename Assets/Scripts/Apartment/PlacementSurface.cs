@@ -17,6 +17,9 @@ public class PlacementSurface : MonoBehaviour
 
     public enum SurfaceAxis { Up, Forward }
 
+    /// <summary>Physical material of the surface — drives reaction SFX on placement.</summary>
+    public enum SurfaceMaterial { Wood, Glass, Metal, Stone, Fabric, Plastic }
+
     /// <summary>
     /// How much a placed item's effects are amplified by the surface it sits on.
     /// Applies to date affection reactions, smell accumulation, tidiness scoring,
@@ -54,12 +57,19 @@ public class PlacementSurface : MonoBehaviour
     [Tooltip("Mark as floor — trash items can be placed here.")]
     [SerializeField] private bool _isFloor;
 
+    [Header("Surface Material (Audio)")]
+    [Tooltip("What the surface is made of — drives the reaction sound on item placement.")]
+    [SerializeField] private SurfaceMaterial _surfaceMaterial = SurfaceMaterial.Wood;
+
     [Header("Effect Multiplier")]
     [Tooltip("Amplifies the impact of items placed here. Applies to date reactions, smell accumulation, tidiness scoring, Nema's gaze, and reveal-wave ordering.")]
     [SerializeField] private SurfaceEffectMultiplier _effectMultiplier = SurfaceEffectMultiplier.OneX;
 
     /// <summary>True if this surface is marked as a floor in the Inspector.</summary>
     public bool IsFloor => _isFloor;
+
+    /// <summary>What the surface is made of (for reaction SFX).</summary>
+    public SurfaceMaterial Material => _surfaceMaterial;
 
     /// <summary>Integer multiplier (1-5) applied to effects of items sitting on this surface.</summary>
     public int EffectMultiplier => (int)_effectMultiplier;

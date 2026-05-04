@@ -161,6 +161,15 @@ public class ObjectGrabber : MonoBehaviour
     [Tooltip("SFX played when placing an object on a surface.")]
     [SerializeField] private AudioClip _placeSFX;
 
+    [Header("Surface Reaction Sounds")]
+    [Tooltip("Reaction SFX per surface material. Played alongside the main place SFX.")]
+    [SerializeField] private AudioClip _surfaceWood;
+    [SerializeField] private AudioClip _surfaceGlass;
+    [SerializeField] private AudioClip _surfaceMetal;
+    [SerializeField] private AudioClip _surfaceStone;
+    [SerializeField] private AudioClip _surfaceFabric;
+    [SerializeField] private AudioClip _surfacePlastic;
+
     [Header("Tether")]
     [Tooltip("Max distance between grab target and held object before teleporting to catch up.")]
     [SerializeField] private float maxTetherDistance = 3f;
@@ -2112,6 +2121,28 @@ public class ObjectGrabber : MonoBehaviour
     {
         var clip = obj != null && obj.PlaceSFXOverride != null ? obj.PlaceSFXOverride : _placeSFX;
         AudioManager.Instance?.PlaySFX(clip);
+
+        // Surface reaction sound (layered on top of the main placement SFX)
+        if (_currentSurface != null)
+        {
+            var reaction = GetSurfaceReactionClip(_currentSurface.Material);
+            if (reaction != null)
+                AudioManager.Instance?.PlaySFX(reaction, 0.5f);
+        }
+    }
+
+    private AudioClip GetSurfaceReactionClip(PlacementSurface.SurfaceMaterial mat)
+    {
+        return mat switch
+        {
+            PlacementSurface.SurfaceMaterial.Wood    => _surfaceWood,
+            PlacementSurface.SurfaceMaterial.Glass   => _surfaceGlass,
+            PlacementSurface.SurfaceMaterial.Metal   => _surfaceMetal,
+            PlacementSurface.SurfaceMaterial.Stone   => _surfaceStone,
+            PlacementSurface.SurfaceMaterial.Fabric  => _surfaceFabric,
+            PlacementSurface.SurfaceMaterial.Plastic => _surfacePlastic,
+            _ => null
+        };
     }
 
     private void ClearHeld()
