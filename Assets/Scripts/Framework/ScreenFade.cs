@@ -119,7 +119,10 @@ public class ScreenFade : MonoBehaviour
         // Re-enable canvas and raycaster before fading out
         var canvas = _canvasGroup != null ? _canvasGroup.GetComponent<Canvas>() : null;
         if (canvas != null) canvas.enabled = true;
-        var raycaster = _canvasGroup != null ? _canvasGroup.GetComponent<UnityEngine.UI.GraphicRaycaster>() : null;
+        var raycaster = _canvasGroup != null
+            ? (_canvasGroup.GetComponent<UnityEngine.UI.GraphicRaycaster>()
+               ?? _canvasGroup.GetComponentInParent<UnityEngine.UI.GraphicRaycaster>())
+            : null;
         if (raycaster != null) raycaster.enabled = true;
         if (_activeFadeCoroutine != null) StopCoroutine(_activeFadeCoroutine);
         _activeFadeCoroutine = StartCoroutine(FadeCoroutine(0f, 1f, duration, true, fadeOutCurve));
@@ -142,7 +145,10 @@ public class ScreenFade : MonoBehaviour
         // underneath are clickable as soon as the fade starts.
         var img = _canvasGroup != null ? _canvasGroup.GetComponent<Image>() : null;
         if (img != null) img.raycastTarget = false;
-        var raycaster = _canvasGroup != null ? _canvasGroup.GetComponent<UnityEngine.UI.GraphicRaycaster>() : null;
+        var raycaster = _canvasGroup != null
+            ? (_canvasGroup.GetComponent<UnityEngine.UI.GraphicRaycaster>()
+               ?? _canvasGroup.GetComponentInParent<UnityEngine.UI.GraphicRaycaster>())
+            : null;
         if (raycaster != null) raycaster.enabled = false;
         _activeFadeCoroutine = StartCoroutine(FadeCoroutine(1f, 0f, duration, false, fadeInCurve));
         return _activeFadeCoroutine;

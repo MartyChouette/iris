@@ -280,7 +280,65 @@ public class InteractableHighlight : MonoBehaviour
     }
 
     private void OnEnable() => s_all.Add(this);
-    private void OnDisable() => s_all.Remove(this);
+    private void OnDisable()
+    {
+        s_all.Remove(this);
+        // Clear any MPB color pulse when disabled
+        if (_fallbackPulsing && _renderers != null)
+        {
+            for (int i = 0; i < _renderers.Length; i++)
+                if (_renderers[i] != null) _renderers[i].SetPropertyBlock(null);
+            _fallbackPulsing = false;
+        }
+    }
+
+    // Fallback color pulse — used when custom highlight shaders are missing (builds)
+    private bool _fallbackPulsing;
+    private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
+    private static readonly int ColorID = Shader.PropertyToID("_Color");
+
+    private void Update()
+    {
+        bool anyActive = _highlighted || _gazeActive || _displayActive
+            || _prepLikedActive || _prepDislikedActive;
+
+        if (!anyActive)
+        {
+            if (_fallbackPulsing)
+            {
+                _fallbackPulsing = false;
+                if (_renderers != null)
+                    for (int i = 0; i < _renderers.Length; i++)
+                        if (_renderers[i] != null) _renderers[i].SetPropertyBlock(null);
+            }
+            return;
+        }
+
+        // Only use fallback pulse if the overlay materials are missing (shader not in build)
+        bool overlayWorking = s_sharedRimMat != null || s_sharedGazeMat != null || s_sharedDisplayMat != null;
+        if (overlayWorking) return;
+
+        // Pulse the base material color directly via MPB
+        _fallbackPulsing = true;
+        Color pulseColor = _displayActive ? DisplayColor
+            : _gazeActive ? GazeColor
+            : _prepLikedActive ? PrepLikedColor
+            : _prepDislikedActive ? PrepDislikedColor
+            : HoverColor;
+
+        float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 4f);
+        Color tint = Color.Lerp(Color.white, pulseColor, pulse * 0.6f);
+
+        var mpb = new MaterialPropertyBlock();
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            if (_renderers[i] == null) continue;
+            _renderers[i].GetPropertyBlock(mpb);
+            mpb.SetColor(BaseColorID, tint);
+            mpb.SetColor(ColorID, tint);
+            _renderers[i].SetPropertyBlock(mpb);
+        }
+    }
 
     public void SetHighlighted(bool on)
     {
