@@ -105,6 +105,9 @@ TestResults*.xml
 # Windows reserved name junk file
 nul
 
+# Docs (generated/internal — not shipped)
+/docs/
+
 # Build artifacts & reports
 build_log*.txt
 builds.zip

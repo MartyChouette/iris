@@ -32889,3 +32889,89 @@ fc77f38 softer carry spring for toylike held-item lag feel
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260503_212217
+### Commits
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+---
+
+## Session End: 20260503_212236
+### Commits
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_214513
+### Commits
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_215020
+### Commits
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_215113
+### Commits
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_222220
+### Commits
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+### Uncommitted Changes
+.gitignore
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+

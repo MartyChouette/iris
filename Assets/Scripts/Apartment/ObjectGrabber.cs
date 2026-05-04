@@ -507,18 +507,19 @@ public class ObjectGrabber : MonoBehaviour
         if (_heldRb.linearVelocity.sqrMagnitude > activeMaxSpeed * activeMaxSpeed)
             _heldRb.linearVelocity = _heldRb.linearVelocity.normalized * activeMaxSpeed;
 
-        // Carry tilt: gently lean item toward movement direction
-        if (!_isOnWall && _heldRb.linearVelocity.sqrMagnitude > 0.01f)
+        // Carry tilt: subtle X/Z lean based on movement, preserving the item's Y rotation
+        if (!_isOnWall && pickupT <= 0f)
         {
             Vector3 vel = _heldRb.linearVelocity;
-            float tiltAngle = Mathf.Clamp(vel.magnitude * 2f, 0f, 8f);
-            Vector3 tiltAxis = Vector3.Cross(Vector3.up, vel.normalized);
-            if (tiltAxis.sqrMagnitude > 0.001f)
-            {
-                Quaternion tiltRot = Quaternion.AngleAxis(tiltAngle, tiltAxis.normalized)
-                    * Quaternion.Euler(0f, _held.transform.eulerAngles.y, 0f);
-                _heldRb.MoveRotation(Quaternion.Slerp(_heldRb.rotation, tiltRot, Time.fixedDeltaTime * 8f));
-            }
+            float speed = new Vector2(vel.x, vel.z).magnitude;
+            // Tilt proportional to horizontal speed, max 3 degrees
+            float tiltX = Mathf.Clamp(-vel.z * 1.5f, -3f, 3f);
+            float tiltZ = Mathf.Clamp(vel.x * 1.5f, -3f, 3f);
+            // Blend toward zero when not moving
+            if (speed < 0.1f) { tiltX = 0f; tiltZ = 0f; }
+            float currentY = _held.transform.eulerAngles.y;
+            Quaternion targetRot = Quaternion.Euler(tiltX, currentY, tiltZ);
+            _heldRb.MoveRotation(Quaternion.Slerp(_heldRb.rotation, targetRot, Time.fixedDeltaTime * 4f));
         }
     }
 
