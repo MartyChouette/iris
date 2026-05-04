@@ -1270,41 +1270,23 @@ public class PlaceableObject : MonoBehaviour
     {
         if (onTop)
         {
-            // Already on top — don't re-save shaders (that would overwrite the
-            // originals with the already-swapped HeldOnTop shader).
             if (_renderOnTopStates.Count > 0) return;
 
-            if (!s_heldOnTopShaderCached)
-            {
-                s_heldOnTopShaderCached = true;
-                s_heldOnTopShader = Shader.Find("Iris/HeldOnTop");
-                if (s_heldOnTopShader == null)
-                    Debug.LogWarning("[PlaceableObject] Iris/HeldOnTop shader not found — held items will not render on top.");
-            }
-            if (s_heldOnTopShader == null) return;
-
-            // Walk EVERY renderer in the hierarchy (multi-mesh items: shoes,
-            // figurines, etc.) and swap each material's shader to HeldOnTop so
-            // it's drawn after every other opaque renderer in the scene. Skip
-            // children that have their own PlaceableObject — they handle
-            // themselves recursively below.
+            // Walk every renderer and bump render queue on ALL material slots.
+            // No shader swap — materials keep their original look, just draw last.
             var renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
             for (int i = 0; i < renderers.Length; i++)
             {
                 var r = renderers[i];
                 if (r == null) continue;
 
-                // A child PlaceableObject will call SetRenderOnTop on itself.
                 var childPO = r.GetComponentInParent<PlaceableObject>();
                 if (childPO != null && childPO != this) continue;
 
-                // Skip stink-line particle systems and silhouette overlays —
-                // they manage their own render order.
                 if (r.gameObject.name == "StinkLines") continue;
                 if (r.gameObject.name == "Silhouette") continue;
 
-                // Instance ALL material slots so multi-material meshes are preserved.
-                var mats = r.materials; // implicitly instances all slots
+                var mats = r.materials;
                 for (int m = 0; m < mats.Length; m++)
                 {
                     if (mats[m] == null) continue;
@@ -1315,7 +1297,6 @@ public class PlaceableObject : MonoBehaviour
                         savedShader = mats[m].shader,
                         savedQueue = mats[m].renderQueue,
                     });
-                    mats[m].shader = s_heldOnTopShader;
                     mats[m].renderQueue = 4000;
                 }
                 r.materials = mats;
@@ -1323,22 +1304,10 @@ public class PlaceableObject : MonoBehaviour
         }
         else
         {
-            // Restore original shader + queue on each tracked material.
-            // If the item was un-glitched while held (e.g. paired via SnapPair),
-            // use the per-slot original shaders instead of the saved glitch shader.
             for (int i = 0; i < _renderOnTopStates.Count; i++)
             {
                 var s = _renderOnTopStates[i];
                 if (s.instanceMat == null || s.renderer == null) continue;
-
-                Shader restore = s.savedShader;
-                // If un-glitched while held, the saved shader is glitch — use the
-                // per-slot original instead.
-                if (!_isGlitched && _originalShaders != null && i < _originalShaders.Length
-                    && _originalShaders[i] != null)
-                    restore = _originalShaders[i];
-
-                s.instanceMat.shader = restore ?? s.instanceMat.shader;
                 s.instanceMat.renderQueue = s.savedQueue;
             }
             _renderOnTopStates.Clear();

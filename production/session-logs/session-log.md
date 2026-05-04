@@ -33289,3 +33289,9 @@ production/session-logs/session-log.md
 e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
 ---
 
+## Session End: 20260504_182347
+### Commits
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+---
+
