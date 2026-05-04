@@ -32794,3 +32794,20 @@ Assets/Scripts/UI/PickupDescriptionHUD.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260503_200609
+### Commits
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+---
+
+## Session End: 20260503_201721
+### Commits
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scripts/Bookcase/DrawerController.cs
+production/session-logs/session-log.md
+---
+

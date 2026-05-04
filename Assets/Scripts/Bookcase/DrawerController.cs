@@ -231,26 +231,13 @@ public class DrawerController : MonoBehaviour
     /// </summary>
     private IEnumerator HingeRoutine(bool opening)
     {
-        var col = GetComponent<Collider>();
-        float halfHeight = col != null ? col.bounds.extents.y : 0.15f;
-
-        // Pivot direction: bottom edge (-up) or top edge (+up)
-        float pivotSign = _hingeAtTop ? 1f : -1f;
-
-        // Compute pivot offset from the CLOSED orientation so it's consistent
-        Quaternion closedWorldRot = transform.parent != null
-            ? transform.parent.rotation * _closedRotation
-            : _closedRotation;
-        Vector3 pivotOffset = (closedWorldRot * Vector3.up) * (pivotSign * halfHeight);
-
+        // Simple local rotation — parent the door mesh under an empty at the hinge edge.
+        // This component rotates around its own local origin, so position is untouched.
         float openAngle = Mathf.Abs(slideDistance) > 0.01f ? slideDistance : 90f;
         Quaternion openRotation = _closedRotation * Quaternion.AngleAxis(openAngle, Vector3.right);
 
         Quaternion startRot = transform.localRotation;
         Quaternion endRot = opening ? openRotation : _closedRotation;
-
-        // Anchor = world position of the hinge edge when door is closed
-        Vector3 closedPivotWorld = transform.parent.TransformPoint(_closedPosition) + pivotOffset;
 
         float elapsed = 0f;
 
@@ -258,27 +245,16 @@ public class DrawerController : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = Smoothstep(elapsed / slideDuration);
-
             transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
-
-            // Keep hinge edge pinned: recalculate position from pivot
-            Vector3 currentPivotOffset = transform.rotation * (Vector3.up * (pivotSign * halfHeight));
-            transform.position = closedPivotWorld - currentPivotOffset;
-
             yield return null;
         }
 
-        // Force exact closed pose to prevent any floating-point drift
+        // Snap to exact target to prevent drift
         transform.localRotation = endRot;
         if (!opening)
         {
             transform.localPosition = _closedPosition;
             transform.localRotation = _closedRotation;
-        }
-        else
-        {
-            Vector3 finalPivotOffset = transform.rotation * (-(Vector3.up) * halfHeight);
-            transform.position = closedPivotWorld - finalPivotOffset;
         }
     }
 
