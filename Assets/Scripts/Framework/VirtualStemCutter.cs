@@ -186,6 +186,10 @@ public class VirtualStemCutter : MonoBehaviour
         // ----- 9. Release leaves on the falling side of the cut -----
         ReleaseLeavesBelowCut(stem, worldPoint, worldNormal);
 
+        // ----- 10. Juice: camera nudge + vignette pulse -----
+        CameraNudge.Nudge(0.4f);
+        VignettePulse.Pulse();
+
         if (debugLogs)
         {
             float angle = stem.GetCurrentCutAngleDeg(Vector3.up);

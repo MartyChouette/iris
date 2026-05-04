@@ -506,6 +506,20 @@ public class ObjectGrabber : MonoBehaviour
         // Speed cap
         if (_heldRb.linearVelocity.sqrMagnitude > activeMaxSpeed * activeMaxSpeed)
             _heldRb.linearVelocity = _heldRb.linearVelocity.normalized * activeMaxSpeed;
+
+        // Carry tilt: gently lean item toward movement direction
+        if (!_isOnWall && _heldRb.linearVelocity.sqrMagnitude > 0.01f)
+        {
+            Vector3 vel = _heldRb.linearVelocity;
+            float tiltAngle = Mathf.Clamp(vel.magnitude * 2f, 0f, 8f);
+            Vector3 tiltAxis = Vector3.Cross(Vector3.up, vel.normalized);
+            if (tiltAxis.sqrMagnitude > 0.001f)
+            {
+                Quaternion tiltRot = Quaternion.AngleAxis(tiltAngle, tiltAxis.normalized)
+                    * Quaternion.Euler(0f, _held.transform.eulerAngles.y, 0f);
+                _heldRb.MoveRotation(Quaternion.Slerp(_heldRb.rotation, tiltRot, Time.fixedDeltaTime * 8f));
+            }
+        }
     }
 
     // ── Pick up ──────────────────────────────────────────────────────
@@ -2129,6 +2143,9 @@ public class ObjectGrabber : MonoBehaviour
             if (reaction != null)
                 AudioManager.Instance?.PlaySFX(reaction, 0.5f);
         }
+
+        // Camera nudge — small positional shake for juicy placement feedback
+        CameraNudge.Nudge(0.3f);
     }
 
     private AudioClip GetSurfaceReactionClip(PlacementSurface.SurfaceMaterial mat)

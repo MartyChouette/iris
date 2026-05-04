@@ -75,7 +75,7 @@ public class ApartmentManager : MonoBehaviour
     [SerializeField] private int _defaultZoomStep = 0;
 
     [Tooltip("Lerp speed for smooth zoom transitions.")]
-    [SerializeField] private float _zoomLerpSpeed = 8f;
+    [SerializeField] private float _zoomLerpSpeed = 5f;
 
     [Header("World Bounds")]
     [Tooltip("Objects outside this box are recovered to the nearest surface.")]
@@ -1227,8 +1227,9 @@ public class ApartmentManager : MonoBehaviour
         // Top-down is driven entirely by LateUpdate — skip virtual camera writes
         if (_topDownActive) return;
 
-        // Write final position = base + parallax + pan
-        t.position = _basePosition + _currentParallaxOffset + _panOffset;
+        // Write final position = base + parallax + pan + camera nudge (juicy feedback)
+        t.position = _basePosition + _currentParallaxOffset + _panOffset
+            + CameraNudge.GetAndDecayOffset(Time.deltaTime);
         t.rotation = _baseRotation * _currentParallaxRotation;
 
         // Write lens — preset or area default, then layer zoom on top

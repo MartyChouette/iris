@@ -296,6 +296,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip, float volume = 1f, string caption = null)
     {
         if (clip == null || !IsValid(sfxSource)) return;
+        sfxSource.pitch = Random.Range(0.95f, 1.05f);
         sfxSource.PlayOneShot(clip, EffectiveSFXVol(volume));
         if (debugLogs) Debug.Log("[AudioManager] SFX: " + clip.name, this);
         ShowCaption(caption);
@@ -305,6 +306,7 @@ public class AudioManager : MonoBehaviour
     public void PlayEnvironment(AudioClip clip, float volume = 1f, string caption = null)
     {
         if (clip == null || !IsValid(environmentSource)) return;
+        environmentSource.pitch = Random.Range(0.95f, 1.05f);
         environmentSource.PlayOneShot(clip, EffectiveSFXVol(volume));
         ShowCaption(caption);
     }
@@ -312,6 +314,7 @@ public class AudioManager : MonoBehaviour
     public void PlayUI(AudioClip clip, float volume = 1f, string caption = null)
     {
         if (clip == null || !IsValid(uiSource)) return;
+        uiSource.pitch = Random.Range(0.95f, 1.05f);
         uiSource.PlayOneShot(clip, EffectiveUIVol(volume));
         ShowCaption(caption);
     }
@@ -558,7 +561,10 @@ public class AudioManager : MonoBehaviour
 
         float vol = EffectiveSFXVol(volume);
         if (first != null)
+        {
+            sfxSource.pitch = Random.Range(0.95f, 1.05f);
             sfxSource.PlayOneShot(first, vol);
+        }
 
         if (delay > 0f)
             yield return new WaitForSeconds(delay);
@@ -567,6 +573,9 @@ public class AudioManager : MonoBehaviour
             yield break;
 
         if (second != null)
+        {
+            sfxSource.pitch = Random.Range(0.95f, 1.05f);
             sfxSource.PlayOneShot(second, vol);
+        }
     }
 }

@@ -32865,3 +32865,27 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260503_210254
+### Commits
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+---
+
+## Session End: 20260503_211710
+### Commits
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+

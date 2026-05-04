@@ -184,6 +184,7 @@ public class DrawerController : MonoBehaviour
         if (opening)
         {
             CurrentState = State.Open;
+            CameraNudge.Nudge(0.15f); // subtle nudge when drawer thumps open
             SmokePoof.Spawn(transform.position, 0.08f);
             if (contentsRoot != null)
                 contentsRoot.SetActive(true);
