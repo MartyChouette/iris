@@ -33295,3 +33295,19 @@ d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save al
 e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
 ---
 
+## Session End: 20260504_184953
+### Commits
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+---
+
+## Session End: 20260504_185012
+### Commits
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+

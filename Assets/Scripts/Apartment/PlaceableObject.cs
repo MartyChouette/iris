@@ -1260,6 +1260,7 @@ public class PlaceableObject : MonoBehaviour
         public Material instanceMat;
         public Shader savedShader;
         public int savedQueue;
+        public int savedZTest;
     }
     private readonly List<RenderOnTopState> _renderOnTopStates = new();
 
@@ -1290,14 +1291,18 @@ public class PlaceableObject : MonoBehaviour
                 for (int m = 0; m < mats.Length; m++)
                 {
                     if (mats[m] == null) continue;
+                    int savedZTest = mats[m].HasProperty("_ZTest")
+                        ? mats[m].GetInt("_ZTest") : 4; // 4 = LessEqual (default)
                     _renderOnTopStates.Add(new RenderOnTopState
                     {
                         renderer = r,
                         instanceMat = mats[m],
                         savedShader = mats[m].shader,
                         savedQueue = mats[m].renderQueue,
+                        savedZTest = savedZTest,
                     });
                     mats[m].renderQueue = 4000;
+                    mats[m].SetInt("_ZTest", 8); // 8 = Always
                 }
                 r.materials = mats;
             }
@@ -1309,6 +1314,7 @@ public class PlaceableObject : MonoBehaviour
                 var s = _renderOnTopStates[i];
                 if (s.instanceMat == null || s.renderer == null) continue;
                 s.instanceMat.renderQueue = s.savedQueue;
+                s.instanceMat.SetInt("_ZTest", s.savedZTest);
             }
             _renderOnTopStates.Clear();
         }
