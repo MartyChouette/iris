@@ -222,6 +222,7 @@ public class ObjectGrabber : MonoBehaviour
 
     // Pickup feel: plucky spring on pickup, then ramp to stiff carry
     private float _pickupTimer;
+    private Coroutine _squishCoroutine;
     private const float PickupFeelDuration = 0.25f; // seconds of plucky feel after pickup
 
     // Surface tracking
@@ -956,6 +957,10 @@ public class ObjectGrabber : MonoBehaviour
         // Show pickup description
         if (PickupDescriptionHUD.Instance != null)
             PickupDescriptionHUD.Instance.Show(placeable.ItemDescription);
+
+        // Pickup squish-pop feel
+        if (_squishCoroutine != null) StopCoroutine(_squishCoroutine);
+        _squishCoroutine = StartCoroutine(SquishPop(placeable.transform, 0.85f, 1.08f));
     }
 
     // ── Place ────────────────────────────────────────────────────────
@@ -1210,6 +1215,7 @@ public class ObjectGrabber : MonoBehaviour
                         zone.RegisterDeposit(_held);
                         OnObjectPlaced?.Invoke(_held);
                         PlayPlaceSFX(_held);
+                        _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
                         ClearHeld();
                         return;
                     }
@@ -1418,6 +1424,10 @@ public class ObjectGrabber : MonoBehaviour
                 }
             }
         }
+
+        // Settle bounce feel on the placed item
+        if (_held != null)
+            _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
 
         ClearHeld();
     }
@@ -2492,6 +2502,10 @@ public class ObjectGrabber : MonoBehaviour
             _wallRotation += angle;
         else
             _held.transform.RotateAround(_held.RotatePivotWorld, axis, angle);
+
+        // Rotate tick feel
+        if (_squishCoroutine != null) StopCoroutine(_squishCoroutine);
+        _squishCoroutine = StartCoroutine(SquishPop(_held.transform, 1.06f, 1.0f, 0.08f));
     }
 
     // ── Helper: half-extent along a normal ────────────────────────────
@@ -2741,6 +2755,38 @@ public class ObjectGrabber : MonoBehaviour
         if (cfg != null)
             return valid ? cfg.shadowValidColor : cfg.shadowInvalidColor;
         return valid ? new Color(0.25f, 0.9f, 0.3f, 0.75f) : new Color(0.95f, 0.18f, 0.2f, 0.75f);
+    }
+
+    // ── Squish-pop feel ──────────────────────────────────────────
+    private System.Collections.IEnumerator SquishPop(Transform target, float squish, float pop, float duration = 0.15f)
+    {
+        if (target == null) yield break;
+        Vector3 baseScale = target.localScale;
+        float seg = duration / 3f;
+
+        // Squish
+        for (float t = 0f; t < seg; t += Time.deltaTime)
+        {
+            if (target == null) yield break;
+            target.localScale = Vector3.Lerp(baseScale, baseScale * squish, t / seg);
+            yield return null;
+        }
+        // Pop
+        for (float t = 0f; t < seg; t += Time.deltaTime)
+        {
+            if (target == null) yield break;
+            target.localScale = Vector3.Lerp(baseScale * squish, baseScale * pop, t / seg);
+            yield return null;
+        }
+        // Settle
+        for (float t = 0f; t < seg; t += Time.deltaTime)
+        {
+            if (target == null) yield break;
+            target.localScale = Vector3.Lerp(baseScale * pop, baseScale, t / seg);
+            yield return null;
+        }
+        if (target != null) target.localScale = baseScale;
+        _squishCoroutine = null;
     }
 
     // ── Ghost preview ──────────────────────────────────────────────

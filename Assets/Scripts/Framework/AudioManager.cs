@@ -36,6 +36,13 @@ public class AudioManager : MonoBehaviour
     public AudioSource environmentSource;
     public AudioSource uiSource;
 
+    [Header("Crossfade")]
+    [SerializeField] private float _crossfadeDuration = 0.5f;
+    private AudioSource _musicSource2;
+    private bool _musicSourceAActive = true; // true = musicSource is active, false = _musicSource2
+    private Coroutine _crossfadeCoroutine;
+    private float _musicTargetVolume = 1f;
+
     [Header("Debug")]
     public bool debugLogs = false;
 
@@ -78,6 +85,15 @@ public class AudioManager : MonoBehaviour
         EnsureSource(ref ambienceSource, "Audio_Ambience");
         EnsureSource(ref weatherSource, "Audio_Weather");
         EnsureSource(ref musicSource, "Audio_Music");
+        // Create second music source for crossfades
+        if (_musicSource2 == null)
+        {
+            var go2 = new GameObject("Audio_Music2");
+            go2.transform.SetParent(transform);
+            _musicSource2 = go2.AddComponent<AudioSource>();
+            _musicSource2.playOnAwake = false;
+            _musicSource2.spatialBlend = 0f;
+        }
         EnsureSource(ref environmentSource, "Audio_Environment");
         EnsureSource(ref uiSource, "Audio_UI");
 
@@ -341,11 +357,52 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(AudioClip clip, float volume = 1f, bool loop = true)
     {
         if (clip == null || !IsValid(musicSource)) return;
-        _preDuckVolume = -1f; // clear duck state on new track
-        musicSource.clip = clip;
-        musicSource.volume = volume * _masterVol * _musicVol;
-        musicSource.loop = loop;
-        musicSource.Play();
+        _preDuckVolume = -1f;
+        _musicTargetVolume = volume;
+
+        AudioSource oldSource = _musicSourceAActive ? musicSource : _musicSource2;
+        AudioSource newSource = _musicSourceAActive ? _musicSource2 : musicSource;
+        _musicSourceAActive = !_musicSourceAActive;
+
+        // If nothing is playing, just start directly
+        if (!oldSource.isPlaying || _crossfadeDuration <= 0f)
+        {
+            oldSource.Stop();
+            newSource.clip = clip;
+            newSource.volume = volume * _masterVol * _musicVol;
+            newSource.loop = loop;
+            newSource.Play();
+            return;
+        }
+
+        // Crossfade: start new, fade both
+        newSource.clip = clip;
+        newSource.volume = 0f;
+        newSource.loop = loop;
+        newSource.Play();
+
+        if (_crossfadeCoroutine != null) StopCoroutine(_crossfadeCoroutine);
+        _crossfadeCoroutine = StartCoroutine(CrossfadeMusic(oldSource, newSource, volume));
+    }
+
+    private IEnumerator CrossfadeMusic(AudioSource fadeOut, AudioSource fadeIn, float targetVol)
+    {
+        float elapsed = 0f;
+        float startVol = fadeOut.volume;
+        float endVol = targetVol * _masterVol * _musicVol;
+
+        while (elapsed < _crossfadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / _crossfadeDuration);
+            if (IsValid(fadeOut)) fadeOut.volume = Mathf.Lerp(startVol, 0f, t);
+            if (IsValid(fadeIn)) fadeIn.volume = Mathf.Lerp(0f, endVol, t);
+            yield return null;
+        }
+
+        if (IsValid(fadeOut)) { fadeOut.Stop(); fadeOut.volume = 0f; }
+        if (IsValid(fadeIn)) fadeIn.volume = endVol;
+        _crossfadeCoroutine = null;
     }
 
     private Coroutine _musicFadeCoroutine;
@@ -355,15 +412,35 @@ public class AudioManager : MonoBehaviour
     {
         if (IsValid(musicSource) && musicSource.isPlaying)
             musicSource.Pause();
+        if (IsValid(_musicSource2) && _musicSource2.isPlaying)
+            _musicSource2.Pause();
     }
 
     public void ResumeMusic()
     {
-        if (IsValid(musicSource) && !musicSource.isPlaying && musicSource.clip != null)
-            musicSource.UnPause();
+        AudioSource active = _musicSourceAActive ? musicSource : _musicSource2;
+        if (IsValid(active) && !active.isPlaying && active.clip != null)
+        {
+            float targetVol = _musicTargetVolume * _masterVol * _musicVol;
+            active.volume = 0f;
+            active.UnPause();
+            StartCoroutine(FadeMusicIn(active, targetVol, 0.2f));
+        }
     }
 
-    public void StopMusic(float fadeTime = 0f)
+    private IEnumerator FadeMusicIn(AudioSource source, float targetVol, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration && IsValid(source))
+        {
+            elapsed += Time.unscaledDeltaTime;
+            source.volume = Mathf.Lerp(0f, targetVol, elapsed / duration);
+            yield return null;
+        }
+        if (IsValid(source)) source.volume = targetVol;
+    }
+
+    public void StopMusic(float fadeTime = 0.3f)
     {
         if (!IsValid(musicSource)) return;
         _preDuckVolume = -1f;

@@ -28,6 +28,9 @@ public class DrawerController : MonoBehaviour
     [Tooltip("For slide axes: distance the drawer slides. For HingeDown: open angle in degrees (default 90).")]
     [SerializeField] private float slideDistance = 0.3f;
 
+    [Tooltip("For HingeDown: pivot at top edge instead of bottom (overhead cabinets).")]
+    [SerializeField] private bool _hingeAtTop;
+
     [Tooltip("Time to open/close in seconds.")]
     [SerializeField] private float slideDuration = 0.3f;
 
@@ -228,15 +231,17 @@ public class DrawerController : MonoBehaviour
     /// </summary>
     private IEnumerator HingeRoutine(bool opening)
     {
-        // Pivot at bottom edge: use local-space collider bounds so height is stable
         var col = GetComponent<Collider>();
         float halfHeight = col != null ? col.bounds.extents.y : 0.15f;
+
+        // Pivot direction: bottom edge (-up) or top edge (+up)
+        float pivotSign = _hingeAtTop ? 1f : -1f;
 
         // Compute pivot offset from the CLOSED orientation so it's consistent
         Quaternion closedWorldRot = transform.parent != null
             ? transform.parent.rotation * _closedRotation
             : _closedRotation;
-        Vector3 pivotOffset = -(closedWorldRot * Vector3.up) * halfHeight;
+        Vector3 pivotOffset = (closedWorldRot * Vector3.up) * (pivotSign * halfHeight);
 
         float openAngle = Mathf.Abs(slideDistance) > 0.01f ? slideDistance : 90f;
         Quaternion openRotation = _closedRotation * Quaternion.AngleAxis(openAngle, Vector3.right);
@@ -244,7 +249,7 @@ public class DrawerController : MonoBehaviour
         Quaternion startRot = transform.localRotation;
         Quaternion endRot = opening ? openRotation : _closedRotation;
 
-        // Anchor = world position of the bottom edge when door is closed
+        // Anchor = world position of the hinge edge when door is closed
         Vector3 closedPivotWorld = transform.parent.TransformPoint(_closedPosition) + pivotOffset;
 
         float elapsed = 0f;
@@ -256,8 +261,8 @@ public class DrawerController : MonoBehaviour
 
             transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
 
-            // Keep bottom edge pinned: recalculate position from pivot
-            Vector3 currentPivotOffset = transform.rotation * (-(Vector3.up) * halfHeight);
+            // Keep hinge edge pinned: recalculate position from pivot
+            Vector3 currentPivotOffset = transform.rotation * (Vector3.up * (pivotSign * halfHeight));
             transform.position = closedPivotWorld - currentPivotOffset;
 
             yield return null;

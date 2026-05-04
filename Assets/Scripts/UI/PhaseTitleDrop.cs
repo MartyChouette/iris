@@ -173,8 +173,20 @@ public class PhaseTitleDrop : MonoBehaviour
         _group.alpha = 1f;
         Shader.SetGlobalFloat(TiltAmountID, _tiltShiftStrength);
 
-        // Hold
-        yield return new WaitForSecondsRealtime(_holdDuration);
+        // Hold with slow upward drift
+        var titleRT = _titleText.GetComponent<RectTransform>();
+        Vector2 holdStartPos = titleRT != null ? titleRT.anchoredPosition : Vector2.zero;
+        elapsed = 0f;
+        while (elapsed < _holdDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            if (titleRT != null)
+                titleRT.anchoredPosition = holdStartPos + Vector2.up * (elapsed * 5f);
+            yield return null;
+        }
+        // Reset position before fade-out
+        if (titleRT != null)
+            titleRT.anchoredPosition = holdStartPos;
 
         // Fade out (title + tilt-shift together)
         elapsed = 0f;

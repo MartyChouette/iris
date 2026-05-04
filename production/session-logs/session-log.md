@@ -32777,3 +32777,20 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260503_195342
+### Commits
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+---
+
+## Session End: 20260503_195955
+### Commits
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+744ab0a gunpla moveable, record scale fix, book color fix, shoe rack free placement
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/UI/PhaseTitleDrop.cs
+Assets/Scripts/UI/PickupDescriptionHUD.cs
+production/session-logs/session-log.md
+---
+

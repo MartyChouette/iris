@@ -22,6 +22,14 @@ public class PickupDescriptionHUD : MonoBehaviour
     private bool _isFadingOut;
     private float _fadeTimer;
 
+    // Slide-up entrance
+    private const float SlideInDuration = 0.2f;
+    private const float SlideInOffset = 30f;
+    private RectTransform _panelRect;
+    private Vector2 _originalAnchoredPos;
+    private bool _isSlidingIn;
+    private float _slideTimer;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -67,6 +75,10 @@ public class PickupDescriptionHUD : MonoBehaviour
                 hlg.childForceExpandHeight = false;
             }
 
+            _panelRect = _panelRoot.GetComponent<RectTransform>();
+            if (_panelRect != null)
+                _originalAnchoredPos = _panelRect.anchoredPosition;
+
             _panelRoot.SetActive(false);
         }
     }
@@ -94,6 +106,20 @@ public class PickupDescriptionHUD : MonoBehaviour
             return;
         }
 
+        // Slide-up + fade-in entrance
+        if (_isSlidingIn)
+        {
+            _slideTimer += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(_slideTimer / SlideInDuration);
+            float ease = t * (2f - t); // ease-out
+            if (_canvasGroup != null) _canvasGroup.alpha = ease;
+            if (_panelRect != null)
+                _panelRect.anchoredPosition = Vector2.Lerp(
+                    _originalAnchoredPos + Vector2.down * SlideInOffset,
+                    _originalAnchoredPos, ease);
+            if (t >= 1f) _isSlidingIn = false;
+        }
+
         _hideTimer -= Time.unscaledDeltaTime;
         if (_hideTimer <= 0f)
             Hide();
@@ -106,7 +132,14 @@ public class PickupDescriptionHUD : MonoBehaviour
         _descriptionText.text = text;
         _panelRoot.SetActive(true);
         _isFadingOut = false;
-        if (_canvasGroup != null) _canvasGroup.alpha = 1f;
+
+        // Start slide-up entrance
+        if (_canvasGroup != null) _canvasGroup.alpha = 0f;
+        if (_panelRect != null)
+            _panelRect.anchoredPosition = _originalAnchoredPos + Vector2.down * SlideInOffset;
+        _isSlidingIn = true;
+        _slideTimer = 0f;
+
         _hideTimer = AutoHideDuration;
     }
 

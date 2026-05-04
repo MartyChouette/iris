@@ -56,6 +56,12 @@ public class GlobalCursorManager : MonoBehaviour
 
     private CursorType _desiredType = CursorType.Default;   // what raycast wants
     private CursorType _displayedType = CursorType.Default;  // what's currently shown
+
+    [Header("Context Tick")]
+    [Tooltip("SFX played when cursor changes from default to a context type.")]
+    [SerializeField] private AudioClip _contextTickSFX;
+    [SerializeField] private float _contextTickVolume = 0.15f;
+    private float _contextTickCooldown;
     private float _currentAlpha;         // 0 = invisible, 1 = full
     private float _targetAlpha;
     private float _hoverTimer;
@@ -343,6 +349,8 @@ public class GlobalCursorManager : MonoBehaviour
 
     private void Update()
     {
+        if (_contextTickCooldown > 0f) _contextTickCooldown -= Time.unscaledDeltaTime;
+
         // Re-fetch Camera.main periodically (every 0.5s) or when null
         _cameraRefetchTimer -= Time.unscaledDeltaTime;
         if (_cachedCamera == null || _cameraRefetchTimer <= 0f)
@@ -554,8 +562,17 @@ public class GlobalCursorManager : MonoBehaviour
         // Same type as last frame — nothing to do
         if (type == _displayedType) return;
 
+        // Audio tick when entering a context cursor from default
+        CursorType prev = _displayedType;
         _displayedType = type;
         _currentAlpha = 1f;
+
+        if (prev == CursorType.Default && type != CursorType.Default
+            && _contextTickSFX != null && _contextTickCooldown <= 0f)
+        {
+            AudioManager.Instance?.PlaySFX(_contextTickSFX, _contextTickVolume);
+            _contextTickCooldown = 0.15f;
+        }
 
         if (type == CursorType.Default)
         {
