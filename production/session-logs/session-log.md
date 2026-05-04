@@ -32975,3 +32975,77 @@ Assets/Scripts/Apartment/ObjectGrabber.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260503_222923
+### Commits
+60ce11d v0.5: carry tilt fix, gitignore docs, juice pass complete
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+---
+
+## Session End: 20260503_223253
+### Commits
+e8a466f bump GameVersion to v0.5.0
+60ce11d v0.5: carry tilt fix, gitignore docs, juice pass complete
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_223608
+### Commits
+e8a466f bump GameVersion to v0.5.0
+60ce11d v0.5: carry tilt fix, gitignore docs, juice pass complete
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_223657
+### Commits
+e8a466f bump GameVersion to v0.5.0
+60ce11d v0.5: carry tilt fix, gitignore docs, juice pass complete
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260503_223950
+### Commits
+e8a466f bump GameVersion to v0.5.0
+60ce11d v0.5: carry tilt fix, gitignore docs, juice pass complete
+bce4d1b camera nudge, vignette pulse, carry tilt, SFX pitch variation, zoom easing
+fc77f38 softer carry spring for toylike held-item lag feel
+925b7d3 surface reaction sounds: layered SFX per surface material type
+1ed408f settle delay, cursor cache, smoke poofs, dust motes on heavy placement
+5e3d8ed simplify hinge routine to pure local rotation (parent-pivot approach)
+3e20b09 juice pass: squish-pop, UI animations, music crossfade, cursor tick, hinge fix
+2669886 polish pass: UI sizing, highlights, stains, shaders, drawer fix, menu click fix
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

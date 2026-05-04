@@ -507,20 +507,7 @@ public class ObjectGrabber : MonoBehaviour
         if (_heldRb.linearVelocity.sqrMagnitude > activeMaxSpeed * activeMaxSpeed)
             _heldRb.linearVelocity = _heldRb.linearVelocity.normalized * activeMaxSpeed;
 
-        // Carry tilt: subtle X/Z lean based on movement, preserving the item's Y rotation
-        if (!_isOnWall && pickupT <= 0f)
-        {
-            Vector3 vel = _heldRb.linearVelocity;
-            float speed = new Vector2(vel.x, vel.z).magnitude;
-            // Tilt proportional to horizontal speed, max 3 degrees
-            float tiltX = Mathf.Clamp(-vel.z * 1.5f, -3f, 3f);
-            float tiltZ = Mathf.Clamp(vel.x * 1.5f, -3f, 3f);
-            // Blend toward zero when not moving
-            if (speed < 0.1f) { tiltX = 0f; tiltZ = 0f; }
-            float currentY = _held.transform.eulerAngles.y;
-            Quaternion targetRot = Quaternion.Euler(tiltX, currentY, tiltZ);
-            _heldRb.MoveRotation(Quaternion.Slerp(_heldRb.rotation, targetRot, Time.fixedDeltaTime * 4f));
-        }
+        // Carry tilt removed — felt bad in practice
     }
 
     // ── Pick up ──────────────────────────────────────────────────────
