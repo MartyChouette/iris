@@ -483,11 +483,11 @@ public class ObjectGrabber : MonoBehaviour
         GetActiveGrabParams(out float presetSpring, out float presetDamper,
             out float presetAccel, out float presetSpeed);
 
-        // Carry params: stiff, direct follow
-        const float carrySpring = 400f;
-        const float carryDamper = 35f;
-        const float carryAccel = 150f;
-        const float carrySpeed = 20f;
+        // Carry params: slightly springy for a toylike lag feel
+        const float carrySpring = 250f;
+        const float carryDamper = 22f;
+        const float carryAccel = 120f;
+        const float carrySpeed = 16f;
 
         // Blend from preset (plucky) to carry (stiff)
         float activeSpring = Mathf.Lerp(carrySpring, presetSpring, pickupT);
