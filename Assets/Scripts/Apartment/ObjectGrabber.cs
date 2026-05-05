@@ -507,6 +507,32 @@ public class ObjectGrabber : MonoBehaviour
         if (_heldRb.linearVelocity.sqrMagnitude > activeMaxSpeed * activeMaxSpeed)
             _heldRb.linearVelocity = _heldRb.linearVelocity.normalized * activeMaxSpeed;
 
+        // Wall rejection: cancel velocity into walls so the item slides along
+        // room geometry instead of tunneling through it. Uses Walls layer (31)
+        // only — not surfaces/furniture, which would cause snagging.
+        RejectVelocityIntoWalls();
+    }
+
+    private void RejectVelocityIntoWalls()
+    {
+        Vector3 vel = _heldRb.linearVelocity;
+        float speed = vel.magnitude;
+        if (speed < 0.01f) return;
+
+        // SphereCast along velocity to detect imminent wall collision
+        float castRadius = 0.05f;
+        float lookAhead = speed * Time.fixedDeltaTime + castRadius;
+        int wallMask = _wallLayer | _barrierLayer;
+        if (wallMask == 0) return;
+
+        if (Physics.SphereCast(_heldRb.worldCenterOfMass, castRadius, vel.normalized,
+                out RaycastHit hit, lookAhead, wallMask, QueryTriggerInteraction.Ignore))
+        {
+            // Remove velocity component going into the wall
+            float into = Vector3.Dot(vel, -hit.normal);
+            if (into > 0f)
+                _heldRb.linearVelocity = vel + hit.normal * into;
+        }
     }
 
     // ── Pick up ──────────────────────────────────────────────────────

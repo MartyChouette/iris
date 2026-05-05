@@ -15,6 +15,8 @@ Shader "Iris/PSXLitGlitch"
 
         [Header(Glitch)]
         _GlitchIntensity ("Glitch Intensity", Range(0, 1)) = 0.5
+
+        [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
 
     SubShader
@@ -31,6 +33,8 @@ Shader "Iris/PSXLitGlitch"
         {
             Name "ForwardLit"
             Tags { "LightMode" = "UniversalForward" }
+
+            ZTest [_ZTest]
 
             HLSLPROGRAM
             #pragma vertex vert

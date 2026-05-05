@@ -15,6 +15,8 @@ Shader "Iris/PSXLitDissolvable"
 
         [Header(Dissolve)]
         _DissolveAmount ("Dissolve Amount", Range(0, 1)) = 0.0
+
+        [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
 
     SubShader
@@ -31,6 +33,8 @@ Shader "Iris/PSXLitDissolvable"
         {
             Name "ForwardLit"
             Tags { "LightMode" = "UniversalForward" }
+
+            ZTest [_ZTest]
 
             HLSLPROGRAM
             #pragma vertex vert

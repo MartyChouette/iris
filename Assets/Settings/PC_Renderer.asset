@@ -89,10 +89,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoubleExposureFeature
   m_Active: 1
   settings:
-    feedbackDecay: 0.241
-    blendIntensity: 0.485
+    feedbackDecay: 0.296
+    blendIntensity: 0.592
     blurRadius: 6
-    bloomThreshold: 0.471
+    bloomThreshold: 0.48
     bloomSoftness: 1
     bufferDivisor: 4
   _shader: {fileID: 4800000, guid: f641a616fb963784db965f01caa3b4f2, type: 3}

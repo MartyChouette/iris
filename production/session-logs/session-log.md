@@ -33311,3 +33311,376 @@ e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PS
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260504_194344
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+---
+
+## Session End: 20260504_195642
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_200145
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_201401
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_201410
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_201731
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_201916
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_202020
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_202140
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_202541
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_223630
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260504_224458
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_002100
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_004131
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_005452
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_005559
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_010137
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_010429
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_010940
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_011053
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_011406
+### Commits
+7f5c77c held items always draw on top: ZTest=Always + renderQueue 4000
+5b9f56e SetRenderOnTop: render queue only, no shader swap
+d8f3772 fix multi-material: SetRenderOnTop now loops all material slots, save all original shaders in Awake
+e5a6c41 multi-material support: _instanceMat → _instanceMats[], remove auto PSXLit swap
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_190254
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_192202
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_192219
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_192345
+### Uncommitted Changes
+Assets/Scenes/Lancy_Main_Menu/Bloom Profile.asset
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

@@ -12,6 +12,8 @@ Shader "Iris/PSXLit"
 
         [Header(Dither Shadows)]
         _ShadowDitherIntensity ("Shadow Dither Intensity", Range(0, 1)) = 1.0
+
+        [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
 
     SubShader
@@ -28,6 +30,8 @@ Shader "Iris/PSXLit"
         {
             Name "ForwardLit"
             Tags { "LightMode" = "UniversalForward" }
+
+            ZTest [_ZTest]
 
             HLSLPROGRAM
             #pragma vertex vert

@@ -1251,16 +1251,16 @@ public class PlaceableObject : MonoBehaviour
 
     // ── Render on top (held items always visible) ─────────────────────
 
-    // Per-renderer state so we can restore each material's original shader on drop.
-    // URP/Lit hard-codes ZTest LEqual — setting a _ZTest property is a no-op.
-    // The only reliable fix is to swap the shader to one with ZTest Always.
+    // Per-renderer state so we can restore each material's original render settings on drop.
     private struct RenderOnTopState
     {
         public Renderer renderer;
         public Material instanceMat;
         public Shader savedShader;
         public int savedQueue;
-        public int savedZTest;
+        public float savedZTest;
+        public bool depthOnlyWasEnabled;
+        public bool depthNormalsWasEnabled;
     }
     private readonly List<RenderOnTopState> _renderOnTopStates = new();
 
@@ -1274,7 +1274,8 @@ public class PlaceableObject : MonoBehaviour
             if (_renderOnTopStates.Count > 0) return;
 
             // Walk every renderer and bump render queue on ALL material slots.
-            // No shader swap — materials keep their original look, just draw last.
+            // Works for any shader (PSX, URP Lit, etc.) — disable depth passes
+            // that hardcode ZTest LEqual so our ZTest Always actually takes effect.
             var renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
             for (int i = 0; i < renderers.Length; i++)
             {
@@ -1291,8 +1292,8 @@ public class PlaceableObject : MonoBehaviour
                 for (int m = 0; m < mats.Length; m++)
                 {
                     if (mats[m] == null) continue;
-                    int savedZTest = mats[m].HasProperty("_ZTest")
-                        ? mats[m].GetInt("_ZTest") : 4; // 4 = LessEqual (default)
+                    float savedZTest = mats[m].HasProperty("_ZTest")
+                        ? mats[m].GetFloat("_ZTest") : 4f; // 4 = LessEqual (default)
                     _renderOnTopStates.Add(new RenderOnTopState
                     {
                         renderer = r,
@@ -1300,9 +1301,14 @@ public class PlaceableObject : MonoBehaviour
                         savedShader = mats[m].shader,
                         savedQueue = mats[m].renderQueue,
                         savedZTest = savedZTest,
+                        depthOnlyWasEnabled = mats[m].GetShaderPassEnabled("DepthOnly"),
+                        depthNormalsWasEnabled = mats[m].GetShaderPassEnabled("DepthNormals"),
                     });
                     mats[m].renderQueue = 4000;
-                    mats[m].SetInt("_ZTest", 8); // 8 = Always
+                    mats[m].SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+                    // Disable depth passes that hardcode ZTest LEqual (URP Lit, etc.)
+                    mats[m].SetShaderPassEnabled("DepthOnly", false);
+                    mats[m].SetShaderPassEnabled("DepthNormals", false);
                 }
                 r.materials = mats;
             }
@@ -1314,7 +1320,9 @@ public class PlaceableObject : MonoBehaviour
                 var s = _renderOnTopStates[i];
                 if (s.instanceMat == null || s.renderer == null) continue;
                 s.instanceMat.renderQueue = s.savedQueue;
-                s.instanceMat.SetInt("_ZTest", s.savedZTest);
+                s.instanceMat.SetFloat("_ZTest", s.savedZTest);
+                s.instanceMat.SetShaderPassEnabled("DepthOnly", s.depthOnlyWasEnabled);
+                s.instanceMat.SetShaderPassEnabled("DepthNormals", s.depthNormalsWasEnabled);
             }
             _renderOnTopStates.Clear();
         }

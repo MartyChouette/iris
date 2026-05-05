@@ -16,6 +16,8 @@ Shader "Iris/PSXInteractable"
         [Header(Vertex Jitter)]
         _JitterAmount  ("Vertex Jitter", Range(0, 0.02)) = 0.002
         _GlitchIntensity ("Glitch Intensity (match PSXLitGlitch)", Range(0, 0.1)) = 0.0
+
+        [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
 
     SubShader
@@ -34,7 +36,7 @@ Shader "Iris/PSXInteractable"
 
             Blend SrcAlpha One   // Additive with alpha control
             ZWrite Off
-            ZTest LEqual
+            ZTest [_ZTest]
             Cull Back
 
             HLSLPROGRAM
