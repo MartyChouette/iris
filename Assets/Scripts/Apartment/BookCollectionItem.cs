@@ -146,6 +146,7 @@ public class BookCollectionItem : MonoBehaviour
         Vector3 spawnPos = transform.position + transform.right * 0.15f + Vector3.up * 0.02f;
         SmokePoof.Spawn(spawnPos);
         var reward = Instantiate(_rewardPrefab, spawnPos, Quaternion.identity);
+        reward.layer = LayerMask.NameToLayer("Placeable");
 
         // Snap to nearest surface
         var placeable = reward.GetComponent<PlaceableObject>();

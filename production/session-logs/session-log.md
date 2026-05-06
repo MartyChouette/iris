@@ -35805,3 +35805,701 @@ Assets/Settings/PC_Renderer.asset
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_154444
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+---
+
+## Session End: 20260506_171707
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_172008
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_173541
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_173945
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_174905
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_175209
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_175832
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180305
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180311
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180324
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180629
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180731
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180839
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180853
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_180929
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_181950
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_182108
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_182115
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_183049
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_183215
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_183502
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_184157
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_184423
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_184914
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_185153
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_185353
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_185539
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_185947
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_191054
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/eyeclosed.png
+Assets/ArtAssets/eyeclosed.png.meta
+Assets/ArtAssets/eyeopen.png
+Assets/ArtAssets/eyeopen.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_191111
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/eyeclosed.png
+Assets/ArtAssets/eyeclosed.png.meta
+Assets/ArtAssets/eyeopen.png
+Assets/ArtAssets/eyeopen.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_191118
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/eyeclosed.png
+Assets/ArtAssets/eyeclosed.png.meta
+Assets/ArtAssets/eyeopen.png
+Assets/ArtAssets/eyeopen.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_191140
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/eyeclosed.png
+Assets/ArtAssets/eyeclosed.png.meta
+Assets/ArtAssets/eyeopen.png
+Assets/ArtAssets/eyeopen.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_191300
+### Commits
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/living_room_carpet/Carpet.001.mat
+Assets/ArtAssets/3dModels/living_room_carpet/livingroom_carpet_albedo.png.meta
+Assets/ArtAssets/eyeclosed.png
+Assets/ArtAssets/eyeclosed.png.meta
+Assets/ArtAssets/eyeopen.png
+Assets/ArtAssets/eyeopen.png.meta
+Assets/ArtAssets/pinch.png
+Assets/ArtAssets/pinch.png.meta
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+

@@ -289,46 +289,8 @@ public class PSXRenderController : MonoBehaviour
 
     private void SwapShadersToRetro()
     {
-        if (_psxLitShader == null) return;
-
-        if (_cachedRenderers == null)
-            _cachedRenderers = FindObjectsByType<Renderer>(FindObjectsSortMode.None);
-        var renderers = _cachedRenderers;
-        int swapped = 0;
-        foreach (var r in renderers)
-        {
-            foreach (var mat in r.sharedMaterials)
-            {
-                if (mat == null || mat.shader == null) continue;
-                if (_originalShaders.ContainsKey(mat)) continue;
-
-                if (s_swappableShaders.Contains(mat.shader.name))
-                {
-                    _originalShaders[mat] = mat.shader;
-                    mat.shader = _psxLitShader;
-                    swapped++;
-                }
-            }
-        }
-
-        // Vertex snapping only on special items (pairables + authored mess).
-        // Everything else gets snap disabled so furniture/environment stays clean.
-        foreach (var r in renderers)
-        {
-            if (r == null) continue;
-            var go = r.gameObject;
-            if (go.GetComponent<PairableItem>() != null) continue;
-            if (go.GetComponentInParent<PairableItem>() != null) continue;
-            var po = go.GetComponent<PlaceableObject>() ?? go.GetComponentInParent<PlaceableObject>();
-            if (po != null && po.Category == ItemCategory.Trash) continue;
-            if (go.GetComponent<PSXObjectSettings>() != null) continue;
-
-            var psx = go.AddComponent<PSXObjectSettings>();
-            psx.SnapResolution = 0f;
-        }
-
-        if (swapped > 0)
-            Debug.Log($"[PSXRenderController] Swapped {swapped} materials to PSXLit.");
+        // PSX shader swap disabled — artist materials stay as authored.
+        Debug.Log("[PSXRenderController] Shader swap disabled — using authored materials.");
     }
 
     /// <summary>
@@ -338,35 +300,7 @@ public class PSXRenderController : MonoBehaviour
     /// </summary>
     public void EnsureSwapped(GameObject go)
     {
-        if (_psxLitShader == null || go == null) return;
-
-        foreach (var r in go.GetComponentsInChildren<Renderer>(true))
-        {
-            foreach (var mat in r.sharedMaterials)
-            {
-                if (mat == null || mat.shader == null) continue;
-                if (_originalShaders.ContainsKey(mat)) continue;
-
-                if (s_swappableShaders.Contains(mat.shader.name))
-                {
-                    _originalShaders[mat] = mat.shader;
-                    mat.shader = _psxLitShader;
-                }
-            }
-
-            // Disable vertex snap on non-special objects
-            if (r.GetComponent<PairableItem>() == null
-                && r.GetComponentInParent<PairableItem>() == null
-                && r.GetComponent<PSXObjectSettings>() == null)
-            {
-                var po = r.GetComponent<PlaceableObject>() ?? r.GetComponentInParent<PlaceableObject>();
-                if (po == null || po.Category != ItemCategory.Trash)
-                {
-                    var psx = r.gameObject.AddComponent<PSXObjectSettings>();
-                    psx.SnapResolution = 0f;
-                }
-            }
-        }
+        // PSX shader swap disabled — artist materials stay as authored.
     }
 
     private void RestoreOriginalShaders()

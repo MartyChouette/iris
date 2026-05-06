@@ -326,8 +326,10 @@ public class GlobalCursorManager : MonoBehaviour
         var loaded = Resources.Load<Texture2D>($"Cursors/{name}");
         if (loaded != null)
         {
+            Debug.Log($"[GlobalCursorManager] Loaded Cursors/{name}: {loaded.width}x{loaded.height}");
             // Always make a RGBA32 copy — works regardless of import settings
             var copy = MakeCursorCopy(loaded);
+            Debug.Log($"[GlobalCursorManager] Copy of {name}: {copy.width}x{copy.height}");
             if (proceduralFallback != null)
                 Destroy(proceduralFallback);
             return copy;
@@ -599,7 +601,7 @@ public class GlobalCursorManager : MonoBehaviour
             return;
         }
 
-        // Swap to the full-opacity context cursor texture immediately
+        // Swap to the full-opacity context cursor texture
         var source = GetSourceTexture(type);
         if (source != null)
         {

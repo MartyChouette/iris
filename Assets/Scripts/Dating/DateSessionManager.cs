@@ -54,6 +54,9 @@ public class DateSessionManager : MonoBehaviour
     private static Shader s_overlaySpriteShader;
     private static Shader s_particleShader;
     private static bool s_shadersInitialized;
+    private static Texture2D s_heartAtlas;
+    private static int s_heartFrameCount;
+    private static bool s_heartAtlasLoaded;
 
     private static void InitCachedShaders()
     {
@@ -1359,13 +1362,15 @@ public class DateSessionManager : MonoBehaviour
         Debug.Log($"[DateSessionManager] SpawnReactionParticles: reaction={reaction} spawnPos={spawnPos:F3} goPos={go.transform.position:F3}");
 #endif
 
+        float heartScale = VisualScaleSettings.Instance.GetHeartScale();
+
         if (reaction == ReactionType.Like)
         {
             main.duration = 2.5f;
             main.loop = false;
             main.startLifetime = new ParticleSystem.MinMaxCurve(1.5f, 2.5f);
             main.startSpeed = new ParticleSystem.MinMaxCurve(0.4f, 1.2f);
-            main.startSize = new ParticleSystem.MinMaxCurve(0.06f, 0.14f);
+            main.startSize = new ParticleSystem.MinMaxCurve(0.06f * heartScale, 0.14f * heartScale);
             main.gravityModifier = -0.4f; // float upward
             main.maxParticles = 30;
             main.startColor = new ParticleSystem.MinMaxGradient(
@@ -1458,6 +1463,33 @@ public class DateSessionManager : MonoBehaviour
             mat.SetFloat("_Surface", 1f);
             mat.SetFloat("_Blend", 0f);
             renderer.material = mat;
+
+            // Heart flipbook for Like reactions
+            if (reaction == ReactionType.Like)
+            {
+                if (!s_heartAtlasLoaded)
+                {
+                    s_heartAtlasLoaded = true;
+                    var frames = FlipbookAtlas.LoadFrames("Particles", "heart_explode_", 3);
+                    if (frames != null && frames.Length > 0)
+                    {
+                        s_heartAtlas = FlipbookAtlas.Build(frames);
+                        s_heartFrameCount = frames.Length;
+                    }
+                }
+                if (s_heartAtlas != null)
+                {
+                    mat.mainTexture = s_heartAtlas;
+                    var tsa = ps.textureSheetAnimation;
+                    tsa.enabled = true;
+                    tsa.mode = ParticleSystemAnimationMode.Grid;
+                    tsa.numTilesX = s_heartFrameCount;
+                    tsa.numTilesY = 1;
+                    tsa.animation = ParticleSystemAnimationType.WholeSheet;
+                    tsa.cycleCount = 1;
+                    tsa.timeMode = ParticleSystemAnimationTimeMode.Lifetime;
+                }
+            }
         }
 
         ps.Play();

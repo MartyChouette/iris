@@ -85,11 +85,20 @@ public class VisibilityEyeIndicator : MonoBehaviour
         }
         else
         {
-            _openEyeTex = GenOpenEye();
-            _openEyeSprite = Sprite.Create(_openEyeTex,
-                new Rect(0, 0, _openEyeTex.width, _openEyeTex.height),
-                new Vector2(0.5f, 0.5f), 128f);
-            _ownsOpenSprite = true;
+            var loadedOpen = Resources.Load<Sprite>("UI/eye_open");
+            if (loadedOpen != null)
+            {
+                _openEyeSprite = loadedOpen;
+                _ownsOpenSprite = false;
+            }
+            else
+            {
+                _openEyeTex = GenOpenEye();
+                _openEyeSprite = Sprite.Create(_openEyeTex,
+                    new Rect(0, 0, _openEyeTex.width, _openEyeTex.height),
+                    new Vector2(0.5f, 0.5f), 128f);
+                _ownsOpenSprite = true;
+            }
         }
 
         if (_closedEyeSpriteOverride != null)
@@ -99,11 +108,20 @@ public class VisibilityEyeIndicator : MonoBehaviour
         }
         else
         {
-            _closedEyeTex = GenClosedEye();
-            _closedEyeSprite = Sprite.Create(_closedEyeTex,
-                new Rect(0, 0, _closedEyeTex.width, _closedEyeTex.height),
-                new Vector2(0.5f, 0.5f), 128f);
-            _ownsClosedSprite = true;
+            var loadedClosed = Resources.Load<Sprite>("UI/eye_closed");
+            if (loadedClosed != null)
+            {
+                _closedEyeSprite = loadedClosed;
+                _ownsClosedSprite = false;
+            }
+            else
+            {
+                _closedEyeTex = GenClosedEye();
+                _closedEyeSprite = Sprite.Create(_closedEyeTex,
+                    new Rect(0, 0, _closedEyeTex.width, _closedEyeTex.height),
+                    new Vector2(0.5f, 0.5f), 128f);
+                _ownsClosedSprite = true;
+            }
         }
     }
 
@@ -235,7 +253,7 @@ public class VisibilityEyeIndicator : MonoBehaviour
             icon.go.transform.position = icon.target.position
                 + camRight * _offset.x + camUp * _offset.y + _cam.transform.forward * _offset.z;
             icon.go.transform.rotation = _cam.transform.rotation;
-            icon.go.transform.localScale = Vector3.one * _iconSize;
+            icon.go.transform.localScale = Vector3.one * _iconSize * VisualScaleSettings.Instance.GetEyeScale();
 
             // Fade: curve-driven fade-in during hold, curve-driven fade-out after
             float alpha;
