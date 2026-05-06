@@ -33684,3 +33684,1549 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260505_192701
+### Commits
+79d0b8e SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+---
+
+## Session End: 20260505_192744
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_195445
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_195555
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_195853
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_195927
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_200347
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_200742
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_200801
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_200835
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/apartment_blockout_detail_2nd_pass.fbx
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+Assets/apartment_blockout_detail_full_feb24.fbx
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_200933
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_204115
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_220622
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_224104
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_224153
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_224316
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_224737
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_230130
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_230608
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_230726
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_230823
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_231114
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_231231
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_231714
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_232314
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_232728
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_233216
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_233334
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_233635
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_234222
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_234237
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_234646
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_235033
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_235424
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260505_235718
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_000255
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_001013
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_003701
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_013100
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_013730
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_013812
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_014040
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_014209
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_014308
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_014558
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_014743
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_014951
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_015035
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_015201
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_015300
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_015413
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_030837
+### Commits
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Gunpla_bod.prefab
+Assets/ArtAssets/Album Covers.meta
+Assets/ArtAssets/Album Covers/Materials.meta
+Assets/ArtAssets/Album Covers/Materials/dreem.mat
+Assets/ArtAssets/Album Covers/Materials/dreem.mat.meta
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat
+Assets/ArtAssets/Album Covers/Materials/hourglass.mat.meta
+Assets/ArtAssets/Album Covers/Materials/righthere.mat
+Assets/ArtAssets/Album Covers/Materials/righthere.mat.meta
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat
+Assets/ArtAssets/Album Covers/Materials/tokyo.mat.meta
+Assets/ArtAssets/Album Covers/dreem.jpg
+Assets/ArtAssets/Album Covers/dreem.jpg.meta
+Assets/ArtAssets/Album Covers/hourglass.jpg
+Assets/ArtAssets/Album Covers/hourglass.jpg.meta
+Assets/ArtAssets/Album Covers/righthere.jpg
+Assets/ArtAssets/Album Covers/righthere.jpg.meta
+Assets/ArtAssets/Album Covers/tokyo.jpg
+Assets/ArtAssets/Album Covers/tokyo.jpg.meta
+Assets/ArtAssets/Album Covers/touch.jpg
+Assets/ArtAssets/Album Covers/touch.jpg.meta
+Assets/ArtAssets/Album Covers/wedding.jpg
+Assets/ArtAssets/Album Covers/wedding.jpg.meta
+Assets/ArtAssets/Nema_Models.meta
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx
+Assets/ArtAssets/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx
+Assets/ArtAssets/Nema_Models/Nema_Leaning On A Wall.fbx.meta
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx
+Assets/ArtAssets/Nema_Models/Northern Soul Spin.fbx.meta
+Assets/ArtAssets/Nema_Models/Sitting.fbx
+Assets/ArtAssets/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Plants.meta
+Assets/ArtAssets/Plants/small_spikey_plant.fbx
+Assets/ArtAssets/Plants/small_spikey_plant.fbx.meta
+Assets/ArtAssets/Plants/small_tiny_plant.fbx
+Assets/ArtAssets/Plants/small_tiny_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_round_plant.fbx
+Assets/ArtAssets/Plants/tall_round_plant.fbx.meta
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx
+Assets/ArtAssets/Plants/tall_spikey_plant.fbx.meta
+Assets/ArtAssets/paintings.meta
+Assets/ArtAssets/paintings/Materials.meta
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat
+Assets/ArtAssets/paintings/Materials/abstractpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/classicpainting.mat
+Assets/ArtAssets/paintings/Materials/classicpainting.mat.meta
+Assets/ArtAssets/paintings/Materials/weebpainting.mat
+Assets/ArtAssets/paintings/Materials/weebpainting.mat.meta
+Assets/ArtAssets/paintings/abstractpainting.png
+Assets/ArtAssets/paintings/abstractpainting.png.meta
+Assets/ArtAssets/paintings/classicpainting.png
+Assets/ArtAssets/paintings/classicpainting.png.meta
+Assets/ArtAssets/paintings/weebpainting.png
+Assets/ArtAssets/paintings/weebpainting.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookItem.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/DefaultVolumeProfile.asset
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/apartment_blockout_detail_3rd_pass_blue.blend
+Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
+production/session-logs/session-log.md
+---
+

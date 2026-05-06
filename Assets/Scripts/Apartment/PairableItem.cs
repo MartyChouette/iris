@@ -91,7 +91,9 @@ public class PairableItem : MonoBehaviour
         // Unpaired pairables get the PSX glitch shader as a visual hint that
         // they belong with a partner. Removed in SnapPair when they connect.
         // Deferred to Start so PlaceableObject.Awake has created _instanceMat.
-        if (!_isPaired && _placeable != null)
+        // Only glitch items that are fully PSX — non-PSX materials (URP Lit)
+        // lose their textures when swapped to PSXLitGlitch.
+        if (!_isPaired && _placeable != null && _placeable.IsFullyPSX)
         {
             _placeable.SetGlitched(true);
 #if UNITY_EDITOR
@@ -206,11 +208,8 @@ public class PairableItem : MonoBehaviour
 
     private void SetColor(Color c)
     {
-        // Use PlaceableObject's instance material if available AND enabled.
-        // After pairing, the held item's PlaceableObject is disabled — fall
-        // through to the MPB path so the pulse still works on both shoes.
-        if (_placeable != null && _placeable.enabled && _placeable.SetInstanceColor(c)) return;
-
+        // Always use MaterialPropertyBlock — never modify instance materials
+        // directly, because .color = white overwrites PSX tinted textures.
         if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
         if (_renderer != null)
         {
@@ -224,7 +223,6 @@ public class PairableItem : MonoBehaviour
 
     private void RestoreColor()
     {
-        if (_placeable != null && _placeable.enabled) { _placeable.ForceRestoreMaterial(); return; }
 
         if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
         if (_renderer != null)

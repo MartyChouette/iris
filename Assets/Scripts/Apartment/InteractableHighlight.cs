@@ -278,6 +278,18 @@ public class InteractableHighlight : MonoBehaviour
         BuildOverrideMaterials();
     }
 
+    /// <summary>
+    /// Re-cache the base materials from the renderer. Call after any external
+    /// system swaps materials on the renderer (e.g. glitch apply/remove).
+    /// </summary>
+    public void RefreshBaseMaterials()
+    {
+        if (_renderers == null) return;
+        _baseMaterialArrays = new Material[_renderers.Length][];
+        for (int i = 0; i < _renderers.Length; i++)
+            _baseMaterialArrays[i] = _renderers[i].sharedMaterials;
+    }
+
     private void OnEnable() => s_all.Add(this);
     private void OnDisable()
     {
@@ -486,8 +498,17 @@ public class InteractableHighlight : MonoBehaviour
         if (_renderers == null || _baseMaterialArrays == null) return;
         for (int r = 0; r < _renderers.Length; r++)
         {
-            if (_renderers[r] != null && _baseMaterialArrays[r] != null)
-                _renderers[r].sharedMaterials = _baseMaterialArrays[r];
+            if (_renderers[r] == null) continue;
+            if (r >= _baseMaterialArrays.Length || _baseMaterialArrays[r] == null) continue;
+            var current = _renderers[r].sharedMaterials;
+            int baseLen = _baseMaterialArrays[r].Length;
+            if (current.Length > baseLen)
+            {
+                var trimmed = new Material[baseLen];
+                System.Array.Copy(current, trimmed, baseLen);
+                _renderers[r].sharedMaterials = trimmed;
+            }
+            _baseMaterialArrays[r] = _renderers[r].sharedMaterials;
         }
     }
 
@@ -521,6 +542,18 @@ public class InteractableHighlight : MonoBehaviour
         for (int r = 0; r < _renderers.Length; r++)
         {
             if (_renderers[r] == null) continue;
+
+            // Always read current base materials from the renderer so we
+            // never use stale/destroyed refs from a previous glitch swap.
+            var current = _renderers[r].sharedMaterials;
+            // Base material count = total minus any overlay slots we previously added
+            int baseLen = _baseMaterialArrays[r] != null ? _baseMaterialArrays[r].Length : current.Length;
+            if (current.Length >= baseLen)
+            {
+                var fresh = new Material[baseLen];
+                System.Array.Copy(current, fresh, baseLen);
+                _baseMaterialArrays[r] = fresh;
+            }
             var baseMats = _baseMaterialArrays[r];
 
             if (extraCount == 0)
@@ -528,6 +561,18 @@ public class InteractableHighlight : MonoBehaviour
                 _renderers[r].sharedMaterials = baseMats;
                 continue;
             }
+
+            // Re-read base from renderer to avoid using stale/destroyed refs
+            baseMats = _renderers[r].sharedMaterials;
+            // Trim to base count if overlays were previously appended
+            int bLen = _baseMaterialArrays[r].Length;
+            if (baseMats.Length > bLen)
+            {
+                var t = new Material[bLen];
+                System.Array.Copy(baseMats, t, bLen);
+                baseMats = t;
+            }
+            _baseMaterialArrays[r] = baseMats;
 
             var mats = new Material[baseMats.Length + extraCount];
             for (int i = 0; i < baseMats.Length; i++)

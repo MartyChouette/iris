@@ -122,8 +122,11 @@ public class BlanketItem : MonoBehaviour
             for (int i = 0; i < _hiddenSceneObjects.Length; i++)
             {
                 if (_hiddenSceneObjects[i] == null) continue;
+                // Unparent before positioning so it doesn't follow the held blanket
+                _hiddenSceneObjects[i].transform.SetParent(null, false);
                 _hiddenSceneObjects[i].SetActive(true);
                 _hiddenSceneObjects[i].transform.position = spawnPos;
+                _hiddenSceneObjects[i].transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
                 // PlacementFlash.Spawn(spawnPos); // TODO: replace with better reveal effect
                 Debug.Log($"[BlanketItem] Revealed scene object: {_hiddenSceneObjects[i].name}");
             }

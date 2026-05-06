@@ -253,6 +253,19 @@ public class PlaceableObject : MonoBehaviour
 #endif
     }
 
+    /// <summary>Check if a shader belongs to the PSX family and can be swapped to glitch.</summary>
+    private static bool IsPSXShader(Shader shader)
+    {
+        if (shader == null) return false;
+        var n = shader.name;
+        return n.StartsWith("Iris/PSX") || n == "Iris/PSXLit" || n == "Iris/PSXInteractable"
+            || n == "Iris/PSXLitDissolvable" || n == "Iris/PSXLitGlitch";
+    }
+
+    // Pre-glitch saved materials — for non-PSX slots we swap in a temp glitch
+    // material and stash the original here so it can be restored perfectly.
+    private Material[] _preGlitchMats;
+
     private void ApplyGlitch()
     {
         if (_instanceMats == null || _instanceMats.Length == 0)
@@ -261,6 +274,11 @@ public class PlaceableObject : MonoBehaviour
             return;
         }
         if (_isGlitched) return;
+        if (!IsFullyPSX)
+        {
+            Debug.Log($"[PlaceableObject] ApplyGlitch skipped on '{name}' — has non-PSX materials");
+            return;
+        }
 
         if (!s_glitchShaderCached)
         {
@@ -273,48 +291,76 @@ public class PlaceableObject : MonoBehaviour
             return;
         }
 
-        if (_originalShader == null && _instanceMats[0] != null)
-            _originalShader = _instanceMats[0].shader;
+        // Save every slot's current material so we can restore on RemoveGlitch.
+        _preGlitchMats = new Material[_instanceMats.Length];
+        for (int i = 0; i < _instanceMats.Length; i++)
+            _preGlitchMats[i] = _instanceMats[i];
 
-        // Save each slot's shader so multi-material objects restore correctly
-        _originalShaders = new Shader[_instanceMats.Length];
         for (int i = 0; i < _instanceMats.Length; i++)
         {
             if (_instanceMats[i] == null) continue;
-            _originalShaders[i] = _instanceMats[i].shader;
-            _instanceMats[i].shader = s_glitchShader;
-            _instanceMats[i].SetFloat("_GlitchIntensity", 0f);
+
+            if (IsPSXShader(_instanceMats[i].shader))
+            {
+                // PSX slot: swap shader in-place (safe, same property set)
+                _instanceMats[i].shader = s_glitchShader;
+                _instanceMats[i].SetFloat("_GlitchIntensity", 0f);
+            }
+            else
+            {
+                // Non-PSX slot: create a temp PSXLitGlitch material using
+                // the original's color so the glitch shimmer is consistent.
+                var temp = new Material(s_glitchShader);
+                temp.SetFloat("_GlitchIntensity", 0f);
+                temp.color = _instanceMats[i].HasProperty("_BaseColor")
+                    ? _instanceMats[i].GetColor("_BaseColor")
+                    : _instanceMats[i].color;
+                // Copy main texture if available
+                if (_instanceMats[i].HasProperty("_BaseMap"))
+                    temp.SetTexture("_MainTex", _instanceMats[i].GetTexture("_BaseMap"));
+                else if (_instanceMats[i].HasProperty("_MainTex"))
+                    temp.SetTexture("_MainTex", _instanceMats[i].GetTexture("_MainTex"));
+                _instanceMats[i] = temp;
+            }
         }
+
+        // Push swapped materials to renderer and refresh highlight cache
+        if (_renderer != null) _renderer.materials = _instanceMats;
+        var hl = GetComponent<InteractableHighlight>();
+        if (hl != null) hl.RefreshBaseMaterials();
         _isGlitched = true;
 #if UNITY_EDITOR
-        Debug.Log($"[PlaceableObject] ApplyGlitch on '{name}': → {s_glitchShader.name} ({_instanceMats.Length} slots)");
+        Debug.Log($"[PlaceableObject] ApplyGlitch on '{name}': ({_instanceMats.Length} slots)");
 #endif
     }
-
-    // Per-slot original shaders — saved before glitch so each slot restores correctly
-    private Shader[] _originalShaders;
 
     private void RemoveGlitch()
     {
         if (!_isGlitched) return;
-        if (_instanceMats == null || _instanceMats.Length == 0) return;
+        if (_preGlitchMats == null || _instanceMats == null) return;
 
-        if (_originalShaders != null)
+        for (int i = 0; i < _instanceMats.Length; i++)
         {
-            for (int i = 0; i < _instanceMats.Length; i++)
+            if (i >= _preGlitchMats.Length) continue;
+
+            if (_instanceMats[i] != _preGlitchMats[i])
             {
-                if (_instanceMats[i] == null) continue;
-                var restore = (i < _originalShaders.Length && _originalShaders[i] != null)
-                    ? _originalShaders[i] : _originalShader;
-                if (restore != null) _instanceMats[i].shader = restore;
+                // Non-PSX slot: destroy temp, restore original
+                if (_instanceMats[i] != null) Destroy(_instanceMats[i]);
+                _instanceMats[i] = _preGlitchMats[i];
+            }
+            else if (_instanceMats[i] != null && _originalShaders != null
+                     && i < _originalShaders.Length && _originalShaders[i] != null)
+            {
+                // PSX slot: restore original shader
+                _instanceMats[i].shader = _originalShaders[i];
             }
         }
-        else if (_originalShader != null)
-        {
-            for (int i = 0; i < _instanceMats.Length; i++)
-                if (_instanceMats[i] != null) _instanceMats[i].shader = _originalShader;
-        }
 
+        if (_renderer != null) _renderer.materials = _instanceMats;
+        var hl = GetComponent<InteractableHighlight>();
+        if (hl != null) hl.RefreshBaseMaterials();
+        _preGlitchMats = null;
         _isGlitched = false;
 #if UNITY_EDITOR
         Debug.Log($"[PlaceableObject] RemoveGlitch on '{name}' ({_instanceMats.Length} slots)");
@@ -330,6 +376,21 @@ public class PlaceableObject : MonoBehaviour
 
     /// <summary>True if the glitch shader is currently applied.</summary>
     public bool IsGlitched => _isGlitched;
+
+    /// <summary>True if ALL material slots use PSX shaders. Non-PSX materials break when swapped to glitch.</summary>
+    public bool IsFullyPSX
+    {
+        get
+        {
+            if (_instanceMats == null || _instanceMats.Length == 0) return false;
+            for (int i = 0; i < _instanceMats.Length; i++)
+            {
+                if (_instanceMats[i] == null) continue;
+                if (!IsPSXShader(_instanceMats[i].shader)) return false;
+            }
+            return true;
+        }
+    }
 
     /// <summary>Force the instance material to a specific shader, bypassing glitch state tracking.</summary>
     public void ForceShader(Shader shader)
@@ -403,7 +464,8 @@ public class PlaceableObject : MonoBehaviour
 
     private Renderer _renderer;
     private Material[] _instanceMats;   // cloned per-slot materials (all slots)
-    private Color _originalColor;       // color of slot 0 (for restore/flash)
+    private Color _originalColor;       // color of slot 0 (for flash reference)
+    private Color[] _originalColors;    // per-slot original colors for restore
 
     // Silhouette overlay (see-through when occluded)
     private Material _silhouetteMat;
@@ -434,6 +496,7 @@ public class PlaceableObject : MonoBehaviour
     private static Shader s_glitchShader;
     private static bool s_glitchShaderCached;
     private Shader _originalShader;
+    private Shader[] _originalShaders;
     private bool _isGlitched;
 
     private void Awake()
@@ -450,6 +513,9 @@ public class PlaceableObject : MonoBehaviour
             _renderer.materials = _instanceMats;
 
             _originalColor = _instanceMats[0] != null ? _instanceMats[0].color : Color.white;
+            _originalColors = new Color[_instanceMats.Length];
+            for (int i = 0; i < _instanceMats.Length; i++)
+                _originalColors[i] = _instanceMats[i] != null ? _instanceMats[i].color : Color.white;
 
             // Capture every slot's original shader before anything applies glitch.
             _originalShader = _instanceMats[0] != null ? _instanceMats[0].shader : null;
@@ -477,10 +543,11 @@ public class PlaceableObject : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _colliders = GetComponentsInChildren<Collider>();
 
-        // Ensure every placeable has an InteractableHighlight for hover/proximity effects
-        // (skip plants — they have their own watering interaction)
-        if (GetComponent<InteractableHighlight>() == null && GetComponent<WaterablePlant>() == null)
-            gameObject.AddComponent<InteractableHighlight>();
+        // InteractableHighlight auto-add disabled — its material cache
+        // conflicts with multi-material objects and glitch swaps.
+        // TODO: refactor highlight system to use MaterialPropertyBlock only.
+        // if (GetComponent<InteractableHighlight>() == null && GetComponent<WaterablePlant>() == null)
+        //     gameObject.AddComponent<InteractableHighlight>();
 
         // Auto-capture spawn position/rotation as home whenever unset
         if (_homePosition == Vector3.zero)
@@ -832,9 +899,10 @@ public class PlaceableObject : MonoBehaviour
         if (_rb != null)
             _rb.isKinematic = false;
 
-        // Picking up a disheveled item corrects it — remove glitch before
-        // SetRenderOnTop saves the shader state, so the glitch stays gone.
-        if (_isGlitched && _startDishelved)
+        // Always remove glitch on pickup — the held item should show its
+        // real materials. Glitch is re-applied on drop if still needed
+        // (e.g. unpaired PairableItem).
+        if (_isGlitched)
             RemoveGlitch();
 
         if (_allowAutoStraighten && !canWallMount)
@@ -921,6 +989,10 @@ public class PlaceableObject : MonoBehaviour
         RestoreMaterial();
         DestroySilhouette();
 
+        // Force-clear any MaterialPropertyBlock color overrides left by pulse systems
+        if (_renderer != null)
+            _renderer.SetPropertyBlock(null);
+
         if (_rb != null)
         {
             _rb.linearVelocity = Vector3.zero;
@@ -971,6 +1043,9 @@ public class PlaceableObject : MonoBehaviour
         SetRenderOnTop(false);
         RestoreMaterial();
         DestroySilhouette();
+
+        if (_renderer != null)
+            _renderer.SetPropertyBlock(null);
 
         // Check if we ended up somewhere the player can't see
         StartCoroutine(CheckVisibilityAfterDrop());
@@ -1251,16 +1326,15 @@ public class PlaceableObject : MonoBehaviour
 
     // ── Render on top (held items always visible) ─────────────────────
 
-    // Per-renderer state so we can restore each material's original render settings on drop.
+    // Per-renderer state so we can restore each material on drop.
     private struct RenderOnTopState
     {
         public Renderer renderer;
-        public Material instanceMat;
-        public Shader savedShader;
+        public int matIndex;
+        public Material originalMat;   // the real material (never modified for non-PSX)
+        public Material tempMat;       // disposable AlwaysOnTop copy (null for PSX)
         public int savedQueue;
         public float savedZTest;
-        public bool depthOnlyWasEnabled;
-        public bool depthNormalsWasEnabled;
     }
     private readonly List<RenderOnTopState> _renderOnTopStates = new();
 
@@ -1269,63 +1343,8 @@ public class PlaceableObject : MonoBehaviour
 
     public void SetRenderOnTop(bool onTop)
     {
-        if (onTop)
-        {
-            if (_renderOnTopStates.Count > 0) return;
-
-            // Walk every renderer and bump render queue on ALL material slots.
-            // Works for any shader (PSX, URP Lit, etc.) — disable depth passes
-            // that hardcode ZTest LEqual so our ZTest Always actually takes effect.
-            var renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
-            for (int i = 0; i < renderers.Length; i++)
-            {
-                var r = renderers[i];
-                if (r == null) continue;
-
-                var childPO = r.GetComponentInParent<PlaceableObject>();
-                if (childPO != null && childPO != this) continue;
-
-                if (r.gameObject.name == "StinkLines") continue;
-                if (r.gameObject.name == "Silhouette") continue;
-
-                var mats = r.materials;
-                for (int m = 0; m < mats.Length; m++)
-                {
-                    if (mats[m] == null) continue;
-                    float savedZTest = mats[m].HasProperty("_ZTest")
-                        ? mats[m].GetFloat("_ZTest") : 4f; // 4 = LessEqual (default)
-                    _renderOnTopStates.Add(new RenderOnTopState
-                    {
-                        renderer = r,
-                        instanceMat = mats[m],
-                        savedShader = mats[m].shader,
-                        savedQueue = mats[m].renderQueue,
-                        savedZTest = savedZTest,
-                        depthOnlyWasEnabled = mats[m].GetShaderPassEnabled("DepthOnly"),
-                        depthNormalsWasEnabled = mats[m].GetShaderPassEnabled("DepthNormals"),
-                    });
-                    mats[m].renderQueue = 4000;
-                    mats[m].SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
-                    // Disable depth passes that hardcode ZTest LEqual (URP Lit, etc.)
-                    mats[m].SetShaderPassEnabled("DepthOnly", false);
-                    mats[m].SetShaderPassEnabled("DepthNormals", false);
-                }
-                r.materials = mats;
-            }
-        }
-        else
-        {
-            for (int i = 0; i < _renderOnTopStates.Count; i++)
-            {
-                var s = _renderOnTopStates[i];
-                if (s.instanceMat == null || s.renderer == null) continue;
-                s.instanceMat.renderQueue = s.savedQueue;
-                s.instanceMat.SetFloat("_ZTest", s.savedZTest);
-                s.instanceMat.SetShaderPassEnabled("DepthOnly", s.depthOnlyWasEnabled);
-                s.instanceMat.SetShaderPassEnabled("DepthNormals", s.depthNormalsWasEnabled);
-            }
-            _renderOnTopStates.Clear();
-        }
+        // No-op: disabled to diagnose white material issue.
+        // TODO: re-enable once material pipeline is stable.
 
         // Cascade to paired/stacked child PlaceableObjects (each owns its own state)
         foreach (Transform child in transform)
@@ -1340,9 +1359,8 @@ public class PlaceableObject : MonoBehaviour
 
     private void RestoreMaterial()
     {
-        if (_instanceMats == null) return;
-        for (int i = 0; i < _instanceMats.Length; i++)
-            if (_instanceMats[i] != null) _instanceMats[i].color = _originalColor;
+        // Color tinting now uses MaterialPropertyBlock (never modifies
+        // instance materials), so there's nothing to restore here.
     }
 
     /// <summary>Public version for external systems (PairableItem) to force color restore.</summary>
@@ -1351,12 +1369,15 @@ public class PlaceableObject : MonoBehaviour
         RestoreMaterial();
     }
 
-    /// <summary>Set all instance material colors directly (for PairableItem pulse). Returns false if no instance materials.</summary>
+    /// <summary>Set all instance material colors via MaterialPropertyBlock (safe for PSX). Returns false if no renderer.</summary>
     public bool SetInstanceColor(Color color)
     {
-        if (_instanceMats == null || _instanceMats.Length == 0) return false;
-        for (int i = 0; i < _instanceMats.Length; i++)
-            if (_instanceMats[i] != null) _instanceMats[i].color = color;
+        if (_renderer == null) return false;
+        var mpb = new MaterialPropertyBlock();
+        _renderer.GetPropertyBlock(mpb);
+        mpb.SetColor("_Color", color);
+        mpb.SetColor("_BaseColor", color);
+        _renderer.SetPropertyBlock(mpb);
         return true;
     }
 
@@ -1365,6 +1386,15 @@ public class PlaceableObject : MonoBehaviour
 
     /// <summary>
     /// Override the instance material's shader and properties from a source material.
+    private System.Collections.IEnumerator DebugMatsNextFrame()
+    {
+        yield return null;
+        if (_renderer == null) yield break;
+        var mats = _renderer.sharedMaterials;
+        for (int d = 0; d < mats.Length; d++)
+            Debug.Log($"[PO-DROP+1] {name} slot {d}: {(mats[d] != null ? mats[d].name + " shader=" + mats[d].shader.name : "NULL")}");
+    }
+
     /// Call AFTER Awake (which creates _instanceMats) and BEFORE InteractableHighlight
     /// caches base materials. Preserves the material reference so pickup/place still works.
     /// </summary>

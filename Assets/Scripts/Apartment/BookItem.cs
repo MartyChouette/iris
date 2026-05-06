@@ -62,10 +62,10 @@ public class BookItem : MonoBehaviour
         _reactable.IsActive = true;
         _reactable.IsPrivate = true;
 
-        // Books are "at home" on their bookcase spawn position or the coffee table
+        // Books are "at home" on their bookcase spawn position
         var placeable = GetComponent<PlaceableObject>();
         if (placeable != null)
-            placeable.ConfigureHome(altHomeZone: "CoffeeTable", useSpawnAsHome: true);
+            placeable.ConfigureHome(useSpawnAsHome: true);
     }
 
     /// <summary>
