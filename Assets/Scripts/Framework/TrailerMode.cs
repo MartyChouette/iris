@@ -9,7 +9,7 @@ public class TrailerMode : MonoBehaviour
 {
     [Header("Settings")]
     [Tooltip("Key to toggle UI visibility.")]
-    [SerializeField] private KeyCode _toggleKey = KeyCode.F8;
+    [SerializeField] private KeyCode _toggleKey = KeyCode.F10;
 
     [Tooltip("Also hide the cursor when UI is hidden.")]
     [SerializeField] private bool _hideCursor = true;
