@@ -35528,3 +35528,23 @@ ProjectSettings/TagManager.asset
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_134147
+### Commits
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+---
+
+## Session End: 20260506_134527
+### Commits
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_135147
+### Commits
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scripts/Apartment/VinylDisc.cs
+production/session-logs/session-log.md
+---
+

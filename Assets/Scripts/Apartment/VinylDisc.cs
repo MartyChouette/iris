@@ -29,7 +29,7 @@ public class VinylDisc : MonoBehaviour
             Definition = sleeve.Definition;
         }
 
-        ApplyLabelColor();
+        // ApplyLabelColor(); // disabled — use stock record as-is
     }
 
     private void OnDestroy()
