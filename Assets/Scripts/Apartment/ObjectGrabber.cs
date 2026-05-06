@@ -3113,6 +3113,28 @@ public class ObjectGrabber : MonoBehaviour
             canPlace = _currentSurface.IsFloor || isTrashCan;
         }
 
+        // Shadow occluded: reject if the camera can't see the placement point
+        // (surface was found but the specific grid cell is behind geometry).
+        // Skip floors — camera sees through furniture to reach the floor.
+        if (canPlace && !_currentSurface.IsFloor)
+        {
+            int occMask = _wallLayer | _barrierLayer;
+            Vector3 camPos = cam.transform.position;
+            Vector3 toPlace = placePos - camPos;
+            float dist = toPlace.magnitude;
+            if (dist > 0.1f && Physics.Raycast(camPos, toPlace / dist,
+                    out RaycastHit occHit, dist - 0.05f, occMask))
+            {
+                bool sameFurniture = occHit.transform.IsChildOf(_currentSurface.transform)
+                                  || _currentSurface.transform.IsChildOf(occHit.transform);
+                if (!sameFurniture && _currentSurface.transform.parent != null
+                    && occHit.transform.parent == _currentSurface.transform.parent)
+                    sameFurniture = true;
+                if (!sameFurniture)
+                    canPlace = false;
+            }
+        }
+
         // Barrier: blocked if placement overlaps barrier geometry.
         // Skip for wall surfaces — the wall itself is on the barrier layer.
         if (canPlace && _barrierLayer != 0 && !_currentSurface.IsVertical)

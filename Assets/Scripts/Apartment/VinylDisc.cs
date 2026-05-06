@@ -18,9 +18,15 @@ public class VinylDisc : MonoBehaviour
     public AlbumSleeve HomeSleeve { get; private set; }
 
     private Material _labelMat;
+    private Vector3 _originalLossyScale;
+
+    /// <summary>World scale captured at Awake — used to restore correct scale after reparenting.</summary>
+    public Vector3 OriginalScale => _originalLossyScale;
 
     private void Awake()
     {
+        _originalLossyScale = transform.lossyScale;
+
         // Cache definition from parent AlbumSleeve
         var sleeve = GetComponentInParent<AlbumSleeve>();
         if (sleeve != null)

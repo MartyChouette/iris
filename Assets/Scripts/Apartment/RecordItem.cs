@@ -17,7 +17,7 @@ public class RecordItem : MonoBehaviour
 
     private void Awake()
     {
-        ApplyAlbumArt();
+        // Album art disabled — vinyl stays stock black
     }
 
     private void OnDestroy()

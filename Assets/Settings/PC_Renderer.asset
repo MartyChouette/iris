@@ -17,7 +17,7 @@ MonoBehaviour:
     passTag: HeldItemOnTop
     Event: 300
     filterSettings:
-      RenderQueueType: 0
+      RenderQueueType: 2
       LayerMask:
         serializedVersion: 2
         m_Bits: 262144

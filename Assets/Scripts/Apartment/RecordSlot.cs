@@ -29,8 +29,8 @@ public class RecordSlot : MonoBehaviour
     [Tooltip("Transform of the disc visual (rotated during playback).")]
     [SerializeField] private Transform _discVisual;
 
-    [Tooltip("Renderer on the disc visual for changing label color.")]
-    [SerializeField] private Renderer _discRenderer;
+    [Tooltip("Felt mat on the platter — hidden when a record is loaded.")]
+    [SerializeField] private GameObject _platterFelt;
 
     [Tooltip("Target rotation speed in degrees/second while playing.")]
     [SerializeField] private float _rotationSpeed = 33.3f;
@@ -69,7 +69,6 @@ public class RecordSlot : MonoBehaviour
 
     private PlaceableObject _loadedPlaceable;
     private VinylDisc _loadedVinyl;
-    private Material _labelMat;
     private bool _isPlaying;
     private float _currentSpinSpeed;
     private Coroutine _lidTween;
@@ -106,18 +105,11 @@ public class RecordSlot : MonoBehaviour
             _lid.localRotation = Quaternion.Euler(_lidClosedAngle);
         }
 
-        if (_discRenderer != null)
-        {
-            _labelMat = new Material(_discRenderer.sharedMaterial);
-            _discRenderer.material = _labelMat;
-        }
     }
 
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
-        if (_labelMat != null)
-            Object.Destroy(_labelMat);
     }
 
     private void Update()
@@ -169,8 +161,9 @@ public class RecordSlot : MonoBehaviour
         held.transform.SetParent(null, true);
         held.transform.position = anchor.position;
         held.transform.rotation = anchor.rotation;
+        held.transform.localScale = vinyl.OriginalScale;
 
-        // Label color swap removed — use the stock black record as-is
+        SetFeltVisible(false);
 
         // Auto-open lid when accepting a record (player must close it manually)
         OpenLid();
@@ -292,6 +285,7 @@ public class RecordSlot : MonoBehaviour
 
         _loadedPlaceable = null;
         _loadedVinyl = null;
+        SetFeltVisible(true);
 
         if (_stopSFX != null)
             AudioManager.Instance?.PlaySFX(_stopSFX);
@@ -322,6 +316,7 @@ public class RecordSlot : MonoBehaviour
         var result = _loadedPlaceable;
         _loadedPlaceable = null;
         _loadedVinyl = null;
+        SetFeltVisible(true);
 
         if (_stopSFX != null)
             AudioManager.Instance?.PlaySFX(_stopSFX);
@@ -357,6 +352,7 @@ public class RecordSlot : MonoBehaviour
 
         _loadedPlaceable = null;
         _loadedVinyl = null;
+        SetFeltVisible(true);
     }
 
     private void StopPlaybackInternal()
@@ -424,5 +420,11 @@ public class RecordSlot : MonoBehaviour
         }
         _lid.localRotation = targetRot;
         _lidTween = null;
+    }
+
+    private void SetFeltVisible(bool visible)
+    {
+        if (_platterFelt != null)
+            _platterFelt.SetActive(visible);
     }
 }

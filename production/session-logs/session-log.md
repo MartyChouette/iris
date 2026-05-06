@@ -35548,3 +35548,260 @@ Assets/Scripts/Apartment/VinylDisc.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_135410
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+---
+
+## Session End: 20260506_135510
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_140358
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_140934
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_141056
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_141529
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_141803
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_144904
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_145119
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_145329
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_145407
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_150256
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_150516
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_151342
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_151359
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_151701
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_152329
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/PLACHOLDER_DANCE_Northern Soul Spin_NEMA.fbx.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_153005
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/PLACHOLDER_DANCE_Northern Soul Spin_NEMA.fbx.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_153018
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/PLACHOLDER_DANCE_Northern Soul Spin_NEMA.fbx.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_153137
+### Commits
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/PLACHOLDER_DANCE_Northern Soul Spin_NEMA.fbx.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/RecordItem.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
