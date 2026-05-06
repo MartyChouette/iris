@@ -59,6 +59,16 @@ public class AffectionBar : MonoBehaviour
     [Tooltip("Pot color.")]
     [SerializeField] private Color _potColor = new Color(0.65f, 0.35f, 0.2f, 0.9f);
 
+    [Header("Art Overrides (drop sprites here to replace procedural shapes)")]
+    [Tooltip("Flower crown / bloom sprite. Replaces the procedural circle.")]
+    [SerializeField] private Sprite _flowerCrownSprite;
+
+    [Tooltip("Leaf sprite. Used for both left and right leaves (right is mirrored).")]
+    [SerializeField] private Sprite _leafSprite;
+
+    [Tooltip("Pot sprite. Replaces the procedural rectangle at the base.")]
+    [SerializeField] private Sprite _potSprite;
+
     private GameObject _canvasRoot;
     private RectTransform _stemRT;
     private RectTransform _flowerRT;
@@ -335,6 +345,7 @@ public class AffectionBar : MonoBehaviour
         potRT.anchoredPosition = new Vector2(0f, 2f);
         potRT.sizeDelta = new Vector2(_potWidth, _potHeight);
         var potImg = potGO.AddComponent<Image>();
+        if (_potSprite != null) { potImg.sprite = _potSprite; potImg.type = Image.Type.Simple; potImg.preserveAspect = true; }
         potImg.color = _potColor;
         potImg.raycastTarget = false;
 
@@ -381,6 +392,7 @@ public class AffectionBar : MonoBehaviour
         _flowerRT.pivot = new Vector2(0.5f, 0.5f);
         _flowerRT.sizeDelta = new Vector2(_flowerMinSize, _flowerMinSize);
         _flowerImage = flowerGO.AddComponent<Image>();
+        if (_flowerCrownSprite != null) { _flowerImage.sprite = _flowerCrownSprite; _flowerImage.type = Image.Type.Simple; _flowerImage.preserveAspect = true; }
         _flowerImage.color = _budColor;
         _flowerImage.raycastTarget = false;
 
@@ -394,11 +406,12 @@ public class AffectionBar : MonoBehaviour
         _leafLeftRT.sizeDelta = new Vector2(_leafSize, _leafSize * 0.6f);
         _leafLeftRT.localRotation = Quaternion.Euler(0f, 0f, 30f);
         var leafLImg = leafLGO.AddComponent<Image>();
+        if (_leafSprite != null) { leafLImg.sprite = _leafSprite; leafLImg.type = Image.Type.Simple; leafLImg.preserveAspect = true; }
         leafLImg.color = _leafColor;
         leafLImg.raycastTarget = false;
         leafLGO.SetActive(false);
 
-        // Right leaf
+        // Right leaf (mirrored)
         var leafRGO = new GameObject("LeafRight");
         leafRGO.transform.SetParent(rootGO.transform, false);
         _leafRightRT = leafRGO.AddComponent<RectTransform>();
@@ -408,6 +421,7 @@ public class AffectionBar : MonoBehaviour
         _leafRightRT.sizeDelta = new Vector2(_leafSize, _leafSize * 0.6f);
         _leafRightRT.localRotation = Quaternion.Euler(0f, 0f, -30f);
         var leafRImg = leafRGO.AddComponent<Image>();
+        if (_leafSprite != null) { leafRImg.sprite = _leafSprite; leafRImg.type = Image.Type.Simple; leafRImg.preserveAspect = true; _leafRightRT.localScale = new Vector3(-1f, 1f, 1f); }
         leafRImg.color = _leafColor;
         leafRImg.raycastTarget = false;
         leafRGO.SetActive(false);

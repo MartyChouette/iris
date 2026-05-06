@@ -35230,3 +35230,38 @@ Assets/apartment_blockout_detail_3rd_pass_blue.blend.meta
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_030947
+### Commits
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+---
+
+## Session End: 20260506_031418
+### Commits
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/Scripts/UI/AffectionBar.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_031636
+### Commits
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/UI/AffectionBar.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_031708
+### Commits
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+### Uncommitted Changes
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/UI/AffectionBar.cs
+production/session-logs/session-log.md
+---
+

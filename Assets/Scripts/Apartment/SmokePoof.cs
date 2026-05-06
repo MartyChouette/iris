@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public static class SmokePoof
 {
+    /// <summary>Assign a sprite to use for smoke particles instead of the default blob. Set via SmokePoof.ParticleSprite = yourSprite.</summary>
+    public static Texture2D ParticleSprite { get; set; }
+
     public static void Spawn(Vector3 position, float radius = 0.15f, Color? color = null)
     {
         var go = new GameObject("SmokePoof");
@@ -71,6 +74,8 @@ public static class SmokePoof
             var mat = new Material(shader);
             mat.SetFloat("_Surface", 1f);
             mat.SetFloat("_Blend", 0f);
+            if (ParticleSprite != null)
+                mat.mainTexture = ParticleSprite;
             renderer.material = mat;
         }
 
