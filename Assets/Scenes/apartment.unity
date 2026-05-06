@@ -26147,7 +26147,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.0038958797, y: 0.0028726973, z: 0.0027514757}
   m_Center: {x: -0.00000040250183, y: -0.0000022983265, z: 0.000033027907}
@@ -51948,7 +51948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21110004
+      value: 0.129
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51956,23 +51956,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071069
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4090839159633749414, guid: 0997c90faec8fa44f9f015c885d8cbb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -84031,7 +84031,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.35, y: 0.22, z: 0.25}
   m_Center: {x: -0.000002326445, y: -0.000000010336348, z: 0.0006092047}

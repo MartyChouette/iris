@@ -35265,3 +35265,83 @@ Assets/Scripts/UI/AffectionBar.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_031835
+### Commits
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+6f4eb51 SetRenderOnTop works for all shaders (URP Lit, PSX, etc): disable depth passes + SetFloat _ZTest
+---
+
+## Session End: 20260506_033010
+### Commits
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/heels/heels_l/Beige linen fabric.mat
+Assets/ArtAssets/3dModels/heels/heels_l/heels_l_normal.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_033210
+### Commits
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/heels/heels_l/Beige linen fabric.mat
+Assets/ArtAssets/3dModels/heels/heels_l/heels_l_normal.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_033328
+### Commits
+3100f8c add TrailerMode: F8 toggles all UI off for clean trailer recording
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/heels/heels_l/Beige linen fabric.mat
+Assets/ArtAssets/3dModels/heels/heels_l/heels_l_normal.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_033617
+### Commits
+a26f067 TrailerMode: change toggle key to F10
+3100f8c add TrailerMode: F8 toggles all UI off for clean trailer recording
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/heels/heels_l/Beige linen fabric.mat
+Assets/ArtAssets/3dModels/heels/heels_l/heels_l_normal.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_033700
+### Commits
+a26f067 TrailerMode: change toggle key to F10
+3100f8c add TrailerMode: F8 toggles all UI off for clean trailer recording
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/heels/heels_l/Beige linen fabric.mat
+Assets/ArtAssets/3dModels/heels/heels_l/heels_l_normal.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_050847
+### Commits
+a26f067 TrailerMode: change toggle key to F10
+3100f8c add TrailerMode: F8 toggles all UI off for clean trailer recording
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/heels/heels_l/Beige linen fabric.mat
+Assets/ArtAssets/3dModels/heels/heels_l/heels_l_normal.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
