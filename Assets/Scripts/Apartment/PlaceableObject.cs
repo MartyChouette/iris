@@ -1341,10 +1341,28 @@ public class PlaceableObject : MonoBehaviour
     private static Shader s_heldOnTopShader;
     private static bool s_heldOnTopShaderCached;
 
+    private static int s_heldItemLayer = -1;
+    private int _savedLayer;
+
     public void SetRenderOnTop(bool onTop)
     {
-        // No-op: disabled to diagnose white material issue.
-        // TODO: re-enable once material pipeline is stable.
+        // Layer-based approach: move to HeldItem layer (rendered with ZTest Always
+        // via URP Render Objects feature). Works for ANY shader.
+        if (s_heldItemLayer < 0)
+        {
+            s_heldItemLayer = LayerMask.NameToLayer("HeldItem");
+            if (s_heldItemLayer < 0) s_heldItemLayer = 18; // fallback (was StickerPad)
+        }
+
+        if (onTop)
+        {
+            _savedLayer = gameObject.layer;
+            SetLayerRecursive(gameObject, s_heldItemLayer);
+        }
+        else
+        {
+            SetLayerRecursive(gameObject, _savedLayer);
+        }
 
         // Cascade to paired/stacked child PlaceableObjects (each owns its own state)
         foreach (Transform child in transform)
@@ -1353,6 +1371,13 @@ public class PlaceableObject : MonoBehaviour
             if (childPlaceable != null)
                 childPlaceable.SetRenderOnTop(onTop);
         }
+    }
+
+    private static void SetLayerRecursive(GameObject go, int layer)
+    {
+        go.layer = layer;
+        for (int i = 0; i < go.transform.childCount; i++)
+            SetLayerRecursive(go.transform.GetChild(i).gameObject, layer);
     }
 
     // ── Material restore ──────────────────────────────────────────────

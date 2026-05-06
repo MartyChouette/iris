@@ -35345,3 +35345,186 @@ Assets/Scenes/apartment.unity
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_051042
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+a26f067 TrailerMode: change toggle key to F10
+3100f8c add TrailerMode: F8 toggles all UI off for clean trailer recording
+2ea0132 add artist sprite slots: flower gauge (crown/leaf/pot), smoke poof, heart particle
+2977774 material pipeline fixes: guard glitch to PSX-only, disable InteractableHighlight auto-add, MPB for color tinting
+---
+
+## Session End: 20260506_114100
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_114314
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_120403
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_120619
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_120655
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_120724
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_121233
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_124004
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/jar_short/Polished Oak Wood.001.mat
+Assets/ArtAssets/3dModels/jar_short/metal.001.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_125133
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/jar_short/Polished Oak Wood.001.mat
+Assets/ArtAssets/3dModels/jar_short/metal.001.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_125307
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/jar_short/Polished Oak Wood.001.mat
+Assets/ArtAssets/3dModels/jar_short/metal.001.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_125317
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/jar_short/Polished Oak Wood.001.mat
+Assets/ArtAssets/3dModels/jar_short/metal.001.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_125447
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/jar_short/Polished Oak Wood.001.mat
+Assets/ArtAssets/3dModels/jar_short/metal.001.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_125749
+### Commits
+289358f scene updates, SSAO tweak, heels material fix, UI art folders + meta files
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/jar_short/Polished Oak Wood.001.mat
+Assets/ArtAssets/3dModels/jar_short/metal.001.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_132524
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/jar_short/Polished Oak Wood.001.mat
+Assets/ArtAssets/3dModels/jar_short/metal.001.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+ProjectSettings/TagManager.asset
+production/session-logs/session-log.md
+---
+

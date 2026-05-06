@@ -28,7 +28,7 @@ TagManager:
   - Placeable
   - Cleanable
   - Face
-  - StickerPad
+  - HeldItem
   - Plants
   - Drawers
   - Perfumes

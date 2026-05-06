@@ -128,7 +128,7 @@ public class MainMenuManager : MonoBehaviour
         if (_saveSlotBackButton != null) _saveSlotBackButton.onClick.AddListener(OnSaveSlotBack);
 
         BuildQuitConfirmPanel();
-        BuildMusicVotePanel();
+        // BuildMusicVotePanel(); // disabled for trailer
 
         // Skip mode select — go straight to demo game panel
         if (_demoConfig != null)
