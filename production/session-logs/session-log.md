@@ -36837,3 +36837,174 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_202932
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+---
+
+## Session End: 20260506_203238
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_203556
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_203605
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_203633
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_210140
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Resources/Audio/tamagotchi_alert.wav
+Assets/Resources/Audio/tamagotchi_alert.wav.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_210239
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Resources/Audio/tamagotchi_alert.wav
+Assets/Resources/Audio/tamagotchi_alert.wav.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_210405
+### Commits
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Resources/Audio/tamagotchi_alert.wav
+Assets/Resources/Audio/tamagotchi_alert.wav.meta
+Assets/Scripts/Apartment/SettleBounce.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_211909
+### Commits
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Resources/Audio/tamagotchi_alert.wav
+Assets/Resources/Audio/tamagotchi_alert.wav.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_221729
+### Commits
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+### Uncommitted Changes
+Assets/Resources/Audio/tamagotchi_alert.wav
+Assets/Resources/Audio/tamagotchi_alert.wav.meta
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_222254
+### Commits
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+### Uncommitted Changes
+Assets/Resources/Audio/tamagotchi_alert.wav
+Assets/Resources/Audio/tamagotchi_alert.wav.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_222326
+### Commits
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+---
+
+## Session End: 20260506_222613
+### Commits
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+### Uncommitted Changes
+Assets/Scripts/Bookcase/DrawerController.cs
+production/session-logs/session-log.md
+---
+
