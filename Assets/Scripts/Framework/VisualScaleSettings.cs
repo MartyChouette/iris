@@ -47,20 +47,24 @@ public class VisualScaleSettings : ScriptableObject
 
     // ── Singleton access ──
     private static VisualScaleSettings s_instance;
+    private static bool s_loaded;
+
     public static VisualScaleSettings Instance
     {
         get
         {
-            if (s_instance == null)
+            if (!s_loaded)
             {
+                s_loaded = true;
                 s_instance = Resources.Load<VisualScaleSettings>("VisualScaleSettings")
                           ?? Resources.Load<VisualScaleSettings>("Visual Scale Settings");
                 if (s_instance == null)
-                {
                     s_instance = CreateInstance<VisualScaleSettings>();
-                }
             }
             return s_instance;
         }
     }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() { s_instance = null; s_loaded = false; }
 }

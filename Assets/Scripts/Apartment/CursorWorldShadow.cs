@@ -98,11 +98,17 @@ public class CursorWorldShadow : MonoBehaviour
         _baseShadowAlpha = _shadowMat.GetColor("_ShadowColor").a;
     }
 
+    private float _cursorContextRetry;
+
     private void SyncCursorTexture()
     {
-        // Try to find CursorContext each frame until found (flower scene fallback)
-        if (_cursorContext == null)
+        // Try to find CursorContext periodically until found (flower scene fallback)
+        if (_cursorContext == null && _cursorContextRetry <= 0f)
+        {
             _cursorContext = FindAnyObjectByType<CursorContext>();
+            _cursorContextRetry = 2f; // retry every 2s, not every frame
+        }
+        if (_cursorContextRetry > 0f) _cursorContextRetry -= Time.deltaTime;
 
         // Pick texture: CursorContext active texture > serialized fallback
         Texture2D desired = null;

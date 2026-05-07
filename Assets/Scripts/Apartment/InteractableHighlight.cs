@@ -305,6 +305,7 @@ public class InteractableHighlight : MonoBehaviour
 
     // Fallback color pulse — used when custom highlight shaders are missing (builds)
     private bool _fallbackPulsing;
+    private MaterialPropertyBlock _cachedMPB;
     private static readonly int BaseColorID = Shader.PropertyToID("_BaseColor");
     private static readonly int ColorID = Shader.PropertyToID("_Color");
 
@@ -340,14 +341,14 @@ public class InteractableHighlight : MonoBehaviour
         float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 4f);
         Color tint = Color.Lerp(Color.white, pulseColor, pulse * 0.6f);
 
-        var mpb = new MaterialPropertyBlock();
+        if (_cachedMPB == null) _cachedMPB = new MaterialPropertyBlock();
         for (int i = 0; i < _renderers.Length; i++)
         {
             if (_renderers[i] == null) continue;
-            _renderers[i].GetPropertyBlock(mpb);
-            mpb.SetColor(BaseColorID, tint);
-            mpb.SetColor(ColorID, tint);
-            _renderers[i].SetPropertyBlock(mpb);
+            _renderers[i].GetPropertyBlock(_cachedMPB);
+            _cachedMPB.SetColor(BaseColorID, tint);
+            _cachedMPB.SetColor(ColorID, tint);
+            _renderers[i].SetPropertyBlock(_cachedMPB);
         }
     }
 
