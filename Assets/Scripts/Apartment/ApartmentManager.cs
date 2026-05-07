@@ -223,6 +223,9 @@ public class ApartmentManager : MonoBehaviour
     {
         GlobalCursorManager.EnsureExists();
 
+        // Fade out menu music as soon as the apartment scene begins
+        MusicDirector.Instance?.FadeOutMenuMusic();
+
         if (areas == null || areas.Length == 0)
         {
             Debug.LogError("[ApartmentManager] No areas assigned.");
