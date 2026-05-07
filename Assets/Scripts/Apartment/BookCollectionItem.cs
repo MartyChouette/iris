@@ -148,15 +148,6 @@ public class BookCollectionItem : MonoBehaviour
         var reward = Instantiate(_rewardPrefab, spawnPos, Quaternion.identity);
         reward.layer = LayerMask.NameToLayer("Placeable");
 
-        // Snap to nearest surface
-        var placeable = reward.GetComponent<PlaceableObject>();
-        if (placeable != null)
-        {
-            var surface = PlacementSurface.FindNearest(spawnPos, skipVertical: true);
-            if (surface != null)
-                placeable.OnPlaced(surface, true, spawnPos, reward.transform.rotation);
-        }
-
         // Caption
         if (!string.IsNullOrEmpty(_rewardCaption))
             CaptionDisplay.Show(_rewardCaption, 3f);

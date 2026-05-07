@@ -140,7 +140,8 @@ public class BlanketItem : MonoBehaviour
                 if (_hiddenItemPrefabs[i] == null) continue;
                 Quaternion spawnRot = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
                 Vector3 itemPos = spawnPos + Vector3.right * (i * 0.1f);
-                Instantiate(_hiddenItemPrefabs[i], itemPos, spawnRot);
+                var spawned = Instantiate(_hiddenItemPrefabs[i], itemPos, spawnRot);
+                spawned.layer = LayerMask.NameToLayer("Placeable");
                 // PlacementFlash.Spawn(itemPos); // TODO: replace with better reveal effect
                 Debug.Log($"[BlanketItem] Spawned hidden item: {_hiddenItemPrefabs[i].name}");
             }
