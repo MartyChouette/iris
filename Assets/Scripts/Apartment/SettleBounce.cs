@@ -10,6 +10,16 @@ public class SettleBounce : MonoBehaviour
 {
     public void Play(Vector3 baseScale)
     {
+        // Kill any existing bounce on this object so they don't stack
+        foreach (var existing in GetComponents<SettleBounce>())
+        {
+            if (existing != this)
+            {
+                existing.StopAllCoroutines();
+                Destroy(existing);
+            }
+        }
+        transform.localScale = baseScale;
         StartCoroutine(Bounce(baseScale));
     }
 
