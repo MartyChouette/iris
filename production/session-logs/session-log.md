@@ -37020,3 +37020,36 @@ e1dc609 fix pair snap preview position — show at actual landing spot, not half
 fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
 ---
 
+## Session End: 20260506_230737
+### Commits
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+---
+
+## Session End: 20260506_231857
+### Commits
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
