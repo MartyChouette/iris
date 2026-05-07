@@ -36983,3 +36983,28 @@ Assets/Scenes/apartment.unity
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_222326
+### Commits
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+---
+
+## Session End: 20260506_222613
+### Commits
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+### Uncommitted Changes
+Assets/Scripts/Bookcase/DrawerController.cs
+production/session-logs/session-log.md
+---
+
