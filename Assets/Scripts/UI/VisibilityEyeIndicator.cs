@@ -108,7 +108,7 @@ public class VisibilityEyeIndicator : MonoBehaviour
         }
         else
         {
-            var loadedClosed = Resources.Load<Sprite>("UI/eye_closed");
+            var loadedClosed = Resources.Load<Sprite>("UI/eye_close");
             if (loadedClosed != null)
             {
                 _closedEyeSprite = loadedClosed;
@@ -176,13 +176,7 @@ public class VisibilityEyeIndicator : MonoBehaviour
 
     private void OnItemPlaced(PlaceableObject placed)
     {
-        if (placed == null) return;
-
-        // Only show for items that the date can react to
-        var tag = placed.GetComponent<ReactableTag>();
-        if (tag == null) return;
-
-        ShowIcon(placed.transform, tag.IsPrivate);
+        // Eye icons only show on drawer open/close, not on regular placement.
     }
 
     private void OnDrawerChanged(DrawerController drawer, bool isClosed, PlaceableObject[] items)
@@ -194,11 +188,27 @@ public class VisibilityEyeIndicator : MonoBehaviour
         }
         else
         {
-            // Door opened — show open eye on each revealed item
+            // Door opened — clear the closed eye from the drawer
+            ClearIcon(drawer.transform);
+
+            // Show open eye on each revealed item
             for (int i = 0; i < items.Length; i++)
             {
                 if (items[i] != null && items[i].gameObject.activeInHierarchy)
                     ShowIcon(items[i].transform, false);
+            }
+        }
+    }
+
+    private void ClearIcon(Transform target)
+    {
+        for (int i = _active.Count - 1; i >= 0; i--)
+        {
+            if (_active[i].target == target)
+            {
+                _active[i].go.SetActive(false);
+                _pool.Enqueue(_active[i]);
+                _active.RemoveAt(i);
             }
         }
     }

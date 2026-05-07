@@ -36503,3 +36503,222 @@ Assets/Settings/PC_Renderer.asset
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_191906
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+---
+
+## Session End: 20260506_192134
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_192142
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_192201
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_192353
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_192511
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scripts/Framework/MainMenuManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_193303
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_194041
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_194246
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_194410
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_194546
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_194947
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_195332
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_195450
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_195605
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_195633
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_200256
+### Commits
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Resources/UI/eye_close.png
+Assets/Resources/UI/eye_close.png.meta
+Assets/Resources/UI/eye_open.png
+Assets/Resources/UI/eye_open.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Bookcase/DrawerController.cs
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/VisibilityEyeIndicator.cs
+production/session-logs/session-log.md
+---
+

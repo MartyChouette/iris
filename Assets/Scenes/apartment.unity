@@ -2949,6 +2949,218 @@ Transform:
   - {fileID: 671882390}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &136032967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 136032975}
+  - component: {fileID: 136032974}
+  - component: {fileID: 136032973}
+  - component: {fileID: 136032972}
+  - component: {fileID: 136032971}
+  - component: {fileID: 136032970}
+  - component: {fileID: 136032969}
+  - component: {fileID: 136032968}
+  m_Layer: 15
+  m_Name: milk box.002 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &136032968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3921d45efb345be428ab4ac1b748574f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableHighlight
+  _itemStyle: -1
+  _highlightShader: {fileID: 0}
+  _outlineShader: {fileID: 0}
+  _overlayShader: {fileID: 0}
+  _interactShader: {fileID: 0}
+--- !u!114 &136032969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d92a0b32c32b14dae1b8e91f7eceef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReactableTag
+  displayName: 
+  tags: []
+  isActive: 1
+  reactionIcon: {fileID: 0}
+  smellAmount: 0
+--- !u!114 &136032970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71b51f9af8c6194ab521348af2210a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaceableObject
+  heldBrightness: 1.4
+  respawnDelay: 0.5
+  _itemCategory: 0
+  _homeZoneName: Fridge
+  _altHomeZoneName: 
+  _itemDescription: An unopened milk carton, still sweet and innocent.
+  _smellPerDay: 0
+  _daysLeftOut: 0
+  canWallMount: 0
+  wallOnly: 0
+  crookedAngleRange: 12
+  _rotateMode: 0
+  _rotatePivot: {fileID: 0}
+  _allowAutoStraighten: 1
+  _disheveledRotation: {x: 0, y: -0.42261827, z: 0, w: 0.90630776}
+  _startDishelved: 1
+  _pickupSFXOverride: {fileID: 8300000, guid: c284ad04b9782384d9a44b855673afe0, type: 3}
+  _placeSFXOverride: {fileID: 8300000, guid: c284ad04b9782384d9a44b855673afe0, type: 3}
+  _useSpawnAsHome: 0
+  _homePosition: {x: 1.5940895, y: 0.95199996, z: -2.3484478}
+  _homeTolerance: 0.2
+  _homeRotation: {x: -0.49942014, y: -0.50057924, z: -0.50057936, w: 0.49942005}
+--- !u!54 &136032971
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &136032972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.084651, y: 0.084651, z: 0.14282656}
+  m_Center: {x: -0.0016019336, y: 0.000114560935, z: -0.025442481}
+--- !u!23 &136032973
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8aaeebdb147427c40a8c2d37949b6366, type: 2}
+  - {fileID: 2100000, guid: 9d5e993dbc3f7504a9c93077d85b382c, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &136032974
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  m_Mesh: {fileID: -4639149307983430140, guid: 38226613c0ce6be4f93b42f6b7b8ca12, type: 3}
+--- !u!4 &136032975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136032967}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.50000006, y: -0.5, z: -0.50000006, w: 0.4999999}
+  m_LocalPosition: {x: -3.468, y: 0.443, z: -0.186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &139230404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5910,11 +6122,11 @@ Transform:
   m_GameObject: {fileID: 224704480}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.773, y: 0.372, z: 0.284}
+  m_LocalPosition: {x: 2.773, y: 0.199, z: 0.284}
   m_LocalScale: {x: 0.45, y: 0.0005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 801454412}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &224704482
 MonoBehaviour:
@@ -10903,11 +11115,11 @@ Transform:
   m_GameObject: {fileID: 412025807}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.773, y: 0.8555, z: 0.284}
+  m_LocalPosition: {x: 2.773, y: 0.6555, z: 0.284}
   m_LocalScale: {x: 0.45, y: 0.0005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 801454412}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &412025809
 MonoBehaviour:
@@ -22595,12 +22807,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1450394868}
-  - {fileID: 949702574}
-  - {fileID: 412025808}
-  - {fileID: 224704481}
-  - {fileID: 1734822066}
-  - {fileID: 1166877767}
   - {fileID: 878294346}
   - {fileID: 814993380}
   - {fileID: 514071322}
@@ -27030,11 +27236,11 @@ Transform:
   m_GameObject: {fileID: 949702573}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.773, y: 0.372, z: 1.292}
+  m_LocalPosition: {x: 2.773, y: 0.199, z: 1.292}
   m_LocalScale: {x: 0.45, y: 0.0005, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 801454412}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &949702575
 MonoBehaviour:
@@ -36938,11 +37144,11 @@ Transform:
   m_GameObject: {fileID: 1166877766}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.773, y: 0.372, z: -0.724}
+  m_LocalPosition: {x: 2.773, y: 0.199, z: -0.724}
   m_LocalScale: {x: 0.45, y: 0.0005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 801454412}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1166877768
 MonoBehaviour:
@@ -44140,11 +44346,11 @@ Transform:
   m_GameObject: {fileID: 1450394867}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.773, y: 0.8555, z: 1.292}
+  m_LocalPosition: {x: 2.773, y: 0.6555, z: 1.292}
   m_LocalScale: {x: 0.45, y: 0.0005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 801454412}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1450394869
 MonoBehaviour:
@@ -52895,11 +53101,11 @@ Transform:
   m_GameObject: {fileID: 1734822065}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.773, y: 0.8555, z: -0.724}
+  m_LocalPosition: {x: 2.773, y: 0.6555, z: -0.724}
   m_LocalScale: {x: 0.45, y: 0.0005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 801454412}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1734822067
 MonoBehaviour:
@@ -55350,7 +55556,7 @@ MonoBehaviour:
   _hingeAtTop: 0
   slideDuration: 0.3
   contentsRoot: {fileID: 1001952124}
-  _interiorSurface: {fileID: 0}
+  _interiorSurface: {fileID: 224704482}
   _maxCapacity: 3
 --- !u!64 &1811261875
 MeshCollider:
@@ -58939,7 +59145,7 @@ MonoBehaviour:
   _hingeAtTop: 0
   slideDuration: 0.3
   contentsRoot: {fileID: 1001952124}
-  _interiorSurface: {fileID: 0}
+  _interiorSurface: {fileID: 949702575}
   _maxCapacity: 3
 --- !u!1 &1952427871
 GameObject:
@@ -60833,7 +61039,7 @@ MonoBehaviour:
   _hingeAtTop: 0
   slideDuration: 0.3
   contentsRoot: {fileID: 1343683273}
-  _interiorSurface: {fileID: 0}
+  _interiorSurface: {fileID: 1166877768}
   _maxCapacity: 3
 --- !u!64 &2026878524
 MeshCollider:
@@ -81157,6 +81363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Milk Carton
       objectReference: {fileID: 0}
+    - target: {fileID: 1558642255686185359, guid: b37889ec1493de446bcfaf827b964767, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2757564868447354530, guid: b37889ec1493de446bcfaf827b964767, type: 3}
       propertyPath: _homeZoneName
       value: Fridge
@@ -91865,7 +92075,6 @@ SceneRoots:
   - {fileID: 1202461448}
   - {fileID: 1651675478}
   - {fileID: 1994708122}
-  - {fileID: 1942182767}
   - {fileID: 1750278478}
   - {fileID: 955522063}
   - {fileID: 8455752373970492106}
@@ -91911,9 +92120,17 @@ SceneRoots:
   - {fileID: 7758307918097530549}
   - {fileID: 6243451016124370456}
   - {fileID: 3119486675020476908}
+  - {fileID: 136032975}
   - {fileID: 62138513}
   - {fileID: 1482258952}
   - {fileID: 2087950768}
   - {fileID: 519472465}
   - {fileID: 598752059}
   - {fileID: 887305161}
+  - {fileID: 1450394868}
+  - {fileID: 949702574}
+  - {fileID: 412025808}
+  - {fileID: 224704481}
+  - {fileID: 1734822066}
+  - {fileID: 1166877767}
+  - {fileID: 1942182767}

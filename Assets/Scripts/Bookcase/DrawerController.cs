@@ -277,11 +277,17 @@ public class DrawerController : MonoBehaviour
         var all = PlaceableObject.All;
         for (int i = 0; i < all.Count; i++)
         {
-            if (all[i].LastPlacedSurface != _interiorSurface) continue;
+            if (all[i] == null) continue;
+            // Match by surface reference OR physical containment
+            bool onSurface = all[i].LastPlacedSurface == _interiorSurface
+                          || _interiorSurface.ContainsWorldPoint(all[i].transform.position);
+            if (!onSurface) continue;
+
             var tag = all[i].GetComponent<ReactableTag>();
             if (tag != null)
             {
                 tag.IsPrivate = isPrivate;
+                all[i].SetLastPlacedSurface(_interiorSurface);
                 affected.Add(all[i]);
             }
         }

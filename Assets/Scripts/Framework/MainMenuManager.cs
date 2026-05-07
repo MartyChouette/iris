@@ -540,9 +540,12 @@ public class MainMenuManager : MonoBehaviour
 
         // Highlight the selected button, dim the others
         float sel = 0.5f, dim = 0.2f;
-        _cozyBtnImg.color   = mood == "Cozy"   ? _cozyTint * sel   : new Color(_cozyTint.r * dim,   _cozyTint.g * dim,   _cozyTint.b * dim,   0.7f);
-        _sadBtnImg.color    = mood == "Sad"    ? _sadTint * sel    : new Color(_sadTint.r * dim,    _sadTint.g * dim,    _sadTint.b * dim,    0.7f);
-        _creepyBtnImg.color = mood == "Creepy" ? _creepyTint * sel : new Color(_creepyTint.r * dim, _creepyTint.g * dim, _creepyTint.b * dim, 0.7f);
+        if (_cozyBtnImg != null)
+            _cozyBtnImg.color   = mood == "Cozy"   ? _cozyTint * sel   : new Color(_cozyTint.r * dim,   _cozyTint.g * dim,   _cozyTint.b * dim,   0.7f);
+        if (_sadBtnImg != null)
+            _sadBtnImg.color    = mood == "Sad"    ? _sadTint * sel    : new Color(_sadTint.r * dim,    _sadTint.g * dim,    _sadTint.b * dim,    0.7f);
+        if (_creepyBtnImg != null)
+            _creepyBtnImg.color = mood == "Creepy" ? _creepyTint * sel : new Color(_creepyTint.r * dim, _creepyTint.g * dim, _creepyTint.b * dim, 0.7f);
     }
 
     private void CastMusicVote()
