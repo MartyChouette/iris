@@ -36722,3 +36722,118 @@ Assets/Scripts/UI/VisibilityEyeIndicator.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_200603
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+---
+
+## Session End: 20260506_202005
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_202056
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_202146
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_202204
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_202311
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_202539
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_202718
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260506_202733
+### Commits
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+dd680a2 disable record label color swap in VinylDisc and RecordSlot — use stock record as-is
+8f97036 held items render on top via HeldItem layer + URP Render Objects, disable music vote panel
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

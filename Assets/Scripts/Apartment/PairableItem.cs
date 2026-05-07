@@ -499,7 +499,7 @@ public class PairableItem : MonoBehaviour
                 effectiveOffset = new Vector3(0.12f, 0f, 0f);
         }
         Vector3 localPos = GetSideBySideLocalOffset(root, held, effectiveOffset);
-        return root.TransformPoint(localPos * 0.5f);
+        return root.TransformPoint(localPos);
     }
 
     /// <summary>Walk up to the root of a paired stack.</summary>
