@@ -4143,7 +4143,7 @@ MonoBehaviour:
   _spinTransitionDuration: 1.5
   _platePlacementPoint: {fileID: 1278029631}
   _lid: {fileID: 8364049462700109229}
-  _lidClosedAngle: {x: -80, y: 0, z: 0}
+  _lidClosedAngle: {x: 330, y: 0, z: 0}
   _lidTweenDuration: 0.65
   _toneArm: {fileID: 8578709095878815570}
   snapRadius: 0.6
@@ -73190,7 +73190,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4bcaa0ca2c14c1e4cb6d59a687392356, type: 2}
-  - {fileID: 2100000, guid: ca585767a47e31d4ba74f5b8023a7ccc, type: 2}
+  - {fileID: 2100000, guid: f16f592fdacae954da3c3853b263e14d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78676,7 +78676,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ca585767a47e31d4ba74f5b8023a7ccc, type: 2}
+  - {fileID: 2100000, guid: f16f592fdacae954da3c3853b263e14d, type: 2}
   - {fileID: 2100000, guid: 4bcaa0ca2c14c1e4cb6d59a687392356, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -92136,7 +92136,7 @@ Transform:
   m_GameObject: {fileID: 9217234436500074490}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0.000000029802322, z: -0.000000029802322, w: 0.7071067}
-  m_LocalPosition: {x: -0.0069834287, y: 0.2651312, z: -0.4032197}
+  m_LocalPosition: {x: -0.007, y: 0.186, z: -0.5}
   m_LocalScale: {x: 2.3255813, y: 3.2258067, z: 4.5454545}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94644,7 +94644,7 @@ GameObject:
   - component: {fileID: 2380718650238024518}
   - component: {fileID: 9217234436500074491}
   m_Layer: 15
-  m_Name: Cube.027
+  m_Name: record_lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
