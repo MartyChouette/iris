@@ -18460,7 +18460,7 @@ MonoBehaviour:
   _lights:
   - {fileID: 1670408912}
   _startsOn: 0
-  _switchRenderer: {fileID: 6272350532747370043}
+  _switchRenderer: {fileID: 501147313}
   _onColor: {r: 0.95, g: 0.9, b: 0.7, a: 1}
   _offColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   _toggleSFX: {fileID: 0}
