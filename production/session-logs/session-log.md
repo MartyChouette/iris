@@ -37053,3 +37053,626 @@ Assets/Scenes/apartment.unity
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260506_233636
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+fac109d record fixes, placement occlusion, held-item render fix, Nema thinking model + materials
+---
+
+## Session End: 20260507_002424
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_002509
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_002606
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_002715
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_002813
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_002821
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_003020
+### Commits
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_003215
+### Commits
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_003502
+### Commits
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_003917
+### Commits
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_004244
+### Commits
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_004843
+### Commits
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_004908
+### Commits
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_004934
+### Commits
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_010707
+### Commits
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_011014
+### Commits
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_011111
+### Commits
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/BlanketItem.cs
+Assets/Scripts/Apartment/BookCollectionItem.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_011247
+### Commits
+2f41d51 fix: spawned items from collections/blankets are now movable
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_011646
+### Commits
+2f41d51 fix: spawned items from collections/blankets are now movable
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_012110
+### Commits
+2f41d51 fix: spawned items from collections/blankets are now movable
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_013242
+### Commits
+2f41d51 fix: spawned items from collections/blankets are now movable
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_013303
+### Commits
+2f41d51 fix: spawned items from collections/blankets are now movable
+a09db21 perf: fix per-frame allocations and expensive lookups
+77650bd Changed asset and location
+8e650a2 scene updates, Nema idle controller + model, new materials
+f000d29 merge: resolve scene conflict, take remote (juice models + glass materials)
+52ad04d Merge branch 'main' of https://github.com/MartyChouette/iris
+1c97774 Updated object in scene
+a51d72e revert drawer privacy to strict surface match — containment check was too broad
+1657262 replace all vase placeholder SFX with vassound.wav across scene
+14448a4 fix SettleBounce stacking — kill existing bounce before starting new one, reset scale
+97e2587 fixed some materials
+e1dc609 fix pair snap preview position — show at actual landing spot, not half-offset center
+1d0b869 fix drawer visibility eye icons, menu null crash, eye art updates
+1cf81f9 new art assets, flipbook particles, visual scale system, disable PSX swap, held-item render feature
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_091550
+### Commits
+514b396 fix: fade out menu music when apartment scene starts
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_215217
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_215230
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_215422
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_215721
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SettleBounce.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_215832
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SettleBounce.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_220109
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SettleBounce.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_221132
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SettleBounce.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_222622
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SettleBounce.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_222956
+### Commits
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_223024
+### Commits
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_223236
+### Commits
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_223343
+### Commits
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_223511
+### Commits
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_223808
+### Commits
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
