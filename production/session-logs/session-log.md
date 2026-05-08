@@ -37740,3 +37740,17 @@ production/session-logs/session-log.md
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260508_133635
+### Commits
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+---
+
+## Session End: 20260508_133740
+### Commits
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
