@@ -875,6 +875,16 @@ public class ObjectGrabber : MonoBehaviour
     {
         var placeable = _held;
 
+        // Kill any in-progress settle bounce and restore the true base scale
+        // so rapid pick-up/place cycles don't compound intermediate scale values.
+        var bounce = placeable.GetComponent<SettleBounce>();
+        if (bounce != null)
+        {
+            placeable.transform.localScale = bounce.BaseScale;
+            bounce.StopAllCoroutines();
+            Destroy(bounce);
+        }
+
         // Clear all highlight layers on the item being picked up
         var heldHL = placeable.GetComponent<InteractableHighlight>();
         if (heldHL != null)
@@ -2360,9 +2370,10 @@ public class ObjectGrabber : MonoBehaviour
 
                 // Occlusion check: reject surfaces whose placement point is
                 // hidden behind solid geometry (counter, bookshelf, etc.).
-                // Skip for floor surfaces — floor placement should never be
-                // blocked by furniture the camera looks through.
-                if (!surface.IsFloor)
+                // Skip for floor surfaces and cubby interiors — these are
+                // intentionally enclosed and would always fail occlusion.
+                bool isCubbyInterior = DrawerController.FindByInteriorSurface(surface) != null;
+                if (!surface.IsFloor && !isCubbyInterior)
                 {
                     Vector3 toProj = projectedPos - camPos;
                     float projDist = toProj.magnitude;
@@ -2434,6 +2445,28 @@ public class ObjectGrabber : MonoBehaviour
 
                 foundSurface = true;
                 break; // first valid, non-occluded surface wins
+            }
+        }
+
+        // Floor→cubby redirect: if we chose the floor but the grab target
+        // is directly above an open cubby's interior surface, snap to that
+        // surface instead. Prevents items falling through cubby shelves.
+        if (foundSurface && _currentSurface != null && _currentSurface.IsFloor)
+        {
+            var allDrawers = DrawerController.All;
+            for (int d = 0; d < allDrawers.Count; d++)
+            {
+                var interior = allDrawers[d].InteriorSurface;
+                if (interior == null) continue;
+                if (allDrawers[d].IsInteriorAndClosed(interior)) continue;
+                if (!interior.ContainsWorldPoint(_grabTarget))   continue;
+
+                // Grab target is over this cubby — redirect to its surface
+                var cubbyHit = interior.ProjectOntoSurface(_grabTarget, cam.transform.position);
+                _grabTarget = cubbyHit.worldPosition;
+                _currentSurface = interior;
+                _lastValidSurface = interior;
+                break;
             }
         }
 

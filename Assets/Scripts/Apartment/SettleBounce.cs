@@ -8,6 +8,11 @@ using UnityEngine;
 /// </summary>
 public class SettleBounce : MonoBehaviour
 {
+    private Vector3 _baseScale;
+
+    /// <summary>The true base scale this bounce animates around.</summary>
+    public Vector3 BaseScale => _baseScale;
+
     public void Play(Vector3 baseScale)
     {
         // Kill any existing bounce on this object so they don't stack
@@ -19,6 +24,7 @@ public class SettleBounce : MonoBehaviour
                 Destroy(existing);
             }
         }
+        _baseScale = baseScale;
         transform.localScale = baseScale;
         StartCoroutine(Bounce(baseScale));
     }
