@@ -1480,10 +1480,11 @@ public class ObjectGrabber : MonoBehaviour
         {
             _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
 
-            // Dust motes on heavy items (bounds volume > threshold)
-            float vol = _heldBoundsExtents.x * _heldBoundsExtents.y * _heldBoundsExtents.z * 8f;
-            if (vol > 0.005f)
-                SmokePoof.Spawn(_held.transform.position, 0.08f, new Color(0.75f, 0.7f, 0.65f, 0.3f));
+            // Poof card at item center, scaled to item size
+            Bounds b = new Bounds(_held.transform.position + _heldBoundsCenterOffset, _heldBoundsExtents * 2f);
+            float poofSize = Mathf.Max(b.size.x, b.size.y, b.size.z) * 1.2f;
+            poofSize = Mathf.Max(poofSize, 0.12f);
+            SmokePoof.Spawn(b.center, poofSize);
         }
 
         ClearHeld();
@@ -3129,10 +3130,14 @@ public class ObjectGrabber : MonoBehaviour
                 placeRot = _held.HomeRotation;
         }
 
-        // Shadow always sits directly under the ghost on the surface face.
-        // Derived from placePos so any override (home snap, etc.) keeps them aligned.
-        // Shadow sits just above the surface face to avoid z-fighting with the floor
-        Vector3 shadowPos = hitResult.worldPosition + hitResult.surfaceNormal * 0.02f;
+        // Shadow sits under the collider center (not the pivot) on the surface.
+        // Project the collider center offset onto the surface plane so the disc
+        // aligns with the visual mass of the object.
+        Vector3 centerOnSurface = placePos + Vector3.ProjectOnPlane(_heldBoundsCenterOffset, hitResult.surfaceNormal);
+        // Flatten back to surface height
+        Vector3 shadowPos = hitResult.worldPosition
+            + Vector3.ProjectOnPlane(centerOnSurface - placePos, hitResult.surfaceNormal)
+            + hitResult.surfaceNormal * 0.02f;
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
         bool canPlace = (!_currentSurface.IsVertical || _held.CanWallMount)
