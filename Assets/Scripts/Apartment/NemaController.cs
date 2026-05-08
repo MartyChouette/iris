@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Scene-scoped singleton that positions Nema's visible model in the apartment.
@@ -309,6 +310,20 @@ public class NemaController : MonoBehaviour
 
     private void UpdateLookTarget()
     {
+        // Priority 0: Hold spacebar → force look at camera
+        if (Keyboard.current != null && Keyboard.current.spaceKey.isPressed)
+        {
+            if (_cachedCamera == null) _cachedCamera = Camera.main;
+            if (_cachedCamera != null)
+            {
+                SetLookTarget(_cachedCamera.transform.position);
+                _interactionTimer = 0f;
+                _isBored = false;
+                _currentIdleMode = IdleMode.None;
+                return;
+            }
+        }
+
         bool isHolding = ObjectGrabber.IsHoldingObject && ObjectGrabber.HeldObject != null;
 
         // Priority 1: Look at held item
