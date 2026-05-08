@@ -294,6 +294,10 @@ public class VisibilityEyeIndicator : MonoBehaviour
 
         var go = new GameObject("VisEyeIcon");
         go.transform.SetParent(transform);
+        // Put on HeldItem layer so icons render via the overlay camera,
+        // which draws after post-processing (no DoubleExposure dithering).
+        int heldLayer = LayerMask.NameToLayer("HeldItem");
+        if (heldLayer >= 0) go.layer = heldLayer;
         var sr = go.AddComponent<SpriteRenderer>();
         sr.sortingOrder = 999;
         // Use the Iris/OverlaySprite shader which hard-codes ZTest Always and
