@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403b64e3aa7aa384aacf6bf7ab574619, type: 3}
   m_Name: DoubleExposureFeature
   m_EditorClassIdentifier: Assembly-CSharp::DoubleExposureFeature
-  m_Active: 1
+  m_Active: 0
   settings:
     feedbackDecay: 0.296
     blendIntensity: 0.592
