@@ -37676,3 +37676,67 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260507_223904
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+---
+
+## Session End: 20260507_224218
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_224817
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_225247
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_225413
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_225829
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_230045
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260507_230334
+### Commits
+18b3c6c chore: add Gunpla Sword prefab, remove test runner artifacts, update fonts
+273c007 fix: cubby placement falls through to floor + rapid-click scale drift
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
