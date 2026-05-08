@@ -58,6 +58,10 @@ public class ApartmentDebugPanel : MonoBehaviour
     private Slider _atmVignetteSlider;
     private Slider _atmGrainSlider;
 
+    // Time-of-day controls
+    private Slider _todSlider;
+    private TMP_Text _todLabel;
+
     private TMP_Text _saveStatusLabel;
 
     private const float FontSize = 16f;
@@ -122,8 +126,35 @@ public class ApartmentDebugPanel : MonoBehaviour
             SyncGrabSliders();
         }
 
+        // [ / ] scrub time of day (shift = fine 15min steps, normal = 1hr)
+        if (GameClock.Instance != null)
+        {
+            float step = Keyboard.current.leftShiftKey.isPressed ? 0.25f : 1f;
+            if (Keyboard.current.leftBracketKey.wasPressedThisFrame)
+                ScrubTime(-step);
+            else if (Keyboard.current.rightBracketKey.wasPressedThisFrame)
+                ScrubTime(step);
+        }
+
         if (_visible)
             UpdateInfo();
+    }
+
+    private void ScrubTime(float delta)
+    {
+        var clock = GameClock.Instance;
+        if (clock == null) return;
+
+        // Auto-pause so the clock doesn't keep ticking after scrub
+        DateDebugOverlay.IsTimePaused = true;
+
+        float hour = Mathf.Clamp(clock.CurrentHour + delta, 0f, 30f);
+        clock.SetHour(hour);
+
+        // Sync slider if panel is open
+        if (_todSlider != null)
+            _todSlider.SetValueWithoutNotify(hour);
+        UpdateTodLabel(hour);
     }
 
     /// <summary>Read current values from all systems and push to sliders.</summary>
@@ -131,6 +162,22 @@ public class ApartmentDebugPanel : MonoBehaviour
     {
         SyncGrabSliders();
         SyncAtmosphereSliders();
+
+        if (_todSlider != null && GameClock.Instance != null)
+        {
+            _todSlider.SetValueWithoutNotify(GameClock.Instance.CurrentHour);
+            UpdateTodLabel(GameClock.Instance.CurrentHour);
+        }
+    }
+
+    private void UpdateTodLabel(float hour)
+    {
+        if (_todLabel == null) return;
+        float displayHour = Mathf.Repeat(hour, 24f);
+        int h = Mathf.FloorToInt(displayHour);
+        int m = Mathf.FloorToInt((displayHour - h) * 60f);
+        string paused = DateDebugOverlay.IsTimePaused ? " (PAUSED)" : "";
+        _todLabel.text = $"Time: {h:D2}:{m:D2}{paused}";
     }
 
     private void SyncGrabSliders()
@@ -549,6 +596,20 @@ public class ApartmentDebugPanel : MonoBehaviour
                      if (_atmGrainLabel != null) _atmGrainLabel.text = $"Grain: {val:F2}"; },
             out _atmGrainLabel);
         _atmGrainSlider = GetLastSlider(cp);
+
+        // ── Time of Day ──
+        AddSectionHeader(cp, "TIME OF DAY  [ / ]", new Color(1f, 0.95f, 0.6f));
+        float initHour = GameClock.Instance != null ? GameClock.Instance.CurrentHour : 12f;
+        AddSliderRow(cp, "Hour", 0f, 30f, initHour,
+            val =>
+            {
+                if (GameClock.Instance == null) return;
+                DateDebugOverlay.IsTimePaused = true;
+                GameClock.Instance.SetHour(val);
+                UpdateTodLabel(val);
+            }, out _todLabel);
+        _todSlider = GetLastSlider(cp);
+        UpdateTodLabel(initHour);
 
         // ── Info readout ──
         AddSectionHeader(cp, "STATUS", new Color(0.8f, 0.9f, 0.8f));

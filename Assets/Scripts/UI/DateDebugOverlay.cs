@@ -14,7 +14,7 @@ public class DateDebugOverlay : MonoBehaviour
 
     /// <summary>When true, game timers (GameClock, prep timer, arrival timer) stop ticking
     /// but gameplay continues normally (movement, interaction, physics all work).</summary>
-    public static bool IsTimePaused { get; private set; }
+    public static bool IsTimePaused { get; set; }
 
     [SerializeField] private GameObject _overlayRoot;
     [SerializeField] private TMP_Text _debugText;

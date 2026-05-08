@@ -190,6 +190,18 @@ public class GameClock : MonoBehaviour
         Debug.Log($"[GameClock] Day {_currentDay} started at {_currentHour:F0}:00 (direct advance)");
     }
 
+    /// <summary>
+    /// Force the clock to a specific hour and fire OnHourChanged so
+    /// DayNightLighting / MoodMachine / etc. update immediately.
+    /// Useful for trailer capture — pair with DateDebugOverlay.IsTimePaused
+    /// so the clock doesn't keep ticking afterward.
+    /// </summary>
+    public void SetHour(float hour)
+    {
+        _currentHour = hour;
+        OnHourChanged?.Invoke(_currentHour);
+    }
+
     /// <summary>Debug shortcut to immediately advance to next day.</summary>
     public void ForceNewDay()
     {
