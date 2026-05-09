@@ -95,6 +95,9 @@ public class GlobalCursorManager : MonoBehaviour
     /// <summary>True when showing a context cursor (not default/grab).</summary>
     public bool IsContextCursor => _displayedType != CursorType.Default && _displayedType != CursorType.Grab;
 
+    /// <summary>Hotspot of the currently displayed cursor in pixel coords (top-left origin).</summary>
+    public Vector2 CurrentHotSpot => GetHotSpot(_displayedType);
+
     /// <summary>Returns the full-opacity source texture for the current cursor type. Used by PourCursorOverlay.</summary>
     public Texture2D GetCurrentCursorTexture()
     {
@@ -239,41 +242,46 @@ public class GlobalCursorManager : MonoBehaviour
         const int S = 32;
         Vector2 center = new Vector2(S / 2f, S / 2f);
 
-        _interactCursor = LoadOrGenerate("pinch", null); // pinch.png already exists
-        _interactHotSpot = Vector2.zero; // top-left (matches flower scene CursorContext)
+        // Load optional CursorConfig asset from Resources for Inspector-assigned
+        // textures and hotspots. Entries with no texture fall through to the
+        // existing LoadOrGenerate path.
+        var cfg = Resources.Load<CursorConfig>("CursorConfig");
 
-        _wateringCursor = LoadOrGenerate("watering", GenWateringPail(S));
-        _wateringHotSpot = new Vector2(6f, 2f);
+        _interactCursor = PickTexture(cfg?.interact, "pinch", null);
+        _interactHotSpot = cfg?.interact.texture != null ? cfg.interact.hotspot : Vector2.zero;
 
-        _fridgeCursor = LoadOrGenerate("fridge", GenFridge(S));
-        _fridgeHotSpot = center;
+        _wateringCursor = PickTexture(cfg?.watering, "watering", GenWateringPail(S));
+        _wateringHotSpot = cfg?.watering.texture != null ? cfg.watering.hotspot : new Vector2(6f, 2f);
 
-        _phoneCursor = LoadOrGenerate("phone", GenPhone(S));
-        _phoneHotSpot = center;
+        _fridgeCursor = PickTexture(cfg?.fridge, "fridge", GenFridge(S));
+        _fridgeHotSpot = cfg?.fridge.texture != null ? cfg.fridge.hotspot : center;
 
-        _drawerCursor = LoadOrGenerate("drawer", GenDrawer(S));
-        _drawerHotSpot = center;
+        _phoneCursor = PickTexture(cfg?.phone, "phone", GenPhone(S));
+        _phoneHotSpot = cfg?.phone.texture != null ? cfg.phone.hotspot : center;
 
-        _drinkCursor = LoadOrGenerate("drink", GenDrinkPour(S));
-        _drinkHotSpot = center;
+        _drawerCursor = PickTexture(cfg?.drawer, "drawer", GenDrawer(S));
+        _drawerHotSpot = cfg?.drawer.texture != null ? cfg.drawer.hotspot : center;
 
-        _spongeCursor = LoadOrGenerate("sponge", GenSponge(S));
-        _spongeHotSpot = center;
+        _drinkCursor = PickTexture(cfg?.drink, "drink", GenDrinkPour(S));
+        _drinkHotSpot = cfg?.drink.texture != null ? cfg.drink.hotspot : center;
 
-        _grabCursor = LoadOrGenerate("grab", GenGrab(S));
-        _grabHotSpot = center;
+        _spongeCursor = PickTexture(cfg?.sponge, "sponge", GenSponge(S));
+        _spongeHotSpot = cfg?.sponge.texture != null ? cfg.sponge.hotspot : center;
 
-        _scissorsCursor = LoadOrGenerate("scissors", GenScissors(S));
-        _scissorsHotSpot = center;
+        _grabCursor = PickTexture(cfg?.grab, "grab", GenGrab(S));
+        _grabHotSpot = cfg?.grab.texture != null ? cfg.grab.hotspot : center;
 
-        _swatterCursor = LoadOrGenerate("swatter", GenSwatter(S));
-        _swatterHotSpot = center;
+        _scissorsCursor = PickTexture(cfg?.scissors, "scissors", GenScissors(S));
+        _scissorsHotSpot = cfg?.scissors.texture != null ? cfg.scissors.hotspot : center;
 
-        _lightCursor = LoadOrGenerate("light", GenLightBulb(S));
-        _lightHotSpot = center;
+        _swatterCursor = PickTexture(cfg?.swatter, "swatter", GenSwatter(S));
+        _swatterHotSpot = cfg?.swatter.texture != null ? cfg.swatter.hotspot : center;
 
-        _defaultCursor = LoadOrGenerate("default", GenArrow(S));
-        _defaultHotSpot = Vector2.zero; // top-left tip of the arrow
+        _lightCursor = PickTexture(cfg?.light, "light", GenLightBulb(S));
+        _lightHotSpot = cfg?.light.texture != null ? cfg.light.hotspot : center;
+
+        _defaultCursor = PickTexture(cfg?.defaultCursor, "default", GenArrow(S));
+        _defaultHotSpot = cfg?.defaultCursor.texture != null ? cfg.defaultCursor.hotspot : new Vector2(32f, 32f);
 
         // Pre-bake alpha ramp for each cursor type
         int typeCount = System.Enum.GetValues(typeof(CursorType)).Length;
@@ -321,6 +329,17 @@ public class GlobalCursorManager : MonoBehaviour
     /// Try loading Resources/Cursors/{name}. If found, discard the fallback and return the loaded texture.
     /// If not found, return the procedural fallback (may be null for pinch which has no procedural).
     /// </summary>
+    /// <summary>Use CursorConfig entry if it has a texture, else fall through to LoadOrGenerate.</summary>
+    private Texture2D PickTexture(CursorConfig.CursorEntry? entry, string name, Texture2D proceduralFallback)
+    {
+        if (entry.HasValue && entry.Value.texture != null)
+        {
+            if (proceduralFallback != null) Destroy(proceduralFallback);
+            return MakeCursorCopy(entry.Value.texture);
+        }
+        return LoadOrGenerate(name, proceduralFallback);
+    }
+
     private Texture2D LoadOrGenerate(string name, Texture2D proceduralFallback)
     {
         var loaded = Resources.Load<Texture2D>($"Cursors/{name}");

@@ -1480,11 +1480,11 @@ public class ObjectGrabber : MonoBehaviour
         {
             _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
 
-            // Poof card at item center, scaled to item size
-            Bounds b = new Bounds(_held.transform.position + _heldBoundsCenterOffset, _heldBoundsExtents * 2f);
-            float poofSize = Mathf.Max(b.size.x, b.size.y, b.size.z) * 1.2f;
-            poofSize = Mathf.Max(poofSize, 0.12f);
-            SmokePoof.Spawn(b.center, poofSize);
+            // Poof cloud at item center, radius scaled to item size
+            Vector3 poofCenter = _held.transform.position + _heldBoundsCenterOffset;
+            float poofRadius = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.z) * 0.5f;
+            poofRadius = Mathf.Max(poofRadius, 0.03f);
+            SmokePoof.Spawn(poofCenter, poofRadius);
         }
 
         ClearHeld();

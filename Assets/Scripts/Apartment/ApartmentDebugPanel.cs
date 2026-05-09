@@ -597,6 +597,45 @@ public class ApartmentDebugPanel : MonoBehaviour
             out _atmGrainLabel);
         _atmGrainSlider = GetLastSlider(cp);
 
+        // ── PSX ──
+        AddSectionHeader(cp, "PSX (F4 toggle)", new Color(0.95f, 0.7f, 0.85f));
+        var psx = PSXRenderController.Instance;
+
+        AddSliderRow(cp, "Res Divisor", 1f, 6f, psx != null ? psx.ResolutionDivisor : 3f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.ResolutionDivisor = val; },
+            out _);
+        AddSliderRow(cp, "Color Depth", 4f, 256f, psx != null ? psx.ColorDepth : 32f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.ColorDepth = val; },
+            out _);
+        AddSliderRow(cp, "Vertex Snap X", 16f, 640f, psx != null ? psx.VertexSnapResolution.x : 160f,
+            val => { if (PSXRenderController.Instance != null)
+                PSXRenderController.Instance.VertexSnapResolution = new Vector2(val, val * 0.75f); },
+            out _);
+        AddSliderRow(cp, "Affine Warp", 0f, 1f, psx != null ? psx.AffineIntensity : 1f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.AffineIntensity = val; },
+            out _);
+        AddSliderRow(cp, "Dither", 0f, 1f, psx != null ? psx.DitherIntensity : 0.5f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.DitherIntensity = val; },
+            out _);
+        AddSliderRow(cp, "Dither Shadow Bias", 0f, 1f, psx != null ? psx.DitherShadowBias : 0.7f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.DitherShadowBias = val; },
+            out _);
+        AddSliderRow(cp, "Shadow Dither", 0f, 1f, psx != null ? psx.ShadowDitherIntensity : 1f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.ShadowDitherIntensity = val; },
+            out _);
+        AddSliderRow(cp, "Tilt-Shift", 0f, 1f, psx != null ? psx.TiltShiftAmount : 0f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.TiltShiftAmount = val; },
+            out _);
+        AddSliderRow(cp, "Tilt Center", 0f, 1f, psx != null ? psx.TiltShiftCenter : 0.5f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.TiltShiftCenter = val; },
+            out _);
+        AddSliderRow(cp, "Tilt Width", 0.01f, 0.5f, psx != null ? psx.TiltShiftWidth : 0.15f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.TiltShiftWidth = val; },
+            out _);
+        AddSliderRow(cp, "Tilt Radius", 1f, 20f, psx != null ? psx.TiltShiftRadius : 8f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.TiltShiftRadius = val; },
+            out _);
+
         // ── Time of Day ──
         AddSectionHeader(cp, "TIME OF DAY  [ / ]", new Color(1f, 0.95f, 0.6f));
         float initHour = GameClock.Instance != null ? GameClock.Instance.CurrentHour : 12f;

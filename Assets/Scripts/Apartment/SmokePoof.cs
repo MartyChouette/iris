@@ -1,14 +1,14 @@
 using UnityEngine;
 
 /// <summary>
-/// Spawns a single camera-facing billboard quad that plays the puff flipbook
-/// animation once, then self-destructs. One card per poof, not a particle cloud.
+/// Spawns a burst of billboard particles, each playing the puff flipbook
+/// animation over its lifetime. Particle cloud feel with hand-drawn cards.
+/// Self-destructs after particles finish.
 /// </summary>
 public static class SmokePoof
 {
     private static Texture2D s_atlas;
     private static int s_frameCount;
-    private static Material s_sharedMat;
 
     private static void EnsureAtlas()
     {
@@ -18,137 +18,103 @@ public static class SmokePoof
         {
             s_atlas = FlipbookAtlas.Build(frames);
             s_frameCount = frames.Length;
-
-            var shader = Shader.Find("Universal Render Pipeline/Unlit")
-                      ?? Shader.Find("Unlit/Transparent");
-            if (shader != null)
-            {
-                s_sharedMat = new Material(shader);
-                s_sharedMat.mainTexture = s_atlas;
-                s_sharedMat.SetFloat("_Surface", 1f); // transparent
-                s_sharedMat.SetFloat("_Blend", 0f);   // alpha blend
-                s_sharedMat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                s_sharedMat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                s_sharedMat.SetInt("_ZWrite", 0);
-                s_sharedMat.renderQueue = 3000;
-            }
         }
     }
 
-    public static void Spawn(Vector3 position, float size = 0.15f, Color? color = null)
+    public static void Spawn(Vector3 position, float radius = 0.15f, Color? color = null)
     {
         EnsureAtlas();
-        if (s_atlas == null || s_sharedMat == null) return;
-
-        float smokeScale = VisualScaleSettings.Instance.GetSmokeScale();
-        float worldSize = size * smokeScale;
-        Color tint = color ?? Color.white;
-
         var go = new GameObject("SmokePoof");
         go.transform.position = position;
 
-        // Render on the overlay camera so the poof draws on top of everything
+        // Render on the overlay camera so poofs draw on top
         int heldLayer = LayerMask.NameToLayer("HeldItem");
         if (heldLayer >= 0)
             go.layer = heldLayer;
 
-        var player = go.AddComponent<SmokePoofPlayer>();
-        player.Init(s_sharedMat, s_atlas, s_frameCount, worldSize, tint);
-    }
-}
+        var ps = go.AddComponent<ParticleSystem>();
+        ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
-/// <summary>
-/// Drives a single billboard quad through the puff flipbook, then destroys itself.
-/// Always faces the camera. Attached by SmokePoof.Spawn().
-/// </summary>
-public class SmokePoofPlayer : MonoBehaviour
-{
-    private MeshRenderer _renderer;
-    private MaterialPropertyBlock _mpb;
-    private int _frameCount;
-    private float _duration;
-    private float _elapsed;
-    private float _size;
-    private Transform _cam;
+        float smokeScale = VisualScaleSettings.Instance.GetSmokeScale();
 
-    private static Mesh s_quad;
+        var main = ps.main;
+        main.playOnAwake = false;
+        main.duration = 0.5f;
+        main.loop = false;
+        main.startLifetime = new ParticleSystem.MinMaxCurve(0.3f, 0.6f);
+        main.startSpeed = new ParticleSystem.MinMaxCurve(0.2f, 0.5f);
+        main.startSize = new ParticleSystem.MinMaxCurve(0.04f * smokeScale, 0.1f * smokeScale);
+        main.gravityModifier = -0.1f;
+        main.maxParticles = 15;
+        main.simulationSpace = ParticleSystemSimulationSpace.World;
+        main.stopAction = ParticleSystemStopAction.Destroy;
 
-    public void Init(Material sharedMat, Texture2D atlas, int frameCount, float worldSize, Color tint)
-    {
-        _frameCount = frameCount;
-        _size = worldSize;
-        _duration = 0.35f; // total playback time
-        _elapsed = 0f;
+        Color c = color ?? new Color(0.85f, 0.82f, 0.78f, 0.7f);
+        main.startColor = new ParticleSystem.MinMaxGradient(c, new Color(c.r, c.g, c.b, c.a * 0.5f));
 
-        _mpb = new MaterialPropertyBlock();
+        var emission = ps.emission;
+        emission.rateOverTime = 0f;
+        emission.SetBursts(new[] { new ParticleSystem.Burst(0f, 12) });
 
-        if (s_quad == null)
-            s_quad = BuildQuad();
+        var shape = ps.shape;
+        shape.shapeType = ParticleSystemShapeType.Sphere;
+        shape.radius = radius;
 
-        var mf = gameObject.AddComponent<MeshFilter>();
-        mf.sharedMesh = s_quad;
+        var sol = ps.sizeOverLifetime;
+        sol.enabled = true;
+        sol.size = new ParticleSystem.MinMaxCurve(1f, new AnimationCurve(
+            new Keyframe(0f, 0.5f),
+            new Keyframe(0.3f, 1f),
+            new Keyframe(1f, 0f)
+        ));
 
-        _renderer = gameObject.AddComponent<MeshRenderer>();
-        _renderer.sharedMaterial = sharedMat;
+        var col = ps.colorOverLifetime;
+        col.enabled = true;
+        var gradient = new Gradient();
+        gradient.SetKeys(
+            new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.white, 1f) },
+            new[] { new GradientAlphaKey(0f, 0f), new GradientAlphaKey(0.8f, 0.15f), new GradientAlphaKey(0f, 1f) }
+        );
+        col.color = gradient;
 
-        // Set initial UV tile and tint
-        _mpb.SetVector("_BaseMap_ST", new Vector4(1f / _frameCount, 1f, 0f, 0f));
-        _mpb.SetColor("_BaseColor", tint);
-        _renderer.SetPropertyBlock(_mpb);
+        var vel = ps.velocityOverLifetime;
+        vel.enabled = true;
+        vel.x = new ParticleSystem.MinMaxCurve(-0.1f, 0.1f);
+        vel.y = new ParticleSystem.MinMaxCurve(0.05f, 0.15f);
+        vel.z = new ParticleSystem.MinMaxCurve(-0.1f, 0.1f);
 
-        transform.localScale = Vector3.one * _size;
-
-        _cam = Camera.main != null ? Camera.main.transform : null;
-    }
-
-    private void Update()
-    {
-        _elapsed += Time.deltaTime;
-        if (_elapsed >= _duration)
+        // Material — each particle is a billboard playing the flipbook
+        var renderer = go.GetComponent<ParticleSystemRenderer>();
+        renderer.renderMode = ParticleSystemRenderMode.Billboard;
+        var shader = Shader.Find("Universal Render Pipeline/Particles/Unlit")
+                  ?? Shader.Find("Particles/Standard Unlit");
+        if (shader != null)
         {
-            Destroy(gameObject);
-            return;
+            var mat = new Material(shader);
+            // Transparent alpha-blended — so PNG transparency works
+            mat.SetFloat("_Surface", 1f); // 1 = Transparent
+            mat.SetFloat("_Blend", 0f);   // 0 = Alpha
+            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            mat.SetInt("_ZWrite", 0);
+            mat.renderQueue = 3000;
+            mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            mat.EnableKeyword("_ALPHABLEND_ON");
+            if (s_atlas != null)
+            {
+                mat.mainTexture = s_atlas;
+                var tsa = ps.textureSheetAnimation;
+                tsa.enabled = true;
+                tsa.mode = ParticleSystemAnimationMode.Grid;
+                tsa.numTilesX = s_frameCount;
+                tsa.numTilesY = 1;
+                tsa.animation = ParticleSystemAnimationType.WholeSheet;
+                tsa.cycleCount = 1;
+                tsa.timeMode = ParticleSystemAnimationTimeMode.Lifetime;
+            }
+            renderer.material = mat;
         }
 
-        float t = _elapsed / _duration;
-
-        // Pick frame
-        int frame = Mathf.Min(Mathf.FloorToInt(t * _frameCount), _frameCount - 1);
-        float offsetX = (float)frame / _frameCount;
-        _mpb.SetVector("_BaseMap_ST", new Vector4(1f / _frameCount, 1f, offsetX, 0f));
-
-        // Fade out over last 30%
-        float alpha = t > 0.7f ? Mathf.InverseLerp(1f, 0.7f, t) : 1f;
-        var col = _mpb.GetColor("_BaseColor");
-        col.a = alpha;
-        _mpb.SetColor("_BaseColor", col);
-
-        _renderer.SetPropertyBlock(_mpb);
-
-        // Billboard — face camera
-        if (_cam != null)
-            transform.rotation = _cam.rotation;
-    }
-
-    private static Mesh BuildQuad()
-    {
-        var mesh = new Mesh { name = "PoofQuad" };
-        mesh.vertices = new[]
-        {
-            new Vector3(-0.5f, -0.5f, 0f),
-            new Vector3( 0.5f, -0.5f, 0f),
-            new Vector3( 0.5f,  0.5f, 0f),
-            new Vector3(-0.5f,  0.5f, 0f),
-        };
-        mesh.uv = new[]
-        {
-            new Vector2(0f, 0f),
-            new Vector2(1f, 0f),
-            new Vector2(1f, 1f),
-            new Vector2(0f, 1f),
-        };
-        mesh.triangles = new[] { 0, 2, 1, 0, 3, 2 };
-        mesh.RecalculateNormals();
-        return mesh;
+        ps.Play();
     }
 }
