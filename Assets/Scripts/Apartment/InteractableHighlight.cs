@@ -236,9 +236,6 @@ public class InteractableHighlight : MonoBehaviour
     {
         _renderers = GetComponentsInChildren<Renderer>();
 
-        // Kill switch — skip all material setup, keep registry for cursor detection
-        if (Disabled) return;
-
         // PSXLit auto-swap removed — artist materials stay as authored (URP).
 
         // When visuals are suppressed, skip highlight material setup.
@@ -320,8 +317,6 @@ public class InteractableHighlight : MonoBehaviour
 
     private void Update()
     {
-        if (Disabled) return;
-
         bool anyActive = _highlighted || _gazeActive || _displayActive
             || _prepLikedActive || _prepDislikedActive;
 
@@ -365,6 +360,7 @@ public class InteractableHighlight : MonoBehaviour
 
     public void SetHighlighted(bool on)
     {
+        if (Disabled) return; // kill switch only blocks general hover
         if (_renderers == null || _renderers.Length == 0 || on == _highlighted) return;
         _highlighted = on;
         RebuildMaterials();
@@ -513,8 +509,6 @@ public class InteractableHighlight : MonoBehaviour
 
     private void RebuildMaterials()
     {
-        // Kill switch — highlight system disabled pending rework
-        if (Disabled) return;
 
         // When visuals are suppressed, do nothing — don't touch materials at all
         if (SuppressVisuals)

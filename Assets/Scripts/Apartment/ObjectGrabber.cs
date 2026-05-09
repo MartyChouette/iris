@@ -912,7 +912,9 @@ public class ObjectGrabber : MonoBehaviour
         if (pickupCol != null)
         {
             _heldBoundsExtents = pickupCol.bounds.extents;
-            _heldBoundsCenterOffset = pickupCol.bounds.center - placeable.transform.position;
+            // Store offset in local space so it rotates correctly with the item
+            Vector3 worldOffset = pickupCol.bounds.center - placeable.transform.position;
+            _heldBoundsCenterOffset = Quaternion.Inverse(placeable.transform.rotation) * worldOffset;
             _heldShadowDiameter = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.z) * 2f * 1.3f;
         }
         else
@@ -1481,7 +1483,7 @@ public class ObjectGrabber : MonoBehaviour
             _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
 
             // Poof cloud at item center, radius scaled to item size
-            Vector3 poofCenter = _held.transform.position + _heldBoundsCenterOffset;
+            Vector3 poofCenter = _held.transform.position + _held.transform.rotation * _heldBoundsCenterOffset;
             float poofRadius = Mathf.Max(_heldBoundsExtents.x, _heldBoundsExtents.z) * 0.5f;
             poofRadius = Mathf.Max(poofRadius, 0.03f);
             SmokePoof.Spawn(poofCenter, poofRadius);
@@ -2429,7 +2431,10 @@ public class ObjectGrabber : MonoBehaviour
                     }
                 }
 
-                _grabTarget = pos;
+                // Offset so the item's visual center (collider center) tracks the
+                // cursor, not the pivot. Keeps off-center items feeling centered.
+                Vector3 rotOff = _held != null ? _held.transform.rotation * _heldBoundsCenterOffset : Vector3.zero;
+                _grabTarget = pos - Vector3.ProjectOnPlane(rotOff, hitResult.surfaceNormal);
 
                 // Track depth so fallback stays smooth if cursor leaves surface
                 _fallbackDepth = Vector3.Dot(
@@ -2480,7 +2485,10 @@ public class ObjectGrabber : MonoBehaviour
             Vector3 planePoint = cam.transform.position + cam.transform.forward * _fallbackDepth;
             var plane = new Plane(-cam.transform.forward, planePoint);
             if (plane.Raycast(ray, out float enter))
-                _grabTarget = ray.GetPoint(enter);
+            {
+                Vector3 rotOff = _held != null ? _held.transform.rotation * _heldBoundsCenterOffset : Vector3.zero;
+                _grabTarget = ray.GetPoint(enter) - rotOff;
+            }
         }
 
         // Wall clamping removed — felt too harsh. Surface bounds still constrain placement.
@@ -2624,9 +2632,11 @@ public class ObjectGrabber : MonoBehaviour
         // extentDot = half-height of collider along normal
         // centerDot = how far the collider center is from the pivot along normal
         // Subtracting gives the distance from pivot to the collider's bottom edge.
+        // Offset is in local space — rotate by current held rotation.
         Vector3 n = normal.normalized;
         float extentDot = Mathf.Abs(Vector3.Dot(_heldBoundsExtents, n));
-        float centerDot = Vector3.Dot(_heldBoundsCenterOffset, n);
+        Vector3 rotatedOffset = _held != null ? _held.transform.rotation * _heldBoundsCenterOffset : _heldBoundsCenterOffset;
+        float centerDot = Vector3.Dot(rotatedOffset, n);
         return Mathf.Max(extentDot - centerDot, 0.01f) + PlacementSafetyMargin;
     }
 
@@ -3131,13 +3141,11 @@ public class ObjectGrabber : MonoBehaviour
         }
 
         // Shadow sits under the collider center (not the pivot) on the surface.
-        // Project the collider center offset onto the surface plane so the disc
-        // aligns with the visual mass of the object.
-        Vector3 centerOnSurface = placePos + Vector3.ProjectOnPlane(_heldBoundsCenterOffset, hitResult.surfaceNormal);
-        // Flatten back to surface height
-        Vector3 shadowPos = hitResult.worldPosition
-            + Vector3.ProjectOnPlane(centerOnSurface - placePos, hitResult.surfaceNormal)
-            + hitResult.surfaceNormal * 0.02f;
+        // Rotate the local-space offset by the placement rotation so it tracks
+        // correctly when the item is rotated while held.
+        Vector3 rotatedOffset = placeRot * _heldBoundsCenterOffset;
+        Vector3 projectedOffset = Vector3.ProjectOnPlane(rotatedOffset, hitResult.surfaceNormal);
+        Vector3 shadowPos = hitResult.worldPosition + projectedOffset + hitResult.surfaceNormal * 0.02f;
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
         bool canPlace = (!_currentSurface.IsVertical || _held.CanWallMount)
