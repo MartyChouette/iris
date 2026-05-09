@@ -875,15 +875,16 @@ public class ObjectGrabber : MonoBehaviour
     {
         var placeable = _held;
 
-        // Kill any in-progress settle bounce and restore the true base scale
-        // so rapid pick-up/place cycles don't compound intermediate scale values.
+        // Kill any in-progress animations and restore the true base scale
+        // so rapid pick-up/place cycles don't compound intermediate values.
+        if (_squishCoroutine != null) { StopCoroutine(_squishCoroutine); _squishCoroutine = null; }
         var bounce = placeable.GetComponent<SettleBounce>();
         if (bounce != null)
         {
-            placeable.transform.localScale = bounce.BaseScale;
             bounce.StopAllCoroutines();
             Destroy(bounce);
         }
+        placeable.transform.localScale = placeable.OriginalScale;
 
         // Clear all highlight layers on the item being picked up
         var heldHL = placeable.GetComponent<InteractableHighlight>();
@@ -1267,7 +1268,7 @@ public class ObjectGrabber : MonoBehaviour
                         zone.RegisterDeposit(_held);
                         OnObjectPlaced?.Invoke(_held);
                         PlayPlaceSFX(_held);
-                        _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
+                        _held.gameObject.AddComponent<SettleBounce>().Play(_held.OriginalScale);
                         ClearHeld();
                         return;
                     }
@@ -1480,7 +1481,7 @@ public class ObjectGrabber : MonoBehaviour
         // Settle bounce feel on the placed item
         if (_held != null)
         {
-            _held.gameObject.AddComponent<SettleBounce>().Play(_held.transform.localScale);
+            _held.gameObject.AddComponent<SettleBounce>().Play(_held.OriginalScale);
 
             // Poof cloud at item center, radius scaled to item size
             Vector3 poofCenter = _held.transform.position + _held.transform.rotation * _heldBoundsCenterOffset;
@@ -2877,7 +2878,10 @@ public class ObjectGrabber : MonoBehaviour
     private System.Collections.IEnumerator SquishPop(Transform target, float squish, float pop, float duration = 0.15f)
     {
         if (target == null) yield break;
-        Vector3 baseScale = target.localScale;
+        // Always animate from the true original scale, not the current
+        // (potentially mid-animation) localScale.
+        var po = target.GetComponent<PlaceableObject>();
+        Vector3 baseScale = po != null ? po.OriginalScale : target.localScale;
         float seg = duration / 3f;
 
         // Squish

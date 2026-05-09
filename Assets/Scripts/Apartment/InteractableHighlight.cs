@@ -227,9 +227,9 @@ public class InteractableHighlight : MonoBehaviour
     // Each layer has: color, alpha/width (intensity), pulse speed, pulse amount
     // Cool-toned colors that read well through the FF8/SotC atmosphere (desaturated + teal shadows)
     private static readonly Color HoverColor = new Color(0.9f, 0.95f, 1f, 1f);       // cool white
-    private static readonly Color GazeColor = new Color(0.4f, 0.85f, 0.95f, 1f);     // bright teal
-    private static readonly Color DisplayColor = new Color(0.7f, 0.8f, 0.95f, 1f);   // soft blue
-    private static readonly Color PrepLikedColor = new Color(0.3f, 0.95f, 0.7f, 1f); // cyan-green
+    private static readonly Color GazeColor = new Color(1f, 0.95f, 0.8f, 1f);        // warm yellow-white
+    private static readonly Color DisplayColor = new Color(1f, 0.95f, 0.8f, 1f);     // warm yellow-white
+    private static readonly Color PrepLikedColor = new Color(1f, 0.95f, 0.8f, 1f);   // warm yellow-white
     private static readonly Color PrepDislikedColor = new Color(1f, 0.35f, 0.5f, 1f); // bright pink
 
     private void Awake()

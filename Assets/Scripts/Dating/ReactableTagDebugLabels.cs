@@ -96,9 +96,14 @@ public class ReactableTagDebugLabels : MonoBehaviour
 
     private GameObject CreateWorldLabel(ReactableTag tag, DatePreferences prefs)
     {
+        // Show the player-facing item name from PlaceableObject
+        var po = tag.GetComponent<PlaceableObject>()
+              ?? tag.GetComponentInParent<PlaceableObject>();
+        string itemName = po != null ? po.ItemDescription : tag.gameObject.name;
+
         string privacy = tag.IsPrivate ? "[Private]" : "[Public]";
         string activeStr = tag.IsActive ? "" : " (Inactive)";
-        string text = $"{privacy}{activeStr} {string.Join(", ", tag.Tags)}";
+        string text = $"\"{itemName}\"\n{privacy}{activeStr} {string.Join(", ", tag.Tags)}";
         Color color = tag.IsPrivate ? new Color(0.6f, 0.6f, 0.6f) : GetTagColor(tag, prefs);
 
         var pivot = new GameObject($"DebugLabel_{tag.gameObject.name}");

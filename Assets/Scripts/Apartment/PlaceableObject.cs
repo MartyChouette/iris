@@ -132,6 +132,9 @@ public class PlaceableObject : MonoBehaviour
     public static void SetWorldBounds(Bounds bounds) { s_worldBounds = bounds; }
 
     public State CurrentState { get; private set; } = State.Resting;
+
+    /// <summary>Scale captured at Awake — the true base scale unaffected by animations.</summary>
+    public Vector3 OriginalScale { get; private set; }
     public ItemCategory Category => _itemCategory;
     public string HomeZoneName => _homeZoneName;
     public string AltHomeZoneName => _altHomeZoneName;
@@ -538,6 +541,7 @@ public class PlaceableObject : MonoBehaviour
             }
         }
 
+        OriginalScale = transform.localScale;
         _lastValidPosition = transform.position;
         _lastValidRotation = transform.rotation;
         _rb = GetComponent<Rigidbody>();
