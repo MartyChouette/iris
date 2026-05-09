@@ -62,6 +62,7 @@ public class GlobalCursorManager : MonoBehaviour
     [SerializeField] private AudioClip _contextTickSFX;
     [SerializeField] private float _contextTickVolume = 0.15f;
     private float _contextTickCooldown;
+    private float _dropCooldown;
     private float _currentAlpha;         // 0 = invisible, 1 = full
     private float _targetAlpha;
     private float _hoverTimer;
@@ -448,10 +449,20 @@ public class GlobalCursorManager : MonoBehaviour
         }
         else if (_displayedType == CursorType.Grab)
         {
-            // Just released — restore cursor visibility
+            // Just released — restore cursor visibility and force default
+            // for a short cooldown so the just-placed item doesn't immediately
+            // trigger the interact cursor.
             Cursor.visible = true;
             _displayedType = CursorType.Default;
             _lastStep = -1;
+            _dropCooldown = 0.15f;
+        }
+
+        if (_dropCooldown > 0f)
+        {
+            _dropCooldown -= Time.unscaledDeltaTime;
+            ApplyCursor(CursorType.Default);
+            return;
         }
 
         // Cursor lock — active interaction holds the cursor type steady
@@ -507,6 +518,12 @@ public class GlobalCursorManager : MonoBehaviour
 
     private static CursorType ClassifyHit(GameObject go)
     {
+        // PlacementSurface colliders are invisible trigger zones on furniture —
+        // not interactable items. Skip them so empty table/shelf space doesn't
+        // false-positive to Interact via GetComponentInParent.
+        if (go.GetComponent<PlacementSurface>() != null)
+            return CursorType.Default;
+
         // During dates, restrict context cursors by phase
         var dsm = DateSessionManager.Instance;
         if (dsm != null && dsm.IsDateActive)

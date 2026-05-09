@@ -1,21 +1,19 @@
 Shader "Iris/PSXInteractable"
 {
-    // Overlay pass: renders affine-warped texture on top of the base material.
-    // Used by InteractableHighlight to show interactable/pickupable objects.
+    // General-purpose highlight overlay. Renders a tinted color wash
+    // over the object with fresnel edge emphasis and optional pulse.
     // Added as an extra material slot — no shadow casting, additive blend.
     Properties
     {
-        _MainTex ("Albedo (from base)", 2D) = "white" {}
-        _Color   ("Tint",   Color) = (1, 0.95, 0.85, 0.3)
+        _Color         ("Tint",        Color) = (1, 0.95, 0.85, 0.3)
 
-        [Header(Affine Warp)]
-        _WarpIntensity ("Warp Intensity", Range(0, 1)) = 0.4
-        _WarpSpeed     ("Warp Pulse Speed", Range(0, 4)) = 1.2
-        _WarpMin       ("Warp Pulse Min", Range(0, 1)) = 0.3
+        [Header(Fresnel)]
+        _FresnelPower  ("Fresnel Power", Range(0.5, 8)) = 2.0
+        _FresnelMin    ("Fresnel Min (center opacity)", Range(0, 1)) = 0.3
 
-        [Header(Vertex Jitter)]
-        _JitterAmount  ("Vertex Jitter", Range(0, 0.02)) = 0.002
-        _GlitchIntensity ("Glitch Intensity (match PSXLitGlitch)", Range(0, 0.1)) = 0.0
+        [Header(Pulse)]
+        _PulseSpeed    ("Pulse Speed",  Range(0, 6)) = 1.5
+        _PulseAmount   ("Pulse Amount", Range(0, 1)) = 0.3
 
         [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
@@ -31,7 +29,7 @@ Shader "Iris/PSXInteractable"
 
         Pass
         {
-            Name "AffineOverlay"
+            Name "HighlightOverlay"
             Tags { "LightMode" = "SRPDefaultUnlit" }
 
             Blend SrcAlpha One   // Additive with alpha control
@@ -50,104 +48,52 @@ Shader "Iris/PSXInteractable"
             {
                 float4 positionOS : POSITION;
                 float3 normalOS   : NORMAL;
-                float2 uv         : TEXCOORD0;
             };
 
             struct Varyings
             {
                 float4 positionCS : SV_POSITION;
-                float2 uvCorrect  : TEXCOORD0;
-                float3 uvAffine   : TEXCOORD1;  // xy = uv * w, z = w
-                float3 normalWS   : TEXCOORD2;
-                float3 viewDirWS  : TEXCOORD3;
-                float  fogFactor  : TEXCOORD4;
+                float3 normalWS   : TEXCOORD0;
+                float3 viewDirWS  : TEXCOORD1;
+                float  fogFactor  : TEXCOORD2;
             };
 
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
-
             CBUFFER_START(UnityPerMaterial)
-                float4 _MainTex_ST;
                 half4  _Color;
-                half   _WarpIntensity;
-                half   _WarpSpeed;
-                half   _WarpMin;
-                half   _JitterAmount;
-                half   _GlitchIntensity;
+                half   _FresnelPower;
+                half   _FresnelMin;
+                half   _PulseSpeed;
+                half   _PulseAmount;
             CBUFFER_END
-
-            // Simple hash for vertex jitter
-            float hash(float2 p)
-            {
-                return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453);
-            }
 
             Varyings vert(Attributes input)
             {
                 Varyings output;
 
-                float3 posOS = input.positionOS.xyz;
-
-                // Optional vertex jitter (subtle wobble to feel alive)
-                if (_JitterAmount > 0 || _GlitchIntensity > 0)
-                {
-                    float t = _Time.y;
-                    float jitter = _JitterAmount + _GlitchIntensity;
-                    float3 offset = float3(
-                        hash(posOS.xy + t) - 0.5,
-                        hash(posOS.yz + t) - 0.5,
-                        hash(posOS.xz + t) - 0.5
-                    ) * jitter * 2.0;
-                    posOS += offset;
-                }
-
-                VertexPositionInputs posInputs = GetVertexPositionInputs(posOS);
-                float4 clipPos = posInputs.positionCS;
-
-                output.positionCS = clipPos;
+                VertexPositionInputs posInputs = GetVertexPositionInputs(input.positionOS.xyz);
+                output.positionCS = posInputs.positionCS;
                 output.normalWS   = TransformObjectToWorldNormal(input.normalOS);
                 output.viewDirWS  = GetWorldSpaceNormalizeViewDir(posInputs.positionWS);
-                output.fogFactor  = ComputeFogFactor(clipPos.z);
-
-                float2 uv = TRANSFORM_TEX(input.uv, _MainTex);
-
-                // Perspective-correct UV
-                output.uvCorrect = uv;
-
-                // Affine UV: multiply by clip w before interpolation
-                output.uvAffine = float3(uv * clipPos.w, clipPos.w);
+                output.fogFactor  = ComputeFogFactor(posInputs.positionCS.z);
 
                 return output;
             }
 
             half4 frag(Varyings input) : SV_Target
             {
-                // Pulsing warp intensity
-                half pulse = lerp(_WarpMin, 1.0, (sin(_Time.y * _WarpSpeed) * 0.5 + 0.5));
-                half warp = _WarpIntensity * pulse;
-
-                // Reconstruct both UV modes
-                float2 correctUV = input.uvCorrect;
-                float2 affineUV  = input.uvAffine.xy / input.uvAffine.z;
-
-                // Blend between correct and affine based on warp
-                float2 finalUV = lerp(correctUV, affineUV, warp);
-
-                half4 tex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, finalUV);
-
-                // Fresnel edge glow — stronger at grazing angles
+                // Fresnel: bright at edges, fades toward center
                 half3 normalWS = normalize(input.normalWS);
                 half3 viewDir  = normalize(input.viewDirWS);
                 half fresnel   = 1.0 - saturate(dot(normalWS, viewDir));
-                fresnel = pow(fresnel, 2.0);
+                fresnel = pow(fresnel, _FresnelPower);
 
-                // Combine: tinted texture with fresnel edge emphasis
-                half3 color = tex.rgb * _Color.rgb;
+                // Pulse
+                half pulse = 1.0 - _PulseAmount * (sin(_Time.y * _PulseSpeed) * 0.5 + 0.5);
 
-                // Alpha: visible across entire surface, stronger at edges
-                half alpha = _Color.a * (0.6 + fresnel * 0.4) * warp;
+                // Alpha: min opacity across surface, stronger at edges
+                half alpha = _Color.a * lerp(_FresnelMin, 1.0, fresnel) * pulse;
 
-                half3 result = color;
+                half3 result = _Color.rgb;
                 result = MixFog(result, input.fogFactor);
 
                 return half4(result, alpha);

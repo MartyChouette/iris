@@ -1361,7 +1361,13 @@ public class PlaceableObject : MonoBehaviour
         }
         else
         {
-            SetLayerRecursive(gameObject, _savedLayer);
+            // Always restore to Placeable — children added mid-hold (paired
+            // books, stacked plates) may have _savedLayer as HeldItem or
+            // Default(0), neither of which is correct after placement.
+            int placeableLayer = LayerMask.NameToLayer("Placeable");
+            int restoreLayer = (_savedLayer != s_heldItemLayer && _savedLayer != 0)
+                ? _savedLayer : placeableLayer;
+            SetLayerRecursive(gameObject, restoreLayer);
         }
 
         // Cascade to paired/stacked child PlaceableObjects (each owns its own state)

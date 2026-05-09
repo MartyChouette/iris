@@ -458,21 +458,8 @@ public class InteractableHighlight : MonoBehaviour
             : s_sharedInteractMat;
         if (source == null) return null;
 
+        // Shader no longer samples a texture — shared material works directly
         _instanceInteractMat = new Material(source);
-
-        for (int i = 0; i < baseMats.Length; i++)
-        {
-            if (baseMats[i] != null && baseMats[i].HasTexture(MainTexID))
-            {
-                var tex = baseMats[i].GetTexture(MainTexID);
-                if (tex != null)
-                {
-                    _instanceInteractMat.SetTexture(MainTexID, tex);
-                    break;
-                }
-            }
-        }
-
         return _instanceInteractMat;
     }
 
@@ -835,7 +822,7 @@ public class InteractableHighlight : MonoBehaviour
         if (s_sharedPrepDislikedMat == null)
             s_sharedPrepDislikedMat = MakeMatForStyle(PrepDislikedColor, 0.4f, 1.5f, 0.08f);
 
-        // Interact (unchanged — uses PSXInteractable shader)
+        // Interact — general-purpose highlight overlay (fresnel + pulse)
         if (s_sharedInteractMat == null)
         {
             var shader = s_cachedInteractShader;
@@ -843,10 +830,10 @@ public class InteractableHighlight : MonoBehaviour
             {
                 s_sharedInteractMat = new Material(shader);
                 s_sharedInteractMat.SetColor("_Color", new Color(1f, 0.95f, 0.85f, 0.3f));
-                s_sharedInteractMat.SetFloat("_WarpIntensity", 0.4f);
-                s_sharedInteractMat.SetFloat("_WarpSpeed", 1.2f);
-                s_sharedInteractMat.SetFloat("_WarpMin", 0.3f);
-                s_sharedInteractMat.SetFloat("_JitterAmount", 0.002f);
+                s_sharedInteractMat.SetFloat("_FresnelPower", 2f);
+                s_sharedInteractMat.SetFloat("_FresnelMin", 0.3f);
+                s_sharedInteractMat.SetFloat("_PulseSpeed", 1.5f);
+                s_sharedInteractMat.SetFloat("_PulseAmount", 0.3f);
             }
         }
     }
