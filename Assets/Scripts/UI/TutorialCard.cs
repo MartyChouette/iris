@@ -35,17 +35,9 @@ public class TutorialCard : MonoBehaviour
 
     private void Awake()
     {
-        // Auto-find CanvasGroup on root (added by builder or at runtime)
-        if (_root != null)
-        {
-            _canvasGroup = _root.GetComponent<CanvasGroup>();
-            if (_canvasGroup == null)
-                _canvasGroup = _root.AddComponent<CanvasGroup>();
-
-            // Find the panel child for scale animation
-            if (_root.transform.childCount > 1)
-                _panelRT = _root.transform.GetChild(1) as RectTransform; // CardPanel is child 1 (after Backdrop)
-        }
+        // Disable immediately — tutorial card is not used
+        if (_root != null) _root.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     [Header("Placeholder")]

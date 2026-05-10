@@ -85,6 +85,20 @@ public class MainMenuManager : MonoBehaviour
     private Transform _musicVoteContainer;
     private string _selectedMood;
 
+    // ── Idle Trailer ─────────────────────────────────────────────
+    [Header("Idle Trailer")]
+    [Tooltip("Video clip to play after idle timeout. Leave empty to disable.")]
+    [SerializeField] private UnityEngine.Video.VideoClip _trailerClip;
+
+    [Tooltip("Seconds of no input before the trailer starts playing.")]
+    [SerializeField] private float _idleTimeout = 45f;
+
+    private float _idleTimer;
+    private bool _trailerPlaying;
+    private float _menuMusicVolume;
+    private UnityEngine.Video.VideoPlayer _trailerPlayer;
+    private GameObject _trailerOverlay;
+
     // ── Scene preloading ──────────────────────────────────────────
     private AsyncOperation _preloadOp;
     private int _targetSceneIndex;
@@ -130,11 +144,12 @@ public class MainMenuManager : MonoBehaviour
         BuildQuitConfirmPanel();
         // BuildMusicVotePanel(); // disabled for trailer
 
-        // Skip mode select — go straight to demo game panel
-        if (_demoConfig != null)
-            SelectMode(_demoConfig);
-        else
-            ShowPanel(MenuState.ModeSelect);
+        // Always use demo config — mode select removed
+        _selectedConfig = _demoConfig != null ? _demoConfig : _fullConfig;
+
+        // Hide mode select panel permanently, show game panel directly
+        if (_modeSelectPanel != null) _modeSelectPanel.SetActive(false);
+        ShowPanel(MenuState.GamePanel);
 
         // Default to Cozy mood music on menu load
         PreviewMood("Cozy");
@@ -178,8 +193,52 @@ public class MainMenuManager : MonoBehaviour
 
     }
 
+    private Vector3 _lastMousePos;
+    private float _trailerWakeCooldown;
+
     private void Update()
     {
+        // Home key — always available to force play trailer
+        if (_trailerClip != null && !_loading && Input.GetKeyDown(KeyCode.Home))
+        {
+            if (_trailerPlaying) StopTrailer(); else StartTrailer();
+            return;
+        }
+
+        // ── Idle trailer ──
+        if (_trailerPlaying)
+        {
+            // Wake up on mouse movement (with 1s cooldown so initial jitter doesn't dismiss)
+            _trailerWakeCooldown -= Time.unscaledDeltaTime;
+            if (_trailerWakeCooldown <= 0f)
+            {
+                Vector3 mousePos = Input.mousePosition;
+                if (Vector3.Distance(mousePos, _lastMousePos) > 5f)
+                {
+                    StopTrailer();
+                    return;
+                }
+            }
+            _lastMousePos = Input.mousePosition;
+            return; // don't process menu input while trailer is playing
+        }
+
+        // Track idle time — reset on any input (keys, clicks, mouse movement)
+        bool hasInput = Input.anyKey
+            || Input.GetMouseButtonDown(0)
+            || Input.mouseScrollDelta.sqrMagnitude > 0f
+            || Vector3.Distance(Input.mousePosition, _lastMousePos) > 2f;
+        _lastMousePos = Input.mousePosition;
+
+        if (hasInput)
+            _idleTimer = 0f;
+        else
+            _idleTimer += Time.unscaledDeltaTime;
+
+        if (_trailerClip != null && _idleTimer >= _idleTimeout && !_loading)
+            StartTrailer();
+
+        // ── Menu input ──
         bool pressed = (IrisInput.Instance != null && IrisInput.Instance.Pause.WasPressedThisFrame())
                     || Input.GetKeyDown(KeyCode.Escape);
         if (!pressed || _loading) return;
@@ -202,6 +261,122 @@ public class MainMenuManager : MonoBehaviour
                 OnSaveSlotBack();
                 break;
         }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // Idle Trailer
+    // ═══════════════════════════════════════════════════════════════
+
+    private RenderTexture _trailerRT;
+
+    private void StartTrailer()
+    {
+        if (_trailerPlaying || _trailerClip == null) return;
+        _trailerPlaying = true;
+
+        // Create fullscreen canvas with RawImage for video
+        _trailerOverlay = new GameObject("TrailerOverlay");
+        _trailerOverlay.transform.SetParent(transform);
+
+        var canvas = _trailerOverlay.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 999;
+        _trailerOverlay.AddComponent<UnityEngine.UI.CanvasScaler>();
+
+        // Black background
+        var bgGO = new GameObject("BG");
+        bgGO.transform.SetParent(_trailerOverlay.transform, false);
+        var bgRT = bgGO.AddComponent<RectTransform>();
+        bgRT.anchorMin = Vector2.zero;
+        bgRT.anchorMax = Vector2.one;
+        bgRT.offsetMin = Vector2.zero;
+        bgRT.offsetMax = Vector2.zero;
+        var bgImg = bgGO.AddComponent<UnityEngine.UI.Image>();
+        bgImg.color = Color.black;
+        bgImg.raycastTarget = false;
+
+        // RawImage for video
+        var vidGO = new GameObject("Video");
+        vidGO.transform.SetParent(_trailerOverlay.transform, false);
+        var vidRT = vidGO.AddComponent<RectTransform>();
+        vidRT.anchorMin = Vector2.zero;
+        vidRT.anchorMax = Vector2.one;
+        vidRT.offsetMin = Vector2.zero;
+        vidRT.offsetMax = Vector2.zero;
+        var rawImg = vidGO.AddComponent<UnityEngine.UI.RawImage>();
+        rawImg.raycastTarget = false;
+
+        // RenderTexture for video output
+        _trailerRT = new RenderTexture(Screen.width, Screen.height, 0);
+        rawImg.texture = _trailerRT;
+
+        // Video player renders to the RenderTexture
+        _trailerPlayer = _trailerOverlay.AddComponent<UnityEngine.Video.VideoPlayer>();
+        _trailerPlayer.clip = _trailerClip;
+        _trailerPlayer.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
+        _trailerPlayer.targetTexture = _trailerRT;
+        _trailerPlayer.isLooping = true;
+        _trailerPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.Direct;
+        _trailerPlayer.Play();
+
+        // Crossfade: fade out menu music, trailer has its own audio track
+        if (AudioManager.Instance != null && AudioManager.Instance.musicSource != null)
+        {
+            _menuMusicVolume = AudioManager.Instance.musicSource.volume;
+            StartCoroutine(FadeMusicVolume(AudioManager.Instance.musicSource, 0f, 1f));
+        }
+
+        // Hide menu panels
+        if (_gamePanel != null) _gamePanel.SetActive(false);
+        if (_modeSelectPanel != null) _modeSelectPanel.SetActive(false);
+        if (_saveSlotPanel != null) _saveSlotPanel.SetActive(false);
+
+        // 1 second cooldown before mouse movement can wake
+        _trailerWakeCooldown = 1f;
+        _lastMousePos = Input.mousePosition;
+
+        Debug.Log("[MainMenuManager] Trailer started.");
+    }
+
+    private void StopTrailer()
+    {
+        if (!_trailerPlaying) return;
+        _trailerPlaying = false;
+        _idleTimer = 0f;
+
+        if (_trailerPlayer != null) _trailerPlayer.Stop();
+        if (_trailerOverlay != null) Destroy(_trailerOverlay);
+        if (_trailerRT != null) { _trailerRT.Release(); Destroy(_trailerRT); }
+        _trailerPlayer = null;
+        _trailerOverlay = null;
+        _trailerRT = null;
+
+        // Crossfade: fade menu music back in to original volume
+        if (AudioManager.Instance != null && AudioManager.Instance.musicSource != null)
+        {
+            AudioManager.Instance.musicSource.volume = 0f;
+            StartCoroutine(FadeMusicVolume(AudioManager.Instance.musicSource, _menuMusicVolume, 1.5f));
+        }
+
+        // Restore menu — force GamePanel since mode select is removed
+        ShowPanel(MenuState.GamePanel);
+        _lastMousePos = Input.mousePosition;
+
+        Debug.Log("[MainMenuManager] Trailer dismissed.");
+    }
+
+    private IEnumerator FadeMusicVolume(AudioSource src, float target, float duration)
+    {
+        if (src == null) yield break;
+        float start = src.volume;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            src.volume = Mathf.Lerp(start, target, elapsed / duration);
+            yield return null;
+        }
+        src.volume = target;
     }
 
     // ═══════════════════════════════════════════════════════════════
@@ -264,11 +439,8 @@ public class MainMenuManager : MonoBehaviour
         ItemStateRegistry.Clear();
         PlayerData.PlayerName = "Nema";
 
-        // Telemetry always on — no consent screen
-        if (_tutorialCard != null)
-            _tutorialCard.Show(() => LoadApartment());
-        else
-            LoadApartment();
+        // Tutorial card disabled — go straight to loading
+        LoadApartment();
     }
 
     public void OnContinue()

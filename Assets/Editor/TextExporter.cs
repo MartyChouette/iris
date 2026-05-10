@@ -146,7 +146,51 @@ public class TextExporter : EditorWindow
             ("perfumeName", "perfumeName")
         });
 
-        // 3. LocalizationTable entries
+        // 3. Hardcoded dialogue and reaction lines
+        // Date reactions
+        AddHardcoded(entries, "DateReaction", "DateReactionUI.cs", "s_likeTexts",
+            new[] { "Loves it!", "Really into this!", "Great taste!" });
+        AddHardcoded(entries, "DateReaction", "DateReactionUI.cs", "s_neutralTexts",
+            new[] { "Hmm, okay.", "Not bad.", "Sure." });
+        AddHardcoded(entries, "DateReaction", "DateReactionUI.cs", "s_dislikeTexts",
+            new[] { "Not a fan...", "Yikes.", "Hard pass." });
+
+        // Phase transition dialogue
+        AddHardcoded(entries, "PhaseDialogue", "DateSessionManager.cs", "s_prePhase2Lines",
+            new[] { "Why don't we go to the kitchen?", "I could use a drink..." });
+        AddHardcoded(entries, "PhaseDialogue", "DateSessionManager.cs", "s_postPhase2Lines",
+            new[] { "Make me something good!", "What are you pouring?" });
+        AddHardcoded(entries, "PhaseDialogue", "DateSessionManager.cs", "s_prePhase3Lines",
+            new[] { "Let's sit down for a bit.", "Show me the living room!" });
+        AddHardcoded(entries, "PhaseDialogue", "DateSessionManager.cs", "s_postPhase3Lines",
+            new[] { "Nice place you've got here...", "Let me look around." });
+
+        // Entrance judgment lines
+        AddHardcoded(entries, "EntranceDialogue", "EntranceJudgmentSequence.cs", "s_noMusicLines",
+            GetStaticStringArray("Assets/Scripts/Dating/EntranceJudgmentSequence.cs", "s_noMusicLines"));
+        AddHardcoded(entries, "EntranceDialogue", "EntranceJudgmentSequence.cs", "s_dirtyKitchenLines",
+            GetStaticStringArray("Assets/Scripts/Dating/EntranceJudgmentSequence.cs", "s_dirtyKitchenLines"));
+        AddHardcoded(entries, "EntranceDialogue", "EntranceJudgmentSequence.cs", "s_dirtyLivingRoomLines",
+            GetStaticStringArray("Assets/Scripts/Dating/EntranceJudgmentSequence.cs", "s_dirtyLivingRoomLines"));
+        AddHardcoded(entries, "EntranceDialogue", "EntranceJudgmentSequence.cs", "s_dirtyEntranceLines",
+            GetStaticStringArray("Assets/Scripts/Dating/EntranceJudgmentSequence.cs", "s_dirtyEntranceLines"));
+
+        // Weather dialogue
+        AddHardcoded(entries, "WeatherDialogue", "NemaWeatherDialogue.cs", "s_lines",
+            GetStaticStringArray("Assets/Scripts/Dating/NemaWeatherDialogue.cs", "s_lines"));
+
+        // 4. Scene ReactableTag tags (what items are tagged as)
+        foreach (var tag in Object.FindObjectsByType<ReactableTag>(FindObjectsSortMode.None))
+        {
+            if (tag == null) continue;
+            string objPath = GetScenePath(tag.transform);
+            string tags = string.Join(", ", tag.Tags);
+            if (!string.IsNullOrEmpty(tags))
+                entries.Add(new TextEntry("ReactableTag", objPath, "tags",
+                    $"tag:{objPath}", tags));
+        }
+
+        // 5. LocalizationTable entries
         foreach (var guid in AssetDatabase.FindAssets("t:LocalizationTable"))
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);
@@ -376,6 +420,41 @@ public class TextExporter : EditorWindow
             }
         }
         return fields.ToArray();
+    }
+
+    private static void AddHardcoded(List<TextEntry> entries, string type, string source,
+        string field, string[] lines)
+    {
+        if (lines == null) return;
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if (string.IsNullOrEmpty(lines[i])) continue;
+            entries.Add(new TextEntry(type, source, $"{field}[{i}]",
+                $"{type.ToLower()}:{source}:{field}[{i}]", lines[i]));
+        }
+    }
+
+    /// <summary>
+    /// Parse a static string array from a C# source file by regex.
+    /// Crude but works for simple single-line array initializers.
+    /// </summary>
+    private static string[] GetStaticStringArray(string relPath, string fieldName)
+    {
+        string fullPath = System.IO.Path.Combine(Application.dataPath, "..", relPath);
+        if (!File.Exists(fullPath)) return new string[0];
+
+        string content = File.ReadAllText(fullPath);
+        // Match: fieldName = { "...", "...", ... };
+        var match = System.Text.RegularExpressions.Regex.Match(content,
+            fieldName + @"\s*=\s*\{([^}]+)\}");
+        if (!match.Success) return new string[0];
+
+        var strMatches = System.Text.RegularExpressions.Regex.Matches(
+            match.Groups[1].Value, "\"([^\"]+)\"");
+        var result = new string[strMatches.Count];
+        for (int i = 0; i < strMatches.Count; i++)
+            result[i] = strMatches[i].Groups[1].Value;
+        return result;
     }
 
     private struct TextEntry
