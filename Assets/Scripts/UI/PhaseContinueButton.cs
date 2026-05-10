@@ -143,7 +143,7 @@ public class PhaseContinueButton : MonoBehaviour
         btnRT.sizeDelta = new Vector2(220f, 50f);
 
         var btnImg = btnGO.AddComponent<Image>();
-        btnImg.color = new Color(0.25f, 0.55f, 0.35f, 1f);
+        btnImg.color = new Color(0.55f, 0.65f, 0.5f, 1f); // sage green
 
         _button = btnGO.AddComponent<Button>();
         _button.targetGraphic = btnImg;

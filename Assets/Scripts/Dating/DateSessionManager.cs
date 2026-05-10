@@ -1456,8 +1456,15 @@ public class DateSessionManager : MonoBehaviour
         if (shader != null)
         {
             var mat = new Material(shader);
+            // Transparent alpha-blended so PNG transparency works
             mat.SetFloat("_Surface", 1f);
             mat.SetFloat("_Blend", 0f);
+            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            mat.SetInt("_ZWrite", 0);
+            mat.renderQueue = 3000;
+            mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            mat.EnableKeyword("_ALPHABLEND_ON");
             renderer.material = mat;
 
             // Heart flipbook for Like reactions

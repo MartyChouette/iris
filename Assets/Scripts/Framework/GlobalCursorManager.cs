@@ -539,20 +539,15 @@ public class GlobalCursorManager : MonoBehaviour
                 return CursorType.Default;
             }
 
-            // Phase 2 (BackgroundJudging): drink interactions + interact
+            // Phase 2 (BackgroundJudging): only drink items are interactable
             if (phase == DateSessionManager.DatePhase.BackgroundJudging)
             {
                 if (Has<DrinkGlass>(go))        return CursorType.Interact;
                 if (Has<BottleItem>(go))        return CursorType.Interact;
-                if (Has<ItemHighlight>(go)
-                 || Has<PlaceableObject>(go))   return CursorType.Interact;
                 return CursorType.Default;
             }
 
-            // Phase 1 (Arrival): interact cursor only, no special contexts
-            if (Has<ItemHighlight>(go)
-             || Has<PlaceableObject>(go)
-             || HasFlowerTag(go))               return CursorType.Interact;
+            // Phase 1 (Arrival): nothing is interactable — just watching
             return CursorType.Default;
         }
 

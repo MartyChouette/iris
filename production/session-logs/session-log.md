@@ -37754,3 +37754,5072 @@ ebc6957 fix: eye icons render on overlay camera to skip post-processing
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260508_133837
+### Commits
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+---
+
+## Session End: 20260508_133954
+### Commits
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_134347
+### Commits
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_134848
+### Commits
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_135205
+### Commits
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_135746
+### Commits
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_140237
+### Commits
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scripts/Apartment/NemaController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_140824
+### Commits
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_143752
+### Commits
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/UI/DateDebugOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_145348
+### Commits
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/UI/DateDebugOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_145404
+### Commits
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Framework/GameClock.cs
+Assets/Scripts/UI/DateDebugOverlay.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_145440
+### Commits
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_145946
+### Commits
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_150052
+### Commits
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_150138
+### Commits
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_150147
+### Commits
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_150439
+### Commits
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Apartment/SmokePoofConfig.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_150628
+### Commits
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Apartment/SmokePoofConfig.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_150652
+### Commits
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Apartment/SmokePoofConfig.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_150913
+### Commits
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Apartment/SmokePoofConfig.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_151657
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_152149
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_152204
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_152309
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_153007
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_164007
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_164104
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_164508
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_164619
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_164732
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_164911
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_165431
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_170354
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_170404
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_170416
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_170537
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_184130
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_191113
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_191634
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_191831
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_192930
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/CursorWorldShadow.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_193306
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/CursorWorldShadow.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_193416
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/CursorWorldShadow.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260508_193704
+### Commits
+555f37b feat: single billboard poof on drop + shadow follows collider center
+8162b80 changed lime juice
+f883161 feat: time-of-day scrubbing for trailer capture
+d411b30 Merge branch 'main' of https://github.com/MartyChouette/iris
+fdd3e70 fixed lightbulb
+74424ef changed overhead light
+eb30b51 feat: hold spacebar to force Nema to look at camera
+272c36d record pivot update
+c268467 chore: update session log
+d282181 changed drinks trolley
+ebc6957 fix: eye icons render on overlay camera to skip post-processing
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/CursorWorldShadow.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_145127
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/SmokePoof.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_145304
+### Commits
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_145543
+### Commits
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_145648
+### Commits
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_150755
+### Commits
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_151109
+### Commits
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_151500
+### Commits
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_151713
+### Commits
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXInteractable.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_151905
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_152007
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_152034
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_152939
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_153100
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_153647
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_154051
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_154259
+### Commits
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_155816
+### Commits
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_160236
+### Commits
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_160348
+### Commits
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_161821
+### Commits
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_161907
+### Commits
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/ReactableTagDebugLabels.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_162012
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_162106
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_162641
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_162754
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_162935
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_163528
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_164623
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_164856
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_165038
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_165054
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_170243
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_171150
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_171410
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_171529
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_171734
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_171823
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_171851
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_172016
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_172607
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_173516
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_173732
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_175720
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_175845
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_180121
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_180213
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_180418
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_180634
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_180802
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_180853
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_181038
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_181205
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_181254
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_181541
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_182154
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_182525
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_182615
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_182706
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_182829
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_182945
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_182952
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_183524
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_183533
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_184148
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_184245
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_194350
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_194510
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_194551
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_194705
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_194937
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_195210
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_195546
+### Commits
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/AlbumSleeve.cs
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Apartment/AuthoredMessSpawner.cs
+Assets/Scripts/Apartment/DrinkCartController.cs
+Assets/Scripts/Apartment/InteractableHighlight.cs
+Assets/Scripts/Apartment/LivingFlowerPlantManager.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Apartment/RecordSlot.cs
+Assets/Scripts/Apartment/TurntableButton.cs
+Assets/Scripts/Apartment/VinylDisc.cs
+Assets/Scripts/Apartment/WallOcclusionFader.cs
+Assets/Scripts/Dating/CoffeeTableDelivery.cs
+Assets/Scripts/Dating/DateItemHighlighter.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Dating/NPCGazeHighlight.cs
+Assets/Scripts/Dating/ReactableTag.cs
+Assets/Scripts/Editor/DrinkSceneSetup.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/GlassController.cs
+Assets/Scripts/Rendering/PSXObjectSettings.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_200426
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_200530
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_200840
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201108
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201340
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201529
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201555
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201711
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201728
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201808
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_201919
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_202031
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_202417
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_202539
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_202620
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_203551
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_203903
+### Commits
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Editor/TextExporter.cs
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scripts/Framework/MainMenuManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_Renderer.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_213820
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_213941
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_214546
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_214804
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_215418
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_215847
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_221454
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_221837
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_222220
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+2bc12d2 fix: held-item layer restore, cursor false positive, clean highlight shader
+3411245 the feel of aligned cursors!!!
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_233607
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_235309
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+a2546c2 fix: rotation-aware placement, layer restore, drink phase highlights
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260509_235851
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_001039
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_001428
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_001632
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+4ab8ef0 feat: scale guardrails, text exporter, warm drink highlights
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_003230
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_005150
+### Commits
+41a8f9b feat: idle trailer, skip mode select/tutorial, comprehensive text export
+2106ab4 feat: replace InteractableHighlight with clean ItemHighlight system
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_092727
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_103824
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_104040
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_104938
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_105433
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_105640
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_105810
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_110006
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_110312
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_110540
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_110734
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_110940
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_111111
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_111349
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_113542
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_113718
+### Uncommitted Changes
+Assets/Animations/Nema_couch.controller
+Assets/ArtAssets/3dModels/Nema_Models/Female Laying Pose.fbx.meta
+Assets/ArtAssets/3dModels/Nema_Models/Sitting.fbx.meta
+Assets/ArtAssets/Material.001.mat
+Assets/ArtAssets/Material.001.mat.meta
+Assets/ArtAssets/Material.002.mat
+Assets/ArtAssets/Material.002.mat.meta
+Assets/ArtAssets/Material.004.mat
+Assets/ArtAssets/Material.004.mat.meta
+Assets/ArtAssets/Material.005.mat
+Assets/ArtAssets/Material.005.mat.meta
+Assets/ArtAssets/Material.006.mat
+Assets/ArtAssets/Material.006.mat.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/Cursors/d_4default.png
+Assets/Resources/Cursors/d_4default.png.meta
+Assets/Resources/Cursors/default.png.meta
+Assets/Resources/Cursors/drawer.png.meta
+Assets/Resources/Cursors/pinch.png.meta
+Assets/Resources/Particles/puff_01.png.meta
+Assets/Resources/Particles/puff_02.png.meta
+Assets/Resources/Particles/puff_03.png.meta
+Assets/Resources/Particles/puff_04.png.meta
+Assets/Resources/Particles/puff_05.png.meta
+Assets/Resources/Particles/puff_06.png.meta
+Assets/Scenes/apartment.unity
+Assets/Scenes/mainmenu_nemahead.unity
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset
+Assets/ScriptableObjects/DrinkMaking/Ingredient_LimeJuice.asset.meta
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/GlobalCursorManager.cs
+Assets/Scripts/Mechanics/DrinkMaking/DrinkPourManager.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/UI/HintDisplayManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/PC_Renderer.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

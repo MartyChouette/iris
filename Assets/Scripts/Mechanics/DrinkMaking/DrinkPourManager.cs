@@ -100,7 +100,8 @@ public class DrinkPourManager : MonoBehaviour
         _activeGlass = glass;
         _activeRecipe = FindRecipeForGlass(glass);
 
-        HighlightAllGlasses(false);
+        // Keep glasses highlighted during pouring so player can see them
+        HighlightAllGlasses(true);
         CurrentState = State.Pouring;
         _overflowSFXPlayed = false;
         _waitingForFirstBottle = true;
@@ -166,6 +167,7 @@ public class DrinkPourManager : MonoBehaviour
     public void StopPouring()
     {
         _pouringIngredient = null;
+        PourDragHelper.End(); // hide pour reticle
         HighlightSingleGlass(_activeGlass, false);
         // Stay in Pouring state — player can grab another bottle
 

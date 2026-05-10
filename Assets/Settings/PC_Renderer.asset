@@ -54,12 +54,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b544912b166aba4f86a5a51d3a196a1, type: 3}
   m_Name: PSXPostProcessFeature
   m_EditorClassIdentifier: Assembly-CSharp::PSXPostProcessFeature
-  m_Active: 0
+  m_Active: 1
   settings:
-    resolutionDivisor: 1
-    colorDepth: 21
+    resolutionDivisor: 1.6
+    colorDepth: 32
     ditherIntensity: 1
-  _postShader: {fileID: 0}
+    ditherShadowBias: 0
+  _postShader: {fileID: 4800000, guid: 26f490ad90348934dbbbbfc3061f991b, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +90,7 @@ MonoBehaviour:
   - {fileID: -3224449619689437488}
   - {fileID: 5742268844292691882}
   - {fileID: -5670967793026460939}
-  m_RendererFeatureMap: ad6b866f10d7b46c33979994d961a2c5d086449e277440d3aad7db0c17a3b04ff512fa9bd6ac4cb1
+  m_RendererFeatureMap: ad6b866f10d7b46c33979994d961a2c5d086449e277440d3aad7db0c17a3b04f67bf4b61b56d2066
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -130,12 +131,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403b64e3aa7aa384aacf6bf7ab574619, type: 3}
   m_Name: DoubleExposureFeature
   m_EditorClassIdentifier: Assembly-CSharp::DoubleExposureFeature
-  m_Active: 0
+  m_Active: 1
   settings:
     feedbackDecay: 0.296
-    blendIntensity: 0.592
-    blurRadius: 6
-    bloomThreshold: 0.48
+    blendIntensity: 0.246
+    blurRadius: 5.49
+    bloomThreshold: 0.993
     bloomSoftness: 1
     bufferDivisor: 4
   _shader: {fileID: 4800000, guid: f641a616fb963784db965f01caa3b4f2, type: 3}
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62c9c65cf3354c93be831c8bc075510, type: 3}
   m_Name: ScreenSpaceAmbientOcclusion
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   m_Settings:
     AOMethod: 0
     Downsample: 0

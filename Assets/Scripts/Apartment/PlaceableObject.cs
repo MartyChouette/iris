@@ -892,7 +892,9 @@ public class PlaceableObject : MonoBehaviour
         if (_isGlitched)
             RemoveGlitch();
 
-        if (_allowAutoStraighten && !canWallMount)
+        // Skip auto-straighten for wall-mounted items — their rotation is intentional
+        // Also skip if the item is WallOnly (paintings that only go on walls)
+        if (_allowAutoStraighten && !canWallMount && !wallOnly)
         {
             // Skip auto-straighten for pairable items (shoes) — player controls rotation
             var pairable = GetComponent<PairableItem>();
@@ -1056,10 +1058,14 @@ public class PlaceableObject : MonoBehaviour
 
     public void AlignToWall(Vector3 wallNormal, float rotationAngle)
     {
-        // Face the wall normal, then apply user yaw. Works cleanly when the
-        // root has (0,0,0) rotation and the mesh visual is on a child.
         transform.rotation = Quaternion.LookRotation(wallNormal, Vector3.up)
             * Quaternion.AngleAxis(rotationAngle, Vector3.forward);
+    }
+
+    /// <summary>Set exact wall rotation (preserves horizontal paintings etc).</summary>
+    public void AlignToWall(Quaternion exactRotation)
+    {
+        transform.rotation = exactRotation;
     }
 
     public void ApplyCrookedOffset(Vector3 wallNormal)

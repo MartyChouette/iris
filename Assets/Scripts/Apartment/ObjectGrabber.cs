@@ -238,6 +238,8 @@ public class ObjectGrabber : MonoBehaviour
     private PlacementSurface _currentSurface;
     private PlacementSurface _lastValidSurface;
     private float _wallRotation;
+    private Quaternion _wallRotationFull;
+    private Quaternion _wallPickupRotation; // exact world rotation at pickup
     private bool _isOnWall;
     private Vector3 _heldOriginalForward; // which way the item faced when picked up
     private bool _isPourTilted;
@@ -971,20 +973,16 @@ public class ObjectGrabber : MonoBehaviour
 
         // Preserve wall rotation so pick-up + put-down keeps the same facing
         _heldOriginalForward = placeable.transform.forward;
+        _wallPickupRotation = placeable.transform.rotation;
         if (_isOnWall)
         {
-            // Use the item's own forward to determine which side of the wall it was on
-            Vector3 wallNormal = Vector3.Dot(_heldOriginalForward, _currentSurface.SurfaceNormal) >= 0f
-                ? _currentSurface.SurfaceNormal
-                : -_currentSurface.SurfaceNormal;
-            Quaternion faceWall = Quaternion.LookRotation(wallNormal, Vector3.up);
-            Quaternion delta = Quaternion.Inverse(faceWall) * placeable.transform.rotation;
-            _wallRotation = delta.eulerAngles.z;
-            if (_wallRotation > 180f) _wallRotation -= 360f;
+            _wallRotationFull = Quaternion.identity; // no delta needed — we use the exact rotation
+            _wallRotation = 0f;
         }
         else
         {
             _wallRotation = 0f;
+            _wallRotationFull = Quaternion.identity;
         }
 
         placeable.OnPickedUp();
@@ -1078,6 +1076,7 @@ public class ObjectGrabber : MonoBehaviour
             if (DrinkPourManager.Instance != null)
             {
                 DrinkPourManager.Instance.StartPouring(_nearestDrinkGlass, heldBottle.Ingredient);
+                PourDragHelper.Begin(); // show pour reticle
                 ConsumeClick();
                 return; // keep holding the bottle
             }
@@ -1347,7 +1346,7 @@ public class ObjectGrabber : MonoBehaviour
             Vector3 wallNormal = hitResult.surfaceNormal;
             if (_held.CanWallMount && Vector3.Dot(_heldOriginalForward, wallNormal) < 0f)
                 wallNormal = -wallNormal;
-            _held.AlignToWall(wallNormal, _wallRotation);
+            _held.AlignToWall(_wallPickupRotation);
             rot = _held.transform.rotation;
         }
         else
@@ -1555,33 +1554,39 @@ public class ObjectGrabber : MonoBehaviour
         // SpecificPartner (shoes) can't re-pair, but AnyOfCategory (plates) can stack freely
         if (heldPairable.IsPaired && heldPairable.Mode == PairableItem.PairMode.SpecificPartner) return false;
 
-        Vector2 screenPos = IrisInput.CursorPosition;
-        Ray ray = ScreenRay(screenPos);
+        // Fast path: if the magnetic snap already locked onto a partner, use that
+        // directly instead of raycasting — the cursor may not be over the partner
+        // since the item is magnetically pulled.
+        PairableItem clickedPairable = _pairSnapTarget;
 
-        // Find a PairableItem along the ray, skipping the held item (its collider
-        // sits at the cursor and would block the ray to the partner behind it).
-        PairableItem clickedPairable = null;
-        float bestDist = float.MaxValue;
-        int hitCount = Physics.RaycastNonAlloc(ray, s_pairHitBuffer, 100f, placeableLayer);
-        for (int i = 0; i < hitCount; i++)
+        // Raycast fallback if no magnetic snap active
+        if (clickedPairable == null)
         {
-            var comp = s_pairHitBuffer[i].collider.GetComponent<PairableItem>();
-            if (comp == null) comp = s_pairHitBuffer[i].collider.GetComponentInParent<PairableItem>();
-            if (comp == null || comp == heldPairable) continue;
-            if (s_pairHitBuffer[i].distance < bestDist)
+            Vector2 screenPos = IrisInput.CursorPosition;
+            Ray ray = ScreenRay(screenPos);
+
+            float bestDist = float.MaxValue;
+            int hitCount = Physics.RaycastNonAlloc(ray, s_pairHitBuffer, 100f, placeableLayer);
+            for (int i = 0; i < hitCount; i++)
             {
-                bestDist = s_pairHitBuffer[i].distance;
-                clickedPairable = comp;
+                var comp = s_pairHitBuffer[i].collider.GetComponent<PairableItem>();
+                if (comp == null) comp = s_pairHitBuffer[i].collider.GetComponentInParent<PairableItem>();
+                if (comp == null || comp == heldPairable) continue;
+                if (s_pairHitBuffer[i].distance < bestDist)
+                {
+                    bestDist = s_pairHitBuffer[i].distance;
+                    clickedPairable = comp;
+                }
             }
-        }
-        // SphereCast fallback for forgiving click area
-        if (clickedPairable == null
-            && Physics.SphereCast(ray, PairStackRadius, out RaycastHit sphereHit, 100f, placeableLayer))
-        {
-            var comp = sphereHit.collider.GetComponent<PairableItem>();
-            if (comp == null) comp = sphereHit.collider.GetComponentInParent<PairableItem>();
-            if (comp != null && comp != heldPairable)
-                clickedPairable = comp;
+            // SphereCast fallback for forgiving click area
+            if (clickedPairable == null
+                && Physics.SphereCast(ray, PairStackRadius, out RaycastHit sphereHit, 100f, placeableLayer))
+            {
+                var comp = sphereHit.collider.GetComponent<PairableItem>();
+                if (comp == null) comp = sphereHit.collider.GetComponentInParent<PairableItem>();
+                if (comp != null && comp != heldPairable)
+                    clickedPairable = comp;
+            }
         }
 
         if (clickedPairable == null) return false;
@@ -1810,11 +1815,13 @@ public class ObjectGrabber : MonoBehaviour
             return;
         }
 
-        if (bestGlass == null && wasPouring && lmbHeld)
+        // While pouring with LMB held, lock to the current glass — can't switch cups mid-pour
+        if (wasPouring && lmbHeld)
         {
             bestGlass = DrinkPourManager.Instance.ActiveGlass;
             if (bestGlass != null)
                 bestDist = 0f;
+            PourDragHelper.UpdateDrag(); // drive the pour reticle
         }
 
         if (bestGlass == null)
@@ -2458,7 +2465,7 @@ public class ObjectGrabber : MonoBehaviour
                     Vector3 wn = hitResult.surfaceNormal;
                     if (_held.CanWallMount && Vector3.Dot(_heldOriginalForward, wn) < 0f)
                         wn = -wn;
-                    _held.AlignToWall(wn, _wallRotation);
+                    _held.AlignToWall(_wallPickupRotation);
                 }
 
                 foundSurface = true;
@@ -2650,7 +2657,12 @@ public class ObjectGrabber : MonoBehaviour
 
         float angle = scrollRotateStep;
         if (_isOnWall && Mathf.Abs(axis.y) > 0.5f)
+        {
             _wallRotation += angle;
+            // Rotate around the wall normal (forward in wall-local space)
+            Vector3 wallForward = _held.transform.forward;
+            _wallPickupRotation = Quaternion.AngleAxis(angle, wallForward) * _wallPickupRotation;
+        }
         else
             _held.transform.RotateAround(_held.RotatePivotWorld, axis, angle);
 
@@ -3168,8 +3180,7 @@ public class ObjectGrabber : MonoBehaviour
         Vector3 placePos = snapped + hitResult.surfaceNormal * halfExtent;
 
         Quaternion placeRot = _currentSurface.IsVertical
-            ? Quaternion.LookRotation(hitResult.surfaceNormal, Vector3.up)
-              * Quaternion.AngleAxis(_wallRotation, Vector3.forward)
+            ? _wallPickupRotation
             : _held.transform.rotation;
 
         // Mirror the home-snap override from Place() so ghost matches exactly
@@ -3181,12 +3192,19 @@ public class ObjectGrabber : MonoBehaviour
                 placeRot = _held.HomeRotation;
         }
 
-        // Shadow sits under the collider center (not the pivot) on the surface.
-        // Rotate the local-space offset by the placement rotation so it tracks
-        // correctly when the item is rotated while held.
-        Vector3 rotatedOffset = placeRot * _heldBoundsCenterOffset;
-        Vector3 projectedOffset = Vector3.ProjectOnPlane(rotatedOffset, hitResult.surfaceNormal);
-        Vector3 shadowPos = hitResult.worldPosition + projectedOffset + hitResult.surfaceNormal * 0.02f;
+        // Shadow position: on walls use the placement position directly (centered on item),
+        // on horizontal surfaces offset by the collider center.
+        Vector3 shadowPos;
+        if (_currentSurface.IsVertical)
+        {
+            shadowPos = placePos + hitResult.surfaceNormal * 0.02f;
+        }
+        else
+        {
+            Vector3 rotatedOffset = placeRot * _heldBoundsCenterOffset;
+            Vector3 projectedOffset = Vector3.ProjectOnPlane(rotatedOffset, hitResult.surfaceNormal);
+            shadowPos = hitResult.worldPosition + projectedOffset + hitResult.surfaceNormal * 0.02f;
+        }
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
         bool canPlace = (!_currentSurface.IsVertical || _held.CanWallMount)

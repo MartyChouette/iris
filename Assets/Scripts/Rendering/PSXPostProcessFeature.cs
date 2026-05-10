@@ -7,11 +7,31 @@ using UnityEngine.Rendering.RenderGraphModule.Util;
 /// <summary>
 /// URP ScriptableRendererFeature that handles PSX-style post-processing:
 /// resolution downscale (pixelation) + color depth reduction + ordered dithering
-/// + tilt-shift blur. All settings come from the PSXPostProcessVolume on the
-/// volume stack — add it to any Volume profile.
+/// + tilt-shift blur. Settings on the feature are the defaults; a PSXPostProcessVolume
+/// on the volume stack overrides them when present.
 /// </summary>
 public class PSXPostProcessFeature : ScriptableRendererFeature
 {
+    [System.Serializable]
+    public class Settings
+    {
+        [Header("Resolution")]
+        [Tooltip("Divide screen resolution by this value. Higher = chunkier pixels.")]
+        [Range(1f, 6f)] public float resolutionDivisor = 3f;
+
+        [Header("Color")]
+        [Tooltip("Color levels per channel (lower = more posterized).")]
+        [Range(4, 256)] public float colorDepth = 32f;
+
+        [Tooltip("Ordered dither strength.")]
+        [Range(0, 1)] public float ditherIntensity = 0.5f;
+
+        [Tooltip("Dither shadow bias. 0 = uniform dither, 1 = dither only in dark areas.")]
+        [Range(0, 1)] public float ditherShadowBias = 0.7f;
+    }
+
+    public Settings settings = new Settings();
+
     [Header("Shader Reference")]
     [Tooltip("Drag PSXPost shader here. Shader.Find does not work in builds.")]
     [SerializeField] private Shader _postShader;
@@ -39,6 +59,7 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
         if (_material == null || _pass == null)
             return;
 
+        _pass.UpdateSettings(settings);
         _pass.requiresIntermediateTexture = true;
         renderer.EnqueuePass(_pass);
     }
@@ -54,6 +75,7 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
     class PSXPostProcessPass : ScriptableRenderPass
     {
         private Material _material;
+        private Settings _settings;
 
         private static readonly int ColorDepthID = Shader.PropertyToID("_ColorDepth");
         private static readonly int DitherIntensityID = Shader.PropertyToID("_DitherIntensity");
@@ -66,22 +88,30 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
             profilingSampler = new ProfilingSampler("PSX Post Process");
         }
 
+        public void UpdateSettings(Settings s) => _settings = s;
+
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
         {
-            if (_material == null) return;
+            if (_material == null || _settings == null) return;
 
             var resourceData = frameData.Get<UniversalResourceData>();
             if (resourceData.isActiveTargetBackBuffer)
                 return;
 
-            // Read settings from the volume stack
-            var vol = VolumeManager.instance.stack.GetComponent<PSXPostProcessVolume>();
-            if (vol == null || !vol.active) return;
+            // Read from volume stack if available, otherwise use feature defaults
+            float resDivisor = _settings.resolutionDivisor;
+            float colorDepth = _settings.colorDepth;
+            float ditherIntensity = _settings.ditherIntensity;
+            float ditherShadowBias = _settings.ditherShadowBias;
 
-            float resDivisor = vol.resolutionDivisor.value;
-            float colorDepth = vol.colorDepth.value;
-            float ditherIntensity = vol.ditherIntensity.value;
-            float ditherShadowBias = vol.ditherShadowBias.value;
+            var vol = VolumeManager.instance.stack.GetComponent<PSXPostProcessVolume>();
+            if (vol != null && vol.active)
+            {
+                if (vol.resolutionDivisor.overrideState) resDivisor = vol.resolutionDivisor.value;
+                if (vol.colorDepth.overrideState) colorDepth = vol.colorDepth.value;
+                if (vol.ditherIntensity.overrideState) ditherIntensity = vol.ditherIntensity.value;
+                if (vol.ditherShadowBias.overrideState) ditherShadowBias = vol.ditherShadowBias.value;
+            }
 
             var source = resourceData.activeColorTexture;
             var sourceDesc = renderGraph.GetTextureDesc(source);

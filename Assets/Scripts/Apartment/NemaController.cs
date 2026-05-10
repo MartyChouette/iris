@@ -256,7 +256,7 @@ public class NemaController : MonoBehaviour
 
     private void Update()
     {
-        if (_model == null) return;
+        if (ActiveModel == null) return;
 
         UpdateLookTarget();
         UpdateBoredTimer();
@@ -270,7 +270,7 @@ public class NemaController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_model == null) return;
+        if (ActiveModel == null) return;
 
         // Manual head look-at (when no Animator IK)
         if (_headBone != null && _lookWeight > 0.01f && _hasLookTarget)
@@ -407,12 +407,13 @@ public class NemaController : MonoBehaviour
 
     private void SetLookTarget(Vector3 worldPos)
     {
-        if (_model == null) return;
+        var active = ActiveModel;
+        if (active == null) return;
 
         // Check angle — don't look behind Nema
-        Vector3 toTarget = worldPos - _model.position;
+        Vector3 toTarget = worldPos - active.position;
         toTarget.y = 0f;
-        float angle = Vector3.Angle(_model.forward, toTarget);
+        float angle = Vector3.Angle(active.forward, toTarget);
         if (angle > _maxLookAngle)
         {
             ClearLookTarget();
@@ -534,9 +535,9 @@ public class NemaController : MonoBehaviour
             var pick = PickWeightedRandomTag(candidates);
             if (pick == null || !pick.IsActive) continue;
 
-            Vector3 toItem = pick.transform.position - _model.position;
+            Vector3 toItem = pick.transform.position - ActiveModel.position;
             toItem.y = 0f;
-            if (Vector3.Angle(_model.forward, toItem) <= _maxLookAngle)
+            if (Vector3.Angle(ActiveModel.forward, toItem) <= _maxLookAngle)
             {
                 _boredTarget = pick.transform;
                 _isBored = true;

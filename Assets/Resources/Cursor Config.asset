@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edafaaf7f5279ca48b9cfd491841fa03, type: 3}
+  m_Name: Cursor Config
+  m_EditorClassIdentifier: Assembly-CSharp::CursorConfig
+  defaultCursor:
+    texture: {fileID: 2800000, guid: abdf9ab4fa4759748b90f45b720c5c74, type: 3}
+    hotspot: {x: 24, y: 24}
+  interact:
+    texture: {fileID: 2800000, guid: fe0f2c89fc455cb489f4f7d6be79e360, type: 3}
+    hotspot: {x: 0, y: 0}
+  watering:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  fridge:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  phone:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  drawer:
+    texture: {fileID: 2800000, guid: fe0f2c89fc455cb489f4f7d6be79e360, type: 3}
+    hotspot: {x: 0, y: 0}
+  drink:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  sponge:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  grab:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  scissors:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  swatter:
+    texture: {fileID: 0}
+    hotspot: {x: 0, y: 0}
+  light:
+    texture: {fileID: 2800000, guid: fe0f2c89fc455cb489f4f7d6be79e360, type: 3}
+    hotspot: {x: 0, y: 0}

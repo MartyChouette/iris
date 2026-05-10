@@ -38,35 +38,8 @@ public class HintDisplayManager : MonoBehaviour
         }
         Instance = this;
 
-        // Ensure hint panel has a dark background and auto-sizes to fit text
-        if (_hintPanel != null)
-        {
-            var img = _hintPanel.GetComponent<Image>();
-            if (img == null)
-            {
-                img = _hintPanel.AddComponent<Image>();
-                img.color = new Color(0f, 0f, 0f, 0.55f);
-            }
-            else if (img.color.a < 0.1f)
-            {
-                img.color = new Color(0f, 0f, 0f, 0.55f);
-            }
-
-            var csf = _hintPanel.GetComponent<ContentSizeFitter>();
-            if (csf == null) csf = _hintPanel.AddComponent<ContentSizeFitter>();
-            csf.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-            csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-            var vlg = _hintPanel.GetComponent<VerticalLayoutGroup>();
-            if (vlg == null)
-            {
-                vlg = _hintPanel.AddComponent<VerticalLayoutGroup>();
-                vlg.padding = new RectOffset(12, 12, 6, 6);
-                vlg.childAlignment = TextAnchor.MiddleCenter;
-                vlg.childForceExpandWidth = false;
-                vlg.childForceExpandHeight = false;
-            }
-        }
+        // Scene setup: _hintPanel should be a UI Panel with an Image (background)
+        // and the two TMP_Text children. Set it up in the editor — no runtime creation.
     }
 
     private void OnEnable()

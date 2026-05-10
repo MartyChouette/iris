@@ -104,10 +104,13 @@ public class ItemHighlight : MonoBehaviour
         else tint = HoverColor;
 
         float pulse = 0.7f + 0.3f * Mathf.Sin(Time.time * 3f);
-        ApplyTint(tint, pulse);
+
+        // Stronger tint for drink phase highlights (display/gaze) so glasses are visible
+        float tintStrength = (_display || _gaze || _prepLiked) ? 0.8f : 0.4f;
+        ApplyTint(tint, pulse, tintStrength);
     }
 
-    private void ApplyTint(Color tint, float intensity)
+    private void ApplyTint(Color tint, float intensity, float strength = 0.4f)
     {
         if (_renderers == null || _originalColors == null) return;
 
@@ -120,7 +123,7 @@ public class ItemHighlight : MonoBehaviour
             {
                 var mpb = new MaterialPropertyBlock();
                 Color original = _originalColors[r][m];
-                Color highlighted = Color.Lerp(original, tint, 0.4f * intensity);
+                Color highlighted = Color.Lerp(original, tint, strength * intensity);
                 mpb.SetColor("_BaseColor", highlighted);
                 _renderers[r].SetPropertyBlock(mpb, m);
             }
