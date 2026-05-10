@@ -161,6 +161,9 @@ public class ObjectGrabber : MonoBehaviour
     [Tooltip("SFX played when placing an object on a surface.")]
     [SerializeField] private AudioClip _placeSFX;
 
+    [Tooltip("SFX played when an item bonks a ceiling/shelf it can't fit under.")]
+    [SerializeField] private AudioClip _bonkSFX;
+
     [Header("Surface Reaction Sounds")]
     [Tooltip("Reaction SFX per surface material. Played alongside the main place SFX.")]
     [SerializeField] private AudioClip _surfaceWood;
@@ -893,6 +896,7 @@ public class ObjectGrabber : MonoBehaviour
         // Kill any in-progress animations and restore the true base scale
         // so rapid pick-up/place cycles don't compound intermediate values.
         if (_squishCoroutine != null) { StopCoroutine(_squishCoroutine); _squishCoroutine = null; }
+        if (_bonkCoroutine != null) { StopCoroutine(_bonkCoroutine); _bonkCoroutine = null; }
         var bounce = placeable.GetComponent<SettleBounce>();
         if (bounce != null)
         {
@@ -1336,6 +1340,19 @@ public class ObjectGrabber : MonoBehaviour
         float halfExtent = GetHeldHalfExtentAlongNormal(hitResult.surfaceNormal);
         pos += hitResult.surfaceNormal * halfExtent;
 
+        // Height clearance: reject if item is too tall for the space above this surface
+        if (!_currentSurface.IsFloor && !_currentSurface.IsVertical)
+        {
+            float itemHeight = GetHeldFullHeightAlongNormal(hitResult.surfaceNormal);
+            float clearance = GetClearanceAboveSurface(hitResult.worldPosition, hitResult.surfaceNormal);
+            if (itemHeight > clearance)
+            {
+                if (_bonkCoroutine == null)
+                    _bonkCoroutine = StartCoroutine(BonkAndBounce(pos, hitResult.surfaceNormal, clearance));
+                return;
+            }
+        }
+
         Quaternion rot;
         bool bookIsFlat = false;
         if (_currentSurface.IsVertical)
@@ -1434,6 +1451,10 @@ public class ObjectGrabber : MonoBehaviour
             Debug.Log($"[ObjectGrabber] BLOCKED: cell occupied at {pos}");
             return;
         }
+
+        // Kill any in-progress pickup animation so it doesn't fight PlacementSnapBounce
+        if (_squishCoroutine != null) { StopCoroutine(_squishCoroutine); _squishCoroutine = null; }
+        _held.transform.localScale = _held.OriginalScale;
 
         // Restore constraints before placement configures the rigidbody
         _heldRb.constraints = _originalConstraints;
@@ -2245,6 +2266,7 @@ public class ObjectGrabber : MonoBehaviour
                 dropBook.ReleaseBooksAbove(null, _held.transform.position, _held.transform.rotation);
         }
 
+        if (_bonkCoroutine != null) { StopCoroutine(_bonkCoroutine); _bonkCoroutine = null; }
         _held = null;
         _heldRb = null;
         _currentSurface = null;
@@ -2689,6 +2711,23 @@ public class ObjectGrabber : MonoBehaviour
         return Mathf.Max(extentDot - centerDot, 0.01f) + PlacementSafetyMargin;
     }
 
+    /// <summary>Full item height along a surface normal (both halves of the extent).</summary>
+    private float GetHeldFullHeightAlongNormal(Vector3 normal)
+    {
+        return 2f * Mathf.Abs(Vector3.Dot(_heldBoundsExtents, normal.normalized));
+    }
+
+    /// <summary>Raycast along surfaceNormal from a point on the surface to find clearance above.</summary>
+    private float GetClearanceAboveSurface(Vector3 surfacePoint, Vector3 surfaceNormal)
+    {
+        int mask = _wallLayer | _barrierLayer;
+        // Start slightly above the surface so we don't hit the surface itself
+        Vector3 origin = surfacePoint + surfaceNormal * 0.01f;
+        if (Physics.Raycast(origin, surfaceNormal, out RaycastHit hit, 2f, mask))
+            return hit.distance + 0.01f; // add back the offset
+        return float.MaxValue;
+    }
+
     // ── Smart book placement ─────────────────────────────────────────
 
     /// <summary>
@@ -2955,6 +2994,72 @@ public class ObjectGrabber : MonoBehaviour
         }
         if (target != null) target.localScale = baseScale;
         _squishCoroutine = null;
+    }
+
+    // ── Bonk & bounce (height rejection) ─────────────────────────
+
+    private Coroutine _bonkCoroutine;
+
+    /// <summary>
+    /// Cute rejection animation when an item can't fit under a shelf/ceiling.
+    /// Item rushes up, bonks, squashes on impact, bounces back, stays held.
+    /// </summary>
+    private IEnumerator BonkAndBounce(Vector3 targetPos, Vector3 surfaceNormal, float clearance)
+    {
+        if (_held == null) yield break;
+
+        Transform t = _held.transform;
+        Vector3 baseScale = _held.OriginalScale;
+        Vector3 startPos = t.position;
+
+        // Where the item would bonk — just under the ceiling
+        Vector3 bonkPos = targetPos + surfaceNormal * (clearance - 0.01f);
+
+        // ── Phase 1: Rush toward ceiling (0.06s) ──
+        for (float elapsed = 0f; elapsed < 0.06f; elapsed += Time.deltaTime)
+        {
+            if (_held == null) yield break;
+            t.position = Vector3.Lerp(startPos, bonkPos, elapsed / 0.06f);
+            yield return null;
+        }
+
+        // ── Phase 2: Squash on impact (0.04s) ──
+        // Compress along the surface normal, expand laterally
+        AudioManager.Instance?.PlaySFX(_bonkSFX != null ? _bonkSFX : _placeSFX, 0.6f);
+        Vector3 squashScale = new Vector3(baseScale.x * 1.2f, baseScale.y * 0.7f, baseScale.z * 1.2f);
+        for (float elapsed = 0f; elapsed < 0.04f; elapsed += Time.deltaTime)
+        {
+            if (_held == null) yield break;
+            t.localScale = Vector3.Lerp(baseScale, squashScale, elapsed / 0.04f);
+            yield return null;
+        }
+
+        // ── Phase 3: Bounce back (0.06s) ──
+        Vector3 stretchScale = new Vector3(baseScale.x * 0.95f, baseScale.y * 1.1f, baseScale.z * 0.95f);
+        for (float elapsed = 0f; elapsed < 0.06f; elapsed += Time.deltaTime)
+        {
+            if (_held == null) yield break;
+            float p = elapsed / 0.06f;
+            t.localScale = Vector3.Lerp(squashScale, stretchScale, p);
+            t.position = Vector3.Lerp(bonkPos, startPos, p);
+            yield return null;
+        }
+
+        // ── Phase 4: Settle scale (0.04s) ──
+        for (float elapsed = 0f; elapsed < 0.04f; elapsed += Time.deltaTime)
+        {
+            if (_held == null) yield break;
+            t.localScale = Vector3.Lerp(stretchScale, baseScale, elapsed / 0.04f);
+            yield return null;
+        }
+
+        if (_held != null)
+        {
+            t.localScale = baseScale;
+            t.position = startPos;
+        }
+
+        _bonkCoroutine = null;
     }
 
     // ── Ghost preview ──────────────────────────────────────────────
@@ -3245,6 +3350,15 @@ public class ObjectGrabber : MonoBehaviour
         if (canPlace && _barrierLayer != 0 && !_currentSurface.IsVertical)
         {
             if (Physics.CheckSphere(placePos, 0.009f, _barrierLayer))
+                canPlace = false;
+        }
+
+        // Height clearance: ghost turns red when item won't fit under the shelf above
+        if (canPlace && !_currentSurface.IsFloor && !_currentSurface.IsVertical)
+        {
+            float itemHeight = GetHeldFullHeightAlongNormal(hitResult.surfaceNormal);
+            float clearance = GetClearanceAboveSurface(hitResult.worldPosition, hitResult.surfaceNormal);
+            if (itemHeight > clearance)
                 canPlace = false;
         }
 

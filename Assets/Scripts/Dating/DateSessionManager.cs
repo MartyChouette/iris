@@ -763,9 +763,9 @@ public class DateSessionManager : MonoBehaviour
             Debug.LogError($"[DateSessionManager] TransitionToPhase3 setup failed: {e}");
         }
 
-        // Release drink-verdict camera, then immediately snap to Phase 3 framing
-        // (both happen while faded — no visible flash)
-        ApartmentManager.Instance?.ClearPresetBase();
+        // Snap directly to Phase 3 framing — ApplyPhaseCamera overwrites all preset
+        // fields, so clearing first just causes a redundant projection-mode round-trip
+        // (ortho→perspective→ortho) that can hitch the GPU.
         ApplyPhaseCamera(DatePhase.Reveal);
 
         // Build reveal cache while still faded — spreads GetComponent calls over frames

@@ -1289,7 +1289,8 @@ public class PlaceableObject : MonoBehaviour
             yield break;
         }
 
-        Vector3 baseScale = transform.localScale;
+        Vector3 baseScale = OriginalScale;
+        transform.localScale = OriginalScale; // force-reset in case animation was interrupted
         Vector3 basePos = transform.position;
 
         // Squish down (0.04s)

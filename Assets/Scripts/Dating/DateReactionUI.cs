@@ -102,23 +102,7 @@ public class DateReactionUI : MonoBehaviour
 
     private void UpdateScreenTextPosition()
     {
-        if (_cachedCamera == null) _cachedCamera = Camera.main;
-        if (_cachedCamera == null || _screenTextRT == null) return;
-
-        Vector3 worldPos = transform.position + Vector3.up * (bubbleHeight + 0.3f);
-        Vector3 screenPos = _cachedCamera.WorldToScreenPoint(worldPos);
-
-        // Clamp to screen edges so text is always visible (with deep margin)
-        const float marginX = 200f;
-        const float marginY = 150f;
-        screenPos.x = Mathf.Clamp(screenPos.x, marginX, Screen.width - marginX);
-        screenPos.y = Mathf.Clamp(screenPos.y, marginY, Screen.height - marginY);
-
-        // Handle behind-camera: push to top of screen
-        if (screenPos.z < 0f)
-            screenPos.y = Screen.height - marginY;
-
-        _screenTextRT.position = new Vector3(screenPos.x, screenPos.y, 0f);
+        // Text is anchored to screen center via EnsureScreenText — no per-frame tracking needed.
     }
 
     /// <summary>Show a reaction sequence: notice → reaction icon → fade out.</summary>
@@ -373,11 +357,14 @@ public class DateReactionUI : MonoBehaviour
             scaler.referenceResolution = new Vector2(1920f, 1080f);
         }
 
-        // Background panel for readability over busy scenes
+        // Background panel for readability — anchored to screen center
         var bgGO = new GameObject("DateScreenTextBG");
         bgGO.transform.SetParent(s_screenTextCanvas.transform, false);
         _screenTextRT = bgGO.AddComponent<RectTransform>();
-        _screenTextRT.pivot = new Vector2(0.5f, 0f);
+        _screenTextRT.anchorMin = new Vector2(0.5f, 0.4f);
+        _screenTextRT.anchorMax = new Vector2(0.5f, 0.4f);
+        _screenTextRT.pivot = new Vector2(0.5f, 0.5f);
+        _screenTextRT.anchoredPosition = Vector2.zero;
         _screenTextRT.sizeDelta = new Vector2(750f, 90f);
 
         var bgImg = bgGO.AddComponent<Image>();
