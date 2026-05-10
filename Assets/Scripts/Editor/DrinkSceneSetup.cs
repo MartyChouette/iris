@@ -187,7 +187,7 @@ public class DrinkSceneSetup
         rb.isKinematic = true;
 
         go.AddComponent<PlaceableObject>();
-        go.AddComponent<InteractableHighlight>();
+        go.AddComponent<ItemHighlight>();
     }
 
     private static void CreateGlass(Transform parent, string name, GlassDefinition glassDef, float x, float radius, float height, int layer)
@@ -208,7 +208,7 @@ public class DrinkSceneSetup
         glassSO.FindProperty("_glassDefinition").objectReferenceValue = glassDef;
         glassSO.ApplyModifiedProperties();
 
-        go.AddComponent<InteractableHighlight>();
+        go.AddComponent<ItemHighlight>();
     }
 
     private static void CreateGarnish(Transform parent, string name, DrinkGarnishDefinition garnishDef, float x, int layer)
@@ -226,7 +226,7 @@ public class DrinkSceneSetup
         rb.isKinematic = true;
 
         go.AddComponent<PlaceableObject>();
-        go.AddComponent<InteractableHighlight>();
+        go.AddComponent<ItemHighlight>();
 
         // TODO: Add GarnishItem marker component when it exists
     }

@@ -134,7 +134,7 @@ public class PlaceableObject : MonoBehaviour
     public State CurrentState { get; private set; } = State.Resting;
 
     /// <summary>Scale captured at Awake — the true base scale unaffected by animations.</summary>
-    public Vector3 OriginalScale { get; private set; }
+    public Vector3 OriginalScale { get; set; }
     public ItemCategory Category => _itemCategory;
     public string HomeZoneName => _homeZoneName;
     public string AltHomeZoneName => _altHomeZoneName;
@@ -329,7 +329,7 @@ public class PlaceableObject : MonoBehaviour
 
         // Push swapped materials to renderer and refresh highlight cache
         if (_renderer != null) _renderer.materials = _instanceMats;
-        var hl = GetComponent<InteractableHighlight>();
+        var hl = GetComponent<ItemHighlight>();
         if (hl != null) hl.RefreshBaseMaterials();
         _isGlitched = true;
 #if UNITY_EDITOR
@@ -361,7 +361,7 @@ public class PlaceableObject : MonoBehaviour
         }
 
         if (_renderer != null) _renderer.materials = _instanceMats;
-        var hl = GetComponent<InteractableHighlight>();
+        var hl = GetComponent<ItemHighlight>();
         if (hl != null) hl.RefreshBaseMaterials();
         _preGlitchMats = null;
         _isGlitched = false;
@@ -506,39 +506,24 @@ public class PlaceableObject : MonoBehaviour
     {
         _renderer = GetComponent<Renderer>();
         if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
+        // Don't clone materials — leave renderer untouched.
+        // All color changes use MaterialPropertyBlock (non-destructive).
         if (_renderer != null && _renderer.sharedMaterials.Length > 0)
         {
-            // Clone ALL material slots so runtime changes don't mutate shared assets
             var shared = _renderer.sharedMaterials;
-            _instanceMats = new Material[shared.Length];
+            _instanceMats = shared;
+            _originalColor = shared[0] != null
+                ? (shared[0].HasProperty("_BaseColor") ? shared[0].GetColor("_BaseColor") : shared[0].color)
+                : Color.white;
+            _originalColors = new Color[shared.Length];
             for (int i = 0; i < shared.Length; i++)
-                _instanceMats[i] = shared[i] != null ? new Material(shared[i]) : null;
-            _renderer.materials = _instanceMats;
-
-            _originalColor = _instanceMats[0] != null ? _instanceMats[0].color : Color.white;
-            _originalColors = new Color[_instanceMats.Length];
-            for (int i = 0; i < _instanceMats.Length; i++)
-                _originalColors[i] = _instanceMats[i] != null ? _instanceMats[i].color : Color.white;
-
-            // Capture every slot's original shader before anything applies glitch.
-            _originalShader = _instanceMats[0] != null ? _instanceMats[0].shader : null;
-            _originalShaders = new Shader[_instanceMats.Length];
-            for (int i = 0; i < _instanceMats.Length; i++)
-            {
-                if (_instanceMats[i] == null) continue;
-                _originalShaders[i] = _instanceMats[i].shader;
-                // If authored with PSXLitGlitch, fall back to PSXLit
-                if (_originalShaders[i] != null && _originalShaders[i].name == "Iris/PSXLitGlitch")
-                {
-                    var psxLit = Shader.Find("Iris/PSXLit");
-                    if (psxLit != null) _originalShaders[i] = psxLit;
-                }
-            }
-            if (_originalShader != null && _originalShader.name == "Iris/PSXLitGlitch")
-            {
-                var psxLit = Shader.Find("Iris/PSXLit");
-                if (psxLit != null) _originalShader = psxLit;
-            }
+                _originalColors[i] = shared[i] != null
+                    ? (shared[i].HasProperty("_BaseColor") ? shared[i].GetColor("_BaseColor") : shared[i].color)
+                    : Color.white;
+            _originalShader = shared[0] != null ? shared[0].shader : null;
+            _originalShaders = new Shader[shared.Length];
+            for (int i = 0; i < shared.Length; i++)
+                if (shared[i] != null) _originalShaders[i] = shared[i].shader;
         }
 
         OriginalScale = transform.localScale;
@@ -547,11 +532,11 @@ public class PlaceableObject : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _colliders = GetComponentsInChildren<Collider>();
 
-        // InteractableHighlight auto-add disabled — its material cache
+        // ItemHighlight auto-add disabled — its material cache
         // conflicts with multi-material objects and glitch swaps.
         // TODO: refactor highlight system to use MaterialPropertyBlock only.
-        // if (GetComponent<InteractableHighlight>() == null && GetComponent<WaterablePlant>() == null)
-        //     gameObject.AddComponent<InteractableHighlight>();
+        // if (GetComponent<ItemHighlight>() == null && GetComponent<WaterablePlant>() == null)
+        //     gameObject.AddComponent<ItemHighlight>();
 
         // Auto-capture spawn position/rotation as home whenever unset
         if (_homePosition == Vector3.zero)
@@ -864,9 +849,7 @@ public class PlaceableObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_instanceMats != null)
-            for (int i = 0; i < _instanceMats.Length; i++)
-                if (_instanceMats[i] != null) Destroy(_instanceMats[i]);
+        // Don't destroy _instanceMats — they're shared assets, not clones.
         if (_silhouetteMat != null) Destroy(_silhouetteMat);
         if (_silhouetteGO != null) Destroy(_silhouetteGO);
         DestroyStinkLines();
@@ -1408,9 +1391,8 @@ public class PlaceableObject : MonoBehaviour
     public bool SetInstanceColor(Color color)
     {
         if (_renderer == null) return false;
+        // Fresh MPB — never GetPropertyBlock first.
         var mpb = new MaterialPropertyBlock();
-        _renderer.GetPropertyBlock(mpb);
-        mpb.SetColor("_Color", color);
         mpb.SetColor("_BaseColor", color);
         _renderer.SetPropertyBlock(mpb);
         return true;
@@ -1430,7 +1412,7 @@ public class PlaceableObject : MonoBehaviour
             Debug.Log($"[PO-DROP+1] {name} slot {d}: {(mats[d] != null ? mats[d].name + " shader=" + mats[d].shader.name : "NULL")}");
     }
 
-    /// Call AFTER Awake (which creates _instanceMats) and BEFORE InteractableHighlight
+    /// Call AFTER Awake (which creates _instanceMats) and BEFORE ItemHighlight
     /// caches base materials. Preserves the material reference so pickup/place still works.
     /// </summary>
     public void ApplyMaterialOverride(Material source, Color color)

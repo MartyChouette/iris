@@ -73,7 +73,8 @@ public class AlbumSleeve : MonoBehaviour
 
     private void Update()
     {
-        // Drive tilt animation
+        // Drive tilt animation — tilt while hovered or while vinyl is out
+        // (in hand or on turntable). Untilts when vinyl is returned to sleeve.
         bool shouldTilt = IsHovered || WaitingForReturn;
         _tiltBlend = Mathf.MoveTowards(_tiltBlend, shouldTilt ? 1f : 0f, Time.deltaTime * _tiltSpeed);
         transform.localRotation = Quaternion.Slerp(_restRotation, _tiltRotation, _tiltBlend);

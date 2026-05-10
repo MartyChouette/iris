@@ -88,10 +88,6 @@ public class DrinkPourManager : MonoBehaviour
     /// <summary>Step 1: highlight all glasses so the player picks one to begin.</summary>
     public void BeginGlassChoice()
     {
-        // Force-reset suppress counter so highlights are guaranteed to render.
-        // The ref-counted suppress can drift if previous sessions didn't clean up.
-        InteractableHighlight.ResetSuppressCount();
-        InteractableHighlight.SuppressVisuals = false;
         CurrentState = State.ChoosingGlass;
         HighlightAllGlasses(true);
         Debug.Log("[DrinkPourManager] Step 1: Choose a glass.");
@@ -138,8 +134,8 @@ public class DrinkPourManager : MonoBehaviour
         SimpleDrinkManager.Instance?.HideRecipePanel();
 
         // Ensure glass has a highlight component for later prompts
-        if (glass.GetComponent<InteractableHighlight>() == null)
-            glass.gameObject.AddComponent<InteractableHighlight>();
+        if (glass.GetComponent<ItemHighlight>() == null)
+            glass.gameObject.AddComponent<ItemHighlight>();
 
         // Switch active glass (contents persist — never clear on switch)
         if (_activeGlass != glass)
@@ -239,8 +235,6 @@ public class DrinkPourManager : MonoBehaviour
         HighlightAllGlasses(false);
         HighlightAllBottles(false);
         HighlightSingleGlass(_activeGlass, false);
-        // Re-suppress highlights (balanced with the unsuppress in BeginGlassChoice)
-        InteractableHighlight.SuppressVisuals = true;
         DrinkCutawayUI.Instance?.Hide();
         _activeGlass = null;
         _activeRecipe = null;
@@ -434,9 +428,9 @@ public class DrinkPourManager : MonoBehaviour
         for (int i = 0; i < glasses.Count; i++)
         {
             if (glasses[i] == null) continue;
-            var hl = glasses[i].GetComponent<InteractableHighlight>();
+            var hl = glasses[i].GetComponent<ItemHighlight>();
             if (hl == null && on)
-                hl = glasses[i].gameObject.AddComponent<InteractableHighlight>();
+                hl = glasses[i].gameObject.AddComponent<ItemHighlight>();
             if (hl == null) continue;
 
             if (!on)
@@ -456,9 +450,9 @@ public class DrinkPourManager : MonoBehaviour
     private void HighlightSingleGlass(DrinkGlass glass, bool on)
     {
         if (glass == null) return;
-        var hl = glass.GetComponent<InteractableHighlight>();
+        var hl = glass.GetComponent<ItemHighlight>();
         if (hl == null && on)
-            hl = glass.gameObject.AddComponent<InteractableHighlight>();
+            hl = glass.gameObject.AddComponent<ItemHighlight>();
         if (hl != null) hl.SetGazeHighlighted(on); // teal = active glass
     }
 
@@ -489,9 +483,9 @@ public class DrinkPourManager : MonoBehaviour
             if (bottle == null) continue;
 
             bool isNext = bottle.Ingredient == nextIngredient;
-            var hl = po.GetComponent<InteractableHighlight>();
+            var hl = po.GetComponent<ItemHighlight>();
             if (isNext && hl == null)
-                hl = po.gameObject.AddComponent<InteractableHighlight>();
+                hl = po.gameObject.AddComponent<ItemHighlight>();
             if (hl != null) hl.SetGazeHighlighted(isNext); // teal = grab this bottle
         }
     }
@@ -503,9 +497,9 @@ public class DrinkPourManager : MonoBehaviour
             if (po == null) continue;
             var bottle = po.GetComponent<BottleItem>();
             if (bottle == null) continue;
-            var hl = po.GetComponent<InteractableHighlight>();
+            var hl = po.GetComponent<ItemHighlight>();
             if (hl == null && on)
-                hl = po.gameObject.AddComponent<InteractableHighlight>();
+                hl = po.gameObject.AddComponent<ItemHighlight>();
             if (hl != null) hl.SetGazeHighlighted(on);
         }
     }

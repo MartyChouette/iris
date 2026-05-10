@@ -8,7 +8,7 @@ using UnityEngine;
 public class NPCGazeHighlight : MonoBehaviour
 {
     private DateCharacterController _controller;
-    private InteractableHighlight _currentHighlight;
+    private ItemHighlight _currentHighlight;
 
     private void Awake()
     {
@@ -23,8 +23,8 @@ public class NPCGazeHighlight : MonoBehaviour
         bool shouldHighlight = state == DateCharacterController.CharState.Investigating;
 
         ReactableTag target = shouldHighlight ? _controller.CurrentTarget : null;
-        InteractableHighlight desired = target != null
-            ? target.GetComponentInChildren<InteractableHighlight>()
+        ItemHighlight desired = target != null
+            ? target.GetComponentInChildren<ItemHighlight>()
             : null;
 
         if (desired == _currentHighlight) return;

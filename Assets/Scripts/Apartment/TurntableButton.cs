@@ -51,7 +51,7 @@ public class TurntableButton : MonoBehaviour
             _parentSlot.Pause();
 
         // Clear highlight after pressing
-        var hl = GetComponent<InteractableHighlight>();
+        var hl = GetComponent<ItemHighlight>();
         if (hl != null) hl.SetHighlighted(false);
 
         if (_clickSFX != null && AudioManager.Instance != null)

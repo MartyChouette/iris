@@ -192,7 +192,8 @@ public class InteractableHighlight : MonoBehaviour
     public static Shader HighlightShader => s_cachedHighlightShader;
 
     private Renderer[] _renderers;
-    private Material[][] _baseMaterialArrays;
+    private Material[][] _baseMaterialArrays; // legacy — no longer written to by RebuildMaterials
+    private bool _shadersInitialized;
     private bool _highlighted;
     private bool _gazeActive;
     private bool _displayActive;
@@ -236,15 +237,27 @@ public class InteractableHighlight : MonoBehaviour
     {
         _renderers = GetComponentsInChildren<Renderer>();
 
-        // PSXLit auto-swap removed — artist materials stay as authored (URP).
-
-        // When visuals are suppressed, skip highlight material setup.
-        // The component only exists for the static registry (cursor detection).
-        if (SuppressVisuals) return;
+        // When disabled or suppressed, only cache renderers for the static
+        // registry (cursor detection). Never touch materials — avoids the
+        // white-out race condition where this Awake runs before PlaceableObject
+        // clones its instance materials.
+        if (Disabled || SuppressVisuals) return;
 
         if (_renderers.Length == 0) return;
 
-        // Cache shaders from serialized refs or Shader.Find fallback
+        CacheShaders();
+        EnsureSharedMaterials();
+
+        _baseMaterialArrays = new Material[_renderers.Length][];
+        for (int i = 0; i < _renderers.Length; i++)
+            _baseMaterialArrays[i] = _renderers[i].sharedMaterials;
+
+        DetectGlitch();
+        BuildOverrideMaterials();
+    }
+
+    private void CacheShaders()
+    {
         if (s_cachedHighlightShader == null)
         {
             s_cachedHighlightShader = _highlightShader;
@@ -273,15 +286,6 @@ public class InteractableHighlight : MonoBehaviour
             s_cachedFresnelShader = Shader.Find("Iris/HighlightFresnel");
         if (s_cachedCleanShader == null)
             s_cachedCleanShader = Shader.Find("Iris/HighlightClean");
-
-        EnsureSharedMaterials();
-
-        _baseMaterialArrays = new Material[_renderers.Length][];
-        for (int i = 0; i < _renderers.Length; i++)
-            _baseMaterialArrays[i] = _renderers[i].sharedMaterials;
-
-        DetectGlitch();
-        BuildOverrideMaterials();
     }
 
     /// <summary>
@@ -347,14 +351,14 @@ public class InteractableHighlight : MonoBehaviour
         float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 4f);
         Color tint = Color.Lerp(Color.white, pulseColor, pulse * 0.6f);
 
-        if (_cachedMPB == null) _cachedMPB = new MaterialPropertyBlock();
         for (int i = 0; i < _renderers.Length; i++)
         {
             if (_renderers[i] == null) continue;
-            _renderers[i].GetPropertyBlock(_cachedMPB);
-            _cachedMPB.SetColor(BaseColorID, tint);
-            _cachedMPB.SetColor(ColorID, tint);
-            _renderers[i].SetPropertyBlock(_cachedMPB);
+            // Fresh MPB — never GetPropertyBlock, it copies ALL material
+            // properties (including _BaseColor) which contaminates multi-mat objects.
+            var mpb = new MaterialPropertyBlock();
+            mpb.SetColor(BaseColorID, tint);
+            _renderers[i].SetPropertyBlock(mpb);
         }
     }
 
@@ -507,26 +511,26 @@ public class InteractableHighlight : MonoBehaviour
         }
     }
 
+    // How many overlay materials we last appended (per renderer).
+    // Used to strip them without caching base material refs.
+    private int[] _lastOverlayCount;
+
     private void RebuildMaterials()
     {
+        // When visuals are suppressed, do nothing
+        if (SuppressVisuals) return;
+        if (_renderers == null || _renderers.Length == 0) return;
 
-        // When visuals are suppressed, do nothing — don't touch materials at all
-        if (SuppressVisuals)
-            return;
-
-        // Materials weren't set up if visuals were suppressed during Awake —
-        // initialize them now on first actual use.
-        if (_baseMaterialArrays == null && _renderers != null && _renderers.Length > 0)
+        // Lazy-init shared materials on first actual highlight
+        if (!_shadersInitialized)
         {
+            CacheShaders();
             EnsureSharedMaterials();
-            _baseMaterialArrays = new Material[_renderers.Length][];
-            for (int i = 0; i < _renderers.Length; i++)
-                _baseMaterialArrays[i] = _renderers[i].sharedMaterials;
-            DetectGlitch();
+            _shadersInitialized = true;
         }
 
-        if (_baseMaterialArrays == null)
-            return;
+        if (_lastOverlayCount == null)
+            _lastOverlayCount = new int[_renderers.Length];
 
         int extraCount = (_interactActive ? 1 : 0)
                        + (_displayActive ? 1 : 0)
@@ -539,42 +543,39 @@ public class InteractableHighlight : MonoBehaviour
         {
             if (_renderers[r] == null) continue;
 
-            // Always read current base materials from the renderer so we
-            // never use stale/destroyed refs from a previous glitch swap.
+            // Read live materials from the renderer — never use a cached array
             var current = _renderers[r].sharedMaterials;
-            // Base material count = total minus any overlay slots we previously added
-            int baseLen = _baseMaterialArrays[r] != null ? _baseMaterialArrays[r].Length : current.Length;
-            if (current.Length >= baseLen)
-            {
-                var fresh = new Material[baseLen];
-                System.Array.Copy(current, fresh, baseLen);
-                _baseMaterialArrays[r] = fresh;
-            }
-            var baseMats = _baseMaterialArrays[r];
+            int prevOverlay = r < _lastOverlayCount.Length ? _lastOverlayCount[r] : 0;
+            int baseCount = current.Length - prevOverlay;
+            if (baseCount < 1) baseCount = current.Length;
 
             if (extraCount == 0)
             {
-                _renderers[r].sharedMaterials = baseMats;
+                // Strip overlays we previously added
+                if (prevOverlay > 0 && current.Length > baseCount)
+                {
+                    var trimmed = new Material[baseCount];
+                    System.Array.Copy(current, trimmed, baseCount);
+                    _renderers[r].sharedMaterials = trimmed;
+                }
+                _lastOverlayCount[r] = 0;
                 continue;
             }
 
-            // Re-read base from renderer to avoid using stale/destroyed refs
-            baseMats = _renderers[r].sharedMaterials;
-            // Trim to base count if overlays were previously appended
-            int bLen = _baseMaterialArrays[r].Length;
-            if (baseMats.Length > bLen)
+            // Build new array: base materials (live) + overlay materials
+            var baseMats = current;
+            if (current.Length > baseCount)
             {
-                var t = new Material[bLen];
-                System.Array.Copy(baseMats, t, bLen);
-                baseMats = t;
+                // Trim previous overlays first
+                baseMats = new Material[baseCount];
+                System.Array.Copy(current, baseMats, baseCount);
             }
-            _baseMaterialArrays[r] = baseMats;
 
-            var mats = new Material[baseMats.Length + extraCount];
-            for (int i = 0; i < baseMats.Length; i++)
+            var mats = new Material[baseCount + extraCount];
+            for (int i = 0; i < baseCount; i++)
                 mats[i] = baseMats[i];
 
-            int slot = baseMats.Length;
+            int slot = baseCount;
 
             if (_interactActive)
             {
@@ -608,6 +609,7 @@ public class InteractableHighlight : MonoBehaviour
             }
 
             _renderers[r].sharedMaterials = mats;
+            _lastOverlayCount[r] = extraCount;
         }
     }
 

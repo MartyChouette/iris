@@ -24,7 +24,7 @@ public class DrinkCartController : MonoBehaviour
     [Tooltip("SFX played when the cart is activated.")]
     [SerializeField] private AudioClip _activateSFX;
 
-    private InteractableHighlight _highlight;
+    private ItemHighlight _highlight;
     private bool _guideActive;
 
     private void Awake()
@@ -109,7 +109,7 @@ public class DrinkCartController : MonoBehaviour
         if (shouldGuide && !_guideActive)
         {
             if (_highlight == null)
-                _highlight = GetComponent<InteractableHighlight>();
+                _highlight = GetComponent<ItemHighlight>();
             if (_highlight != null)
                 _highlight.SetHighlighted(true);
             _guideActive = true;

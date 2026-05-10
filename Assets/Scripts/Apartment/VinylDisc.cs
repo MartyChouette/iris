@@ -58,6 +58,13 @@ public class VinylDisc : MonoBehaviour
     {
         transform.SetParent(null, true);
 
+        // Restore correct world scale after unparenting
+        transform.localScale = _originalLossyScale;
+
+        // Update PlaceableObject's OriginalScale so animations use the right base
+        var poBound = GetComponent<PlaceableObject>();
+        if (poBound != null) poBound.OriginalScale = _originalLossyScale;
+
         // Show the disc — it was hidden while in the sleeve
         SetRenderersVisible(true);
 

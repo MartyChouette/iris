@@ -65,25 +65,31 @@ public class PSXObjectSettings : MonoBehaviour
     /// <summary>Apply overrides to all renderers via MaterialPropertyBlock.</summary>
     public void Apply()
     {
-        if (_renderers == null || _mpb == null) return;
+        if (_renderers == null) return;
+
+        bool hasAny = (_snapResolution >= 0f) || (_affineIntensity >= 0f) || (_shadowDither >= 0f);
+        if (!hasAny) return;
 
         for (int i = 0; i < _renderers.Length; i++)
         {
             var r = _renderers[i];
             if (r == null) continue;
 
-            r.GetPropertyBlock(_mpb);
+            // Use a fresh MPB — never GetPropertyBlock first, because that
+            // copies ALL material properties into the MPB (including _BaseColor),
+            // which then overrides the material's authored color when set back.
+            var mpb = new MaterialPropertyBlock();
 
             if (_snapResolution >= 0f)
-                _mpb.SetVector(SnapResID, new Vector4(_snapResolution, _snapResolution * 0.75f, 0f, 0f));
+                mpb.SetVector(SnapResID, new Vector4(_snapResolution, _snapResolution * 0.75f, 0f, 0f));
 
             if (_affineIntensity >= 0f)
-                _mpb.SetFloat(AffineID, _affineIntensity);
+                mpb.SetFloat(AffineID, _affineIntensity);
 
             if (_shadowDither >= 0f)
-                _mpb.SetFloat(ShadowDitherID, _shadowDither);
+                mpb.SetFloat(ShadowDitherID, _shadowDither);
 
-            r.SetPropertyBlock(_mpb);
+            r.SetPropertyBlock(mpb);
         }
 
         _applied = true;

@@ -182,13 +182,13 @@ public class ApartmentManager : MonoBehaviour
     private Vector3 _panOffset;
 
     // Hover highlight tracking
-    private InteractableHighlight _hoveredHighlight;
+    private ItemHighlight _hoveredHighlight;
     private readonly HashSet<GameObject> _plantHighlightSet = new();
     private PlaceableObject _cachedHeldForWateringCheck;
     private bool _cachedIsWateringCan;
 
-    /// <summary>The InteractableHighlight currently under the cursor, or null.</summary>
-    public InteractableHighlight HoveredHighlight => _hoveredHighlight;
+    /// <summary>The ItemHighlight currently under the cursor, or null.</summary>
+    public ItemHighlight HoveredHighlight => _hoveredHighlight;
     // _proximityHighlights removed — proximity highlight stage dropped
     private Camera _cachedMainCamera;
 
@@ -753,10 +753,9 @@ public class ApartmentManager : MonoBehaviour
         if (SuppressPan) return;
         if (IrisInput.Instance == null) return;
 
-        // Top-down: allow left-click drag in addition to MMB drag.
+        // MMB drag only — LMB is reserved for item interaction.
         bool mmb = IrisInput.Instance.PanButton.IsPressed();
-        bool lmbDrag = _topDownActive && Input.GetMouseButton(0);
-        if (!mmb && !lmbDrag) return;
+        if (!mmb) return;
 
         Vector2 delta = IrisInput.Instance.PanDelta.ReadValue<Vector2>();
         if (delta.sqrMagnitude < 0.01f) return;
@@ -1316,7 +1315,7 @@ public class ApartmentManager : MonoBehaviour
         Vector2 mousePos = IrisInput.CursorPosition;
         Ray ray = cam.ScreenPointToRay(mousePos);
 
-        // ── Find nearest InteractableHighlight to the cursor ray ──
+        // ── Find nearest ItemHighlight to the cursor ray ──
         // Scans all registered highlights (placeables, plants, etc.).
         // When holding a watering can, only plants are valid hover targets.
         // Cache the GetComponent result — only recheck when held object changes.
@@ -1337,10 +1336,10 @@ public class ApartmentManager : MonoBehaviour
                 if (plants[i] != null) _plantHighlightSet.Add(plants[i].gameObject);
         }
 
-        InteractableHighlight hit = null;
+        ItemHighlight hit = null;
         {
             float bestAngle = HoverAngle;
-            var allHighlights = InteractableHighlight.All;
+            var allHighlights = ItemHighlight.All;
             for (int i = 0; i < allHighlights.Count; i++)
             {
                 var hl = allHighlights[i];
@@ -1381,7 +1380,7 @@ public class ApartmentManager : MonoBehaviour
     }
 
     /// <summary>If the object has a PairableItem with a specific partner, highlight/unhighlight it too.</summary>
-    private static void SetPartnerHighlight(InteractableHighlight hl, bool on)
+    private static void SetPartnerHighlight(ItemHighlight hl, bool on)
     {
         var pairable = hl.GetComponent<PairableItem>();
         if (pairable == null) return;
@@ -1389,7 +1388,7 @@ public class ApartmentManager : MonoBehaviour
         // For SpecificPartner: highlight the partner shoe
         if (pairable.Mode == PairableItem.PairMode.SpecificPartner && pairable.SpecificPartner != null)
         {
-            var partnerHL = pairable.SpecificPartner.GetComponent<InteractableHighlight>();
+            var partnerHL = pairable.SpecificPartner.GetComponent<ItemHighlight>();
             if (partnerHL != null)
                 partnerHL.SetHighlighted(on);
         }
@@ -1397,7 +1396,7 @@ public class ApartmentManager : MonoBehaviour
         // For AnyOfCategory when paired: highlight the paired child
         if (pairable.PairedChild != null)
         {
-            var childHL = pairable.PairedChild.GetComponent<InteractableHighlight>();
+            var childHL = pairable.PairedChild.GetComponent<ItemHighlight>();
             if (childHL != null)
                 childHL.SetHighlighted(on);
         }

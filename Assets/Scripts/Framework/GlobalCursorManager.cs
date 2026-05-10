@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 ///   4. Drawer     — hovering DrawerController (open/pull icon)
 ///   5. Drink      — hovering SimpleDrinkManager or drink station (pouring icon)
 ///   6. Light      — hovering LightSwitch (lightbulb icon)
-///   7. Interact   — hovering InteractableHighlight, PlaceableObject, etc. (pinch)
+///   7. Interact   — hovering ItemHighlight, PlaceableObject, etc. (pinch)
 ///   8. Default    — OS cursor (null)
 /// </summary>
 public class GlobalCursorManager : MonoBehaviour
@@ -533,7 +533,7 @@ public class GlobalCursorManager : MonoBehaviour
             // Phase 3 (Reveal): only show Interact cursor for inspectable items
             if (phase == DateSessionManager.DatePhase.Reveal)
             {
-                if (Has<InteractableHighlight>(go)
+                if (Has<ItemHighlight>(go)
                  || Has<PlaceableObject>(go)
                  || HasFlowerTag(go))           return CursorType.Interact;
                 return CursorType.Default;
@@ -544,13 +544,13 @@ public class GlobalCursorManager : MonoBehaviour
             {
                 if (Has<DrinkGlass>(go))        return CursorType.Interact;
                 if (Has<BottleItem>(go))        return CursorType.Interact;
-                if (Has<InteractableHighlight>(go)
+                if (Has<ItemHighlight>(go)
                  || Has<PlaceableObject>(go))   return CursorType.Interact;
                 return CursorType.Default;
             }
 
             // Phase 1 (Arrival): interact cursor only, no special contexts
-            if (Has<InteractableHighlight>(go)
+            if (Has<ItemHighlight>(go)
              || Has<PlaceableObject>(go)
              || HasFlowerTag(go))               return CursorType.Interact;
             return CursorType.Default;
@@ -560,7 +560,7 @@ public class GlobalCursorManager : MonoBehaviour
         if (Has<WaterablePlant>(go))       return CursorType.Interact;
         if (Has<FridgeController>(go))     return CursorType.Interact;
         if (Has<PhoneController>(go))      return CursorType.Interact;
-        if (Has<InteractableHighlight>(go)
+        if (Has<ItemHighlight>(go)
          || Has<PlaceableObject>(go)
          || Has<RecordSlot>(go)
          || HasFlowerTag(go))              return CursorType.Interact;

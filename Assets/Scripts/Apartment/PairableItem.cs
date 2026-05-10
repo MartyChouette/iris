@@ -81,9 +81,16 @@ public class PairableItem : MonoBehaviour
         _renderer = GetComponentInChildren<Renderer>();
         _pulseMPB = new MaterialPropertyBlock();
 
-        // Capture the TRUE base color once — never changes
+        // Capture the TRUE base color once — never changes.
+        // URP Lit uses _BaseColor, not _Color. .color returns _Color which
+        // may be white even when the material has a colored _BaseColor.
         if (_renderer != null && _renderer.sharedMaterial != null)
-            _baseColor = _renderer.sharedMaterial.color;
+        {
+            if (_renderer.sharedMaterial.HasProperty("_BaseColor"))
+                _baseColor = _renderer.sharedMaterial.GetColor("_BaseColor");
+            else
+                _baseColor = _renderer.sharedMaterial.color;
+        }
     }
 
     private void Start()
@@ -136,15 +143,19 @@ public class PairableItem : MonoBehaviour
 
         if (shouldPulse)
         {
-            _originalColorCaptured = true;
-            float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * _partnerPulseSpeed * Mathf.PI * 2f);
-            Color c = Color.Lerp(_baseColor, _partnerPulseColor, pulse);
-            SetColor(c);
+            if (!_originalColorCaptured)
+            {
+                _originalColorCaptured = true;
+                var hl = GetComponent<ItemHighlight>();
+                if (hl == null) hl = gameObject.AddComponent<ItemHighlight>();
+                hl.SetHighlighted(true);
+            }
         }
         else if (_originalColorCaptured)
         {
-            RestoreColor();
             _originalColorCaptured = false;
+            var hl = GetComponent<ItemHighlight>();
+            if (hl != null) hl.SetHighlighted(false);
         }
     }
 
@@ -165,9 +176,9 @@ public class PairableItem : MonoBehaviour
         if (!_isPaired && _pairMode == PairMode.SpecificPartner
             && _specificPartner != null && !_specificPartner._isPaired)
         {
-            var partnerHL = _specificPartner.GetComponent<InteractableHighlight>();
+            var partnerHL = _specificPartner.GetComponent<ItemHighlight>();
             if (partnerHL == null)
-                partnerHL = _specificPartner.gameObject.AddComponent<InteractableHighlight>();
+                partnerHL = _specificPartner.gameObject.AddComponent<ItemHighlight>();
             partnerHL.SetHighlighted(true);
             _partnerHighlightActive = true;
         }
@@ -189,7 +200,7 @@ public class PairableItem : MonoBehaviour
 
             if (_partnerHighlightActive)
             {
-                var partnerHL = _specificPartner.GetComponent<InteractableHighlight>();
+                var partnerHL = _specificPartner.GetComponent<ItemHighlight>();
                 if (partnerHL != null)
                     partnerHL.SetHighlighted(false);
             }
@@ -208,26 +219,23 @@ public class PairableItem : MonoBehaviour
 
     private void SetColor(Color c)
     {
-        // Always use MaterialPropertyBlock — never modify instance materials
-        // directly, because .color = white overwrites PSX tinted textures.
         if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
         if (_renderer != null)
         {
+            // Fresh MPB — never GetPropertyBlock first, it copies ALL material
+            // properties including _BaseColor which contaminates multi-material objects.
             var mpb = new MaterialPropertyBlock();
-            _renderer.GetPropertyBlock(mpb);
             mpb.SetColor("_BaseColor", c);
-            mpb.SetColor("_Color", c);
             _renderer.SetPropertyBlock(mpb);
         }
     }
 
     private void RestoreColor()
     {
-
         if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
         if (_renderer != null)
         {
-            _renderer.SetPropertyBlock(new MaterialPropertyBlock()); // clear all overrides
+            _renderer.SetPropertyBlock(null); // clear all overrides
 
             // Re-apply PSXObjectSettings so snap=0 survives the MPB clear
             var psx = GetComponent<PSXObjectSettings>();
@@ -295,7 +303,7 @@ public class PairableItem : MonoBehaviour
         else if (!string.IsNullOrEmpty(held._pairedDescription) && _placeable != null)
             _placeable.ItemDescription = held._pairedDescription;
 
-        // Kill InteractableHighlight on BOTH items — no lingering glow after pairing
+        // Kill ItemHighlight on BOTH items — no lingering glow after pairing
         ClearHighlight(gameObject);
         ClearHighlight(held.gameObject);
 
@@ -619,10 +627,10 @@ public class PairableItem : MonoBehaviour
             placeable.SetGlitched(false);
     }
 
-    /// <summary>Turn off and disable InteractableHighlight on a GameObject so it can't re-trigger.</summary>
+    /// <summary>Turn off and disable ItemHighlight on a GameObject so it can't re-trigger.</summary>
     private static void ClearHighlight(GameObject go)
     {
-        var hl = go.GetComponent<InteractableHighlight>();
+        var hl = go.GetComponent<ItemHighlight>();
         if (hl != null)
         {
             hl.SetHighlighted(false);

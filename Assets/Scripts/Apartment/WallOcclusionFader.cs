@@ -149,9 +149,10 @@ public class WallOcclusionFader : MonoBehaviour
                 {
                     current = GetBaseDissolve(rend),
                     floor = GetBaseDissolve(rend),
+                    // Fresh MPB — never GetPropertyBlock, it copies ALL material
+                    // properties (including _BaseColor) which contaminates multi-mat objects.
                     mpb = new MaterialPropertyBlock()
                 };
-                rend.GetPropertyBlock(state.mpb);
             }
 
             float target = Mathf.Max(_targetDissolve, state.floor);
@@ -237,7 +238,7 @@ public class WallOcclusionFader : MonoBehaviour
                 floor = floor,
                 mpb = new MaterialPropertyBlock()
             };
-            rend.GetPropertyBlock(state.mpb);
+            // Fresh MPB — only set dissolve, never GetPropertyBlock.
             state.mpb.SetFloat(DissolveID, floor);
             rend.SetPropertyBlock(state.mpb);
             _trackedRenderers[rend] = state;

@@ -366,8 +366,8 @@ public class LivingFlowerPlantManager : MonoBehaviour
         // PlaceableObject — defaults: category=General, no home zone
         go.AddComponent<PlaceableObject>();
 
-        // InteractableHighlight for hover/gaze/display rim light on all child renderers
-        go.AddComponent<InteractableHighlight>();
+        // ItemHighlight for hover/gaze/display rim light on all child renderers
+        go.AddComponent<ItemHighlight>();
     }
 
     private static void SetLayerRecursive(GameObject go, int layer)

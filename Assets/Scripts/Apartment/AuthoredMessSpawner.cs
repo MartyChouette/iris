@@ -359,7 +359,7 @@ public class AuthoredMessSpawner : MonoBehaviour
         poSO.SetString("_itemDescription", !string.IsNullOrEmpty(bp.description) ? bp.description : bp.messName);
 
         // Apply glitch material AFTER PlaceableObject.Awake (so _instanceMat exists)
-        // and BEFORE InteractableHighlight.Awake (so it caches the correct base material)
+        // and BEFORE ItemHighlight.Awake (so it caches the correct base material)
         if (isProcedural && _glitchMatInstance != null)
         {
             po.ApplyMaterialOverride(_glitchMatInstance, bp.objectColor);
@@ -374,9 +374,9 @@ public class AuthoredMessSpawner : MonoBehaviour
         // Also disable collider physics so trash doesn't block the trash can.
         ApplyTrashVisuals(go);
 
-        // Add InteractableHighlight — caches materials including glitch override
-        if (go.GetComponent<InteractableHighlight>() == null)
-            go.AddComponent<InteractableHighlight>();
+        // Add ItemHighlight — caches materials including glitch override
+        if (go.GetComponent<ItemHighlight>() == null)
+            go.AddComponent<ItemHighlight>();
 
         // Add ReactableTag
         var reactable = go.GetComponent<ReactableTag>();

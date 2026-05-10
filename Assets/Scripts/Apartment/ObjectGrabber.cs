@@ -756,6 +756,19 @@ public class ObjectGrabber : MonoBehaviour
                 clickedSlot = hit.collider.GetComponentInParent<RecordSlot>();
             if (clickedSlot != null && clickedSlot.IsLoaded)
             {
+                // If paused, eject vinyl into hand instead of resuming
+                if (!clickedSlot.IsPlaying)
+                {
+                    var ejected = clickedSlot.EjectVinyl();
+                    if (ejected != null)
+                    {
+                        _held = ejected;
+                        _pickupTimer = PickupFeelDuration;
+                        InitGrab();
+                        ConsumeClick();
+                        return;
+                    }
+                }
                 clickedSlot.TogglePlayPause();
                 ConsumeClick();
                 return;
@@ -887,7 +900,7 @@ public class ObjectGrabber : MonoBehaviour
         placeable.transform.localScale = placeable.OriginalScale;
 
         // Clear all highlight layers on the item being picked up
-        var heldHL = placeable.GetComponent<InteractableHighlight>();
+        var heldHL = placeable.GetComponent<ItemHighlight>();
         if (heldHL != null)
         {
             heldHL.SetHighlighted(false);
@@ -902,7 +915,6 @@ public class ObjectGrabber : MonoBehaviour
         var pairable = placeable.GetComponent<PairableItem>();
         if (pairable != null)
         {
-            InteractableHighlight.SuppressVisuals = false;
             pairable.OnPickedUp();
         }
 
@@ -985,9 +997,8 @@ public class ObjectGrabber : MonoBehaviour
         // When picking up a vinyl record, highlight the turntable until placed
         if (placeable.GetComponent<VinylDisc>() != null && RecordSlot.Instance != null)
         {
-            InteractableHighlight.SuppressVisuals = false;
-            var slotHL = RecordSlot.Instance.GetComponent<InteractableHighlight>();
-            if (slotHL == null) slotHL = RecordSlot.Instance.gameObject.AddComponent<InteractableHighlight>();
+            var slotHL = RecordSlot.Instance.GetComponent<ItemHighlight>();
+            if (slotHL == null) slotHL = RecordSlot.Instance.gameObject.AddComponent<ItemHighlight>();
             slotHL.SetHighlighted(true);
         }
 
@@ -1381,10 +1392,15 @@ public class ObjectGrabber : MonoBehaviour
             return;
 
         // Bounds check: reject if item footprint hangs off the surface
+        // Use two smallest extents as footprint (largest = height)
         if (!_currentSurface.IsFloor && !_currentSurface.IsVertical)
         {
-            float halfX = _heldBoundsExtents.x;
-            float halfZ = _heldBoundsExtents.z;
+            float ex = _heldBoundsExtents.x, ey = _heldBoundsExtents.y, ez = _heldBoundsExtents.z;
+            float max = Mathf.Max(ex, ey, ez);
+            float halfX, halfZ;
+            if (max == ey)      { halfX = ex; halfZ = ez; }
+            else if (max == ex) { halfX = ey; halfZ = ez; }
+            else                { halfX = ex; halfZ = ey; }
             Vector3 surfNormal = _currentSurface.SurfaceNormal;
             Vector3 fwd = Vector3.ProjectOnPlane(rot * Vector3.forward, surfNormal).normalized;
             Vector3 rgt = Vector3.Cross(surfNormal, fwd).normalized;
@@ -2209,7 +2225,7 @@ public class ObjectGrabber : MonoBehaviour
             if (pairable != null) pairable.OnPutDown();
 
             // Clear any lingering highlight
-            var hl = _held.GetComponent<InteractableHighlight>();
+            var hl = _held.GetComponent<ItemHighlight>();
             if (hl != null)
             {
                 hl.SetHighlighted(false);
@@ -2256,9 +2272,8 @@ public class ObjectGrabber : MonoBehaviour
         // Clear turntable highlight if we were holding a record
         if (RecordSlot.Instance != null)
         {
-            var slotHL = RecordSlot.Instance.GetComponent<InteractableHighlight>();
+            var slotHL = RecordSlot.Instance.GetComponent<ItemHighlight>();
             if (slotHL != null) slotHL.SetHighlighted(false);
-            InteractableHighlight.SuppressVisuals = true;
         }
 
         // Safety: unlock cursor in case an interaction lock was active
@@ -2270,12 +2285,12 @@ public class ObjectGrabber : MonoBehaviour
 
     // ── Target highlight blink (generic + plant-specific) ────────────
 
-    /// <summary>Blink a single object's InteractableHighlight N times.</summary>
+    /// <summary>Blink a single object's ItemHighlight N times.</summary>
     private static System.Collections.IEnumerator BlinkHighlight(GameObject target, int blinks)
     {
         if (target == null) yield break;
-        var hl = target.GetComponent<InteractableHighlight>();
-        if (hl == null) hl = target.AddComponent<InteractableHighlight>();
+        var hl = target.GetComponent<ItemHighlight>();
+        if (hl == null) hl = target.AddComponent<ItemHighlight>();
 
         for (int b = 0; b < blinks; b++)
         {
@@ -2290,16 +2305,13 @@ public class ObjectGrabber : MonoBehaviour
     /// <summary>Turn plant highlights on or off (steady, same style as shoe partner highlight).</summary>
     private void SetPlantHighlights(bool on)
     {
-        // Unsuppress so the highlight shader actually renders
-        InteractableHighlight.SuppressVisuals = !on;
-
         var plants = WaterablePlant.All;
         for (int i = 0; i < plants.Count; i++)
         {
             if (plants[i] == null) continue;
-            var hl = plants[i].GetComponent<InteractableHighlight>();
+            var hl = plants[i].GetComponent<ItemHighlight>();
             if (hl == null && on)
-                hl = plants[i].gameObject.AddComponent<InteractableHighlight>();
+                hl = plants[i].gameObject.AddComponent<ItemHighlight>();
             if (hl != null) hl.SetHighlighted(on);
         }
     }
@@ -2325,10 +2337,9 @@ public class ObjectGrabber : MonoBehaviour
     private void SetGlassMagnetHighlight(DrinkGlass glass, bool on)
     {
         if (glass == null) return;
-        if (on) InteractableHighlight.SuppressVisuals = false;
-        var hl = glass.GetComponent<InteractableHighlight>();
+        var hl = glass.GetComponent<ItemHighlight>();
         if (hl == null && on)
-            hl = glass.gameObject.AddComponent<InteractableHighlight>();
+            hl = glass.gameObject.AddComponent<ItemHighlight>();
         if (hl != null) hl.SetHighlighted(on);
     }
 
@@ -2455,11 +2466,12 @@ public class ObjectGrabber : MonoBehaviour
             }
         }
 
-        // Floor→cubby redirect: if we chose the floor but the grab target
-        // is directly above an open cubby's interior surface, snap to that
-        // surface instead. Prevents items falling through cubby shelves.
+        // Floor→shelf redirect: if we chose the floor but the grab target
+        // is directly above a cubby interior or slotted DropZone surface,
+        // snap to that surface instead. Prevents items falling through shelves.
         if (foundSurface && _currentSurface != null && _currentSurface.IsFloor)
         {
+            // Check drawer/cubby interiors
             var allDrawers = DrawerController.All;
             for (int d = 0; d < allDrawers.Count; d++)
             {
@@ -2468,12 +2480,36 @@ public class ObjectGrabber : MonoBehaviour
                 if (allDrawers[d].IsInteriorAndClosed(interior)) continue;
                 if (!interior.ContainsWorldPoint(_grabTarget))   continue;
 
-                // Grab target is over this cubby — redirect to its surface
                 var cubbyHit = interior.ProjectOntoSurface(_grabTarget, cam.transform.position);
                 _grabTarget = cubbyHit.worldPosition;
                 _currentSurface = interior;
                 _lastValidSurface = interior;
                 break;
+            }
+
+            // Check non-floor PlacementSurfaces above the floor (shelves, racks)
+            // that the ray passed through to hit the floor
+            if (_currentSurface.IsFloor)
+            {
+                float bestY = float.MinValue;
+                PlacementSurface bestShelf = null;
+                for (int h = 0; h < hitCount; h++)
+                {
+                    var surface = s_surfaceHitBuffer[h].collider.GetComponentInParent<PlacementSurface>();
+                    if (surface == null || surface.IsFloor || surface.IsVertical) continue;
+                    if (s_surfaceHitBuffer[h].point.y > bestY)
+                    {
+                        bestY = s_surfaceHitBuffer[h].point.y;
+                        bestShelf = surface;
+                    }
+                }
+                if (bestShelf != null)
+                {
+                    var shelfHit = bestShelf.ProjectOntoSurface(_grabTarget, cam.transform.position);
+                    _grabTarget = shelfHit.worldPosition;
+                    _currentSurface = bestShelf;
+                    _lastValidSurface = bestShelf;
+                }
             }
         }
 
@@ -3071,9 +3107,10 @@ public class ObjectGrabber : MonoBehaviour
         if (_shadowGO == null || _heldRb == null) return;
 
         // Hide shadow and ghost while magnetically snapped to an interaction
-        // target (bottle→glass, watering can→plant, shoe→partner) — the snap
-        // itself is the visual feedback, not the placement preview
-        if (_nearestDrinkGlass != null || _nearestWaterablePlant != null || _pairSnapTarget != null)
+        // target (bottle→glass, watering can→plant, shoe→partner, vinyl→turntable)
+        // — the snap itself is the visual feedback, not the placement preview
+        bool isVinyl = _held != null && _held.GetComponent<VinylDisc>() != null;
+        if (_nearestDrinkGlass != null || _nearestWaterablePlant != null || _pairSnapTarget != null || isVinyl)
         {
             _shadowGO.SetActive(false);
             UpdateGhostPreview(Vector3.zero, Quaternion.identity, show: false);
@@ -3208,10 +3245,20 @@ public class ObjectGrabber : MonoBehaviour
 
         // Bounds check: reject if the item's footprint hangs off the surface edge.
         // Skip for floors (infinite-feeling) and walls (handled by wall snap).
+        // Use the two smallest extents as the footprint — the largest is height,
+        // not part of the surface footprint. Prevents tall narrow items (bottles)
+        // from failing bounds checks on narrow shelves.
         if (canPlace && !_currentSurface.IsFloor && !_currentSurface.IsVertical)
         {
-            float halfX = _heldBoundsExtents.x;
-            float halfZ = _heldBoundsExtents.z;
+            float ex = _heldBoundsExtents.x;
+            float ey = _heldBoundsExtents.y;
+            float ez = _heldBoundsExtents.z;
+            // Sort to find the two smallest — those are the footprint
+            float max = Mathf.Max(ex, ey, ez);
+            float halfX, halfZ;
+            if (max == ey)      { halfX = ex; halfZ = ez; }
+            else if (max == ex) { halfX = ey; halfZ = ez; }
+            else                { halfX = ex; halfZ = ey; }
             // Check all four footprint corners against the surface bounds
             Vector3 fwd = Vector3.ProjectOnPlane(placeRot * Vector3.forward, hitResult.surfaceNormal).normalized;
             Vector3 rgt = Vector3.Cross(hitResult.surfaceNormal, fwd).normalized;

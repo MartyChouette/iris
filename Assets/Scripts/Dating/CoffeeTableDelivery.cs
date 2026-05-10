@@ -219,8 +219,8 @@ public class CoffeeTableDelivery : MonoBehaviour
         SetPrivateField(placeable, "_smellPerDay", 0.15f);
 
         // Add interaction highlight so the cursor system lights it up on hover.
-        if (glass.GetComponent<InteractableHighlight>() == null)
-            glass.AddComponent<InteractableHighlight>();
+        if (glass.GetComponent<ItemHighlight>() == null)
+            glass.AddComponent<ItemHighlight>();
 
         Debug.Log("[CoffeeTableDelivery] Drink cup promoted to DirtyGlass (→ Sink).");
 

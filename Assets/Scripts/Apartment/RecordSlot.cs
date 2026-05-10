@@ -170,7 +170,7 @@ public class RecordSlot : MonoBehaviour
         Play();
 
         // Clear turntable highlight
-        var slotHL = GetComponent<InteractableHighlight>();
+        var slotHL = GetComponent<ItemHighlight>();
         if (slotHL != null) slotHL.SetHighlighted(false);
 
         Debug.Log($"[RecordSlot] Loaded: {vinyl.Definition.title} by {vinyl.Definition.artist}");

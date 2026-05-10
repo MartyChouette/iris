@@ -136,8 +136,7 @@ public class GlassController : MonoBehaviour
 
         if (_rimMat == null)
         {
-            var shader = InteractableHighlight.HighlightShader;
-            if (shader == null) shader = Shader.Find("Iris/Highlight");
+            var shader = Shader.Find("Iris/Highlight");
             if (shader == null) return;
             _rimMat = new Material(shader);
             _rimMat.SetColor("_HighlightColor", new Color(0.6f, 0.9f, 1f, 0.15f));

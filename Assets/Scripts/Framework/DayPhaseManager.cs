@@ -995,7 +995,7 @@ public class DayPhaseManager : MonoBehaviour
         // Clean up any stray trimming debris that fell into the apartment
         // during scene unload (they're at flower-scene scale = giant).
         // Safety: only touch things that are clearly NOT legitimate apartment objects —
-        //   • no PlaceableObject AND no InteractableHighlight AND no DateCharacterController
+        //   • no PlaceableObject AND no ItemHighlight AND no DateCharacterController
         //   • at flower-scene scale (>3x — apartment objects are usually ~1x)
         //   • parented to scene root (apartment objects are always nested)
         foreach (var debris in Object.FindObjectsByType<Rigidbody>(FindObjectsSortMode.None))
@@ -1005,7 +1005,7 @@ public class DayPhaseManager : MonoBehaviour
             if (debris.transform.parent != null) continue; // apartment objects are nested
             if (debris.transform.lossyScale.x < 3f) continue; // must be giant
             if (debris.GetComponent<PlaceableObject>() != null) continue;
-            if (debris.GetComponent<InteractableHighlight>() != null) continue;
+            if (debris.GetComponent<ItemHighlight>() != null) continue;
             if (debris.GetComponent<DateCharacterController>() != null) continue;
 
             Object.Destroy(debris.gameObject);

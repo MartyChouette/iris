@@ -906,7 +906,7 @@ public class DateSessionManager : MonoBehaviour
     {
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
 
-        InteractableHighlight activeHL = null;
+        ItemHighlight activeHL = null;
         bool activeHLLiked = false;
 
         for (int i = 0; i < items.Count; i++)
@@ -945,9 +945,9 @@ public class DateSessionManager : MonoBehaviour
                 activeHL = null;
             }
 
-            var highlight = tag.GetComponent<InteractableHighlight>()
-                         ?? tag.GetComponentInParent<InteractableHighlight>()
-                         ?? tag.GetComponentInChildren<InteractableHighlight>();
+            var highlight = tag.GetComponent<ItemHighlight>()
+                         ?? tag.GetComponentInParent<ItemHighlight>()
+                         ?? tag.GetComponentInChildren<ItemHighlight>();
             if (highlight != null)
             {
                 if (reaction == ReactionType.Like)
@@ -1052,19 +1052,15 @@ public class DateSessionManager : MonoBehaviour
 
     private void HighlightDrinkGlasses(bool on)
     {
-        if (on) InteractableHighlight.SuppressVisuals = false;
-
         var glasses = DrinkGlass.All;
         for (int i = 0; i < glasses.Count; i++)
         {
             if (glasses[i] == null) continue;
-            var hl = glasses[i].GetComponent<InteractableHighlight>();
+            var hl = glasses[i].GetComponent<ItemHighlight>();
             if (hl == null && on)
-                hl = glasses[i].gameObject.AddComponent<InteractableHighlight>();
+                hl = glasses[i].gameObject.AddComponent<ItemHighlight>();
             if (hl != null) hl.SetHighlighted(on);
         }
-
-        if (!on) InteractableHighlight.SuppressVisuals = true;
     }
 
     // ── Drink verdict cinematic: apartment show/hide ─────────────────

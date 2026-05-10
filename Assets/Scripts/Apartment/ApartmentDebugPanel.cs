@@ -115,8 +115,7 @@ public class ApartmentDebugPanel : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            InteractableHighlight.CycleStyle();
-            RefreshHighlightStyleLabel();
+            // CycleStyle removed — ItemHighlight no longer has style cycling
         }
 
         if (Input.GetKeyDown(KeyCode.F6))
@@ -368,8 +367,7 @@ public class ApartmentDebugPanel : MonoBehaviour
 
     private void RefreshHighlightStyleLabel()
     {
-        if (_hlStyleLabel != null)
-            _hlStyleLabel.text = $"Style: {InteractableHighlight.CurrentStyle} (F5)";
+        // Style cycling removed — ItemHighlight no longer has CurrentStyle
     }
 
     private void OnHighlightParamChanged()
@@ -383,8 +381,6 @@ public class ApartmentDebugPanel : MonoBehaviour
         if (_hlAlphaLabel != null) _hlAlphaLabel.text = $"Alpha: {alpha:F2}";
         if (_hlPulseLabel != null) _hlPulseLabel.text = $"Pulse: {pulse:F2}";
         if (_hlRimLabel != null) _hlRimLabel.text = $"Rim: {rim:F1}";
-
-        InteractableHighlight.SetTuningOverrides(width, alpha, pulse, rim);
     }
 
     // ── Grab feel tuning ──
@@ -504,7 +500,7 @@ public class ApartmentDebugPanel : MonoBehaviour
 
         // ── Highlight ──
         AddSectionHeader(cp, "HIGHLIGHT", new Color(1f, 0.9f, 0.7f));
-        _hlStyleLabel = AddLabel(cp, $"Style: {InteractableHighlight.CurrentStyle} (F5)");
+        _hlStyleLabel = AddLabel(cp, "Style: (F5)");
 
         AddSliderRow(cp, "Width", 0.001f, 0.05f, 0.008f, _ => OnHighlightParamChanged(), out _hlWidthLabel);
         _hlWidthSlider = GetLastSlider(cp);
@@ -514,21 +510,6 @@ public class ApartmentDebugPanel : MonoBehaviour
         _hlPulseSlider = GetLastSlider(cp);
         AddSliderRow(cp, "Rim Power", 0.5f, 8.0f, 2.5f, _ => OnHighlightParamChanged(), out _hlRimLabel);
         _hlRimSlider = GetLastSlider(cp);
-
-        TMP_Text hlSnapLabel = null, hlOffsetLabel = null, hlJitterLabel = null;
-        AddSliderRow(cp, "HL Snap", 0f, 500f, 160f,
-            val => { InteractableHighlight.HLSnapEnabled = val > 1f;
-                     InteractableHighlight.HLSnapRes = val;
-                     if (hlSnapLabel != null) hlSnapLabel.text = val > 1f ? $"HL Snap: {val:F0}" : "HL Snap: OFF"; },
-            out hlSnapLabel);
-        AddSliderRow(cp, "HL Offset", 0f, 0.02f, 0.001f,
-            val => { InteractableHighlight.HLNormalOffset = val;
-                     if (hlOffsetLabel != null) hlOffsetLabel.text = $"HL Offset: {val:F3}"; },
-            out hlOffsetLabel);
-        AddSliderRow(cp, "HL Jitter", 0f, 0.02f, 0f,
-            val => { InteractableHighlight.HLJitter = val;
-                     if (hlJitterLabel != null) hlJitterLabel.text = $"HL Jitter: {val:F3}"; },
-            out hlJitterLabel);
 
         // ── Grab Feel ──
         AddSectionHeader(cp, "GRAB FEEL", new Color(0.9f, 0.75f, 1f));

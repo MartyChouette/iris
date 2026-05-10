@@ -27,7 +27,7 @@ public class ReactableTag : MonoBehaviour
     [Tooltip("Smell contribution of this item. Smell travels through drawers.")]
     [SerializeField] private float smellAmount = 0f;
 
-    private InteractableHighlight _highlight;
+    private ItemHighlight _highlight;
 
     public string DisplayName => !string.IsNullOrEmpty(displayName) ? displayName : gameObject.name;
     public string[] Tags => tags;
@@ -101,7 +101,7 @@ public class ReactableTag : MonoBehaviour
     private void UpdateDisplayHighlight()
     {
         if (_highlight == null)
-            _highlight = GetComponent<InteractableHighlight>();
+            _highlight = GetComponent<ItemHighlight>();
 
         if (_highlight != null)
             _highlight.SetDisplayHighlighted(isActive && !isPrivate);

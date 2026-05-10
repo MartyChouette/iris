@@ -18,8 +18,8 @@ public class DateItemHighlighter : MonoBehaviour
     private DatePersonalDefinition _currentDate;
 
     // Track which highlights we applied so we can clear them
-    private readonly List<InteractableHighlight> _likedHighlights = new List<InteractableHighlight>();
-    private readonly List<InteractableHighlight> _dislikedHighlights = new List<InteractableHighlight>();
+    private readonly List<ItemHighlight> _likedHighlights = new List<ItemHighlight>();
+    private readonly List<ItemHighlight> _dislikedHighlights = new List<ItemHighlight>();
 
     private const float RescanInterval = 0.5f;
 
@@ -121,7 +121,7 @@ public class DateItemHighlighter : MonoBehaviour
         for (int i = 0; i < allReactables.Count; i++)
         {
             var reactable = allReactables[i];
-            var highlight = reactable.GetComponent<InteractableHighlight>();
+            var highlight = reactable.GetComponent<ItemHighlight>();
             if (highlight == null) continue;
 
             var tags = reactable.Tags;
