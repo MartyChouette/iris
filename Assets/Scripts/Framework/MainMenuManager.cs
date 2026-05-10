@@ -863,6 +863,10 @@ public class MainMenuManager : MonoBehaviour
         if (_loading) return;
         _loading = true;
 
+        // Fade out menu music
+        if (MusicDirector.Instance != null)
+            MusicDirector.Instance.FadeOutMenuMusic();
+
         if (ScreenFade.Instance != null && _fadeDuration > 0f)
             StartCoroutine(FadeAndLoad());
         else
