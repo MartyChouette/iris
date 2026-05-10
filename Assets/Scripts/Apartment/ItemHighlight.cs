@@ -123,7 +123,12 @@ public class ItemHighlight : MonoBehaviour
             {
                 var mpb = new MaterialPropertyBlock();
                 Color original = _originalColors[r][m];
-                Color highlighted = Color.Lerp(original, tint, strength * intensity);
+                float blend = strength * intensity;
+                Color highlighted = Color.Lerp(original, tint, blend);
+                // Additive boost so light-colored objects (glass) still glow visibly
+                highlighted.r += tint.r * blend * 0.25f;
+                highlighted.g += tint.g * blend * 0.25f;
+                highlighted.b += tint.b * blend * 0.25f;
                 mpb.SetColor("_BaseColor", highlighted);
                 _renderers[r].SetPropertyBlock(mpb, m);
             }

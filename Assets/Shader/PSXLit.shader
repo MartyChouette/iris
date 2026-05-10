@@ -13,6 +13,9 @@ Shader "Iris/PSXLit"
         [Header(Dither Shadows)]
         _ShadowDitherIntensity ("Shadow Dither Intensity", Range(0, 1)) = 1.0
 
+        [Header(Depth)]
+        _DepthBias ("Depth Bias", Float) = 0.0
+
         [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
 
@@ -70,6 +73,7 @@ Shader "Iris/PSXLit"
                 float4 _VertexSnapResolution; // xy used
                 half   _AffineIntensity;
                 half   _ShadowDitherIntensity;
+                float  _DepthBias;
             CBUFFER_END
 
             // ── Bayer 8x8 ordered dither matrix (normalized 0–1) ──
@@ -101,6 +105,11 @@ Shader "Iris/PSXLit"
                     clipPos.xy = floor(clipPos.xy / clipPos.w * snapRes + 0.5)
                                / snapRes * clipPos.w;
                 }
+
+                // Depth bias: nudge clip-space Z to prevent z-fighting on
+                // compound meshes (e.g. book pages inside cover). Positive
+                // values push the surface away from the camera.
+                clipPos.z += _DepthBias * clipPos.w;
 
                 output.positionCS  = clipPos;
                 output.positionWS  = posInputs.positionWS;
@@ -216,6 +225,7 @@ Shader "Iris/PSXLit"
                 float4 _VertexSnapResolution;
                 half   _AffineIntensity;
                 half   _ShadowDitherIntensity;
+                float  _DepthBias;
             CBUFFER_END
 
             float3 _LightDirection;

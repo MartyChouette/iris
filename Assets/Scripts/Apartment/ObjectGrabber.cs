@@ -3297,19 +3297,11 @@ public class ObjectGrabber : MonoBehaviour
                 placeRot = _held.HomeRotation;
         }
 
-        // Shadow position: on walls use the placement position directly (centered on item),
-        // on horizontal surfaces offset by the collider center.
-        Vector3 shadowPos;
-        if (_currentSurface.IsVertical)
-        {
-            shadowPos = placePos + hitResult.surfaceNormal * 0.02f;
-        }
-        else
-        {
-            Vector3 rotatedOffset = placeRot * _heldBoundsCenterOffset;
-            Vector3 projectedOffset = Vector3.ProjectOnPlane(rotatedOffset, hitResult.surfaceNormal);
-            shadowPos = hitResult.worldPosition + projectedOffset + hitResult.surfaceNormal * 0.02f;
-        }
+        // Shadow position: offset by the collider center projected onto the surface
+        // so the highlight sits under the item's visual center, not its pivot.
+        Vector3 rotatedOffset = placeRot * _heldBoundsCenterOffset;
+        Vector3 projectedOffset = Vector3.ProjectOnPlane(rotatedOffset, hitResult.surfaceNormal);
+        Vector3 shadowPos = hitResult.worldPosition + projectedOffset + hitResult.surfaceNormal * 0.02f;
         Quaternion shadowRot = Quaternion.FromToRotation(Vector3.up, hitResult.surfaceNormal);
 
         bool canPlace = (!_currentSurface.IsVertical || _held.CanWallMount)

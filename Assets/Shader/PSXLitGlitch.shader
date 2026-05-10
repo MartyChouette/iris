@@ -16,6 +16,9 @@ Shader "Iris/PSXLitGlitch"
         [Header(Glitch)]
         _GlitchIntensity ("Glitch Intensity", Range(0, 1)) = 0.5
 
+        [Header(Depth)]
+        _DepthBias ("Depth Bias", Float) = 0.0
+
         [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
 
@@ -75,6 +78,7 @@ Shader "Iris/PSXLitGlitch"
                 half   _AffineIntensity;
                 half   _ShadowDitherIntensity;
                 half   _GlitchIntensity;
+                float  _DepthBias;
             CBUFFER_END
 
             // ── Hash functions ──
@@ -142,6 +146,8 @@ Shader "Iris/PSXLitGlitch"
                         clipPos.xy += float2(jitterX, jitterY) * strength;
                     }
                 }
+
+                clipPos.z += _DepthBias * clipPos.w;
 
                 output.positionCS  = clipPos;
                 output.positionWS  = posInputs.positionWS;
@@ -290,6 +296,7 @@ Shader "Iris/PSXLitGlitch"
                 half   _AffineIntensity;
                 half   _ShadowDitherIntensity;
                 half   _GlitchIntensity;
+                float  _DepthBias;
             CBUFFER_END
 
             float3 _LightDirection;

@@ -42823,3 +42823,278 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260510_115509
+### Commits
+f1c2c5c feat: wall rotation preserve, pair snap fix, pour lock, material tools
+---
+
+## Session End: 20260510_115828
+### Commits
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_115956
+### Commits
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scripts/Framework/MainMenuManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_120027
+### Commits
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scripts/Framework/MainMenuManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_120139
+### Commits
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260510_121842
+# Session State — 2026-05-10
+
+## Current Focus
+Trailer polish, gameplay feel fixes, material pipeline cleanup
+
+## Completed This Session (2026-05-08 → 2026-05-10)
+
+### New Systems
+- **ItemHighlight** — clean MPB-only highlight system replacing InteractableHighlight (21 files swapped)
+- **Time-of-day scrubbing** — [ / ] hotkeys + F3 slider for trailer capture
+- **Idle trailer** — plays after 45s idle or Home key on main menu, mouse wakes
+- **CursorConfig** — ScriptableObject for cursor textures + visual hotspot picker editor
+- **Text Export/Import** — CSV tool for all player-facing text (Tools > Iris > Text Export-Import)
+- **Material Consolidator** — batch swap duplicate materials (Tools > Iris > Material Consolidator)
+- **PSXPostProcessVolume** — URP Volume override for PSX settings
+
+### Bug Fixes
+- **White-out eliminated** — root cause: GetPropertyBlock copies _BaseColor from slot 0 into MPB, SetPropertyBlock overrides ALL sub-meshes. Fixed in PSXObjectSettings, WallOcclusionFader, PairableItem, InteractableHighlight (now ItemHighlight)
+- **PlaceableObject no longer clones materials** — prevents stale material refs
+- **Pair snap reliability** — TryPairWithClicked uses _pairSnapTarget directly
+- **HeldItem layer restore** — forces Placeable layer on drop (fixes books/plates stuck on overlay camera)
+- **Scale compounding** — PlaceableObject.OriginalScale prevents drift on rapid pick/place
+- **Cursor false positive** — PlacementSurface skip + drop cooldown
+- **Wall painting rotation** — stores exact world rotation, not decomposed Z angle
+- **Bottle locked to glass** — can't switch cups mid-pour while LMB held
+- **Record scale** — VinylDisc updates OriginalScale on extract from sleeve
+
+### Polish
+- **Smoke poof** — particle cloud with flipbook cards, transparent alpha blend
+- **Heart particles** — transparent blend fix (was rendering as opaque squares)
+- **Nema look-at** — uses ActiveModel for all per-location models, spacebar forces camera look
+- **Placement shadow** — centers on collider bounds, rotation-aware, wall-specific positioning
+- **Footprint bounds** — uses two smallest extents (not AABB height) for surface edge checks
+- **Drink phase** — glasses stay highlighted during pour, 80% tint, sage green continue button
+- **Phase 1/2 cursor** — only shows interact on actually interactable items
+- **Top-down pan** — MMB only, LMB no longer grabs camera
+- **Record click** — paused turntable click ejects to hand
+- **Menu music** — fades out when loading apartment
+- **Mode select removed** — goes straight to game panel
+- **Tutorial card disabled** — no more invisible click blocker
+- **PSXInteractable shader** — rewritten as clean fresnel+pulse, no PSX affine/jitter
+- **Floor→shelf redirect** — items land on cubby/rack surfaces, not floor below
+
+## Key Files Modified
+- Assets/Scripts/Apartment/ItemHighlight.cs (NEW)
+- Assets/Scripts/Apartment/InteractableHighlight.cs (dead code)
+- Assets/Scripts/Apartment/ObjectGrabber.cs (major changes)
+- Assets/Scripts/Apartment/PlaceableObject.cs (no material cloning)
+- Assets/Scripts/Apartment/PairableItem.cs (ItemHighlight pulse)
+- Assets/Scripts/Apartment/NemaController.cs (ActiveModel look-at)
+- Assets/Scripts/Rendering/PSXObjectSettings.cs (fresh MPB)
+- Assets/Scripts/Rendering/PSXPostProcessFeature.cs (settings restored)
+- Assets/Scripts/Rendering/PSXRenderController.cs (tilt-shift, volume sync)
+- Assets/Scripts/Framework/MainMenuManager.cs (trailer, mode skip, music fade)
+- Assets/Scripts/Framework/GlobalCursorManager.cs (phase cursor, hotspot, drop cooldown)
+- Assets/Scripts/Apartment/WallOcclusionFader.cs (fresh MPB)
+- Assets/Shader/PSXInteractable.shader (clean fresnel+pulse)
+
+## Open Items
+- Hint panel needs scene-based setup (code no longer creates it at runtime)
+- PSXPostProcessVolume optional — feature defaults work without it
+- Trailer file is local-only (gitignored, 108MB)
+---
+
+## Session End: 20260510_121842
+### Commits
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_124044
+### Commits
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_124304
+### Commits
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_125752
+### Commits
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_131756
+### Commits
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_133300
+### Commits
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_134344
+### Commits
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_134437
+### Commits
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_134745
+### Commits
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_135738
+### Commits
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_142807
+### Commits
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_143222
+### Commits
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PlaceableObject.cs
+Assets/Scripts/Dating/DateReactionUI.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_145742
+### Commits
+5694b7a feat: bonk-and-bounce height rejection, fix resize bug, center Phase 3 text
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_150357
+### Commits
+5694b7a feat: bonk-and-bounce height rejection, fix resize bug, center Phase 3 text
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/Shader/PSXMirror.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_152722
+### Commits
+5694b7a feat: bonk-and-bounce height rejection, fix resize bug, center Phase 3 text
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/Shader/PSXMirror.shader
+production/session-logs/session-log.md
+---
+
+## Session End: 20260510_153733
+### Commits
+5694b7a feat: bonk-and-bounce height rejection, fix resize bug, center Phase 3 text
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Shader/PSXLit.shader
+Assets/Shader/PSXLitDissolvable.shader
+Assets/Shader/PSXLitGlitch.shader
+Assets/Shader/PSXMirror.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

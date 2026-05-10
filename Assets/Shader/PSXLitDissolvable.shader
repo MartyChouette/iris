@@ -16,6 +16,9 @@ Shader "Iris/PSXLitDissolvable"
         [Header(Dissolve)]
         _DissolveAmount ("Dissolve Amount", Range(0, 1)) = 0.0
 
+        [Header(Depth)]
+        _DepthBias ("Depth Bias", Float) = 0.0
+
         [HideInInspector] _ZTest ("ZTest", Float) = 4
     }
 
@@ -74,6 +77,7 @@ Shader "Iris/PSXLitDissolvable"
                 half   _AffineIntensity;
                 half   _ShadowDitherIntensity;
                 half   _DissolveAmount;
+                float  _DepthBias;
             CBUFFER_END
 
             // ── Bayer 8x8 ordered dither matrix (normalized 0-1) ──
@@ -103,6 +107,8 @@ Shader "Iris/PSXLitDissolvable"
                     clipPos.xy = floor(clipPos.xy / clipPos.w * snapRes + 0.5)
                                / snapRes * clipPos.w;
                 }
+
+                clipPos.z += _DepthBias * clipPos.w;
 
                 output.positionCS  = clipPos;
                 output.positionWS  = posInputs.positionWS;
@@ -217,6 +223,7 @@ Shader "Iris/PSXLitDissolvable"
                 half   _AffineIntensity;
                 half   _ShadowDitherIntensity;
                 half   _DissolveAmount;
+                float  _DepthBias;
             CBUFFER_END
 
             // Bayer 8x8 for shadow dissolve

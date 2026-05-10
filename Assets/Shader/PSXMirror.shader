@@ -10,6 +10,9 @@ Shader "Iris/PSXMirror"
         [Header(PSX Effects)]
         _VertexSnapResolution ("Vertex Snap Resolution", Vector) = (160, 120, 0, 0)
 
+        [Header(Depth)]
+        _DepthBias ("Depth Bias", Float) = 0.0
+
         [Header(Retro Distortion)]
         _WarpStrength  ("Edge Warp Strength", Range(0, 0.05)) = 0.015
         _ScanlineAlpha ("Scanline Darkening",  Range(0, 0.5))  = 0.15
@@ -60,6 +63,7 @@ Shader "Iris/PSXMirror"
                 half4  _Tint;
                 half   _Brightness;
                 float4 _VertexSnapResolution;
+                float  _DepthBias;
                 half   _WarpStrength;
                 half   _ScanlineAlpha;
                 half   _ColorBands;
@@ -88,6 +92,8 @@ Shader "Iris/PSXMirror"
                     clipPos.xy = floor(clipPos.xy / clipPos.w * snapRes + 0.5)
                                / snapRes * clipPos.w;
                 }
+
+                clipPos.z += _DepthBias * clipPos.w;
 
                 output.positionCS = clipPos;
                 output.screenPos  = ComputeScreenPos(clipPos);
