@@ -297,6 +297,11 @@ public class DateSessionManager : MonoBehaviour
     private bool _arrivalTimerActive;
     private readonly List<AccumulatedReaction> _accumulatedReactions = new();
     private readonly HashSet<ReactableTag> _scoredTags = new();
+
+    // Phase 3 cached evaluations — built gradually at phase start to avoid hitch
+    private readonly Dictionary<ReactableTag, (ReactionType reaction, int multiplier)> _revealCache = new();
+    private bool _revealCacheReady;
+
     private Coroutine _phase2PulseCoroutine;
     private Color _fridgeOrigColor;
     private Color _drinkOrigColor;
@@ -481,6 +486,8 @@ public class DateSessionManager : MonoBehaviour
             _moodCheckTimer = 0f;
             _accumulatedReactions.Clear();
             _scoredTags.Clear();
+            _revealCache.Clear();
+            _revealCacheReady = false;
 
             Debug.Log("[DateSessionManager] P1_DEBUG: SpawnDateCharacter begin");
             SpawnDateCharacter();
@@ -761,6 +768,9 @@ public class DateSessionManager : MonoBehaviour
         ApartmentManager.Instance?.ClearPresetBase();
         ApplyPhaseCamera(DatePhase.Reveal);
 
+        // Build reveal cache while still faded — spreads GetComponent calls over frames
+        yield return StartCoroutine(BuildRevealCache());
+
         // Fade in always runs even if setup threw
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(fadeDuration);
@@ -854,11 +864,55 @@ public class DateSessionManager : MonoBehaviour
 
         var items = GatherRevealItems(skipInspected: true);
 
+        // Separate liked and disliked
+        var liked = new List<(ReactableTag tag, ReactionType reaction, int multiplier)>();
+        var disliked = new List<(ReactableTag tag, ReactionType reaction, int multiplier)>();
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].reaction == ReactionType.Like)
+                liked.Add(items[i]);
+            else
+                disliked.Add(items[i]);
+        }
+
 #if UNITY_EDITOR
-        Debug.Log($"[DateSessionManager] Sweep: {items.Count} un-inspected items remaining.");
+        Debug.Log($"[DateSessionManager] Sweep: {liked.Count} liked, {disliked.Count} disliked remaining.");
 #endif
 
-        yield return StartCoroutine(RunRevealWave(items));
+        // Fire all liked items at once — particles burst simultaneously
+        if (liked.Count > 0)
+        {
+            for (int i = 0; i < liked.Count; i++)
+            {
+                _scoredTags.Add(liked[i].tag);
+                ApplyReaction(liked[i].reaction, liked[i].multiplier);
+                SpawnReactionParticles(liked[i].tag.transform.position, liked[i].reaction);
+                SpawnMultiplierPopup(liked[i].tag.transform.position + Vector3.up * 0.22f, liked[i].multiplier, liked[i].reaction);
+
+                var hl = liked[i].tag.GetComponent<ItemHighlight>()
+                      ?? liked[i].tag.GetComponentInParent<ItemHighlight>();
+                if (hl != null) hl.SetPrepLikedHighlighted(true);
+            }
+
+            AffectionBar.Instance?.ShowPopup($"{liked.Count} things loved! \u2665", true);
+            yield return new WaitForSeconds(2f);
+
+            // Clear liked highlights
+            for (int i = 0; i < liked.Count; i++)
+            {
+                var hl = liked[i].tag.GetComponent<ItemHighlight>()
+                      ?? liked[i].tag.GetComponentInParent<ItemHighlight>();
+                if (hl != null) hl.SetPrepLikedHighlighted(false);
+            }
+        }
+
+        // Then fire disliked one by one (staggered for impact)
+        if (disliked.Count > 0)
+        {
+            yield return new WaitForSeconds(0.5f);
+            yield return StartCoroutine(RunRevealWave(disliked));
+        }
+
     }
 
     /// <summary>
@@ -866,31 +920,71 @@ public class DateSessionManager : MonoBehaviour
     /// When <paramref name="skipInspected"/> is true, tags already handled
     /// by DateInspectSystem are excluded (for the Phase 3 remainder sweep).
     /// </summary>
-    private List<(ReactableTag tag, ReactionType reaction, int multiplier)> GatherRevealItems(bool skipInspected)
+    /// <summary>
+    /// Build the reveal cache gradually over multiple frames to avoid a hitch.
+    /// Call at the start of Phase 3 while the screen is still fading in.
+    /// </summary>
+    private IEnumerator BuildRevealCache()
     {
+        _revealCache.Clear();
+        _revealCacheReady = false;
+
+        if (_currentDate == null || _currentDate.preferences == null)
+        {
+            _revealCacheReady = true;
+            yield break;
+        }
+
         var prefs = _currentDate.preferences;
         var apartmentScene = gameObject.scene;
+        var allTags = ReactableTag.All;
+        int batchSize = 10; // evaluate 10 per frame
+
+        for (int i = 0; i < allTags.Count; i++)
+        {
+            var tag = allTags[i];
+            if (tag == null || !tag.IsActive || tag.IsPrivate) continue;
+            if (tag.gameObject.scene != apartmentScene) continue;
+
+            var reaction = ReactionEvaluator.EvaluateReactable(tag, prefs);
+            int multiplier = GetTagEffectMultiplier(tag);
+            _revealCache[tag] = (reaction, multiplier);
+
+            if ((i + 1) % batchSize == 0)
+                yield return null; // spread across frames
+        }
+
+        _revealCacheReady = true;
+        Debug.Log($"[DateSessionManager] Reveal cache built: {_revealCache.Count} items");
+    }
+
+    /// <summary>Look up a tag's cached reaction. Returns Neutral if not cached.</summary>
+    public ReactionType GetCachedReaction(ReactableTag tag)
+    {
+        return _revealCache.TryGetValue(tag, out var entry) ? entry.reaction : ReactionType.Neutral;
+    }
+
+    private List<(ReactableTag tag, ReactionType reaction, int multiplier)> GatherRevealItems(bool skipInspected)
+    {
         var inspectSystem = DateInspectSystem.Instance;
 
         var list = new List<(ReactableTag tag, ReactionType reaction, int multiplier)>();
-        foreach (var tag in ReactableTag.All)
+        foreach (var kvp in _revealCache)
         {
-            if (!tag.IsActive) continue;
-            if (tag.IsPrivate) continue;
-            if (tag.gameObject.scene != apartmentScene) continue;
+            var tag = kvp.Key;
+            if (tag == null || !tag.IsActive) continue;
 
             if (skipInspected && inspectSystem != null && inspectSystem.IsInspected(tag))
                 continue;
 
-            // Skip items already scored earlier in this date (excursions, inspect clicks)
+            // Skip items already scored earlier in this date
             if (_scoredTags.Contains(tag))
                 continue;
 
-            var reaction = ReactionEvaluator.EvaluateReactable(tag, prefs);
+            var reaction = kvp.Value.reaction;
             if (reaction == ReactionType.Neutral) continue;
 
-            int multiplier = GetTagEffectMultiplier(tag);
-            list.Add((tag, reaction, multiplier));
+            list.Add((tag, reaction, kvp.Value.multiplier));
         }
         // Descending by multiplier so 3× items go first, then 2×, then 1×.
         list.Sort((a, b) => b.multiplier.CompareTo(a.multiplier));
