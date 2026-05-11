@@ -56,7 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PSXPostProcessFeature
   m_Active: 1
   settings:
-    resolutionDivisor: 1.6
+    resolutionDivisor: 1.5
     colorDepth: 32
     ditherIntensity: 1
     ditherShadowBias: 0

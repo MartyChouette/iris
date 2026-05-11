@@ -43124,3 +43124,62 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260511_105937
+### Commits
+359bc31 chore: add door model, editor scene/material updates
+---
+
+## Session End: 20260511_113803
+### Commits
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_123824
+### Commits
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_123903
+### Commits
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_124753
+### Commits
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_130151
+### Commits
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_144448
+### Commits
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
