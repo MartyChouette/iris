@@ -58,11 +58,7 @@ MonoBehaviour:
   settings:
     resolutionDivisor: 1
     colorDepth: 155
-<<<<<<< Updated upstream
     ditherIntensity: 0.525
-=======
-    ditherIntensity: 0.53
->>>>>>> Stashed changes
     ditherShadowBias: 1
   _postShader: {fileID: 4800000, guid: 26f490ad90348934dbbbbfc3061f991b, type: 3}
 --- !u!114 &11400000
@@ -163,19 +159,10 @@ MonoBehaviour:
     AfterOpaque: 0
     Source: 1
     NormalSamples: 1
-<<<<<<< Updated upstream
     Intensity: 0.8
     DirectLightingStrength: 0.138
     Radius: 0.5
     Samples: 1
     BlurQuality: 0
     Falloff: 92.27
-=======
-    Intensity: 0.08
-    DirectLightingStrength: 0.13
-    Radius: 0.5
-    Samples: 1
-    BlurQuality: 0
-    Falloff: 93
->>>>>>> Stashed changes
     SampleCount: -1
