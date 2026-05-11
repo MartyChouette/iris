@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 63d7845d9ae7f164cb082e1f3ef839c2
+guid: 1f9a98cdf4c1f9848961be5fb311f4cf
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Beige linen fabric
-    second: {fileID: 2100000, guid: ba68b2f1aa6ab2b4fa63beeae861bc3f, type: 2}
+    second: {fileID: 2100000, guid: b13b9eb01ffec2148988510c613f917b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
