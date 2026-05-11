@@ -3224,10 +3224,12 @@ public class ObjectGrabber : MonoBehaviour
         if (_shadowGO == null || _heldRb == null) return;
 
         // Hide shadow and ghost while magnetically snapped to an interaction
-        // target (bottle→glass, watering can→plant, shoe→partner, vinyl→turntable)
-        // — the snap itself is the visual feedback, not the placement preview
+        // target (bottle→glass, watering can→plant, vinyl→turntable)
+        // — the snap itself is the visual feedback, not the placement preview.
+        // Pair snap keeps shadow+ghost visible so the user can see where the
+        // item will land (especially inside enclosed cubbies).
         bool isVinyl = _held != null && _held.GetComponent<VinylDisc>() != null;
-        if (_nearestDrinkGlass != null || _nearestWaterablePlant != null || _pairSnapTarget != null || isVinyl)
+        if (_nearestDrinkGlass != null || _nearestWaterablePlant != null || isVinyl)
         {
             _shadowGO.SetActive(false);
             UpdateGhostPreview(Vector3.zero, Quaternion.identity, show: false);
@@ -3318,7 +3320,10 @@ public class ObjectGrabber : MonoBehaviour
         // Shadow occluded: reject if the camera can't see the placement point
         // (surface was found but the specific grid cell is behind geometry).
         // Skip floors — camera sees through furniture to reach the floor.
-        if (canPlace && !_currentSurface.IsFloor)
+        // Skip cubby interiors — they are intentionally enclosed and would
+        // always fail occlusion (matches the surface-finding logic).
+        bool isCubbyInterior = DrawerController.FindByInteriorSurface(_currentSurface) != null;
+        if (canPlace && !_currentSurface.IsFloor && !isCubbyInterior)
         {
             int occMask = _wallLayer | _barrierLayer;
             Vector3 camPos = cam.transform.position;
