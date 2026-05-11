@@ -43183,3 +43183,67 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260511_153235
+### Commits
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+---
+
+## Session End: 20260511_154537
+### Commits
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/Texture_Images/Milk_label.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_155814
+### Commits
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Raspberry_juice/raspberry_label.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/Rum.mat
+Assets/Scenes/apartment.unity
+Assets/Texture_Images/Milk_label.mat
+Assets/Texture_Images/rum_label.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_155903
+### Commits
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Raspberry_juice/raspberry_label.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/Rum.mat
+Assets/Scenes/apartment.unity
+Assets/Texture_Images/Milk_label.mat
+Assets/Texture_Images/rum_label.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_155911
+### Commits
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/Raspberry_juice/raspberry_label.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/Rum.mat
+Assets/Scenes/apartment.unity
+Assets/Texture_Images/Milk_label.mat
+Assets/Texture_Images/rum_label.mat
+production/session-logs/session-log.md
+---
+

@@ -56,10 +56,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PSXPostProcessFeature
   m_Active: 1
   settings:
-    resolutionDivisor: 1.5
-    colorDepth: 32
-    ditherIntensity: 1
-    ditherShadowBias: 0
+    resolutionDivisor: 1
+    colorDepth: 155
+    ditherIntensity: 0.525
+    ditherShadowBias: 1
   _postShader: {fileID: 4800000, guid: 26f490ad90348934dbbbbfc3061f991b, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -159,10 +159,10 @@ MonoBehaviour:
     AfterOpaque: 0
     Source: 1
     NormalSamples: 1
-    Intensity: 0.4
-    DirectLightingStrength: 0.25
-    Radius: 0.3
+    Intensity: 0.8
+    DirectLightingStrength: 0.138
+    Radius: 0.5
     Samples: 1
     BlurQuality: 0
-    Falloff: 100
+    Falloff: 92.27
     SampleCount: -1
