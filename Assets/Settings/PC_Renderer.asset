@@ -56,10 +56,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PSXPostProcessFeature
   m_Active: 1
   settings:
+<<<<<<< Updated upstream
     resolutionDivisor: 1.5
     colorDepth: 32
     ditherIntensity: 1
     ditherShadowBias: 0
+=======
+    resolutionDivisor: 1
+    colorDepth: 155
+    ditherIntensity: 0.525
+    ditherShadowBias: 1
+>>>>>>> Stashed changes
   _postShader: {fileID: 4800000, guid: 26f490ad90348934dbbbbfc3061f991b, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -97,13 +104,13 @@ MonoBehaviour:
   m_AssetVersion: 3
   m_PrepassLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967263
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967263
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967263
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 1
@@ -154,15 +161,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   m_Settings:
-    AOMethod: 0
+    AOMethod: 1
     Downsample: 0
     AfterOpaque: 0
     Source: 1
     NormalSamples: 1
-    Intensity: 0.4
-    DirectLightingStrength: 0.25
-    Radius: 0.3
+    Intensity: 0.08
+    DirectLightingStrength: 0.138
+    Radius: 0.5
     Samples: 1
     BlurQuality: 0
-    Falloff: 100
+    Falloff: 92.27
     SampleCount: -1
