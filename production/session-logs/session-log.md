@@ -43098,3 +43098,29 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260510_181312
+### Commits
+13a863b feat: PSX depth bias, brighter glass highlights, wall shadow alignment
+5694b7a feat: bonk-and-bounce height rejection, fix resize bug, center Phase 3 text
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+---
+
+## Session End: 20260510_185008
+### Commits
+13a863b feat: PSX depth bias, brighter glass highlights, wall shadow alignment
+5694b7a feat: bonk-and-bounce height rejection, fix resize bug, center Phase 3 text
+cd1e467 feat: Phase 3 reveal cache + liked items burst simultaneously
+1e4ae55 fix: fade out menu music when loading apartment
+6edf162 feat: wall rotation preserve, pair snap fix, pour lock, material tools
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/arch_lamp/Materials/arch_lamp_albedo.mat
+Assets/Scenes/apartment.unity
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
