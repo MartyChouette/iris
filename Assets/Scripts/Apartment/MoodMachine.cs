@@ -36,6 +36,10 @@ public class MoodMachine : MonoBehaviour
     [Tooltip("Speed of profile crossfade (0→1 per second).")]
     [SerializeField] private float profileBlendSpeed = 0.8f;
 
+    [Tooltip("How much influence each spray adds (stacks up to 1.0).")]
+    [Range(0.05f, 1f)]
+    [SerializeField] private float perfumeInfluenceStep = 0.334f;
+
     // ──────────────────────────────────────────────────────────────
     // Public read-only
     // ──────────────────────────────────────────────────────────────
@@ -51,6 +55,7 @@ public class MoodMachine : MonoBehaviour
     // Profile crossfade
     private MoodMachineProfile _overrideProfile;
     private float _profileBlend; // 0 = base, 1 = override
+    private float _blendTarget;  // incremented per spray, capped at 1
 
     // Cache god ray base rotations
     private Quaternion[] _godRayBaseRotations;
@@ -123,26 +128,32 @@ public class MoodMachine : MonoBehaviour
     // ──────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Crossfade to an override profile (e.g. from a perfume).
-    /// Pass null to fade back to the base profile.
+    /// Push a perfume atmosphere profile. Each call adds one step of influence
+    /// (additive, incremental). Switching to a different profile resets the
+    /// blend and starts building from scratch.
     /// </summary>
     public void SetOverrideProfile(MoodMachineProfile overrideProfile)
     {
-        if (overrideProfile != null)
+        if (overrideProfile == null) return;
+
+        if (_overrideProfile != overrideProfile)
         {
+            // New perfume — start fresh
             _overrideProfile = overrideProfile;
-            // blend will ramp toward 1 in Update
+            _blendTarget = perfumeInfluenceStep;
         }
         else
         {
-            // blend will ramp toward 0, then we clear the reference
+            // Same perfume sprayed again — deepen the influence
+            _blendTarget = Mathf.Clamp01(_blendTarget + perfumeInfluenceStep);
         }
     }
 
     /// <summary>Clear the override and fade back to base profile.</summary>
     public void ClearOverrideProfile()
     {
-        SetOverrideProfile(null);
+        _blendTarget = 0f;
+        // _overrideProfile cleared once blend reaches 0 in Update
     }
 
     // ──────────────────────────────────────────────────────────────
@@ -154,12 +165,11 @@ public class MoodMachine : MonoBehaviour
         float target = ComputeTarget();
         _currentMood = Mathf.MoveTowards(_currentMood, target, lerpSpeed * Time.deltaTime);
 
-        // Profile crossfade
-        float blendTarget = _overrideProfile != null ? 1f : 0f;
-        _profileBlend = Mathf.MoveTowards(_profileBlend, blendTarget, profileBlendSpeed * Time.deltaTime);
+        // Profile crossfade — smooth lerp toward incremental target
+        _profileBlend = Mathf.MoveTowards(_profileBlend, _blendTarget, profileBlendSpeed * Time.deltaTime);
 
         // Clear reference once fully faded out
-        if (_profileBlend <= 0f && _overrideProfile != null && blendTarget == 0f)
+        if (_profileBlend <= 0f && _overrideProfile != null && _blendTarget <= 0f)
             _overrideProfile = null;
 
         ApplyMood(_currentMood);
