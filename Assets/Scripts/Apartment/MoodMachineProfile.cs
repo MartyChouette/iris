@@ -38,4 +38,12 @@ public class MoodMachineProfile : ScriptableObject
 
     [Tooltip("Window material emission strength (0 → 1).")]
     public AnimationCurve windowEmission = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+
+    [Header("Color Filter")]
+    [Tooltip("Screen-space color tint across mood range. White = no tint.")]
+    public Gradient colorFilter;
+
+    [Header("God Rays")]
+    [Tooltip("Y-axis rotation of god ray quads across mood range (degrees).")]
+    public AnimationCurve godRayRotation = AnimationCurve.Linear(0f, 0f, 1f, 0f);
 }

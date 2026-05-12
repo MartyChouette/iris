@@ -1,24 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// A perfume bottle on the bookcase shelf. Single click to spray —
-/// big particle burst, mood set, bottle stays on shelf.
+/// particle burst layers with staggered timing, mood set, bottle stays on shelf.
 /// </summary>
 public class PerfumeBottle : MonoBehaviour
 {
-    private static readonly System.Collections.Generic.List<PerfumeBottle> s_all = new();
-    public static System.Collections.Generic.IReadOnlyList<PerfumeBottle> All => s_all;
+    private static readonly List<PerfumeBottle> s_all = new();
+    public static IReadOnlyList<PerfumeBottle> All => s_all;
 
     [Header("Definition")]
     [Tooltip("ScriptableObject defining this perfume.")]
     [SerializeField] private PerfumeDefinition definition;
 
-    [Header("Spray")]
-    [Tooltip("Child ParticleSystem for the spray mist.")]
-    [SerializeField] private ParticleSystem sprayParticles;
-
-    [Tooltip("Number of particles to emit in the one-shot burst.")]
-    [SerializeField] private int burstCount = 30;
+    [Header("Spray Layers")]
+    [Tooltip("Each layer fires its particle system after its delay. Add layers with the + button.")]
+    [SerializeField] private List<SprayLayer> sprayLayers = new();
 
     /// <summary>Fired when any perfume is sprayed.</summary>
     public static event System.Action OnPerfumeSprayed;
@@ -54,13 +53,14 @@ public class PerfumeBottle : MonoBehaviour
             _baseColor = _instanceMaterial.color;
         }
 
-        if (sprayParticles != null)
-            sprayParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        for (int i = 0; i < sprayLayers.Count; i++)
+        {
+            if (sprayLayers[i].particles != null)
+                sprayLayers[i].particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
     }
 
     public void SetDefinition(PerfumeDefinition def) => definition = def;
-
-    public void SetSprayParticles(ParticleSystem ps) => sprayParticles = ps;
 
     public void OnHoverEnter()
     {
@@ -85,37 +85,118 @@ public class PerfumeBottle : MonoBehaviour
     }
 
     /// <summary>
-    /// One-click spray: burst particles, set mood. Can be sprayed again to
-    /// re-select this perfume after spraying a different one.
+    /// One-click spray: burst particles across all layers with staggered timing,
+    /// set mood. Can be sprayed again to re-select this perfume.
     /// </summary>
     public void SprayOnce()
     {
-        // Deactivate all other perfumes first so only the latest spray is active
         for (int i = 0; i < s_all.Count; i++)
         {
             if (s_all[i] == this) continue;
             s_all[i].Deactivate();
         }
 
-        // Burst particles
-        if (sprayParticles != null)
-            sprayParticles.Emit(burstCount);
+        StartCoroutine(FireSprayLayers());
 
-        // SFX
         if (definition != null && definition.spraySFX != null && AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(definition.spraySFX);
 
-        // Mood
         if (definition != null && MoodMachine.Instance != null)
+        {
             MoodMachine.Instance.SetSource("Perfume", definition.moodValue);
+            MoodMachine.Instance.SetOverrideProfile(definition.atmosphereProfile);
+        }
 
-        // Reactable
         var reactable = GetComponent<ReactableTag>();
         if (reactable != null) reactable.IsActive = true;
 
         SprayComplete = true;
         LastSprayed = definition;
         OnPerfumeSprayed?.Invoke();
+    }
+
+    private IEnumerator FireSprayLayers()
+    {
+        if (sprayLayers.Count == 0) yield break;
+
+        var sorted = new List<SprayLayer>(sprayLayers);
+        sorted.Sort((a, b) => a.delay.CompareTo(b.delay));
+
+        float elapsed = 0f;
+        for (int i = 0; i < sorted.Count; i++)
+        {
+            var layer = sorted[i];
+            if (layer.particles == null) continue;
+
+            float wait = layer.delay - elapsed;
+            if (wait > 0f)
+            {
+                yield return new WaitForSeconds(wait);
+                elapsed += wait;
+            }
+
+            if (layer.duration <= 0f)
+            {
+                // Instant burst
+                layer.particles.Emit(layer.burstCount);
+            }
+            else
+            {
+                // Sustained emission with fade in/out
+                StartCoroutine(SustainedEmission(layer));
+            }
+        }
+    }
+
+    private IEnumerator SustainedEmission(SprayLayer layer)
+    {
+        var ps = layer.particles;
+        var emission = ps.emission;
+        emission.enabled = true;
+
+        float peak = layer.emissionRate;
+        float fadeIn = layer.fadeIn;
+        float sustain = layer.duration - fadeIn - layer.fadeOut;
+        if (sustain < 0f) sustain = 0f;
+        float fadeOut = layer.fadeOut;
+
+        // Fade in
+        if (fadeIn > 0f)
+        {
+            ps.Play();
+            float t = 0f;
+            while (t < fadeIn)
+            {
+                t += Time.deltaTime;
+                emission.rateOverTime = Mathf.Lerp(0f, peak, t / fadeIn);
+                yield return null;
+            }
+        }
+        else
+        {
+            emission.rateOverTime = peak;
+            ps.Play();
+        }
+
+        // Sustain
+        emission.rateOverTime = peak;
+        if (sustain > 0f)
+            yield return new WaitForSeconds(sustain);
+
+        // Fade out
+        if (fadeOut > 0f)
+        {
+            float t = 0f;
+            while (t < fadeOut)
+            {
+                t += Time.deltaTime;
+                emission.rateOverTime = Mathf.Lerp(peak, 0f, t / fadeOut);
+                yield return null;
+            }
+        }
+
+        emission.rateOverTime = 0f;
+        ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
     /// <summary>Deactivate this perfume (called when a different perfume is sprayed).</summary>
@@ -125,11 +206,41 @@ public class PerfumeBottle : MonoBehaviour
 
         var reactable = GetComponent<ReactableTag>();
         if (reactable != null) reactable.IsActive = false;
+
+        if (MoodMachine.Instance != null)
+            MoodMachine.Instance.ClearOverrideProfile();
     }
 
     private void OnDestroy()
     {
         if (_instanceMaterial != null)
             Destroy(_instanceMaterial);
+    }
+
+    [System.Serializable]
+    public class SprayLayer
+    {
+        [Tooltip("Particle system for this layer.")]
+        public ParticleSystem particles;
+
+        [Tooltip("Delay in seconds before this layer fires (0 = immediate).")]
+        public float delay;
+
+        [Header("Burst Mode (duration = 0)")]
+        [Tooltip("Number of particles to emit in an instant burst.")]
+        public int burstCount = 30;
+
+        [Header("Sustained Mode (duration > 0)")]
+        [Tooltip("Total duration in seconds. Set to 0 for instant burst mode.")]
+        public float duration;
+
+        [Tooltip("Peak emission rate (particles/sec) during sustained mode.")]
+        public float emissionRate = 20f;
+
+        [Tooltip("Seconds to ramp emission from 0 to peak.")]
+        public float fadeIn;
+
+        [Tooltip("Seconds to ramp emission from peak to 0.")]
+        public float fadeOut;
     }
 }

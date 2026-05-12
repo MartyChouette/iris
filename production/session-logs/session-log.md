@@ -43247,3 +43247,239 @@ Assets/Texture_Images/rum_label.mat
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260511_160823
+### Commits
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+---
+
+## Session End: 20260511_161049
+### Commits
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_161102
+### Commits
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_164247
+### Commits
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_164343
+### Commits
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Settings/PC_Renderer.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_164556
+### Commits
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_172833
+### Commits
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_172850
+### Commits
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_172907
+### Commits
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+d4ef54f fix: cubby placement preview — skip occlusion check, show pair-snap shadow
+359bc31 chore: add door model, editor scene/material updates
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_215457
+### Commits
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_215506
+### Commits
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_215544
+### Commits
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_220153
+### Commits
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_220226
+### Commits
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_220332
+### Commits
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_220651
+### Commits
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Apartment/MoodMachine.cs
+Assets/Scripts/Apartment/MoodMachineProfile.cs
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Bookcase/PerfumeDefinition.cs
+production/session-logs/session-log.md
+---
+

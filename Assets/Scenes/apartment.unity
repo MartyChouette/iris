@@ -1234,8 +1234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerfumeBottle
   definition: {fileID: 11400000, guid: 79fbaf96592001e4c8018cc332da8a34, type: 2}
-  sprayParticles: {fileID: 0}
-  burstCount: 30
+  sprayLayers: []
 --- !u!1 &48523342
 GameObject:
   m_ObjectHideFlags: 0
@@ -24207,8 +24206,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerfumeBottle
   definition: {fileID: 11400000, guid: 78c81e3feacfe8247922d6c1f56027c3, type: 2}
-  sprayParticles: {fileID: 2049306076}
-  burstCount: 50
+  sprayLayers:
+  - particles: {fileID: 2049306076}
+    delay: 0
+    burstCount: 0
+    duration: 3
+    emissionRate: 0
+    fadeIn: 0
+    fadeOut: 0
 --- !u!114 &885491239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66163,8 +66168,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerfumeBottle
   definition: {fileID: 11400000, guid: 79fbaf96592001e4c8018cc332da8a34, type: 2}
-  sprayParticles: {fileID: 1984809435}
-  burstCount: 30
+  sprayLayers:
+  - particles: {fileID: 1984809435}
+    delay: 0
+    burstCount: 0
+    duration: 3
+    emissionRate: 0
+    fadeIn: 0
+    fadeOut: 0
 --- !u!65 &1992875923
 BoxCollider:
   m_ObjectHideFlags: 0

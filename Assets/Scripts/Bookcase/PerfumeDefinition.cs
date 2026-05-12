@@ -38,6 +38,10 @@ public class PerfumeDefinition : ScriptableObject
     [Range(0f, 1f)]
     public float moodValue = 0.5f;
 
+    [Header("Atmosphere")]
+    [Tooltip("Optional override profile. When sprayed, MoodMachine crossfades to this atmosphere.")]
+    public MoodMachineProfile atmosphereProfile;
+
     [Header("Audio")]
     [Tooltip("SFX played on spray (optional).")]
     public AudioClip spraySFX;
