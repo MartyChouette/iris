@@ -172,14 +172,13 @@ public class PairableItem : MonoBehaviour
         // Both SpecificPartner (shoes) and AnyOfCategory (plates):
         // stay paired, pick up the whole group as a unit.
 
-        // Flash partner highlight for unpaired shoes
-        if (!_isPaired && _pairMode == PairMode.SpecificPartner
-            && _specificPartner != null && !_specificPartner._isPaired)
+        // Flash partner highlight every time a shoe is picked up (bright)
+        if (_pairMode == PairMode.SpecificPartner && _specificPartner != null)
         {
             var partnerHL = _specificPartner.GetComponent<ItemHighlight>();
             if (partnerHL == null)
                 partnerHL = _specificPartner.gameObject.AddComponent<ItemHighlight>();
-            partnerHL.SetHighlighted(true);
+            partnerHL.SetDisplayHighlighted(true);
             _partnerHighlightActive = true;
         }
     }
@@ -202,7 +201,7 @@ public class PairableItem : MonoBehaviour
             {
                 var partnerHL = _specificPartner.GetComponent<ItemHighlight>();
                 if (partnerHL != null)
-                    partnerHL.SetHighlighted(false);
+                    partnerHL.SetDisplayHighlighted(false);
             }
         }
 

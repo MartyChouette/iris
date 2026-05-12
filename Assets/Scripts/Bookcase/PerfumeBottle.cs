@@ -100,10 +100,17 @@ public class PerfumeBottle : MonoBehaviour
             s_all[i].Deactivate();
         }
 
+        // SprayCount incremented early so FireSprayLayers can read it for scaling
+        SprayCount = Mathf.Min(SprayCount + 1, 3);
+
         StartCoroutine(FireSprayLayers());
 
         if (definition != null && definition.spraySFX != null && AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(definition.spraySFX);
+
+        // Crossfade ambience on first spray of this perfume
+        if (SprayCount == 1 && definition != null && definition.ambienceClip != null && AudioManager.Instance != null)
+            AudioManager.Instance.CrossfadeAmbience(definition.ambienceClip, 0.6f, 1.5f);
 
         if (definition != null && MoodMachine.Instance != null)
         {
@@ -114,7 +121,6 @@ public class PerfumeBottle : MonoBehaviour
         var reactable = GetComponent<ReactableTag>();
         if (reactable != null) reactable.IsActive = true;
 
-        SprayCount = Mathf.Min(SprayCount + 1, 3);
         SprayComplete = true;
         LastSprayed = definition;
         LastSprayIntensity = Mathf.Clamp01(SprayCount / 3f);
@@ -124,6 +130,9 @@ public class PerfumeBottle : MonoBehaviour
     private IEnumerator FireSprayLayers()
     {
         if (sprayLayers.Count == 0) yield break;
+
+        // Scale effects by spray intensity (1/3, 2/3, 3/3)
+        float intensity = Mathf.Clamp01(SprayCount / 3f);
 
         var sorted = new List<SprayLayer>(sprayLayers);
         sorted.Sort((a, b) => a.delay.CompareTo(b.delay));
@@ -143,24 +152,25 @@ public class PerfumeBottle : MonoBehaviour
 
             if (layer.duration <= 0f)
             {
-                // Instant burst
-                layer.particles.Emit(layer.burstCount);
+                // Instant burst — scaled by intensity
+                int count = Mathf.Max(1, Mathf.RoundToInt(layer.burstCount * intensity));
+                layer.particles.Emit(count);
             }
             else
             {
-                // Sustained emission with fade in/out
-                StartCoroutine(SustainedEmission(layer));
+                // Sustained emission — scaled by intensity
+                StartCoroutine(SustainedEmission(layer, intensity));
             }
         }
     }
 
-    private IEnumerator SustainedEmission(SprayLayer layer)
+    private IEnumerator SustainedEmission(SprayLayer layer, float intensity)
     {
         var ps = layer.particles;
         var emission = ps.emission;
         emission.enabled = true;
 
-        float peak = layer.emissionRate;
+        float peak = layer.emissionRate * intensity;
         float fadeIn = layer.fadeIn;
         float sustain = layer.duration - fadeIn - layer.fadeOut;
         if (sustain < 0f) sustain = 0f;

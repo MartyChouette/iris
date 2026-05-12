@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5efed0c7b7bca40822027625fe0cf5, type: 3}
   m_Name: Mess_Wilted_Leaves
   m_EditorClassIdentifier: Assembly-CSharp::MessBlueprint
-  messName: Wilted Leaves
+  messName: Wilted Leaf
   description: Brown, curled leaves shed from a dying plant.
   category: 2
   messType: 1
   spillDefinition: {fileID: 0}
   objectPrefab: {fileID: 6440390279786177658, guid: becd1c8d3a827d041823c500f4ab3a95, type: 3}
-  objectScale: {x: 0.05, y: 0.01, z: 0.04}
+  objectScale: {x: 0.001, y: 0.01, z: 0.001}
   objectColor: {r: 1, g: 1, b: 1, a: 1}
   requirePreviousDate: {fileID: 0}
   requireDateVisitCount: 0

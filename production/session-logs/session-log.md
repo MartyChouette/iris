@@ -43497,3 +43497,367 @@ e2eb603 Revert "Changed Renderer Setting"
 d870462 chore: scene, renderer, material, and font editor updates
 ---
 
+## Session End: 20260511_222635
+### Commits
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+---
+
+## Session End: 20260511_231330
+### Commits
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Apartment/MoodMachine.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_231349
+### Commits
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Apartment/MoodMachine.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_231539
+### Commits
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_231640
+### Commits
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_231726
+### Commits
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_232033
+### Commits
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Dating/ReactionEvaluator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_232152
+### Commits
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Dating/ReactionEvaluator.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_233225
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_233304
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_233738
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_233908
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260511_234256
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260512_000356
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+### Uncommitted Changes
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Bookcase/AptPerfume_01_Morning_Dew.asset
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Bookcase/PerfumeDefinition.cs
+Assets/Scripts/Framework/AudioManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+Assets/nema_non_indexed.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260512_001500
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Bookcase/AptPerfume_01_Morning_Dew.asset
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Bookcase/PerfumeDefinition.cs
+Assets/Scripts/Framework/AudioManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+Assets/nema_non_indexed.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260512_001959
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Bookcase/AptPerfume_01_Morning_Dew.asset
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Bookcase/PerfumeDefinition.cs
+Assets/Scripts/Framework/AudioManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+Assets/nema_non_indexed.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260512_002143
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Bookcase/AptPerfume_01_Morning_Dew.asset
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Bookcase/PerfumeDefinition.cs
+Assets/Scripts/Framework/AudioManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+Assets/nema_non_indexed.mat
+production/session-logs/session-log.md
+---
+
+## Session End: 20260512_005302
+### Commits
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+### Uncommitted Changes
+Assets/ArtAssets/3dModels/door/door.fbx
+Assets/ArtAssets/3dModels/door/door.fbx.meta
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Bookcase/AptPerfume_01_Morning_Dew.asset
+Assets/Scripts/Apartment/NemaController.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/Bookcase/PerfumeBottle.cs
+Assets/Scripts/Bookcase/PerfumeDefinition.cs
+Assets/Scripts/Framework/AudioManager.cs
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+Assets/nema_non_indexed.mat
+production/session-logs/session-log.md
+---
+

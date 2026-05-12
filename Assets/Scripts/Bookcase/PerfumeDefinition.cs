@@ -45,4 +45,7 @@ public class PerfumeDefinition : ScriptableObject
     [Header("Audio")]
     [Tooltip("SFX played on spray (optional).")]
     public AudioClip spraySFX;
+
+    [Tooltip("Ambient loop that crossfades in when this perfume is active (optional).")]
+    public AudioClip ambienceClip;
 }

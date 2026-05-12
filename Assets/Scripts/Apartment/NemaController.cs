@@ -82,8 +82,17 @@ public class NemaController : MonoBehaviour
     public Transform ActiveModel => _activeModelGO != null ? _activeModelGO.transform : (_model != null ? _model : null);
 
     [Header("Look-At")]
-    [Tooltip("How fast the look-at weight blends in/out (per second).")]
-    [SerializeField] private float _lookBlendSpeed = 3f;
+    [Tooltip("How fast the look-at weight blends IN (per second).")]
+    [SerializeField] private float _lookBlendInSpeed = 2f;
+
+    [Tooltip("How fast the look-at weight blends OUT (per second). Slower = less twitchy.")]
+    [SerializeField] private float _lookBlendOutSpeed = 1.2f;
+
+    [Tooltip("How fast the look target position smooths toward new targets (per second). Lower = more sluggish head.")]
+    [SerializeField] private float _lookTargetSmoothSpeed = 4f;
+
+    [Tooltip("Seconds a new target must persist before Nema commits to looking at it.")]
+    [SerializeField] private float _lookDwellTime = 0.25f;
 
     [Tooltip("Maximum head turn angle (degrees) before Nema gives up looking.")]
     [SerializeField] private float _maxLookAngle = 90f;
@@ -158,7 +167,11 @@ public class NemaController : MonoBehaviour
     private Transform _currentTarget;
 
     // Look-at
-    private Vector3 _lookTarget;
+    private Vector3 _lookTarget;        // smoothed position fed to IK
+    private Vector3 _desiredLookTarget; // raw target before smoothing
+    private Vector3 _pendingTarget;     // candidate waiting for dwell
+    private float _pendingDwell;        // how long the pending target has been stable
+    private bool _pendingActive;        // whether a candidate is waiting
     private float _lookWeight;
     private float _targetLookWeight;
     private bool _hasLookTarget;
@@ -420,16 +433,60 @@ public class NemaController : MonoBehaviour
             return;
         }
 
-        _lookTarget = worldPos;
+        // Dwell gate — candidate must persist before Nema commits
+        if (!_hasLookTarget || Vector3.Distance(worldPos, _desiredLookTarget) > 0.15f)
+        {
+            // New candidate target appeared (or shifted significantly)
+            if (!_pendingActive || Vector3.Distance(worldPos, _pendingTarget) > 0.15f)
+            {
+                // Start dwell timer for this candidate
+                _pendingTarget = worldPos;
+                _pendingDwell = 0f;
+                _pendingActive = true;
+            }
+            else
+            {
+                // Same candidate — accumulate dwell
+                _pendingTarget = worldPos;
+                _pendingDwell += Time.deltaTime;
+            }
+
+            // Not committed yet — keep easing toward existing target (or ease out if none)
+            if (_pendingDwell < _lookDwellTime)
+            {
+                if (_hasLookTarget)
+                {
+                    // Still looking at old target, smooth weight
+                    _lookWeight = Mathf.MoveTowards(_lookWeight, _targetLookWeight, _lookBlendInSpeed * Time.deltaTime);
+                    _lookTarget = Vector3.Lerp(_lookTarget, _desiredLookTarget, _lookTargetSmoothSpeed * Time.deltaTime);
+                }
+                return;
+            }
+
+            // Dwell passed — commit to new target
+            _desiredLookTarget = _pendingTarget;
+            _pendingActive = false;
+            if (!_hasLookTarget)
+                _lookTarget = _desiredLookTarget; // first target — no smooth, just start there
+        }
+        else
+        {
+            // Existing target moved slightly — track it directly (no re-dwell)
+            _desiredLookTarget = worldPos;
+            _pendingActive = false;
+        }
+
         _hasLookTarget = true;
         _targetLookWeight = 1f;
-        _lookWeight = Mathf.MoveTowards(_lookWeight, _targetLookWeight, _lookBlendSpeed * Time.deltaTime);
+        _lookWeight = Mathf.MoveTowards(_lookWeight, _targetLookWeight, _lookBlendInSpeed * Time.deltaTime);
+        _lookTarget = Vector3.Lerp(_lookTarget, _desiredLookTarget, _lookTargetSmoothSpeed * Time.deltaTime);
     }
 
     private void ClearLookTarget()
     {
+        _pendingActive = false;
         _targetLookWeight = 0f;
-        _lookWeight = Mathf.MoveTowards(_lookWeight, 0f, _lookBlendSpeed * Time.deltaTime);
+        _lookWeight = Mathf.MoveTowards(_lookWeight, 0f, _lookBlendOutSpeed * Time.deltaTime);
         if (_lookWeight < 0.01f)
             _hasLookTarget = false;
     }

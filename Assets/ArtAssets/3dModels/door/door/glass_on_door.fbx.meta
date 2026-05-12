@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: f83014b201e30bd4d9ef482b257d1283
+guid: 0db7de5170a0c8e40876db5f7be6f6ab
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Brown Polished Oak Wood.002
-    second: {fileID: 2100000, guid: c8096ad4080a6db43afc9f475cc627f1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: metal
-    second: {fileID: 2100000, guid: 53c3df4d2b41f3c4cabd26b2477a4e42, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

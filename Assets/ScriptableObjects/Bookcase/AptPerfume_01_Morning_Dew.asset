@@ -16,7 +16,10 @@ MonoBehaviour:
   description: Light and crisp, like sunlight through wet leaves on a spring morning.
   bottleColor: {r: 0.3, g: 0.7, b: 0.5, a: 0.8}
   sprayColor: {r: 0.5, g: 0.9, b: 0.7, a: 0.4}
-  lightingColor: {r: 0.8, g: 1, b: 0.9, a: 1}
-  lightIntensity: 1.2
+  lightingColor: {r: 1, g: 1, b: 1, a: 1}
+  lightIntensity: 2
   moodParticleColor: {r: 0.5, g: 0.9, b: 0.7, a: 0.4}
+  perfumeTag: 
+  moodValue: 0.5
+  atmosphereProfile: {fileID: 11400000, guid: 380528c4a7f2a954f872004391f329e1, type: 2}
   spraySFX: {fileID: 0}

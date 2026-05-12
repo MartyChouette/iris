@@ -43,6 +43,10 @@ public class AudioManager : MonoBehaviour
     private Coroutine _crossfadeCoroutine;
     private float _musicTargetVolume = 1f;
 
+    private AudioSource _ambienceSource2;
+    private bool _ambienceSourceAActive = true;
+    private Coroutine _ambienceCrossfadeCoroutine;
+
     [Header("Debug")]
     public bool debugLogs = false;
 
@@ -93,6 +97,15 @@ public class AudioManager : MonoBehaviour
             _musicSource2 = go2.AddComponent<AudioSource>();
             _musicSource2.playOnAwake = false;
             _musicSource2.spatialBlend = 0f;
+        }
+        // Create second ambience source for crossfades
+        if (_ambienceSource2 == null)
+        {
+            var ambGo = new GameObject("Audio_Ambience2");
+            ambGo.transform.SetParent(transform);
+            _ambienceSource2 = ambGo.AddComponent<AudioSource>();
+            _ambienceSource2.playOnAwake = false;
+            _ambienceSource2.spatialBlend = 0f;
         }
         EnsureSource(ref environmentSource, "Audio_Environment");
         EnsureSource(ref uiSource, "Audio_UI");
@@ -329,6 +342,58 @@ public class AudioManager : MonoBehaviour
         ambienceSource.volume = EffectiveAmbVol(volume);
         ambienceSource.loop = loop;
         ambienceSource.Play();
+    }
+
+    public void CrossfadeAmbience(AudioClip clip, float volume = 1f, float duration = -1f)
+    {
+        if (clip == null) return;
+        if (duration < 0f) duration = _crossfadeDuration;
+
+        AudioSource oldSource = _ambienceSourceAActive ? ambienceSource : _ambienceSource2;
+        AudioSource newSource = _ambienceSourceAActive ? _ambienceSource2 : ambienceSource;
+        _ambienceSourceAActive = !_ambienceSourceAActive;
+        // Keep public ambienceSource pointing to the active one
+        ambienceSource = newSource;
+
+        if (!oldSource.isPlaying || duration <= 0f)
+        {
+            oldSource.Stop();
+            newSource.clip = clip;
+            _ambienceBaseVolume = volume;
+            newSource.volume = EffectiveAmbVol(volume);
+            newSource.loop = true;
+            newSource.Play();
+            return;
+        }
+
+        newSource.clip = clip;
+        newSource.volume = 0f;
+        newSource.loop = true;
+        newSource.Play();
+
+        _ambienceBaseVolume = volume;
+        if (_ambienceCrossfadeCoroutine != null) StopCoroutine(_ambienceCrossfadeCoroutine);
+        _ambienceCrossfadeCoroutine = StartCoroutine(CrossfadeAmbienceSources(oldSource, newSource, volume, duration));
+    }
+
+    private IEnumerator CrossfadeAmbienceSources(AudioSource fadeOut, AudioSource fadeIn, float targetVol, float duration)
+    {
+        float elapsed = 0f;
+        float startVol = fadeOut.volume;
+        float endVol = EffectiveAmbVol(targetVol);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            if (IsValid(fadeOut)) fadeOut.volume = Mathf.Lerp(startVol, 0f, t);
+            if (IsValid(fadeIn)) fadeIn.volume = Mathf.Lerp(0f, endVol, t);
+            yield return null;
+        }
+
+        if (IsValid(fadeOut)) { fadeOut.Stop(); fadeOut.volume = 0f; }
+        if (IsValid(fadeIn)) fadeIn.volume = endVol;
+        _ambienceCrossfadeCoroutine = null;
     }
 
     public void StopAmbience()
