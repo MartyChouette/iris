@@ -25,8 +25,12 @@ public class PerfumeBottle : MonoBehaviour
     /// <summary>The most recently sprayed perfume definition (null if none sprayed this session).</summary>
     public static PerfumeDefinition LastSprayed { get; private set; }
 
+    /// <summary>Spray intensity of the last sprayed perfume (0 = none, 0.334 = 1 spray, 0.667 = 2, 1.0 = 3).</summary>
+    public static float LastSprayIntensity { get; private set; }
+
     public PerfumeDefinition Definition => definition;
     public bool SprayComplete { get; private set; }
+    public int SprayCount { get; private set; }
 
     private Vector3 _shelfPosition;
     private Material _instanceMaterial;
@@ -34,10 +38,10 @@ public class PerfumeBottle : MonoBehaviour
     private bool _isHovered;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetStatics() => LastSprayed = null;
+    private static void ResetStatics() { LastSprayed = null; LastSprayIntensity = 0f; }
 
     /// <summary>Clear the last sprayed perfume (call on date end).</summary>
-    public static void ClearLastSprayed() => LastSprayed = null;
+    public static void ClearLastSprayed() { LastSprayed = null; LastSprayIntensity = 0f; }
 
     private void OnEnable() => s_all.Add(this);
     private void OnDisable() => s_all.Remove(this);
@@ -110,8 +114,10 @@ public class PerfumeBottle : MonoBehaviour
         var reactable = GetComponent<ReactableTag>();
         if (reactable != null) reactable.IsActive = true;
 
+        SprayCount = Mathf.Min(SprayCount + 1, 3);
         SprayComplete = true;
         LastSprayed = definition;
+        LastSprayIntensity = Mathf.Clamp01(SprayCount / 3f);
         OnPerfumeSprayed?.Invoke();
     }
 
@@ -203,6 +209,7 @@ public class PerfumeBottle : MonoBehaviour
     public void Deactivate()
     {
         SprayComplete = false;
+        SprayCount = 0;
 
         var reactable = GetComponent<ReactableTag>();
         if (reactable != null) reactable.IsActive = false;

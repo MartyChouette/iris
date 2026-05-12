@@ -161,19 +161,41 @@ public static class ReactionEvaluator
     /// <summary>Evaluate the sprayed perfume against the date's perfume preferences.</summary>
     public static ReactionType EvaluatePerfume(PerfumeDefinition perfume, DatePreferences prefs)
     {
+        return EvaluatePerfume(perfume, prefs, PerfumeBottle.LastSprayIntensity);
+    }
+
+    /// <summary>Evaluate perfume with explicit spray intensity (0-1).</summary>
+    public static ReactionType EvaluatePerfume(PerfumeDefinition perfume, DatePreferences prefs, float intensity)
+    {
         if (prefs == null) return ReactionType.Neutral;
         if (perfume == null) return prefs.noPerfumeReaction;
 
         string tag = perfume.perfumeTag;
         if (string.IsNullOrEmpty(tag)) return ReactionType.Neutral;
 
+        bool liked = false;
+        bool disliked = false;
+
         for (int i = 0; i < prefs.likedPerfumeTags.Length; i++)
             if (string.Equals(tag, prefs.likedPerfumeTags[i], System.StringComparison.OrdinalIgnoreCase))
-                return ReactionType.Like;
+            { liked = true; break; }
 
         for (int i = 0; i < prefs.dislikedPerfumeTags.Length; i++)
             if (string.Equals(tag, prefs.dislikedPerfumeTags[i], System.StringComparison.OrdinalIgnoreCase))
-                return ReactionType.Dislike;
+            { disliked = true; break; }
+
+        // Intensity modifies the reaction:
+        // Liked perfume:  1/3 = Neutral (too subtle), 2/3 = Like (sweet spot), 3/3 = Dislike (overwhelming)
+        // Disliked:       1/3 = Neutral (barely notice), 2/3 = Dislike, 3/3 = Dislike
+        // Neutral tag:    1/3 = Neutral, 2/3 = Neutral, 3/3 = Dislike (too strong)
+        if (liked)
+        {
+            if (intensity > 0.99f) return ReactionType.Dislike;
+            return intensity > 0.34f ? ReactionType.Like : ReactionType.Neutral;
+        }
+
+        if (disliked)
+            return intensity > 0.34f ? ReactionType.Dislike : ReactionType.Neutral;
 
         return ReactionType.Neutral;
     }
