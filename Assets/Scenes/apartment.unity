@@ -1217,7 +1217,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.00083776354, y: 0.0008377642, z: 0.0014678407}
   m_Center: {x: 0.000006386438, y: 0.000002129312, z: 0.025}
@@ -18731,9 +18731,11 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: 93d1b1f600db551489be635c746a0bab, type: 2}
   directionalLight: {fileID: 1664897878}
   rainParticles: {fileID: 0}
+  godRayQuads: []
   _ambienceClip: {fileID: 8300000, guid: 20ddc2cdcbbdf4a4fb21aabb527872f1, type: 3}
   _weatherClip: {fileID: 8300000, guid: 20ddc2cdcbbdf4a4fb21aabb527872f1, type: 3}
   lerpSpeed: 0.5
+  profileBlendSpeed: 0.8
 --- !u!4 &666569917
 Transform:
   m_ObjectHideFlags: 0
@@ -66172,8 +66174,8 @@ MonoBehaviour:
   - particles: {fileID: 1984809435}
     delay: 0
     burstCount: 0
-    duration: 3
-    emissionRate: 0
+    duration: 8.23
+    emissionRate: 10.97
     fadeIn: 0
     fadeOut: 0
 --- !u!65 &1992875923

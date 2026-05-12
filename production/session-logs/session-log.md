@@ -43483,3 +43483,17 @@ Assets/Scripts/Bookcase/PerfumeDefinition.cs
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260511_221008
+### Commits
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+a5c0249 fix: resolve merge conflict markers in PC_Renderer asset
+8ea6afc shoe platform
+8b7d69f chore: material updates, new Pupil_Glimmer mat, renderer and scene tweaks
+e2eb603 Revert "Changed Renderer Setting"
+1205c6f Changed Renderer Setting
+d870462 chore: scene, renderer, material, and font editor updates
+---
+
