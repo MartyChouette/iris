@@ -193,6 +193,19 @@ public class DayPhaseManager : MonoBehaviour
         if (_editorQuickBoot)
             TryEditorQuickBoot();
 #endif
+
+        // Show tutorial card when starting directly in Exploration (demo flow)
+        if (_currentPhase == DayPhase.Exploration)
+        {
+            StartCoroutine(ShowTutorialCardDelayed());
+        }
+    }
+
+    private IEnumerator ShowTutorialCardDelayed()
+    {
+        // Wait for loading screen to fade out
+        yield return new WaitForSecondsRealtime(0.7f);
+        TutorialCard.ShowObjective("Help Nema organize her room\nbefore her date Paris arrives tonight");
     }
 
 #if UNITY_EDITOR

@@ -43861,3 +43861,88 @@ Assets/nema_non_indexed.mat
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260512_011533
+### Commits
+bd68a52 feat: scaled spray FX, ambience crossfade, smooth Nema look-at, brighter pair flash
+b2b3d78 feat: date reacts to spray intensity — 2/3 is sweet spot, 3/3 overwhelming
+4d7525f feat: additive incremental perfume atmosphere, 3 sprays to full
+053d2f6 ember stacked.
+9dfb216 chore: scene and session log updates
+12e0ff8 feat: multi-layer spray system + per-perfume atmosphere profiles
+0e9808c particle system for perfume
+b6a4ed4 rum bottle and stuff
+fac7e69 just some rotations
+---
+
+## Session End: 20260512_214701
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunInfo.json.meta
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Resources/PerformanceTestRunSettings.json.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Apartment/Green.asset
+Assets/ScriptableObjects/Apartment/Yelloww.asset
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260512_231953
+### Uncommitted Changes
+Assets/Materials/aptblockout_detail_3rd_pass_blue/book_cover_2.mat
+Assets/Materials/aptblockout_detail_3rd_pass_blue/matte_white.mat
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunInfo.json.meta
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Resources/PerformanceTestRunSettings.json.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Apartment/Green.asset
+Assets/ScriptableObjects/Apartment/Yelloww.asset
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260513_092654
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunInfo.json.meta
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Resources/PerformanceTestRunSettings.json.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Apartment/Green.asset
+Assets/ScriptableObjects/Apartment/Yelloww.asset
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260513_092940
+### Uncommitted Changes
+Assets/Resources/PerformanceTestRunInfo.json
+Assets/Resources/PerformanceTestRunInfo.json.meta
+Assets/Resources/PerformanceTestRunSettings.json
+Assets/Resources/PerformanceTestRunSettings.json.meta
+Assets/Scenes/apartment.unity
+Assets/ScriptableObjects/Apartment/Green.asset
+Assets/ScriptableObjects/Apartment/Yelloww.asset
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/UI/TutorialCard.cs
+Assets/Settings/PC_RPAsset.asset
+Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

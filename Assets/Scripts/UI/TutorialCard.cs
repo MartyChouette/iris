@@ -32,10 +32,13 @@ public class TutorialCard : MonoBehaviour
     private GameObject _premiseText;
     private GameObject _controlsText;
     private bool _onControlsPage;
+    private bool _spawnedByCode;
 
     private void Awake()
     {
-        // Disable immediately — tutorial card is not used
+        // Scene-placed instances stay disabled (legacy MainMenuManager reference).
+        // Code-spawned instances skip this — ShowObjective sets _spawnedByCode first.
+        if (_spawnedByCode) return;
         if (_root != null) _root.SetActive(false);
         gameObject.SetActive(false);
     }
@@ -216,6 +219,121 @@ public class TutorialCard : MonoBehaviour
         btnTMP.alignment = TextAlignmentOptions.Center;
         btnTMP.color = new Color(0.95f, 0.92f, 0.85f);
         if (theme != null && theme.primaryFont != null) btnTMP.font = theme.primaryFont;
+    }
+
+    // ── Static one-shot objective card ─────────────────────────────────
+
+    /// <summary>
+    /// Spawn a simple single-page tutorial card with the given message.
+    /// Dismisses on click and destroys itself.
+    /// </summary>
+    public static void ShowObjective(string message, Action onDismiss = null)
+    {
+        // Create disabled so Awake doesn't kill it, then flag and re-enable
+        var go = new GameObject("TutorialCard_Objective");
+        go.SetActive(false);
+        DontDestroyOnLoad(go);
+        var card = go.AddComponent<TutorialCard>();
+        card._spawnedByCode = true;
+        go.SetActive(true);
+        card._onDismiss = () =>
+        {
+            onDismiss?.Invoke();
+            Destroy(go);
+        };
+        card.BuildObjectiveCard(message);
+
+        if (AccessibilitySettings.ReduceMotion)
+        {
+            if (card._canvasGroup != null) card._canvasGroup.alpha = 1f;
+            if (card._panelRT != null) card._panelRT.localScale = Vector3.one;
+        }
+        else
+        {
+            card._animCoroutine = card.StartCoroutine(card.FadeIn());
+        }
+    }
+
+    private void BuildObjectiveCard(string message)
+    {
+        _root = new GameObject("ObjectiveCardRoot");
+        _root.transform.SetParent(transform, false);
+
+        var canvas = _root.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 200;
+        var scaler = _root.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920f, 1080f);
+        _root.AddComponent<GraphicRaycaster>();
+
+        _canvasGroup = _root.AddComponent<CanvasGroup>();
+        _canvasGroup.alpha = 0f;
+
+        // Dim backdrop
+        var bg = new GameObject("Backdrop");
+        bg.transform.SetParent(_root.transform, false);
+        var bgRT = bg.AddComponent<RectTransform>();
+        bgRT.anchorMin = Vector2.zero; bgRT.anchorMax = Vector2.one; bgRT.sizeDelta = Vector2.zero;
+        var bgImg = bg.AddComponent<Image>();
+        bgImg.color = new Color(0f, 0f, 0f, 0.6f);
+
+        // Card panel
+        var panel = new GameObject("CardPanel");
+        panel.transform.SetParent(_root.transform, false);
+        _panelRT = panel.AddComponent<RectTransform>();
+        _panelRT.anchorMin = new Vector2(0.5f, 0.5f);
+        _panelRT.anchorMax = new Vector2(0.5f, 0.5f);
+        _panelRT.sizeDelta = new Vector2(680f, 260f);
+        var panelImg = panel.AddComponent<Image>();
+        panelImg.color = new Color(0.95f, 0.93f, 0.88f, 1f);
+
+        var theme = IrisTextTheme.Active;
+
+        // Message text
+        var msgGO = new GameObject("Message");
+        msgGO.transform.SetParent(panel.transform, false);
+        var msgRT = msgGO.AddComponent<RectTransform>();
+        msgRT.anchorMin = new Vector2(0.08f, 0.30f);
+        msgRT.anchorMax = new Vector2(0.92f, 0.90f);
+        msgRT.sizeDelta = Vector2.zero;
+        var msgTMP = msgGO.AddComponent<TextMeshProUGUI>();
+        msgTMP.text = message;
+        msgTMP.fontSize = 28f;
+        msgTMP.alignment = TextAlignmentOptions.Center;
+        msgTMP.color = new Color(0.15f, 0.15f, 0.15f);
+        if (theme != null && theme.primaryFont != null) msgTMP.font = theme.primaryFont;
+
+        // OK button
+        var btnGO = new GameObject("OKBtn");
+        btnGO.transform.SetParent(panel.transform, false);
+        var btnRT = btnGO.AddComponent<RectTransform>();
+        btnRT.anchorMin = new Vector2(0.5f, 0f);
+        btnRT.anchorMax = new Vector2(0.5f, 0f);
+        btnRT.pivot = new Vector2(0.5f, 0f);
+        btnRT.anchoredPosition = new Vector2(0f, 15f);
+        btnRT.sizeDelta = new Vector2(160f, 44f);
+        var btnImg = btnGO.AddComponent<Image>();
+        btnImg.color = new Color(0.2f, 0.2f, 0.22f);
+        _startButton = btnGO.AddComponent<Button>();
+        _startButton.targetGraphic = btnImg;
+        _startButton.onClick.AddListener(OnStartClicked);
+
+        var btnTxtGO = new GameObject("Label");
+        btnTxtGO.transform.SetParent(btnGO.transform, false);
+        var btnTxtRT = btnTxtGO.AddComponent<RectTransform>();
+        btnTxtRT.anchorMin = Vector2.zero; btnTxtRT.anchorMax = Vector2.one; btnTxtRT.sizeDelta = Vector2.zero;
+        var btnTMP = btnTxtGO.AddComponent<TextMeshProUGUI>();
+        btnTMP.text = "OK";
+        btnTMP.fontSize = 22f;
+        btnTMP.alignment = TextAlignmentOptions.Center;
+        btnTMP.color = new Color(0.95f, 0.92f, 0.85f);
+        if (theme != null && theme.primaryFont != null) btnTMP.font = theme.primaryFont;
+
+        // No second page — single click dismisses
+        _premiseText = null;
+        _controlsText = null;
+        _onControlsPage = true; // skip page-flip logic
     }
 
     // ── Animation ────────────────────────────────────────────────────
