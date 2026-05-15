@@ -169,7 +169,6 @@ public class DateInspectSystem : MonoBehaviour
     public bool TryInspect()
     {
         if (_hoveredTag == null) return false;
-        if (_inspected.Contains(_hoveredTag)) return false;
 
         var dsm = DateSessionManager.Instance;
         if (dsm == null || !dsm.IsDateActive) return false;
@@ -180,47 +179,45 @@ public class DateInspectSystem : MonoBehaviour
 
         var tag = _hoveredTag;
 
-        // Each item only affects the score once per date
-        if (dsm.TryMarkScored(tag)) return false;
-
         var prefs = dsm.CurrentDate.preferences;
         var reaction = ReactionEvaluator.EvaluateReactable(tag, prefs);
         int multiplier = DateSessionManager.GetTagEffectMultiplier(tag);
 
-        _inspected.Add(tag);
+        bool firstTime = _inspected.Add(tag);
 
         // 1. Wiggle the item
         StartCoroutine(WiggleItem(tag.transform));
 
-        // 2. Apply affection change with multiplier → flower gauge pulse/wilt + SFX
-        dsm.ApplyReaction(reaction, multiplier);
-
-        // 3. Flower gauge popup (with multiplier suffix)
-        if (reaction != ReactionType.Neutral)
+        // 2. Apply affection change only on first inspect
+        if (firstTime && !dsm.TryMarkScored(tag))
         {
-            bool liked = reaction == ReactionType.Like;
-            string sym = liked ? " \u2665" : " \u2639";
-            string popText = tag.DisplayName + sym;
-            if (multiplier > 1) popText += $" \u00d7{multiplier}";
-            AffectionBar.Instance?.ShowPopup(popText, liked);
+            dsm.ApplyReaction(reaction, multiplier);
+
+            // 3. Flower gauge popup (with multiplier suffix)
+            if (reaction != ReactionType.Neutral)
+            {
+                bool liked = reaction == ReactionType.Like;
+                string sym = liked ? " \u2665" : " \u2639";
+                string popText = tag.DisplayName + sym;
+                if (multiplier > 1) popText += $" \u00d7{multiplier}";
+                AffectionBar.Instance?.ShowPopup(popText, liked);
+            }
+
+            // Particles + multiplier popup on first inspect only
+            DateSessionManager.SpawnReactionParticles(
+                tag.transform.position + Vector3.up * 0.3f, reaction);
+
+            if (reaction != ReactionType.Neutral)
+                dsm.SpawnMultiplierPopup(
+                    tag.transform.position + Vector3.up * 0.52f, multiplier, reaction);
         }
 
-        // 4. Date character reaction bubble
-        // Priority: bespoke tag line → per-date generic lines → hardcoded defaults
+        // 4. Date character reaction bubble — always show on every click
         string customLine = prefs.GetBespokeLine(tag.Tags, reaction)
                          ?? prefs.GetGenericLine(reaction);
         var reactionUI = dsm.DateCharacter?.GetComponent<DateReactionUI>();
         if (reactionUI != null)
             reactionUI.ShowLabeledReaction(reaction, tag.DisplayName, tag.ReactionIcon, customLine);
-
-        // 5. Particles at item
-        DateSessionManager.SpawnReactionParticles(
-            tag.transform.position + Vector3.up * 0.3f, reaction);
-
-        // 6. World-space multiplier popup — always shown (green for positive, red for negative)
-        if (reaction != ReactionType.Neutral)
-            dsm.SpawnMultiplierPopup(
-                tag.transform.position + Vector3.up * 0.52f, multiplier, reaction);
 
         return true;
     }
