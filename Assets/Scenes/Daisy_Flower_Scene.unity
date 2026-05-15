@@ -119,6 +119,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &18965617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 924311542965092929, guid: 8095a0ae50f1ef547bd78b6d12c98fcd, type: 3}
+  m_PrefabInstance: {fileID: 8426878410151901395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &18965619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18965617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b8598af48af3142bae19fab4f627be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeafAttachmentMarker
+  owningLeaf: {fileID: 1721056108}
 --- !u!1 &38260976
 GameObject:
   m_ObjectHideFlags: 0
@@ -10596,6 +10614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1338079571}
+  - component: {fileID: 1338079572}
   m_Layer: 6
   m_Name: BleedPoint
   m_TagString: Untagged
@@ -10618,6 +10637,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 252842250}
   m_LocalEulerAnglesHint: {x: 175.1, y: 51.8, z: -15.634}
+--- !u!114 &1338079572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338079570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b8598af48af3142bae19fab4f627be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeafAttachmentMarker
+  owningLeaf: {fileID: 252842256}
 --- !u!4 &1380600916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1352501571937741693, guid: 8095a0ae50f1ef547bd78b6d12c98fcd, type: 3}
@@ -10642,6 +10674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381174659}
+  - component: {fileID: 1381174660}
   m_Layer: 6
   m_Name: BleedPoint
   m_TagString: Untagged
@@ -10664,6 +10697,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 774411311}
   m_LocalEulerAnglesHint: {x: 175.1, y: 51.8, z: -15.634}
+--- !u!114 &1381174660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381174658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b8598af48af3142bae19fab4f627be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeafAttachmentMarker
+  owningLeaf: {fileID: 774411317}
 --- !u!1 &1390654515
 GameObject:
   m_ObjectHideFlags: 0
@@ -12288,6 +12334,7 @@ MonoBehaviour:
   musicSource: {fileID: 1161898581}
   environmentSource: {fileID: 2103594502}
   uiSource: {fileID: 257449417}
+  _crossfadeDuration: 0.5
   debugLogs: 0
 --- !u!4 &1757028359
 Transform:
@@ -12577,6 +12624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824165514}
+  - component: {fileID: 1824165515}
   m_Layer: 6
   m_Name: BleedPoint (1)
   m_TagString: Untagged
@@ -12599,6 +12647,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 543450653404620464}
   m_LocalEulerAnglesHint: {x: 175.1, y: 51.8, z: -15.634}
+--- !u!114 &1824165515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824165513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b8598af48af3142bae19fab4f627be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeafAttachmentMarker
+  owningLeaf: {fileID: 3469287837255199003}
 --- !u!1 &1842010381
 GameObject:
   m_ObjectHideFlags: 0
@@ -14566,6 +14627,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1707971043889358780, guid: 8095a0ae50f1ef547bd78b6d12c98fcd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 706797317}
+    - targetCorrespondingSourceObject: {fileID: 924311542965092929, guid: 8095a0ae50f1ef547bd78b6d12c98fcd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 18965619}
   m_SourcePrefab: {fileID: 100100000, guid: 8095a0ae50f1ef547bd78b6d12c98fcd, type: 3}
 --- !u!114 &8426878410151901396 stripped
 MonoBehaviour:
