@@ -471,6 +471,23 @@ public class ApartmentManager : MonoBehaviour
     [SerializeField] private Vector2 _topDownBoundsHalf = new Vector2(6f, 6f);
 
     private bool _topDownActive;
+    public bool IsTopDown => _topDownActive;
+
+    /// <summary>Exit top-down view programmatically (e.g. before date phase transitions).</summary>
+    public void ExitTopDown()
+    {
+        if (!_topDownActive) return;
+        _topDownActive = false;
+        _basePosition = _savedPosition;
+        _baseRotation = _savedRotation;
+        _baseFOV = _savedFOV;
+        _panOffset = _savedPanOffset;
+        _currentZoomStep = _savedZoomStep;
+        _currentZoom = _savedZoom;
+        _targetZoom = _savedZoom;
+        if (brain != null) brain.enabled = true;
+        if (browseCamera != null) browseCamera.enabled = true;
+    }
     private Vector3 _savedPosition;
     private Quaternion _savedRotation;
     private float _savedFOV;

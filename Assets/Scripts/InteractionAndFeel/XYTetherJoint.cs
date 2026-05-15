@@ -378,8 +378,10 @@ public class XYTetherJoint : MonoBehaviour
             var t = s_all[i];
             if (t == null) continue;
 
-            if (on)
-                t.ResetBreakAccumulators();
+            // Reset accumulators in both directions: entering suppression
+            // clears stale data, leaving suppression prevents accumulated
+            // drift from triggering instant breaks and re-arms the grace window.
+            t.ResetBreakAccumulators();
 
             t.ApplyBreakForceToJoint();
         }

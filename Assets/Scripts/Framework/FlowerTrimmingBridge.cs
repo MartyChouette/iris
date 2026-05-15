@@ -192,8 +192,8 @@ public class FlowerTrimmingBridge : MonoBehaviour
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
 
-        // 7) Unsuppress joint breaks
-        XYTetherJoint.SetCutBreakSuppressed(false);
+        // 7) Keep joint breaks suppressed until the scene is visible.
+        //    DayPhaseManager calls PrepareForGameplay() after fade-in.
 
         // Find the FlowerSessionController in the loaded scene
         FlowerSessionController session = null;
@@ -476,6 +476,31 @@ public class FlowerTrimmingBridge : MonoBehaviour
         textRect.offsetMax = Vector2.zero;
 
         return canvasGO;
+    }
+
+    // ── Gameplay readiness ──────────────────────────────────────────────
+
+    /// <summary>
+    /// Zero all rigidbody velocities and unsuppress joint breaks.
+    /// Called by DayPhaseManager after the fade-in so the flower is calm
+    /// when the player first sees it.
+    /// </summary>
+    public void PrepareForGameplay()
+    {
+        // Zero residual velocities so joints don't spike on unsuppress
+        foreach (var joint in XYTetherJoint.All)
+        {
+            if (joint == null) continue;
+            var rb = joint.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
+
+        XYTetherJoint.SetCutBreakSuppressed(false);
+        Debug.Log("[FlowerTrimmingBridge] PrepareForGameplay — velocities zeroed, joints unsuppressed.");
     }
 
     // ── Camera management ─────────────────────────────────────────────

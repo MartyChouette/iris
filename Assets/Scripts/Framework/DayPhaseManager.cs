@@ -962,7 +962,11 @@ public class DayPhaseManager : MonoBehaviour
         if (ScreenFade.Instance != null)
             yield return ScreenFade.Instance.FadeIn(_fadeDuration * 2f);
 
-        // 8b. Fade music back up now that the scene is visible
+        // 8b. Unsuppress joints now that the flower is visible — zeroes velocities
+        //     and re-arms the grace window so nothing breaks on the first frames.
+        bridge.PrepareForGameplay();
+
+        // 8c. Fade music back up now that the scene is visible
         AudioManager.Instance?.UnduckMusic(1.5f);
 
         // 9. Slowly transition sky from night to morning while player trims

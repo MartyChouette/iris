@@ -76,8 +76,6 @@ public class PhaseContinueButton : MonoBehaviour
     /// <summary>Show the button with default "Continue →" text. Calls <paramref name="onClicked"/> once when pressed.</summary>
     public void Show(System.Action onClicked)
     {
-        if (_labelTMP != null && _labelTMP.text != "Continue \u2192")
-            _labelTMP.text = "Continue \u2192"; // reset to default if it was changed
         _onClick = onClicked;
         _canvas.gameObject.SetActive(true);
         _canvasGroup.interactable = true;

@@ -573,6 +573,9 @@ public class DateSessionManager : MonoBehaviour
 
     private IEnumerator TransitionToPhase2()
     {
+        // Exit top-down camera if active — phase cameras will fight it
+        ApartmentManager.Instance?.ExitTopDown();
+
         var reactionUI = _dateCharacterGO?.GetComponent<DateReactionUI>();
 
         // Pre-transition NPC dialogue
@@ -683,10 +686,21 @@ public class DateSessionManager : MonoBehaviour
         if (_state != SessionState.DateInProgress) yield break;
 
         // ── Step 2: Player pours freely, then clicks "Serve" ──
+        // Wait until at least one glass has liquid before showing the Serve button
+        yield return new WaitUntil(() =>
+        {
+            if (_state != SessionState.DateInProgress) return true;
+            var glasses = DrinkGlass.All;
+            for (int i = 0; i < glasses.Count; i++)
+                if (glasses[i] != null && glasses[i].TotalFill > 0f) return true;
+            return false;
+        });
+        if (_state != SessionState.DateInProgress) yield break;
+
         if (PhaseContinueButton.Instance != null)
         {
             bool serveClicked = false;
-            PhaseContinueButton.Instance.Show(() => { serveClicked = true; }, "Serve");
+            PhaseContinueButton.Instance.Show(() => { serveClicked = true; }, "SERVE");
 
             yield return new WaitUntil(() => serveClicked || _state != SessionState.DateInProgress);
             if (_state != SessionState.DateInProgress) yield break;
@@ -707,6 +721,9 @@ public class DateSessionManager : MonoBehaviour
 
     private IEnumerator TransitionToPhase3()
     {
+        // Exit top-down camera if active — phase cameras will fight it
+        ApartmentManager.Instance?.ExitTopDown();
+
         StopPhase2Pulse();
         HighlightDrinkGlasses(false);
         // Phase2EnvironmentDim.Instance?.RestoreEnvironment();
