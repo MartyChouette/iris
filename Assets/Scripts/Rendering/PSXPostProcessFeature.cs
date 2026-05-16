@@ -4,6 +4,14 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.RenderGraphModule.Util;
 
+/// <summary>Bayer dither pattern size.</summary>
+public enum DitherPattern
+{
+    Bayer2x2 = 0,
+    Bayer4x4 = 1,
+    Bayer8x8 = 2
+}
+
 /// <summary>
 /// URP ScriptableRendererFeature that handles PSX-style post-processing:
 /// resolution downscale (pixelation) + color depth reduction + ordered dithering
@@ -26,8 +34,21 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
         [Tooltip("Ordered dither strength.")]
         [Range(0, 1)] public float ditherIntensity = 0.5f;
 
-        [Tooltip("Dither shadow bias. 0 = uniform dither, 1 = dither only in dark areas.")]
-        [Range(0, 1)] public float ditherShadowBias = 0.7f;
+        [Tooltip("Dither pattern for mid-shadows.")]
+        public DitherPattern finePattern = DitherPattern.Bayer4x4;
+
+        [Tooltip("Dither pattern for deep shadows.")]
+        public DitherPattern coarsePattern = DitherPattern.Bayer2x2;
+
+        [Tooltip("Luminance above which no dither appears.")]
+        [Range(0, 1)] public float shadowThreshold = 0.5f;
+
+        [Tooltip("Luminance below which the coarse pattern fully takes over.")]
+        [Range(0, 1)] public float deepShadowThreshold = 0.15f;
+
+        [Header("Zoom Scaling")]
+        [Tooltip("Camera ortho size at which dither is 1:1. Dither scales with zoom relative to this. 0 = no zoom scaling.")]
+        public float ditherZoomReference = 5f;
     }
 
     public Settings settings = new Settings();
@@ -80,7 +101,11 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
         private static readonly int ColorDepthID = Shader.PropertyToID("_ColorDepth");
         private static readonly int DitherIntensityID = Shader.PropertyToID("_DitherIntensity");
         private static readonly int DitherResolutionID = Shader.PropertyToID("_DitherResolution");
-        private static readonly int DitherShadowBiasID = Shader.PropertyToID("_DitherShadowBias");
+        private static readonly int FinePatternID = Shader.PropertyToID("_FinePattern");
+        private static readonly int CoarsePatternID = Shader.PropertyToID("_CoarsePattern");
+        private static readonly int ShadowThresholdID = Shader.PropertyToID("_ShadowThreshold");
+        private static readonly int DeepShadowThresholdID = Shader.PropertyToID("_DeepShadowThreshold");
+        private static readonly int DitherZoomID = Shader.PropertyToID("_DitherZoom");
 
         public PSXPostProcessPass(Material material)
         {
@@ -102,7 +127,10 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
             float resDivisor = _settings.resolutionDivisor;
             float colorDepth = _settings.colorDepth;
             float ditherIntensity = _settings.ditherIntensity;
-            float ditherShadowBias = _settings.ditherShadowBias;
+            int finePattern = (int)_settings.finePattern;
+            int coarsePattern = (int)_settings.coarsePattern;
+            float shadowThreshold = _settings.shadowThreshold;
+            float deepShadowThreshold = _settings.deepShadowThreshold;
 
             var vol = VolumeManager.instance.stack.GetComponent<PSXPostProcessVolume>();
             if (vol != null && vol.active)
@@ -110,7 +138,10 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
                 if (vol.resolutionDivisor.overrideState) resDivisor = vol.resolutionDivisor.value;
                 if (vol.colorDepth.overrideState) colorDepth = vol.colorDepth.value;
                 if (vol.ditherIntensity.overrideState) ditherIntensity = vol.ditherIntensity.value;
-                if (vol.ditherShadowBias.overrideState) ditherShadowBias = vol.ditherShadowBias.value;
+                if (vol.finePattern.overrideState) finePattern = (int)vol.finePattern.value;
+                if (vol.coarsePattern.overrideState) coarsePattern = (int)vol.coarsePattern.value;
+                if (vol.shadowThreshold.overrideState) shadowThreshold = vol.shadowThreshold.value;
+                if (vol.deepShadowThreshold.overrideState) deepShadowThreshold = vol.deepShadowThreshold.value;
             }
 
             var source = resourceData.activeColorTexture;
@@ -119,7 +150,27 @@ public class PSXPostProcessFeature : ScriptableRendererFeature
             // Update material properties
             _material.SetFloat(ColorDepthID, colorDepth);
             _material.SetFloat(DitherIntensityID, ditherIntensity);
-            _material.SetFloat(DitherShadowBiasID, ditherShadowBias);
+            _material.SetFloat(FinePatternID, finePattern);
+            _material.SetFloat(CoarsePatternID, coarsePattern);
+            _material.SetFloat(ShadowThresholdID, shadowThreshold);
+            _material.SetFloat(DeepShadowThresholdID, deepShadowThreshold);
+
+            // Compute zoom factor from camera ortho size
+            float ditherZoom = 1f;
+            float zoomRef = _settings.ditherZoomReference;
+            var vol2 = vol; // reuse vol from above
+            if (vol2 != null && vol2.active && vol2.ditherZoomReference.overrideState)
+                zoomRef = vol2.ditherZoomReference.value;
+            if (zoomRef > 0f)
+            {
+                var cameraData = frameData.Get<UniversalCameraData>();
+                var cam = cameraData.camera;
+                float camSize = cam.orthographic
+                    ? cam.orthographicSize
+                    : cam.fieldOfView * 0.5f;
+                ditherZoom = camSize / zoomRef;
+            }
+            _material.SetFloat(DitherZoomID, ditherZoom);
 
             float div = Mathf.Max(resDivisor, 1f);
             int lowW = Mathf.Max(1, Mathf.RoundToInt(sourceDesc.width / div));

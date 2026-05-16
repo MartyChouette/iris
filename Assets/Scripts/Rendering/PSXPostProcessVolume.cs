@@ -2,6 +2,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+/// <summary>Volume parameter for <see cref="DitherPattern"/> enum.</summary>
+[System.Serializable]
+public sealed class DitherPatternParameter : VolumeParameter<DitherPattern>
+{
+    public DitherPatternParameter(DitherPattern value, bool overrideState = false)
+        : base(value, overrideState) { }
+}
+
 /// <summary>
 /// URP Volume override for PSX post-processing. Add to any Volume profile
 /// to control resolution, color depth, dithering, and tilt-shift from the
@@ -32,8 +40,20 @@ public class PSXPostProcessVolume : VolumeComponent
     [Tooltip("Ordered dither strength. 0 = off, 1 = full.")]
     public ClampedFloatParameter ditherIntensity = new ClampedFloatParameter(0.5f, 0f, 1f);
 
-    [Tooltip("0 = uniform dither everywhere, 1 = dither only in dark areas (PS1 stipple).")]
-    public ClampedFloatParameter ditherShadowBias = new ClampedFloatParameter(0.7f, 0f, 1f);
+    [Tooltip("Dither pattern for mid-shadows.")]
+    public DitherPatternParameter finePattern = new DitherPatternParameter(DitherPattern.Bayer4x4);
+
+    [Tooltip("Dither pattern for deep shadows.")]
+    public DitherPatternParameter coarsePattern = new DitherPatternParameter(DitherPattern.Bayer2x2);
+
+    [Tooltip("Luminance above which no dither appears.")]
+    public ClampedFloatParameter shadowThreshold = new ClampedFloatParameter(0.5f, 0f, 1f);
+
+    [Tooltip("Luminance below which the coarse pattern fully takes over.")]
+    public ClampedFloatParameter deepShadowThreshold = new ClampedFloatParameter(0.15f, 0f, 1f);
+
+    [Tooltip("Camera ortho size at which dither is 1:1 scale. 0 = no zoom scaling.")]
+    public FloatParameter ditherZoomReference = new FloatParameter(5f);
 
     [Header("Shadow Dithering (Object Shader)")]
     [Tooltip("PSX-style dithered shadows on PSXLit materials. 0 = smooth, 1 = fully stippled.")]

@@ -4,7 +4,10 @@ Shader "Iris/Fullscreen/PSXPost"
     {
         _ColorDepth     ("Color Depth (levels per channel)", Float) = 32
         _DitherIntensity ("Dither Intensity", Range(0, 1)) = 0.5
-        _DitherShadowBias ("Dither Shadow Bias (0 = uniform, 1 = dark areas only)", Range(0, 1)) = 0.7
+        _FinePattern     ("Fine Pattern (0=2x2, 1=4x4, 2=8x8)", Float) = 1
+        _CoarsePattern   ("Coarse Pattern (0=2x2, 1=4x4, 2=8x8)", Float) = 0
+        _ShadowThreshold ("Shadow Threshold", Range(0, 1)) = 0.5
+        _DeepShadowThreshold ("Deep Shadow Threshold", Range(0, 1)) = 0.15
     }
 
     SubShader
@@ -33,7 +36,11 @@ Shader "Iris/Fullscreen/PSXPost"
             CBUFFER_START(UnityPerMaterial)
                 float _ColorDepth;
                 half  _DitherIntensity;
-                half  _DitherShadowBias;
+                float _FinePattern;
+                float _CoarsePattern;
+                half  _ShadowThreshold;
+                half  _DeepShadowThreshold;
+                float _DitherZoom; // camera zoom factor for world-space-feel dither
                 float2 _DitherResolution; // low-res pixel grid size for dither alignment
             CBUFFER_END
 
@@ -43,14 +50,53 @@ Shader "Iris/Fullscreen/PSXPost"
             float _TiltShiftWidth;    // half-width of sharp band in UV (0.15 default)
             float _TiltShiftRadius;   // max blur radius in texels (8 default)
 
-            // ── Bayer 4×4 ordered dither matrix (normalized to 0–1) ──
-            static const float BayerMatrix[16] =
+            // ── Bayer dither matrices (normalized to 0–1) ──
+            static const float Bayer2[4] =
+            {
+                0.0 / 4.0, 2.0 / 4.0,
+                3.0 / 4.0, 1.0 / 4.0
+            };
+
+            static const float Bayer4[16] =
             {
                  0.0 / 16.0,  8.0 / 16.0,  2.0 / 16.0, 10.0 / 16.0,
                 12.0 / 16.0,  4.0 / 16.0, 14.0 / 16.0,  6.0 / 16.0,
                  3.0 / 16.0, 11.0 / 16.0,  1.0 / 16.0,  9.0 / 16.0,
                 15.0 / 16.0,  7.0 / 16.0, 13.0 / 16.0,  5.0 / 16.0
             };
+
+            static const float Bayer8[64] =
+            {
+                 0.0/64.0, 32.0/64.0,  8.0/64.0, 40.0/64.0,  2.0/64.0, 34.0/64.0, 10.0/64.0, 42.0/64.0,
+                48.0/64.0, 16.0/64.0, 56.0/64.0, 24.0/64.0, 50.0/64.0, 18.0/64.0, 58.0/64.0, 26.0/64.0,
+                12.0/64.0, 44.0/64.0,  4.0/64.0, 36.0/64.0, 14.0/64.0, 46.0/64.0,  6.0/64.0, 38.0/64.0,
+                60.0/64.0, 28.0/64.0, 52.0/64.0, 20.0/64.0, 62.0/64.0, 30.0/64.0, 54.0/64.0, 22.0/64.0,
+                 3.0/64.0, 35.0/64.0, 11.0/64.0, 43.0/64.0,  1.0/64.0, 33.0/64.0,  9.0/64.0, 41.0/64.0,
+                51.0/64.0, 19.0/64.0, 59.0/64.0, 27.0/64.0, 49.0/64.0, 17.0/64.0, 57.0/64.0, 25.0/64.0,
+                15.0/64.0, 47.0/64.0,  7.0/64.0, 39.0/64.0, 13.0/64.0, 45.0/64.0,  5.0/64.0, 37.0/64.0,
+                63.0/64.0, 31.0/64.0, 55.0/64.0, 23.0/64.0, 61.0/64.0, 29.0/64.0, 53.0/64.0, 21.0/64.0
+            };
+
+            // Sample Bayer pattern: 0 = 2x2, 1 = 4x4, 2 = 8x8
+            // Returns threshold centered around 0 (range ~ -0.5 to +0.5)
+            float SampleBayer(float2 pixelPos, int pattern)
+            {
+                if (pattern <= 0)
+                {
+                    int2 c = int2(fmod(pixelPos, 2.0));
+                    return Bayer2[c.y * 2 + c.x] - 0.5;
+                }
+                else if (pattern >= 2)
+                {
+                    int2 c = int2(fmod(pixelPos, 8.0));
+                    return Bayer8[c.y * 8 + c.x] - 0.5;
+                }
+                else
+                {
+                    int2 c = int2(fmod(pixelPos, 4.0));
+                    return Bayer4[c.y * 4 + c.x] - 0.5;
+                }
+            }
 
             // 8 offsets in a disc pattern (unit circle)
             static const float2 DiscOffsets[8] =
@@ -101,24 +147,26 @@ Shader "Iris/Fullscreen/PSXPost"
 
                 float levels = max(_ColorDepth, 2.0);
 
-                // ── Ordered dithering ──
-                // Use low-res pixel grid so dither pattern stays constant
-                // regardless of resolution divisor
+                // ── Dual-pattern ordered dithering ──
                 float2 ditherRes = _DitherResolution.x > 0 ? _DitherResolution : _ScreenParams.xy;
+                ditherRes *= max(_DitherZoom, 0.01); // scale with camera zoom
                 float2 pixelPos = uv * ditherRes;
-                int2 ditherCoord = int2(fmod(pixelPos, 4.0));
-                int idx = ditherCoord.y * 4 + ditherCoord.x;
-                float threshold = BayerMatrix[idx] - 0.5; // center around 0
 
                 float3 c = screen.rgb;
-
-                // Shadow-biased dither: at _DitherShadowBias = 1, dither only
-                // appears in dark areas (classic PS1 stipple shadows). At 0, uniform.
                 float luminance = dot(c, float3(0.299, 0.587, 0.114));
-                float darknessMask = 1.0 - saturate(luminance * 2.0); // 1 in dark, 0 in bright
-                float biasedIntensity = lerp(_DitherIntensity, _DitherIntensity * darknessMask, _DitherShadowBias);
 
-                c += threshold * (1.0 / levels) * biasedIntensity;
+                // Dither strength ramps up below _ShadowThreshold (bright = clean)
+                float ditherStrength = 1.0 - smoothstep(0.0, _ShadowThreshold, luminance);
+
+                // Blend from fine to coarse pattern below _DeepShadowThreshold
+                float coarseBlend = 1.0 - smoothstep(0.0, _DeepShadowThreshold, luminance);
+
+                // Sample both patterns and blend
+                float fineSample   = SampleBayer(pixelPos, (int)_FinePattern);
+                float coarseSample = SampleBayer(pixelPos, (int)_CoarsePattern);
+                float ditherSample = lerp(fineSample, coarseSample, coarseBlend);
+
+                c += ditherSample * (1.0 / levels) * _DitherIntensity * ditherStrength;
 
                 // ── Color depth reduction (posterization) ──
                 c = floor(c * levels + 0.5) / levels;

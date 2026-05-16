@@ -43,9 +43,22 @@ public class PSXRenderController : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float _ditherIntensity = 0.5f;
 
-    [Tooltip("Dither shadow bias. 0 = uniform dither everywhere, 1 = dither only in dark areas (PS1 stipple).")]
+    [Tooltip("Dither pattern for mid-shadows.")]
+    [SerializeField] private DitherPattern _finePattern = DitherPattern.Bayer4x4;
+
+    [Tooltip("Dither pattern for deep shadows.")]
+    [SerializeField] private DitherPattern _coarsePattern = DitherPattern.Bayer2x2;
+
+    [Tooltip("Luminance above which no dither appears.")]
     [Range(0f, 1f)]
-    [SerializeField] private float _ditherShadowBias = 0.7f;
+    [SerializeField] private float _shadowThreshold = 0.5f;
+
+    [Tooltip("Luminance below which the coarse pattern fully takes over.")]
+    [Range(0f, 1f)]
+    [SerializeField] private float _deepShadowThreshold = 0.15f;
+
+    [Tooltip("Camera ortho size at which dither is 1:1. 0 = no zoom scaling.")]
+    [SerializeField] private float _ditherZoomReference = 5f;
 
     [Header("Shadow Dithering (Object Shader)")]
     [Tooltip("PSX-style dithered shadows on PSXLit materials. 0 = smooth shadows, 1 = fully stippled.")]
@@ -102,10 +115,34 @@ public class PSXRenderController : MonoBehaviour
         set { _ditherIntensity = Mathf.Clamp01(value); ApplyAll(); }
     }
 
-    public float DitherShadowBias
+    public DitherPattern FinePattern
     {
-        get => _ditherShadowBias;
-        set { _ditherShadowBias = Mathf.Clamp01(value); ApplyAll(); }
+        get => _finePattern;
+        set { _finePattern = value; ApplyAll(); }
+    }
+
+    public DitherPattern CoarsePattern
+    {
+        get => _coarsePattern;
+        set { _coarsePattern = value; ApplyAll(); }
+    }
+
+    public float ShadowThreshold
+    {
+        get => _shadowThreshold;
+        set { _shadowThreshold = Mathf.Clamp01(value); ApplyAll(); }
+    }
+
+    public float DeepShadowThreshold
+    {
+        get => _deepShadowThreshold;
+        set { _deepShadowThreshold = Mathf.Clamp01(value); ApplyAll(); }
+    }
+
+    public float DitherZoomReference
+    {
+        get => _ditherZoomReference;
+        set { _ditherZoomReference = Mathf.Max(0f, value); ApplyAll(); }
     }
 
     public float ShadowDitherIntensity
@@ -295,8 +332,20 @@ public class PSXRenderController : MonoBehaviour
             if (vol.ditherIntensity.overrideState && !Mathf.Approximately(_ditherIntensity, vol.ditherIntensity.value))
             { _ditherIntensity = vol.ditherIntensity.value; changed = true; }
 
-            if (vol.ditherShadowBias.overrideState && !Mathf.Approximately(_ditherShadowBias, vol.ditherShadowBias.value))
-            { _ditherShadowBias = vol.ditherShadowBias.value; changed = true; }
+            if (vol.finePattern.overrideState && _finePattern != vol.finePattern.value)
+            { _finePattern = vol.finePattern.value; changed = true; }
+
+            if (vol.coarsePattern.overrideState && _coarsePattern != vol.coarsePattern.value)
+            { _coarsePattern = vol.coarsePattern.value; changed = true; }
+
+            if (vol.shadowThreshold.overrideState && !Mathf.Approximately(_shadowThreshold, vol.shadowThreshold.value))
+            { _shadowThreshold = vol.shadowThreshold.value; changed = true; }
+
+            if (vol.deepShadowThreshold.overrideState && !Mathf.Approximately(_deepShadowThreshold, vol.deepShadowThreshold.value))
+            { _deepShadowThreshold = vol.deepShadowThreshold.value; changed = true; }
+
+            if (vol.ditherZoomReference.overrideState && !Mathf.Approximately(_ditherZoomReference, vol.ditherZoomReference.value))
+            { _ditherZoomReference = vol.ditherZoomReference.value; changed = true; }
 
             if (vol.vertexSnapResolution.overrideState)
             {
@@ -376,7 +425,11 @@ public class PSXRenderController : MonoBehaviour
         vol.resolutionDivisor.Override(_resolutionDivisor);
         vol.colorDepth.Override(_colorDepth);
         vol.ditherIntensity.Override(_ditherIntensity);
-        vol.ditherShadowBias.Override(_ditherShadowBias);
+        vol.finePattern.Override(_finePattern);
+        vol.coarsePattern.Override(_coarsePattern);
+        vol.shadowThreshold.Override(_shadowThreshold);
+        vol.deepShadowThreshold.Override(_deepShadowThreshold);
+        vol.ditherZoomReference.Override(_ditherZoomReference);
         vol.vertexSnapResolution.Override(_vertexSnapResolution.x);
         vol.affineIntensity.Override(_affineIntensity);
         vol.shadowDitherIntensity.Override(_shadowDitherIntensity);

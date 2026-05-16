@@ -43946,3 +43946,282 @@ Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.as
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260513_093009
+### Commits
+4b40afb feat: tutorial objective card at apartment startup
+---
+
+## Session End: 20260514_204640
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_204935
+### Uncommitted Changes
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_205226
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_210646
+### Uncommitted Changes
+Assets/Scripts/Apartment/ApartmentManager.cs
+Assets/Scripts/Dating/DateSessionManager.cs
+Assets/Scripts/Framework/DayPhaseManager.cs
+Assets/Scripts/Framework/FlowerTrimmingBridge.cs
+Assets/Scripts/InteractionAndFeel/XYTetherJoint.cs
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_210915
+### Commits
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_212045
+### Commits
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_220030
+### Commits
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_220451
+### Commits
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_220550
+### Commits
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_220650
+### Commits
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_221734
+### Commits
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+Assets/Scripts/UI/PhaseContinueButton.cs
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_222006
+### Commits
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_222116
+### Commits
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_230702
+### Commits
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_232337
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_234930
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_234959
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_235045
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260514_235139
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260515_000152
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260515_001224
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260515_001339
+### Commits
+3d87c06 chore: bump version to 0.5.0
+15875ff fix: continue button label reset, allow repeat item reactions in phase 3
+91707b6 fix: add LeafAttachmentMarker to daisy leaves so they fall on stem cut
+99fdc0c fix: drink serve button softlock, top-down camera softlock, flower physics breaks on load
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_000347
+### Uncommitted Changes
+Assets/Materials/Clock_Face.mat
+Assets/Materials/Plate.mat
+Assets/Materials/Record.mat
+Assets/Materials/Wine.mat
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_160005
+### Uncommitted Changes
+Assets/Materials/Clock_Face.mat
+Assets/Materials/Plate.mat
+Assets/Materials/Record.mat
+Assets/Materials/Wine.mat
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXPostProcessVolume.cs
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_160202
+### Uncommitted Changes
+Assets/Materials/Clock_Face.mat
+Assets/Materials/Plate.mat
+Assets/Materials/Record.mat
+Assets/Materials/Wine.mat
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXPostProcessVolume.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_161208
+### Uncommitted Changes
+Assets/Materials/Clock_Face.mat
+Assets/Materials/Plate.mat
+Assets/Materials/Record.mat
+Assets/Materials/Wine.mat
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXPostProcessVolume.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_161607
+### Uncommitted Changes
+Assets/Materials/Clock_Face.mat
+Assets/Materials/Plate.mat
+Assets/Materials/Record.mat
+Assets/Materials/Wine.mat
+Assets/Materials/name_non_indexed_texture.mat
+Assets/Scenes/apartment.unity
+Assets/Scripts/Apartment/ApartmentDebugPanel.cs
+Assets/Scripts/Rendering/PSXPostProcessFeature.cs
+Assets/Scripts/Rendering/PSXPostProcessVolume.cs
+Assets/Scripts/Rendering/PSXRenderController.cs
+Assets/Settings/PC_Renderer.asset
+Assets/Shader/PSXPost.shader
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+

@@ -57,9 +57,13 @@ MonoBehaviour:
   m_Active: 1
   settings:
     resolutionDivisor: 1
-    colorDepth: 90
-    ditherIntensity: 0.525
-    ditherShadowBias: 1
+    colorDepth: 120
+    ditherIntensity: 1
+    finePattern: 0
+    coarsePattern: 2
+    shadowThreshold: 0.028
+    deepShadowThreshold: 0.057
+    ditherZoomReference: 1
   _postShader: {fileID: 4800000, guid: 26f490ad90348934dbbbbfc3061f991b, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:

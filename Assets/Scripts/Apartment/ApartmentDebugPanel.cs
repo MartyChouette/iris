@@ -598,8 +598,11 @@ public class ApartmentDebugPanel : MonoBehaviour
         AddSliderRow(cp, "Dither", 0f, 1f, psx != null ? psx.DitherIntensity : 0.5f,
             val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.DitherIntensity = val; },
             out _);
-        AddSliderRow(cp, "Dither Shadow Bias", 0f, 1f, psx != null ? psx.DitherShadowBias : 0.7f,
-            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.DitherShadowBias = val; },
+        AddSliderRow(cp, "Shadow Threshold", 0f, 1f, psx != null ? psx.ShadowThreshold : 0.5f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.ShadowThreshold = val; },
+            out _);
+        AddSliderRow(cp, "Deep Shadow Threshold", 0f, 1f, psx != null ? psx.DeepShadowThreshold : 0.15f,
+            val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.DeepShadowThreshold = val; },
             out _);
         AddSliderRow(cp, "Shadow Dither", 0f, 1f, psx != null ? psx.ShadowDitherIntensity : 1f,
             val => { if (PSXRenderController.Instance != null) PSXRenderController.Instance.ShadowDitherIntensity = val; },
