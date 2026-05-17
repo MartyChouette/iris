@@ -114,6 +114,8 @@ public class DropZone : MonoBehaviour
     private Material _instanceMat;
     private Color _originalColor;
     private bool _playerHoldingMatch;
+    private PlaceableObject _lastHeldForPairCheck;
+    private PairableItem _cachedHeldPairable;
     private bool _pulsing;
 
     // Explicit slot occupancy — tracks which PlaceableObject is in each slot.
@@ -155,10 +157,14 @@ public class DropZone : MonoBehaviour
             if (!string.IsNullOrEmpty(_zoneName)
                 && (held.HomeZoneName == _zoneName || held.AltHomeZoneName == _zoneName))
             {
-                // Shoes must be paired to place at the shoe station
-                var pairable = held.GetComponent<PairableItem>();
-                if (pairable != null && pairable.Mode == PairableItem.PairMode.SpecificPartner)
-                    _playerHoldingMatch = pairable.IsPaired;
+                // Shoes must be paired to place at the shoe station — cache per held change
+                if (held != _lastHeldForPairCheck)
+                {
+                    _lastHeldForPairCheck = held;
+                    _cachedHeldPairable = held.GetComponent<PairableItem>();
+                }
+                if (_cachedHeldPairable != null && _cachedHeldPairable.Mode == PairableItem.PairMode.SpecificPartner)
+                    _playerHoldingMatch = _cachedHeldPairable.IsPaired;
                 else
                     _playerHoldingMatch = true;
             }
@@ -414,9 +420,15 @@ public class DropZone : MonoBehaviour
             if (cols[i] != null) cols[i].enabled = false;
 
         // Render on top of the trash can during the arc animation
+        // Track instanced materials so we can clean them up before Destroy
         var renderers = go.GetComponentsInChildren<Renderer>();
+        var arcMats = new Material[renderers.Length];
         for (int i = 0; i < renderers.Length; i++)
-            if (renderers[i] != null) renderers[i].material.renderQueue = 4000;
+        {
+            if (renderers[i] == null) continue;
+            arcMats[i] = renderers[i].material; // creates instance
+            arcMats[i].renderQueue = 4000;
+        }
 
         Vector3 startPos = go.transform.position;
         Quaternion startRot = go.transform.rotation;
@@ -495,6 +507,9 @@ public class DropZone : MonoBehaviour
             yield return null;
         }
 
+        // Destroy instanced materials before destroying the GO
+        for (int i = 0; i < arcMats.Length; i++)
+            if (arcMats[i] != null) Destroy(arcMats[i]);
         if (go != null) Destroy(go);
     }
 

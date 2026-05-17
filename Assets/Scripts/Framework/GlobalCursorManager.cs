@@ -89,6 +89,7 @@ public class GlobalCursorManager : MonoBehaviour
     public static void LockCursorToSwatter()  => s_lockedCursor = CursorType.Swatter;
     public static void LockCursorToScissors() => s_lockedCursor = CursorType.Scissors;
     public static void LockCursorToDrink()    => s_lockedCursor = CursorType.Drink;
+    public static void LockCursorToInteract() => s_lockedCursor = CursorType.Interact;
 
     /// <summary>Current cursor opacity (0-1). Read by CursorWorldShadow.</summary>
     public float CurrentAlpha => _currentAlpha;
@@ -569,7 +570,7 @@ public class GlobalCursorManager : MonoBehaviour
         if (Has<BottleItem>(go))           return CursorType.Interact;
         if (Has<FlyController>(go))         return CursorType.Interact;
         if (Has<CleanableSurface>(go))     return CursorType.Interact;
-        if (Has<ScissorStation>(go))      return CursorType.Scissors;
+        if (Has<ScissorStation>(go))      return CursorType.Interact;
         if (Has<LightSwitch>(go))          return CursorType.Interact;
         return CursorType.Default;
     }

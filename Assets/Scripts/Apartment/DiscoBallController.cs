@@ -104,11 +104,11 @@ public class DiscoBallController : MonoBehaviour
             && !ObjectGrabber.ClickConsumedThisFrame
             && _selfCollider != null)
         {
-            var cam = Camera.main;
-            if (cam != null)
             {
                 Vector2 screenPos = _mousePosition.ReadValue<Vector2>();
-                Ray ray = ApartmentManager.Instance != null ? ApartmentManager.Instance.ScreenPointToRay(screenPos) : cam.ScreenPointToRay(screenPos);
+                var am = ApartmentManager.Instance;
+                if (am == null) return;
+                Ray ray = am.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit, 100f)
                     && (hit.collider == _selfCollider || hit.collider.transform.IsChildOf(transform)))
                 {

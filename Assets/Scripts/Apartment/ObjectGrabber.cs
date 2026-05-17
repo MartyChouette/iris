@@ -195,6 +195,11 @@ public class ObjectGrabber : MonoBehaviour
         s_lastConsumedFrame = -1;
         ClickConsumedThisFrame = false;
         OnObjectPlaced = null; // clear subscribers from previous sessions
+        s_currentFeel = GrabFeel.Default;
+        s_overrideSpring = -1f;
+        s_overrideDamper = -1f;
+        s_overrideAccel = -1f;
+        s_overrideSpeed = -1f;
     }
 
     /// <summary>The active ObjectGrabber in the scene, or null.</summary>
@@ -306,10 +311,9 @@ public class ObjectGrabber : MonoBehaviour
             && ScreenFade.Instance != null && ScreenFade.Instance.IsFading)
             return;
 
-        // Always use the current main camera (Cinemachine brain may switch)
-        var mainCam = Camera.main;
-        if (mainCam != null && mainCam != cam)
-            cam = mainCam;
+        // Refresh camera when disabled (e.g. flower trimming disables apartment camera)
+        if (cam == null || !cam.enabled)
+            cam = Camera.main;
 
         // Reset click consumption flag at start of each frame
         if (Time.frameCount != s_lastConsumedFrame)

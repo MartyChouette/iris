@@ -53,6 +53,11 @@ public class BlanketItem : MonoBehaviour
     /// Called by ObjectGrabber after PlaceableObject.OnPickedUp().
     /// Triggers the fold animation and hidden item reveal.
     /// </summary>
+    private void OnDisable()
+    {
+        if (_foldRoutine != null) { StopCoroutine(_foldRoutine); _foldRoutine = null; }
+    }
+
     public void OnBlanketPickedUp()
     {
         if (_hasBeenPickedUp) return;

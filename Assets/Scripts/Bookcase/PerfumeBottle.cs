@@ -62,6 +62,9 @@ public class PerfumeBottle : MonoBehaviour
             if (sprayLayers[i].particles != null)
                 sprayLayers[i].particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+
+        // Pre-sort spray layers by delay so FireSprayLayers doesn't allocate
+        sprayLayers.Sort((a, b) => a.delay.CompareTo(b.delay));
     }
 
     public void SetDefinition(PerfumeDefinition def) => definition = def;
@@ -134,8 +137,8 @@ public class PerfumeBottle : MonoBehaviour
         // Scale effects by spray intensity (1/3, 2/3, 3/3)
         float intensity = Mathf.Clamp01(SprayCount / 3f);
 
-        var sorted = new List<SprayLayer>(sprayLayers);
-        sorted.Sort((a, b) => a.delay.CompareTo(b.delay));
+        // Already sorted in Awake — iterate directly
+        var sorted = sprayLayers;
 
         float elapsed = 0f;
         for (int i = 0; i < sorted.Count; i++)

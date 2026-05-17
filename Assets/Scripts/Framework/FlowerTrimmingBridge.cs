@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Unity.Cinemachine;
 using TMPro;
 
@@ -406,6 +407,15 @@ public class FlowerTrimmingBridge : MonoBehaviour
         var btn = btnGO.AddComponent<Button>();
         btn.targetGraphic = btnImage;
         btn.onClick.AddListener(() => session.EvaluateCurrentFlower());
+
+        // Show interact cursor on hover (bypasses IsPointerOverGameObject early-return)
+        var trigger = btnGO.AddComponent<EventTrigger>();
+        var enterEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+        enterEntry.callback.AddListener(_ => GlobalCursorManager.LockCursorToInteract());
+        trigger.triggers.Add(enterEntry);
+        var exitEntry = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
+        exitEntry.callback.AddListener(_ => GlobalCursorManager.UnlockCursor());
+        trigger.triggers.Add(exitEntry);
 
         var btnRect = btnGO.GetComponent<RectTransform>();
         btnRect.anchorMin = new Vector2(0.5f, 0f);

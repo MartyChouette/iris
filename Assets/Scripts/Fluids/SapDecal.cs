@@ -45,20 +45,14 @@ public class SapDecal : MonoBehaviour
 
     private void Awake()
     {
-        // Try to find renderer
+        // Cache renderer references — defer material instance to Activate()
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _meshRenderer = GetComponent<MeshRenderer>();
 
-        if (_meshRenderer != null)
-        {
-            // Create instance of material to avoid shared material issues
-            _material = _meshRenderer.material;
-            _baseColor = _material.color;
-        }
-        else if (_spriteRenderer != null)
-        {
+        if (_spriteRenderer != null)
             _baseColor = _spriteRenderer.color;
-        }
+        else if (_meshRenderer != null && _meshRenderer.sharedMaterial != null)
+            _baseColor = _meshRenderer.sharedMaterial.color;
 
         gameObject.SetActive(false);
     }
@@ -68,6 +62,11 @@ public class SapDecal : MonoBehaviour
         _timer = 0f;
         _alpha = 0f;
         _isActive = true;
+
+        // Create material instance on first activation (not on pool init)
+        if (_material == null && _meshRenderer != null)
+            _material = _meshRenderer.material;
+
         gameObject.SetActive(true);
         UpdateAlpha(0f);
     }

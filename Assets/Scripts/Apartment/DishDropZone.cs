@@ -27,6 +27,8 @@ public class DishDropZone : MonoBehaviour
 
     private Material _instanceMat;
     private bool _playerHoldingPlate;
+    private PlaceableObject _lastHeldCheck;
+    private bool _lastHeldIsPlate;
 
     private void Start()
     {
@@ -42,9 +44,14 @@ public class DishDropZone : MonoBehaviour
 
     private void Update()
     {
-        // Check if the held object is a plate (uses static accessor — no scene scan)
+        // Check if the held object is a plate — cache result, only recheck when held changes
         var held = ObjectGrabber.HeldObject;
-        _playerHoldingPlate = held != null && held.GetComponent<StackablePlate>() != null;
+        if (held != _lastHeldCheck)
+        {
+            _lastHeldCheck = held;
+            _lastHeldIsPlate = held != null && held.GetComponent<StackablePlate>() != null;
+        }
+        _playerHoldingPlate = _lastHeldIsPlate;
 
         // Pulse color
         if (_instanceMat != null)

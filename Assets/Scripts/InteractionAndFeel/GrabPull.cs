@@ -63,10 +63,7 @@ public class GrabPull : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    /// <summary>
-    /// Lazily resolve the active camera. Handles additive scene loading where
-    /// Camera.main may point to a different scene's camera during Awake.
-    /// </summary>
+    /// <summary>Returns cached camera, refreshed when disabled/destroyed.</summary>
     private Camera ActiveCam
     {
         get

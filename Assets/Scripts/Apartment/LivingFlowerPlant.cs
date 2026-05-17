@@ -113,7 +113,8 @@ public class LivingFlowerPlant : MonoBehaviour
             if (r.gameObject.name == "Pot" || r.gameObject.name == "Soil")
                 continue;
             tintable.Add(r);
-            colors.Add(r.material.color);
+            // Read from sharedMaterial to avoid creating instances
+            colors.Add(r.sharedMaterial != null ? r.sharedMaterial.color : Color.white);
         }
 
         _renderers = tintable.ToArray();
@@ -142,13 +143,15 @@ public class LivingFlowerPlant : MonoBehaviour
         else if (waterState == WaterState.Overwatered)
             wiltTint *= OverwaterTint;
 
-        // Apply tint to all child renderers, preserving each one's original color
+        // Apply tint via MPB — no material instances created
         if (_renderers != null)
         {
+            var mpb = new MaterialPropertyBlock();
             for (int i = 0; i < _renderers.Length; i++)
             {
                 if (_renderers[i] == null) continue;
-                _renderers[i].material.color = _originalColors[i] * wiltTint;
+                mpb.SetColor("_BaseColor", _originalColors[i] * wiltTint);
+                _renderers[i].SetPropertyBlock(mpb);
             }
         }
 

@@ -1098,7 +1098,9 @@ public class ApartmentManager : MonoBehaviour
     /// </summary>
     public Ray ScreenPointToRay(Vector2 screenPos)
     {
-        var cam = Camera.main;
+        if (_cachedMainCamera == null || !_cachedMainCamera.enabled)
+            _cachedMainCamera = UnityEngine.Camera.main;
+        var cam = _cachedMainCamera;
         if (cam == null) return default;
 
         // Normal browse: Camera.main.ScreenPointToRay works perfectly —
