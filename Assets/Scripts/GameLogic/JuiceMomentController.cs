@@ -533,8 +533,13 @@ public class JuiceMomentController : MonoBehaviour
         }
         Instance = this;
 
-        if (!targetCamera) targetCamera = Camera.main;
-        _camTransform = cameraRig != null ? cameraRig : targetCamera.transform;
+        if (!targetCamera)
+        {
+            targetCamera = Camera.main;
+            if (!targetCamera)
+                Debug.LogError("[JuiceMomentController] No targetCamera assigned and Camera.main is null!", this);
+        }
+        _camTransform = cameraRig != null ? cameraRig : (targetCamera != null ? targetCamera.transform : transform);
         _camOriginalLocalPos = _camTransform.localPosition;
         _camOriginalFOV = targetCamera != null ? targetCamera.fieldOfView : 60f;
 

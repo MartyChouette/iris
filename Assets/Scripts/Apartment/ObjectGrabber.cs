@@ -301,41 +301,6 @@ public class ObjectGrabber : MonoBehaviour
 
     private void Update()
     {
-        // RAW DEBUG — fires before any gate, uses old Input API as fallback
-        if (Input.GetMouseButtonDown(0))
-        {
-            var c = Camera.main;
-            string hitMain = "MISS";
-            Ray rMain = default;
-            if (c != null)
-            {
-                rMain = c.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(rMain, out RaycastHit h, 100f))
-                    hitMain = $"{h.collider.gameObject.name} (layer={h.collider.gameObject.layer})";
-            }
-
-            // Fresh camera test — copy browseCamera transform, no Cinemachine contamination
-            string hitFresh = "NO_AM";
-            Ray rFresh = default;
-            var am = ApartmentManager.Instance;
-            if (am != null)
-            {
-                rFresh = am.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(rFresh, out RaycastHit h2, 100f))
-                    hitFresh = $"{h2.collider.gameObject.name} (layer={h2.collider.gameObject.layer})";
-                else
-                    hitFresh = "MISS";
-            }
-
-            bool presetActive = false;
-            if (am != null)
-            {
-                var pf = am.GetType().GetField("_presetOverrideActive", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                if (pf != null) presetActive = (bool)pf.GetValue(am);
-            }
-            Debug.LogWarning($"[OG-RAW] CMain={hitMain} ray={rMain.origin:F1}→{rMain.direction:F2} | Fresh={hitFresh} ray={rFresh.origin:F1}→{rFresh.direction:F2} | preset={presetActive} phase={DayPhaseManager.Instance?.CurrentPhase}");
-        }
-
         // Only block input during actual fades, not during gameplay waits
         if (DayPhaseManager.Instance != null && DayPhaseManager.Instance.IsTransitioning
             && ScreenFade.Instance != null && ScreenFade.Instance.IsFading)

@@ -44324,3 +44324,21 @@ production/session-logs/compaction-log.txt
 production/session-logs/session-log.md
 ---
 
+## Session End: 20260517_020638
+### Commits
+9285eae docs: update CLAUDE.md with Unity 6 config, add session log entry
+---
+
+## Session End: 20260517_021006
+### Commits
+9285eae docs: update CLAUDE.md with Unity 6 config, add session log entry
+### Uncommitted Changes
+Assets/Scripts/Apartment/ItemHighlight.cs
+Assets/Scripts/Apartment/ObjectGrabber.cs
+Assets/Scripts/Apartment/PairableItem.cs
+Assets/Scripts/GameLogic/JuiceMomentController.cs
+Assets/Scripts/InteractionAndFeel/InspectionController.cs
+Assets/Scripts/InteractionAndFeel/JellyMesh.cs
+production/session-logs/session-log.md
+---
+

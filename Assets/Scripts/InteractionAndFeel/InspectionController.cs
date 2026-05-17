@@ -109,10 +109,17 @@ public class InspectionController : MonoBehaviour
 
     void TryStartInspection()
     {
-        if (cam == null) return;
         if (!Input.GetMouseButtonDown(0)) return;
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        // Prefer ApartmentManager's raycast (accounts for Cinemachine brain)
+        var am = ApartmentManager.Instance;
+        Ray ray;
+        if (am != null)
+            ray = am.ScreenPointToRay(Input.mousePosition);
+        else if (cam != null)
+            ray = cam.ScreenPointToRay(Input.mousePosition);
+        else
+            return;
         if (!Physics.Raycast(ray, out RaycastHit hit, 200f))
         {
             if (debugLogs) Debug.Log("[InspectionController] Raycast hit nothing.", this);

@@ -39,6 +39,7 @@ public class JellyMesh : MonoBehaviour
     private MeshRenderer renderer;
     private JellyVertex[] jv;
     private Vector3[] vertexArray;
+    private Vector3[] _cachedOriginalVerts;
 
     void Start()
     {
@@ -46,9 +47,11 @@ public class JellyMesh : MonoBehaviour
         MeshClone = Instantiate(OriginalMesh);
         GetComponent<MeshFilter>().sharedMesh = MeshClone;
         renderer = GetComponent<MeshRenderer>();
-        jv = new JellyVertex[MeshClone.vertices.Length];
-        for (int i = 0; i < MeshClone.vertices.Length; i++)
-            jv[i] = new JellyVertex(i, transform.TransformPoint(MeshClone.vertices[i]));
+        _cachedOriginalVerts = OriginalMesh.vertices; // cache once — no per-frame alloc
+        vertexArray = new Vector3[_cachedOriginalVerts.Length];
+        jv = new JellyVertex[_cachedOriginalVerts.Length];
+        for (int i = 0; i < _cachedOriginalVerts.Length; i++)
+            jv[i] = new JellyVertex(i, transform.TransformPoint(_cachedOriginalVerts[i]));
 
     }
 
@@ -59,11 +62,14 @@ public class JellyMesh : MonoBehaviour
 
     void FixedUpdate()
     {
-        vertexArray = OriginalMesh.vertices;
+        System.Array.Copy(_cachedOriginalVerts, vertexArray, _cachedOriginalVerts.Length);
+        var bounds = renderer.bounds; // cache bounds once per tick
+        float boundsMaxY = bounds.max.y;
+        float boundsSizeY = bounds.size.y;
         for (int i = 0; i < jv.Length; i++)
         {
             Vector3 target = transform.TransformPoint(vertexArray[jv[i].ID]);
-            float intensity = (1 - (renderer.bounds.max.y - target.y) / renderer.bounds.size.y) * Intensity;
+            float intensity = (1 - (boundsMaxY - target.y) / boundsSizeY) * Intensity;
             jv[i].Shake(target, Mass, stiffness, damping);
             target = transform.InverseTransformPoint(jv[i].Position);
             vertexArray[jv[i].ID] = Vector3.Lerp(vertexArray[jv[i].ID], target, intensity);

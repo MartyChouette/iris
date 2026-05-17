@@ -24,6 +24,7 @@ public class ItemHighlight : MonoBehaviour
     private Renderer[] _renderers;
     private Color[][] _originalColors; // per-renderer, per-material-slot
     private bool _dirty;
+    private readonly MaterialPropertyBlock _mpb = new MaterialPropertyBlock();
 
     // ── Colors ───────────────
     private static readonly Color HoverColor = new Color(1f, 0.95f, 0.8f, 1f);
@@ -121,7 +122,6 @@ public class ItemHighlight : MonoBehaviour
             // Per-material-slot MPB so each sub-mesh keeps its own base color
             for (int m = 0; m < _originalColors[r].Length; m++)
             {
-                var mpb = new MaterialPropertyBlock();
                 Color original = _originalColors[r][m];
                 float blend = strength * intensity;
                 Color highlighted = Color.Lerp(original, tint, blend);
@@ -129,8 +129,9 @@ public class ItemHighlight : MonoBehaviour
                 highlighted.r += tint.r * blend * 0.25f;
                 highlighted.g += tint.g * blend * 0.25f;
                 highlighted.b += tint.b * blend * 0.25f;
-                mpb.SetColor("_BaseColor", highlighted);
-                _renderers[r].SetPropertyBlock(mpb, m);
+                _mpb.Clear();
+                _mpb.SetColor("_BaseColor", highlighted);
+                _renderers[r].SetPropertyBlock(_mpb, m);
             }
         }
     }

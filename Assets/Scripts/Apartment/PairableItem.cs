@@ -63,6 +63,7 @@ public class PairableItem : MonoBehaviour
     private MaterialPropertyBlock _pulseMPB;
     private Color _originalColor;
     private bool _originalColorCaptured;
+    private ItemHighlight _cachedHighlight;
     private bool _pairPulseActive; // true while snap-confirmation pulse is playing
 
     public bool IsPaired => _isPaired;
@@ -146,16 +147,17 @@ public class PairableItem : MonoBehaviour
             if (!_originalColorCaptured)
             {
                 _originalColorCaptured = true;
-                var hl = GetComponent<ItemHighlight>();
-                if (hl == null) hl = gameObject.AddComponent<ItemHighlight>();
-                hl.SetHighlighted(true);
+                if (_cachedHighlight == null)
+                    _cachedHighlight = GetComponent<ItemHighlight>();
+                if (_cachedHighlight == null)
+                    _cachedHighlight = gameObject.AddComponent<ItemHighlight>();
+                _cachedHighlight.SetHighlighted(true);
             }
         }
         else if (_originalColorCaptured)
         {
             _originalColorCaptured = false;
-            var hl = GetComponent<ItemHighlight>();
-            if (hl != null) hl.SetHighlighted(false);
+            if (_cachedHighlight != null) _cachedHighlight.SetHighlighted(false);
         }
     }
 
