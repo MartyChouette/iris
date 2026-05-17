@@ -1,3 +1,33 @@
+## Session: 20260516 — Dual-pattern dither, perfume atmosphere, Phase 3 polish
+
+### Summary
+Post-showcase sprint (May 3-16). Major features: perfume atmosphere system, dual-pattern shadow dither with zoom scaling, ItemHighlight rewrite, held-item overlay camera, date Phase 3 polish. ~80 commits. v0.5.0 shipped.
+
+### Key Features
+- **Perfume atmosphere system** — Multi-layer spray with per-perfume profiles. Additive incremental (3 sprays to full). Date reacts to intensity (2/3 sweet spot, 3/3 overwhelming). Ambience crossfade.
+- **Dual-pattern shadow dither** — Bayer 2x2/4x4/8x8 selectable for fine/coarse. Luminance thresholds control where dither appears. Zoom-responsive scaling (world-space feel).
+- **ItemHighlight** — Complete rewrite replacing InteractableHighlight. MPB-only per-slot, no material instances.
+- **Held-item overlay camera** — Camera stacking renders held items on top of all scene geometry. Eye icons also on overlay.
+- **Date Phase 3 polish** — Reveal cache + liked items burst simultaneously. Repeat reactions allowed. Continue button label fix.
+- **Tutorial objective card** — Overlay at apartment startup with control instructions.
+- **TrailerMode** — F8/F10 toggles all UI for clean recording. Idle trailer + skip mode select.
+
+### Bug Fixes
+- Drink serve button softlock, top-down camera softlock, flower physics on load
+- LeafAttachmentMarker for daisy leaves (fall on stem cut)
+- Cubby placement (falls through floor, rapid-click scale drift)
+- Per-frame allocations in hot paths
+- Menu music fade on apartment load
+
+### Files Changed (Key)
+- `PSXPost.shader`, `PSXPostProcessFeature.cs`, `PSXPostProcessVolume.cs`, `PSXRenderController.cs` — dither system
+- `ItemHighlight.cs` — new highlight system
+- `PerfumeBottle.cs`, `AtmosphereController.cs` — perfume atmosphere
+- `DateSessionManager.cs` — Phase 3 polish
+- `HeldItemOnTopFeature.cs` — overlay camera
+
+---
+
 ## Session: 20260419 — Cinematic controls, preview tool parity, camera fixes
 
 ### Summary
@@ -44222,6 +44252,75 @@ Assets/Scripts/Rendering/PSXRenderController.cs
 Assets/Settings/PC_Renderer.asset
 Assets/Shader/PSXPost.shader
 Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_164256
+### Commits
+8ee34cc feat: dual-pattern shadow dither with zoom scaling
+---
+
+## Session End: 20260516_164301
+### Commits
+8ee34cc feat: dual-pattern shadow dither with zoom scaling
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_164505
+### Commits
+8ee34cc feat: dual-pattern shadow dither with zoom scaling
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_164658
+### Commits
+8ee34cc feat: dual-pattern shadow dither with zoom scaling
+### Uncommitted Changes
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_184556
+### Commits
+8ee34cc feat: dual-pattern shadow dither with zoom scaling
+### Uncommitted Changes
+CLAUDE.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260516_184732
+### Commits
+8ee34cc feat: dual-pattern shadow dither with zoom scaling
+### Uncommitted Changes
+CLAUDE.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260517_014740
+### Uncommitted Changes
+CLAUDE.md
+production/session-logs/session-log.md
+---
+
+## Session End: 20260517_014955
+### Uncommitted Changes
+CLAUDE.md
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260517_015259
+### Uncommitted Changes
+CLAUDE.md
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+---
+
+## Session End: 20260517_015440
+### Uncommitted Changes
+CLAUDE.md
+production/session-logs/compaction-log.txt
 production/session-logs/session-log.md
 ---
 
